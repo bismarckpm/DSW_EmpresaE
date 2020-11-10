@@ -1,0 +1,22 @@
+<ng-sidebar-container>
+ 
+  <!-- A sidebar -->
+  <ng-sidebar [(opened)]="opened">
+    <p> Menu </p>
+    
+    <ul class="menu">
+      <li><a href=""> Encuestado </a></li>
+      <li><a href=""> Analista </a></li>
+      <li><a href=""> Administrador </a></li>
+      <li><a href=""> Cliente </a></li>
+    </ul>
+
+    <button (click)="toggleSidebar()">Close menu </button>
+  </ng-sidebar>
+
+  <!-- Page content -->
+  <div ng-sidebar-content>
+    <button (click)="toggleSidebar()">Menu principal</button>
+  </div>
+
+</ng-sidebar-container>

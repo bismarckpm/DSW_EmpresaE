@@ -1,0 +1,38 @@
+.h3{
+    padding-top: 10px;
+}
+.form-signin {
+    background-color: #f4f4f4;
+    box-shadow: 0 0 2.5em rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+.form-control{
+    width: 300px;
+    
+}
+
+.form-label-group{
+    margin-left: 30px;
+
+}
+
+.texto{
+    text-align: center;
+}
+
+.btn{
+    width: 150px;
+    margin-left: 120px;
+    ;
+}
+
+.navbar-brand{
+    margin-left: 32px;
+    margin-top: 0;
+    font-size: small;
+}
+
+.checkbox{ 
+    padding-left: 30px;
+}

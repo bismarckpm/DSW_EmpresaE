@@ -8,8 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  constructor(private router:Router) { }
+  private router:Router;
+  constructor() { 
+    
+  }
 
   ngOnInit(): void {
   }
@@ -21,7 +23,7 @@ export class LoginComponent implements OnInit {
   }
 
   navegarHaciaOlvido(){
-    this.router.navigate(['/Olvido']);
+    //this.router.navigate(['/Olvido']);
   }
 
 }

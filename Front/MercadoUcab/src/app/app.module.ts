@@ -15,6 +15,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrarseComponent } from './componentes/login/registrarse/registrarse.component';
 
 
+//Services
+import { UsuarioService } from "./services/usuario.service";
+import { RecuperacionComponent } from './componentes/login/recuperacion/recuperacion.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +27,7 @@ import { RegistrarseComponent } from './componentes/login/registrarse/registrars
     NavbarComponent,
     SidebarComponent,
     RegistrarseComponent,
+    RecuperacionComponent,
     
   ],
   imports: [
@@ -33,7 +39,9 @@ import { RegistrarseComponent } from './componentes/login/registrarse/registrars
     FormsModule,
 
   ],
-  providers: [],
+  providers: [
+    UsuarioService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

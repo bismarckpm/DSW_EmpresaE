@@ -1,8 +1,8 @@
 <nav class="navbar navbar-dark bg-dark"> 
     <a class="navbar-brand" href="#">MercadoUcab</a>
         <form class="form-inline">
-          <a (click)="navegarHaciaLogin()" class="navbar-brand my-2" >Login /</a>
-          <a (click)="navegarHaciaRegistro()" class="navbar-brand my-2 my-sm-0" >Registrate</a>
+          <a [routerLink]="['/login']" routerLinkActive="active" class="navbar-brand my-2" >Login /</a>
+          <a [routerLink]="['/registro']" routerLinkActive="activ"  class="navbar-brand my-2 my-sm-0" >Registrate</a>
       </form>
   
   </nav>

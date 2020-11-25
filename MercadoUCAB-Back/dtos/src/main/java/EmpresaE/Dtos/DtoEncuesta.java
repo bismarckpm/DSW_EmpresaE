@@ -1,2 +1,4 @@
-package EmpresaE.Dtos;public class DtoEncuesta {
+package EmpresaE.Dtos;
+
+public class DtoEncuesta {
 }

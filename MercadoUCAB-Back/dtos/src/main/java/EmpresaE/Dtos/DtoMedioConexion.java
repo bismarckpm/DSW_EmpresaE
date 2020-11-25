@@ -1,2 +1,4 @@
-package EmpresaE.Dtos;public class DtoMedioConexion {
+package EmpresaE.Dtos;
+
+public class DtoMedioConexion {
 }

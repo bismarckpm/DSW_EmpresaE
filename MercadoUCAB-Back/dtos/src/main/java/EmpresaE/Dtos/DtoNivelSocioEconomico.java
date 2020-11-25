@@ -1,2 +1,4 @@
-package EmpresaE.Dtos;public class DtoNivelSocioEconomico {
+package EmpresaE.Dtos;
+
+public class DtoNivelSocioEconomico {
 }

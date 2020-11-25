@@ -1,3 +1,4 @@
+package empresaE.Daos;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;

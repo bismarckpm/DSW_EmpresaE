@@ -1,2 +1,4 @@
-package EmpresaE.Dtos;public class DtoTipoUsuario {
+package EmpresaE.Dtos;
+
+public class DtoTipoUsuario {
 }

@@ -1,2 +1,4 @@
-package EmpresaE.Dtos;public class DtoSubcategoriaTipo {
+package EmpresaE.Dtos;
+
+public class DtoSubcategoriaTipo {
 }

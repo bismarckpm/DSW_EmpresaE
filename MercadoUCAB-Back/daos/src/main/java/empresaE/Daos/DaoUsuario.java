@@ -1,2 +1,4 @@
-package empresaE.Daos;public class DaoUsuario {
+package empresaE.Daos;
+
+public class DaoUsuario {
 }

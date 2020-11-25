@@ -19,6 +19,7 @@
     <modules>
         <module>entidades</module>
         <module>dtos</module>
+        <module>daos</module>
     </modules>
 
 

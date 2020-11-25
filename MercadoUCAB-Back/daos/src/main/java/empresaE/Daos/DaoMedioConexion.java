@@ -1,2 +1,4 @@
-package empresaE.Daos;public class DaoMedioConexion {
+package empresaE.Daos;
+
+public class DaoMedioConexion {
 }

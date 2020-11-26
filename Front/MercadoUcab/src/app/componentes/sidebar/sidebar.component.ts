@@ -5,14 +5,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent implements OnInit {
-  opened = false;
-  constructor() { }
+export class SidebarComponent {
 
-  ngOnInit(): void {
-  }
-   toggleSidebar() {
-    this.opened = !this.opened;
-  }
+  links: string[] = [];
+
+  constructor() { }
 
 }

@@ -14,6 +14,12 @@ import { SidebarComponent } from './componentes/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrarseComponent } from './componentes/login/registrarse/registrarse.component';
 import { RecuperacionComponent } from './componentes/login/recuperacion/recuperacion.component';
+import { ListaComponent } from './componentes/lista/lista.component';
+import { FormularioComponent } from './componentes/formulario/formulario.component';
+import { AdminComponent } from './modulos/admin/admin.component';
+import { ClienteComponent } from './modulos/cliente/cliente.component';
+import { UsuarioComponent } from './modulos/usuario/usuario.component';
+import { AnalistaComponent } from './modulos/analista/analista.component';
 
 
 // Services
@@ -28,7 +34,12 @@ import { UsuarioService } from './services/usuario.service';
     SidebarComponent,
     RegistrarseComponent,
     RecuperacionComponent,
-
+    ListaComponent,
+    FormularioComponent,
+    AdminComponent,
+    ClienteComponent,
+    UsuarioComponent,
+    AnalistaComponent
   ],
   imports: [
     BrowserModule,

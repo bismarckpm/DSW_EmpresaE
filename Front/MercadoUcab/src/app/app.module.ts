@@ -14,10 +14,13 @@ import { SidebarComponent } from './componentes/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrarseComponent } from './componentes/login/registrarse/registrarse.component';
 import { RecuperacionComponent } from './componentes/login/recuperacion/recuperacion.component';
+import { ListaComponent } from './componentes/lista/lista.component';
 
 
 // Services
 import { UsuarioService } from './services/usuario.service';
+import { FormularioComponent } from './componentes/formulario/formulario.component';
+import { AdminComponent } from './modulos/modulo-admin/admin/admin.component';
 
 
 @NgModule({
@@ -28,7 +31,9 @@ import { UsuarioService } from './services/usuario.service';
     SidebarComponent,
     RegistrarseComponent,
     RecuperacionComponent,
-
+    ListaComponent,
+    FormularioComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

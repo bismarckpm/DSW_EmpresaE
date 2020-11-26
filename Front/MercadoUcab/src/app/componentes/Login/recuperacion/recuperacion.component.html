@@ -1,25 +1,22 @@
 <div class="olvido ">
     <form class="container">
-  
-        <div class="form-row">
 
-          <div class="form-group col-md-6">
-            <p style="font-style: italic; font-size: medium; color: aliceblue;"> Para la recuperacion necesitamos que ingrese su correo para poder comprobar que estas registrado en el Sistema de MERCADOUCAB</p>
-          </div>
+      <app-sidebar></app-sidebar>
+  
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <p style="font-style: italic; font-size: medium; color: aliceblue;"> Para la recuperacion necesitamos que ingrese su correo para poder comprobar que estas registrado en el Sistema de MERCADOUCAB</p>
         </div>
-
+      </div>
   
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                      <label for="inputEmail4" style="color: azure;">Email</label>
-                      <input type="email" class="form-control"  name="email">
-                </div>
-    
-            </div>  
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label for="inputEmail4" style="color: azure;">Email</label>
+          <input type="email" class="form-control"  name="email">
+        </div>
+      </div>  
   
-
-  
-          <button (click)="confirmarCorreo()" type="submit" class="btn btn-light">confirmar</button>   
+      <button (click)="confirmarCorreo()" type="submit" class="btn btn-light">confirmar</button>   
     </form>
   </div>
   

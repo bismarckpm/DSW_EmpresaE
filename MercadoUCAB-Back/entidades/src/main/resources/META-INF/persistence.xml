@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="empresae">
+        <class>ucab.empresae.entidades.CategoriaEntity</class>
+        <class>ucab.empresae.entidades.ClienteEntity</class>
+        <class>ucab.empresae.entidades.ClienteEstudioEntity</class>
+        <class>ucab.empresae.entidades.EncuestaEntity</class>
+        <class>ucab.empresae.entidades.EncuestadoEntity</class>
+        <class>ucab.empresae.entidades.EstadoCivilEntity</class>
+        <class>ucab.empresae.entidades.EstudioEntity</class>
+        <class>ucab.empresae.entidades.EstudioEncuestadoEntity</class>
+        <class>ucab.empresae.entidades.GeneroEntity</class>
+        <class>ucab.empresae.entidades.HijoEntity</class>
+        <class>ucab.empresae.entidades.LugarEntity</class>
+        <class>ucab.empresae.entidades.MarcaEntity</class>
+        <class>ucab.empresae.entidades.MedioConexionEntity</class>
+        <class>ucab.empresae.entidades.NivelAcademicoEntity</class>
+        <class>ucab.empresae.entidades.NivelSocioeconomicoEntity</class>
+        <class>ucab.empresae.entidades.OcupacionEntity</class>
+        <class>ucab.empresae.entidades.OpcionEntity</class>
+        <class>ucab.empresae.entidades.PreguntaEntity</class>
+        <class>ucab.empresae.entidades.PreguntaOpcionEntity</class>
+        <class>ucab.empresae.entidades.PresentacionEntity</class>
+        <class>ucab.empresae.entidades.RespuestaEntity</class>
+        <class>ucab.empresae.entidades.SubcategoriaEntity</class>
+        <class>ucab.empresae.entidades.TelefonoEntity</class>
+        <class>ucab.empresae.entidades.TipoEntity</class>
+        <class>ucab.empresae.entidades.TipoPreguntaEntity</class>
+        <class>ucab.empresae.entidades.TipoUsuarioEntity</class>
+        <class>ucab.empresae.entidades.UsuarioEntity</class>
+
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mercadeoucab"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="admin"/>
+            <!-- <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/> -->
+            <property name="eclipselink.logging.level" value="FINE"/>
+        </properties>
+    </persistence-unit>
+</persistence>

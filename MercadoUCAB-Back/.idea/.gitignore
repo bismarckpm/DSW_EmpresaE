@@ -6,3 +6,6 @@
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
+../MercadoUCAB-Back.iml
+../dtos/dtos.iml
+../entidades/entidades.iml

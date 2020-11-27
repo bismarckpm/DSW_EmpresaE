@@ -12,4 +12,8 @@ export class ListaComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  eliminar(){
+    console.log('eliminó elemento');
+  }
+
 }

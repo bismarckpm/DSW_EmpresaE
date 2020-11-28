@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent {
 
-  categorias: string[] = ['Clientes', 'Usuarios', 'Analistas', 'Estudios', 'Preguntas', 'Categoria', 'Subcategoria', 'Marca'];
+  secciones: string[] = [];
 
-  constructor() { }
+  // tslint:disable-next-line: variable-name
+  constructor(private _adminService: AdminService) {
+    this.secciones = this._adminService.getSecciones();
+  }
 
 }

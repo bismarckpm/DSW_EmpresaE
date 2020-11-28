@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent {
 
-  links: string[] = [];
+  categorias: string[] = ['Clientes', 'Usuarios', 'Analistas', 'Estudios', 'Preguntas', 'Categoria', 'Subcategoria', 'Marca'];
 
   constructor() { }
 

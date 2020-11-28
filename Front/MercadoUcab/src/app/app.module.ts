@@ -24,6 +24,8 @@ import { AnalistaComponent } from './modulos/analista/analista.component';
 
 // Services
 import { UsuarioService } from './services/usuario.service';
+import { CategoriasComponent } from './modulos/categorias/categorias.component';
+import { SubcategoriasComponent } from './modulos/subcategorias/subcategorias.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { UsuarioService } from './services/usuario.service';
     AdminComponent,
     ClienteComponent,
     UsuarioComponent,
-    AnalistaComponent
+    AnalistaComponent,
+    CategoriasComponent,
+    SubcategoriasComponent
   ],
   imports: [
     BrowserModule,

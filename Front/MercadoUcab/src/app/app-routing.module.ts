@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'cliente', component: ClienteComponent},
   { path: 'analista', component: AnalistaComponent},
   { path: 'usuario', component: UsuarioComponent},
-  { path: '', redirectTo: '/login', pathMatch: 'full'},
+ // { path: '', redirectTo: '/login', pathMatch: 'full'},
 ];
 
 

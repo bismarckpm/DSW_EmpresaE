@@ -126,17 +126,6 @@
           }
         }
       }
-<<<<<<< HEAD
-    }
-  },
-  "defaultProject": "MercadoUcab"
-}
-=======
-<<<<<<< Updated upstream
-    }},
-  "defaultProject": "MercadoUcab"
-}
-=======
     }
   },
   "defaultProject": "MercadoUcab",
@@ -144,5 +133,3 @@
     "analytics": false
   }
 }
->>>>>>> Stashed changes
->>>>>>> d564132795ea5ae9ebd3894dc440066dc91feacf

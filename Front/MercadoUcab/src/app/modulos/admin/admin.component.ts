@@ -12,4 +12,7 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  agregar() {
+    console.log('agregó elemento');
+  }
 }

@@ -26,6 +26,7 @@ import { AnalistaComponent } from './modulos/analista/analista.component';
 import { UsuarioService } from './services/usuario.service';
 import { CategoriasComponent } from './modulos/categorias/categorias.component';
 import { SubcategoriasComponent } from './modulos/subcategorias/subcategorias.component';
+import { FormClientesComponent } from './componentes/form-clientes/form-clientes.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { SubcategoriasComponent } from './modulos/subcategorias/subcategorias.co
     UsuarioComponent,
     AnalistaComponent,
     CategoriasComponent,
-    SubcategoriasComponent
+    SubcategoriasComponent,
+    FormClientesComponent,
   ],
   imports: [
     BrowserModule,

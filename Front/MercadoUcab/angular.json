@@ -119,6 +119,16 @@
           }
         }
       }
+<<<<<<< Updated upstream
     }},
   "defaultProject": "MercadoUcab"
 }
+=======
+    }
+  },
+  "defaultProject": "MercadoUcab",
+  "cli": {
+    "analytics": false
+  }
+}
+>>>>>>> Stashed changes

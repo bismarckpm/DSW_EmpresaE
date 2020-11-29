@@ -5,7 +5,7 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
             Agregar
         </button>
-        
+
         <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -23,7 +23,7 @@
                             <div *ngSwitchCase="'Preguntas'"></div>
                             <div *ngSwitchCase="'Categorias'"></div>
                             <div *ngSwitchCase="'Subcategorias'"></div>
-                            <div *ngSwitchCase="'Marcas'"></div>
+                            <div *ngSwitchCase="'Marcas'"><app-form-marca></app-form-marca></div>
                             <div *ngSwitchDefault><p>default</p></div>
                         </div>
                     </div>
@@ -44,6 +44,6 @@
     <div *ngSwitchCase="'Preguntas'"><app-lista-preguntas></app-lista-preguntas></div>
     <div *ngSwitchCase="'Categorias'"></div>
     <div *ngSwitchCase="'Subcategorias'"></div>
-    <div *ngSwitchCase="'Marcas'"></div>
+    <div *ngSwitchCase="'Marcas'"><app-lista-marca></app-lista-marca></div>
     <div *ngSwitchDefault><p>default</p></div>
 </div>

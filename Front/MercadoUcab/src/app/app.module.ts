@@ -25,6 +25,9 @@ import { AnalistaComponent } from './modulos/analista/analista.component';
 // Services
 import { UsuarioService } from './services/usuario.service';
 import { FormClientesComponent } from './componentes/form-clientes/form-clientes.component';
+import { FormMarcaComponent } from './componentes/form-marca/form-marca.component';
+import { ListaMarcaComponent } from './componentes/lista-marca/lista-marca.component';
+import { MainClienadminComponent } from './main-clienadmin/main-clienadmin.component';
 
 
 @NgModule({
@@ -42,6 +45,9 @@ import { FormClientesComponent } from './componentes/form-clientes/form-clientes
     UsuarioComponent,
     AnalistaComponent,
     FormClientesComponent,
+    FormMarcaComponent,
+    ListaMarcaComponent,
+    MainClienadminComponent,
   ],
   imports: [
     BrowserModule,

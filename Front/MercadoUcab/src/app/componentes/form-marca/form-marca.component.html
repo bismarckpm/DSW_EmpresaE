@@ -1,39 +1,22 @@
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form class="needs-validation" novalidate>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="nombre">Name</label>
-              <input type="text" class="form-control" id="nombre" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                Valid Name is required.
-              </div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Estado
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item">Activo (A)</a>
-                  <a class="dropdown-item">Inactivo (I)</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Aceptar</button>
+<form class="needs-validation" novalidate>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="nombre">Nombre</label>
+      <input type="text" class="form-control" id="nombre" placeholder="" value="" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-5 mb-3">
+      <label for="country">Estado</label>
+      <select class="custom-select d-block w-100" id="country" required>
+        <option value="">Choose...</option>
+        <option>Activo (A)</option>
+        <option>Inactivo (I)</option>
+      </select>
+      <div class="invalid-feedback">
+        Please select a valid option.
       </div>
     </div>
   </div>
-</div>
+</form>

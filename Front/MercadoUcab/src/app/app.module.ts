@@ -27,6 +27,7 @@ import { MainClienadminComponent } from './componentes/main-clienadmin/main-clie
 // Services
 import { UsuarioService } from './services/usuario.service';
 import { AdminService } from './services/admin.service';
+import { ListaPreguntasComponent } from './componentes/lista-preguntas/lista-preguntas.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { AdminService } from './services/admin.service';
     AnalistaComponent,
     FormClientesComponent,
     MainClienadminComponent,
+    ListaPreguntasComponent,
   ],
   imports: [
     BrowserModule,

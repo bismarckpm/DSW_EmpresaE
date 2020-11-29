@@ -1,7 +1,7 @@
 
 export interface Usuario {
 
-      id?: number;
+      id: number;
       nombre: string;
       nombre2: string;
       apellido: string;

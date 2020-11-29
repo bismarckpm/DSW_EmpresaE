@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'registro', component: RegistrarseComponent},
   { path: 'login', component: LoginComponent},
   { path: 'recuperacion', component: RecuperacionComponent},
-  { path: 'admin', component: AdminComponent},
+  { path: 'admin/:id', component: AdminComponent},
   { path: 'seccion/:id', component: MainClienadminComponent},
   { path: 'cliente', component: ClienteComponent},
   { path: 'analista', component: AnalistaComponent},

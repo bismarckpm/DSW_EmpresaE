@@ -9,15 +9,15 @@ import { AdminService } from 'src/app/services/admin.service';
 })
 export class MainClienadminComponent implements OnInit {
 
-  seccion: string;
+  seccion: any;
 
   constructor(
     private ruta: ActivatedRoute,
     private servicio: AdminService
   ) {
     this.ruta.params.subscribe(params => {
-      console.log(params.id);
-      this.seccion = this.servicio.getSeccion(params.i);
+      console.log(params);
+      this.seccion = this.servicio.getSeccion(params.id);
     });
   }
 

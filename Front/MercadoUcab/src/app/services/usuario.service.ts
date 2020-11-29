@@ -8,9 +8,35 @@ import { Usuario } from '../models/usuario';
 })
 export class UsuarioService {
 
-  API_URI= 'http://';
+  API_URI = 'http://';
+  usuarios: Usuario[] = [
+  {
+    id: 0,
+    nombre: 'prueba0',
+    nombre2: '',
+    apellido: '',
+    apellido2: '',
+    email: '',
+    password: '',
+    rol: '',
+  },
+  {
+    id: 1,
+    nombre: 'prueba1',
+    nombre2: '',
+    apellido: '',
+    apellido2: '',
+    email: '',
+    password: '',
+    rol: '',
+  },
+];
 
   constructor( private http: HttpClient) { }
+
+  getUsuarios(): Usuario[] {
+    return this.usuarios;
+  }
 
   getUsuario(){
       return this.http.get(`${this.API_URI}/usuario`);
@@ -20,7 +46,7 @@ export class UsuarioService {
     return this.http.post(`${this.API_URI}/usuario`, usuario);
   }
 
-  updateUsuario(id ,updateUser){
-    return this.http.post(`${this.API_URI}/usuario/${id}`,updateUser);
+  updateUsuario(id , updateUser){
+    return this.http.post(`${this.API_URI}/usuario/${id}`, updateUser);
   }
 }

@@ -8,13 +8,15 @@ import { AdminComponent } from './modulos/admin/admin.component';
 import { ClienteComponent } from './modulos/cliente/cliente.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
 import { UsuarioComponent } from './modulos/usuario/usuario.component';
+import { MainClienadminComponent } from './componentes/main-clienadmin/main-clienadmin.component';
 
 
 const routes: Routes = [
   { path: 'registro', component: RegistrarseComponent},
   { path: 'login', component: LoginComponent},
   { path: 'recuperacion', component: RecuperacionComponent},
-  { path: 'admin', component: AdminComponent},
+  { path: 'admin/:id', component: AdminComponent},
+  { path: 'seccion/:id', component: MainClienadminComponent},
   { path: 'cliente', component: ClienteComponent},
   { path: 'analista', component: AnalistaComponent},
   { path: 'usuario', component: UsuarioComponent},

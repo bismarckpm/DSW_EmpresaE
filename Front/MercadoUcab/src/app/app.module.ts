@@ -20,14 +20,16 @@ import { AdminComponent } from './modulos/admin/admin.component';
 import { ClienteComponent } from './modulos/cliente/cliente.component';
 import { UsuarioComponent } from './modulos/usuario/usuario.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
+import { FormClientesComponent } from './componentes/form-clientes/form-clientes.component';
+import { MainClienadminComponent } from './componentes/main-clienadmin/main-clienadmin.component';
 
 
 // Services
 import { UsuarioService } from './services/usuario.service';
-import { FormClientesComponent } from './componentes/form-clientes/form-clientes.component';
 import { FormMarcaComponent } from './componentes/form-marca/form-marca.component';
 import { ListaMarcaComponent } from './componentes/lista-marca/lista-marca.component';
-import { MainClienadminComponent } from './main-clienadmin/main-clienadmin.component';
+import { AdminService } from './services/admin.service';
+import { ListaPreguntasComponent } from './componentes/lista-preguntas/lista-preguntas.component';
 
 
 @NgModule({
@@ -48,6 +50,8 @@ import { MainClienadminComponent } from './main-clienadmin/main-clienadmin.compo
     FormMarcaComponent,
     ListaMarcaComponent,
     MainClienadminComponent,
+    MainClienadminComponent,
+    ListaPreguntasComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +63,8 @@ import { MainClienadminComponent } from './main-clienadmin/main-clienadmin.compo
 
   ],
   providers: [
-    UsuarioService
+    UsuarioService,
+    AdminService
   ],
   bootstrap: [AppComponent]
 })

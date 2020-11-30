@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormClientesComponent implements OnInit {
 
+  item: any = {
+    nombre: ''
+  };
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  agregarNombre() {
+    console.log(this.item);
   }
 
 }

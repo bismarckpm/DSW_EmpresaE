@@ -15,18 +15,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrarseComponent } from './componentes/login/registrarse/registrarse.component';
 import { RecuperacionComponent } from './componentes/login/recuperacion/recuperacion.component';
 import { ListaComponent } from './componentes/lista/lista.component';
-import { FormularioComponent } from './componentes/formulario/formulario.component';
 import { AdminComponent } from './modulos/admin/admin.component';
 import { ClienteComponent } from './modulos/cliente/cliente.component';
 import { UsuarioComponent } from './modulos/usuario/usuario.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
+import { FormClientesComponent } from './componentes/form-clientes/form-clientes.component';
+import { ListaPreguntasComponent } from './componentes/lista-preguntas/lista-preguntas.component';
 
 
 // Services
 import { UsuarioService } from './services/usuario.service';
-import { CategoriasComponent } from './modulos/categorias/categorias.component';
-import { SubcategoriasComponent } from './modulos/subcategorias/subcategorias.component';
-import { FormClientesComponent } from './componentes/form-clientes/form-clientes.component';
+import { AdminService } from './services/admin.service';
+import { MainAdminComponent } from './componentes/main-admin/main-admin.component';
+import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
 
 
 @NgModule({
@@ -38,14 +39,14 @@ import { FormClientesComponent } from './componentes/form-clientes/form-clientes
     RegistrarseComponent,
     RecuperacionComponent,
     ListaComponent,
-    FormularioComponent,
     AdminComponent,
     ClienteComponent,
     UsuarioComponent,
     AnalistaComponent,
-    CategoriasComponent,
-    SubcategoriasComponent,
     FormClientesComponent,
+    ListaPreguntasComponent,
+    MainAdminComponent,
+    ListaEstudiosComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +58,8 @@ import { FormClientesComponent } from './componentes/form-clientes/form-clientes
 
   ],
   providers: [
-    UsuarioService
+    UsuarioService,
+    AdminService
   ],
   bootstrap: [AppComponent]
 })

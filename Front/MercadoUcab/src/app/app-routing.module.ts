@@ -14,11 +14,12 @@ const routes: Routes = [
   { path: 'registro', component: RegistrarseComponent},
   { path: 'login', component: LoginComponent},
   { path: 'recuperacion', component: RecuperacionComponent},
-  { path: 'admin', component: AdminComponent},
+  { path: 'admin/:id', component: AdminComponent},
   { path: 'cliente', component: ClienteComponent},
   { path: 'analista', component: AnalistaComponent},
   { path: 'usuario', component: UsuarioComponent},
- // { path: '', redirectTo: '/login', pathMatch: 'full'},
+ 
+  { path: '**', redirectTo: '/login', pathMatch: 'full'},
 ];
 
 

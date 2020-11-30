@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class AdminService {
 
-  secciones: string[] = ['Clientes', 'Usuarios', 'Analistas', 'Estudios', 'Preguntas', 'Categorias', 'Subcategorias', 'Marcas'];
+  secciones: string[] = ['Inicio','Clientes', 'Usuarios', 'Analistas', 'Estudios', 'Preguntas', 'Categorias', 'Subcategorias', 'Marcas'];
 
   constructor() { console.log('servicio ADMIN'); }
 

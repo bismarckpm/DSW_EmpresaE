@@ -15,19 +15,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrarseComponent } from './componentes/login/registrarse/registrarse.component';
 import { RecuperacionComponent } from './componentes/login/recuperacion/recuperacion.component';
 import { ListaComponent } from './componentes/lista/lista.component';
-import { FormularioComponent } from './componentes/formulario/formulario.component';
 import { AdminComponent } from './modulos/admin/admin.component';
 import { ClienteComponent } from './modulos/cliente/cliente.component';
 import { UsuarioComponent } from './modulos/usuario/usuario.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
 import { FormClientesComponent } from './componentes/form-clientes/form-clientes.component';
-import { MainClienadminComponent } from './componentes/main-clienadmin/main-clienadmin.component';
+import { ListaPreguntasComponent } from './componentes/lista-preguntas/lista-preguntas.component';
 
 
 // Services
 import { UsuarioService } from './services/usuario.service';
 import { AdminService } from './services/admin.service';
-import { ListaPreguntasComponent } from './componentes/lista-preguntas/lista-preguntas.component';
+import { MainAdminComponent } from './componentes/main-admin/main-admin.component';
+import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
 
 
 @NgModule({
@@ -39,14 +39,14 @@ import { ListaPreguntasComponent } from './componentes/lista-preguntas/lista-pre
     RegistrarseComponent,
     RecuperacionComponent,
     ListaComponent,
-    FormularioComponent,
     AdminComponent,
     ClienteComponent,
     UsuarioComponent,
     AnalistaComponent,
     FormClientesComponent,
-    MainClienadminComponent,
     ListaPreguntasComponent,
+    MainAdminComponent,
+    ListaEstudiosComponent,
   ],
   imports: [
     BrowserModule,

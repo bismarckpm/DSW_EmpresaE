@@ -10,16 +10,19 @@ import { AdminService } from 'src/app/services/admin.service';
 export class AdminComponent implements OnInit {
 
   seccion: any;
+  item: any = {
+    nombre: ''
+  };
 
   constructor(
-    // private ruta: ActivatedRoute,
-    // private servicio: AdminService,
+    private ruta: ActivatedRoute,
+    private servicio: AdminService,
     private rutaActtual: Router
   ) {
-    // this.ruta.params.subscribe(params => {
-    //   console.log(params);
-    //   this.seccion = this.servicio.getSeccion(params.id);
-    // });
+    this.ruta.params.subscribe(params => {
+      console.log(params);
+      this.seccion = this.servicio.getSeccion(params.id);
+    });
     console.log(this.rutaActtual.url);
   }
 
@@ -27,6 +30,10 @@ export class AdminComponent implements OnInit {
   }
 
   agregar() {
-    console.log('agregó elemento');
+    console.log(this.item);
+  }
+
+  agregarNombre() {
+    console.log(this.item);
   }
 }

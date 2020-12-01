@@ -32,9 +32,15 @@ import { FormClientesComponent } from './componentes/form-clientes/form-clientes
 import { FormMarcaComponent } from './componentes/form-marca/form-marca.component';
 import { FormUsuariosComponent } from './componentes/form-usuarios/form-usuarios.component';
 import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
+
+import { ListaCategoriaComponent } from './componentes/lista-categoria/lista-categoria.component';
+import { CategoriasComponent } from "./modulos/categorias/categorias.component";
+import { FormCategoriaComponent } from './componentes/form-categoria/form-categoria.component';
+=======
 import { ListaMarcaComponent } from './componentes/lista-marca/lista-marca.component';
 import { ListaPreguntasComponent } from './componentes/lista-preguntas/lista-preguntas.component';
 import { MainAdminComponent } from './componentes/main-admin/main-admin.component';
+
 
 
 @NgModule({
@@ -56,9 +62,15 @@ import { MainAdminComponent } from './componentes/main-admin/main-admin.componen
     ListaPreguntasComponent,
     MainAdminComponent,
     ListaEstudiosComponent,
+
+    ListaCategoriaComponent,
+    FormCategoriaComponent,
+    CategoriasComponent 
+
     FormUsuariosComponent,
     CategoriasComponent,
     SubcategoriasComponent
+
 
   ],
   imports: [

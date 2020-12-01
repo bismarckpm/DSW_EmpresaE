@@ -8,6 +8,7 @@ import { AdminComponent } from './modulos/admin/admin.component';
 import { ClienteComponent } from './modulos/cliente/cliente.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
 import { UsuarioComponent } from './modulos/usuario/usuario.component';
+import { CategoriasComponent } from './modulos/categorias/categorias.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,8 @@ const routes: Routes = [
   { path: 'cliente', component: ClienteComponent},
   { path: 'analista', component: AnalistaComponent},
   { path: 'usuario', component: UsuarioComponent},
+  { path: 'categoria', component: CategoriasComponent },
+ 
   { path: '**', redirectTo: '/login', pathMatch: 'full'},
 ];
 

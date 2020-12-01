@@ -18,26 +18,118 @@
             <th>{{ cliente.rif }}</th>
             <td>
               <div class="d-flex justify-content-around">
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#staticBackdrop">
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#staticBackdropUpdate">
                   <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
                   </svg>
                 </button>
-                <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal fade" id="staticBackdropUpdate" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                   <div class="modal-dialog">
                       <div class="modal-content">
                           <div class="modal-header">
-                            <h1>Actualizar (seccion) tal</h1>
+                            <h5 class="modal-title" id="staticBackdropLabel">Actualizar cliente {{ cliente.id }}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
                           <div class="modal-body">
-                              <!-- <app-form-clientes></app-form-clientes> -->
+                              <form class="needs-validation" novalidate>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstName">First name</label>
+                                        <input type="text" class="form-control" name="nombre" id="firstName" placeholder="" value="" required>
+                                        <div class="invalid-feedback">
+                                            Valid first name is required.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="lastName">Last name</label>
+                                        <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                                        <div class="invalid-feedback">
+                                        Valid last name is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="mb-3">
+                                            <label for="username">Username</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">@</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="username" placeholder="Username" required>
+                                                <div class="invalid-feedback" style="width: 100%;">
+                                                    Your username is required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            
+                                    <div class="col-md-6 mb-3">
+                                        <div class="mb-3">
+                                        <label for="email">Email <span class="text-muted">(Optional)</span></label>
+                                        <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                                        <div class="invalid-feedback">
+                                            Please enter a valid email address for shipping updates.
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="mb-3">
+                                        <label for="address">Address</label>
+                                        <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your shipping address.
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="mb-3">
+                                        <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+                                        <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="row">
+                                <div class="col-md-5 mb-3">
+                                    <label for="country">Country</label>
+                                    <select class="custom-select d-block w-100" id="country" required>
+                                    <option value="">Choose...</option>
+                                    <option>United States</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                    Please select a valid country.
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="state">State</label>
+                                    <select class="custom-select d-block w-100" id="state" required>
+                                    <option value="">Choose...</option>
+                                    <option>California</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                    Please provide a valid state.
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="zip">Zip</label>
+                                    <input type="text" class="form-control" id="zip" placeholder="" required>
+                                    <div class="invalid-feedback">
+                                    Zip code required.
+                                    </div>
+                                </div>
+                                </div>
+                            </form>
                           </div>
                           <div class="modal-footer">
                               <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                              <button type="button" class="btn btn-primary" (click)="actualizar()">Aceptar</button>
+                              <button type="button" class="btn btn-primary" (click)="actualizar()" data-dismiss="modal">Aceptar</button>
                           </div>
                       </div>
                   </div>

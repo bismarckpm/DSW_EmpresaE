@@ -11,7 +11,7 @@ export class ListaPreguntasComponent implements OnInit {
 
   preguntas: Pregunta[] = [];
 
-  constructor(private servicio: PreguntaService) { 
+  constructor(private servicio: PreguntaService) {
     this.preguntas = this.servicio.getPreguntas();
   }
 

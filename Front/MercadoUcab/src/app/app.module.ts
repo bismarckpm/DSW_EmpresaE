@@ -40,6 +40,8 @@ import { ListaPresentacionComponent } from './componentes/lista-presentacion/lis
 import { UsuarioService } from './services/usuario.service';
 import { AdminService } from './services/admin.service';
 import { MarcaService } from './services/marca.service';
+import { FormTipoComponent } from './componentes/form-tipo/form-tipo.component';
+import { ListaTipoComponent } from './componentes/lista-tipo/lista-tipo.component';
 
 
 
@@ -72,7 +74,9 @@ import { MarcaService } from './services/marca.service';
     FormPreguntaComponent,
     SubcategoriasComponent,
     FormPresentacionComponent,
-    ListaPresentacionComponent
+    ListaPresentacionComponent,
+    FormTipoComponent,
+    ListaTipoComponent
 
   ],
   imports: [

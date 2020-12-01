@@ -15,7 +15,8 @@ export class AdminService {
     'Categorias',
     'Subcategorias',
     'Marcas',
-    'Presentaciones'
+    'Presentaciones',
+    'Tipos'
   ];
 
   constructor() { console.log('servicio ADMIN'); }

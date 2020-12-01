@@ -28,6 +28,9 @@ import { UsuarioService } from './services/usuario.service';
 import { AdminService } from './services/admin.service';
 import { MainAdminComponent } from './componentes/main-admin/main-admin.component';
 import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
+import { ListaCategoriaComponent } from './componentes/lista-categoria/lista-categoria.component';
+import { CategoriasComponent } from "./modulos/categorias/categorias.component";
+import { FormCategoriaComponent } from './componentes/form-categoria/form-categoria.component';
 
 
 @NgModule({
@@ -47,6 +50,9 @@ import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estud
     ListaPreguntasComponent,
     MainAdminComponent,
     ListaEstudiosComponent,
+    ListaCategoriaComponent,
+    FormCategoriaComponent,
+    CategoriasComponent 
   ],
   imports: [
     BrowserModule,

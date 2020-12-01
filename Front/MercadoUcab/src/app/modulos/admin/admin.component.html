@@ -22,7 +22,7 @@
                             <div *ngSwitchCase="'Analistas'"></div>
                             <div *ngSwitchCase="'Estudios'"></div>
                             <div *ngSwitchCase="'Preguntas'"></div>
-                            <div *ngSwitchCase="'Categorias'"></div>
+                            <div *ngSwitchCase="'Categorias'"><app-form-categoria></app-form-categoria></div>
                             <div *ngSwitchCase="'Subcategorias'"></div>
                             <div *ngSwitchCase="'Marcas'"></div>
                             <div *ngSwitchDefault></div>
@@ -37,7 +37,7 @@
                 <div *ngSwitchCase="'Analistas'"></div>
                 <div *ngSwitchCase="'Estudios'"></div>
                 <div *ngSwitchCase="'Preguntas'"><app-lista-preguntas></app-lista-preguntas></div>
-                <div *ngSwitchCase="'Categorias'"></div>
+                <div *ngSwitchCase="'Categorias'"> <app-lista-categoria></app-lista-categoria> </div>
                 <div *ngSwitchCase="'Subcategorias'"></div>
                 <div *ngSwitchCase="'Marcas'"></div>
                 <div *ngSwitchDefault></div>

@@ -1,0 +1,34 @@
+{
+  "categoria": [
+    {
+      "id": 1,
+      "nombre": "Tony Stark",
+      "estatus": "b"
+    },
+    {
+      "id": 2,
+      "nombre": "Black Widow",
+      "estatus": "b"
+    },
+    {
+      "nombre": "Maurico",
+      "id": 3,
+      "estatus": "g"
+    },
+    {
+      "id": 5,
+      "nombre": "pedro gutierres",
+      "estatus": "hola mundo"
+    },
+    {
+      "id": 7,
+      "nombre": "asdad",
+      "estatus": "asdd"
+    },
+    {
+      "id": 8,
+      "nombre": "jo",
+      "estatus": "a"
+    }
+  ]
+}

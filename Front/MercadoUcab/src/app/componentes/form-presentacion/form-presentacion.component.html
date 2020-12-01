@@ -1,0 +1,40 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">Marca</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+        <div class="row">
+          <div class="col-md-5 mb-3">
+            <label for="country">Estado</label>
+            <select class="custom-select d-block w-100" id="country" required>
+              <option value="">Choose...</option>
+              <option>Activo</option>
+              <option>Inactivo</option>
+            </select>
+            <div class="invalid-feedback">
+              Please select a valid option.
+            </div>
+          </div>
+        </div>
+    <div class="modal-body">
+      <form class="needs-validation" novalidate>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="nombre">Descripcion</label>
+            <input type="text" class="form-control" id="nombre" placeholder="" value="" required>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      <button type="submit" class="btn btn-primary" (click)="agregarPresentacion()" data-dismiss="modal">Guargar</button>
+    </div>
+  </div>
+</div>

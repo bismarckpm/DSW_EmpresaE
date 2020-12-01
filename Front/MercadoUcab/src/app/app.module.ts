@@ -35,6 +35,8 @@ import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estud
 import { ListaMarcaComponent } from './componentes/lista-marca/lista-marca.component';
 import { ListaPreguntasComponent } from './componentes/lista-preguntas/lista-preguntas.component';
 import { MainAdminComponent } from './componentes/main-admin/main-admin.component';
+import { FormPresentacionComponent } from './componentes/form-presentacion/form-presentacion.component';
+import { ListaPresentacionComponent } from './componentes/lista-presentacion/lista-presentacion.component';
 
 
 @NgModule({
@@ -58,7 +60,9 @@ import { MainAdminComponent } from './componentes/main-admin/main-admin.componen
     ListaEstudiosComponent,
     FormUsuariosComponent,
     CategoriasComponent,
-    SubcategoriasComponent
+    SubcategoriasComponent,
+    FormPresentacionComponent,
+    ListaPresentacionComponent
 
   ],
   imports: [

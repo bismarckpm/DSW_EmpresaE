@@ -30,14 +30,18 @@ import { FormCategoriaComponent } from './componentes/form-categoria/form-catego
 import { ListaCategoriaComponent } from './componentes/lista-categoria/lista-categoria.component';
 import { CategoriasComponent } from './modulos/categorias/categorias.component';
 import { SubcategoriasComponent } from './modulos/subcategorias/subcategorias.component';
+import { ListaClientesComponent } from './componentes/lista-clientes/lista-clientes.component';
+import { FormPreguntaComponent } from './componentes/form-pregunta/form-pregunta.component';
+import { FormPresentacionComponent } from './componentes/form-presentacion/form-presentacion.component';
+import { ListaPresentacionComponent } from './componentes/lista-presentacion/lista-presentacion.component';
 
 
 // Services
 import { UsuarioService } from './services/usuario.service';
 import { AdminService } from './services/admin.service';
 import { MarcaService } from './services/marca.service';
-import { ListaClientesComponent } from './componentes/lista-clientes/lista-clientes.component';
-import { FormPreguntaComponent } from './componentes/form-pregunta/form-pregunta.component';
+
+
 
 
 @NgModule({
@@ -65,7 +69,10 @@ import { FormPreguntaComponent } from './componentes/form-pregunta/form-pregunta
     FormUsuariosComponent,
     SubcategoriasComponent,
     ListaClientesComponent,
-    FormPreguntaComponent
+    FormPreguntaComponent,
+    SubcategoriasComponent,
+    FormPresentacionComponent,
+    ListaPresentacionComponent
 
   ],
   imports: [

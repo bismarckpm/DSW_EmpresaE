@@ -7,8 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="entidades" />
-        <module name="dtos" />
         <module name="daos" />
+        <module name="dtos" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

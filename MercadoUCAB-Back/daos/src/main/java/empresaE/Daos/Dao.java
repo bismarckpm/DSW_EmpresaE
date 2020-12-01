@@ -5,6 +5,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import ucab.empresae.entidades.BaseEntity;
 
 public class Dao<T>
 {
@@ -141,8 +142,8 @@ public class Dao<T>
 
         try
         {
-            final EntidadBase base = ( EntidadBase ) _em.find( type, id );
-            base.getId();
+            final BaseEntity base = ( BaseEntity ) _em.find( type, id );
+            base.get_id();
             entity = ( T ) base;
         }
         catch ( Exception e )

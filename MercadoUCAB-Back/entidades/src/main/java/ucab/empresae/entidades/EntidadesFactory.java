@@ -4,6 +4,10 @@ import java.lang.annotation.Repeatable;
 
 public class EntidadesFactory {
 
+    public static BaseEntity BaseEntityInstance() {
+        return new BaseEntity();
+    }
+
     public static CategoriaEntity CategoriaInstance() {
         return new CategoriaEntity();
     }

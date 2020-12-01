@@ -19,18 +19,28 @@ import { AdminComponent } from './modulos/admin/admin.component';
 import { ClienteComponent } from './modulos/cliente/cliente.component';
 import { UsuarioComponent } from './modulos/usuario/usuario.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
-import { FormClientesComponent } from './componentes/form-clientes/form-clientes.component';
-import { ListaPreguntasComponent } from './componentes/lista-preguntas/lista-preguntas.component';
+
+import { CategoriasComponent } from './modulos/categorias/categorias.component';
+import { SubcategoriasComponent } from './modulos/subcategorias/subcategorias.component';
 
 
 // Services
 import { UsuarioService } from './services/usuario.service';
 import { AdminService } from './services/admin.service';
-import { MainAdminComponent } from './componentes/main-admin/main-admin.component';
+import { MarcaService } from './services/marca.service';
+import { FormClientesComponent } from './componentes/form-clientes/form-clientes.component';
+import { FormMarcaComponent } from './componentes/form-marca/form-marca.component';
+import { FormUsuariosComponent } from './componentes/form-usuarios/form-usuarios.component';
 import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
+
 import { ListaCategoriaComponent } from './componentes/lista-categoria/lista-categoria.component';
 import { CategoriasComponent } from "./modulos/categorias/categorias.component";
 import { FormCategoriaComponent } from './componentes/form-categoria/form-categoria.component';
+=======
+import { ListaMarcaComponent } from './componentes/lista-marca/lista-marca.component';
+import { ListaPreguntasComponent } from './componentes/lista-preguntas/lista-preguntas.component';
+import { MainAdminComponent } from './componentes/main-admin/main-admin.component';
+
 
 
 @NgModule({
@@ -47,12 +57,21 @@ import { FormCategoriaComponent } from './componentes/form-categoria/form-catego
     UsuarioComponent,
     AnalistaComponent,
     FormClientesComponent,
+    FormMarcaComponent,
+    ListaMarcaComponent,
     ListaPreguntasComponent,
     MainAdminComponent,
     ListaEstudiosComponent,
+
     ListaCategoriaComponent,
     FormCategoriaComponent,
     CategoriasComponent 
+
+    FormUsuariosComponent,
+    CategoriasComponent,
+    SubcategoriasComponent
+
+
   ],
   imports: [
     BrowserModule,
@@ -65,7 +84,8 @@ import { FormCategoriaComponent } from './componentes/form-categoria/form-catego
   ],
   providers: [
     UsuarioService,
-    AdminService
+    AdminService,
+    MarcaService
   ],
   bootstrap: [AppComponent]
 })

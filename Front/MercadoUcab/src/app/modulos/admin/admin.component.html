@@ -7,7 +7,6 @@
                     <div *ngSwitchCase="'Inicio'"><h1 class="h2 text-white"f>Panel de Administracion</h1></div>
                     <div *ngSwitchDefault><h1 class="h2 text-white"f>Lista de {{seccion}}</h1></div>
                 </div>
-                <!-- <h1 class="h2 text-white"f>Lista de {{seccion}}</h1> -->
                 <div class="btn-toolbar mb-2 mb-md-0">
             
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop"
@@ -24,7 +23,7 @@
                             <div *ngSwitchCase="'Preguntas'"></div>
                             <div *ngSwitchCase="'Categorias'"></div>
                             <div *ngSwitchCase="'Subcategorias'"></div>
-                            <div *ngSwitchCase="'Marcas'"></div>
+                            <div *ngSwitchCase="'Marcas'"><app-form-marca></app-form-marca></div>
                             <div *ngSwitchDefault></div>
                         </div>
                     </div>
@@ -39,7 +38,7 @@
                 <div *ngSwitchCase="'Preguntas'"><app-lista-preguntas></app-lista-preguntas></div>
                 <div *ngSwitchCase="'Categorias'"></div>
                 <div *ngSwitchCase="'Subcategorias'"></div>
-                <div *ngSwitchCase="'Marcas'"></div>
+                <div *ngSwitchCase="'Marcas'"><app-lista-marca></app-lista-marca></div>
                 <div *ngSwitchDefault></div>
             </div>
         </main>

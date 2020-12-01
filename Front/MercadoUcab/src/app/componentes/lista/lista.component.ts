@@ -12,7 +12,7 @@ export class ListaComponent implements OnInit {
   usuarios: Usuario[] = [];
 
   // tslint:disable-next-line: variable-name
-  constructor(private _servicio: UsuarioService) { 
+  constructor(private _servicio: UsuarioService) {
     this.usuarios = this._servicio.getUsuarios();
   }
 

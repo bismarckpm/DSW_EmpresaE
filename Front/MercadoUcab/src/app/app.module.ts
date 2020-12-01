@@ -21,13 +21,17 @@ import { UsuarioComponent } from './modulos/usuario/usuario.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
 import { FormClientesComponent } from './componentes/form-clientes/form-clientes.component';
 import { ListaPreguntasComponent } from './componentes/lista-preguntas/lista-preguntas.component';
+import { FormMarcaComponent } from './componentes/form-marca/form-marca.component';
+import { ListaMarcaComponent } from './componentes/lista-marca/lista-marca.component';
+import { MainAdminComponent } from './componentes/main-admin/main-admin.component';
+import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
 
 
 // Services
 import { UsuarioService } from './services/usuario.service';
 import { AdminService } from './services/admin.service';
-import { MainAdminComponent } from './componentes/main-admin/main-admin.component';
-import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
+import { MarcaService } from './services/marca.service';
+import { FormUsuariosComponent } from './componentes/form-usuarios/form-usuarios.component';
 
 
 @NgModule({
@@ -44,9 +48,12 @@ import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estud
     UsuarioComponent,
     AnalistaComponent,
     FormClientesComponent,
+    FormMarcaComponent,
+    ListaMarcaComponent,
     ListaPreguntasComponent,
     MainAdminComponent,
     ListaEstudiosComponent,
+    FormUsuariosComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +66,8 @@ import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estud
   ],
   providers: [
     UsuarioService,
-    AdminService
+    AdminService,
+    MarcaService
   ],
   bootstrap: [AppComponent]
 })

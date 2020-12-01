@@ -31,10 +31,10 @@
             </div>
             <div [ngSwitch]="seccion">
                 <div *ngSwitchCase="'Inicio'"><app-main-admin></app-main-admin></div>
-                <div *ngSwitchCase="'Clientes'"></div>
+                <div *ngSwitchCase="'Clientes'"><app-lista-clientes></app-lista-clientes></div>
                 <div *ngSwitchCase="'Usuarios'"><app-lista></app-lista></div>
                 <div *ngSwitchCase="'Analistas'"></div>
-                <div *ngSwitchCase="'Estudios'"></div>
+                <div *ngSwitchCase="'Estudios'"><app-lista-estudios></app-lista-estudios></div>
                 <div *ngSwitchCase="'Preguntas'"><app-lista-preguntas></app-lista-preguntas></div>
                 <div *ngSwitchCase="'Categorias'"> <app-lista-categoria></app-lista-categoria> </div>
                 <div *ngSwitchCase="'Subcategorias'"></div>

@@ -5,15 +5,17 @@
           <tr>
             <th>ID</th>
             <th>Estado</th>
-            <th>Descripción</th>
+            <th>Razón Social</th>
+            <th>R.I.F</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let pregunta of preguntas">
-            <th>{{ pregunta.id }}</th>
-            <th>{{ pregunta.estado }}</th>
-            <th>{{ pregunta.descripcion }}</th>
+          <tr *ngFor="let cliente of clientes">
+            <th>{{ cliente.id }}</th>
+            <th>{{ cliente.estado }}</th>
+            <th>{{ cliente.razonSocial }}</th>
+            <th>{{ cliente.rif }}</th>
             <td>
               <div class="d-flex justify-content-around">
                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#staticBackdrop">

@@ -11,14 +11,9 @@
       "estatus": "b"
     },
     {
-      "nombre": "Maurico",
-      "id": 3,
-      "estatus": "g"
-    },
-    {
       "id": 5,
       "nombre": "pedro gutierres",
-      "estatus": "hola mundo"
+      "estatus": "a"
     },
     {
       "id": 7,
@@ -28,6 +23,11 @@
     {
       "id": 8,
       "nombre": "jo",
+      "estatus": "a"
+    },
+    {
+      "id": 9,
+      "nombre": "pedro2",
       "estatus": "a"
     }
   ]

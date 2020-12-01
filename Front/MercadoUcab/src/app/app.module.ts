@@ -34,9 +34,9 @@ import { FormUsuariosComponent } from './componentes/form-usuarios/form-usuarios
 import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
 
 import { ListaCategoriaComponent } from './componentes/lista-categoria/lista-categoria.component';
-import { CategoriasComponent } from "./modulos/categorias/categorias.component";
+
 import { FormCategoriaComponent } from './componentes/form-categoria/form-categoria.component';
-=======
+
 import { ListaMarcaComponent } from './componentes/lista-marca/lista-marca.component';
 import { ListaPreguntasComponent } from './componentes/lista-preguntas/lista-preguntas.component';
 import { MainAdminComponent } from './componentes/main-admin/main-admin.component';
@@ -65,7 +65,7 @@ import { MainAdminComponent } from './componentes/main-admin/main-admin.componen
 
     ListaCategoriaComponent,
     FormCategoriaComponent,
-    CategoriasComponent 
+    CategoriasComponent, 
 
     FormUsuariosComponent,
     CategoriasComponent,

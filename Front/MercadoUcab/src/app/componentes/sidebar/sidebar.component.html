@@ -1,22 +1,45 @@
-<ng-sidebar-container>
- 
-  <!-- A sidebar -->
-  <ng-sidebar [(opened)]="opened">
-    <p> Menu </p>
-    
-    <ul class="menu">
-      <li><a href=""> Encuestado </a></li>
-      <li><a href=""> Analista </a></li>
-      <li><a href=""> Administrador </a></li>
-      <li><a href=""> Cliente </a></li>
-    </ul>
+<div class="container-fluid ">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="sidebar-sticky">
+        <div class="accordion" id="accordionExample" *ngFor="let seccion of secciones, index as i">
+          <!-- esto es lo que se va a repetir con el ngFor -->
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" 
+                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
+                [routerLink]="['/admin', i]">
+                  {{ seccion }}
+                </button>
+              </h2>
+            </div>
+          </div>
+        </div>
 
-    <button (click)="toggleSidebar()">Close menu </button>
-  </ng-sidebar>
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Saved reports</span>
+          <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+            <span data-feather="plus-circle"></span>
+          </a>
+        </h6>
 
-  <!-- Page content -->
-  <div ng-sidebar-content>
-    <button (click)="toggleSidebar()">Menu principal</button>
+        <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              Current month
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              Last quarter
+            </a>
+          </li>
+        </ul>
+
+      </div>
+    </nav>
   </div>
-
-</ng-sidebar-container>
+</div>

@@ -19,26 +19,15 @@ import { AdminComponent } from './modulos/admin/admin.component';
 import { ClienteComponent } from './modulos/cliente/cliente.component';
 import { UsuarioComponent } from './modulos/usuario/usuario.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
-import { CategoriasComponent } from './modulos/categorias/categorias.component';
-import { SubcategoriasComponent } from './modulos/subcategorias/subcategorias.component'
-// Service
-import { UsuarioService } from './services/usuario.service';
-import { AdminService } from './services/admin.service';import { MarcaService } from './services/marca.service';
 import { FormClientesComponent } from './componentes/form-clientes/form-clientes.component';
 import { FormMarcaComponent } from './componentes/form-marca/form-marca.component';
 import { FormUsuariosComponent } from './componentes/form-usuarios/form-usuarios.component';
 import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
-import { ListaCategoriaComponent } from './componentes/lista-categoria/lista-categoria.component';
-import { FormCategoriaComponent } from './componentes/form-categoria/form-categoria.component';
 import { ListaMarcaComponent } from './componentes/lista-marca/lista-marca.component';
 import { ListaPreguntasComponent } from './componentes/lista-preguntas/lista-preguntas.component';
 import { MainAdminComponent } from './componentes/main-admin/main-admin.component';
-
 import { ListaSubcategoriaComponent } from './componentes/lista-subcategoria/lista-subcategoria.component';
 import { FormSubcategoriaComponent } from './componentes/form-subcategoria/form-subcategoria.component';
-import { SubcategoriaService } from './services/subcategoria.service';
-import { CategoriaService } from './services/categoria.service';
-
 import { FormCategoriaComponent } from './componentes/form-categoria/form-categoria.component';
 import { ListaCategoriaComponent } from './componentes/lista-categoria/lista-categoria.component';
 import { CategoriasComponent } from './modulos/categorias/categorias.component';
@@ -47,14 +36,16 @@ import { ListaClientesComponent } from './componentes/lista-clientes/lista-clien
 import { FormPreguntaComponent } from './componentes/form-pregunta/form-pregunta.component';
 import { FormPresentacionComponent } from './componentes/form-presentacion/form-presentacion.component';
 import { ListaPresentacionComponent } from './componentes/lista-presentacion/lista-presentacion.component';
-
+import { FormTipoComponent } from './componentes/form-tipo/form-tipo.component';
+import { ListaTipoComponent } from './componentes/lista-tipo/lista-tipo.component';
 
 // Services
 import { UsuarioService } from './services/usuario.service';
 import { AdminService } from './services/admin.service';
 import { MarcaService } from './services/marca.service';
-import { FormTipoComponent } from './componentes/form-tipo/form-tipo.component';
-import { ListaTipoComponent } from './componentes/lista-tipo/lista-tipo.component';
+import { SubcategoriaService } from './services/subcategoria.service';
+import { CategoriaService } from './services/categoria.service';
+
 
 
 
@@ -87,7 +78,7 @@ import { ListaTipoComponent } from './componentes/lista-tipo/lista-tipo.componen
     SubcategoriasComponent,
 
     ListaSubcategoriaComponent,
-    FormSubcategoriaComponent
+    FormSubcategoriaComponent,
 
 
     ListaClientesComponent,

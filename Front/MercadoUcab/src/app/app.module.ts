@@ -35,6 +35,8 @@ import { ListaPreguntasComponent } from './componentes/lista-preguntas/lista-pre
 import { MainAdminComponent } from './componentes/main-admin/main-admin.component';
 import { ListaSubcategoriaComponent } from './componentes/lista-subcategoria/lista-subcategoria.component';
 import { FormSubcategoriaComponent } from './componentes/form-subcategoria/form-subcategoria.component';
+import { SubcategoriaService } from './services/subcategoria.service';
+import { CategoriaService } from './services/categoria.service';
 
 
 
@@ -57,11 +59,9 @@ import { FormSubcategoriaComponent } from './componentes/form-subcategoria/form-
     ListaPreguntasComponent,
     MainAdminComponent,
     ListaEstudiosComponent,
-
     ListaCategoriaComponent,
     FormCategoriaComponent,
     CategoriasComponent, 
-
     FormUsuariosComponent,
     CategoriasComponent,
     SubcategoriasComponent,
@@ -82,7 +82,9 @@ import { FormSubcategoriaComponent } from './componentes/form-subcategoria/form-
   providers: [
     UsuarioService,
     AdminService,
-    MarcaService
+    MarcaService,
+    SubcategoriaService,
+    CategoriaService
   ],
   bootstrap: [AppComponent]
 })

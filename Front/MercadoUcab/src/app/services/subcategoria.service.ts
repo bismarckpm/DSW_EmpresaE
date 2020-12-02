@@ -7,9 +7,10 @@ import { catchError, retry } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class SubsubcategoriaService {
+export class SubcategoriaService {
    //Definimos el url del api
    apiurl='http://localhost:3000';
+   
   constructor(private http:HttpClient) { }
 // Http Options
   httpOptions = {

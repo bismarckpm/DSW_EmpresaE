@@ -2,7 +2,7 @@
   "categoria": [
     {
       "id": 1,
-      "nombre": "Tony Stark",
+      "nombre": "javier",
       "estatus": "b"
     },
     {
@@ -29,6 +29,26 @@
       "id": 9,
       "nombre": "pedro2",
       "estatus": "a"
+    }
+  ],
+  "subcategoria": [
+    {
+      "id": 1,
+      "nombre": "refrescos",
+      "estatus": "b",
+      "id_categoria": 1
+    },
+    {
+      "id": 2,
+      "nombre": "doritos",
+      "estatus": "b",
+      "id_categoria": 2
+    },
+    {
+      "id": 5,
+      "nombre": "desodorante",
+      "estatus": "a",
+      "id_categoria": 3
     }
   ]
 }

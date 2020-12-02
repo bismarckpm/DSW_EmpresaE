@@ -42,6 +42,7 @@ import { AdminService } from './services/admin.service';
 import { MarcaService } from './services/marca.service';
 import { FormTipoComponent } from './componentes/form-tipo/form-tipo.component';
 import { ListaTipoComponent } from './componentes/lista-tipo/lista-tipo.component';
+import { FormEstudioComponent } from './componentes/form-estudio/form-estudio.component';
 
 
 
@@ -76,7 +77,8 @@ import { ListaTipoComponent } from './componentes/lista-tipo/lista-tipo.componen
     FormPresentacionComponent,
     ListaPresentacionComponent,
     FormTipoComponent,
-    ListaTipoComponent
+    ListaTipoComponent,
+    FormEstudioComponent,
 
   ],
   imports: [

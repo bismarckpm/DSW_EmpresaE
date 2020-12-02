@@ -33,10 +33,30 @@ import { FormCategoriaComponent } from './componentes/form-categoria/form-catego
 import { ListaMarcaComponent } from './componentes/lista-marca/lista-marca.component';
 import { ListaPreguntasComponent } from './componentes/lista-preguntas/lista-preguntas.component';
 import { MainAdminComponent } from './componentes/main-admin/main-admin.component';
+
 import { ListaSubcategoriaComponent } from './componentes/lista-subcategoria/lista-subcategoria.component';
 import { FormSubcategoriaComponent } from './componentes/form-subcategoria/form-subcategoria.component';
 import { SubcategoriaService } from './services/subcategoria.service';
 import { CategoriaService } from './services/categoria.service';
+
+import { FormCategoriaComponent } from './componentes/form-categoria/form-categoria.component';
+import { ListaCategoriaComponent } from './componentes/lista-categoria/lista-categoria.component';
+import { CategoriasComponent } from './modulos/categorias/categorias.component';
+import { SubcategoriasComponent } from './modulos/subcategorias/subcategorias.component';
+import { ListaClientesComponent } from './componentes/lista-clientes/lista-clientes.component';
+import { FormPreguntaComponent } from './componentes/form-pregunta/form-pregunta.component';
+import { FormPresentacionComponent } from './componentes/form-presentacion/form-presentacion.component';
+import { ListaPresentacionComponent } from './componentes/lista-presentacion/lista-presentacion.component';
+
+
+// Services
+import { UsuarioService } from './services/usuario.service';
+import { AdminService } from './services/admin.service';
+import { MarcaService } from './services/marca.service';
+import { FormTipoComponent } from './componentes/form-tipo/form-tipo.component';
+import { ListaTipoComponent } from './componentes/lista-tipo/lista-tipo.component';
+
+
 
 
 
@@ -65,8 +85,18 @@ import { CategoriaService } from './services/categoria.service';
     FormUsuariosComponent,
     CategoriasComponent,
     SubcategoriasComponent,
+
     ListaSubcategoriaComponent,
     FormSubcategoriaComponent
+
+
+    ListaClientesComponent,
+    FormPreguntaComponent,
+    SubcategoriasComponent,
+    FormPresentacionComponent,
+    ListaPresentacionComponent,
+    FormTipoComponent,
+    ListaTipoComponent
 
 
   ],

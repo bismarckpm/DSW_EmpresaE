@@ -1,24 +1,9 @@
 {
   "categoria": [
     {
-      "id": 1,
-      "nombre": "javier",
-      "estatus": "b"
-    },
-    {
-      "id": 2,
-      "nombre": "Black Widow",
-      "estatus": "b"
-    },
-    {
       "id": 5,
       "nombre": "pedro gutierres",
-      "estatus": "a"
-    },
-    {
-      "id": 7,
-      "nombre": "asdad",
-      "estatus": "asdd"
+      "estatus": "i"
     },
     {
       "id": 8,
@@ -29,6 +14,11 @@
       "id": 9,
       "nombre": "pedro2",
       "estatus": "a"
+    },
+    {
+      "id": 10,
+      "nombre": "Prueba 25",
+      "estatus": "i"
     }
   ],
   "subcategoria": [

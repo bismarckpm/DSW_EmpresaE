@@ -9,6 +9,7 @@ import { ClienteComponent } from './modulos/cliente/cliente.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
 import { UsuarioComponent } from './modulos/usuario/usuario.component';
 import { CategoriasComponent } from './modulos/categorias/categorias.component';
+import { SubcategoriasComponent } from './modulos/subcategorias/subcategorias.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'analista', component: AnalistaComponent},
   { path: 'usuario', component: UsuarioComponent},
   { path: 'categoria', component: CategoriasComponent },
+  { path: 'subcategoria', component: SubcategoriasComponent },
  
   { path: '**', redirectTo: '/login', pathMatch: 'full'},
 ];

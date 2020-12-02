@@ -19,12 +19,33 @@ import { AdminComponent } from './modulos/admin/admin.component';
 import { ClienteComponent } from './modulos/cliente/cliente.component';
 import { UsuarioComponent } from './modulos/usuario/usuario.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
+<<<<<<< HEAD
 import { CategoriasComponent } from './modulos/categorias/categorias.component';
 import { SubcategoriasComponent } from './modulos/subcategorias/subcategorias.component';
+=======
+import { FormClientesComponent } from './componentes/form-clientes/form-clientes.component';
+import { FormMarcaComponent } from './componentes/form-marca/form-marca.component';
+import { FormUsuariosComponent } from './componentes/form-usuarios/form-usuarios.component';
+import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
+import { ListaMarcaComponent } from './componentes/lista-marca/lista-marca.component';
+import { ListaPreguntasComponent } from './componentes/lista-preguntas/lista-preguntas.component';
+import { MainAdminComponent } from './componentes/main-admin/main-admin.component';
+import { FormCategoriaComponent } from './componentes/form-categoria/form-categoria.component';
+import { ListaCategoriaComponent } from './componentes/lista-categoria/lista-categoria.component';
+import { CategoriasComponent } from './modulos/categorias/categorias.component';
+import { SubcategoriasComponent } from './modulos/subcategorias/subcategorias.component';
+import { ListaClientesComponent } from './componentes/lista-clientes/lista-clientes.component';
+import { FormPreguntaComponent } from './componentes/form-pregunta/form-pregunta.component';
+import { FormPresentacionComponent } from './componentes/form-presentacion/form-presentacion.component';
+import { ListaPresentacionComponent } from './componentes/lista-presentacion/lista-presentacion.component';
+
+
+>>>>>>> c9c62c2756779e1e15b498abf8a7b4783abe60c1
 // Services
 import { UsuarioService } from './services/usuario.service';
 import { AdminService } from './services/admin.service';
 import { MarcaService } from './services/marca.service';
+<<<<<<< HEAD
 import { FormClientesComponent } from './componentes/form-clientes/form-clientes.component';
 import { FormMarcaComponent } from './componentes/form-marca/form-marca.component';
 import { FormUsuariosComponent } from './componentes/form-usuarios/form-usuarios.component';
@@ -36,6 +57,9 @@ import { ListaPreguntasComponent } from './componentes/lista-preguntas/lista-pre
 import { MainAdminComponent } from './componentes/main-admin/main-admin.component';
 import { ListaSubcategoriaComponent } from './componentes/lista-subcategoria/lista-subcategoria.component';
 import { FormSubcategoriaComponent } from './componentes/form-subcategoria/form-subcategoria.component';
+=======
+
+>>>>>>> c9c62c2756779e1e15b498abf8a7b4783abe60c1
 
 
 
@@ -58,9 +82,9 @@ import { FormSubcategoriaComponent } from './componentes/form-subcategoria/form-
     ListaPreguntasComponent,
     MainAdminComponent,
     ListaEstudiosComponent,
-
     ListaCategoriaComponent,
     FormCategoriaComponent,
+<<<<<<< HEAD
     CategoriasComponent, 
 
     FormUsuariosComponent,
@@ -69,6 +93,16 @@ import { FormSubcategoriaComponent } from './componentes/form-subcategoria/form-
     ListaSubcategoriaComponent,
     FormSubcategoriaComponent
 
+=======
+    CategoriasComponent,
+    FormUsuariosComponent,
+    SubcategoriasComponent,
+    ListaClientesComponent,
+    FormPreguntaComponent,
+    SubcategoriasComponent,
+    FormPresentacionComponent,
+    ListaPresentacionComponent
+>>>>>>> c9c62c2756779e1e15b498abf8a7b4783abe60c1
 
   ],
   imports: [

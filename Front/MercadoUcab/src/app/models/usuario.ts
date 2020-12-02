@@ -1,4 +1,4 @@
-export interface Encuestado {
+export interface Usuario {
 
       id: number;
       nombre: string;

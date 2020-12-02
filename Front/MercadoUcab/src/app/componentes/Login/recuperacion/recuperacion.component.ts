@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EncuestadoService } from 'src/app/services/encuestado.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 
 @Component({
@@ -10,9 +10,9 @@ import { EncuestadoService } from 'src/app/services/encuestado.service';
 
 export class RecuperacionComponent implements OnInit {
 
-
-
-  constructor(private usuarioService:EncuestadoService) {
+   
+ 
+  constructor(private usuarioService:UsuarioService) { 
 
   }
 
@@ -20,7 +20,7 @@ export class RecuperacionComponent implements OnInit {
   }
 
   confirmarCorreo(){
-    //Validar el correo que este en la base de datos
+    //Validar el correo que este en la base de datos 
     //luego redireccionar a otro componente de para que ingrese la clave
     // guardar
   }

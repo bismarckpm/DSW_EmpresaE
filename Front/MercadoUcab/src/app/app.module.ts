@@ -21,7 +21,7 @@ import { UsuarioComponent } from './modulos/usuario/usuario.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
 import { FormClientesComponent } from './componentes/form-clientes/form-clientes.component';
 import { FormMarcaComponent } from './componentes/form-marca/form-marca.component';
-import { FormUsuariosComponent } from './componentes/form-usuarios/form-usuarios.component';
+import { FormEncuestadoComponent } from './componentes/form-encuestado/form-encuestado.component';
 import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
 import { ListaMarcaComponent } from './componentes/lista-marca/lista-marca.component';
 import { ListaPreguntasComponent } from './componentes/lista-preguntas/lista-preguntas.component';
@@ -37,12 +37,11 @@ import { ListaPresentacionComponent } from './componentes/lista-presentacion/lis
 
 
 // Services
-import { UsuarioService } from './services/usuario.service';
+import { EncuestadoService } from './services/encuestado.service';
 import { AdminService } from './services/admin.service';
 import { MarcaService } from './services/marca.service';
 import { FormTipoComponent } from './componentes/form-tipo/form-tipo.component';
 import { ListaTipoComponent } from './componentes/lista-tipo/lista-tipo.component';
-
 
 
 
@@ -68,7 +67,7 @@ import { ListaTipoComponent } from './componentes/lista-tipo/lista-tipo.componen
     ListaCategoriaComponent,
     FormCategoriaComponent,
     CategoriasComponent,
-    FormUsuariosComponent,
+    FormEncuestadoComponent,
     SubcategoriasComponent,
     ListaClientesComponent,
     FormPreguntaComponent,
@@ -76,7 +75,7 @@ import { ListaTipoComponent } from './componentes/lista-tipo/lista-tipo.componen
     FormPresentacionComponent,
     ListaPresentacionComponent,
     FormTipoComponent,
-    ListaTipoComponent
+    ListaTipoComponent,
 
   ],
   imports: [
@@ -89,7 +88,7 @@ import { ListaTipoComponent } from './componentes/lista-tipo/lista-tipo.componen
 
   ],
   providers: [
-    UsuarioService,
+    EncuestadoService,
     AdminService,
     MarcaService
   ],

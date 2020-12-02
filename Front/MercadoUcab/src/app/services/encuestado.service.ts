@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Usuario } from '../models/usuario';
+import { Encuestado } from '../models/encuestado';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioService {
+export class EncuestadoService {
 
   API_URI = 'http://';
-  usuarios: Usuario[] = [
+  encuestados: Encuestado[] = [
     {
       id: 0,
       nombre: 'prueba0',
@@ -19,6 +19,7 @@ export class UsuarioService {
       email: '',
       password: '',
       rol: '',
+      estado: 'a',
     },
     {
       id: 1,
@@ -34,19 +35,19 @@ export class UsuarioService {
 
   constructor( private http: HttpClient) { }
 
-  getUsuarios(): Usuario[] {
-    return this.usuarios;
+  getEncuestados(): Encuestado[] {
+    return this.encuestados;
   }
 
-  getUsuario(){
-    return this.http.get(`${this.API_URI}/usuario`);
+  getEncuestado(){
+    return this.http.get(`${this.API_URI}/encuestado`);
   }
 
-  registarUsuario(usuario: Usuario){
-    return this.http.post(`${this.API_URI}/usuario`, usuario);
+  registarEncuestado(encuestado: Encuestado){
+    return this.http.post(`${this.API_URI}/encuestado`, encuestado);
   }
 
-  updateUsuario(id , updateUser){
-    return this.http.post(`${this.API_URI}/usuario/${id}`, updateUser);
+  updateEncuestado(id , updateEncuestado){
+    return this.http.post(`${this.API_URI}/encuestado/${id}`, updateEncuestado);
   }
 }

@@ -21,7 +21,6 @@ import { UsuarioComponent } from './modulos/usuario/usuario.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
 import { CategoriasComponent } from './modulos/categorias/categorias.component';
 import { SubcategoriasComponent } from './modulos/subcategorias/subcategorias.component';
-// Service
 
 
 // Services

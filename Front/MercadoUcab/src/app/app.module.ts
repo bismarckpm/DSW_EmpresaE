@@ -40,6 +40,11 @@ import { ListaPresentacionComponent } from './componentes/lista-presentacion/lis
 import { UsuarioService } from './services/usuario.service';
 import { AdminService } from './services/admin.service';
 import { MarcaService } from './services/marca.service';
+import { FomrAnalistaComponent } from './componentes/fomr-analista/fomr-analista.component';
+import { ListaAnalistaComponent } from './componentes/lista-analista/lista-analista.component';
+import { CambiarClaveComponent } from './componentes/cambiar-clave/cambiar-clave.component';
+import { EditClienteComponent } from './componentes/edit-cliente/edit-cliente.component';
+import { EditUsuarioComponent } from './componentes/edit-usuario/edit-usuario.component';
 
 
 
@@ -72,7 +77,12 @@ import { MarcaService } from './services/marca.service';
     FormPreguntaComponent,
     SubcategoriasComponent,
     FormPresentacionComponent,
-    ListaPresentacionComponent
+    ListaPresentacionComponent,
+    FomrAnalistaComponent,
+    ListaAnalistaComponent,
+    CambiarClaveComponent,
+    EditClienteComponent,
+    EditUsuarioComponent
 
   ],
   imports: [

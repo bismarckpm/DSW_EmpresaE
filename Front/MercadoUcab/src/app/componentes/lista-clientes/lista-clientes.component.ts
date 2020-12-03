@@ -10,12 +10,6 @@ import { ClienteService } from 'src/app/services/cliente.service';
 export class ListaClientesComponent implements OnInit {
 
   clientes: Cliente[] = [];
-  clienteUpdate: Cliente = {
-    id: 0,
-    estado: '',
-    razonSocial: '',
-    rif: 0,
-  };
 
   constructor(private servicio: ClienteService) {
     this.clientes = this.servicio.getClientes();
@@ -24,8 +18,8 @@ export class ListaClientesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public actualizar() {
-    console.log('Actualizó');
+  public eliminarCliente(clienteEliminar: Cliente): void{
+    console.log('elimino ' + clienteEliminar.id);
   }
 
 }

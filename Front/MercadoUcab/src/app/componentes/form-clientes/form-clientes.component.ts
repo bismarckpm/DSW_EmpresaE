@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-form-clientes',
@@ -16,8 +16,9 @@ export class FormClientesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  agregarNombre() {
-    console.log(this.item);
+  agregarCliente(): void {
+      console.log('agrego: ' + this.item.nombre);
+      this.item.nombre = '';
   }
 
 }

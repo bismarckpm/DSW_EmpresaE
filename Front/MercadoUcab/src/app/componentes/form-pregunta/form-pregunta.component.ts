@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormPreguntaComponent implements OnInit {
 
+  item: any = {
+    descripcion: '',
+    estado: ''
+  };
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  agregarPregunta(){
+    console.log('agregó pregunta');
+  }
 }

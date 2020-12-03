@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from 'src/app/models/usuario';
-import { UsuarioService } from 'src/app/services/usuario.service';
-
+import {UsuarioService} from '../../../services/usuario.service';
+import {Usuario} from '../../../models/usuario';
 
 @Component({
   selector: 'app-registrarse',
@@ -10,31 +9,30 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class RegistrarseComponent implements OnInit {
 
-  usuario: Usuario ={
-    id:0,
-    nombre:'',
-    nombre2:'',
-    apellido:'',
-    apellido2:'',
-    email:'',
-    password:'',
-    rol:'',
+  usuario: Usuario = {
+    id: 0,
+    nombre: '',
+    nombre2: '',
+    apellido: '',
+    apellido2: '',
+    estado: '',
+    fechaNacimiento: '',
   };
 
-  constructor(private usuarioService:UsuarioService) {
-
-    
-   }
+  constructor(private usuarioService: UsuarioService) {
+  }
 
   ngOnInit(): void {
   }
-  guardarUsuario(){
+
+  // tslint:disable-next-line:typedef
+  guardarUsuario() {
     this.usuarioService.registarUsuario(this.usuario)
-    .subscribe(
-      res=>{
-        console.log(res)
-      },
-      err=> console.error(err)
-    )
+      .subscribe(
+        res => {
+          console.log(res);
+        },
+        err => console.error(err)
+      );
   }
 }

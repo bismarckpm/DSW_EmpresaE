@@ -27,6 +27,11 @@
             <version>8.0.18</version>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>entidades</groupId>
+            <artifactId>entidades</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

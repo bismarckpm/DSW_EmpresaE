@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormUsuariosComponent implements OnInit {
 
+  item: any = {
+    nombre: ''
+  };
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  agregarUsuario(){
+    console.log('agregó usuario');
+  }
 }

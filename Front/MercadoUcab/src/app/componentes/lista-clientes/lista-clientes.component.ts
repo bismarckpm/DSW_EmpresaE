@@ -11,8 +11,9 @@ export class ListaClientesComponent implements OnInit {
 
   clientes: Cliente[] = [];
 
-  constructor(private servicio: ClienteService) {
-    this.clientes = this.servicio.getClientes();
+  // tslint:disable-next-line:variable-name
+  constructor(private _servicio: ClienteService) {
+    this.clientes = this._servicio.getClientes();
    }
 
   ngOnInit(): void {

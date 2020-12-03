@@ -29,8 +29,6 @@ import { EditUsuarioComponent } from './componentes/edit-usuario/edit-usuario.co
 import { FormTipoComponent } from './componentes/form-tipo/form-tipo.component';
 import { ListaTipoComponent } from './componentes/lista-tipo/lista-tipo.component';
 import { FormEstudioComponent } from './componentes/form-estudio/form-estudio.component';
-import {SubcategoriaService} from './services/subcategoria.service';
-import {CategoriaService} from './services/categoria.service';
 import {FormSubcategoriaComponent} from './componentes/form-subcategoria/form-subcategoria.component';
 import {FormClientesComponent} from './componentes/form-clientes/form-clientes.component';
 import {FormMarcaComponent} from './componentes/form-marca/form-marca.component';
@@ -52,6 +50,8 @@ import {FormPreguntaComponent} from './componentes/form-pregunta/form-pregunta.c
 import { UsuarioService } from './services/usuario.service';
 import { AdminService } from './services/admin.service';
 import { MarcaService } from './services/marca.service';
+import { SubcategoriaService } from './services/subcategoria.service';
+import {CategoriaService} from './services/categoria.service';
 
 
 

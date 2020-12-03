@@ -21,6 +21,7 @@
         <module>dtos</module>
         <module>daos</module>
         <module>servicio</module>
+        <module>excepciones</module>
     </modules>
 
     <dependencies>

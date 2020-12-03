@@ -16,9 +16,8 @@ export class UsuarioService {
       nombre2: '',
       apellido: '',
       apellido2: '',
-      email: '',
-      password: '',
-      rol: '',
+      estado: '',
+      fechaNacimiento: '',
     },
     {
       id: 1,
@@ -26,9 +25,8 @@ export class UsuarioService {
       nombre2: '',
       apellido: '',
       apellido2: '',
-      email: '',
-      password: '',
-      rol: '',
+      estado: '',
+      fechaNacimiento: '',
     },
   ];
 

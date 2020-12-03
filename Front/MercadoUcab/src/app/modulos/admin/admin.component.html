@@ -17,10 +17,10 @@
                     <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div [ngSwitch]="seccion">
                             <div *ngSwitchCase="'Clientes'"><app-form-clientes></app-form-clientes></div>
-                            <div *ngSwitchCase="'Usuarios'"></div>
+                            <div *ngSwitchCase="'Usuarios'"><app-form-usuarios></app-form-usuarios></div>
                             <div *ngSwitchCase="'Analistas'"></div>
-                            <div *ngSwitchCase="'Estudios'"></div>
-                            <div *ngSwitchCase="'Preguntas'"></div>
+                            <div *ngSwitchCase="'Estudios'"><app-form-estudio></app-form-estudio></div>
+                            <div *ngSwitchCase="'Preguntas'"><app-form-pregunta></app-form-pregunta></div>
                             <div *ngSwitchCase="'Categorias'"><app-form-categoria></app-form-categoria></div>
                             <div *ngSwitchCase="'Subcategorias'"><app-form-subcategoria></app-form-subcategoria></div>
                             <div *ngSwitchCase="'Presentaciones'"><app-form-presentacion></app-form-presentacion></div>

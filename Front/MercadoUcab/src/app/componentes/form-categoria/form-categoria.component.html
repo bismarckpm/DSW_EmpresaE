@@ -4,23 +4,20 @@
       <div class="container custom-container">
           <div class="col-md-12">
             <h3 class="mb-3 text-center">Crear Categoria</h3>
-        
+
             <div class="form-group">
               <input type="text" [(ngModel)]="categoria.nombre" class="form-control"   name="nombre"  >
             </div>
-        
-            <label for=""> Estatus de la Categoria</label> <br>
-            <select class="mdb-select md-form" [(ngModel)]= "categoria.estatus" name="estatus" >
-              <option value="a">Activa</option>
-              <option value="i">Inactiva</option>
-            </select>
-            <br>
+
+            <div class="form-group">
+              <input type="text" [(ngModel)]="categoria.estatus" class="form-control"  name="estatus"  >
+            </div>
           </div>
         </div>
 
       <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-primary" (click)="addCategoria(categoria)" data-dismiss="modal">Guargar</button>
+          <button type="submit" class="btn btn-primary" (click)="addCategoria(categoria)" data-dismiss="modal">Guardar</button>
       </div>
   </div>
 </div>

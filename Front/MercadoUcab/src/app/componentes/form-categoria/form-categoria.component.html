@@ -1,22 +1,41 @@
 <div class="modal-dialog">
   <div class="modal-content">
 
-      <div class="container custom-container">
-          <div class="col-md-12">
-            <h3 class="mb-3 text-center">Crear Categoria</h3>
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Marca</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div> 
 
-            <div class="form-group">
-              <input type="text" [(ngModel)]="categoria.nombre" class="form-control"   name="nombre"  >
-            </div>
+         <div class="modal-body">  
+           <form [formGroup]="formCategoria">
+                <div class="form-group">
+                    <input type="text" [(ngModel)]="categoria.nombre" class="form-control"  formControlName="nombreCategoria" name="nombre"  >
+                      <div *ngIf="nombreCategoria.invalid && (nombreCategoria.dirty || nombreCategoria.touched)" class="alert alert-danger">
+                          <div *ngIf="nombreCategoria.errors.required">
+                            Este campo es obligatorio
+                          </div>
+                          <div *ngIf="nombreCategoria.errors.pattern">
+                            Introduzca un nombre valido
+                          </div>
+                      </div>
+                  </div>
         
-            <label for=""> Estatus de la Categoria</label> <br>
-            <select class="mdb-select md-form" [(ngModel)]= "categoria.estatus" name="estatus" >
-              <option value="a">Activa</option>
-              <option value="i">Inactiva</option>
-            </select>
-            <br>
-          </div>
-        </div>
+                  <label > Estatus de la Categoria</label> <br>
+                  <select class="mdb-select md-form" [(ngModel)]= "categoria.estatus" formControlName="estadoCategoria"name="estatus" >
+                        <option value="a">Activa</option>
+                        <option value="i">Inactiva</option>
+                  </select>
+
+                  <div *ngIf="estadoCategoria.invalid && (estadoCategoria.dirty || estadoCategoria.touched)" class="alert alert-danger">
+                      <div *ngIf="estadoCategoria.errors.required">
+                        Este campo es obligatorio
+                      </div>
+                  </div>
+
+          </form>
+      </div> <!-- Final del modal body-->
 
       <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

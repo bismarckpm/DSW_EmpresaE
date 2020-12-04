@@ -7,7 +7,7 @@
     },
     {
       "id": 8,
-      "nombre": "jo",
+      "nombre": "asd",
       "estatus": "a"
     },
     {
@@ -22,23 +22,18 @@
     }
   ],
   "subcategoria": [
+    
     {
       "id": 1,
-      "nombre": "refrescos",
-      "estatus": "b",
-      "dtoCategoria": {
-        "id": 5,
-        "nombre": "pedro gutierres",
-        "estatus": "i"
-      }
-    },
-    {
-      "id": 2,
-      "nombre": "Chucheria",
-      "estatus": "a",
-      "dtoCategoria": {
-        "id": 5
-      }
+      "nombre": "pedro gutierres",
+      "estatus": "i",
+      "dtoCategoria":
+        {
+          "id": 5,
+          "nombre": "pedro gutierres",
+          "estatus": "i"
+        }
+      
     }
   ]
 }

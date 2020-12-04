@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { Subcategoria } from 'src/app/models/subcategoria';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 
@@ -15,21 +16,24 @@ import { Subcategoria } from 'src/app/models/subcategoria';
 })
 export class ListaSubcategoriaComponent implements OnInit {
 
+    //Declaracion de las varibales del componente que se usa
   Subcategoria: Subcategoria[]=[];
-  
   id = this.actRoute.snapshot.params['id'];
-
   @Input()subcategoriaData={ id:0, nombre:'',estatus:'', dtoCategoria:{id:0}};
-  
   categoria:any;
+
+  //Declaracion para las Validaciones
+  formSubcategoria: FormGroup;
+  namePattern: any = /^[A-Za-z0-9\s]+$/;
 
 
   constructor(
     public subcategoriaService: SubcategoriaService,
     public categoriaService :CategoriaService,
     public actRoute: ActivatedRoute,
-    public router: Router
-  ) { }
+    public router: Router,
+    private formBuilder: FormBuilder
+  ) {  this.createForm(); }
 
   ngOnInit(): void {
     this.loadSubcategoria();
@@ -66,6 +70,27 @@ export class ListaSubcategoriaComponent implements OnInit {
     this.categoriaService.getCategorias().subscribe((Categorias: {}) => {
       this.categoria= Categorias;
     })
+  }
+
+   /// Validacion de Datos 
+   get nombreSubcategoria(){
+    return this.formSubcategoria.get('nombreSubcategoria');
+  }
+
+  get estadoSubcategoria(){
+    return this.formSubcategoria.get('estadoSubcategoria');
+  }
+
+  get CATEGORIA(){
+    return this.formSubcategoria.get('CATEGORIA');
+  }
+
+  createForm(){
+    this.formSubcategoria = this.formBuilder.group({
+      nombreSubcategoria: ['', [Validators.pattern(this.namePattern), Validators.required]],
+      estadoSubcategoria: ['', Validators.required],
+      CATEGORIA: ['', Validators.required],
+    });
   }
 
 

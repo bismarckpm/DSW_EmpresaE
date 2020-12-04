@@ -8,7 +8,7 @@ import java.util.List;
 public class CategoriaEntity extends BaseEntity{
     private String estado;
     private String nombre;
-    private List<SubcategoriaEntity> subcategorias;
+    //private List<SubcategoriaEntity> subcategorias;
 
     @Basic
     @Column(name = "estado")
@@ -30,7 +30,7 @@ public class CategoriaEntity extends BaseEntity{
         this.nombre = nombre;
     }
 
-    @OneToMany(mappedBy = "categoria")
+    /*@OneToMany(mappedBy = "categoria")
     public List<SubcategoriaEntity> getSubcategorias() {
         return subcategorias;
     }
@@ -38,4 +38,5 @@ public class CategoriaEntity extends BaseEntity{
     public void setSubcategorias(List<SubcategoriaEntity> subcategorias) {
         this.subcategorias = subcategorias;
     }
+     */
 }

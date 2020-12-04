@@ -8,10 +8,20 @@ import java.util.List;
 public class SubcategoriaEntity extends BaseEntity{
     private String estado;
     private String nombre;
-    private CategoriaEntity categoria;
-    private List<EstudioEntity> estudios;
-    private List<MarcaEntity> marcas;
-    private List<PreguntaEntity> preguntas;
+
+    //private List<EstudioEntity> estudios;
+    //private List<MarcaEntity> marcas;
+    //private List<PreguntaEntity> preguntas;
+
+    public SubcategoriaEntity( long id )
+    {
+        super( id );
+    }
+
+    public SubcategoriaEntity( )
+    {
+
+    }
 
     @Basic
     @Column(name = "estado")
@@ -36,6 +46,7 @@ public class SubcategoriaEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_categoria", referencedColumnName = "id", nullable = false)
+    private CategoriaEntity categoria;
     public CategoriaEntity getCategoria() {
         return categoria;
     }
@@ -43,7 +54,7 @@ public class SubcategoriaEntity extends BaseEntity{
     public void setCategoria(CategoriaEntity categoria) {
         this.categoria = categoria;
     }
-
+/*
     @OneToMany(mappedBy = "subcategoria")
     public List<EstudioEntity> getEstudios() {
         return estudios;
@@ -70,5 +81,5 @@ public class SubcategoriaEntity extends BaseEntity{
 
     public void setPreguntas(List<PreguntaEntity> preguntas) {
         this.preguntas = preguntas;
-    }
+    }*/
 }

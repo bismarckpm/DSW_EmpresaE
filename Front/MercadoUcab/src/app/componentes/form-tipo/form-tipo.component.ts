@@ -30,7 +30,7 @@ export class FormTipoComponent implements OnInit {
   createForm(){
     this.formTipo = this.formBuilder.group({
       nombreTipo: ['', [Validators.pattern(this.patronNombreTipo), Validators.required]],
-      descripcionTipo: ['', Validators.required],
+      descripcionTipo: ['', [Validators.pattern(this.patronNombreTipo), Validators.required]],
       estadoTipo: ['', Validators.required],
     });
   }

@@ -25,7 +25,7 @@ public class PresentacionServicio {
         }
         return Response.ok(presentaciones).build();
     }
-/*
+
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -45,5 +45,5 @@ public class PresentacionServicio {
         else {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
-    }*/
+    }
 }

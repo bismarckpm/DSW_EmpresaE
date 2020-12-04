@@ -14,7 +14,7 @@
                                        <td>{{ subcategoria.id }}</td>
                                        <td>{{ subcategoria.nombre }}</td>
                                        <td>{{ subcategoria.estatus }}</td>
-                                       <td>{{ subcategoria.id_categoria}}</td>
+                                       <td>{{ subcategoria.dtoCategoria.nombre}}</td>
                                                                       
                                         <td>
                                               <div class="d-flex justify-content-around">
@@ -38,23 +38,47 @@
                                                                                       </div>
                                                       <!-- Cuerpo completo del Modal -->
                                                               <div class="modal-body">
+                                                                  <form [formGroup]="formSubcategoria">
                                                                          <div class="modal-dialog">
                                                                                  <div class="modal-content">                      
                                                                                      <div class="form-group">
-                                                                                           <input type="text" [(ngModel)]="subcategoriaData.nombre" class="form-control"   name="nombre"  >
-                                                                                     </div>
-                                                                                   
-                                                                                       <div class="form-group">
-                                                                                               <input type="text" [(ngModel)]="subcategoriaData.estatus" class="form-control"  name="estatus"  >
-                                                                                       </div>
+                                                                                          <Label>nombre de la subcategoria </Label>
+                                                                                           <input type="text" [(ngModel)]="subcategoriaData.nombre" class="form-control"  formControlName="nombreSubcategoria" name="nombre" placeholder="Nombre de la Subcategoria" >
+                                                                                           <div *ngIf="nombreSubcategoria.invalid && (nombreSubcategoria.dirty || nombreSubcategoria.touched)" class="alert alert-danger">
+                                                                                                <div *ngIf="nombreSubcategoria.errors.required">
+                                                                                                  Este campo es obligatorio
+                                                                                                </div>
+                                                                                                <div *ngIf="nombreSubcategoria.errors.pattern">
+                                                                                                  Introduzca un nombre valido
+                                                                                                </div>
+                                                                                              </div>
+                                                                                    </div>
+                                                                                          <label for=""> Estatus de la subcategoria</label>
+                                                                                       <select class="mdb-select md-form" [(ngModel)]= "subcategoriaData.estatus" formControlName="estadoSubcategoria" name="estatus" >
+                                                                                          <option value="a">Activa</option>
+                                                                                          <option value="i">Inactiva</option>
+                                                                                        </select>
+                                                                                        <div *ngIf="estadoSubcategoria.invalid && (estadoSubcategoria.dirty || estadoSubcategoria.touched)" class="alert alert-danger">
+                                                                                          <div *ngIf="estadoSubcategoria.errors.required">
+                                                                                            Este campo es obligatorio
+                                                                                          </div>
+                                                                                        </div>
+                                                                                        <br>
                                                                                
                                                                                
                                                                               <div class="form-group row">
-                                                                                          <label for="" class="col-sm-3 col-form-label escrituerModal"> categorias</label>
+                                                                                    <br>
+                                                                                          <label for="" class="col-sm-4 col-form-label escrituerModal">Seleccione una categorias</label>
                                                                                      <div class="col-sm-8">
-                                                                                           <select name="id_categoria" id="id_categoria" class="form-control escrituerModal" [(ngModel)]="subcategoriaData.id_categoria">
-                                                                                                 <option class="escrituraModal" *ngFor="let cat of categoria" [ngValue]= "cat.id">{{cat.nombre}}</option>
+                                                                                           <select name="dtoCategoria.id" id="dtoCategoria.id" class="form-control escrituerModal " [(ngModel)]="subcategoriaData.dtoCategoria.id" formControlName="CATEGORIA" >
+                                                                                                <option  value=""> Slecciones una ...</option> 
+                                                                                                <option class="escrituraModal" *ngFor="let cat of categoria"   [ngValue]= "cat.id" >{{cat.nombre}}</option>
                                                                                            </select>
+                                                                                           <div *ngIf="CATEGORIA.invalid && (CATEGORIA.dirty || CATEGORIA.touched)" class="alert alert-danger">
+                                                                                                <div *ngIf="CATEGORIA.errors.required">
+                                                                                                  Este campo es obligatorio
+                                                                                                </div>
+                                                                                              </div> 
                                                                                     </div>
                                                                               </div>
                                                                                <!-- Parte inferior del modal -->                                        
@@ -66,6 +90,7 @@
                                                                                </div>
                                                                               </div> 
                                                                      </div>
+                                                                  </form>
                                                             </div><!-- cierre del cuerpo modal -->
                                                        </div>
                                                    </div>

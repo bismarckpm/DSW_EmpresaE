@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-form-clientes',
@@ -8,47 +7,24 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class FormClientesComponent implements OnInit {
 
-  formCliente: FormGroup;
-  patronRIFCliente: any = /^[0-9]+$/;
+  item: any = {
+    nombre: ''
+  };
 
-  get rifCliente(){
-    return this.formCliente.get('rifCliente');
-  }
-
-  get razonSocialCliente (){
-    return this.formCliente.get('razonSocialCliente');
-  }
-
-  get estadoCliente(){
-    return this.formCliente.get('estadoCliente');
-  }
-
-  constructor(private formBuilder: FormBuilder) {
-    this.createForm();
-  }
-
-  createForm(){
-    this.formCliente = this.formBuilder.group({
-      rifCliente: ['', [Validators.required, Validators.pattern(this.patronRIFCliente)]],
-      razonSocialCliente: ['', Validators.required],
-      estadoCliente: ['', Validators.required],
-    });
-  }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
+
   agregarCliente() {
-    console.log('agrego cliente');
+    console.log(this.item);
   }
 
-  onSubmit() {
-    if (this.formCliente.valid) {
-      console.log(this.formCliente.value);
-    }
-    else{
-      alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
-    }
-  }
+ /* agregarCliente(): void {
+    console.log('agrego: ' + this.item.nombre);
+    this.item.nombre = '';
+
+  }*/
 
 }

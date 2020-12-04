@@ -19,12 +19,18 @@ export class ListaClientesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
   eliminar(){
     console.log('eliminó elemento');
   }
 
   actualizar(){
     console.log('actualizó elemento');
+  } 
+
+  public eliminarCliente(clienteEliminar: Cliente): void{
+    console.log('elimino ' + clienteEliminar.id);
+
   }
 
 }

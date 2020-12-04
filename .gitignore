@@ -4,3 +4,10 @@
 .idea/modules.xml
 .idea/vcs.xml
 .idea/workspace.xml
+
+MercadoUCAB-Back.iml
+daos/daos.iml
+dtos/dtos.iml
+entidades/entidades.iml
+excepciones/excepciones.iml
+servicio/servicio.iml

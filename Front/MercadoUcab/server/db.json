@@ -1,54 +1,39 @@
 {
   "categoria": [
     {
-      "id": 1,
-      "nombre": "javier",
-      "estatus": "b"
-    },
-    {
-      "id": 2,
-      "nombre": "Black Widow",
-      "estatus": "b"
-    },
-    {
       "id": 5,
       "nombre": "pedro gutierres",
-      "estatus": "a"
-    },
-    {
-      "id": 7,
-      "nombre": "asdad",
-      "estatus": "asdd"
+      "estatus": "i"
     },
     {
       "id": 8,
-      "nombre": "jo",
+      "nombre": "asd",
       "estatus": "a"
     },
     {
       "id": 9,
       "nombre": "pedro2",
       "estatus": "a"
+    },
+    {
+      "id": 10,
+      "nombre": "Prueba 25",
+      "estatus": "i"
     }
   ],
   "subcategoria": [
+    
     {
       "id": 1,
-      "nombre": "refrescos",
-      "estatus": "b",
-      "id_categoria": 1
-    },
-    {
-      "id": 2,
-      "nombre": "doritos",
-      "estatus": "b",
-      "id_categoria": 2
-    },
-    {
-      "id": 5,
-      "nombre": "desodorante",
-      "estatus": "a",
-      "id_categoria": 3
+      "nombre": "pedro gutierres",
+      "estatus": "i",
+      "dtoCategoria":
+        {
+          "id": 5,
+          "nombre": "pedro gutierres",
+          "estatus": "i"
+        }
+      
     }
   ]
 }

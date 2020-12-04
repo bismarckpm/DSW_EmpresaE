@@ -14,6 +14,8 @@ export class AdminComponent implements OnInit {
     nombre: ''
   };
 
+  accion = 1;
+
   constructor(
     private ruta: ActivatedRoute,
     private servicio: AdminService,
@@ -29,11 +31,4 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  agregar() {
-    console.log(this.item);
-  }
-
-  agregarNombre() {
-    console.log(this.item);
-  }
 }

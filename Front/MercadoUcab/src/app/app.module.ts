@@ -23,15 +23,14 @@ import { CategoriasComponent } from './modulos/categorias/categorias.component';
 import { SubcategoriasComponent } from './modulos/subcategorias/subcategorias.component';
 
 
-// Services
-import { UsuarioService } from './services/usuario.service';
-import { AdminService } from './services/admin.service';
-import { MarcaService } from './services/marca.service';
+import { FomrAnalistaComponent } from './componentes/fomr-analista/fomr-analista.component';
+import { ListaAnalistaComponent } from './componentes/lista-analista/lista-analista.component';
+import { CambiarClaveComponent } from './componentes/cambiar-clave/cambiar-clave.component';
+import { EditClienteComponent } from './componentes/edit-cliente/edit-cliente.component';
+import { EditUsuarioComponent } from './componentes/edit-usuario/edit-usuario.component';
 import { FormTipoComponent } from './componentes/form-tipo/form-tipo.component';
 import { ListaTipoComponent } from './componentes/lista-tipo/lista-tipo.component';
 import { FormEstudioComponent } from './componentes/form-estudio/form-estudio.component';
-import {SubcategoriaService} from './services/subcategoria.service';
-import {CategoriaService} from './services/categoria.service';
 import {FormSubcategoriaComponent} from './componentes/form-subcategoria/form-subcategoria.component';
 import {FormClientesComponent} from './componentes/form-clientes/form-clientes.component';
 import {FormMarcaComponent} from './componentes/form-marca/form-marca.component';
@@ -47,6 +46,17 @@ import {ListaClientesComponent} from './componentes/lista-clientes/lista-cliente
 import {FormPresentacionComponent} from './componentes/form-presentacion/form-presentacion.component';
 import {ListaPresentacionComponent} from './componentes/lista-presentacion/lista-presentacion.component';
 import {FormPreguntaComponent} from './componentes/form-pregunta/form-pregunta.component';
+
+
+
+// Services
+import { UsuarioService } from './services/usuario.service';
+import { AdminService } from './services/admin.service';
+import { MarcaService } from './services/marca.service';
+import { SubcategoriaService } from './services/subcategoria.service';
+import { CategoriaService } from './services/categoria.service';
+
+
 
 
 
@@ -87,6 +97,14 @@ import {FormPreguntaComponent} from './componentes/form-pregunta/form-pregunta.c
     ListaClientesComponent,
     FormPresentacionComponent,
     ListaPresentacionComponent,
+
+
+    FomrAnalistaComponent,
+    ListaAnalistaComponent,
+    CambiarClaveComponent,
+    EditClienteComponent,
+    EditUsuarioComponent,
+
     FormPreguntaComponent
   ],
   imports: [

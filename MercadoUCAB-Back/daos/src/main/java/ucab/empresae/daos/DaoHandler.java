@@ -21,7 +21,7 @@ public class DaoHandler
         {
             try
             {
-                _emf = Persistence.createEntityManagerFactory( "prueba" );
+                _emf = Persistence.createEntityManagerFactory( "empresae" );
             }
             catch ( PersistenceException e )
             {

@@ -8,10 +8,8 @@ import java.util.List;
 public class PreguntaEntity extends BaseEntity{
     private String estado;
     private String descripcion;
-    private TipoPreguntaEntity tipo;
-    private SubcategoriaEntity subcategoria;
-    private List<EncuestaEntity> encuestas;
-    private List<PreguntaOpcionEntity> preguntaOpcion;
+    //private List<EncuestaEntity> encuestas;
+    //private List<PreguntaOpcionEntity> preguntaOpcion;
 
     @Basic
     @Column(name = "estado")
@@ -34,7 +32,8 @@ public class PreguntaEntity extends BaseEntity{
     }
 
     @ManyToOne
-    @JoinColumn(name = "id_tipo", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "id_tipo", referencedColumnName = "id")
+    private TipoPreguntaEntity tipo;
     public TipoPreguntaEntity getTipo() {
         return tipo;
     }
@@ -45,6 +44,7 @@ public class PreguntaEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_subcategoria", referencedColumnName = "id")
+    private SubcategoriaEntity subcategoria;
     public SubcategoriaEntity getSubcategoria() {
         return subcategoria;
     }
@@ -53,6 +53,7 @@ public class PreguntaEntity extends BaseEntity{
         this.subcategoria = subcategoria;
     }
 
+    /*
     @OneToMany(mappedBy = "pregunta")
     public List<EncuestaEntity> getEncuestas() {
         return encuestas;
@@ -70,4 +71,6 @@ public class PreguntaEntity extends BaseEntity{
     public void setPreguntaOpcion(List<PreguntaOpcionEntity> preguntaOpcion) {
         this.preguntaOpcion = preguntaOpcion;
     }
+    */
+
 }

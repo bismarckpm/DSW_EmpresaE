@@ -26,7 +26,7 @@ public class PreguntaServicio {
         }
         return Response.ok(preguntas).build();
     }
-/*
+
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -58,6 +58,6 @@ public class PreguntaServicio {
     public String consulta()
     {
         return "Epa";
-    }*/
+    }
 
 }

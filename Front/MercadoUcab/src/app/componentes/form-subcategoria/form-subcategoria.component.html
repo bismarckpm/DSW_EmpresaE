@@ -1,44 +1,66 @@
 <div class="modal-dialog">
     <div class="modal-content">
   
-        <div class="container custom-container">
-            <div class="col-md-12">
-              <h3 class="mb-3 text-center">Crear Subcategoria </h3>
-                
-                    <div class="form-group">
-                        <label for="" class="col-sm-8 col-form-label escrituerModal"> Nombre de la Subcategoria</label>
-                        <input type="text" [(ngModel)]="subcategoria.nombre" class=" col-sm-10 form-control"   name="nombre"  >
-                    </div>
-                
-                    <div class="form-group">
-                        <label class="col-sm-6"> Estatus de la subcategoria</label>
-                        <select class="mdb-select md-form" [(ngModel)]= "subcategoria.estatus" name="estatus" >
-                           <option value="a">Activa</option>
-                           <option value="i">Inactiva</option>
-                         </select>
-                         <br>
-                    </div>
-                    </div>
-                </div>
-
-                    <div class="form-group row">
-                            
-                                <label for="" class="col-sm-6 col-form-label escrituerModal"> Seleccione una categoria</label>
-                                    <select name="id_categoria"  class="col-sm-4 form-control escrituerModal" [(ngModel)]="subcategoria.dtoCategoria.id">
-                                        <option class="escrituraModal" *ngFor="let cat of categoria" [ngValue]= "cat.id">{{cat.nombre}}</option>
-                                    </select>
-
-                            
-                            
-                    </div>
-
-                    <label for="">Si la categoria no se esta, seleccional el boton agregar categoria </label>
-                    
-              <button type="button" class=" col-sm-4 btn btn-success" data-dismiss="modal">agregar categoria</button>
+        <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Crear Subcategoria</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
   
+        <div class="modal-body">
+          <form [formGroup]="formSubcategoria">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="nombre">Nombre de la Subcategoria</label>
+                <input type="text" [(ngModel)]="subcategoria.nombre" class=" col-sm-10 form-control" formControlName="nombreSubcategoria"  name="nombre"  >
+                <div *ngIf="nombreSubcategoria.invalid && (nombreSubcategoria.dirty || nombreSubcategoria.touched)" class="alert alert-danger">
+                    <div *ngIf="nombreSubcategoria.errors.required">
+                      Este campo es obligatorio
+                    </div>
+                    <div *ngIf="nombreSubcategoria.errors.pattern">
+                      Introduzca un nombre valido
+                    </div>
+                  </div>
+              </div>
+            </div>
+  
+            <div class="form-group">
+                <label class="col-sm-6"> Estatus de la subcategoria</label>
+                <select class="mdb-select md-form" [(ngModel)]= "subcategoria.estatus" formControlName="estadoSubcategoria" name="estatus" >
+                   <option value="a">Activa</option>
+                   <option value="i">Inactiva</option>
+                 </select>
+                 <div *ngIf="estadoSubcategoria.invalid && (estadoSubcategoria.dirty || estadoSubcategoria.touched)" class="alert alert-danger">
+                    <div *ngIf="estadoSubcategoria.errors.required">
+                      Este campo es obligatorio
+                    </div>
+                  </div>
+                 <br>
+            </div>
+
+            <div class="form-group row">
+                <label for="" class="col-sm-6 col-form-label escrituerModal"> Seleccione una categoria</label>
+                    <select name="id_categoria"  class="custom-select col-sm-4 form-control escrituerModal"  [(ngModel)]="subcategoria.dtoCategoria.id" formControlName="CATEGORIA" >
+                        <option  value=""> Slecciones una ...</option>
+                        <option  *ngFor="let cat of categoria" [ngValue]= "cat.id"  >{{cat.nombre}}</option>
+                    </select> 
+                    <div *ngIf="CATEGORIA.invalid && (CATEGORIA.dirty || CATEGORIA.touched)" class="alert alert-danger">
+                        <div *ngIf="CATEGORIA.errors.required">
+                          Este campo es obligatorio
+                        </div>
+                      </div>        
+            </div>
+
+          </form>
+          <label for="">Si la categoria no se esta, seleccional el boton agregar categoria </label>
+                    
+          <button type="button" class=" col-sm-4 btn btn-success" data-dismiss="modal">agregar categoria</button>
+
+        </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary" (click)="addSubcategoria(subcategoria)" data-dismiss="modal">Guargar</button>
+            <button type="submit" class="btn btn-primary" (click)="addSubcategoria(subcategoria)" data-dismiss="modal">Guardar</button>
         </div>
     </div>
   </div>

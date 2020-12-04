@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-form-marca',
@@ -7,11 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormMarcaComponent implements OnInit {
 
-  item: any = {
-    nombre: ''
-  };
+  formMarca: FormGroup;
+  namePattern: any = /^[A-Za-z0-9\s]+$/;
 
-  constructor() { }
+  get nombreMarca(){
+    return this.formMarca.get('nombreMarca');
+  }
+
+  get estadoMarca(){
+    return this.formMarca.get('estadoMarca');
+  }
+
+  constructor(private formBuilder: FormBuilder) {
+    this.createForm();
+  }
+
+  createForm(){
+    this.formMarca = this.formBuilder.group({
+      nombreMarca: ['', [Validators.pattern(this.namePattern), Validators.required]],
+      estadoMarca: ['', Validators.required],
+    });
+  }
 
   ngOnInit(): void {
   }
@@ -20,4 +37,12 @@ export class FormMarcaComponent implements OnInit {
     console.log('agregó marca');
   }
 
+  onSubmit() {
+    if (this.formMarca.valid) {
+      console.log(this.formMarca.value);
+    }
+    else{
+      alert('FILL ALL FIELDS');
+    }
+  }
 }

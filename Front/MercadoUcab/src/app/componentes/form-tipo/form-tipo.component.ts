@@ -43,7 +43,7 @@ export class FormTipoComponent implements OnInit {
       console.log(this.formTipo.value);
     }
     else{
-      alert('FILL ALL FIELDS');
+      alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
     }
   }
 

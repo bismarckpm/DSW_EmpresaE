@@ -42,7 +42,7 @@ export class FormMarcaComponent implements OnInit {
       console.log(this.formMarca.value);
     }
     else{
-      alert('FILL ALL FIELDS');
+      alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
     }
   }
 }

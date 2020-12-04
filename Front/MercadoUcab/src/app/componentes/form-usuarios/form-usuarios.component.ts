@@ -57,7 +57,7 @@ export class FormUsuariosComponent implements OnInit {
       console.log(this.formUsuario.value);
     }
     else{
-      alert('FILL ALL FIELDS');
+      alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
     }
   }
 }

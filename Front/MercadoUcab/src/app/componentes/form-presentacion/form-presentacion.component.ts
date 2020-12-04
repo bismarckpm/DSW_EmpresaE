@@ -42,7 +42,7 @@ export class FormPresentacionComponent implements OnInit {
       console.log(this.formPresentacion.value);
     }
     else{
-      alert('FILL ALL FIELDS');
+      alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
     }
   }
 }

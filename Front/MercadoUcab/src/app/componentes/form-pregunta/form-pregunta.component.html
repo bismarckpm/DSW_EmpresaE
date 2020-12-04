@@ -7,27 +7,34 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-
-
     <div class="modal-body">
-      <form class="needs-validation" novalidate>
+      <form [formGroup]="formPregunta">
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="descripcion">Descripcion</label>
-            <input type="text" class="form-control" id="descripcion" placeholder="" value="" required>
+            <input type="text" class="form-control" id="descripcion" placeholder="" formControlName="descripcionPregunta" value="">
+            <div *ngIf="descripcionPregunta.invalid && (descripcionPregunta.dirty || descripcionPregunta.touched)" class="alert alert-danger">
+              <div *ngIf="descripcionPregunta.errors.required">
+                Este campo es obligatorio
+              </div>
+              <div *ngIf="descripcionPregunta.errors.pattern">
+                Introduzca una descripcion valida
+              </div>
+            </div>
           </div>
         </div>
-
         <div class="row">
           <div class="col-md-5 mb-3">
             <label for="country">Estado</label>
-            <select class="custom-select d-block w-100" id="country" required>
+            <select class="custom-select d-block w-100" id="country" formControlName="estadoPregunta">
               <option value="">Choose...</option>
               <option>Activo</option>
               <option>Inactivo</option>
             </select>
-            <div class="invalid-feedback">
-              Please select a valid option.
+            <div *ngIf="estadoPregunta.invalid && (estadoPregunta.dirty || estadoPregunta.touched)" class="alert alert-danger">
+              <div *ngIf="estadoPregunta.errors.required">
+                Este campo es obligatorio
+              </div>
             </div>
           </div>
         </div>
@@ -36,7 +43,7 @@
 
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-      <button type="submit" class="btn btn-primary" (click)="agregarPregunta()" data-dismiss="modal">Guardar</button>
+      <button type="submit" class="btn btn-primary" (click)="onSubmit()" data-dismiss="modal">Guardar</button>
     </div>
   </div>
 </div>

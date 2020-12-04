@@ -9,7 +9,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class FormMarcaComponent implements OnInit {
 
   formMarca: FormGroup;
-  namePattern: any = /^[A-Za-z0-9\s]+$/;
+  patronNombreMarca: any = /^[A-Za-z0-9\s]+$/;
 
   get nombreMarca(){
     return this.formMarca.get('nombreMarca');
@@ -25,7 +25,7 @@ export class FormMarcaComponent implements OnInit {
 
   createForm(){
     this.formMarca = this.formBuilder.group({
-      nombreMarca: ['', [Validators.pattern(this.namePattern), Validators.required]],
+      nombreMarca: ['', [Validators.pattern(this.patronNombreMarca), Validators.required]],
       estadoMarca: ['', Validators.required],
     });
   }

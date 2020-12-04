@@ -3,6 +3,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 import { CategoriaService } from 'src/app/services/categoria.service';
+import { Subcategoria } from 'src/app/models/subcategoria';
+
 
 
 
@@ -13,10 +15,11 @@ import { CategoriaService } from 'src/app/services/categoria.service';
 })
 export class ListaSubcategoriaComponent implements OnInit {
 
-  Subcategoria: any=[];
+  Subcategoria: Subcategoria[]=[];
+  
   id = this.actRoute.snapshot.params['id'];
 
-  @Input()subcategoriaData: any={};
+  @Input()subcategoriaData={ id:0, nombre:'',estatus:'', dtoCategoria:{id:0}};
   
   categoria:any;
 
@@ -30,12 +33,11 @@ export class ListaSubcategoriaComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadSubcategoria();
-   // this.addcategoria();
 
   }
 
-  loadSubcategoria(){
-    return this.subcategoriaService.getsubcategorias().subscribe((data: {}) => {
+  loadSubcategoria():void {
+    this.subcategoriaService.getsubcategorias().subscribe(data => {
       this.Subcategoria = data;
     })
   }
@@ -49,10 +51,8 @@ export class ListaSubcategoriaComponent implements OnInit {
   }
   
   updateSubcategoria(){
-    console.log('Funciona');
-    
-     /* this.subcategoriaService.updatesubcategoria(this.subcategoriaData.id, this.subcategoriaData).subscribe(data => {
-      })*/
+     this.subcategoriaService.updatesubcategoria(this.subcategoriaData.id, this.subcategoriaData).subscribe(data => {
+      })
     
   }
 

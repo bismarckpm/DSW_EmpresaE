@@ -14,7 +14,7 @@
                                        <td>{{ subcategoria.id }}</td>
                                        <td>{{ subcategoria.nombre }}</td>
                                        <td>{{ subcategoria.estatus }}</td>
-                                       <td>{{ subcategoria.id_categoria}}</td>
+                                       <td>{{ subcategoria.dtoCategoria.nombre}}</td>
                                                                       
                                         <td>
                                               <div class="d-flex justify-content-around">
@@ -41,7 +41,8 @@
                                                                          <div class="modal-dialog">
                                                                                  <div class="modal-content">                      
                                                                                      <div class="form-group">
-                                                                                           <input type="text" [(ngModel)]="subcategoriaData.nombre" class="form-control"   name="nombre"  >
+                                                                                          <Label>nombre de la subcategoria </Label>
+                                                                                           <input type="text" [(ngModel)]="subcategoriaData.nombre" class="form-control"   name="nombre" placeholder="Nombre de la Subcategoria" >
                                                                                      </div>
                                                                                           <label for=""> Estatus de la subcategoria</label>
                                                                                        <select class="mdb-select md-form" [(ngModel)]= "subcategoriaData.estatus" name="estatus" >
@@ -53,10 +54,10 @@
                                                                                
                                                                               <div class="form-group row">
                                                                                     <br>
-                                                                                          <label for="" class="col-sm-3 col-form-label escrituerModal"> categorias</label>
+                                                                                          <label for="" class="col-sm-4 col-form-label escrituerModal">Seleccione una categorias</label>
                                                                                      <div class="col-sm-8">
-                                                                                           <select name="id_categoria" id="id_categoria" class="form-control escrituerModal" [(ngModel)]="subcategoriaData.id_categoria">
-                                                                                                 <option class="escrituraModal" *ngFor="let cat of categoria" [ngValue]= "cat.id">{{cat.nombre}}</option>
+                                                                                           <select name="dtoCategoria.id" id="dtoCategoria.id" class="form-control escrituerModal " [(ngModel)]="subcategoriaData.dtoCategoria.id">
+                                                                                                 <option class="escrituraModal" *ngFor="let cat of categoria"   [ngValue]= "cat.id" >{{cat.nombre}}</option>
                                                                                            </select>
                                                                                     </div>
                                                                               </div>

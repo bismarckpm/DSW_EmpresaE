@@ -9,33 +9,42 @@
       </div>
 
       <div class="modal-body">
-        <form class="needs-validation" novalidate>
+        <form [formGroup]="formMarca">
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="nombre">Nombre</label>
-              <input type="text" class="form-control" id="nombre" placeholder="" value="" required>
+              <input type="text" class="form-control" id="nombre" placeholder="" formControlName="nombreMarca" value="">
+              <div *ngIf="nombreMarca.invalid && (nombreMarca.dirty || nombreMarca.touched)" class="alert alert-danger">
+                <div *ngIf="nombreMarca.errors.required">
+                  Este campo es obligatorio
+                </div>
+                <div *ngIf="nombreMarca.errors.pattern">
+                  Introduzca un nombre valido
+                </div>
+              </div>
             </div>
           </div>
-        
+
           <div class="row">
             <div class="col-md-5 mb-3">
-              <label for="country">Estado</label>
-              <select class="custom-select d-block w-100" id="country" required>
+              <label for="estado">Estado</label>
+              <select class="custom-select d-block w-100" formControlName="estadoMarca" id="estado">
                 <option value="">Choose...</option>
                 <option>Activo</option>
                 <option>Inactivo</option>
               </select>
-              <div class="invalid-feedback">
-                Please select a valid option.
+              <div *ngIf="estadoMarca.invalid && (estadoMarca.dirty || estadoMarca.touched)" class="alert alert-danger">
+                <div *ngIf="estadoMarca.errors.required">
+                  Este campo es obligatorio
+                </div>
               </div>
             </div>
           </div>
         </form>
       </div>
-
       <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-primary" (click)="agregarMarca()" data-dismiss="modal">Guargar</button>
+          <button type="submit" class="btn btn-primary" (click)="onSubmit()" data-dismiss="modal">Guardar</button>
       </div>
   </div>
 </div>

@@ -16,7 +16,7 @@ export class FormClientesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  agregarNombre() {
+  agregarCliente() {
     console.log(this.item);
   }
 

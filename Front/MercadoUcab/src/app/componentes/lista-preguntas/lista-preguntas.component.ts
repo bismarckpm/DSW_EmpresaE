@@ -11,11 +11,20 @@ export class ListaPreguntasComponent implements OnInit {
 
   preguntas: Pregunta[] = [];
 
-  constructor(private servicio: PreguntaService) {
-    this.preguntas = this.servicio.getPreguntas();
+  // tslint:disable-next-line:variable-name
+  constructor(private _servicio: PreguntaService) {
+    this.preguntas = this._servicio.getPreguntas();
   }
 
   ngOnInit(): void {
+  }
+
+  eliminar(){
+    console.log('eliminó elemento');
+  }
+
+  actualizar(){
+    console.log('actualizó elemento');
   }
 
 }

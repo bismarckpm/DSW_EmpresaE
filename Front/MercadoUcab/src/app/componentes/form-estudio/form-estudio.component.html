@@ -9,46 +9,85 @@
     </div>
 
     <div class="modal-body">
-      <form class="needs-validation" novalidate>
+      <form [formGroup]="formEstudio">
         <div class="row">
           <div class="col-md-4">
               <label for="nombre">Nombre</label>
-              <input type="text" class="form-control" id="nombre" placeholder=" " required>
-              <div class="invalid-feedback">
-                Please enter your shipping address.
-              </div>
+              <input type="text" class="form-control" id="nombre" placeholder=" " formControlName="nombreEstudio">
+              <div *ngIf="nombreEstudio.invalid && (nombreEstudio.dirty || nombreEstudio.touched)" class="alert alert-danger">
+                <div *ngIf="nombreEstudio.errors.required">
+                  Este campo es obligatorio
+                </div>
+                <div *ngIf="nombreEstudio.errors.pattern">
+                  Introduzca un formato valido
+                </div>
+            </div>
           </div>
             <div class="col-md-4 mb-3">
             <label for="edadMinima">Edad Minima</label>
-              <input type="text" class="form-control" id="edadMinima" placeholder=" " required>
+              <input type="text" class="form-control" id="edadMinima" placeholder=" " formControlName="edadMinimaEstudio">
+              <div *ngIf="edadMinimaEstudio.invalid && (edadMinimaEstudio.dirty || edadMinimaEstudio.touched)" class="alert alert-danger">
+                <div *ngIf="edadMinimaEstudio.errors.required">
+                  Este campo es obligatorio
+                </div>
+                <div *ngIf="edadMinimaEstudio.errors.pattern">
+                  Introduzca una edad valida
+                </div>
+              </div>
             </div>
             <div class="col-md-4 mb-3">
               <label for="edadMaxima">Edad Maxima</label>
-              <input type="text" class="form-control" id="edadMaxima" placeholder=" " required>
+              <input type="text" class="form-control" id="edadMaxima" placeholder=" " formControlName="edadMaximaEstudio">
+              <div *ngIf="edadMaximaEstudio.invalid && (edadMaximaEstudio.dirty || edadMaximaEstudio.touched)" class="alert alert-danger">
+                <div *ngIf="edadMaximaEstudio.errors.required">
+                  Este campo es obligatorio
+                </div>
+                <div *ngIf="edadMaximaEstudio.errors.pattern">
+                  Introduzca una edad valida
+                </div>
+              </div>
             </div>
           </div>
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="fechaInicio">Fecha inicio</label>
-            <input type="text" class="form-control" id="fechaInicio" placeholder="" value="" required>
+            <input type="text" class="form-control" id="fechaInicio" placeholder="DD/MM/AAAA" value="" formControlName="fechaInicioEstudio">
+            <div *ngIf="fechaInicioEstudio.invalid && (fechaInicioEstudio.dirty || fechaInicioEstudio.touched)" class="alert alert-danger">
+              <div *ngIf="fechaInicioEstudio.errors.required">
+                Este campo es obligatorio
+              </div>
+              <div *ngIf="fechaInicioEstudio.errors.pattern">
+                Introduzca un formato valido
+              </div>
+            </div>
           </div>
           <div class="col-md-6 mb-3">
             <label for="fechaFin">Fecha fin</label>
-            <input type="text" class="form-control" id="fechaFin" placeholder="" value="" required>
+            <input type="text" class="form-control" id="fechaFin" placeholder="DD/MM/AAAA" value="" formControlName="fechaFinEstudio">
+            <div *ngIf="fechaFinEstudio.invalid && (fechaFinEstudio.dirty || fechaFinEstudio.touched)" class="alert alert-danger">
+              <div *ngIf="fechaFinEstudio.errors.required">
+                Este campo es obligatorio
+              </div>
+              <div *ngIf="fechaFinEstudio.errors.pattern">
+                Introduzca un formato valido
+              </div>
+            </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-5 mb-3">
             <label for="estado">Estado</label>
-            <select class="custom-select d-block w-100" id="estado" required>
+            <select class="custom-select d-block w-100" id="estado" formControlName="estadoEstudio">
               <option value="">Choose...</option>
               <option>Solicitado</option>
               <option>Procesado</option>
               <option>En ejecucion</option>
               <option>Culminado</option>
             </select>
-            <div class="invalid-feedback">
-              Please select a valid option.
+            <div *ngIf="estadoEstudio.invalid && (estadoEstudio.dirty || estadoEstudio.touched)" class="alert alert-danger">
+              <div *ngIf="estadoEstudio.errors.required">
+                Este campo es obligatorio
+              </div>
             </div>
           </div>
         </div>
@@ -56,7 +95,7 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-      <button type="submit" class="btn btn-primary" (click)="agregarEstudio()" data-dismiss="modal">Guardar</button>
+      <button type="submit" class="btn btn-primary" (click)="onSubmit()" data-dismiss="modal">Guardar</button>
     </div>
   </div>
 </div>

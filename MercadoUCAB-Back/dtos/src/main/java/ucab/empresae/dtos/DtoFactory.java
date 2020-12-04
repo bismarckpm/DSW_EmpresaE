@@ -34,10 +34,6 @@ public class DtoFactory {
         return new DtoEstudioEncuestado();
     }
 
-    public static DtoEstudioGenero DtoEstudioGeneroInstance() {
-        return new DtoEstudioGenero();
-    }
-
     public static DtoGenero DtoGeneroInstance() {
         return new DtoGenero();
     }
@@ -92,18 +88,6 @@ public class DtoFactory {
 
     public static DtoSubcategoria DtoSubcategoriaInstance() {
         return new DtoSubcategoria();
-    }
-
-    public static DtoSubcategoriaMarca DtoSubcategoriaMarcaInstance() {
-        return new DtoSubcategoriaMarca();
-    }
-
-    public static DtoSubcategoriaPresentacion DtoSubcategoriaPresentacionInstance() {
-        return new DtoSubcategoriaPresentacion();
-    }
-
-    public static DtoSubcategoriaTipo DtoSubcategoriaTipoInstance() {
-        return new DtoSubcategoriaTipo();
     }
 
     public static DtoTipo DtoTipoInstance() {

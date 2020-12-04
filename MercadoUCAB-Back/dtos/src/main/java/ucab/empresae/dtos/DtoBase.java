@@ -4,6 +4,7 @@ import ucab.empresae.excepciones.PruebaExcepcion;
 
 public class DtoBase {
     private long _id;
+    private String estatus;
 
 
     public DtoBase( long id ) throws Exception
@@ -30,5 +31,13 @@ public class DtoBase {
         {
             throw new PruebaExcepcion();
         }
+    }
+
+    public String getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(String estatus) {
+        this.estatus = estatus;
     }
 }

@@ -19,11 +19,12 @@ export class FormClientesComponent implements OnInit {
 
   agregarCliente() {
     console.log(this.item);
+  }
 
-  agregarCliente(): void {
+ /* agregarCliente(): void {
     console.log('agrego: ' + this.item.nombre);
     this.item.nombre = '';
 
-  }
+  }*/
 
 }

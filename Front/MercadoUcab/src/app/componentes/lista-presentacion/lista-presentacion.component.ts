@@ -13,7 +13,7 @@ export class ListaPresentacionComponent implements OnInit {
 
   // tslint:disable-next-line:variable-name
   constructor(private _servicio: PresentacionService) {
-    this.presentaciones = this._servicio.getPresentaciones();
+    //this.presentaciones = this._servicio.getPresentaciones();
 
   }
 

@@ -26,6 +26,7 @@ export class ListaClientesComponent implements OnInit {
 
   actualizar(){
     console.log('actualizó elemento');
+  } 
 
   public eliminarCliente(clienteEliminar: Cliente): void{
     console.log('elimino ' + clienteEliminar.id);

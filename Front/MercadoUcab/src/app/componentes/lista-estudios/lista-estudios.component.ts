@@ -12,7 +12,7 @@ export class ListaEstudiosComponent implements OnInit {
   estudios: any[] = [];
 
   constructor(private servicio: EstudioService) {
-    this.estudios = this.servicio.getEstudios();
+    //this.estudios = this.servicio.getEstudios();
    }
 
   ngOnInit(): void {

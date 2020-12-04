@@ -14,7 +14,7 @@ export class ListaMarcaComponent implements OnInit {
 
   // tslint:disable-next-line:variable-name
   constructor(private _servicio: MarcaService) {
-    this.marcas = this._servicio.getMarcas();
+    //this.marcas = this._servicio.getMarcas();
 
   }
 

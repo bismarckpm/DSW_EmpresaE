@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 import { Router } from '@angular/router';
 import { CategoriaService } from 'src/app/services/categoria.service';
+import {Categoria} from 'src/app/models/categoria'
 
 
 @Component({
@@ -11,7 +12,7 @@ import { CategoriaService } from 'src/app/services/categoria.service';
 })
 export class FormSubcategoriaComponent implements OnInit {
   
-  @Input() subcategoria ={ id:0,nombre:'',estatus:'',id_categoria:0};
+  @Input() subcategoria ={ id:0, nombre:'',estatus:'', dtoCategoria:{id:0}};
   categoria:any;
 
   constructor( 

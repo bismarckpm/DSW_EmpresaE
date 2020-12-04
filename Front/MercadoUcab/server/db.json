@@ -26,19 +26,19 @@
       "id": 1,
       "nombre": "refrescos",
       "estatus": "b",
-      "id_categoria": 1
+      "dtoCategoria": {
+        "id": 5,
+        "nombre": "pedro gutierres",
+        "estatus": "i"
+      }
     },
     {
       "id": 2,
-      "nombre": "doritos",
-      "estatus": "b",
-      "id_categoria": 2
-    },
-    {
-      "id": 5,
-      "nombre": "desodorante",
+      "nombre": "Chucheria",
       "estatus": "a",
-      "id_categoria": 3
+      "dtoCategoria": {
+        "id": 5
+      }
     }
   ]
 }

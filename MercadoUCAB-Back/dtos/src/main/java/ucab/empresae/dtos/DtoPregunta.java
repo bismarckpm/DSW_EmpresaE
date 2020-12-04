@@ -1,15 +1,24 @@
 package ucab.empresae.dtos;
 
-import javax.persistence.*;
-import java.util.List;
+public class DtoPregunta extends DtoBase {
 
-public class DtoPregunta extends DtoBase
-{
+    //Atributps
     private String estado;
     private String descripcion;
+
+    //Relaciones
     private DtoTipoPregunta dtoTipoPregunta;
     private DtoSubcategoria dtoSubcategoria;
 
+    //Constructores
+    public DtoPregunta() {
+    }
+
+    public DtoPregunta(long id) throws Exception {
+        super(id);
+    }
+
+    //Getters y Setters
     public String getEstado() {
         return estado;
     }
@@ -30,7 +39,7 @@ public class DtoPregunta extends DtoBase
         return dtoTipoPregunta;
     }
 
-    public void setTipo(DtoTipoPregunta dtoTipoPregunta) {
+    public void setDtoTipoPregunta(DtoTipoPregunta dtoTipoPregunta) {
         this.dtoTipoPregunta = dtoTipoPregunta;
     }
 
@@ -38,7 +47,7 @@ public class DtoPregunta extends DtoBase
         return dtoSubcategoria;
     }
 
-    public void setSubcategoria(DtoSubcategoria dtoSubcategoria) {
+    public void setDtoSubcategoria(DtoSubcategoria dtoSubcategoria) {
         this.dtoSubcategoria = dtoSubcategoria;
     }
 

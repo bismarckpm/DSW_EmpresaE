@@ -3,8 +3,8 @@ package ucab.empresae.dtos;
 public class DtoGenero extends DtoBase {
 
     //Atributos
-    private String dtoEstado;
-    private String dtoNombre;
+    private String estado;
+    private String nombre;
 
     //Constructores
     public DtoGenero() {
@@ -17,19 +17,19 @@ public class DtoGenero extends DtoBase {
 
     //Getters y Setters
     public String getEstado() {
-        return dtoEstado;
+        return estado;
     }
 
     public void setEstado(String estado) {
-        this.dtoEstado = estado;
+        this.estado = estado;
     }
 
     public String getNombre() {
-        return dtoNombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        this.dtoNombre = nombre;
+        this.nombre = nombre;
     }
 
 }

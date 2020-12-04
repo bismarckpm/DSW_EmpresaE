@@ -8,7 +8,18 @@ import java.util.List;
 public class PresentacionEntity extends BaseEntity{
     private String estado;
     private String descripcion;
-    private List<TipoEntity> tipos;
+    //private List<TipoEntity> tipos;
+
+    public PresentacionEntity( )
+    {
+
+    }
+
+    public PresentacionEntity( long id )
+    {
+        super( id );
+    }
+
 
     @Basic
     @Column(name = "estado")
@@ -29,7 +40,7 @@ public class PresentacionEntity extends BaseEntity{
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
+/*
     @ManyToMany(mappedBy = "presentaciones")
     public List<TipoEntity> getTipos() {
         return tipos;
@@ -38,4 +49,5 @@ public class PresentacionEntity extends BaseEntity{
     public void setTipos(List<TipoEntity> tipos) {
         this.tipos = tipos;
     }
+ */
 }

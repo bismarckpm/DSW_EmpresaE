@@ -5,7 +5,7 @@
         <tr>
           <th>ID</th>
           <th>Nombre de Subcategoria</th>
-          <th>Estatus </th>
+          <th>Estado </th>
           <th>Categoria</th>
         </tr>
         </thead>
@@ -13,7 +13,7 @@
         <tr *ngFor="let subcategoria of Subcategoria " >
           <td>{{ subcategoria.id }}</td>
           <td>{{ subcategoria.nombre }}</td>
-          <td>{{ subcategoria.estatus }}</td>
+          <td>{{ subcategoria.estado }}</td>
           <td>{{ subcategoria.dtoCategoria.nombre}}</td>
           <td>
             <div class="d-flex justify-content-around">
@@ -56,8 +56,8 @@
                             </div>
                             <div class="row">
                               <div class="col-md-5 mb-3">
-                                <label for=""> Estado</label>
-                                  <select class="custom-select d-block w-100" [(ngModel)]= "subcategoriaData.estatus" formControlName="estadoSubcategoria" name="estatus" >
+                                <label for="">Estado</label>
+                                  <select class="custom-select d-block w-100" [(ngModel)]= "subcategoriaData.estado" formControlName="estadoSubcategoria" name="estado" >
                                     <option value="a">Activa</option>
                                     <option value="i">Inactiva</option>
                                   </select>
@@ -74,7 +74,7 @@
                               <label for="" class="col-sm-4 col-form-label escrituerModal">Seleccione una categorias</label>
                               <div class="col-sm-8">
                                 <select name="dtoCategoria.id" id="dtoCategoria.id" class="form-control escrituerModal " [(ngModel)]="subcategoriaData.dtoCategoria.id" formControlName="CATEGORIA" >
-                                  <option  value=""> Selecciones una ...</option>
+                                  <option value=""> Selecciones una ...</option>
                                   <option class="escrituraModal" *ngFor="let cat of categoria"   [ngValue]= "cat.id" >{{cat.nombre}}</option>
                                 </select>
                                 <div *ngIf="CATEGORIA.invalid && (CATEGORIA.dirty || CATEGORIA.touched)" class="alert alert-danger">

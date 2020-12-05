@@ -31,6 +31,22 @@
         "nombre": "pedro gutierres",
         "estatus": "i"
       }
+    },
+    {
+      "id": 3,
+      "nombre": "tt",
+      "estado": "a",
+      "dtoCategoria": {
+        "id": 5
+      }
+    },
+    {
+      "id": 4,
+      "nombre": "eee",
+      "estado": "a",
+      "dtoCategoria": {
+        "id": 5
+      }
     }
   ],
   "marca": [

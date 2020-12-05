@@ -22,18 +22,23 @@
     }
   ],
   "subcategoria": [
-    
     {
       "id": 1,
       "nombre": "pedro gutierres",
       "estatus": "i",
-      "dtoCategoria":
-        {
-          "id": 5,
-          "nombre": "pedro gutierres",
-          "estatus": "i"
-        }
-      
+      "dtoCategoria": {
+        "id": 5,
+        "nombre": "pedro gutierres",
+        "estatus": "i"
+      }
+    }
+  ],
+  "marca": [
+    {
+      "id": 1,
+      "nombre": "Pepsi",
+      "estado": "i",
+      "estatus": "i"
     }
   ]
 }

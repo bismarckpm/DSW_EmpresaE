@@ -13,7 +13,7 @@
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="nombre">Nombre</label>
-              <input type="text" class="form-control" id="nombre" placeholder="" formControlName="nombreMarca" value="">
+              <input type="text" [(ngModel)]="marca.nombre" class="form-control" id="nombre" placeholder="" formControlName="nombreMarca" name="nombre" value="">
               <div *ngIf="nombreMarca.invalid && (nombreMarca.dirty || nombreMarca.touched)" class="alert alert-danger">
                 <div *ngIf="nombreMarca.errors.required">
                   Este campo es obligatorio
@@ -28,10 +28,10 @@
           <div class="row">
             <div class="col-md-5 mb-3">
               <label for="estado">Estado</label>
-              <select class="custom-select d-block w-100" formControlName="estadoMarca" id="estado">
+              <select class="custom-select d-block w-100" [(ngModel)]="marca.estado" formControlName="estadoMarca" id="estado" name="estado">
                 <option value="">Choose...</option>
-                <option>Activo</option>
-                <option>Inactivo</option>
+                <option value="a">Activo</option>
+                <option value="i">Inactivo</option>
               </select>
               <div *ngIf="estadoMarca.invalid && (estadoMarca.dirty || estadoMarca.touched)" class="alert alert-danger">
                 <div *ngIf="estadoMarca.errors.required">
@@ -45,9 +45,7 @@
       <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 
-          <button type="submit" class="btn btn-primary" (click)="onSubmit()" data-dismiss="modal">Guardar</button>
-
-          <button type="submit" class="btn btn-primary" (click)="agregarMarca()" data-dismiss="modal">Guardar</button>
+          <button type="submit" class="btn btn-primary" (click)="addMarca(marca)" data-dismiss="modal">Guardar</button>
 
       </div>
   </div>

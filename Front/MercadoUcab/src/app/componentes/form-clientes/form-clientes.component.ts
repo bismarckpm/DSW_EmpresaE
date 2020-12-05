@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
   selector: 'app-form-clientes',
@@ -11,14 +12,16 @@ export class FormClientesComponent implements OnInit {
     nombre: ''
   };
 
-  constructor() { }
+  constructor(
+    publico clienteService:ClienteService
+  ) { }
 
   ngOnInit(): void {
   }
 
 
   agregarCliente() {
-    console.log(this.item);
+    this.item.clienteService.
   }
 
  /* agregarCliente(): void {

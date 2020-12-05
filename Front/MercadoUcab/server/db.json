@@ -22,18 +22,30 @@
     }
   ],
   "subcategoria": [
-    
     {
       "id": 1,
       "nombre": "pedro gutierres",
       "estatus": "i",
-      "dtoCategoria":
-        {
-          "id": 5,
-          "nombre": "pedro gutierres",
-          "estatus": "i"
-        }
-      
+      "dtoCategoria": {
+        "id": 5,
+        "nombre": "pedro gutierres",
+        "estatus": "i"
+      }
+    },
+    {
+      "id": 2,
+      "nombre": "as",
+      "estatus": "a",
+      "dtoCategoria": {
+        "id": 9
+      }
+    }
+  ],
+  "marca": [
+    {
+      "id": 1,
+      "nombre": "BMW",
+      "estatus": "a"
     }
   ]
 }

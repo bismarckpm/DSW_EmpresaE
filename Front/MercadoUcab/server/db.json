@@ -33,19 +33,28 @@
       }
     },
     {
-      "id": 2,
-      "nombre": "as",
-      "estatus": "a",
+      "id": 3,
+      "nombre": "tt",
+      "estado": "a",
       "dtoCategoria": {
-        "id": 9
+        "id": 5
+      }
+    },
+    {
+      "id": 4,
+      "nombre": "eee",
+      "estado": "a",
+      "dtoCategoria": {
+        "id": 5
       }
     }
   ],
   "marca": [
     {
       "id": 1,
-      "nombre": "BMW",
-      "estatus": "a"
+      "nombre": "Pepsi",
+      "estado": "i",
+      "estatus": "i"
     }
   ]
 }

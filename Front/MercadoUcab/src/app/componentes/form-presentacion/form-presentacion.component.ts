@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-form-presentacion',
@@ -7,17 +8,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormPresentacionComponent implements OnInit {
 
-  item: any = {
-    descripcion: '',
-    estado: ''
-  };
+  formPresentacion: FormGroup;
+  patronDescripcionPresentacion: any = /^[A-Za-z0-9\s]+$/;
 
-  constructor() { }
+  get descripcionPresentacion(){
+    return this.formPresentacion.get('descripcionPresentacion');
+  }
+
+  get estadoPresentacion(){
+    return this.formPresentacion.get('estadoPresentacion');
+  }
+
+  constructor(private formBuilder: FormBuilder) {
+    this.createForm();
+  }
+
+  createForm(){
+    this.formPresentacion = this.formBuilder.group({
+      descripcionPresentacion: ['', [Validators.required, Validators.pattern(this.patronDescripcionPresentacion)]],
+      estadoPresentacion: ['', Validators.required],
+    });
+  }
 
   ngOnInit(): void {
   }
 
   agregarPresentacion(){
     console.log('agregó presentacion');
+  }
+
+  onSubmit() {
+    if (this.formPresentacion.valid) {
+      console.log(this.formPresentacion.value);
+    }
+    else{
+      alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
+    }
   }
 }

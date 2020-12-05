@@ -65,4 +65,43 @@ public class MarcaServicio {
         }
     }
 
+    @PUT
+    @Consumes(value=MediaType.APPLICATION_JSON)
+    @Produces(value=MediaType.APPLICATION_JSON)
+    @Path("/updateMarca/{id}")
+    public Response updateMarca(@PathParam("id") long id, DtoMarca dtoMarca) {
+        DaoMarca dao = new DaoMarca();
+        MarcaEntity marca = dao.find(id, MarcaEntity.class);
+
+        if (marca != null){
+            marca.setNombre(dtoMarca.getNombre());
+            marca.setEstado(dtoMarca.getEstado());
+            MarcaEntity resul = dao.update(marca);
+            return Response.ok().entity(marca).build();
+        }
+        else{
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
+
+    @DELETE
+    @Produces(value=MediaType.APPLICATION_JSON)
+    @Path("deleteMarca/{id}")
+    public Response deleteMarca(@PathParam("id") long id)
+    {
+        try
+        {
+            DaoMarca dao = new DaoMarca();
+            MarcaEntity marca = dao.find(id, MarcaEntity.class);
+            if(marca != null) {
+                MarcaEntity resul = dao.delete(marca);
+                return Response.ok().build();
+            }
+        }
+        catch (Exception er){
+            String problema = er.getMessage();
+        }
+        return Response.status(Response.Status.NOT_FOUND).build();
+    }
+
 }

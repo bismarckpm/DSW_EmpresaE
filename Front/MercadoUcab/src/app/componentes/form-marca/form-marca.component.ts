@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from "@angular/router";
+import {MarcaService} from "../../services/marca.service";
 
 @Component({
   selector: 'app-form-marca',
@@ -7,6 +9,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./form-marca.component.css']
 })
 export class FormMarcaComponent implements OnInit {
+
+  @Input() marca = { id: 0, nombre: '', estado: ''};
 
   formMarca: FormGroup;
   patronNombreMarca: any = /^[A-Za-z0-9\s]+$/;
@@ -19,7 +23,10 @@ export class FormMarcaComponent implements OnInit {
     return this.formMarca.get('estadoMarca');
   }
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    public marcaService: MarcaService,
+    public router: Router,
+    private formBuilder: FormBuilder) {
     this.createForm();
   }
 
@@ -33,16 +40,17 @@ export class FormMarcaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  agregarMarca(){
-    console.log('agregó marca');
-  }
-
-  onSubmit() {
+  addMarca(marca){
     if (this.formMarca.valid) {
-      console.log(this.formMarca.value);
+      this.marcaService.createMarca(this.marca).subscribe((data: {}) => {
+      });
     }
     else{
-      alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
+      alert(' LLenar todos los campos por favor');
     }
+  }
+
+  agregarMarca() {
+    console.log('agregó marca');
   }
 }

@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Cliente } from '../models/cliente';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Lugar } from '../models/lugar';
 import {Observable, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClienteService {
+export class LugarService {
 
   apiurl = 'http://localhost:3000';
 
@@ -19,40 +20,41 @@ export class ClienteService {
     })
   };
 ///////// Metodos para ejecutar//////////////
-  getCategorias(): Observable<Cliente>{
-    return this.http.get<Cliente>(this.apiurl + '/categoria')
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      )
-  }
 
-  getCliente(id): Observable<Cliente>{
-    return this.http.get<Cliente>(this.apiurl + '/categoria/' + id)
+  getLugares(): Observable<Lugar>{
+    return this.http.get<Lugar>(this.apiurl + '/lugar')
       .pipe(
         retry(1),
         catchError(this.handleError)
       );
   }
 
-  createCliente(cliente): Observable<Cliente>{
-    return this.http.post<Cliente>(this.apiurl + '/categoria', JSON.stringify(cliente), this.httpOptions)
+  getLugar(id): Observable<Lugar>{
+    return this.http.get<Lugar>(this.apiurl + '/lugar/' + id)
       .pipe(
         retry(1),
         catchError(this.handleError)
       );
   }
 
-  updateCliente(id, cliente): Observable<Cliente>{
-    return this.http.put<Cliente>(this.apiurl + '/categoria/' + id, JSON.stringify(cliente), this.httpOptions)
+  createLugar(lugar): Observable<Lugar>{
+    return this.http.post<Lugar>(this.apiurl + '/lugar', JSON.stringify(lugar), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
       );
   }
 
-  deleteCliente(id){
-    return this.http.delete<Cliente>(this.apiurl + '/categoria/' + id, this.httpOptions)
+  updateLugar(id, lugar): Observable<Lugar>{
+    return this.http.put<Lugar>(this.apiurl + '/lugar/' + id, JSON.stringify(lugar), this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+
+  deleteLugar(id){
+    return this.http.delete<Lugar>(this.apiurl + '/lugar/' + id, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)

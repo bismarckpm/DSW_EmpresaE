@@ -12,7 +12,7 @@
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="descripcion">Descripcion</label>
-            <input type="text" class="form-control" id="descripcion" placeholder="" formControlName="descripcionPregunta" value="">
+            <input type="text" class="form-control" [(ngModel)]= "Pregunta.descripcion" formControlName="descripcionPregunta" value="descripcion">
             <div *ngIf="descripcionPregunta.invalid && (descripcionPregunta.dirty || descripcionPregunta.touched)" class="alert alert-danger">
               <div *ngIf="descripcionPregunta.errors.required">
                 Este campo es obligatorio
@@ -26,10 +26,10 @@
         <div class="row">
           <div class="col-md-5 mb-3">
             <label for="country">Estado</label>
-            <select class="custom-select d-block w-100" id="country" formControlName="estadoPregunta">
+            <select class="custom-select d-block w-100" [(ngModel)]= "Pregunta.estado" formControlName="estadoPregunta" value="estado">
               <option value="">Choose...</option>
-              <option>Activo</option>
-              <option>Inactivo</option>
+              <option value="a">Activo</option>
+              <option value="I">Inactivo</option>
             </select>
             <div *ngIf="estadoPregunta.invalid && (estadoPregunta.dirty || estadoPregunta.touched)" class="alert alert-danger">
               <div *ngIf="estadoPregunta.errors.required">
@@ -38,12 +38,43 @@
             </div>
           </div>
         </div>
+
+        <div class="row">
+          <div class="col-md-5 mb-3">
+            <label for="country">Tipo de Pregunta</label>
+            <select class="custom-select d-block w-100" [(ngModel)]= "Pregunta.dtoTipoPregunta.id" formControlName="tipoPregunta" value="Pregunta.dtoTipoPregunta.id"><!-- Hacer lo de *ngFor-->
+              <option  *ngFor="let tp of tipopregunta" [ngValue]= "tp.id" >{{tp.tipo}}</option>
+            </select>
+            <div *ngIf="tipoPregunta.invalid && (tipoPregunta.dirty || tipoPregunta.touched)" class="alert alert-danger">
+              <div *ngIf="tipoPregunta.errors.required">
+                Este campo es obligatorio
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5 mb-3">
+            <label for="country">Subcategoria asociada</label>
+            <select class="custom-select d-block w-100"   [(ngModel)]= "Pregunta.dtoSubcategoria.id"  formControlName="nombreSubcategoria" value="Pregunta.dtoSubcategoria.id"><!-- Hacer lo de *ngFor-->
+              <option value="">Choose...</option>
+              <option *ngFor="let sub of subcategoria" [ngValue]="sub.id">{{sub.nombre}}</option>
+            </select>
+            <div *ngIf="nombreSubcategoria.invalid && (nombreSubcategoria.dirty || nombreSubcategoria.touched)" class="alert alert-danger">
+                    <div *ngIf="nombreSubcategoria.errors.required">
+                      Este campo es obligatorio
+                    </div>
+           
+            </div>
+          </div>
+        </div>
+
       </form>
     </div>
 
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-      <button type="submit" class="btn btn-primary" (click)="onSubmit()" data-dismiss="modal">Guardar</button>
+      <button type="submit" class="btn btn-primary" (click)="addPregunta()" data-dismiss="modal">Guardar</button>
     </div>
   </div>
 </div>

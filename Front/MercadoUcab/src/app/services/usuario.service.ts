@@ -1,50 +1,76 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Usuario } from '../models/usuario';
+import { Observable, throwError } from 'rxjs';
+import { retry, catchError } from 'rxjs/operators';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
+  apiurl='http://localhost:3000';
+   
+  constructor(private http:HttpClient) { }
+// Http Options
+  httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+} 
 
-  API_URI = 'http://';
-  usuarios: Usuario[] = [
-    {
-      id: 0,
-      nombre: 'prueba0',
-      nombre2: '',
-      apellido: '',
-      apellido2: '',
-      estado: '',
-      fechaNacimiento: '',
-    },
-    {
-      id: 1,
-      nombre: 'prueba1',
-      nombre2: '',
-      apellido: '',
-      apellido2: '',
-      estado: '',
-      fechaNacimiento: '',
-    },
-  ];
+///////// Metodos para ejecutar//////////////
+getUsuarios():Observable<Usuario[]>{
+  return this.http.get<Usuario[]>(this.apiurl+'/Usuario')
+  .pipe(
+    retry(1),
+    catchError(this.handleError)
+  )
+}
 
-  constructor( private http: HttpClient) { }
+getUsuario(id):Observable<Usuario[]>{
+  return this.http.get<Usuario[]>(this.apiurl+'/Usuario/'+id)
+  .pipe(
+    retry(1),
+    catchError(this.handleError)
+  )
+}
 
-  getUsuarios(): Usuario[] {
-    return this.usuarios;
+createUsuario(Usuario):Observable<Usuario[]>{
+  return this.http.post<Usuario[]>(this.apiurl+'/Usuario',JSON.stringify(Usuario), this.httpOptions)
+  .pipe(
+    retry(1),
+    catchError(this.handleError)
+  )
+}
+
+updateUsuario(id,Usuario):Observable<Usuario[]>{
+  return this.http.put<Usuario[]>(this.apiurl+'/Usuario/'+id,JSON.stringify(Usuario), this.httpOptions)
+  .pipe(
+    retry(1),
+    catchError(this.handleError)
+  )
+}
+
+deleteUsuario(id){
+  return this.http.delete<Usuario[]>(this.apiurl + '/Usuario/' + id, this.httpOptions)
+  .pipe(
+    retry(1),
+    catchError(this.handleError)
+  )
+}
+
+///////////////////// Error HandleError
+handleError(error) {
+  let errorMessage = '';
+  if(error.error instanceof ErrorEvent) {
+    // Get client-side error
+    errorMessage = error.error.message;
+  } else {
+    // Get server-side error
+    errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
   }
-
-  getUsuario(){
-    return this.http.get(`${this.API_URI}/usuario`);
-  }
-
-  registarUsuario(usuario: Usuario){
-    return this.http.post(`${this.API_URI}/usuario`, usuario);
-  }
-
-  updateUsuario(id , updateUser){
-    return this.http.post(`${this.API_URI}/usuario/${id}`, updateUser);
-  }
+  window.alert(errorMessage);
+  return throwError(errorMessage);
+}
 }

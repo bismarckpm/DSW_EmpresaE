@@ -9,34 +9,19 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class PresentacionService {
 
-   //Definimos el url del api
-   apiurl='http://localhost:3000';
+  apiurl='http://localhost:3000';
    
-  presentaciones: Presentacion[] = [
-    {
-      id: 0,
-      descripcion: 'presentacion de producto x',
-      estado: 'a',
-    },
-    {
-      id: 1,
-      descripcion: 'presentacion de producto y',
-      estado: 'i',
-    },
-  ];
-
-  constructor(private http: HttpClient) { }
-
+  constructor(private http:HttpClient) { }
 // Http Options
-httpOptions = {
+  httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
   })
 } 
 
 ///////// Metodos para ejecutar//////////////
-getPresentacions():Observable<Presentacion[]>{
-  return this.http.get<Presentacion[]>(this.apiurl+'/presentacion')
+getPresentaciones():Observable<Presentacion[]>{
+  return this.http.get<Presentacion[]>(this.apiurl+'/Presentacion')
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -44,7 +29,7 @@ getPresentacions():Observable<Presentacion[]>{
 }
 
 getPresentacion(id):Observable<Presentacion[]>{
-  return this.http.get<Presentacion[]>(this.apiurl+'/presentacion/'+id)
+  return this.http.get<Presentacion[]>(this.apiurl+'/Presentacion/'+id)
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -52,7 +37,7 @@ getPresentacion(id):Observable<Presentacion[]>{
 }
 
 createPresentacion(Presentacion):Observable<Presentacion[]>{
-  return this.http.post<Presentacion[]>(this.apiurl+'/presentacion',JSON.stringify(Presentacion), this.httpOptions)
+  return this.http.post<Presentacion[]>(this.apiurl+'/Presentacion',JSON.stringify(Presentacion), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -60,7 +45,7 @@ createPresentacion(Presentacion):Observable<Presentacion[]>{
 }
 
 updatePresentacion(id,Presentacion):Observable<Presentacion[]>{
-  return this.http.put<Presentacion[]>(this.apiurl+'/presentacion/'+id,JSON.stringify(Presentacion), this.httpOptions)
+  return this.http.put<Presentacion[]>(this.apiurl+'/Presentacion/'+id,JSON.stringify(Presentacion), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -68,7 +53,7 @@ updatePresentacion(id,Presentacion):Observable<Presentacion[]>{
 }
 
 deletePresentacion(id){
-  return this.http.delete<Presentacion[]>(this.apiurl + '/presentacion/' + id, this.httpOptions)
+  return this.http.delete<Presentacion[]>(this.apiurl + '/Presentacion/' + id, this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)

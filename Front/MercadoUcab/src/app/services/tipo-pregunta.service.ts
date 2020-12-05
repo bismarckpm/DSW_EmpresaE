@@ -1,14 +1,14 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {Tipo} from '../models/tipo';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import { TipoPregunta } from '../models/tipo-pregunta';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TipoService {
-
+export class TipoPreguntaService {
+  //Definimos el url del api
   apiurl='http://localhost:3000';
    
   constructor(private http:HttpClient) { }
@@ -20,40 +20,40 @@ export class TipoService {
 } 
 
 ///////// Metodos para ejecutar//////////////
-getTipos():Observable<Tipo[]>{
-  return this.http.get<Tipo[]>(this.apiurl+'/Tipo')
+getTipoPreguntas():Observable<TipoPregunta[]>{
+  return this.http.get<TipoPregunta[]>(this.apiurl+'/tipopregunta')
   .pipe(
     retry(1),
     catchError(this.handleError)
   )
 }
 
-getTipo(id):Observable<Tipo[]>{
-  return this.http.get<Tipo[]>(this.apiurl+'/Tipo/'+id)
+getTipoPregunta(id):Observable<TipoPregunta[]>{
+  return this.http.get<TipoPregunta[]>(this.apiurl+'/tipopregunta/'+id)
   .pipe(
     retry(1),
     catchError(this.handleError)
   )
 }
 
-createTipo(Tipo):Observable<Tipo[]>{
-  return this.http.post<Tipo[]>(this.apiurl+'/Tipo',JSON.stringify(Tipo), this.httpOptions)
+createTipoPregunta(TipoPregunta):Observable<TipoPregunta[]>{
+  return this.http.post<TipoPregunta[]>(this.apiurl+'/tipopregunta',JSON.stringify(TipoPregunta), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
   )
 }
 
-updateTipo(id,Tipo):Observable<Tipo[]>{
-  return this.http.put<Tipo[]>(this.apiurl+'/Tipo/'+id,JSON.stringify(Tipo), this.httpOptions)
+updateTipoPregunta(id,TipoPregunta):Observable<TipoPregunta[]>{
+  return this.http.put<TipoPregunta[]>(this.apiurl+'/tipopregunta/'+id,JSON.stringify(TipoPregunta), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
   )
 }
 
-deleteTipo(id){
-  return this.http.delete<Tipo[]>(this.apiurl + '/Tipo/' + id, this.httpOptions)
+deleteTipoPregunta(id){
+  return this.http.delete<TipoPregunta[]>(this.apiurl + '/tipopregunta/' + id, this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)

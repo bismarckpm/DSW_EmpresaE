@@ -3,33 +3,23 @@
     {
       "id": 5,
       "nombre": "pedro gutierres",
-      "estatus": "i"
+      "estado": "i"
     },
     {
       "id": 8,
       "nombre": "asd",
-      "estatus": "a"
-    },
-    {
-      "id": 9,
-      "nombre": "pedro2",
-      "estatus": "a"
-    },
-    {
-      "id": 10,
-      "nombre": "Prueba 25",
-      "estatus": "i"
+      "estado": "a"
     }
   ],
   "subcategoria": [
     {
       "id": 1,
       "nombre": "pedro gutierres",
-      "estatus": "i",
+      "estado": "i",
       "dtoCategoria": {
         "id": 5,
         "nombre": "pedro gutierres",
-        "estatus": "i"
+        "estado": "i"
       }
     },
     {
@@ -53,8 +43,83 @@
     {
       "id": 1,
       "nombre": "Pepsi",
+      "estado": "i"
+    },
+    {
+      "id": 2,
+      "nombre": "Chucheria",
+      "estado": "a"
+    }
+  ],
+  "presentacion": [
+    {
+      "id": 1,
+      "descripcion": "a",
+      "estado": "a"
+    },
+    {
+      "id": 2,
+      "descripcion": "aerosol",
+      "estado": "a"
+    },
+    {
+      "id": 4,
+      "descripcion": "pedro",
+      "estado": "i"
+    }
+  ],
+  "tipopregunta": [
+    {
+      "id": 1,
+      "estado": "a",
+      "tipo": "verdadero y Falso"
+    },
+    {
+      "id": 2,
+      "estado": "a",
+      "tipo": "simple"
+    },
+    {
+      "id": 4,
       "estado": "i",
-      "estatus": "i"
+      "tipo": "multiple"
+    },
+    {
+      "id": 5,
+      "estado": "i",
+      "tipo": "libre"
+    }
+  ],
+  "pregunta": [
+    {
+      "id": 1,
+      "descripcion": "asdsad",
+      "estado": "a",
+      "dtoTipoPregunta": {
+        "id": 1,
+        "estado": "a",
+        "tipo": "verdadero y Falso"
+      },
+      "dtoSubcategoria": {
+        "id": 1,
+        "nombre": "pedro gutierres",
+        "estado": "i"
+      }
+    },
+    {
+      "id": 2,
+      "descripcion": "Prueba exitosa Editar",
+      "estado": "a",
+      "dtoTipoPregunta": {
+        "id": 1,
+        "estado": "i",
+        "tipo": "multiple"
+      },
+      "dtoSubcategoria": {
+        "id": 3,
+        "nombre": "pedro gutierres",
+        "estado": "i"
+      }
     }
   ]
 }

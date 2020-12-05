@@ -13,7 +13,7 @@ export class ListaTipoComponent implements OnInit {
 
   // tslint:disable-next-line:variable-name
   constructor(private _servicio: TipoService) {
-    this.tipos = this._servicio.getTipos();
+    //this.tipos = this._servicio.getTipos();
   }
 
   ngOnInit(): void {

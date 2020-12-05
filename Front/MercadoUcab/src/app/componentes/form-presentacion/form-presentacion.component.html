@@ -12,7 +12,7 @@
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="descripcion">Descripcion</label>
-            <input type="text" class="form-control" id="descripcion" placeholder="" formControlName="descripcionPresentacion" value="">
+            <input type="text" class="form-control"   [(ngModel)]="presentacion.descripcion" formControlName="descripcionPresentacion" value="descripcion">
             <div *ngIf="descripcionPresentacion.invalid && (descripcionPresentacion.dirty || descripcionPresentacion.touched)" class="alert alert-danger">
               <div *ngIf="descripcionPresentacion.errors.required">
                 Este campo es obligatorio
@@ -26,10 +26,10 @@
         <div class="row">
           <div class="col-md-5 mb-3">
             <label for="country">Estado</label>
-            <select class="custom-select d-block w-100" id="country" formControlName="estadoPresentacion">
+            <select class="custom-select d-block w-100"  [(ngModel)]="presentacion.estado"  formControlName="estadoPresentacion" value="estado">
               <option value="">Choose...</option>
-              <option>Activo</option>
-              <option>Inactivo</option>
+              <option value="a">Activo</option>
+              <option value="i">Inactivo</option>
             </select>
             <div *ngIf="estadoPresentacion.invalid && (estadoPresentacion.dirty || estadoPresentacion.touched)" class="alert alert-danger">
               <div *ngIf="estadoPresentacion.errors.required">
@@ -43,7 +43,7 @@
 
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-      <button type="submit" class="btn btn-primary" (click)="onSubmit()" data-dismiss="modal">Guardar</button>
+      <button type="submit" class="btn btn-primary" (click)="addPresentacion()" data-dismiss="modal">Guardar</button>
     </div>
   </div>
 </div>

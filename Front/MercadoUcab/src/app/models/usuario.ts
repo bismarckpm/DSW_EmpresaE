@@ -8,4 +8,10 @@ export interface Usuario {
       estado: string;
       fechaNacimiento: string;
 
+
  }
+
+
+
+
+

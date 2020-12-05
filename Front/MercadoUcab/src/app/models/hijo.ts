@@ -1,3 +1,4 @@
+import { Encuestado } from './encuestado';
 import { Genero } from './genero';
 
 export interface Hijo {

@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SubcategoriaService } from 'src/app/services/subcategoria.service';
+import { TipoPreguntaService } from 'src/app/services/tipo-pregunta.service';
 import { Pregunta } from '../../models/pregunta';
 import { PreguntaService } from '../../services/pregunta.service';
 
@@ -10,21 +14,84 @@ import { PreguntaService } from '../../services/pregunta.service';
 export class ListaPreguntasComponent implements OnInit {
 
   preguntas: Pregunta[] = [];
+  id = this.actRoute.snapshot.params['id'];
+  @Input() preguntaData ={ id:0, descripcion:'',estado:'',dtoTipoPregunta:{id:0,estado:'',tipo:''} ,dtoSubcategoria:{id:0, nombre:'',estado:'', }};
+   subcategoria:any;
+   tipopregunta:any;
 
-  // tslint:disable-next-line:variable-name
-  constructor(private _servicio: PreguntaService) {
-    this.preguntas = this._servicio.getPreguntas();
-  }
+   formPregunta: FormGroup;
+   namePattern: any = /^[A-Za-z0-9\s]+$/;
+
+  constructor(
+    public preguntaService:PreguntaService,
+    public subcategoriaService:SubcategoriaService,
+    public tipopreguntaService:TipoPreguntaService,
+    public actRoute: ActivatedRoute,
+    public router: Router,
+    private formBuilder: FormBuilder
+
+  ) { this.createForm();}
+
 
   ngOnInit(): void {
+    this.loadpregunta();
+
   }
 
-  eliminar(){
-    console.log('eliminó elemento');
+  loadpregunta():void {
+    this.preguntaService.getPreguntas().subscribe(data => {
+      this.preguntas = data;
+    })
   }
 
-  actualizar(){
-    console.log('actualizó elemento');
+  deletePregunta(id) {
+
+      this.preguntaService.deletePregunta(id).subscribe(data => {
+        this.loadpregunta()
+      })
+
   }
+
+  updatePregunta(){
+     this.preguntaService.updatePregunta(this.preguntaData.id, this.preguntaData).subscribe(data => {
+      })
+      this.loadpregunta();
+
+  }
+
+  editar(pregunta){
+    this.addSubcategoria();
+    this.addTipoPregunta()
+    this.preguntaData= pregunta;
+  }
+
+  ///Esto es para mostrar en los drops doww
+  addSubcategoria(){
+    this.subcategoriaService.getsubcategorias().subscribe((data: {}) => {
+      this.subcategoria= data;
+    })
+  }
+  addTipoPregunta(){
+    this.tipopreguntaService.getTipoPreguntas().subscribe((data: {}) => {
+      this.tipopregunta= data;
+    })
+  }
+
+  //Validaciones de Pregunta
+  get descripcionPregunta(){return this.formPregunta.get('descripcionPregunta');}
+  get estadoPregunta(){ return this.formPregunta.get('estadoPregunta');}
+  get tipoPregunta(){return this.formPregunta.get('tipoPregunta');}
+  get nombreSubcategoria(){return this.formPregunta.get('nombreSubcategoria');}
+
+  createForm(){
+    this.formPregunta = this.formBuilder.group({
+      descripcionPregunta: ['', [Validators.required, Validators.pattern(this.namePattern)]],
+      estadoPregunta: ['', Validators.required],
+      tipoPregunta: ['', Validators.required],
+      nombreSubcategoria: ['', Validators.required],
+    });
+  }
+
+
 
 }

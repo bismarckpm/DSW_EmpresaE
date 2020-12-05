@@ -1,5 +1,6 @@
 package ucab.empresae.entidades;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,7 +11,6 @@ public class SubcategoriaEntity extends BaseEntity{
     private String nombre;
 
     //private List<EstudioEntity> estudios;
-    //private List<MarcaEntity> marcas;
     //private List<PreguntaEntity> preguntas;
 
     public SubcategoriaEntity( long id )
@@ -62,10 +62,12 @@ public class SubcategoriaEntity extends BaseEntity{
 
     public void setEstudios(List<EstudioEntity> estudios) {
         this.estudios = estudios;
-    }
+    }*/
 
     @ManyToMany
+    @JsonbTransient
     @JoinTable(name = "subcategoria_marca", schema = "mercadeoucab", joinColumns = @JoinColumn(name = "id_subcategoria", referencedColumnName = "id", nullable = false), inverseJoinColumns = @JoinColumn(name = "id_marca", referencedColumnName = "id", nullable = false))
+    private List<MarcaEntity> marcas;
     public List<MarcaEntity> getMarcas() {
         return marcas;
     }
@@ -74,7 +76,7 @@ public class SubcategoriaEntity extends BaseEntity{
         this.marcas = marcas;
     }
 
-    @OneToMany(mappedBy = "subcategoria")
+    /*@OneToMany(mappedBy = "subcategoria")
     public List<PreguntaEntity> getPreguntas() {
         return preguntas;
     }

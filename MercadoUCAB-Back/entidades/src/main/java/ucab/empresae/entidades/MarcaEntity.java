@@ -8,8 +8,7 @@ import java.util.List;
 public class MarcaEntity extends BaseEntity{
     private String estado;
     private String nombre;
-    private List<SubcategoriaEntity> subcategorias;
-    private List<TipoEntity> tipos;
+
 
     @Basic
     @Column(name = "estado")
@@ -32,6 +31,7 @@ public class MarcaEntity extends BaseEntity{
     }
 
     @ManyToMany(mappedBy = "marcas")
+    private List<SubcategoriaEntity> subcategorias;
     public List<SubcategoriaEntity> getSubcategorias() {
         return subcategorias;
     }
@@ -40,7 +40,8 @@ public class MarcaEntity extends BaseEntity{
         this.subcategorias = subcategorias;
     }
 
-    @ManyToMany
+    /*@ManyToMany
+    private List<TipoEntity> tipos;
     @JoinTable(name = "marca_tipo", schema = "mercadeoucab", joinColumns = @JoinColumn(name = "id_marca", referencedColumnName = "id", nullable = false), inverseJoinColumns = @JoinColumn(name = "id_tipo", referencedColumnName = "id", nullable = false))
     public List<TipoEntity> getTipos() {
         return tipos;
@@ -48,5 +49,5 @@ public class MarcaEntity extends BaseEntity{
 
     public void setTipos(List<TipoEntity> tipos) {
         this.tipos = tipos;
-    }
+    }*/
 }

@@ -24,12 +24,29 @@
   "subcategoria": [
     {
       "id": 1,
-      "nombre": "pedro gutierres",
-      "estatus": "i",
+      "nombre": "pppp",
+      "estatus": "a",
       "dtoCategoria": {
-        "id": 5,
+        "id": 8,
         "nombre": "pedro gutierres",
         "estatus": "i"
+      },
+      "estado": "a"
+    },
+    {
+      "id": 2,
+      "nombre": "juana",
+      "estado": "i",
+      "dtoCategoria": {
+        "id": 8
+      }
+    },
+    {
+      "id": 3,
+      "nombre": "ddd",
+      "estado": "i",
+      "dtoCategoria": {
+        "id": 10
       }
     }
   ],

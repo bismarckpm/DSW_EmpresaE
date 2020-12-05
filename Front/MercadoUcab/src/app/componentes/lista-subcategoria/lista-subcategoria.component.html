@@ -5,7 +5,7 @@
         <tr>
           <th>ID</th>
           <th>Nombre de Subcategoria</th>
-          <th>Estatus </th>
+          <th>Estado </th>
           <th>Categoria</th>
         </tr>
         </thead>
@@ -13,7 +13,7 @@
         <tr *ngFor="let subcategoria of Subcategoria " >
           <td>{{ subcategoria.id }}</td>
           <td>{{ subcategoria.nombre }}</td>
-          <td>{{ subcategoria.estatus }}</td>
+          <td>{{ subcategoria.estado }}</td>
           <td>{{ subcategoria.dtoCategoria.nombre}}</td>
           <td>
             <div class="d-flex justify-content-around">
@@ -56,8 +56,8 @@
                             </div>
                             <div class="row">
                               <div class="col-md-5 mb-3">
-                                <label for=""> Estado</label>
-                                  <select class="custom-select d-block w-100" [(ngModel)]= "subcategoriaData.estatus" formControlName="estadoSubcategoria" name="estatus" >
+                                <label for="estado"> Estado</label>
+                                  <select class="custom-select d-block w-100" [(ngModel)]= "subcategoriaData.estado" formControlName="estadoSubcategoria" name="estado" id="estado">
                                     <option value="a">Activa</option>
                                     <option value="i">Inactiva</option>
                                   </select>

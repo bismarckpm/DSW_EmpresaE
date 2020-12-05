@@ -9,48 +9,48 @@ import { Categoria } from '../models/categoria';
 })
 export class CategoriaService {
 
-  // Definimos el url del api
-  apiurl = 'http://localhost:3000';
+  //Definimos el url del api
+  apiurl='http://localhost:3000';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http:HttpClient) { }
 
   // Http Options
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
-  };
+  }  
 ///////// Metodos para ejecutar//////////////
-  getCategorias(): Observable<Categoria>{
-    return this.http.get<Categoria>(this.apiurl + '/categoria')
+  getCategorias():Observable<Categoria>{
+    return this.http.get<Categoria>(this.apiurl+'/categoria')
     .pipe(
       retry(1),
       catchError(this.handleError)
-    );
+    )
   }
 
-  getCategoria(id): Observable<Categoria>{
-    return this.http.get<Categoria>(this.apiurl + '/categoria/' + id)
+  getCategoria(id):Observable<Categoria>{
+    return this.http.get<Categoria>(this.apiurl+'/categoria/'+id)
     .pipe(
       retry(1),
       catchError(this.handleError)
-    );
+    )
   }
 
-  createCategoria(categoria): Observable<Categoria>{
-    return this.http.post<Categoria>(this.apiurl+ '/categoria',JSON.stringify(categoria), this.httpOptions)
+  createCategoria(categoria):Observable<Categoria>{
+    return this.http.post<Categoria>(this.apiurl+'/categoria',JSON.stringify(categoria), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
-    );
+    )
   }
 
-  updateCategoria(id, categoria): Observable<Categoria>{
-    return this.http.put<Categoria>(this.apiurl+ '/categoria/' + id, JSON.stringify(categoria), this.httpOptions)
+  updateCategoria(id,categoria):Observable<Categoria>{
+    return this.http.put<Categoria>(this.apiurl+'/categoria/'+id,JSON.stringify(categoria), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
-    );
+    )
   }
 
   deleteCategoria(id){
@@ -58,13 +58,13 @@ export class CategoriaService {
     .pipe(
       retry(1),
       catchError(this.handleError)
-    );
+    )
   }
 
   ///////////////////// Error HandleError
   handleError(error) {
     let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
+    if(error.error instanceof ErrorEvent) {
       // Get client-side error
       errorMessage = error.error.message;
     } else {

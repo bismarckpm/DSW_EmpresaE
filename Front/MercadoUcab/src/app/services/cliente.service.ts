@@ -1,75 +1,42 @@
 import { Injectable } from '@angular/core';
 import { Cliente } from '../models/cliente';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
-import {catchError, retry} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClienteService {
 
-  apiurl = 'http://localhost:3000';
+  API_URI = 'http://';
+  clientes: Cliente[] = [
+    {
+      id: 1,
+      estado: 'A',
+      razonSocial: 'J',
+      rif: 10012010
+    },
+    {
+      id: 2,
+      estado: 'A',
+      razonSocial: 'J',
+      rif: 202002
+    },
+  ];
 
   constructor(private http: HttpClient) { }
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  };
-///////// Metodos para ejecutar//////////////
-  getCategorias(): Observable<Cliente>{
-    return this.http.get<Cliente>(this.apiurl + '/categoria')
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      )
+   getClientes(): Cliente[] {
+    return this.clientes;
+  }
+  getCliente() {
+    return this.http.get(`${this.API_URI}/cliente`);
   }
 
-  getCliente(id): Observable<Cliente>{
-    return this.http.get<Cliente>(this.apiurl + '/categoria/' + id)
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      );
+  registarCliente(marca: Cliente){
+    return this.http.post(`${this.API_URI}/cliente`, marca);
   }
 
-  createCliente(cliente): Observable<Cliente>{
-    return this.http.post<Cliente>(this.apiurl + '/categoria', JSON.stringify(cliente), this.httpOptions)
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      );
-  }
-
-  updateCliente(id, cliente): Observable<Cliente>{
-    return this.http.put<Cliente>(this.apiurl + '/categoria/' + id, JSON.stringify(cliente), this.httpOptions)
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      );
-  }
-
-  deleteCliente(id){
-    return this.http.delete<Cliente>(this.apiurl + '/categoria/' + id, this.httpOptions)
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      );
-  }
-
-  ///////////////////// Error HandleError
-  handleError(error) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // Get client-side error
-      errorMessage = error.error.message;
-    } else {
-      // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    window.alert(errorMessage);
-    return throwError(errorMessage);
+  updateCliente(id , updateCliente){
+    return this.http.post(`${this.API_URI}/cliente/${id}`, updateCliente);
   }
 }

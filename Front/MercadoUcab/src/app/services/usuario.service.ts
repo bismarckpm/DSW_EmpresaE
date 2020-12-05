@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../models/usuario';
-import {Observable, throwError} from 'rxjs';
-import {catchError, retry} from 'rxjs/operators';
 
 
 @Injectable({
@@ -10,68 +8,43 @@ import {catchError, retry} from 'rxjs/operators';
 })
 export class UsuarioService {
 
-  apiurl = 'http://localhost:3000';
+  API_URI = 'http://';
+  usuarios: Usuario[] = [
+    {
+      id: 0,
+      nombre: 'prueba0',
+      nombre2: '',
+      apellido: '',
+      apellido2: '',
+      estado: '',
+      fechaNacimiento: '',
+    },
+    {
+      id: 1,
+      nombre: 'prueba1',
+      nombre2: '',
+      apellido: '',
+      apellido2: '',
+      estado: '',
+      fechaNacimiento: '',
+    },
+  ];
 
-  constructor(private http: HttpClient) { }
+  constructor( private http: HttpClient) { }
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  };
-///////// Metodos para ejecutar//////////////
-
-  getUsuarios(): Observable<Usuario>{
-    return this.http.get<Usuario>(this.apiurl + '/usuario')
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      );
+  getUsuarios(): Usuario[] {
+    return this.usuarios;
   }
 
-  getUsuario(id): Observable<Usuario>{
-    return this.http.get<Usuario>(this.apiurl + '/usuario/' + id)
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      );
+  getUsuario(){
+    return this.http.get(`${this.API_URI}/usuario`);
   }
 
-  createUsuario(usuario): Observable<Usuario>{
-    return this.http.post<Usuario>(this.apiurl + '/usuario', JSON.stringify(usuario), this.httpOptions)
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      );
+  registarUsuario(usuario: Usuario){
+    return this.http.post(`${this.API_URI}/usuario`, usuario);
   }
 
-  updateUsuario(id, usuario): Observable<Usuario>{
-    return this.http.put<Usuario>(this.apiurl + '/usuario/' + id, JSON.stringify(usuario), this.httpOptions)
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      );
-  }
-
-  deleteUsuario(id){
-    return this.http.delete<Usuario>(this.apiurl + '/usuario/' + id, this.httpOptions)
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      );
-  }
-
-  ///////////////////// Error HandleError
-  handleError(error) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // Get client-side error
-      errorMessage = error.error.message;
-    } else {
-      // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    window.alert(errorMessage);
-    return throwError(errorMessage);
+  updateUsuario(id , updateUser){
+    return this.http.post(`${this.API_URI}/usuario/${id}`, updateUser);
   }
 }

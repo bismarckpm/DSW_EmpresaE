@@ -18,7 +18,11 @@
                         <div [ngSwitch]="seccion">
                             <div *ngSwitchCase="'Clientes'"><app-form-clientes></app-form-clientes></div>
                             <div *ngSwitchCase="'Usuarios'"><app-form-usuarios></app-form-usuarios></div>
+
+                            <div *ngSwitchCase="'Analistas'"></div>
+
                             <div *ngSwitchCase="'Analistas'"><form-analista></form-analista></div>
+
                             <div *ngSwitchCase="'Estudios'"><app-form-estudio></app-form-estudio></div>
                             <div *ngSwitchCase="'Preguntas'"><app-form-pregunta></app-form-pregunta></div>
                             <div *ngSwitchCase="'Categorias'"><app-form-categoria></app-form-categoria></div>

@@ -1,6 +1,6 @@
 import org.junit.Test;
 import ucab.empresae.dtos.DtoUsuario;
-import ucab.empresae.servicio.DirectorioActivo;
+import ucab.empresae.directorioactivo.DirectorioActivo;
 
 
 public class DirectorioActivo_Test {
@@ -11,7 +11,7 @@ public class DirectorioActivo_Test {
     public void createUserLDAP() {
         DtoUsuario user = new DtoUsuario();
         rol = "Analista";
-        user.setUsername( "prueba2" );
+        user.setUsername( "prueba5" );
         user.setClave( "Prueba654321" );
         user.setCorreoelectronico("prueba@gmail.com");
         DirectorioActivo ldap = new DirectorioActivo();

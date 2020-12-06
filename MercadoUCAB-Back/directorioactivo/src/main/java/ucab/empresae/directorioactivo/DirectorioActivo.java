@@ -1,4 +1,4 @@
-package ucab.empresae.servicio;
+package ucab.empresae.directorioactivo;
 
 import ucab.empresae.dtos.DtoUsuario;
 

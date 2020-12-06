@@ -10,7 +10,6 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>ucab.empresae</groupId>
     <artifactId>directorioactivo</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>

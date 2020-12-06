@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,7 +8,11 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
+  ruta: string;
+
   constructor(private router:Router) { 
+    console.log(this.router.url.toString().substr(1));
+    this.ruta = this.router.url.toString().substr(1);
   }
 
   ngOnInit(): void {

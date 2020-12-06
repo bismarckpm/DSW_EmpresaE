@@ -14,7 +14,6 @@ export class AdminComponent implements OnInit {
     nombre: ''
   };
 
-  accion = 1;
 
   constructor(
     private ruta: ActivatedRoute,

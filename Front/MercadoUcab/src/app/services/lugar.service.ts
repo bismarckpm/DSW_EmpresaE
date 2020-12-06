@@ -22,7 +22,7 @@ export class LugarService {
    
    ///////// Metodos para ejecutar//////////////
    getLugars():Observable<Lugar[]>{
-     return this.http.get<Lugar[]>(this.apiurl+'/Lugar')
+     return this.http.get<Lugar[]>(this.apiurl+'/lugar')
      .pipe(
        retry(1),
        catchError(this.handleError)
@@ -30,7 +30,7 @@ export class LugarService {
    }
    
    getLugar(id):Observable<Lugar[]>{
-     return this.http.get<Lugar[]>(this.apiurl+'/Lugar/'+id)
+     return this.http.get<Lugar[]>(this.apiurl+'/lugar/'+id)
      .pipe(
        retry(1),
        catchError(this.handleError)
@@ -38,7 +38,7 @@ export class LugarService {
    }
    
    createLugar(Lugar):Observable<Lugar[]>{
-     return this.http.post<Lugar[]>(this.apiurl+'/Lugar',JSON.stringify(Lugar), this.httpOptions)
+     return this.http.post<Lugar[]>(this.apiurl+'/lugar',JSON.stringify(Lugar), this.httpOptions)
      .pipe(
        retry(1),
        catchError(this.handleError)
@@ -46,7 +46,7 @@ export class LugarService {
    }
    
    updateLugar(id,Lugar):Observable<Lugar[]>{
-     return this.http.put<Lugar[]>(this.apiurl+'/Lugar/'+id,JSON.stringify(Lugar), this.httpOptions)
+     return this.http.put<Lugar[]>(this.apiurl+'/lugar/'+id,JSON.stringify(Lugar), this.httpOptions)
      .pipe(
        retry(1),
        catchError(this.handleError)
@@ -54,7 +54,7 @@ export class LugarService {
    }
    
    deleteLugar(id){
-     return this.http.delete<Lugar[]>(this.apiurl + '/Lugar/' + id, this.httpOptions)
+     return this.http.delete<Lugar[]>(this.apiurl + '/lugar/' + id, this.httpOptions)
      .pipe(
        retry(1),
        catchError(this.handleError)

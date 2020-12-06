@@ -55,6 +55,30 @@
       "nombre": "Pepsi",
       "estado": "i",
       "estatus": "i"
+    },
+    {
+      "id": 2,
+      "nombre": "coca",
+      "estado": "i"
+    },
+    {
+      "id": 3,
+      "nombre": "",
+      "estado": "a"
+    }
+  ],
+  "tipo": [
+    {
+      "id": 1,
+      "nombre": "tipo modificado",
+      "estado": "a",
+      "descripcion": "descr nueva"
+    },
+    {
+      "id": 2,
+      "nombre": "ttttt",
+      "estado": "a",
+      "descripcion": ""
     }
   ]
 }

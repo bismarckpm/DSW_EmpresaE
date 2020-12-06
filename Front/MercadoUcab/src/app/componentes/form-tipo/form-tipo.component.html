@@ -12,7 +12,7 @@
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="nombre">Nombre</label>
-            <input type="text" class="form-control" id="nombre" placeholder="" formControlName="nombreTipo" value="">
+            <input type="text" [(ngModel)]="tipo.nombre" class="form-control" id="nombre" placeholder="" formControlName="nombreTipo" name="nombre" value="">
             <div *ngIf="nombreTipo.invalid && (nombreTipo.dirty || nombreTipo.touched)" class="alert alert-danger">
               <div *ngIf="nombreTipo.errors.required">
                 Este campo es obligatorio
@@ -24,7 +24,7 @@
           </div>
           <div class="col-md-6 mb-3">
             <label for="descripcion">Descripcion</label>
-            <input type="text" class="form-control" id="descripcion" placeholder="" formControlName="descripcionTipo" value="">
+            <input type="text" [(ngModel)]="tipo.descripcion" class="form-control" id="descripcion" placeholder="" formControlName="descripcionTipo" name="descripcion" value="">
             <div *ngIf="descripcionTipo.invalid && (descripcionTipo.dirty || descripcionTipo.touched)" class="alert alert-danger">
               <div *ngIf="descripcionTipo.errors.required">
                 Este campo es obligatorio
@@ -38,10 +38,10 @@
         <div class="row">
           <div class="col-md-5 mb-3">
             <label for="estado">Estado</label>
-            <select class="custom-select d-block w-100" id="estado" formControlName="estadoTipo">
+            <select class="custom-select d-block w-100" [(ngModel)]="tipo.estado" id="estado" name="estado" formControlName="estadoTipo">
               <option value="">Choose...</option>
-              <option>Activo</option>
-              <option>Inactivo</option>
+              <option value="a">Activo</option>
+              <option value="i">Inactivo</option>
             </select>
             <div *ngIf="estadoTipo.invalid && (estadoTipo.dirty || estadoTipo.touched)" class="alert alert-danger">
               <div *ngIf="estadoTipo.errors.required">
@@ -54,7 +54,7 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-      <button type="submit" class="btn btn-primary" (click)="onSubmit()" data-dismiss="modal">Guardar</button>
+      <button type="submit" class="btn btn-primary" (click)="addTipo(tipo)" data-dismiss="modal">Guardar</button>
     </div>
   </div>
 </div>

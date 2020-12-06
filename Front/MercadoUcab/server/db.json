@@ -120,8 +120,23 @@
         "nombre": "pedro gutierres",
         "estado": "i"
       }
+    }  
+  ],
+  "tipo": [
+    {
+      "id": 1,
+      "nombre": "tipo modificado",
+      "estado": "a",
+      "descripcion": "descr nueva"
+    },
+    {
+      "id": 2,
+      "nombre": "ttttt",
+      "estado": "a",
+      "descripcion": ""
     }
   ],
+
   "lugar":[
 
     

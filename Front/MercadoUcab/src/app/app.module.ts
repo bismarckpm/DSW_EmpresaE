@@ -19,10 +19,6 @@ import { AdminComponent } from './modulos/admin/admin.component';
 import { ClienteComponent } from './modulos/cliente/cliente.component';
 import { UsuarioComponent } from './modulos/usuario/usuario.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
-import { CategoriasComponent } from './modulos/categorias/categorias.component';
-import { SubcategoriasComponent } from './modulos/subcategorias/subcategorias.component';
-
-
 import { FomrAnalistaComponent } from './componentes/fomr-analista/fomr-analista.component';
 import { ListaAnalistaComponent } from './componentes/lista-analista/lista-analista.component';
 import { CambiarClaveComponent } from './componentes/cambiar-clave/cambiar-clave.component';
@@ -46,6 +42,8 @@ import {ListaClientesComponent} from './componentes/lista-clientes/lista-cliente
 import {FormPresentacionComponent} from './componentes/form-presentacion/form-presentacion.component';
 import {ListaPresentacionComponent} from './componentes/lista-presentacion/lista-presentacion.component';
 import {FormPreguntaComponent} from './componentes/form-pregunta/form-pregunta.component';
+import { FormEncuestaComponent } from './componentes/form-encuesta/form-encuesta.component';
+import { ListaEncuestaComponent } from './componentes/lista-encuesta/lista-encuesta.component';
 
 
 
@@ -83,10 +81,7 @@ import { CategoriaService } from './services/categoria.service';
     ListaEstudiosComponent,
     ListaCategoriaComponent,
     FormCategoriaComponent,
-    CategoriasComponent,
     FormUsuariosComponent,
-    CategoriasComponent,
-    SubcategoriasComponent,
     ListaSubcategoriaComponent,
     FormSubcategoriaComponent,
     FormTipoComponent,
@@ -97,15 +92,14 @@ import { CategoriaService } from './services/categoria.service';
     ListaClientesComponent,
     FormPresentacionComponent,
     ListaPresentacionComponent,
-
-
     FomrAnalistaComponent,
     ListaAnalistaComponent,
     CambiarClaveComponent,
     EditClienteComponent,
     EditUsuarioComponent,
-
-    FormPreguntaComponent
+    FormPreguntaComponent,
+    FormEncuestaComponent,
+    ListaEncuestaComponent
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,7 @@
 
 
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Marca</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Crear Marca</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -12,6 +12,7 @@
          <div class="modal-body">  
            <form [formGroup]="formCategoria">
                 <div class="form-group">
+                    <label > Nombre de la categoria </label>
                     <input type="text" [(ngModel)]="categoria.nombre" class="form-control"  formControlName="nombreCategoria" name="nombre"  >
                       <div *ngIf="nombreCategoria.invalid && (nombreCategoria.dirty || nombreCategoria.touched)" class="alert alert-danger">
                           <div *ngIf="nombreCategoria.errors.required">
@@ -23,8 +24,8 @@
                       </div>
                   </div>
         
-                  <label > Estatus de la Categoria</label> <br>
-                  <select class="mdb-select md-form" [(ngModel)]= "categoria.estatus" formControlName="estadoCategoria"name="estatus" >
+                  <label > estado de la Categoria</label> <br>
+                  <select class="mdb-select md-form" [(ngModel)]= "categoria.estado" formControlName="estadoCategoria"name="estado" >
                         <option value="a">Activa</option>
                         <option value="i">Inactiva</option>
                   </select>
@@ -38,19 +39,6 @@
           </form>
       </div> <!-- Final del modal body-->
 
-      <div class="container custom-container">
-          <div class="col-md-12">
-            <h3 class="mb-3 text-center">Crear Categoria</h3>
-
-            <div class="form-group">
-              <input type="text" [(ngModel)]="categoria.nombre" class="form-control"   name="nombre"  >
-            </div>
-
-            <div class="form-group">
-              <input type="text" [(ngModel)]="categoria.estatus" class="form-control"  name="estatus"  >
-            </div>
-          </div>
-        </div>
 
 
       <div class="modal-footer">

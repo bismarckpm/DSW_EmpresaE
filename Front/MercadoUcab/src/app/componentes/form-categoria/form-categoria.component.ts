@@ -14,7 +14,7 @@ export class FormCategoriaComponent implements OnInit {
   formCategoria: FormGroup;
   namePattern: any = /^[A-Za-z0-9\s]+$/;
 
-  @Input() categoria ={ id:0,nombre:'',estatus:''};
+  @Input() categoria ={ id:0,nombre:'',estado:''};
 
   constructor(
     public categoriaService:CategoriaService,

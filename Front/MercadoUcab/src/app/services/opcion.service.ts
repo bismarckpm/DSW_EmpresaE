@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Usuario } from '../models/usuario';
+import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-
+import { Opcion } from '../models/opcion';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioService {
-  apiurl='http://localhost:3000';
+export class OpcionService {
+
+   //Definimos el url del api
+   apiurl='http://localhost:3000';
    
   constructor(private http:HttpClient) { }
 // Http Options
@@ -20,40 +21,40 @@ export class UsuarioService {
 } 
 
 ///////// Metodos para ejecutar//////////////
-getUsuarios():Observable<Usuario[]>{
-  return this.http.get<Usuario[]>(this.apiurl+'/Usuario')
+getOpcions():Observable<Opcion[]>{
+  return this.http.get<Opcion[]>(this.apiurl+'/Opcion')
   .pipe(
     retry(1),
     catchError(this.handleError)
   )
 }
 
-getUsuario(id):Observable<Usuario[]>{
-  return this.http.get<Usuario[]>(this.apiurl+'/Usuario/'+id)
+getOpcion(id):Observable<Opcion[]>{
+  return this.http.get<Opcion[]>(this.apiurl+'/Opcion/'+id)
   .pipe(
     retry(1),
     catchError(this.handleError)
   )
 }
 
-createUsuario(Usuario):Observable<Usuario[]>{
-  return this.http.post<Usuario[]>(this.apiurl+'/Usuario',JSON.stringify(Usuario), this.httpOptions)
+createOpcion(Opcion):Observable<Opcion[]>{
+  return this.http.post<Opcion[]>(this.apiurl+'/Opcion',JSON.stringify(Opcion), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
   )
 }
 
-updateUsuario(id,Usuario):Observable<Usuario[]>{
-  return this.http.put<Usuario[]>(this.apiurl+'/Usuario/'+id,JSON.stringify(Usuario), this.httpOptions)
+updateOpcion(id,Opcion):Observable<Opcion[]>{
+  return this.http.put<Opcion[]>(this.apiurl+'/Opcion/'+id,JSON.stringify(Opcion), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
   )
 }
 
-deleteUsuario(id){
-  return this.http.delete<Usuario[]>(this.apiurl + '/Usuario/' + id, this.httpOptions)
+deleteOpcion(id){
+  return this.http.delete<Opcion[]>(this.apiurl + '/Opcion/' + id, this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)

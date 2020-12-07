@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Usuario } from '../models/usuario';
+import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-
+import { Hijo } from '../models/hijo';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioService {
-  apiurl='http://localhost:3000';
+export class HijoService {
+
+   //Definimos el url del api
+   apiurl='http://localhost:3000';
    
   constructor(private http:HttpClient) { }
 // Http Options
@@ -20,40 +21,40 @@ export class UsuarioService {
 } 
 
 ///////// Metodos para ejecutar//////////////
-getUsuarios():Observable<Usuario[]>{
-  return this.http.get<Usuario[]>(this.apiurl+'/Usuario')
+getHijos():Observable<Hijo[]>{
+  return this.http.get<Hijo[]>(this.apiurl+'/Hijo')
   .pipe(
     retry(1),
     catchError(this.handleError)
   )
 }
 
-getUsuario(id):Observable<Usuario[]>{
-  return this.http.get<Usuario[]>(this.apiurl+'/Usuario/'+id)
+getHijo(id):Observable<Hijo[]>{
+  return this.http.get<Hijo[]>(this.apiurl+'/Hijo/'+id)
   .pipe(
     retry(1),
     catchError(this.handleError)
   )
 }
 
-createUsuario(Usuario):Observable<Usuario[]>{
-  return this.http.post<Usuario[]>(this.apiurl+'/Usuario',JSON.stringify(Usuario), this.httpOptions)
+createHijo(Hijo):Observable<Hijo[]>{
+  return this.http.post<Hijo[]>(this.apiurl+'/Hijo',JSON.stringify(Hijo), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
   )
 }
 
-updateUsuario(id,Usuario):Observable<Usuario[]>{
-  return this.http.put<Usuario[]>(this.apiurl+'/Usuario/'+id,JSON.stringify(Usuario), this.httpOptions)
+updateHijo(id,Hijo):Observable<Hijo[]>{
+  return this.http.put<Hijo[]>(this.apiurl+'/Hijo/'+id,JSON.stringify(Hijo), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
   )
 }
 
-deleteUsuario(id){
-  return this.http.delete<Usuario[]>(this.apiurl + '/Usuario/' + id, this.httpOptions)
+deleteHijo(id){
+  return this.http.delete<Hijo[]>(this.apiurl + '/Hijo/' + id, this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)

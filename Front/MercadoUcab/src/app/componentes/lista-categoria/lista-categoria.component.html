@@ -13,7 +13,7 @@
           <tr *ngFor="let categoria of Categoria ">
             <td>{{ categoria.id }}</td>
             <td>{{ categoria.nombre }}</td>
-            <td>{{ categoria.estatus }}</td>
+            <td>{{ categoria.estado }}</td>
    
             <td>
               <div class="d-flex justify-content-around">
@@ -53,7 +53,7 @@
                                               </div>
                                           
                                               <label for="">Estatus de la Categoria</label>
-                                              <select class="mdb-select md-form" [(ngModel)]= "categoriaData.estatus" formControlName="estadoCategoria" name="estatus" >
+                                              <select class="mdb-select md-form" [(ngModel)]= "categoriaData.estado" formControlName="estadoCategoria" name="estado" >
                                                 <option value="a">Activa</option>
                                                 <option value="i">Inactiva</option>
                                               </select>

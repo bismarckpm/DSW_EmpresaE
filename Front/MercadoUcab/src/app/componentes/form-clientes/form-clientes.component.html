@@ -9,21 +9,26 @@
         </div>
 
         <div class="modal-body">
-            <form class="needs-validation" novalidate>
+          <form [formGroup]="formCliente">
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="rif">RIF</label>
-                        <input type="text" class="form-control" id="rif" placeholder="" value="" required>
-                        <div class="invalid-feedback">
-                        Valid is required.
-                        </div>
+                        <input type="text" class="form-control" id="rif" placeholder="" formControlName="rifCliente" value="" >
+                          <div *ngIf="rifCliente.invalid && (rifCliente.dirty || rifCliente.touched)" class="alert alert-danger">
+                            <div *ngIf="rifCliente.errors.required">
+                              Este campo es obligatorio
+                            </div>
+                            <div *ngIf="rifCliente.errors.pattern">
+                              Introduzca un formato valido
+                            </div>
+                          </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <div class="mb-3">
                         <label for="address">Address (aqui seria la fk de lugar)</label>
-                        <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+                        <input type="text" class="form-control" id="address" placeholder="1234 Main St">
                         <div class="invalid-feedback">
                             Please enter your shipping address.
                         </div>
@@ -33,20 +38,22 @@
                 <div class="row">
                   <div class="col-md-5 mb-3">
                     <label for="estado">Estado</label>
-                    <select class="custom-select d-block w-100" id="estado" required>
+                    <select class="custom-select d-block w-100" id="estado" formControlName="estadoCliente">
                       <option value="">Choose...</option>
                       <option>Activo</option>
                       <option>Inactivo</option>
                     </select>
-                    <div class="invalid-feedback">
-                      Please select a valid option.
+                    <div *ngIf="estadoCliente.invalid && (estadoCliente.dirty || estadoCliente.touched)" class="alert alert-danger">
+                      <div *ngIf="estadoCliente.errors.required">
+                        Este campo es obligatorio
+                      </div>
                     </div>
                   </div>
                 </div>
               <div class="row">
                 <div class="col-md-5 mb-3">
                   <label for="razonSocial">Razon Social</label>
-                  <select class="custom-select d-block w-100" id="razonSocial" required>
+                  <select class="custom-select d-block w-100" id="razonSocial" formControlName="razonSocialCliente">
                     <option value="">Choose...</option>
                     <option>Juridico (J)</option>
                     <option>P</option>
@@ -56,8 +63,10 @@
                     <option>ONG</option>
                     <option>ASFL</option>
                   </select>
-                  <div class="invalid-feedback">
-                    Please select a valid option.
+                  <div *ngIf="razonSocialCliente.invalid && (razonSocialCliente.dirty || razonSocialCliente.touched)" class="alert alert-danger">
+                    <div *ngIf="razonSocialCliente.errors.required">
+                      Este campo es obligatorio
+                    </div>
                   </div>
                 </div>
               </div>
@@ -65,7 +74,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary" (click)="agregarCliente()" data-dismiss="modal">Guardar</button>
+            <button type="submit" class="btn btn-primary" (click)="onSubmit()" data-dismiss="modal">Guardar</button>
         </div>
     </div>
 </div>

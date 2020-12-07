@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 import { Router } from '@angular/router';
 import { CategoriaService } from 'src/app/services/categoria.service';
-import {Categoria} from 'src/app/models/categoria'
+import {Categoria} from 'src/app/models/categoria';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
@@ -12,14 +12,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./form-subcategoria.component.css']
 })
 export class FormSubcategoriaComponent implements OnInit {
-  
-  @Input() subcategoria ={ id:0, nombre:'',estatus:'', dtoCategoria:{id:0}};
+
+  @Input() subcategoria ={ id:0, nombre:'',estado:'', dtoCategoria:{id:0}};
   categoria:any;
   // Validacion de datos
   formSubcategoria: FormGroup;
   namePattern: any = /^[A-Za-z0-9\s]+$/;
 
-  constructor( 
+  constructor(
     public subcategoriaService: SubcategoriaService,
     public categoriaService:CategoriaService,
     public router:Router,
@@ -42,7 +42,7 @@ export class FormSubcategoriaComponent implements OnInit {
   }
   }
 
-  
+
 
     ///Esto es para mostrar en los drops doww
     addcategoria(){
@@ -54,11 +54,11 @@ export class FormSubcategoriaComponent implements OnInit {
     }
 
 
-   /// Validacion de Datos 
+   /// Validacion de Datos
     get nombreSubcategoria(){
       return this.formSubcategoria.get('nombreSubcategoria');
     }
-  
+
     get estadoSubcategoria(){
       return this.formSubcategoria.get('estadoSubcategoria');
     }

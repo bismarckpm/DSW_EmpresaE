@@ -13,7 +13,7 @@ export class ListaClientesComponent implements OnInit {
 
   // tslint:disable-next-line:variable-name
   constructor(private _servicio: ClienteService) {
-    this.clientes = this._servicio.getClientes();
+    //this.clientes = this._servicio.getClientes();
    }
 
   ngOnInit(): void {
@@ -26,6 +26,7 @@ export class ListaClientesComponent implements OnInit {
 
   actualizar(){
     console.log('actualizó elemento');
+  } 
 
   public eliminarCliente(clienteEliminar: Cliente): void{
     console.log('elimino ' + clienteEliminar.id);

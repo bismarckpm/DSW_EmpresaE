@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {UsuarioService} from '../../../services/usuario.service';
 import {Usuario} from '../../../models/usuario';
 
@@ -9,15 +9,25 @@ import {Usuario} from '../../../models/usuario';
 })
 export class RegistrarseComponent implements OnInit {
 
-  usuario: Usuario = {
-    id: 0,
-    nombre: '',
-    nombre2: '',
-    apellido: '',
-    apellido2: '',
-    estado: '',
-    fechaNacimiento: '',
+  @Input() usuario = {id: 0, primerNombre: '', segundoNombre: '' , primerApellido: '', segundoApellido: 0, fechaNacimiento: '', estado: '',
+    dtoEstadoCivil: {id: 0, nombre: '', estado: ''},
+    dtoNivelAcademico: {id: 0, nombre: '', estado: ''},
+    dtoMedioConexion: {id: 0, nombre: '', estado: ''},
+    dtoGenero: {id: 0, nombre: '', estado: ''},
+    dtoOcupacion: {id: 0, nombre: '', estado: ''},
+    dtoNivelSocioEconomico: {id: 0, nombre: '', estado: '', descripcion: ''},
+    dtoLugar: {id: 0, estado: '', nombre: '', tipo: ''},
+    dtoUsuario: {id: 0, username: '', estado: '', clave: '', correoElectronico: '', dtoTipoUsuario: {id: 0, estado: '', descripcion: ''}},
   };
+
+  estadoCivil: any;
+  nivelAcademico: any;
+  medioConexion: any;
+  genero: any;
+  ocupacion: any;
+  nivelSocioEconomico: any;
+  lugar: any;
+  usuario: any;
 
   constructor(private usuarioService: UsuarioService) {
   }

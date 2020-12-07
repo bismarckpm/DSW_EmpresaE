@@ -69,7 +69,7 @@ export class FormEstudioComponent implements OnInit {
 
 ///Busqueda para los drop de lugar por pais seleccionado previamente
 BusquedaEstado(id){
-  //El ID es del pais 
+  //El ID es del pais
   this.auxPaisID=id;
   //Esta peticion se realiza para mostar todos los estados aasociado a ese pais
   this.lugarService.getEstado(id).subscribe((data: {}) => {
@@ -111,7 +111,7 @@ addLugar(){
   })
 }
 
-//// Validaciones 
+//// Validaciones
   get nombreEstudio(){return this.formEstudio.get('nombreEstudio');}
   get edadMinimaEstudio(){return this.formEstudio.get('edadMinimaEstudio');}
   get edadMaximaEstudio(){return this.formEstudio.get('edadMaximaEstudio');}

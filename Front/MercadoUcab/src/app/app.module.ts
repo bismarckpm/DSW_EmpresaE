@@ -55,6 +55,7 @@ import { AdminService } from './services/admin.service';
 import { MarcaService } from './services/marca.service';
 import { SubcategoriaService } from './services/subcategoria.service';
 import { CategoriaService } from './services/categoria.service';
+import { PerfilComponent } from './componentes/perfil/perfil.component';
 
 
 
@@ -105,7 +106,9 @@ import { CategoriaService } from './services/categoria.service';
     EditClienteComponent,
     EditUsuarioComponent,
 
-    FormPreguntaComponent
+    FormPreguntaComponent,
+
+    PerfilComponent
   ],
   imports: [
     BrowserModule,

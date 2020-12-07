@@ -7,7 +7,7 @@ export interface Estudio {
     id: number;
     estado : "string";
     nombre: "string";
-    comentarioAnalista : "string";
+    comentarioAnalista ?: "string";
     edadMinima:number;
     edadMaxima:number;
     fechaInicio: "string";

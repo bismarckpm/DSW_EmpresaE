@@ -27,7 +27,9 @@
       "nombre": "tt",
       "estado": "a",
       "dtoCategoria": {
-        "id": 5
+        "id": 5,
+        "nombre": "pedro gutierres",
+        "estado": "i"
       }
     },
     {
@@ -35,7 +37,9 @@
       "nombre": "eee",
       "estado": "a",
       "dtoCategoria": {
-        "id": 5
+        "id": 5,
+        "nombre": "pedro gutierres",
+        "estado": "i"
       }
     }
   ],
@@ -120,7 +124,7 @@
         "nombre": "pedro gutierres",
         "estado": "i"
       }
-    }  
+    }
   ],
   "tipo": [
     {
@@ -133,12 +137,104 @@
       "id": 2,
       "nombre": "ttttt",
       "estado": "a",
-      "descripcion": ""
+      "descripcion": "jojoj"
     }
   ],
-
-  "lugar":[
-
-    
+  "estudio": [
+    {
+      "id": 1,
+      "nombre": "Chucheria",
+      "estado": "procesado",
+      "comentarioAnalista": "",
+      "edadMinima": 18,
+      "edadMaxima": 19,
+      "fechaInicio": "19/8/20",
+      "fechaFin": "20/8/20",
+      "dtoLugar": [
+        {
+          "id": 1,
+          "nombre": "Venezuela",
+          "tipo": "pais"
+        }
+      ],
+      "dtoNivelSocioEconomico": [
+        {
+          "id": 1,
+          "estado": "a",
+          "nombre": "pobre",
+          "descripcion": "pobre nivel descomunal"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "asd",
+      "estado": "solicitado",
+      "comentarioAnalista": "",
+      "edadMinima": "25",
+      "edadMaxima": "26",
+      "fechaInicio": "18/05/2020",
+      "fechaFin": "19/05/2020",
+      "dtoLugar": {
+        "id": 0,
+        "estado": "",
+        "nombre": "",
+        "tipo": ""
+      },
+      "dtoNivelSocioEconomico": {
+        "id": 0,
+        "nombre": "",
+        "estado": "",
+        "descripcion": ""
+      },
+      "dtoSubcategoria": {
+        "id": 0,
+        "nombre": "",
+        "estado": ""
+      }
+    }
+  ],
+  "lugar": [
+    {
+      "id": 1,
+      "nombre": "Venezuela",
+      "tipo": "pais"
+    },
+    {
+      "id": 2,
+      "nombre": "Colombia",
+      "tipo": "pais"
+    },
+    {
+      "id": 3,
+      "nombre": "Estados Unidos",
+      "tipo": "pais"
+    }
+  ],
+  "nivelsocioeconomico": [
+    {
+      "id": 1,
+      "estado": "a",
+      "nombre": "bajo",
+      "descripcion": ""
+    },
+    {
+      "id": 2,
+      "estado": "a",
+      "nombre": "medio",
+      "descripcion": ""
+    },
+    {
+      "id": 3,
+      "estado": "a",
+      "nombre": "Alto",
+      "descripcion": ""
+    },
+    {
+      "id": 4,
+      "estado": "a",
+      "nombre": "sin recurso",
+      "descripcion": ""
+    }
   ]
 }

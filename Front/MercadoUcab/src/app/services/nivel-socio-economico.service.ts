@@ -1,13 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
-import { Lugar } from '../models/Lugar';
+import { catchError, retry } from 'rxjs/operators';
+import { NivelSocioEconomico } from '../models/nivel-socio-economico';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LugarService {
+export class NivelSocioEconomicoService {
 
      //Definimos el url del api
      apiurl='http://localhost:3000';
@@ -21,56 +21,40 @@ export class LugarService {
    } 
    
    ///////// Metodos para ejecutar//////////////
-   getLugars():Observable<Lugar[]>{
-     return this.http.get<Lugar[]>(this.apiurl+'/lugar')
+   getNivelSocioEconomicos():Observable<NivelSocioEconomico[]>{
+     return this.http.get<NivelSocioEconomico[]>(this.apiurl+'/nivelsocioeconomico')
      .pipe(
        retry(1),
        catchError(this.handleError)
      )
    }
    
-   getLugar(id):Observable<Lugar[]>{
-     return this.http.get<Lugar[]>(this.apiurl+'/lugar/'+id)
-     .pipe(
-       retry(1),
-       catchError(this.handleError)
-     )
-   }
-
-   getEstado(paisID):Observable<Lugar[]>{
-    return this.http.get<Lugar[]>(this.apiurl+'/lugar/'+paisID )
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-    )
-   }
-
-   getParroquia(paisID,estadoID):Observable<Lugar[]>{
-    return this.http.get<Lugar[]>(this.apiurl+'/lugar/'+paisID+estadoID )
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-    )
-   }
-   
-   createLugar(Lugar):Observable<Lugar[]>{
-     return this.http.post<Lugar[]>(this.apiurl+'/lugar',JSON.stringify(Lugar), this.httpOptions)
+   getNivelSocioEconomico(id):Observable<NivelSocioEconomico[]>{
+     return this.http.get<NivelSocioEconomico[]>(this.apiurl+'/nivelsocioeconomico/'+id)
      .pipe(
        retry(1),
        catchError(this.handleError)
      )
    }
    
-   updateLugar(id,Lugar):Observable<Lugar[]>{
-     return this.http.put<Lugar[]>(this.apiurl+'/lugar/'+id,JSON.stringify(Lugar), this.httpOptions)
+   createNivelSocioEconomico(NivelSocioEconomico):Observable<NivelSocioEconomico[]>{
+     return this.http.post<NivelSocioEconomico[]>(this.apiurl+'/nivelsocioeconomico',JSON.stringify(NivelSocioEconomico), this.httpOptions)
      .pipe(
        retry(1),
        catchError(this.handleError)
      )
    }
    
-   deleteLugar(id){
-     return this.http.delete<Lugar[]>(this.apiurl + '/lugar/' + id, this.httpOptions)
+   updateNivelSocioEconomico(id,NivelSocioEconomico):Observable<NivelSocioEconomico[]>{
+     return this.http.put<NivelSocioEconomico[]>(this.apiurl+'/nivelsocioeconomico/'+id,JSON.stringify(NivelSocioEconomico), this.httpOptions)
+     .pipe(
+       retry(1),
+       catchError(this.handleError)
+     )
+   }
+   
+   deleteNivelSocioEconomico(id){
+     return this.http.delete<NivelSocioEconomico[]>(this.apiurl + '/nivelsocioeconomico/' + id, this.httpOptions)
      .pipe(
        retry(1),
        catchError(this.handleError)

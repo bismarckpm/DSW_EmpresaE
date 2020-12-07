@@ -11,17 +11,17 @@
         <div class="modal-body">
             <form class="needs-validation" novalidate>
                 <div class="form-row">
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-4 col-sm-4 mb-3">
                         <label for="fechaInicio">Fecha Inicio</label>
-                        <input type="text" class="form-control" id="fechaInicio" placeholder="DD/MM/YYYY" value="" required>
+                        <input type="text" class="form-control" id="fechaInicio" [(ngModel)]="encuesta.fechaInicio" name="fechaInicio" placeholder="DD/MM/YYYY" value="" required>
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-4 col-sm-4 mb-3">
                         <label for="fechaFin">Fecha Fin</label>
-                        <input type="text" class="form-control" id="fechaFin" placeholder="DD/MM/YYYY" value="" required>
+                        <input type="text" class="form-control" id="fechaFin" [(ngModel)]="encuesta.fechaFin" name="fechaFin" placeholder="DD/MM/YYYY" value="" required>
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-4 col-sm-4 mb-3">
                         <label for="estado">Estado</label>
-                        <select class="custom-select d-block w-100" id="estado" required>
+                        <select class="custom-select d-block w-100" [(ngModel)]="encuesta.estado" id="estado" name="estado" required>
                             <option value="">Choose...</option>
                             <option>A</option>
                             <option>I</option>
@@ -32,19 +32,26 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="cantidadPreguntas">Cantidad de preguntas</label>
+                    <div class="col-md-4 col-sm-6 mb-3">
+                        <label for="cantidadPreguntas">Estudio relacionado</label>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <input [(ngModel)]="cantPreguntas" type="text" class="form-control" id="cantidadPreguntas" placeholder="1-10" value="" required>
+                    <div class="col-md-8 col-sm-6 mb-3">
+                        <select class="custom-select d-block w-100" [(ngModel)]="encuesta.dtoEstudio" id="dtoEstudio" name="dtoEstudio" required>
+                            <option value="">Choose...</option>
+                            <option *ngFor="let estudio of estudios">{{ estudio }}</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a valid option.
+                        </div>
                     </div>
                 </div>
+                <!-- arreglar esta parte de agregar preguntas a una encuesta -->
                 <div class="form-row" *ngFor="let pregunta of cantPreguntas">
-                    <div class="col-md-8 mb-4">
+                    <div class="col-md-8 col-sm-8 mb-4">
                         <label for="pregunta">Pregunta</label>
                         <input type="text" class="form-control" id="pregunta" placeholder="" value="" required>
                     </div>
-                    <div class="col-md-4 mb-2">
+                    <div class="col-md-4  col-sm-4 mb-2">
                         <label for="tipoPregunta">Tipo de pregunta</label>
                         <select class="custom-select d-block w-100" id="tipoPregunta" required>
                             <option value="">Choose...</option>
@@ -61,7 +68,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary" (click)="agregarEncuesta()" data-dismiss="modal">Guardar</button>
+            <button type="submit" class="btn btn-primary" (click)="addEncuesta()" data-dismiss="modal">Guardar</button>
         </div>    
     </div>
-  </div>
+</div>

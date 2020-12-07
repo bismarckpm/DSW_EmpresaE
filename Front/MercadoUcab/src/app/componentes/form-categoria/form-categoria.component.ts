@@ -10,15 +10,14 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class FormCategoriaComponent implements OnInit {
 
-  ///PAra validar
+  /// PAra validar
   formCategoria: FormGroup;
   namePattern: any = /^[A-Za-z0-9\s]+$/;
-
-  @Input() categoria ={ id:0,nombre:'',estatus:''};
+  @Input() categoria = { id: 0, nombre: '', estatus: ''};
 
   constructor(
-    public categoriaService:CategoriaService,
-    public router :Router,
+    public categoriaService: CategoriaService,
+    public router: Router,
     private formBuilder: FormBuilder
   ) { this.createForm(); }
 
@@ -29,7 +28,7 @@ export class FormCategoriaComponent implements OnInit {
 
     if (this.formCategoria.valid) {
       this.categoriaService.createCategoria(this.categoria).subscribe((data: {}) => {
-      })
+      });
     }
     else{
       alert('FILL ALL FIELDS');
@@ -39,7 +38,7 @@ export class FormCategoriaComponent implements OnInit {
   }
 
 
-  /////Metodos para las validaciones 
+  ///// Metodos para las validaciones
   get nombreCategoria(){
     return this.formCategoria.get('nombreCategoria');
   }
@@ -47,7 +46,7 @@ export class FormCategoriaComponent implements OnInit {
   get estadoCategoria(){
     return this.formCategoria.get('estadoCategoria');
   }
-  
+
   createForm(){
     this.formCategoria = this.formBuilder.group({
       nombreCategoria: ['', [Validators.pattern(this.namePattern), Validators.required]],

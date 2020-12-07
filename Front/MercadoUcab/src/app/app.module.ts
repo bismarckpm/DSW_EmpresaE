@@ -53,10 +53,7 @@ import { AdminService } from './services/admin.service';
 import { MarcaService } from './services/marca.service';
 import { SubcategoriaService } from './services/subcategoria.service';
 import { CategoriaService } from './services/categoria.service';
-
-
-
-
+import { EncuestaService } from './services/encuesta.service';
 
 
 
@@ -116,7 +113,8 @@ import { CategoriaService } from './services/categoria.service';
     AdminService,
     MarcaService,
     SubcategoriaService,
-    CategoriaService
+    CategoriaService,
+    EncuestaService
   ],
   bootstrap: [AppComponent]
 })

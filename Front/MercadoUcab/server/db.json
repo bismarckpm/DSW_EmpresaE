@@ -3,37 +3,288 @@
     {
       "id": 5,
       "nombre": "pedro gutierres",
-      "estatus": "i"
+      "estado": "i"
     },
     {
       "id": 8,
       "nombre": "asd",
-      "estatus": "a"
-    },
-    {
-      "id": 9,
-      "nombre": "pedro2",
-      "estatus": "a"
-    },
-    {
-      "id": 10,
-      "nombre": "Prueba 25",
-      "estatus": "i"
+      "estado": "a"
     }
   ],
   "subcategoria": [
-    
     {
       "id": 1,
       "nombre": "pedro gutierres",
-      "estatus": "i",
-      "dtoCategoria":
+      "estado": "i",
+      "dtoCategoria": {
+        "id": 5,
+        "nombre": "pedro gutierres",
+        "estado": "i"
+      }
+    },
+    {
+      "id": 3,
+      "nombre": "tt",
+      "estado": "a",
+      "dtoCategoria": {
+        "id": 5,
+        "nombre": "pedro gutierres",
+        "estado": "i"
+      }
+    },
+    {
+      "id": 4,
+      "nombre": "eee",
+      "estado": "a",
+      "dtoCategoria": {
+        "id": 5,
+        "nombre": "pedro gutierres",
+        "estado": "i"
+      }
+    }
+  ],
+  "marca": [
+    {
+      "id": 1,
+      "nombre": "Pepsi",
+      "estado": "i"
+    },
+    {
+      "id": 2,
+      "nombre": "Chucheria",
+      "estado": "a"
+    }
+  ],
+  "presentacion": [
+    {
+      "id": 1,
+      "descripcion": "a",
+      "estado": "a"
+    },
+    {
+      "id": 2,
+      "descripcion": "aerosol",
+      "estado": "a"
+    },
+    {
+      "id": 4,
+      "descripcion": "pedro",
+      "estado": "i"
+    }
+  ],
+  "tipopregunta": [
+    {
+      "id": 1,
+      "estado": "a",
+      "tipo": "verdadero y Falso"
+    },
+    {
+      "id": 2,
+      "estado": "a",
+      "tipo": "simple"
+    },
+    {
+      "id": 4,
+      "estado": "i",
+      "tipo": "multiple"
+    },
+    {
+      "id": 5,
+      "estado": "i",
+      "tipo": "libre"
+    }
+  ],
+  "pregunta": [
+    {
+      "id": 1,
+      "descripcion": "asdsad",
+      "estado": "a",
+      "dtoTipoPregunta": {
+        "id": 1,
+        "estado": "a",
+        "tipo": "verdadero y Falso"
+      },
+      "dtoSubcategoria": {
+        "id": 1,
+        "nombre": "pedro gutierres",
+        "estado": "i"
+      }
+    },
+    {
+      "id": 2,
+      "descripcion": "Prueba exitosa Editar",
+      "estado": "a",
+      "dtoTipoPregunta": {
+        "id": 1,
+        "estado": "i",
+        "tipo": "multiple"
+      },
+      "dtoSubcategoria": {
+        "id": 3,
+        "nombre": "pedro gutierres",
+        "estado": "i"
+      }
+    }
+  ],
+  "tipo": [
+    {
+      "id": 1,
+      "nombre": "tipo modificado",
+      "estado": "a",
+      "descripcion": "descr nueva"
+    },
+    {
+      "id": 2,
+      "nombre": "ttttt",
+      "estado": "a",
+      "descripcion": "jojoj"
+    }
+  ],
+  "estudio": [
+    {
+      "id": 1,
+      "nombre": "Chucheria",
+      "estado": "procesado",
+      "comentarioAnalista": "",
+      "edadMinima": 18,
+      "edadMaxima": 19,
+      "fechaInicio": "19/8/20",
+      "fechaFin": "20/8/20",
+      "dtoLugar": [
         {
-          "id": 5,
-          "nombre": "pedro gutierres",
-          "estatus": "i"
+          "id": 1,
+          "nombre": "Venezuela",
+          "tipo": "pais"
         }
-      
+      ],
+      "dtoNivelSocioEconomico": [
+        {
+          "id": 1,
+          "estado": "a",
+          "nombre": "pobre",
+          "descripcion": "pobre nivel descomunal"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "asd",
+      "estado": "solicitado",
+      "comentarioAnalista": "",
+      "edadMinima": "25",
+      "edadMaxima": "26",
+      "fechaInicio": "18/05/2020",
+      "fechaFin": "19/05/2020",
+      "dtoLugar": {
+        "id": 0,
+        "estado": "",
+        "nombre": "",
+        "tipo": ""
+      },
+      "dtoNivelSocioEconomico": {
+        "id": 0,
+        "nombre": "",
+        "estado": "",
+        "descripcion": ""
+      },
+      "dtoSubcategoria": {
+        "id": 0,
+        "nombre": "",
+        "estado": ""
+      }
+    }
+  ],
+  "lugar": [
+    {
+      "id": 1,
+      "nombre": "Venezuela",
+      "tipo": "pais"
+    },
+    {
+      "id": 2,
+      "nombre": "Colombia",
+      "tipo": "pais"
+    },
+    {
+      "id": 3,
+      "nombre": "Estados Unidos",
+      "tipo": "pais"
+    }
+  ],
+  "nivelsocioeconomico": [
+    {
+      "id": 1,
+      "estado": "a",
+      "nombre": "bajo",
+      "descripcion": ""
+    },
+    {
+      "id": 2,
+      "estado": "a",
+      "nombre": "medio",
+      "descripcion": ""
+    },
+    {
+      "id": 3,
+      "estado": "a",
+      "nombre": "Alto",
+      "descripcion": ""
+    },
+    {
+      "id": 4,
+      "estado": "a",
+      "nombre": "sin recurso",
+      "descripcion": ""
+    }
+  ],
+  "encuesta": [
+    {
+      "id": 1,
+      "estado": "A",
+      "fechaInicio": "10/01/2000",
+      "fechaFin": null,
+      "dtoEstudio": null,
+      "dtoPregunta": null
+    },
+    {
+      "id": 2,
+      "estado": "A",
+      "fechaInicio": "10/01/2000",
+      "fechaFin": null,
+      "dtoEstudio": null,
+      "dtoPregunta": null
+    },
+    {
+      "id": 3,
+      "estado": "A",
+      "fechaInicio": "10/01/2000",
+      "fechaFin": null,
+      "dtoEstudio": null,
+      "dtoPregunta": null
+    },
+    {
+      "id": 7,
+      "estado": "A",
+      "fechaInicio": "",
+      "fechaFin": "sadasd",
+      "dtoEstudio": null,
+      "dtoPregunta": null
+    },
+    {
+      "id": 8,
+      "estado": "A",
+      "fechaInicio": "",
+      "fechaFin": "sadasd",
+      "dtoEstudio": null,
+      "dtoPregunta": null
+    },
+    {
+      "id": 9,
+      "estado": "A",
+      "fechaInicio": "prueba",
+      "fechaFin": "asd",
+      "dtoEstudio": "2",
+      "dtoPregunta": null
     }
   ]
 }

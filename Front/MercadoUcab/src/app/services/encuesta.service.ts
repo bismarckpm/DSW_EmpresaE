@@ -1,19 +1,16 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
-import { Estudio } from '../models/estudio';
+import { catchError, retry } from 'rxjs/operators';
+import { Encuesta } from '../models/encuesta';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EstudioService {
+export class EncuestaService {
 
-
+  // Definimos el url del api
   apiurl = 'http://localhost:3000';
-
-  constructor(private http: HttpClient) { }
-
 
   // Http Options
   httpOptions = {
@@ -22,40 +19,42 @@ export class EstudioService {
     })
   };
 
-  getEstudios(): any{
-    return this.http.get<Estudio[]>(this.apiurl + '/estudio')
+  constructor(private http: HttpClient) { }
+
+  getEncuestas(): Observable<Encuesta>{
+    return this.http.get<Encuesta>(this.apiurl + '/encuesta')
     .pipe(
       retry(1),
       catchError(this.handleError)
     );
   }
 
-  getEstudio(id): Observable<Estudio[]>{
-    return this.http.get<Estudio[]>(this.apiurl + '/estudio/' + id)
+  getEncuesta(id): Observable<Encuesta>{
+    return this.http.get<Encuesta>(this.apiurl + '/encuesta/' + id)
     .pipe(
       retry(1),
       catchError(this.handleError)
     );
   }
 
-  createEstudio(Estudio): Observable<Estudio[]>{
-    return this.http.post<Estudio[]>(this.apiurl + '/estudio', JSON.stringify(Estudio), this.httpOptions)
+  createEncuesta(encuesta): Observable<Encuesta>{
+    return this.http.post<Encuesta>(this.apiurl + '/encuesta', JSON.stringify(encuesta), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
     );
   }
 
-  updateEstudio(id, Estudio): Observable<Estudio[]>{
-    return this.http.put<Estudio[]>(this.apiurl + '/estudio/' + id, JSON.stringify(Estudio), this.httpOptions)
+  updateEncuesta(id, encuesta): Observable<Encuesta>{
+    return this.http.put<Encuesta>(this.apiurl + '/encuesta/' + id, JSON.stringify(encuesta), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
     );
   }
 
-  deleteEstudio(id){
-    return this.http.delete<Estudio[]>(this.apiurl + '/estudio/' + id, this.httpOptions)
+  deleteEncuesta(id): Observable<Encuesta> {
+    return this.http.delete<Encuesta>(this.apiurl + '/encuesta/' + id, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -63,7 +62,7 @@ export class EstudioService {
   }
 
   ///////////////////// Error HandleError
-  handleError(error) {
+  handleError(error): Observable<never> {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       // Get client-side error
@@ -74,7 +73,6 @@ export class EstudioService {
     }
     window.alert(errorMessage);
     return throwError(errorMessage);
-  }
-
+ }
 
 }

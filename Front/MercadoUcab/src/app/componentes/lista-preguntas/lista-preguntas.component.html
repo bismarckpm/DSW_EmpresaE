@@ -41,7 +41,7 @@
                       <div class="row">
                         <div class="col-md-6 mb-3">
                           <label for="descripcion">Descripcion</label>
-                          <input type="text" class="form-control" [(ngModel)]= "preguntaData.descripcion" formControlName="descripcionPregunta" value="descripcion">
+                          <input type="text" class="form-control" [(ngModel)]= "preguntaData.descripcion" formControlName="descripcionPregunta"  name="preguntaData.descripcion" value="preguntaData.descripcion">
                           <div *ngIf="descripcionPregunta.invalid && (descripcionPregunta.dirty || descripcionPregunta.touched)" class="alert alert-danger">
                             <div *ngIf="descripcionPregunta.errors.required">
                               Este campo es obligatorio
@@ -55,7 +55,7 @@
                       <div class="row">
                         <div class="col-md-5 mb-3">
                           <label for="country">Estado</label>
-                          <select class="custom-select d-block w-100" [(ngModel)]= "preguntaData.estado" formControlName="estadoPregunta" value="estado">
+                          <select class="custom-select d-block w-100" name="preguntaData.estado" [(ngModel)]= "preguntaData.estado" formControlName="estadoPregunta" value="preguntaData.estado">
                             <option value="">Choose...</option>
                             <option value="a">Activo</option>
                             <option value="I">Inactivo</option>
@@ -71,7 +71,7 @@
                       <div class="row">
                         <div class="col-md-5 mb-3">
                           <label for="country">Tipo de Pregunta</label>
-                          <select class="custom-select d-block w-100" [(ngModel)]= "preguntaData.dtoTipoPregunta.id" formControlName="tipoPregunta" value="preguntaData.dtoTipoPregunta.id"><!-- Hacer lo de *ngFor-->
+                          <select class="custom-select d-block w-100" [(ngModel)]= "preguntaData.dtoTipoPregunta.id" formControlName="tipoPregunta"  name="preguntaData.dtoTipoPregunta.id"value="preguntaData.dtoTipoPregunta.id"><!-- Hacer lo de *ngFor-->
                             <option  *ngFor="let tp of tipopregunta" [ngValue]= "tp.id" >{{tp.tipo}}</option>
                           </select>
                           <div *ngIf="tipoPregunta.invalid && (tipoPregunta.dirty || tipoPregunta.touched)" class="alert alert-danger">
@@ -85,7 +85,7 @@
                       <div class="row">
                         <div class="col-md-5 mb-3">
                           <label for="country">Subcategoria asociada</label>
-                          <select class="custom-select d-block w-100"   [(ngModel)]= "preguntaData.dtoSubcategoria.id"  formControlName="nombreSubcategoria" value="preguntaData.dtoSubcategoria.id"><!-- Hacer lo de *ngFor-->
+                          <select class="custom-select d-block w-100"  name="preguntaData.dtoSubcategoria.id" [(ngModel)]= "preguntaData.dtoSubcategoria.id"  formControlName="nombreSubcategoria" value="preguntaData.dtoSubcategoria.id"><!-- Hacer lo de *ngFor-->
                             <option value="">Choose...</option>
                             <option *ngFor="let sub of subcategoria" [ngValue]="sub.id">{{sub.nombre}}</option>
                           </select>

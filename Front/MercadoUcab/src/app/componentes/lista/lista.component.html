@@ -8,7 +8,6 @@
           <th>Segundo Nombre</th>
           <th>Primer Apellido</th>
           <th>Segundo Apellido</th>
-          <th>Estado</th>
           <th>Fecha de Nacimiento</th>
 
           <th></th>
@@ -17,11 +16,10 @@
       <tbody>
         <tr *ngFor="let encuestado of encuestados">
           <td>{{ encuestado.id }}</td>
-          <td>{{ encuestado.nombre }}</td>
-          <td>{{ encuestado.nombre2 }}</td>
-          <td>{{ encuestado.apellido }}</td>
-          <td>{{ encuestado.apellido2 }}</td>
-          <td>{{ encuestado.estado }}</td>
+          <td>{{ encuestado.primerNombre }}</td>
+          <td>{{ encuestado.segundoNombre }}</td>
+          <td>{{ encuestado.primerApeliido }}</td>
+          <td>{{ encuestado.segundoApeliido }}</td>
           <td>{{ encuestado.fechaNacimiento }}</td>
           <td>
             <div class="d-flex justify-content-around">

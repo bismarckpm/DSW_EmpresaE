@@ -1,59 +1,59 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Usuario } from '../models/usuario';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import {Encuestado} from '../models/encuestado';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioService {
+export class EncuestadoService {
   apiurl='http://localhost:3000';
-   
+
   constructor(private http:HttpClient) { }
 // Http Options
   httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
   })
-} 
+}
 
 ///////// Metodos para ejecutar//////////////
-getUsuarios():Observable<Usuario[]>{
-  return this.http.get<Usuario[]>(this.apiurl+'/Usuario')
+getEncuestados():Observable<Encuestado[]>{
+  return this.http.get<Encuestado[]>(this.apiurl+'/Encuestado')
   .pipe(
     retry(1),
     catchError(this.handleError)
   )
 }
 
-getUsuario(id):Observable<Usuario[]>{
-  return this.http.get<Usuario[]>(this.apiurl+'/Usuario/'+id)
+getEncuestado(id):Observable<Encuestado[]>{
+  return this.http.get<Encuestado[]>(this.apiurl+'/Encuestado/'+id)
   .pipe(
     retry(1),
     catchError(this.handleError)
   )
 }
 
-createUsuario(Usuario):Observable<Usuario[]>{
-  return this.http.post<Usuario[]>(this.apiurl+'/Usuario',JSON.stringify(Usuario), this.httpOptions)
+createEncuestado(Encuestado):Observable<Encuestado[]>{
+  return this.http.post<Encuestado[]>(this.apiurl+'/Encuestado',JSON.stringify(Encuestado), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
   )
 }
 
-updateUsuario(id,Usuario):Observable<Usuario[]>{
-  return this.http.put<Usuario[]>(this.apiurl+'/Usuario/'+id,JSON.stringify(Usuario), this.httpOptions)
+updateEncuestado(id,Encuestado):Observable<Encuestado[]>{
+  return this.http.put<Encuestado[]>(this.apiurl+'/Encuestado/'+id,JSON.stringify(Encuestado), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
   )
 }
 
-deleteUsuario(id){
-  return this.http.delete<Usuario[]>(this.apiurl + '/Usuario/' + id, this.httpOptions)
+deleteEncuestado(id){
+  return this.http.delete<Encuestado[]>(this.apiurl + '/Encuestado/' + id, this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)

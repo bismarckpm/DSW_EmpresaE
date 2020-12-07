@@ -17,7 +17,7 @@ import { RecuperacionComponent } from './componentes/login/recuperacion/recupera
 import { ListaComponent } from './componentes/lista/lista.component';
 import { AdminComponent } from './modulos/admin/admin.component';
 import { ClienteComponent } from './modulos/cliente/cliente.component';
-import { UsuarioComponent } from './modulos/usuario/usuario.component';
+import { EncuestadoComponent } from './modulos/encuestado/encuestado.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
 import { CategoriasComponent } from './modulos/categorias/categorias.component';
 import { SubcategoriasComponent } from './modulos/subcategorias/subcategorias.component';
@@ -40,7 +40,7 @@ import {MainAdminComponent} from './componentes/main-admin/main-admin.component'
 import {ListaEstudiosComponent} from './componentes/lista-estudios/lista-estudios.component';
 import {FormCategoriaComponent} from './componentes/form-categoria/form-categoria.component';
 import {ListaCategoriaComponent} from './componentes/lista-categoria/lista-categoria.component';
-import {FormUsuariosComponent} from './componentes/form-usuarios/form-usuarios.component';
+import {FormEncuestadoComponent} from './componentes/form-encuestado/form-encuestado.component';
 import {ListaSubcategoriaComponent} from './componentes/lista-subcategoria/lista-subcategoria.component';
 import {ListaClientesComponent} from './componentes/lista-clientes/lista-clientes.component';
 import {FormPresentacionComponent} from './componentes/form-presentacion/form-presentacion.component';
@@ -50,7 +50,7 @@ import {FormPreguntaComponent} from './componentes/form-pregunta/form-pregunta.c
 
 
 // Services
-import { UsuarioService } from './services/usuario.service';
+import { EncuestadoService } from './services/encuestado.service';
 import { AdminService } from './services/admin.service';
 import { MarcaService } from './services/marca.service';
 import { SubcategoriaService } from './services/subcategoria.service';
@@ -74,7 +74,7 @@ import { PerfilComponent } from './componentes/perfil/perfil.component';
     ListaComponent,
     AdminComponent,
     ClienteComponent,
-    UsuarioComponent,
+    EncuestadoComponent,
     AnalistaComponent,
     FormClientesComponent,
     FormMarcaComponent,
@@ -85,7 +85,7 @@ import { PerfilComponent } from './componentes/perfil/perfil.component';
     ListaCategoriaComponent,
     FormCategoriaComponent,
     CategoriasComponent,
-    FormUsuariosComponent,
+    FormEncuestadoComponent,
     CategoriasComponent,
     SubcategoriasComponent,
     ListaSubcategoriaComponent,
@@ -121,7 +121,7 @@ import { PerfilComponent } from './componentes/perfil/perfil.component';
 
   ],
   providers: [
-    UsuarioService,
+    EncuestadoService,
     AdminService,
     MarcaService,
     SubcategoriaService,

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UsuarioService} from '../../../services/usuario.service';
-import {Usuario} from '../../../models/usuario';
+import {EncuestadoService} from '../../../services/encuestado.service';
+import {Encuestado} from '../../../models/encuestado';
 
 @Component({
   selector: 'app-registrarse',
@@ -9,7 +9,7 @@ import {Usuario} from '../../../models/usuario';
 })
 export class RegistrarseComponent implements OnInit {
 
-  @Input() usuario = {id: 0, primerNombre: '', segundoNombre: '' , primerApellido: '', segundoApellido: 0, fechaNacimiento: '', estado: '',
+  @Input() encuestado = {id: 0, primerNombre: '', segundoNombre: '' , primerApellido: '', segundoApellido: 0, fechaNacimiento: '', estado: '',
     dtoEstadoCivil: {id: 0, nombre: '', estado: ''},
     dtoNivelAcademico: {id: 0, nombre: '', estado: ''},
     dtoMedioConexion: {id: 0, nombre: '', estado: ''},
@@ -29,15 +29,15 @@ export class RegistrarseComponent implements OnInit {
   lugar: any;
   usuario: any;
 
-  constructor(private usuarioService: UsuarioService) {
+  constructor(private encuestadoService: EncuestadoService) {
   }
 
   ngOnInit(): void {
   }
 
   // tslint:disable-next-line:typedef
-  guardarUsuario() {
-   /* this.usuarioService.registarUsuario(this.usuario)
+  guardarEncuestado() {
+   /* this.encuestadoService.registarEncuestado(this.encuestado)
       .subscribe(
         res => {
           console.log(res);

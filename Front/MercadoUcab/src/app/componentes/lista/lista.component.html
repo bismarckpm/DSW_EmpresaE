@@ -15,14 +15,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let usuario of usuarios">
-          <td>{{ usuario.id }}</td>
-          <td>{{ usuario.nombre }}</td>
-          <td>{{ usuario.nombre2 }}</td>
-          <td>{{ usuario.apellido }}</td>
-          <td>{{ usuario.apellido2 }}</td>
-          <td>{{ usuario.estado }}</td>
-          <td>{{ usuario.fechaNacimiento }}</td>
+        <tr *ngFor="let encuestado of encuestados">
+          <td>{{ encuestado.id }}</td>
+          <td>{{ encuestado.nombre }}</td>
+          <td>{{ encuestado.nombre2 }}</td>
+          <td>{{ encuestado.apellido }}</td>
+          <td>{{ encuestado.apellido2 }}</td>
+          <td>{{ encuestado.estado }}</td>
+          <td>{{ encuestado.fechaNacimiento }}</td>
           <td>
             <div class="d-flex justify-content-around">
               <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#staticBackdrop">

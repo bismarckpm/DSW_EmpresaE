@@ -13,13 +13,13 @@ import { TipoPreguntaService } from '../../services/tipo-pregunta.service';
 })
 export class FormEncuestaComponent implements OnInit {
 
-  @Input() encuesta: Encuesta = {
+  @Input() encuesta={
     _id: 0,
-    estado: '',
-    fechaInicio: '',
-    fechaFin: '',
-    dtoEstudio: null,
-    dtoPregunta: null
+    estado:'',
+    fechaInicio:'',
+    fechaFin:'',
+    dtoEstudio:{id:0},
+    dtoPregunta:{id:0}
   };
   cantPreguntas = [];
   estudios: any = [];

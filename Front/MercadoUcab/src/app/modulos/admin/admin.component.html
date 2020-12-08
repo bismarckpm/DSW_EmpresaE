@@ -17,8 +17,9 @@
                     <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div [ngSwitch]="seccion">
                             <div *ngSwitchCase="'Clientes'"><app-form-clientes></app-form-clientes></div>
-                            <div *ngSwitchCase="'Usuarios'"><app-form-usuarios></app-form-usuarios></div>
-                            <div *ngSwitchCase="'Analistas'"><app-form-analista></app-form-analista></div>
+                            <div *ngSwitchCase="'Encuestados'"><app-form-encuestado></app-form-encuestado></div>
+                            <div *ngSwitchCase="'Analistas'"></div>
+                            <div *ngSwitchCase="'Analistas'"><form-analista></form-analista></div>
                             <div *ngSwitchCase="'Estudios'"><app-form-estudio></app-form-estudio></div>
                             <div *ngSwitchCase="'Encuestas'"><app-form-encuesta></app-form-encuesta></div>
                             <div *ngSwitchCase="'Preguntas'"><app-form-pregunta></app-form-pregunta></div>
@@ -35,8 +36,8 @@
             <div [ngSwitch]="seccion">
                 <div *ngSwitchCase="'Inicio'"><app-main-admin></app-main-admin></div>
                 <div *ngSwitchCase="'Clientes'"><app-lista-clientes></app-lista-clientes></div>
-                <div *ngSwitchCase="'Usuarios'"><app-lista></app-lista></div>
-                <div *ngSwitchCase="'Analistas'"><app-lista-analista></app-lista-analista></div>
+                <div *ngSwitchCase="'Encuestados'"><app-lista></app-lista></div>
+                <div *ngSwitchCase="'Analistas'"><lista-analista></lista-analista></div>
                 <div *ngSwitchCase="'Estudios'"><app-lista-estudios></app-lista-estudios></div>
                 <div *ngSwitchCase="'Encuestas'"><app-lista-encuesta></app-lista-encuesta></div>
                 <div *ngSwitchCase="'Preguntas'"><app-lista-preguntas></app-lista-preguntas></div>

@@ -17,7 +17,7 @@ import { RecuperacionComponent } from './componentes/login/recuperacion/recupera
 import { ListaComponent } from './componentes/lista/lista.component';
 import { AdminComponent } from './modulos/admin/admin.component';
 import { ClienteComponent } from './modulos/cliente/cliente.component';
-import { UsuarioComponent } from './modulos/usuario/usuario.component';
+import { EncuestadoComponent } from './modulos/encuestado/encuestado.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
 import { FomrAnalistaComponent } from './componentes/fomr-analista/fomr-analista.component';
 import { ListaAnalistaComponent } from './componentes/lista-analista/lista-analista.component';
@@ -36,7 +36,7 @@ import {MainAdminComponent} from './componentes/main-admin/main-admin.component'
 import {ListaEstudiosComponent} from './componentes/lista-estudios/lista-estudios.component';
 import {FormCategoriaComponent} from './componentes/form-categoria/form-categoria.component';
 import {ListaCategoriaComponent} from './componentes/lista-categoria/lista-categoria.component';
-import {FormUsuariosComponent} from './componentes/form-usuarios/form-usuarios.component';
+import {FormEncuestadoComponent} from './componentes/form-encuestado/form-encuestado.component';
 import {ListaSubcategoriaComponent} from './componentes/lista-subcategoria/lista-subcategoria.component';
 import {ListaClientesComponent} from './componentes/lista-clientes/lista-clientes.component';
 import {FormPresentacionComponent} from './componentes/form-presentacion/form-presentacion.component';
@@ -45,10 +45,8 @@ import {FormPreguntaComponent} from './componentes/form-pregunta/form-pregunta.c
 import { FormEncuestaComponent } from './componentes/form-encuesta/form-encuesta.component';
 import { ListaEncuestaComponent } from './componentes/lista-encuesta/lista-encuesta.component';
 
-
-
 // Services
-import { UsuarioService } from './services/usuario.service';
+import { EncuestadoService } from './services/encuestado.service';
 import { AdminService } from './services/admin.service';
 import { MarcaService } from './services/marca.service';
 import { SubcategoriaService } from './services/subcategoria.service';
@@ -57,6 +55,11 @@ import { EncuestaService } from './services/encuesta.service';
 import { TipoService } from './services/tipo.service';
 import { TipoPregunta } from './models/tipo-pregunta';
 import { TipoPreguntaService } from './services/tipo-pregunta.service';
+import { PerfilComponent } from './componentes/perfil/perfil.component';
+
+
+
+
 
 
 
@@ -71,7 +74,7 @@ import { TipoPreguntaService } from './services/tipo-pregunta.service';
     ListaComponent,
     AdminComponent,
     ClienteComponent,
-    UsuarioComponent,
+    EncuestadoComponent,
     AnalistaComponent,
     FormClientesComponent,
     FormMarcaComponent,
@@ -81,7 +84,10 @@ import { TipoPreguntaService } from './services/tipo-pregunta.service';
     ListaEstudiosComponent,
     ListaCategoriaComponent,
     FormCategoriaComponent,
-    FormUsuariosComponent,
+
+    FormEncuestadoComponent,
+ 
+  
     ListaSubcategoriaComponent,
     FormSubcategoriaComponent,
     FormTipoComponent,
@@ -97,9 +103,10 @@ import { TipoPreguntaService } from './services/tipo-pregunta.service';
     CambiarClaveComponent,
     EditClienteComponent,
     EditUsuarioComponent,
+
     FormPreguntaComponent,
-    FormEncuestaComponent,
-    ListaEncuestaComponent
+
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
@@ -112,7 +119,7 @@ import { TipoPreguntaService } from './services/tipo-pregunta.service';
 
   ],
   providers: [
-    UsuarioService,
+    EncuestadoService,
     AdminService,
     MarcaService,
     SubcategoriaService,

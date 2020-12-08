@@ -31,7 +31,7 @@ public class PreguntaServicio {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/addPregunta")
-    public Response addUsuario(DtoPregunta dtoPregunta) {
+    public Response addPregunta(DtoPregunta dtoPregunta) {
 
         DaoPregunta dao = new DaoPregunta();
         PreguntaEntity pregunta = new PreguntaEntity();
@@ -46,6 +46,45 @@ public class PreguntaServicio {
             pregunta.setTipo(tipoPregunta);
 
             PreguntaEntity resul = dao.insert(pregunta);
+            return Response.ok(pregunta).build();
+        }
+        else {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+        }
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Produces(value = MediaType.APPLICATION_JSON)
+    public Response deletePregunta(@PathParam("id") long id) {
+
+        DaoPregunta dao = new DaoPregunta();
+        PreguntaEntity pregunta = dao.find(id, PreguntaEntity.class);
+        if (pregunta != null) {
+            PreguntaEntity resul = dao.delete(pregunta);
+            return Response.ok().build();
+        }
+
+        return Response.status(Response.Status.NOT_FOUND).build();
+    }
+
+    @PUT
+    @Path("/updatePregunta/{id}")
+    public Response updatePregunta(@PathParam("id") long id, DtoPregunta dtoPregunta) {
+
+        DaoPregunta dao = new DaoPregunta();
+        PreguntaEntity pregunta = dao.find(id, PreguntaEntity.class);
+
+        if(pregunta != null) {
+            pregunta.setEstado(dtoPregunta.getEstado());
+            pregunta.setDescripcion(dtoPregunta.getDescripcion());
+
+            SubcategoriaEntity subcategoria = new SubcategoriaEntity(dtoPregunta.getDtoSubcategoria().getId());
+            pregunta.setSubcategoria(subcategoria);
+            TipoPreguntaEntity tipoPregunta = new TipoPreguntaEntity(dtoPregunta.getDtoTipoPregunta().getId());
+            pregunta.setTipo(tipoPregunta);
+
+            PreguntaEntity resul = dao.update(pregunta);
             return Response.ok(pregunta).build();
         }
         else {

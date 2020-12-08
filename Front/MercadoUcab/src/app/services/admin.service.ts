@@ -8,9 +8,10 @@ export class AdminService {
   secciones: string[] = [
     'Inicio',
     'Clientes',
-    'Usuarios',
+    'Encuestados',
     'Analistas',
     'Estudios',
+    'Encuestas',
     'Preguntas',
     'Categorias',
     'Subcategorias',
@@ -21,11 +22,11 @@ export class AdminService {
 
   constructor() { console.log('servicio ADMIN'); }
 
-  getSecciones() {
+  getSecciones(): string[] {
     return this.secciones;
   }
 
-  getSeccion(i) {
+  getSeccion(i): string {
     return this.secciones[i];
   }
 }

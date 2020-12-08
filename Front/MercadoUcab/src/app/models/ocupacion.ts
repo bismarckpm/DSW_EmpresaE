@@ -1,5 +1,5 @@
 export interface Ocupacion {
-    id:number;
+    _id:number;
     estado:string;
     nombre:string;
 }

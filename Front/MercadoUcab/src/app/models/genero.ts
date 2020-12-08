@@ -1,7 +1,7 @@
 
 
 export interface Genero {
-    id:number;
+    _id:number;
     estado:string;
     nombre:string;
 }

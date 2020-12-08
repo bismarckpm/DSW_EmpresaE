@@ -11,24 +11,24 @@ export class NivelSocioEconomicoService {
 
      //Definimos el url del api
      apiurl='http://localhost:3000';
-   
+
      constructor(private http:HttpClient) { }
    // Http Options
      httpOptions = {
      headers: new HttpHeaders({
        'Content-Type': 'application/json'
      })
-   } 
-   
+   }
+
    ///////// Metodos para ejecutar//////////////
-   getNivelSocioEconomicos():Observable<NivelSocioEconomico[]>{
+   getNivelesSocioEconomicos():Observable<NivelSocioEconomico[]>{
      return this.http.get<NivelSocioEconomico[]>(this.apiurl+'/nivelsocioeconomico')
      .pipe(
        retry(1),
        catchError(this.handleError)
      )
    }
-   
+
    getNivelSocioEconomico(id):Observable<NivelSocioEconomico[]>{
      return this.http.get<NivelSocioEconomico[]>(this.apiurl+'/nivelsocioeconomico/'+id)
      .pipe(
@@ -36,7 +36,7 @@ export class NivelSocioEconomicoService {
        catchError(this.handleError)
      )
    }
-   
+
    createNivelSocioEconomico(NivelSocioEconomico):Observable<NivelSocioEconomico[]>{
      return this.http.post<NivelSocioEconomico[]>(this.apiurl+'/nivelsocioeconomico',JSON.stringify(NivelSocioEconomico), this.httpOptions)
      .pipe(
@@ -44,7 +44,7 @@ export class NivelSocioEconomicoService {
        catchError(this.handleError)
      )
    }
-   
+
    updateNivelSocioEconomico(id,NivelSocioEconomico):Observable<NivelSocioEconomico[]>{
      return this.http.put<NivelSocioEconomico[]>(this.apiurl+'/nivelsocioeconomico/'+id,JSON.stringify(NivelSocioEconomico), this.httpOptions)
      .pipe(
@@ -52,7 +52,7 @@ export class NivelSocioEconomicoService {
        catchError(this.handleError)
      )
    }
-   
+
    deleteNivelSocioEconomico(id){
      return this.http.delete<NivelSocioEconomico[]>(this.apiurl + '/nivelsocioeconomico/' + id, this.httpOptions)
      .pipe(
@@ -60,7 +60,7 @@ export class NivelSocioEconomicoService {
        catchError(this.handleError)
      )
    }
-   
+
    ///////////////////// Error HandleError
    handleError(error) {
      let errorMessage = '';

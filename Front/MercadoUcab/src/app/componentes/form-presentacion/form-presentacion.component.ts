@@ -12,7 +12,7 @@ import { PresentacionService } from 'src/app/services/presentacion.service';
 export class FormPresentacionComponent implements OnInit {
 
 
-  @Input() presentacion ={ id:0, descripcion:'',estado:''};
+  @Input() presentacion ={ _id:0, descripcion:'',estado:''};
   // Validacion de datos
   formPresentacion: FormGroup;
   namePattern: any = /^[A-Za-z0-9\s]+$/;

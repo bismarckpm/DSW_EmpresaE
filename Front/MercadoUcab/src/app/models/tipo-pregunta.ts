@@ -1,5 +1,5 @@
 export interface TipoPregunta {
-    id:number;
+    _id:number;
     estado:string;
     tipo:string;
 }

@@ -2,7 +2,7 @@ import { Lugar } from './Lugar';
 import { Usuario } from './usuario';
 
 export interface Cliente {
-    id: number;
+    _id: number;
     estado: string;
     razonSocial: string;
     rif: number;

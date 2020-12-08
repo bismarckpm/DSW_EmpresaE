@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class FormTipoComponent implements OnInit {
 
-  @Input() tipo = {id: 0, nombre: '', estado: '', descripcion: ''};
+  @Input() tipo = {_id: 0, nombre: '', estado: '', descripcion: ''};
   formTipo: FormGroup;
   patronNombreTipo: any = /^[A-Za-z0-9\s]+$/;
 

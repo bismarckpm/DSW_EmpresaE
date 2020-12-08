@@ -14,8 +14,8 @@ import { PreguntaService } from '../../services/pregunta.service';
 export class ListaPreguntasComponent implements OnInit {
 
   preguntas: Pregunta[] = [];
-  id = this.actRoute.snapshot.params['id'];
-  @Input() preguntaData ={ id:0, descripcion:'',estado:'',dtoTipoPregunta:{id:0,estado:'',tipo:''} ,dtoSubcategoria:{id:0, nombre:'',estado:'', }};
+  _id = this.actRoute.snapshot.params['_id'];
+  @Input() preguntaData ={ _id:0, descripcion:'',estado:'',dtoTipoPregunta:{_id:0,estado:'',tipo:''} ,dtoSubcategoria:{_id:0, nombre:'',estado:'', }};
    subcategoria:any;
    tipopregunta:any;
 
@@ -53,7 +53,7 @@ export class ListaPreguntasComponent implements OnInit {
   }
 
   updatePregunta(){
-     this.preguntaService.updatePregunta(this.preguntaData.id, this.preguntaData).subscribe(data => {
+     this.preguntaService.updatePregunta(this.preguntaData._id, this.preguntaData).subscribe(data => {
       })
       this.loadpregunta();
 

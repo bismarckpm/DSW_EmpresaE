@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Encuesta } from 'src/app/models/encuesta';
+import { EstudioService } from 'src/app/services/estudio.service';
+import { TipoPreguntaService } from 'src/app/services/tipo-pregunta.service';
+import { EncuestaService } from '../../services/encuesta.service';
 
 @Component({
   selector: 'app-lista-encuesta',
@@ -8,56 +12,80 @@ import { Encuesta } from 'src/app/models/encuesta';
 })
 export class ListaEncuestaComponent implements OnInit {
 
-  encuestas: Encuesta[] = [
-    {
-      _id: 1,
-      estado: 'a',
-      fechaInicio: '10/01/2000',
-      fechaFin: null,
-      dtoEstudio: null,
-      dtoPregunta:{
-        _id: 1,
-        estado: 'a',
-        descripcion: 'descripcion',
-        dtoTipoPregunta:{
-          _id:1,
-          estado:'a',
-          tipo:'simple',
-        },
-        dtoSubcategoria:{
-          _id:1,
-          nombre:'pepe',
-          estado:'a',
-          dtoCategoria:{
-            _id:1,
-            nombre:'hola',
-            estado:'a'
-          }
-        },
-      }
-    },
-    {
-      _id:2 ,
-      estado: 'a',
-      fechaInicio: '10/01/2000',
-      fechaFin: null,
-      dtoEstudio: null,
-      dtoPregunta: null,
-    },
-  ];
+  tipoPreguntas: any = [];
+  cantPreguntas = [];
+  encuestas: any = [];
+  estudios: any = [];
+  formEncuesta: FormGroup;
+  namePattern: any = /^[A-Za-z0-9\s]+$/;
+  @Input() encuesta: Encuesta = {
+    _id: 0,
+    estado: '',
+    fechaInicio: '',
+    fechaFin: '',
+    dtoEstudio: null,
+    dtoPregunta: null
+  };
 
-  constructor() { }
+  constructor(
+    private servicio: EncuestaService,
+    private servicioEstudio: EstudioService,
+    private servicioTipoPregunta: TipoPreguntaService,
+    private formBuilder: FormBuilder
+  ) {
+    this.loadEncuestas();
+    this.servicioEstudio.getEstudios().subscribe((data: {}) => {
+      this.estudios = data;
+    });
+    this.servicioTipoPregunta.getTipoPreguntas().subscribe((data: {}) => {
+      this.tipoPreguntas = data;
+    });
+  }
 
   ngOnInit(): void {
   }
 
-
-  actualizarEncuesta(): void {
-    console.log('actualizo encuesta');
+  loadEncuestas(): any{
+    return this.servicio.getEncuestas().subscribe((data: {}) => {
+      this.encuestas = data;
+    });
   }
 
-  eliminarEncuesta(encuesta: Encuesta): void {
-    console.log('elimino encuesta');
+  // Delete Encuesta
+  deleteEncuesta(id): any {
+    if (window.confirm('Are you sure, you want to delete?')){
+      this.servicio.deleteEncuesta(id).subscribe(data => {
+        this.loadEncuestas();
+      });
+    }
   }
 
+  updateEncuesta() {
+
+  }
+  // Sustitucion de variables para el update
+  editar(encuesta){
+  }
+
+  asigCantPregunta(cant: number): void {
+    for (let i = 0; i < cant; i++) {
+      this.cantPreguntas.push(i);
+    }
+  }
+
+  ///// Metodos para las validaciones
+  get nombreEncuesta(): AbstractControl{
+    return this.formEncuesta.get('nombreEncuesta');
+  }
+
+  get estadoEncuesta(): AbstractControl{
+    return this.formEncuesta.get('estadoEncuesta');
+  }
+
+  createForm(): any {
+    this.formEncuesta = this.formBuilder.group({
+      nombreEncuesta: ['', [Validators.pattern(this.namePattern), Validators.required]],
+      estadoEncuesta: ['', Validators.required],
+    });
+  }
 }

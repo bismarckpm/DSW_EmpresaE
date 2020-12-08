@@ -10,9 +10,9 @@ import { Estudio } from '../models/estudio';
 export class EstudioService {
 
 
-  apiurl='http://localhost:3000';
+  apiurl = 'http://localhost:3000';
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
 
   // Http Options
@@ -20,52 +20,52 @@ export class EstudioService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
+  };
+
+  getEstudios(): any{
+    return this.http.get<Estudio[]>(this.apiurl + '/estudio')
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
   }
 
-  getEstudios():Observable<Estudio[]>{
-    return this.http.get<Estudio[]>(this.apiurl+'/estudio')
+  getEstudio(id): Observable<Estudio[]>{
+    return this.http.get<Estudio[]>(this.apiurl + '/estudio/' + id)
     .pipe(
       retry(1),
       catchError(this.handleError)
-    )
+    );
   }
-  
-  getEstudio(id):Observable<Estudio[]>{
-    return this.http.get<Estudio[]>(this.apiurl+'/estudio/'+id)
+
+  createEstudio(Estudio): Observable<Estudio[]>{
+    return this.http.post<Estudio[]>(this.apiurl + '/estudio', JSON.stringify(Estudio), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
-    )
+    );
   }
-  
-  createEstudio(Estudio):Observable<Estudio[]>{
-    return this.http.post<Estudio[]>(this.apiurl+'/estudio',JSON.stringify(Estudio), this.httpOptions)
+
+  updateEstudio(id, Estudio): Observable<Estudio[]>{
+    return this.http.put<Estudio[]>(this.apiurl + '/estudio/' + id, JSON.stringify(Estudio), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
-    )
+    );
   }
-  
-  updateEstudio(id,Estudio):Observable<Estudio[]>{
-    return this.http.put<Estudio[]>(this.apiurl+'/estudio/'+id,JSON.stringify(Estudio), this.httpOptions)
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-    )
-  }
-  
+
   deleteEstudio(id){
     return this.http.delete<Estudio[]>(this.apiurl + '/estudio/' + id, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
-    )
+    );
   }
-  
+
   ///////////////////// Error HandleError
   handleError(error) {
     let errorMessage = '';
-    if(error.error instanceof ErrorEvent) {
+    if (error.error instanceof ErrorEvent) {
       // Get client-side error
       errorMessage = error.error.message;
     } else {

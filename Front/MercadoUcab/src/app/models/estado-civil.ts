@@ -1,5 +1,5 @@
 export interface EstadoCivil {
-    id:number;
+    _id:number;
     nombre :string;
     estado:string;
 }

@@ -18,8 +18,8 @@ export class ListaSubcategoriaComponent implements OnInit {
 
     //Declaracion de las varibales del componente que se usa
   Subcategoria: Subcategoria[]=[];
-  id = this.actRoute.snapshot.params['id'];
-  @Input()subcategoriaData={ id:0, nombre:'',estado:'', dtoCategoria:{id:0}};
+  _id = this.actRoute.snapshot.params['_id'];
+  @Input()subcategoriaData={ _id:0, nombre:'',estado:'', dtoCategoria:{_id:0}};
   categoria:any;
 
   //Declaracion para las Validaciones
@@ -55,7 +55,7 @@ export class ListaSubcategoriaComponent implements OnInit {
   }
 
   updateSubcategoria(){
-     this.subcategoriaService.updatesubcategoria(this.subcategoriaData.id, this.subcategoriaData).subscribe(data => {
+     this.subcategoriaService.updatesubcategoria(this.subcategoriaData._id, this.subcategoriaData).subscribe(data => {
       })
 
   }

@@ -1,5 +1,5 @@
 export interface NivelSocioEconomico {
-    id:number;
+    _id:number;
     estado:string;
     nombre:string;
     descripcion:string;

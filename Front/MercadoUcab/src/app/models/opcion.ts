@@ -1,5 +1,5 @@
 export interface Opcion {
-    id:number;
+    _id:number;
     estado:string;
     descripcion:string;
 }

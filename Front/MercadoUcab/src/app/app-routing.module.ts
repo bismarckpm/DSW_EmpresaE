@@ -7,9 +7,9 @@ import { RecuperacionComponent } from './componentes/login/recuperacion/recupera
 import { AdminComponent } from './modulos/admin/admin.component';
 import { ClienteComponent } from './modulos/cliente/cliente.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
-import { UsuarioComponent } from './modulos/usuario/usuario.component';
-import { CategoriasComponent } from './modulos/categorias/categorias.component';
-import { SubcategoriasComponent } from './modulos/subcategorias/subcategorias.component';
+
+import { EncuestadoComponent } from './modulos/encuestado/encuestado.component';
+
 
 
 const routes: Routes = [
@@ -19,10 +19,8 @@ const routes: Routes = [
   { path: 'admin/:id', component: AdminComponent},
   { path: 'cliente', component: ClienteComponent},
   { path: 'analista', component: AnalistaComponent},
-  { path: 'usuario', component: UsuarioComponent},
-  { path: 'categoria', component: CategoriasComponent },
-  { path: 'subcategoria', component: SubcategoriasComponent },
- 
+  { path: 'usuario', component: EncuestadoComponent},
+
   { path: '**', redirectTo: '/login', pathMatch: 'full'},
 ];
 

@@ -12,8 +12,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class ListaTipoComponent implements OnInit {
 
   Tipo: Tipo[] = [];
-  id = this.actRoute.snapshot.params.id;
-  @Input() tipoData = {id: 0, nombre: '', estado: '', descripcion: ''};
+  _id = this.actRoute.snapshot.params._id;
+  @Input() tipoData = {_id: 0, nombre: '', estado: '', descripcion: ''};
 
   formTipo: FormGroup;
   patronNombreTipo: any = /^[A-Za-z0-9\s]+$/;
@@ -43,7 +43,7 @@ export class ListaTipoComponent implements OnInit {
   }
 
   updateTipo(){
-    this.tipoService.updateTipo(this.tipoData.id, this.tipoData).subscribe(data => {
+    this.tipoService.updateTipo(this.tipoData._id, this.tipoData).subscribe(data => {
     });
   }
 

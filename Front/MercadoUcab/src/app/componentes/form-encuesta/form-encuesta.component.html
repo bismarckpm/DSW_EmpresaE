@@ -1,0 +1,87 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+  
+        <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Encuesta</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="asigCantPregunta(0)">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    
+        <div class="modal-body">
+            <form class="needs-validation" novalidate>
+                <div class="form-row">
+                    <div class="col-md-4 col-sm-4 mb-3">
+                        <label for="fechaInicio">Fecha Inicio</label>
+                        <input type="text" class="form-control" id="fechaInicio" [(ngModel)]="encuesta.fechaInicio" name="encuesta.fechaInicio" placeholder="DD/MM/YYYY" value="encuesta.fechaInicio" >
+                    </div>
+                    <div class="col-md-4 col-sm-4 mb-3">
+                        <label for="fechaFin">Fecha Fin</label>
+                        <input type="text" class="form-control" id="fechaFin" [(ngModel)]="encuesta.fechaFin" name="encuesta.fechaFin" placeholder="DD/MM/YYYY" value="encuesta.fechaFin" >
+                    </div>
+                    <div class="col-md-4 col-sm-4 mb-3">
+                        <label for="estado">Estado</label>
+                        <select class="custom-select d-block w-100" [(ngModel)]="encuesta.estado" id="encuesta.estado"  value="encuesta.estado"name="encuesta.estado" >
+                            <option value="">Choose...</option>
+                            <option>A</option>
+                            <option>I</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a valid option.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 col-sm-6 mb-3">
+                        <label for="estudio">Estudio relacionado</label>
+                    </div>
+                    <div class="col-md-8 col-sm-6 mb-3">
+                        <select class="custom-select d-block w-100" [(ngModel)]="encuesta.dtoEstudio" id="dtoEstudio" value="encuesta.dtoEstudio" name="encuesta.dtoEstudio" >
+                            <option value="">Choose...</option>
+                            <option *ngFor="let estudio of estudios">{{ estudio.nombre }}</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a valid option.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-8 col-sm-6 mb-3">
+                        <label for="cantidadPreguntas">Cantidad de preguntas</label>
+                    </div>
+                    <div class="col-md-4 col-sm-6 mb-3">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-light" (click)="asigCantPregunta(5)">5</button>
+                            <button type="button" class="btn btn-light" (click)="asigCantPregunta(10)">10</button>
+                            <button type="button" class="btn btn-light" (click)="asigCantPregunta(15)">15</button>
+                          </div>
+                        <div class="invalid-feedback">
+                            Please select a valid option.
+                        </div>
+                    </div>
+                </div>
+                <!-- arreglar esta parte de agregar preguntas a una encuesta -->
+                <div class="form-row" *ngFor="let i of cantPreguntas">
+                    <div class="col-md-8 col-sm-8 mb-4">
+                        <label for="pregunta">Pregunta</label>
+                        <input type="text" ng class="form-control" id="pregunta" placeholder="" value="">
+                    </div>
+                    <div class="col-md-4  col-sm-4 mb-2">
+                        <label for="tipoPregunta">Tipo de pregunta</label>
+                        <select class="custom-select d-block w-100" id="tipoPregunta">
+                            <option value="">Choose...</option>
+                            <option *ngFor="let tipoPregunta of tipoPreguntas">{{ tipoPregunta.tipo }}</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a valid option.
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="asigCantPregunta(0)">Cancelar</button>
+            <button type="submit" class="btn btn-primary" (click)="addEncuesta()" data-dismiss="modal">Guardar</button>
+        </div>    
+    </div>
+</div>

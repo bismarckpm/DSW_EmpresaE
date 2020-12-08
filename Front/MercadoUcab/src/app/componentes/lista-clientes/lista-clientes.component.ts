@@ -29,7 +29,7 @@ export class ListaClientesComponent implements OnInit {
   } 
 
   public eliminarCliente(clienteEliminar: Cliente): void{
-    console.log('elimino ' + clienteEliminar.id);
+    console.log('elimino ' + clienteEliminar._id);
 
   }
 

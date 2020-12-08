@@ -12,8 +12,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class ListaMarcaComponent implements OnInit {
 
   Marca: Marca[] = [];
-  id = this.actRoute.snapshot.params.id;
-  @Input() marcaData = {id: 0, nombre: '', estado: ''};
+  _id = this.actRoute.snapshot.params['_id'];
+  @Input() marcaData = {_id: 0, nombre: '', estado: ''};
 
   formMarca: FormGroup;
   namePattern: any = /^[A-Za-z0-9\s]+$/;
@@ -47,7 +47,7 @@ export class ListaMarcaComponent implements OnInit {
   }
 
   updateMarca(){
-    this.marcaService.updateMarca(this.marcaData.id, this.marcaData).subscribe(data => {
+    this.marcaService.updateMarca(this.marcaData._id, this.marcaData).subscribe(data => {
     });
   }
 

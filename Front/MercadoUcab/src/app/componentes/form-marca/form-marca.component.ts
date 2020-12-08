@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class FormMarcaComponent implements OnInit {
 
-  @Input() marca = { id: 0, nombre: '', estado: ''};
+  @Input() marca = { _id: 0, nombre: '', estado: ''};
   formMarca: FormGroup;
   patronNombreMarca: any = /^[A-Za-z0-9\s]+$/;
 

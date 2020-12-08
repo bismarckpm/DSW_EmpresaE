@@ -2,7 +2,7 @@
     <div class="modal-content">
   
         <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Encuesta</h5>
+            <h5 class="modal-title" id="staticBackdropLabel">encuesta</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="asigCantPregunta(0)">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -12,16 +12,16 @@
             <form class="needs-validation" novalidate>
                 <div class="form-row">
                     <div class="col-md-4 col-sm-4 mb-3">
-                        <label for="fechaInicio">Fecha Inicio</label>
-                        <input type="text" class="form-control" id="fechaInicio" [(ngModel)]="encuesta.fechaInicio" name="encuesta.fechaInicio" placeholder="DD/MM/YYYY" value="encuesta.fechaInicio" >
+                        <label>Fecha Inicio</label>
+                        <input type="text" class="form-control"   name="encuesta.fechaInicio" placeholder="DD/MM/YYYY"  >
                     </div>
                     <div class="col-md-4 col-sm-4 mb-3">
                         <label for="fechaFin">Fecha Fin</label>
-                        <input type="text" class="form-control" id="fechaFin" [(ngModel)]="encuesta.fechaFin" name="encuesta.fechaFin" placeholder="DD/MM/YYYY" value="encuesta.fechaFin" >
+                        <input type="text" class="form-control"   placeholder="DD/MM/YYYY" value="encuesta.fechaFin" >
                     </div>
                     <div class="col-md-4 col-sm-4 mb-3">
                         <label for="estado">Estado</label>
-                        <select class="custom-select d-block w-100" [(ngModel)]="encuesta.estado" id="encuesta.estado"  value="encuesta.estado"name="encuesta.estado" >
+                        <select class="custom-select d-block w-100"  value="encuesta.estado">
                             <option value="">Choose...</option>
                             <option>A</option>
                             <option>I</option>
@@ -36,7 +36,7 @@
                         <label for="estudio">Estudio relacionado</label>
                     </div>
                     <div class="col-md-8 col-sm-6 mb-3">
-                        <select class="custom-select d-block w-100" [(ngModel)]="encuesta.dtoEstudio" id="dtoEstudio" value="encuesta.dtoEstudio" name="encuesta.dtoEstudio" >
+                        <select class="custom-select d-block w-100"  value="encuesta.dtoEstudio" name="encuesta.dtoEstudio" >
                             <option value="">Choose...</option>
                             <option *ngFor="let estudio of estudios">{{ estudio.nombre }}</option>
                         </select>
@@ -51,9 +51,9 @@
                     </div>
                     <div class="col-md-4 col-sm-6 mb-3">
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-light" (click)="asigCantPregunta(5)">5</button>
-                            <button type="button" class="btn btn-light" (click)="asigCantPregunta(10)">10</button>
-                            <button type="button" class="btn btn-light" (click)="asigCantPregunta(15)">15</button>
+                            <button type="button" class="btn btn-light" >5</button>
+                            <button type="button" class="btn btn-light" >10</button>
+                            <button type="button" class="btn btn-light" >15</button>
                           </div>
                         <div class="invalid-feedback">
                             Please select a valid option.
@@ -80,8 +80,8 @@
             </form>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="asigCantPregunta(0)">Cancelar</button>
-            <button type="submit" class="btn btn-primary" (click)="addEncuesta()" data-dismiss="modal">Guardar</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cancelar</button>
+            <button type="submit" class="btn btn-primary"  data-dismiss="modal">Guardar</button>
         </div>    
     </div>
 </div>

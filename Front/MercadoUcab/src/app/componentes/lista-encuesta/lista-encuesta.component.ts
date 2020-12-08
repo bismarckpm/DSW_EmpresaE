@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Encuesta } from 'src/app/models/encuesta';
+import { EstudioService } from 'src/app/services/estudio.service';
+import { TipoPreguntaService } from 'src/app/services/tipo-pregunta.service';
 import { EncuestaService } from '../../services/encuesta.service';
 
 @Component({
@@ -9,14 +11,35 @@ import { EncuestaService } from '../../services/encuesta.service';
   styleUrls: ['./lista-encuesta.component.css']
 })
 export class ListaEncuestaComponent implements OnInit {
-  [x: string]: any;
 
+  tipoPreguntas: any = [];
+  cantPreguntas = [];
   encuestas: any = [];
+  estudios: any = [];
   formEncuesta: FormGroup;
   namePattern: any = /^[A-Za-z0-9\s]+$/;
+  @Input() encuesta: Encuesta = {
+    id: 0,
+    estado: '',
+    fechaInicio: '',
+    fechaFin: '',
+    dtoEstudio: null,
+    dtoPregunta: null
+  };
 
-  constructor( private servicio: EncuestaService ) {
+  constructor(
+    private servicio: EncuestaService,
+    private servicioEstudio: EstudioService,
+    private servicioTipoPregunta: TipoPreguntaService,
+    private formBuilder: FormBuilder
+  ) {
     this.loadEncuestas();
+    this.servicioEstudio.getEstudios().subscribe((data: {}) => {
+      this.estudios = data;
+    });
+    this.servicioTipoPregunta.getTipoPreguntas().subscribe((data: {}) => {
+      this.tipoPreguntas = data;
+    });
   }
 
   ngOnInit(): void {
@@ -42,6 +65,12 @@ export class ListaEncuestaComponent implements OnInit {
   }
   // Sustitucion de variables para el update
   editar(encuesta){
+  }
+
+  asigCantPregunta(cant: number): void {
+    for (let i = 0; i < cant; i++) {
+      this.cantPreguntas.push(i);
+    }
   }
 
   ///// Metodos para las validaciones

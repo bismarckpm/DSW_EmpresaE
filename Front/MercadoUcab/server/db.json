@@ -244,7 +244,38 @@
       "fechaInicio": "10/01/2000",
       "fechaFin": null,
       "dtoEstudio": null,
-      "dtoPregunta": null
+      "dtoPregunta": [
+        {
+          "id": 1,
+          "descripcion": "asdsad",
+          "estado": "a",
+          "dtoTipoPregunta": {
+            "id": 1,
+            "estado": "a",
+            "tipo": "verdadero y Falso"
+          },
+          "dtoSubcategoria": {
+            "id": 1,
+            "nombre": "pedro gutierres",
+            "estado": "i"
+          }
+        },
+        {
+          "id": 2,
+          "descripcion": "Prueba exitosa Editar",
+          "estado": "a",
+          "dtoTipoPregunta": {
+            "id": 1,
+            "estado": "i",
+            "tipo": "multiple"
+          },
+          "dtoSubcategoria": {
+            "id": 3,
+            "nombre": "pedro gutierres",
+            "estado": "i"
+          }
+        }
+      ]
     },
     {
       "id": 2,
@@ -284,6 +315,14 @@
       "fechaInicio": "prueba",
       "fechaFin": "asd",
       "dtoEstudio": "2",
+      "dtoPregunta": null
+    },
+    {
+      "id": 10,
+      "estado": "A",
+      "fechaInicio": "10",
+      "fechaFin": "10",
+      "dtoEstudio": "Chucheria",
       "dtoPregunta": null
     }
   ]

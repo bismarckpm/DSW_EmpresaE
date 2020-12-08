@@ -100,7 +100,7 @@ BusquedaParroquia(id){
 }
 
 addNivelSocioEconomico(){
-  this.nivelsocioeconomicoService.getNivelSocioEconomicos().subscribe((data: {}) => {
+  this.nivelsocioeconomicoService.getNivelesSocioEconomicos().subscribe((data: {}) => {
     this.nivelSocioEconomico= data;
   })
 }

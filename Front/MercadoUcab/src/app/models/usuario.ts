@@ -1,14 +1,16 @@
+import {TipoUsuario} from './tipo-usuario';
+import {Encuestado} from './encuestado';
+import {Cliente} from './cliente';
+
 export interface Usuario {
 
       id: number;
-      nombre: string;
-      nombre2: string;
-      apellido: string;
-      apellido2: string;
-      estado: string;
-      fechaNacimiento: string;
-
-
+      username: string;
+      clave: string;
+      correoelectronico: string;
+      dtoTipoUsuario: TipoUsuario;
+      dtoEncuestado: Encuestado;
+      dtoCliente: Cliente;
  }
 
 

@@ -12,4 +12,12 @@ public class MarcaServicio_Test {
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
 
     }
+
+    @Test
+    public void getMarcaTest() throws Exception{
+        ucab.empresae.servicio.MarcaServicio servicio = new ucab.empresae.servicio.MarcaServicio();
+        Response resultado = servicio.getMarca(1);
+        Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
+    }
+
 }

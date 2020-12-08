@@ -10,26 +10,26 @@ export class ListaEncuestaComponent implements OnInit {
 
   encuestas: Encuesta[] = [
     {
-      id: 1,
+      _id: 1,
       estado: 'a',
       fechaInicio: '10/01/2000',
       fechaFin: null,
       dtoEstudio: null,
       dtoPregunta:{
-        id: 1,
+        _id: 1,
         estado: 'a',
         descripcion: 'descripcion',
         dtoTipoPregunta:{
-          id:1,
+          _id:1,
           estado:'a',
           tipo:'simple',
         },
         dtoSubcategoria:{
-          id:1,
+          _id:1,
           nombre:'pepe',
           estado:'a',
           dtoCategoria:{
-            id:1,
+            _id:1,
             nombre:'hola',
             estado:'a'
           }
@@ -37,7 +37,7 @@ export class ListaEncuestaComponent implements OnInit {
       }
     },
     {
-      id:2 ,
+      _id:2 ,
       estado: 'a',
       fechaInicio: '10/01/2000',
       fechaFin: null,

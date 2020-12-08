@@ -1,5 +1,5 @@
 export interface MedioConexion {
-    id:number;
+    _id:number;
     nombre:string;
     estado:string;
 }

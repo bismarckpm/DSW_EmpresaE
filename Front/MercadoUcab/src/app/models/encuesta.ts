@@ -2,7 +2,7 @@ import { Estudio } from './estudio';
 import { Pregunta } from './pregunta';
 
 export interface Encuesta {
-    id: number;
+    _id: number;
     estado: string;
     fechaInicio: string;
     fechaFin: string;

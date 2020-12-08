@@ -10,7 +10,7 @@ import {Usuario} from '../../../models/usuario';
 export class RegistrarseComponent implements OnInit {
 
   usuario: Usuario = {
-    id: 0,
+    _id: 0,
     nombre: '',
     nombre2: '',
     apellido: '',

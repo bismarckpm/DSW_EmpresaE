@@ -15,7 +15,7 @@ export class ListaCategoriaComponent implements OnInit {
    namePattern: any = /^[A-Za-z0-9\s]+$/;
 
   Categoria: any=[];
-  id = this.actRoute.snapshot.params['id'];
+  _id = this.actRoute.snapshot.params['_id'];
 
   @Input() categoriaData: any = {};
   constructor( 
@@ -46,7 +46,7 @@ export class ListaCategoriaComponent implements OnInit {
   
   updateCategoria() {
     if (this.formCategoria.valid) {
-      this.categoriaService.updateCategoria(this.categoriaData.id, this.categoriaData).subscribe(data => {
+      this.categoriaService.updateCategoria(this.categoriaData._id, this.categoriaData).subscribe(data => {
       })
     }
     else{

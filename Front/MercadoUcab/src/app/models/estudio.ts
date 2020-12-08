@@ -4,7 +4,7 @@ import { NivelSocioEconomico } from './nivel-socio-economico';
 import { Subcategoria } from './subcategoria';
  
 export interface Estudio {
-    id: number;
+    _id: number;
     estado : "string";
     nombre: "string";
     comentarioAnalista ?: "string";

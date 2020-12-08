@@ -13,8 +13,8 @@ export class ListaPresentacionComponent implements OnInit {
  
 
   presentaciones: Presentacion[] = [];
-  id=this.actRoute.snapshot.params['id'];
-  @Input() presentacionData={id:0,  descripcion:'',estado:''};
+  _id=this.actRoute.snapshot.params['_id'];
+  @Input() presentacionData={_id:0,  descripcion:'',estado:''};
   presentacion:any;
 
     //Declaracion para las Validaciones
@@ -48,7 +48,7 @@ export class ListaPresentacionComponent implements OnInit {
   }
 
   updatePresentacion(){
-     this.presentacionService.updatePresentacion(this.presentacionData.id, this.presentacionData).subscribe(data => {
+     this.presentacionService.updatePresentacion(this.presentacionData._id, this.presentacionData).subscribe(data => {
       })
 
   }

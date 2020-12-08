@@ -8,7 +8,7 @@ import { Ocupacion } from './ocupacion';
 import { Usuario } from './usuario';
 
 export interface Encuestado {
-   id:number;
+   _id:number;
    primerNombre:string;
    segundoNombre:string;
    primerApeliido:string;

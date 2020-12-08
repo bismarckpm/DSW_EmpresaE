@@ -1,5 +1,5 @@
 export interface Presentacion {
-  id: number;
+  _id: number;
   descripcion: string;
   estado: string;
 }

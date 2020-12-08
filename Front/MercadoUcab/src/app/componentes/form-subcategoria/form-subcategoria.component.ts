@@ -13,7 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class FormSubcategoriaComponent implements OnInit {
 
-  @Input() subcategoria ={ id:0, nombre:'',estado:'', dtoCategoria:{id:0}};
+  @Input() subcategoria ={ _id:0, nombre:'',estado:'', dtoCategoria:{_id:0}};
   categoria:any;
   // Validacion de datos
   formSubcategoria: FormGroup;

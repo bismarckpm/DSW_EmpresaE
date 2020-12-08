@@ -15,10 +15,10 @@ import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 })
 export class FormEstudioComponent implements OnInit {
 
-  @Input() estudio={id:0, nombre:'',estado:'' ,comentarioAnalista:'', edadMinima:0,edadMaxima:0 ,fechaInicio:'', fechaFin: '',
-  dtoLugar : {id:0,estado:'',nombre:'',tipo:''},
-  dtoNivelSocioEconomico:{id:0,nombre:'',estado:'', descripcion:''},
-  dtoSubcategoria : {id:0, nombre:'',estado:''},
+  @Input() estudio={_id:0, nombre:'',estado:'' ,comentarioAnalista:'', edadMinima:0,edadMaxima:0 ,fechaInicio:'', fechaFin: '',
+  dtoLugar : {_id:0,estado:'',nombre:'',tipo:''},
+  dtoNivelSocioEconomico:{_id:0,nombre:'',estado:'', descripcion:''},
+  dtoSubcategoria : {_id:0, nombre:'',estado:''},
  };
 
  nivelSocioEconomico:any;

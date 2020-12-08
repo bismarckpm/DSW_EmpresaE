@@ -8,29 +8,52 @@ import { TipoPregunta } from '../models/tipo-pregunta';
   providedIn: 'root'
 })
 export class TipoPreguntaService {
-
   // Definimos el url del api
   apiurl = 'http://localhost:3000';
 
+  constructor(private http: HttpClient) { }
   // Http Options
-  httpOptions = {
+    httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
   };
 
-  constructor(private http: HttpClient) { }
-
-  getTipoPreguntas(): Observable<TipoPregunta>{
-    return this.http.get<TipoPregunta>(this.apiurl + '/tipopregunta')
+  ///////// Metodos para ejecutar//////////////
+  getTipoPreguntas(): Observable<TipoPregunta[]>{
+    return this.http.get<TipoPregunta[]>(this.apiurl + '/tipopregunta')
     .pipe(
       retry(1),
       catchError(this.handleError)
     );
   }
 
-  getTipoPregunta(id): Observable<TipoPregunta>{
-    return this.http.get<TipoPregunta>(this.apiurl + '/tipopregunta/' + id)
+  getTipoPregunta(id): Observable<TipoPregunta[]>{
+    return this.http.get<TipoPregunta[]>(this.apiurl + '/tipopregunta/' + id)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
+  createTipoPregunta(TipoPregunta): Observable<TipoPregunta[]>{
+    return this.http.post<TipoPregunta[]>(this.apiurl + '/tipopregunta', JSON.stringify(TipoPregunta), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
+  updateTipoPregunta(id, TipoPregunta): Observable<TipoPregunta[]>{
+    return this.http.put<TipoPregunta[]>(this.apiurl + '/tipopregunta/' + id, JSON.stringify(TipoPregunta), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
+  deleteTipoPregunta(id){
+    return this.http.delete<TipoPregunta[]>(this.apiurl + '/tipopregunta/' + id, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -38,7 +61,7 @@ export class TipoPreguntaService {
   }
 
   ///////////////////// Error HandleError
-  handleError(error): Observable<never> {
+  handleError(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       // Get client-side error
@@ -49,6 +72,5 @@ export class TipoPreguntaService {
     }
     window.alert(errorMessage);
     return throwError(errorMessage);
- }
-
+  }
 }

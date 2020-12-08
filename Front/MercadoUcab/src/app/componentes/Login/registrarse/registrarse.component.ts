@@ -27,12 +27,12 @@ export class RegistrarseComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   guardarUsuario() {
-    this.usuarioService.registarUsuario(this.usuario)
+   /* this.usuarioService.registarUsuario(this.usuario)
       .subscribe(
         res => {
           console.log(res);
         },
         err => console.error(err)
-      );
+      );*/
   }
 }

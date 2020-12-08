@@ -1,116 +1,112 @@
 <div class="container mt-2">
     <div class="table-responsive">
       <table class="table table-striped table-sm bg-light">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Nombre de Subcategoria</th>
-                      <th>Estatus </th>
-                      <th>Categoria</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                              <tr *ngFor="let subcategoria of Subcategoria " >
-                                       <td>{{ subcategoria.id }}</td>
-                                       <td>{{ subcategoria.nombre }}</td>
-                                       <td>{{ subcategoria.estatus }}</td>
-                                       <td>{{ subcategoria.dtoCategoria.nombre}}</td>
-                                                                      
-                                        <td>
-                                              <div class="d-flex justify-content-around">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre de Subcategoria</th>
+          <th>Estado </th>
+          <th>Categoria</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let subcategoria of Subcategoria " >
+          <td>{{ subcategoria.id }}</td>
+          <td>{{ subcategoria.nombre }}</td>
+          <td>{{ subcategoria.estado }}</td>
+          <td>{{ subcategoria.dtoCategoria.nombre}}</td>
+          <td>
+            <div class="d-flex justify-content-around">
+              <button type="button" class="btn btn-primary" data-toggle="modal" (click)="editar(subcategoria)" data-target="#exampleModal">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                </svg>
+              </button>
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <!-- Cabezado Modal -->
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Editar Subcategoria </h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <!-- Cuerpo completo del Modal -->
+                    <div class="modal-body">
+                      <form [formGroup]="formSubcategoria">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="form-group">
+                              <div class="row">
+                                <div class="col-md-5 mb-3">
+                                  <label>Nombre</label>
+                                    <input type="text" [(ngModel)]="subcategoriaData.nombre" class="form-control"  formControlName="nombreSubcategoria" name="nombre" placeholder="Nombre de la Subcategoria" >
+                                      <div *ngIf="nombreSubcategoria.invalid && (nombreSubcategoria.dirty || nombreSubcategoria.touched)" class="alert alert-danger">
+                                        <div *ngIf="nombreSubcategoria.errors.required">
+                                          Este campo es obligatorio
+                                        </div>
+                                        <div *ngIf="nombreSubcategoria.errors.pattern">
+                                          Introduzca un nombre valido
+                                        </div>
+                                      </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-5 mb-3">
+                                <label for="">Estado</label>
+                                  <select class="custom-select d-block w-100" [(ngModel)]= "subcategoriaData.estado" formControlName="estadoSubcategoria" name="estado" >
+                                    <option value="a">Activa</option>
+                                    <option value="i">Inactiva</option>
+                                  </select>
+                                  <div *ngIf="estadoSubcategoria.invalid && (estadoSubcategoria.dirty || estadoSubcategoria.touched)" class="alert alert-danger">
+                                    <div *ngIf="estadoSubcategoria.errors.required">
+                                      Este campo es obligatorio
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                            <br>
+                            <div class="form-group row">
+                              <br>
+                              <label for="" class="col-sm-4 col-form-label escrituerModal">Seleccione una categorias</label>
+                              <div class="col-sm-8">
+                                <select name="dtoCategoria.id" id="dtoCategoria.id" class="form-control escrituerModal " [(ngModel)]="subcategoriaData.dtoCategoria.id" formControlName="CATEGORIA" >
+                                  <option value=""> Selecciones una ...</option>
+                                  <option class="escrituraModal" *ngFor="let cat of categoria"   [ngValue]= "cat.id" >{{cat.nombre}}</option>
+                                </select>
+                                <div *ngIf="CATEGORIA.invalid && (CATEGORIA.dirty || CATEGORIA.touched)" class="alert alert-danger">
+                                  <div *ngIf="CATEGORIA.errors.required">
+                                    Este campo es obligatorio
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- Parte inferior del modal -->
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                              <button type="submit" class="btn btn-success" (click)="updateSubcategoria()" data-dismiss="modal">Guardar</button>
 
-                                                          <button type="button" class="btn btn-primary" data-toggle="modal" (click)="editar(subcategoria)" data-target="#exampleModal">
-                                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
-                                                                  </svg>
-                                                          </button>
-                                                                            
-                                      <!-- Modal -->
-                                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                     <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                           <!-- Cabezado Modal -->   
-                                                                                   <div class="modal-header">
-                                                                                         <h5 class="modal-title" id="exampleModalLabel">Editar Subcategoria </h5>
-                                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                                </button>
-                                                                                      </div>
-                                                      <!-- Cuerpo completo del Modal -->
-                                                              <div class="modal-body">
-                                                                  <form [formGroup]="formSubcategoria">
-                                                                         <div class="modal-dialog">
-                                                                                 <div class="modal-content">                      
-                                                                                     <div class="form-group">
-                                                                                          <Label>nombre de la subcategoria </Label>
-                                                                                           <input type="text" [(ngModel)]="subcategoriaData.nombre" class="form-control"  formControlName="nombreSubcategoria" name="nombre" placeholder="Nombre de la Subcategoria" >
-                                                                                           <div *ngIf="nombreSubcategoria.invalid && (nombreSubcategoria.dirty || nombreSubcategoria.touched)" class="alert alert-danger">
-                                                                                                <div *ngIf="nombreSubcategoria.errors.required">
-                                                                                                  Este campo es obligatorio
-                                                                                                </div>
-                                                                                                <div *ngIf="nombreSubcategoria.errors.pattern">
-                                                                                                  Introduzca un nombre valido
-                                                                                                </div>
-                                                                                              </div>
-                                                                                    </div>
-                                                                                          <label for=""> Estatus de la subcategoria</label>
-                                                                                       <select class="mdb-select md-form" [(ngModel)]= "subcategoriaData.estatus" formControlName="estadoSubcategoria" name="estatus" >
-                                                                                          <option value="a">Activa</option>
-                                                                                          <option value="i">Inactiva</option>
-                                                                                        </select>
-                                                                                        <div *ngIf="estadoSubcategoria.invalid && (estadoSubcategoria.dirty || estadoSubcategoria.touched)" class="alert alert-danger">
-                                                                                          <div *ngIf="estadoSubcategoria.errors.required">
-                                                                                            Este campo es obligatorio
-                                                                                          </div>
-                                                                                        </div>
-                                                                                        <br>
-                                                                               
-                                                                               
-                                                                              <div class="form-group row">
-                                                                                    <br>
-                                                                                          <label for="" class="col-sm-4 col-form-label escrituerModal">Seleccione una categorias</label>
-                                                                                     <div class="col-sm-8">
-                                                                                           <select name="dtoCategoria.id" id="dtoCategoria.id" class="form-control escrituerModal " [(ngModel)]="subcategoriaData.dtoCategoria.id" formControlName="CATEGORIA" >
-                                                                                                <option  value=""> Slecciones una ...</option> 
-                                                                                                <option class="escrituraModal" *ngFor="let cat of categoria"   [ngValue]= "cat.id" >{{cat.nombre}}</option>
-                                                                                           </select>
-                                                                                           <div *ngIf="CATEGORIA.invalid && (CATEGORIA.dirty || CATEGORIA.touched)" class="alert alert-danger">
-                                                                                                <div *ngIf="CATEGORIA.errors.required">
-                                                                                                  Este campo es obligatorio
-                                                                                                </div>
-                                                                                              </div> 
-                                                                                    </div>
-                                                                              </div>
-                                                                               <!-- Parte inferior del modal -->                                        
-                                                                               <div class="modal-footer">
-                                                                
-                                                                                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                                                           <button type="submit" class="btn btn-success" (click)="updateSubcategoria()" data-dismiss="modal">Guargar</button>
-                
-                                                                               </div>
-                                                                              </div> 
-                                                                     </div>
-                                                                  </form>
-                                                            </div><!-- cierre del cuerpo modal -->
-                                                       </div>
-                                                   </div>
-                            
-                                          </div> <!-- Finall Modal -->
-                                                          
-                                                                          
-
-                                                  <button type="button" class="btn btn-danger btn-sm" (click)="deleteSubcategoria(subcategoria.id)">
-                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                      <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                    </svg>
-                                                  </button>
-
-
-                                            </div>
-                                      </td>
-                              </tr>
-                  </tbody>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div><!-- cierre del cuerpo modal -->
+                  </div>
+                </div>
+              </div> <!-- Finall Modal -->
+              <button type="button" class="btn btn-danger btn-sm" (click)="deleteSubcategoria(subcategoria.id)">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                </svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
       </table>
     </div>
 </div>

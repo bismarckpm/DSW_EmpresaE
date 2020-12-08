@@ -9,52 +9,52 @@ import { Encuesta } from '../models/encuesta';
 })
 export class EncuestaService {
 
-  // Definimos el url del api
-  apiurl = 'http://localhost:3000';
+    // Definimos el url del api
+    apiurl = 'http://localhost:3000';
 
+    constructor(private http: HttpClient) { }
   // Http Options
-  httpOptions = {
+    httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
   };
 
-  constructor(private http: HttpClient) { }
-
-  getEncuestas(): Observable<Encuesta>{
-    return this.http.get<Encuesta>(this.apiurl + '/encuesta')
+  ///////// Metodos para ejecutar//////////////
+  getEncuestas(): Observable<Encuesta[]>{
+    return this.http.get<Encuesta[]>(this.apiurl + '/encuesta')
     .pipe(
       retry(1),
       catchError(this.handleError)
     );
   }
 
-  getEncuesta(id): Observable<Encuesta>{
-    return this.http.get<Encuesta>(this.apiurl + '/encuesta/' + id)
+  getEncuesta(id): Observable<Encuesta[]>{
+    return this.http.get<Encuesta[]>(this.apiurl + '/encuesta/' + id)
     .pipe(
       retry(1),
       catchError(this.handleError)
     );
   }
 
-  createEncuesta(encuesta): Observable<Encuesta>{
-    return this.http.post<Encuesta>(this.apiurl + '/encuesta', JSON.stringify(encuesta), this.httpOptions)
+  createEncuesta(Encuesta): Observable<Encuesta[]>{
+    return this.http.post<Encuesta[]>(this.apiurl + '/encuesta', JSON.stringify(Encuesta), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
     );
   }
 
-  updateEncuesta(id, encuesta): Observable<Encuesta>{
-    return this.http.put<Encuesta>(this.apiurl + '/encuesta/' + id, JSON.stringify(encuesta), this.httpOptions)
+  updateEncuesta(id, Encuesta): Observable<Encuesta[]>{
+    return this.http.put<Encuesta[]>(this.apiurl + '/encuesta/' + id, JSON.stringify(Encuesta), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
     );
   }
 
-  deleteEncuesta(id): Observable<Encuesta> {
-    return this.http.delete<Encuesta>(this.apiurl + '/encuesta/' + id, this.httpOptions)
+  deleteEncuesta(id){
+    return this.http.delete<Encuesta[]>(this.apiurl + '/encuesta/' + id, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -62,7 +62,7 @@ export class EncuestaService {
   }
 
   ///////////////////// Error HandleError
-  handleError(error): Observable<never> {
+  handleError(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       // Get client-side error

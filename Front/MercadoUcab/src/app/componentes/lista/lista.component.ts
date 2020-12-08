@@ -13,7 +13,7 @@ export class ListaComponent implements OnInit {
 
   // tslint:disable-next-line: variable-name
   constructor(private _servicio: UsuarioService) {
-    this.usuarios = this._servicio.getUsuarios();
+    //this.usuarios = this._servicio.getUsuarios();
   }
 
   ngOnInit(): void {

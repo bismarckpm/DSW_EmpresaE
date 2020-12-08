@@ -1,5 +1,6 @@
 package ucab.empresae.entidades;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.List;
 
@@ -8,8 +9,7 @@ import java.util.List;
 public class MarcaEntity extends BaseEntity{
     private String estado;
     private String nombre;
-    private List<SubcategoriaEntity> subcategorias;
-    private List<TipoEntity> tipos;
+
 
     @Basic
     @Column(name = "estado")
@@ -32,6 +32,7 @@ public class MarcaEntity extends BaseEntity{
     }
 
     @ManyToMany(mappedBy = "marcas")
+    private List<SubcategoriaEntity> subcategorias;
     public List<SubcategoriaEntity> getSubcategorias() {
         return subcategorias;
     }
@@ -41,7 +42,9 @@ public class MarcaEntity extends BaseEntity{
     }
 
     @ManyToMany
+    @JsonbTransient
     @JoinTable(name = "marca_tipo", schema = "mercadeoucab", joinColumns = @JoinColumn(name = "id_marca", referencedColumnName = "id", nullable = false), inverseJoinColumns = @JoinColumn(name = "id_tipo", referencedColumnName = "id", nullable = false))
+    private List<TipoEntity> tipos;
     public List<TipoEntity> getTipos() {
         return tipos;
     }

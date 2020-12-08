@@ -15,7 +15,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let estudio of estudios " >
-          <th>{{ estudio.id }}</th>
+          <th>{{ estudio._id }}</th>
           <th>{{ estudio.estado }}</th>
           <th>{{ estudio.nombre }}</th>
           <th>{{ estudio.edadMinima }}</th>
@@ -131,9 +131,9 @@
                           <div class="row">
                             <div class="col-md-5 mb-3">
                               <label for="estado">Pais</label>
-                              <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.dtoLugar.id" formControlName="lugarEstudio" (click)="BusquedaEstado(estudioData.dtoLugar.id)"   value="estudioData.dtoLugar.id">
+                              <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.dtoLugar._id" formControlName="lugarEstudio" (click)="BusquedaEstado(estudioData.dtoLugar._id)"   value="estudioData.dtoLugar._id">
                                 <option value="">Choose...</option>
-                                <option  *ngFor="let lu of lugar"  [ngValue]= "lu.id"   >{{lu.nombre}}</option>
+                                <option  *ngFor="let lu of lugar"  [ngValue]= "lu._id"   >{{lu.nombre}}</option>
                               </select>
                               <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
                                 <div *ngIf="lugarEstudio.errors.required">
@@ -144,9 +144,9 @@
 
                             <div class="col-md-5 mb-3">
                               <label for="estado">Estado</label>
-                              <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.dtoLugar.id" (click)="BusquedaParroquia(estudioData.dtoLugar.id)"formControlName="lugarEstudio"  value="estudioData.dtoLugar.id">
+                              <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.dtoLugar._id" (click)="BusquedaParroquia(estudioData.dtoLugar._id)"formControlName="lugarEstudio"  value="estudioData.dtoLugar._id">
                                 <option value="">Choose...</option>
-                                <option  *ngFor="let estado of estados" [ngValue]= "estado.id"  >{{estado.nombre}}</option>
+                                <option  *ngFor="let estado of estados" [ngValue]= "estado._id"  >{{estado.nombre}}</option>
                               </select>
                               <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
                                 <div *ngIf="lugarEstudio.errors.required">
@@ -157,9 +157,9 @@
 
                             <div class="col-md-5 mb-3">
                               <label for="estado">Parroquia</label>
-                              <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.dtoLugar.id" formControlName="lugarEstudio"  value="estudioData.dtoLugar.id">
+                              <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.dtoLugar._id" formControlName="lugarEstudio"  value="estudioData.dtoLugar._id">
                                 <option value="">Choose...</option>
-                                <option  *ngFor="let parroquia of parroquias" [ngValue]= "parroquia.id"  >{{parroquia.nombre}}</option>
+                                <option  *ngFor="let parroquia of parroquias" [ngValue]= "parroquia._id"  >{{parroquia.nombre}}</option>
                               </select>
                               <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
                                 <div *ngIf="lugarEstudio.errors.required">
@@ -173,9 +173,9 @@
                          
                       <div class="col-md-5 mb-3">
                         <label for="" class="col-sm-6 col-form-label escrituerModal"> Subcategoria </label>
-                            <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.dtoSubcategoria.id" formControlName="subcategoriaEstudio" value="estudioData.dtoSubcategoria.id">
+                            <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.dtoSubcategoria._id" formControlName="subcategoriaEstudio" value="estudioData.dtoSubcategoria._id">
                                 <option  value=""> Slecciones una ...</option>
-                                <option  *ngFor="let sub of subcategoria" [ngValue]= "sub.id"  >{{sub.nombre}}</option>
+                                <option  *ngFor="let sub of subcategoria" [ngValue]= "sub._id"  >{{sub.nombre}}</option>
                             </select>
                             <div *ngIf="subcategoriaEstudio.invalid && (subcategoriaEstudio.dirty || subcategoriaEstudio.touched)" class="alert alert-danger">
                                 <div *ngIf="subcategoriaEstudio.errors.required">
@@ -186,9 +186,9 @@
 
                         <div class="col-md-5 mb-3">
                           <label for="" class="col-sm-6 col-form-label escrituerModal">Nivel Socio Economico  </label>
-                              <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.dtoNivelSocioEconomico.id" formControlName="nivelEstudio" value="estudioData.dtoNivelSocioEconomico.id" >
+                              <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.dtoNivelSocioEconomico._id" formControlName="nivelEstudio" value="estudioData.dtoNivelSocioEconomico._id" >
                                   <option  value=""> Slecciones una ...</option>
-                                  <option  *ngFor="let nivel of nivelSocioEconomico" [ngValue]= "nivel.id"  >{{nivel.nombre}}</option>
+                                  <option  *ngFor="let nivel of nivelSocioEconomico" [ngValue]= "nivel._id"  >{{nivel.nombre}}</option>
                               </select>
                               <div *ngIf="nivelEstudio.invalid && (nivelEstudio.dirty || nivelEstudio.touched)" class="alert alert-danger">
                                   <div *ngIf="nivelEstudio.errors.required">
@@ -208,7 +208,7 @@
                   </div>
                 </div>
               </div> <!-- Finall Modal -->
-              <button type="button" class="btn btn-danger btn-sm" (click)="deleteEstudio(estudio.id)">
+              <button type="button" class="btn btn-danger btn-sm" (click)="deleteEstudio(estudio._id)">
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                   <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>

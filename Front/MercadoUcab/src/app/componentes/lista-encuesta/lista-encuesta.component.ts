@@ -19,7 +19,7 @@ export class ListaEncuestaComponent implements OnInit {
   formEncuesta: FormGroup;
   namePattern: any = /^[A-Za-z0-9\s]+$/;
   @Input() encuesta: Encuesta = {
-    id: 0,
+    _id: 0,
     estado: '',
     fechaInicio: '',
     fechaFin: '',

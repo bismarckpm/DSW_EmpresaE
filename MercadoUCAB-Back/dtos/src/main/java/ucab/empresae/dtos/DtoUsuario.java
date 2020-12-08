@@ -6,6 +6,7 @@ public class DtoUsuario extends DtoBase {
     private String estado;
     private String username;
     private String clave;
+    private String correoelectronico;
     
     //Relaciones
     private DtoTipoUsuario dtoTipoUsuario;
@@ -44,6 +45,10 @@ public class DtoUsuario extends DtoBase {
     public void setClave(String clave) {
         this.clave = clave;
     }
+
+    public String getCorreoelectronico(){return correoelectronico;}
+
+    public void setCorreoelectronico(String correoelectronico){this.correoelectronico = correoelectronico;}
 
     public DtoTipoUsuario getDtoTipoUsuario() {
         return dtoTipoUsuario;

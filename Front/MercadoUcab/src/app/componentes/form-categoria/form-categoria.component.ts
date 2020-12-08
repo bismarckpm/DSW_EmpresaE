@@ -13,7 +13,8 @@ export class FormCategoriaComponent implements OnInit {
   /// PAra validar
   formCategoria: FormGroup;
   namePattern: any = /^[A-Za-z0-9\s]+$/;
-  @Input() categoria = { id: 0, nombre: '', estado: ''};
+
+  @Input() categoria = { _id: 0, nombre: '', estado: ''};
 
   constructor(
     public categoriaService: CategoriaService,

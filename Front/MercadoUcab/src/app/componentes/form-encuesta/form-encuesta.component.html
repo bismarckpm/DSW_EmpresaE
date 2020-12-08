@@ -13,15 +13,15 @@
                 <div class="form-row">
                     <div class="col-md-4 col-sm-4 mb-3">
                         <label for="fechaInicio">Fecha Inicio</label>
-                        <input type="text" class="form-control" id="fechaInicio" [(ngModel)]="encuesta.fechaInicio" name="fechaInicio" placeholder="DD/MM/YYYY" value="" required>
+                        <input type="text" class="form-control" id="fechaInicio" [(ngModel)]="encuesta.fechaInicio" name="encuesta.fechaInicio" placeholder="DD/MM/YYYY" value="encuesta.fechaInicio" >
                     </div>
                     <div class="col-md-4 col-sm-4 mb-3">
                         <label for="fechaFin">Fecha Fin</label>
-                        <input type="text" class="form-control" id="fechaFin" [(ngModel)]="encuesta.fechaFin" name="fechaFin" placeholder="DD/MM/YYYY" value="" required>
+                        <input type="text" class="form-control" id="fechaFin" [(ngModel)]="encuesta.fechaFin" name="encuesta.fechaFin" placeholder="DD/MM/YYYY" value="encuesta.fechaFin" >
                     </div>
                     <div class="col-md-4 col-sm-4 mb-3">
                         <label for="estado">Estado</label>
-                        <select class="custom-select d-block w-100" [(ngModel)]="encuesta.estado" id="estado" name="estado" required>
+                        <select class="custom-select d-block w-100" [(ngModel)]="encuesta.estado" id="encuesta.estado"  value="encuesta.estado"name="encuesta.estado" >
                             <option value="">Choose...</option>
                             <option>A</option>
                             <option>I</option>
@@ -36,7 +36,7 @@
                         <label for="estudio">Estudio relacionado</label>
                     </div>
                     <div class="col-md-8 col-sm-6 mb-3">
-                        <select class="custom-select d-block w-100" [(ngModel)]="encuesta.dtoEstudio" id="dtoEstudio" name="dtoEstudio" required>
+                        <select class="custom-select d-block w-100" [(ngModel)]="encuesta.dtoEstudio" id="dtoEstudio" value="encuesta.dtoEstudio" name="encuesta.dtoEstudio" >
                             <option value="">Choose...</option>
                             <option *ngFor="let estudio of estudios">{{ estudio.nombre }}</option>
                         </select>

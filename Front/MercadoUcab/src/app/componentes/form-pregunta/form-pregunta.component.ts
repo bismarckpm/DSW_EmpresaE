@@ -16,16 +16,16 @@ export class FormPreguntaComponent implements OnInit {
 
   ///Declaracion de l obejto Pregunta 
   @Input() Pregunta ={ 
-    id:0, 
+    _id:0, 
     descripcion:'',
     estado:'',
     dtoTipoPregunta:{
-      id:0,
+      _id:0,
       estado:'',
       tipo:''
     } ,
     dtoSubcategoria:{
-      id:0, 
+      _id:0, 
       nombre:'',
       estado:'', 
       }

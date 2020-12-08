@@ -8,20 +8,20 @@ import { Ocupacion } from './ocupacion';
 import { Usuario } from './usuario';
 
 export interface Encuestado {
-   id: number;
-   primerNombre: string;
-   segundoNombre: string;
-   primerApeliido: string;
-   segundoApeliido: string;
-   fechaNacimiento: string;
-
-   dtoEstado: EstadoCivil;
-   dtoNivelAcademico: NivelAcademico;
-   dtoMedioConexion: MedioConexion;
-   dtoGenero: Genero;
-   dtoOcupacion: Ocupacion;
-   dtoNivelSocioeconomico: NivelSocioEconomico;
-   dtoLugar: Lugar;
-   dtoUsuario: Usuario;
+   _id:number;
+   primerNombre:string;
+   segundoNombre:string;
+   primerApeliido:string;
+   segundoApeliido:string;
+   fechaNacimiento:string;
+   
+   dtoEstado:EstadoCivil;
+   dtoNivelAcademico:NivelAcademico;
+   dtoMedioConexion:MedioConexion;
+   dtoGenero:Genero;
+   dtoOcupacion:Ocupacion;
+   dtoNivelSocioeconomico:NivelSocioEconomico;
+   dtoLugar:Lugar;
+   dtoUsuario:Usuario;
 
 }

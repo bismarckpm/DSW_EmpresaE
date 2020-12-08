@@ -18,13 +18,13 @@ import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 export class ListaEstudiosComponent implements OnInit {
 
 
-  // Declaracion de variables
- estudios: Estudio[] = [];
- id = this.actRoute.snapshot.params.id;
- @Input() estudioData = {id: 0, nombre: '', estado: '', comentarioAnalista : '', edadMinima: 0, edadMaxima: 0 , fechaInicio: '', fechaFin: '',
-             dtoLugar : {id: 0, estado: '', nombre: '', tipo: ''},
-             dtoNivelSocioEconomico: {id: 0, nombre: '', estado: '', descripcion: ''},
-             dtoSubcategoria : {id: 0, nombre: '', estado: ''},
+  //Declaracion de variables 
+ estudios: Estudio[]=[];
+ _id = this.actRoute.snapshot.params['_id'];
+ @Input() estudioData={_id:0, nombre:'',estado:'',comentarioAnalista :'', edadMinima:0,edadMaxima:0 ,fechaInicio:'', fechaFin: '',
+             dtoLugar : {_id:0,estado:'',nombre:'',tipo:''},
+             dtoNivelSocioEconomico:{_id:0,nombre:'',estado:'', descripcion:''},
+             dtoSubcategoria : {_id:0, nombre:'',estado:''},
             };
   // Declaracion para los dropdown
   nivelSocioEconomico: any;
@@ -72,9 +72,9 @@ export class ListaEstudiosComponent implements OnInit {
 
   updateEstudio(){
     if (this.formEstudio.valid) {
-    this.estudioService.updateEstudio(this.estudioData.id, this.estudioData).subscribe(data => {
-     });
-    this.loadEstudios();
+    this.estudioService.updateEstudio(this.estudioData._id, this.estudioData).subscribe(data => {
+     })
+     this.loadEstudios();
     }
     else{
       alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
@@ -116,7 +116,7 @@ addSubcategoria(){
 }
 
 addNivelSocioEconomico(){
-  this.nivelsocioeconomicoService.getNivelSocioEconomicos().subscribe((data: {}) => {
+  this.nivelsocioeconomicoService.getNivelesSocioEconomicos().subscribe((data: {}) => {
     this.nivelSocioEconomico = data;
   });
 }

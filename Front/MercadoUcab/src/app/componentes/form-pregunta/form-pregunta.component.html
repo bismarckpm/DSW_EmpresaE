@@ -42,8 +42,8 @@
         <div class="row">
           <div class="col-md-5 mb-3">
             <label for="country">Tipo de Pregunta</label>
-            <select class="custom-select d-block w-100" [(ngModel)]= "Pregunta.dtoTipoPregunta.id" formControlName="tipoPregunta" value="Pregunta.dtoTipoPregunta.id"><!-- Hacer lo de *ngFor-->
-              <option  *ngFor="let tp of tipopregunta" [ngValue]= "tp.id" >{{tp.tipo}}</option>
+            <select class="custom-select d-block w-100" [(ngModel)]= "Pregunta.dtoTipoPregunta._id" formControlName="tipoPregunta" value="Pregunta.dtoTipoPregunta._id"><!-- Hacer lo de *ngFor-->
+              <option  *ngFor="let tp of tipopregunta" [ngValue]= "tp._id" >{{tp.tipo}}</option>
             </select>
             <div *ngIf="tipoPregunta.invalid && (tipoPregunta.dirty || tipoPregunta.touched)" class="alert alert-danger">
               <div *ngIf="tipoPregunta.errors.required">
@@ -56,9 +56,9 @@
         <div class="row">
           <div class="col-md-5 mb-3">
             <label for="country">Subcategoria asociada</label>
-            <select class="custom-select d-block w-100"   [(ngModel)]= "Pregunta.dtoSubcategoria.id"  formControlName="nombreSubcategoria" value="Pregunta.dtoSubcategoria.id"><!-- Hacer lo de *ngFor-->
+            <select class="custom-select d-block w-100"   [(ngModel)]= "Pregunta.dtoSubcategoria._id"  formControlName="nombreSubcategoria" value="Pregunta.dtoSubcategoria._id"><!-- Hacer lo de *ngFor-->
               <option value="">Choose...</option>
-              <option *ngFor="let sub of subcategoria" [ngValue]="sub.id">{{sub.nombre}}</option>
+              <option *ngFor="let sub of subcategoria" [ngValue]="sub._id">{{sub.nombre}}</option>
             </select>
             <div *ngIf="nombreSubcategoria.invalid && (nombreSubcategoria.dirty || nombreSubcategoria.touched)" class="alert alert-danger">
                     <div *ngIf="nombreSubcategoria.errors.required">

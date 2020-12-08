@@ -157,9 +157,9 @@
       <div class="form-row">
         <div class="form-group col-md-3">
           <label for="pais">Pais</label>
-          <select class="custom-select d-block w-100"  [(ngModel)]="encuestado.dtoLugar.id" formControlName="lugarEncuestado" (click)="busquedaEstado(encuestado.dtoLugar.id)" id="pais" value="encuestado.dtoLugar.id">
+          <select class="custom-select d-block w-100"  [(ngModel)]="encuestado.dtoLugar._id" formControlName="lugarEncuestado" (click)="busquedaEstado(encuestado.dtoLugar._id)" id="pais" value="encuestado.dtoLugar._id">
             <option selected>Choose...</option>
-            <option  *ngFor="let lu of lugar"  [ngValue]= "lu.id"   >{{lu.nombre}}</option>
+            <option  *ngFor="let lu of lugar"  [ngValue]= "lu._id"   >{{lu.nombre}}</option>
           </select>
           <div *ngIf="lugarEncuestado.invalid && (lugarEncuestado.dirty || lugarEncuestado.touched)" class="alert alert-danger">
             <div *ngIf="lugarEncuestado.errors.required">
@@ -169,9 +169,9 @@
         </div>
         <div class="form-group col-md-3">
           <label for="estado">Estado</label>
-          <select class="custom-select d-block w-100"  [(ngModel)]="encuestado.dtoLugar.id" (click)="busquedaCiudad(encuestado.dtoLugar.id)" formControlName="lugarEncuestado" id="estado" value="encuestado.dtoLugar.id">
+          <select class="custom-select d-block w-100"  [(ngModel)]="encuestado.dtoLugar._id"  formControlName="lugarEncuestado" id="estado" value="encuestado.dtoLugar._id">
             <option selected>Choose...</option>
-            <option  *ngFor="let estado of estados" [ngValue]= "estado.id"  >{{estado.nombre}}</option>
+            <option  *ngFor="let estado of estados" [ngValue]= "estado._id"  >{{estado.nombre}}</option>
           </select>
           <div *ngIf="lugarEncuestado.invalid && (lugarEncuestado.dirty || lugarEncuestado.touched)" class="alert alert-danger">
             <div *ngIf="lugarEncuestado.errors.required">
@@ -181,9 +181,9 @@
         </div>
         <div class="form-group col-md-3">
           <label for="ciudad">Ciudad</label>
-          <select class="custom-select d-block w-100"  [(ngModel)]="encuestado.dtoLugar.id" (click)="busquedaMunicipio(encuestado.dtoLugar.id)" formControlName="lugarEncuestado" id="ciudad" value="encuestado.dtoLugar.id">
+          <select class="custom-select d-block w-100"  [(ngModel)]="encuestado.dtoLugar._id" formControlName="lugarEncuestado" id="ciudad" value="encuestado.dtoLugar._id">
             <option selected>Choose...</option>
-            <option  *ngFor="let ciudad of ciudades" [ngValue]= "ciudad.id"  >{{ciudad.nombre}}</option>
+            <option  *ngFor="let ciudad of ciudades" [ngValue]= "ciudad._id"  >{{ciudad.nombre}}</option>
           </select>
           <div *ngIf="lugarEncuestado.invalid && (lugarEncuestado.dirty || lugarEncuestado.touched)" class="alert alert-danger">
             <div *ngIf="lugarEncuestado.errors.required">
@@ -195,9 +195,9 @@
       <div class="form-row">
         <div class="form-group col-md-3">
           <label for="municipio">Municipio</label>
-          <select class="custom-select d-block w-100"  [(ngModel)]="encuestado.dtoLugar.id" (click)="busquedaParroquia(encuestado.dtoLugar.id)" formControlName="lugarEncuestado" id="municipio" value="encuestado.dtoLugar.id">
+          <select class="custom-select d-block w-100"  [(ngModel)]="encuestado.dtoLugar._id" formControlName="lugarEncuestado" id="municipio" value="encuestado.dtoLugar._id">
             <option selected>Choose...</option>
-            <option  *ngFor="let municipio of municipios" [ngValue]= "municipio.id"  >{{municipio.nombre}}</option>
+            <option  *ngFor="let municipio of municipios" [ngValue]= "municipio._id"  >{{municipio.nombre}}</option>
           </select>
           <div *ngIf="lugarEncuestado.invalid && (lugarEncuestado.dirty || lugarEncuestado.touched)" class="alert alert-danger">
             <div *ngIf="lugarEncuestado.errors.required">
@@ -207,9 +207,9 @@
         </div>
         <div class="form-group col-md-3">
           <label for="parroquia">Parroquia</label>
-          <select class="custom-select d-block w-100"  [(ngModel)]="encuestado.dtoLugar.id" (click)="busquedaParroquia(encuestado.dtoLugar.id)" formControlName="lugarEncuestado" id="parroquia" value="encuestado.dtoLugar.id">
+          <select class="custom-select d-block w-100"  [(ngModel)]="encuestado.dtoLugar._id" (click)="busquedaParroquia(encuestado.dtoLugar._id)" formControlName="lugarEncuestado" id="parroquia" value="encuestado.dtoLugar._id">
             <option selected>Choose...</option>
-            <option  *ngFor="let parroquia of parroquias" [ngValue]= "parroquia.id"  >{{parroquia.nombre}}</option>
+            <option  *ngFor="let parroquia of parroquias" [ngValue]= "parroquia._id"  >{{parroquia.nombre}}</option>
           </select>
           <div *ngIf="lugarEncuestado.invalid && (lugarEncuestado.dirty || lugarEncuestado.touched)" class="alert alert-danger">
             <div *ngIf="lugarEncuestado.errors.required">

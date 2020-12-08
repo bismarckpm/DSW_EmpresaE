@@ -89,6 +89,8 @@ export class RegistrarseComponent implements OnInit {
     }
   }
 
+ 
+
   addEstadoCivil(){
     this.estadoCivilService.getEstadosCiviles().subscribe((EstadosCiviles: {}) => {
       this.estadoCivil = EstadosCiviles;

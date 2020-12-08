@@ -14,7 +14,7 @@ import { TipoPreguntaService } from '../../services/tipo-pregunta.service';
 export class FormEncuestaComponent implements OnInit {
 
   @Input() encuesta: Encuesta = {
-    id: 0,
+    _id: 0,
     estado: '',
     fechaInicio: '',
     fechaFin: '',

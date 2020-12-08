@@ -1,43 +1,43 @@
 {
   "categoria": [
     {
-      "_id": 5,
+      "id": 5,
       "nombre": "pedro gutierres",
       "estado": "i"
     },
     {
-      "_id": 8,
+      "id": 8,
       "nombre": "asd",
       "estado": "a"
     }
   ],
   "subcategoria": [
     {
-      "_id": 1,
+      "id": 1,
       "nombre": "pedro gutierres",
       "estado": "i",
       "dtoCategoria": {
-        "_id": 5,
+        "id": 5,
         "nombre": "pedro gutierres",
         "estado": "i"
       }
     },
     {
-      "_id": 3,
+      "id": 3,
       "nombre": "tt",
       "estado": "a",
       "dtoCategoria": {
-        "_id": 5,
+        "id": 5,
         "nombre": "pedro gutierres",
         "estado": "i"
       }
     },
     {
-      "_id": 4,
+      "id": 4,
       "nombre": "eee",
       "estado": "a",
       "dtoCategoria": {
-        "_id": 5,
+        "id": 5,
         "nombre": "pedro gutierres",
         "estado": "i"
       }
@@ -45,82 +45,82 @@
   ],
   "marca": [
     {
-      "_id": 1,
+      "id": 1,
       "nombre": "Pepsi",
       "estado": "i"
     },
     {
-      "_id": 2,
+      "id": 2,
       "nombre": "Chucheria",
       "estado": "a"
     }
   ],
   "presentacion": [
     {
-      "_id": 1,
+      "id": 1,
       "descripcion": "a",
       "estado": "a"
     },
     {
-      "_id": 2,
+      "id": 2,
       "descripcion": "aerosol",
       "estado": "a"
     },
     {
-      "_id": 4,
+      "id": 4,
       "descripcion": "pedro",
       "estado": "i"
     }
   ],
   "tipopregunta": [
     {
-      "_id": 1,
+      "id": 1,
       "estado": "a",
       "tipo": "verdadero y Falso"
     },
     {
-      "_id": 2,
+      "id": 2,
       "estado": "a",
       "tipo": "simple"
     },
     {
-      "_id": 4,
+      "id": 4,
       "estado": "i",
       "tipo": "multiple"
     },
     {
-      "_id": 5,
+      "id": 5,
       "estado": "i",
       "tipo": "libre"
     }
   ],
   "pregunta": [
     {
-      "_id": 1,
+      "id": 1,
       "descripcion": "asdsad",
       "estado": "a",
       "dtoTipoPregunta": {
-        "_id": 1,
+        "id": 1,
         "estado": "a",
         "tipo": "verdadero y Falso"
       },
       "dtoSubcategoria": {
-        "_id": 1,
+        "id": 1,
         "nombre": "pedro gutierres",
         "estado": "i"
       }
     },
     {
-      "_id": 2,
+      "id": 2,
       "descripcion": "Prueba exitosa Editar",
       "estado": "a",
       "dtoTipoPregunta": {
-        "_id": 1,
+        "id": 1,
         "estado": "i",
         "tipo": "multiple"
       },
       "dtoSubcategoria": {
-        "_id": 3,
+        "id": 3,
         "nombre": "pedro gutierres",
         "estado": "i"
       }
@@ -128,13 +128,13 @@
   ],
   "tipo": [
     {
-      "_id": 1,
+      "id": 1,
       "nombre": "tipo modificado",
       "estado": "a",
       "descripcion": "descr nueva"
     },
     {
-      "_id": 2,
+      "id": 2,
       "nombre": "ttttt",
       "estado": "a",
       "descripcion": "jojoj"
@@ -142,7 +142,7 @@
   ],
   "estudio": [
     {
-      "_id": 1,
+      "id": 1,
       "nombre": "Chucheria",
       "estado": "procesado",
       "comentarioAnalista": "",
@@ -152,14 +152,14 @@
       "fechaFin": "20/8/20",
       "dtoLugar": [
         {
-          "_id": 1,
+          "id": 1,
           "nombre": "Venezuela",
           "tipo": "pais"
         }
       ],
       "dtoNivelSocioEconomico": [
         {
-          "_id": 1,
+          "id": 1,
           "estado": "a",
           "nombre": "pobre",
           "descripcion": "pobre nivel descomunal"
@@ -167,7 +167,7 @@
       ]
     },
     {
-      "_id": 2,
+      "id": 2,
       "nombre": "asd",
       "estado": "solicitado",
       "comentarioAnalista": "",
@@ -176,19 +176,19 @@
       "fechaInicio": "18/05/2020",
       "fechaFin": "19/05/2020",
       "dtoLugar": {
-        "_id": 0,
+        "id": 0,
         "estado": "",
         "nombre": "",
         "tipo": ""
       },
       "dtoNivelSocioEconomico": {
-        "_id": 0,
+        "id": 0,
         "nombre": "",
         "estado": "",
         "descripcion": ""
       },
       "dtoSubcategoria": {
-        "_id": 0,
+        "id": 0,
         "nombre": "",
         "estado": ""
       }
@@ -264,42 +264,42 @@
   ],
   "lugar": [
     {
-      "_id": 1,
+      "id": 1,
       "nombre": "Venezuela",
       "tipo": "pais"
     },
     {
-      "_id": 2,
+      "id": 2,
       "nombre": "Colombia",
       "tipo": "pais"
     },
     {
-      "_id": 3,
-      "nombre": "Estados Un_idos",
+      "id": 3,
+      "nombre": "Estados Unidos",
       "tipo": "pais"
     }
   ],
   "nivelsocioeconomico": [
     {
-      "_id": 1,
+      "id": 1,
       "estado": "a",
       "nombre": "bajo",
       "descripcion": ""
     },
     {
-      "_id": 2,
+      "id": 2,
       "estado": "a",
       "nombre": "medio",
       "descripcion": ""
     },
     {
-      "_id": 3,
+      "id": 3,
       "estado": "a",
       "nombre": "Alto",
       "descripcion": ""
     },
     {
-      "_id": 4,
+      "id": 4,
       "estado": "a",
       "nombre": "sin recurso",
       "descripcion": ""

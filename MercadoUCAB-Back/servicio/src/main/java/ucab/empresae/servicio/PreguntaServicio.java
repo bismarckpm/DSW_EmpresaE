@@ -1,6 +1,8 @@
 package ucab.empresae.servicio;
 
 import ucab.empresae.daos.DaoPregunta;
+import ucab.empresae.daos.DaoSubcategoria;
+import ucab.empresae.daos.DaoTipoPregunta;
 import ucab.empresae.dtos.DtoPregunta;
 import ucab.empresae.entidades.PreguntaEntity;
 import ucab.empresae.entidades.SubcategoriaEntity;
@@ -33,19 +35,22 @@ public class PreguntaServicio {
     public Response addPregunta(DtoPregunta dtoPregunta) {
 
         DaoPregunta dao = new DaoPregunta();
+        DaoTipoPregunta daoTipoPregunta = new DaoTipoPregunta();
+        DaoSubcategoria daoSubcategoria = new DaoSubcategoria();
+
         PreguntaEntity pregunta = new PreguntaEntity();
 
         if(pregunta != null) {
             pregunta.setDescripcion(dtoPregunta.getDescripcion());
             pregunta.setEstado(dtoPregunta.getEstado());
 
-            SubcategoriaEntity subcategoria = new SubcategoriaEntity(dtoPregunta.getSubcategoria().getId());
+            SubcategoriaEntity subcategoria = daoSubcategoria.find(dtoPregunta.getSubcategoria().getId(), SubcategoriaEntity.class);
             pregunta.setSubcategoria(subcategoria);
-            TipoPreguntaEntity tipoPregunta = new TipoPreguntaEntity(dtoPregunta.getTipo().getId());
+            TipoPreguntaEntity tipoPregunta = daoTipoPregunta.find(dtoPregunta.getTipo().getId(), TipoPreguntaEntity.class);
             pregunta.setTipo(tipoPregunta);
 
             PreguntaEntity resul = dao.insert(pregunta);
-            return Response.ok(pregunta).build();
+            return Response.ok().entity(resul).build();
         }
         else {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();

@@ -57,7 +57,7 @@ public class SubcategoriaServicio extends AplicacionBase {
             SubcategoriaEntity subcategoriaEntity = new SubcategoriaEntity();
             subcategoriaEntity.setNombre(dtoSubcategoria.getNombre());
             subcategoriaEntity.setEstado(dtoSubcategoria.getEstado());
-            subcategoriaEntity.setCategoria(new CategoriaEntity(dtoSubcategoria.getDtoCategoria().getId()));
+            subcategoriaEntity.setCategoria(new CategoriaEntity(dtoSubcategoria.getCategoria().getId()));
 
             return Response.ok(dao.update(subcategoriaEntity)).build();
         } catch(Exception ex){

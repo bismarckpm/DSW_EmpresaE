@@ -70,6 +70,9 @@ public class NivelSocioeconomicoEntity extends BaseEntity{
         this.estudios = estudios;
     }
 
+
+    public NivelSocioeconomicoEntity() {
+    }
     public NivelSocioeconomicoEntity(long id) {
         super(id);
     }

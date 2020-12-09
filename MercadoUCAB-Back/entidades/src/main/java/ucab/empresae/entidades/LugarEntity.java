@@ -102,6 +102,9 @@ public class LugarEntity extends BaseEntity{
         this.estudios = estudios;
     }
 
+    public LugarEntity() {
+
+    }
     public LugarEntity(long id) {
         super(id);
     }

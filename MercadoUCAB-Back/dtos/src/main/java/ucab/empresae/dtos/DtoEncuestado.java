@@ -11,14 +11,14 @@ public class DtoEncuestado extends DtoBase {
     private String fechaNacimiento;
 
     //Relaciones
-    private DtoEstadoCivil dtoEstadoCivil;
-    private DtoNivelAcademico dtoNivelAcademico;
-    private DtoMedioConexion dtoMedioConexion;
-    private DtoGenero dtoGenero;
-    private DtoOcupacion dtoOcupacion;
-    private DtoNivelSocioEconomico dtoNivelSocioeconomico;
-    private DtoLugar dtoLugar;
-    private DtoUsuario dtoUsuario;
+    private DtoEstadoCivil estadoCivil;
+    private DtoNivelAcademico nivelAcademico;
+    private DtoMedioConexion medioConexion;
+    private DtoGenero genero;
+    private DtoOcupacion ocupacion;
+    private DtoNivelSocioEconomico nivelSocioeco;
+    private DtoLugar lugar;
+    private DtoUsuario usuario;
 
     //Constructores
     public DtoEncuestado() {
@@ -79,67 +79,67 @@ public class DtoEncuestado extends DtoBase {
     }
 
     public DtoEstadoCivil getEstadoCivil() {
-        return dtoEstadoCivil;
+        return estadoCivil;
     }
 
     public void setEstadocivil(DtoEstadoCivil edocivil) {
-        this.dtoEstadoCivil = edocivil;
+        this.estadoCivil = edocivil;
     }
 
     public DtoNivelAcademico getNivelAcademico() {
-        return dtoNivelAcademico;
+        return nivelAcademico;
     }
 
     public void setNivelAcademico(DtoNivelAcademico nivelacademico) {
-        this.dtoNivelAcademico = nivelacademico;
+        this.nivelAcademico = nivelacademico;
     }
 
     public DtoMedioConexion getMedioConexion() {
-        return dtoMedioConexion;
+        return medioConexion;
     }
 
     public void setMedioConexion(DtoMedioConexion medioconexion) {
-        this.dtoMedioConexion = medioconexion;
+        this.medioConexion = medioconexion;
     }
 
     public DtoGenero getGenero() {
-        return dtoGenero;
+        return genero;
     }
 
     public void setGenero(DtoGenero genero) {
-        this.dtoGenero = genero;
+        this.genero = genero;
     }
 
     public DtoOcupacion getOcupacion() {
-        return dtoOcupacion;
+        return ocupacion;
     }
 
     public void setOcupacion(DtoOcupacion ocupacion) {
-        this.dtoOcupacion = ocupacion;
+        this.ocupacion = ocupacion;
     }
 
     public DtoNivelSocioEconomico getNivelSocioeco() {
-        return dtoNivelSocioeconomico;
+        return nivelSocioeco;
     }
 
-    public void setNivelSocioeco(DtoNivelSocioEconomico nivelsocioeco) {
-        this.dtoNivelSocioeconomico = nivelsocioeco;
+    public void setNivelSocioeco(DtoNivelSocioEconomico nivelsocioeconomico) {
+        this.nivelSocioeco = nivelsocioeconomico;
     }
 
     public DtoLugar getLugar() {
-        return dtoLugar;
+        return lugar;
     }
 
     public void setLugar(DtoLugar lugar) {
-        this.dtoLugar = lugar;
+        this.lugar = lugar;
     }
 
     public DtoUsuario getUsuario() {
-        return dtoUsuario;
+        return usuario;
     }
 
     public void setUsuario(DtoUsuario usuario) {
-        this.dtoUsuario = usuario;
+        this.usuario = usuario;
     }
 
 }

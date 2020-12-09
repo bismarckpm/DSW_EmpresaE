@@ -8,9 +8,8 @@ import java.util.List;
 public class GeneroEntity extends BaseEntity {
     private String estado;
     private String nombre;
-    private List<HijoEntity> hijos;
-    private List<EncuestadoEntity> encuestados;
-    private List<EstudioEntity> estudios;
+    //private List<HijoEntity> hijos;
+    //private List<EncuestadoEntity> encuestados;
 
     public GeneroEntity( long id )
     {
@@ -39,7 +38,7 @@ public class GeneroEntity extends BaseEntity {
         this.nombre = nombre;
     }
 
-    @OneToMany(mappedBy = "genero")
+    /*@OneToMany(mappedBy = "genero")
     public List<HijoEntity> getHijos() {
         return hijos;
     }
@@ -55,9 +54,10 @@ public class GeneroEntity extends BaseEntity {
 
     public void setEncuestados(List<EncuestadoEntity> encuestados) {
         this.encuestados = encuestados;
-    }
+    }*/
 
     @ManyToMany(mappedBy = "generos")
+    private List<EstudioEntity> estudios;
     public List<EstudioEntity> getEstudios() {
         return estudios;
     }

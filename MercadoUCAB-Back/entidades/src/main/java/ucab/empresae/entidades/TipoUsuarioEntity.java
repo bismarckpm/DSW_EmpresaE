@@ -8,7 +8,7 @@ import java.util.List;
 public class TipoUsuarioEntity extends BaseEntity{
     private String descripcion;
     private String estado;
-    private List<UsuarioEntity> usuarios;
+    //private List<UsuarioEntity> usuarios;
 
     @Basic
     @Column(name = "descripcion")
@@ -30,12 +30,12 @@ public class TipoUsuarioEntity extends BaseEntity{
         this.estado = estado;
     }
 
-    @OneToMany(mappedBy = "tipousuario")
+    /*@OneToMany(mappedBy = "tipousuario")
     public List<UsuarioEntity> getUsuarios() {
         return usuarios;
     }
 
     public void setUsuarios(List<UsuarioEntity> usuarios) {
         this.usuarios = usuarios;
-    }
+    }*/
 }

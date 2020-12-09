@@ -8,7 +8,7 @@ import java.util.List;
 public class EstadoCivilEntity extends BaseEntity{
     private String estado;
     private String nombre;
-    private List<EncuestadoEntity> encuestados;
+    //private List<EncuestadoEntity> encuestados;
 
     public EstadoCivilEntity( long id )
     {
@@ -37,12 +37,12 @@ public class EstadoCivilEntity extends BaseEntity{
         this.nombre = nombre;
     }
 
-    @OneToMany(mappedBy = "edocivil")
+    /*@OneToMany(mappedBy = "edocivil")
     public List<EncuestadoEntity> getEncuestados() {
         return encuestados;
     }
 
     public void setEncuestados(List<EncuestadoEntity> encuestados) {
         this.encuestados = encuestados;
-    }
+    }*/
 }

@@ -9,10 +9,10 @@ public class LugarEntity extends BaseEntity{
     private String estado;
     private String nombre;
     private String tipo;
-    private List<ClienteEntity> clientes;
-    private List<EncuestadoEntity> encuestados;
-    private List<LugarEntity> lugares;
-    private List<EstudioEntity> estudios;
+    //private List<ClienteEntity> clientes;
+    //private List<EncuestadoEntity> encuestados;
+    //private List<LugarEntity> lugares;
+    //private List<EstudioEntity> estudios;
 
     @Basic
     @Column(name = "estado")
@@ -55,6 +55,17 @@ public class LugarEntity extends BaseEntity{
         this.lugar = lugar;
     }
 
+    /*@ManyToOne
+    @JoinColumn(name = "id_nivelsocioeco", referencedColumnName = "id")
+    private NivelSocioeconomicoEntity nivelsocioeco;
+    public NivelSocioeconomicoEntity getNivelsocioeco() {
+        return nivelsocioeco;
+    }
+
+    public void setNivelsocioeco(NivelSocioeconomicoEntity nivelsocioeco) {
+        this.nivelsocioeco = nivelsocioeco;
+    }*/
+
     public LugarEntity(long id) {
         super(id);
     }
@@ -92,17 +103,6 @@ public class LugarEntity extends BaseEntity{
 
     public void setClientes(List<ClienteEntity> clientes) {
         this.clientes = clientes;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "id_nivelsocioeco", referencedColumnName = "id")
-    private NivelSocioeconomicoEntity nivelsocioeco;
-    public NivelSocioeconomicoEntity getNivelsocioeco() {
-        return nivelsocioeco;
-    }
-
-    public void setNivelsocioeco(NivelSocioeconomicoEntity nivelsocioeco) {
-        this.nivelsocioeco = nivelsocioeco;
     }
 
 

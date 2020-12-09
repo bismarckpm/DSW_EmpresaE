@@ -8,7 +8,7 @@ import java.util.List;
 public class MedioConexionEntity extends BaseEntity{
     private String estado;
     private String nombre;
-    private List<EncuestadoEntity> encuestados;
+    //private List<EncuestadoEntity> encuestados;
 
     public MedioConexionEntity( long id )
     {
@@ -37,12 +37,12 @@ public class MedioConexionEntity extends BaseEntity{
         this.nombre = nombre;
     }
 
-    @OneToMany(mappedBy = "medioconexion")
+    /*@OneToMany(mappedBy = "medioconexion")
     public List<EncuestadoEntity> getEncuestados() {
         return encuestados;
     }
 
     public void setEncuestados(List<EncuestadoEntity> encuestados) {
         this.encuestados = encuestados;
-    }
+    }*/
 }

@@ -8,7 +8,7 @@ public class DtoBase {
 
     public DtoBase( long id ) throws Exception
     {
-        setId( id );
+        set_id( id );
     }
 
     public DtoBase()
@@ -20,7 +20,7 @@ public class DtoBase {
         return _id;
     }
 
-    public void setId( long id ) throws PruebaExcepcion
+    public void set_id( long id ) throws PruebaExcepcion
     {
         if ( id >= 0 )
         {

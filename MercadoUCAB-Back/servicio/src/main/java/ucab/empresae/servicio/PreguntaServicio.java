@@ -30,7 +30,6 @@ public class PreguntaServicio {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/addPregunta")
     public Response addPregunta(DtoPregunta dtoPregunta) {
 
         DaoPregunta dao = new DaoPregunta();
@@ -40,9 +39,9 @@ public class PreguntaServicio {
             pregunta.setDescripcion(dtoPregunta.getDescripcion());
             pregunta.setEstado(dtoPregunta.getEstado());
 
-            SubcategoriaEntity subcategoria = new SubcategoriaEntity(dtoPregunta.getDtoSubcategoria().getId());
+            SubcategoriaEntity subcategoria = new SubcategoriaEntity(dtoPregunta.getSubcategoria().getId());
             pregunta.setSubcategoria(subcategoria);
-            TipoPreguntaEntity tipoPregunta = new TipoPreguntaEntity(dtoPregunta.getDtoTipoPregunta().getId());
+            TipoPreguntaEntity tipoPregunta = new TipoPreguntaEntity(dtoPregunta.getTipo().getId());
             pregunta.setTipo(tipoPregunta);
 
             PreguntaEntity resul = dao.insert(pregunta);
@@ -69,7 +68,7 @@ public class PreguntaServicio {
     }
 
     @PUT
-    @Path("/updatePregunta/{id}")
+    @Path("/{id}")
     public Response updatePregunta(@PathParam("id") long id, DtoPregunta dtoPregunta) {
 
         DaoPregunta dao = new DaoPregunta();
@@ -79,9 +78,9 @@ public class PreguntaServicio {
             pregunta.setEstado(dtoPregunta.getEstado());
             pregunta.setDescripcion(dtoPregunta.getDescripcion());
 
-            SubcategoriaEntity subcategoria = new SubcategoriaEntity(dtoPregunta.getDtoSubcategoria().getId());
+            SubcategoriaEntity subcategoria = new SubcategoriaEntity(dtoPregunta.getSubcategoria().getId());
             pregunta.setSubcategoria(subcategoria);
-            TipoPreguntaEntity tipoPregunta = new TipoPreguntaEntity(dtoPregunta.getDtoTipoPregunta().getId());
+            TipoPreguntaEntity tipoPregunta = new TipoPreguntaEntity(dtoPregunta.getTipo().getId());
             pregunta.setTipo(tipoPregunta);
 
             PreguntaEntity resul = dao.update(pregunta);

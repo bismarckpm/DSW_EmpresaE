@@ -45,6 +45,10 @@ createPregunta(Pregunta):Observable<Pregunta[]>{
 }
 
 updatePregunta(id,Pregunta):Observable<Pregunta[]>{
+  console.log("=========Imprimiendo el objeto=============");
+  console.log(Pregunta);
+  console.log("=========Imprimiendo el objeto=============");
+
   return this.http.put<Pregunta[]>(this.apiurl+'/pregunta/'+id,JSON.stringify(Pregunta), this.httpOptions)
   .pipe(
     retry(1),

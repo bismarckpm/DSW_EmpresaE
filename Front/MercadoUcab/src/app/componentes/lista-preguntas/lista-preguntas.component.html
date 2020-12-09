@@ -15,8 +15,8 @@
         <td>{{ pregunta._id }}</td>
         <td>{{ pregunta.descripcion }}</td>
         <td>{{ pregunta.estado }}</td>
-        <td>{{ pregunta.dtoSubcategoria.nombre}}</td>
-        <td>{{ pregunta.dtoTipoPregunta.tipo}}</td>
+        <td>{{ pregunta.subcategoria.nombre}}</td>
+        <td>{{ pregunta.tipo.tipo}}</td>
         <td>
           <div class="d-flex justify-content-around">
             <button type="button" class="btn btn-primary" data-toggle="modal" (click)="editar(pregunta)" data-target="#exampleModal">
@@ -71,8 +71,8 @@
                       <div class="row">
                         <div class="col-md-5 mb-3">
                           <label for="country">Tipo de Pregunta</label>
-                          <select class="custom-select d-block w-100" [(ngModel)]= "preguntaData.dtoTipoPregunta._id" formControlName="tipoPregunta"  name="preguntaData.dtoTipoPregunta._id"value="preguntaData.dtoTipoPregunta._id"><!-- Hacer lo de *ngFor-->
-                            <option  *ngFor="let tp of tipopregunta" [ngValue]= "tp._id" >{{tp.tipo}}</option>
+                          <select class="custom-select d-block w-100" [(ngModel)]= "preguntaData.tipo._id" formControlName="tipoPregunta"  name="preguntaData.tipo._id"value="preguntaData.tipo._id"><!-- Hacer lo de *ngFor-->
+                            <option  *ngFor="let tp of tipopreguntas" [ngValue]= "tp._id" >{{tp.tipo}}</option>
                           </select>
                           <div *ngIf="tipoPregunta.invalid && (tipoPregunta.dirty || tipoPregunta.touched)" class="alert alert-danger">
                             <div *ngIf="tipoPregunta.errors.required">
@@ -85,9 +85,9 @@
                       <div class="row">
                         <div class="col-md-5 mb-3">
                           <label for="country">Subcategoria asociada</label>
-                          <select class="custom-select d-block w-100"  name="preguntaData.dtoSubcategoria._id" [(ngModel)]= "preguntaData.dtoSubcategoria._id"  formControlName="nombreSubcategoria" value="preguntaData.dtoSubcategoria._id"><!-- Hacer lo de *ngFor-->
+                          <select class="custom-select d-block w-100"  name="preguntaData.subcategoria._id" [(ngModel)]= "preguntaData.subcategoria._id"  formControlName="nombreSubcategoria" value="preguntaData.subcategoria._id"><!-- Hacer lo de *ngFor-->
                             <option value="">Choose...</option>
-                            <option *ngFor="let sub of subcategoria" [ngValue]="sub._id">{{sub.nombre}}</option>
+                            <option *ngFor="let sub of subcategorias" [ngValue]="sub._id">{{sub.nombre}}</option>
                           </select>
                           <div *ngIf="nombreSubcategoria.invalid && (nombreSubcategoria.dirty || nombreSubcategoria.touched)" class="alert alert-danger">
                                   <div *ngIf="nombreSubcategoria.errors.required">

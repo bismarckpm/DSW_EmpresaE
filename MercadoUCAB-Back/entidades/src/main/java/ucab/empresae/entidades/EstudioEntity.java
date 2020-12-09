@@ -17,6 +17,7 @@ public class EstudioEntity extends BaseEntity{
     private LugarEntity lugar;
     private NivelSocioeconomicoEntity nivelsocioeco;
     private SubcategoriaEntity subcategoria;
+    private UsuarioEntity analista;
     private List<GeneroEntity> generos;
     private List<ClienteEstudioEntity> clienteestudios;
     private List<EstudioEncuestadoEntity> estudioencuestados;
@@ -122,6 +123,13 @@ public class EstudioEntity extends BaseEntity{
         this.subcategoria = subcategoria;
     }
 
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario_analista", referencedColumnName = "id", nullable = false)
+    public UsuarioEntity getAnalista() { return analista; }
+
+    public void setAnalista(UsuarioEntity analista) { this.analista = analista; }
+
     @ManyToMany
     @JoinTable(name = "estudio_genero", schema = "mercadeoucab", joinColumns = @JoinColumn(name = "id_estudio", referencedColumnName = "id", nullable = false), inverseJoinColumns = @JoinColumn(name = "id_genero", referencedColumnName = "id", nullable = false))
     public List<GeneroEntity> getGeneros() {
@@ -158,4 +166,5 @@ public class EstudioEntity extends BaseEntity{
     public void setEncuestas(List<EncuestaEntity> encuestas) {
         this.encuestas = encuestas;
     }
+
 }

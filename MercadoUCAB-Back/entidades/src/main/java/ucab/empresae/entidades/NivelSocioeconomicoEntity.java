@@ -9,9 +9,9 @@ public class NivelSocioeconomicoEntity extends BaseEntity{
     private String estado;
     private String nombre;
     private String descripcion;
-    private List<EncuestadoEntity> encuestados;
-    private List<LugarEntity> lugares;
-    private List<EstudioEntity> estudios;
+    //private List<EncuestadoEntity> encuestados;
+    //private List<LugarEntity> lugares;
+    //private List<EstudioEntity> estudios;
 
     @Basic
     @Column(name = "estado")
@@ -43,7 +43,7 @@ public class NivelSocioeconomicoEntity extends BaseEntity{
         this.descripcion = descripcion;
     }
 
-    @OneToMany(mappedBy = "nivelsocioeco")
+    /*@OneToMany(mappedBy = "nivelsocioeco")
     public List<EncuestadoEntity> getEncuestados() {
         return encuestados;
     }
@@ -68,7 +68,7 @@ public class NivelSocioeconomicoEntity extends BaseEntity{
 
     public void setEstudios(List<EstudioEntity> estudios) {
         this.estudios = estudios;
-    }
+    }*/
 
 
     public NivelSocioeconomicoEntity() {
@@ -76,4 +76,6 @@ public class NivelSocioeconomicoEntity extends BaseEntity{
     public NivelSocioeconomicoEntity(long id) {
         super(id);
     }
+
+    public NivelSocioeconomicoEntity(){}
 }

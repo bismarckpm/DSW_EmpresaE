@@ -77,6 +77,7 @@ public class TipoServicio {
             tipo.setNombre(dtoTipo.getNombre());
             tipo.setEstado(dtoTipo.getEstado());
             tipo.setDescripcion(dtoTipo.getDescripcion());
+            TipoEntity resul = dao.update(tipo);
             return Response.ok().entity(tipo).build();
         }
         else{

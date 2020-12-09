@@ -9,10 +9,13 @@ public class UsuarioEntity extends BaseEntity{
     private String estado;
     private String username;
     private String clave;
-    private TipoUsuarioEntity tipousuario;
-    private ClienteEntity cliente;
-    private EncuestadoEntity encuestado;
-    private List<EstudioEntity> estudiosAnalista;
+    //private ClienteEntity cliente;
+    //private EncuestadoEntity encuestado;
+    //private List<EstudioEntity> estudiosAnalista;
+
+    public UsuarioEntity(long id){super(id);}
+
+    public UsuarioEntity(){}
 
     @Basic
     @Column(name = "estado")
@@ -46,6 +49,7 @@ public class UsuarioEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_tipo", referencedColumnName = "id", nullable = false)
+    private TipoUsuarioEntity tipousuario;
     public TipoUsuarioEntity getTipousuario() {
         return tipousuario;
     }
@@ -54,7 +58,7 @@ public class UsuarioEntity extends BaseEntity{
         this.tipousuario = tipousuario;
     }
 
-    @OneToOne(mappedBy = "usuario")
+    /*@OneToOne(mappedBy = "usuario")
     public ClienteEntity getCliente() {
         return cliente;
     }
@@ -72,7 +76,7 @@ public class UsuarioEntity extends BaseEntity{
         this.encuestado = encuestado;
     }
 
-    /*@OneToMany(mappedBy = "analista")
+    @OneToMany(mappedBy = "analista")
     public List<EstudioEntity> getEstudiosAnalista() {
         return this.estudiosAnalista;
     }

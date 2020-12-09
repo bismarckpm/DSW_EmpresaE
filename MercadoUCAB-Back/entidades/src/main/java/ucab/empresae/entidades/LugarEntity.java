@@ -9,12 +9,10 @@ public class LugarEntity extends BaseEntity{
     private String estado;
     private String nombre;
     private String tipo;
-    private List<ClienteEntity> clientes;
-    private List<EncuestadoEntity> encuestados;
-    private List<LugarEntity> lugares;
-    private LugarEntity lugar;
-    private NivelSocioeconomicoEntity nivelsocioeco;
-    private List<EstudioEntity> estudios;
+    //private List<ClienteEntity> clientes;
+    //private List<EncuestadoEntity> encuestados;
+    //private List<LugarEntity> lugares;
+    //private List<EstudioEntity> estudios;
 
     @Basic
     @Column(name = "estado")
@@ -46,35 +44,9 @@ public class LugarEntity extends BaseEntity{
         this.tipo = tipo;
     }
 
-    @OneToMany(mappedBy = "lugar")
-    public List<ClienteEntity> getClientes() {
-        return clientes;
-    }
-
-    public void setClientes(List<ClienteEntity> clientes) {
-        this.clientes = clientes;
-    }
-
-    @OneToMany(mappedBy = "lugar")
-    public List<EncuestadoEntity> getEncuestados() {
-        return encuestados;
-    }
-
-    public void setEncuestados(List<EncuestadoEntity> encuestados) {
-        this.encuestados = encuestados;
-    }
-
-    @OneToMany(mappedBy = "lugar")
-    public List<LugarEntity> getLugares() {
-        return lugares;
-    }
-
-    public void setLugares(List<LugarEntity> lugares) {
-        this.lugares = lugares;
-    }
-
     @ManyToOne
     @JoinColumn(name = "id_recursiva", referencedColumnName = "id")
+    private LugarEntity lugar;
     public LugarEntity getLugar() {
         return lugar;
     }
@@ -83,17 +55,28 @@ public class LugarEntity extends BaseEntity{
         this.lugar = lugar;
     }
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "id_nivelsocioeco", referencedColumnName = "id")
+    private NivelSocioeconomicoEntity nivelsocioeco;
     public NivelSocioeconomicoEntity getNivelsocioeco() {
         return nivelsocioeco;
     }
 
     public void setNivelsocioeco(NivelSocioeconomicoEntity nivelsocioeco) {
         this.nivelsocioeco = nivelsocioeco;
+    }*/
+
+    public LugarEntity(long id) {
+        super(id);
     }
 
+    public LugarEntity(){}
+
+
+    /*
+
     @OneToMany(mappedBy = "lugar")
+    @JsonbTransient
     public List<EstudioEntity> getEstudios() {
         return estudios;
     }
@@ -102,10 +85,35 @@ public class LugarEntity extends BaseEntity{
         this.estudios = estudios;
     }
 
-    public LugarEntity() {
+    @OneToMany(mappedBy = "lugar")
+    @JsonbTransient
+    public List<LugarEntity> getLugares() {
+        return lugares;
+    }
 
+    public void setLugares(List<LugarEntity> lugares) {
+        this.lugares = lugares;
     }
-    public LugarEntity(long id) {
-        super(id);
+
+     @OneToMany(mappedBy = "lugar")
+    @JsonbTransient
+    public List<ClienteEntity> getClientes() {
+        return clientes;
     }
+
+    public void setClientes(List<ClienteEntity> clientes) {
+        this.clientes = clientes;
+    }
+
+
+    @OneToMany(mappedBy = "lugar")
+    @JsonbTransient
+    public List<EncuestadoEntity> getEncuestados() {
+        return encuestados;
+    }
+
+    public void setEncuestados(List<EncuestadoEntity> encuestados) {
+        this.encuestados = encuestados;
+    }
+    */
 }

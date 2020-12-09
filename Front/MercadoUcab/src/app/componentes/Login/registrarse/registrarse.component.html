@@ -1,8 +1,7 @@
 <div class="registro">
-  <form class="container">
-
+  <form [formGroup]="formRegistroEncuestado" class="container">
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-3">
         <label for="primernombre">Primer Nombre</label>
         <input type="text" class="form-control" [(ngModel)]="encuestado.primerNombre" formControlName="primerNombreEncuestado" id="primernombre" name="primerNombre">
         <div *ngIf="primerNombreEncuestado.invalid && (primerNombreEncuestado.dirty || primerNombreEncuestado.touched)" class="alert alert-danger">
@@ -14,7 +13,7 @@
           </div>
         </div>
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-3">
         <label for="segundonombre">Segundo Nombre</label>
         <input type="text" class="form-control" [(ngModel)]="encuestado.segundoNombre" formControlName="segundoNombreEncuestado" id="segundonombre" name="segundoNombre">
         <div *ngIf="segundoNombreEncuestado.invalid && (segundoNombreEncuestado.dirty || segundoNombreEncuestado.touched)" class="alert alert-danger">
@@ -26,7 +25,7 @@
           </div>
         </div>
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-3">
         <label for="primerapellido">Primer Apellido</label>
         <input type="text" class="form-control" [(ngModel)]="encuestado.primerApellido" formControlName="primerApellidoEncuestado" id="primerapellido" name="primerApellido">
         <div *ngIf="primerApellidoEncuestado.invalid && (primerApellidoEncuestado.dirty || primerApellidoEncuestado.touched)" class="alert alert-danger">
@@ -38,7 +37,7 @@
           </div>
         </div>
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-3">
         <label for="segundoapellido">Segundo Apellido</label>
         <input type="text" class="form-control" [(ngModel)]="encuestado.segundoApellido" formControlName="segundoApellidoEncuestado" id="segundoapellido" name="segundoApellido">
         <div *ngIf="segundoApellidoEncuestado.invalid && (segundoApellidoEncuestado.dirty || segundoApellidoEncuestado.touched)" class="alert alert-danger">
@@ -52,9 +51,9 @@
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="estado">Estado</label>
-        <select class="custom-select d-block w-100" [(ngModel)]= "encuestado.estado" formControlName="estadoEncuestado" id="estado" name="estado">
+      <div class="form-group col-md-4">
+        <label for="estatus">Estado</label>
+        <select class="custom-select d-block w-100" [(ngModel)]= "encuestado.estado" formControlName="estadoEncuestado" id="estatus" name="estado">
           <option value="">Choose...</option>
           <option value="a">Activa</option>
           <option value="i">Inactiva</option>
@@ -65,9 +64,9 @@
           </div>
         </div>
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label for="fechanacimiento">Fecha de Nacimiento</label>
-        <input type="text" [(ngModel)]="encuestado.fechaNacimiento" formControlName="fechaNacimientoEncuestado" id="fechanacimiento" name="fechaNacimiento">
+        <input type="text" class="form-control" [(ngModel)]="encuestado.fechaNacimiento" formControlName="fechaNacimientoEncuestado" id="fechanacimiento" name="fechaNacimiento">
       </div>
       <div *ngIf="fechaNacimientoEncuestado.invalid && (fechaNacimientoEncuestado.dirty || fechaNacimientoEncuestado.touched)" class="alert alert-danger">
         <div *ngIf="fechaNacimientoEncuestado.errors.required">
@@ -81,9 +80,9 @@
       <div class="form-row">
         <div class="col-md-3">
           <label for="genero">Genero</label>
-          <select class="custom-select d-block w-100" [(ngModel)]= "encuestado.dtoGenero" formControlName="generoEncuestado" id="genero" name="genero">
+          <select class="custom-select d-block w-100" [(ngModel)]= "encuestado.dtoGenero._id" formControlName="generoEncuestado" id="genero" name="genero">
             <option value="">Choose...</option>
-            <option  *ngFor="let genero of genero" [ngValue]= "genero.id"  >{{genero.nombre}}</option>
+            <option  *ngFor="let genero of genero" [ngValue]= "genero._id"  >{{genero.nombre}}</option>
           </select>
           <div *ngIf="generoEncuestado.invalid && (generoEncuestado.dirty || generoEncuestado.touched)" class="alert alert-danger">
             <div *ngIf="generoEncuestado.errors.required">
@@ -93,9 +92,9 @@
         </div>
         <div class="col-md-3">
           <label for="estadocivil">Estado Civil</label>
-          <select class="custom-select d-block w-100" [(ngModel)]= "encuestado.dtoEstadoCivil" formControlName="estadoCivilEncuestado" id="estadocivil" name="estadoCivil">
+          <select class="custom-select d-block w-100" [(ngModel)]= "encuestado.dtoEstadoCivil._id" formControlName="estadoCivilEncuestado" id="estadocivil" name="estadoCivil">
             <option value="">Choose...</option>
-            <option  *ngFor="let estadoCivil of estadoCivil" [ngValue]= "estadoCivil.id"  >{{estadoCivil.nombre}}</option>
+            <option  *ngFor="let estadoCivil of estadoCivil" [ngValue]= "estadoCivil._id"  >{{estadoCivil.nombre}}</option>
           </select>
           <div *ngIf="estadoCivilEncuestado.invalid && (estadoCivilEncuestado.dirty || estadoCivilEncuestado.touched)" class="alert alert-danger">
             <div *ngIf="estadoCivilEncuestado.errors.required">
@@ -105,9 +104,9 @@
         </div>
         <div class="col-md-3">
           <label for="nivelsocioeconomico">Nivel Socioeconomico</label>
-          <select class="custom-select d-block w-100" [(ngModel)]= "encuestado.dtoNivelSocioEconomico" formControlName="nivelSocioeconomicoEncuestado" id="nivelsocioeconomico" name="nivelSocioeconomico">
+          <select class="custom-select d-block w-100" [(ngModel)]= "encuestado.dtoNivelSocioEconomico._id" formControlName="nivelSocioeconomicoEncuestado" id="nivelsocioeconomico" name="nivelSocioeconomico">
             <option value="">Choose...</option>
-            <option  *ngFor="let nivelSocioEconomico of nivelSocioEconomico" [ngValue]= "nivelSocioEconomico.id"  >{{nivelSocioEconomico.nombre}}</option>
+            <option  *ngFor="let nivelSocioEconomico of nivelSocioEconomico" [ngValue]= "nivelSocioEconomico._id"  >{{nivelSocioEconomico.nombre}}</option>
           </select>
           <div *ngIf="nivelSocioEconomicoEncuestado.invalid && (nivelSocioEconomicoEncuestado.dirty || nivelSocioEconomicoEncuestado.touched)" class="alert alert-danger">
             <div *ngIf="nivelSocioEconomicoEncuestado.errors.required">
@@ -117,9 +116,9 @@
         </div>
         <div class="col-md-3">
           <label for="nivelacademico">Nivel Academico</label>
-          <select class="custom-select d-block w-100" [(ngModel)]= "encuestado.dtoNivelAcademico" formControlName="nivelAcademicoEncuestado" id="nivelacademico" name="nivelAcademico">
+          <select class="custom-select d-block w-100" [(ngModel)]= "encuestado.dtoNivelAcademico._id" formControlName="nivelAcademicoEncuestado" id="nivelacademico" name="nivelAcademico">
             <option value="">Choose...</option>
-            <option  *ngFor="let nivelAcademico of nivelAcademico" [ngValue]= "nivelAcademico.id"  >{{nivelAcademico.nombre}}</option>
+            <option  *ngFor="let nivelAcademico of nivelAcademico" [ngValue]= "nivelAcademico._id"  >{{nivelAcademico.nombre}}</option>
           </select>
           <div *ngIf="nivelAcademicoEncuestado.invalid && (nivelAcademicoEncuestado.dirty || nivelAcademicoEncuestado.touched)" class="alert alert-danger">
             <div *ngIf="nivelAcademicoEncuestado.errors.required">
@@ -131,9 +130,9 @@
     <div class="form-row">
       <div class="col-md-6">
         <label for="ocupacion">Ocupacion</label>
-        <select class="custom-select d-block w-100" [(ngModel)]="encuestado.dtoOcupacion" formControlName="ocupacionEncuestado" id="ocupacion" name="ocupacion">
+        <select class="custom-select d-block w-100" [(ngModel)]="encuestado.dtoOcupacion._id" formControlName="ocupacionEncuestado" id="ocupacion" name="ocupacion">
           <option value="">Choose...</option>
-          <option  *ngFor="let ocupacion of ocupacion" [ngValue]= "ocupacion.id"  >{{ocupacion.nombre}}</option>
+          <option  *ngFor="let ocupacion of ocupacion" [ngValue]= "ocupacion._id"  >{{ocupacion.nombre}}</option>
         </select>
         <div *ngIf="ocupacionEncuestado.invalid && (ocupacionEncuestado.dirty || ocupacionEncuestado.touched)" class="alert alert-danger">
           <div *ngIf="ocupacionEncuestado.errors.required">
@@ -143,9 +142,9 @@
       </div>
       <div class="col-md-6">
         <label for="medioconexion">Medio Conexion</label>
-        <select class="custom-select d-block w-100" [(ngModel)]="encuestado.dtoMedioConexion" formControlName="medioConexionEncuestado" id="medioconexion" name="medioConexion">
+        <select class="custom-select d-block w-100" [(ngModel)]="encuestado.dtoMedioConexion._id" formControlName="medioConexionEncuestado" id="medioconexion" name="medioConexion">
           <option value="">Choose...</option>
-          <option  *ngFor="let medioConexion of medioConexion" [ngValue]= "medioConexion.id"  >{{medioConexion.nombre}}</option>
+          <option  *ngFor="let medioConexion of medioConexion" [ngValue]= "medioConexion._id"  >{{medioConexion.nombre}}</option>
         </select>
         <div *ngIf="medioConexionEncuestado.invalid && (medioConexionEncuestado.dirty || medioConexionEncuestado.touched)" class="alert alert-danger">
           <div *ngIf="medioConexionEncuestado.errors.required">
@@ -158,8 +157,8 @@
         <div class="form-group col-md-3">
           <label for="pais">Pais</label>
           <select class="custom-select d-block w-100"  [(ngModel)]="encuestado.dtoLugar._id" formControlName="lugarEncuestado" (click)="busquedaEstado(encuestado.dtoLugar._id)" id="pais" value="encuestado.dtoLugar._id">
-            <option selected>Choose...</option>
-            <option  *ngFor="let lu of lugar"  [ngValue]= "lu._id"   >{{lu.nombre}}</option>
+            <option value="">Choose...</option>
+            <option *ngFor="let lu of lugar" [ngValue]= "lu._id"   >{{lu.nombre}}</option>
           </select>
           <div *ngIf="lugarEncuestado.invalid && (lugarEncuestado.dirty || lugarEncuestado.touched)" class="alert alert-danger">
             <div *ngIf="lugarEncuestado.errors.required">
@@ -169,7 +168,7 @@
         </div>
         <div class="form-group col-md-3">
           <label for="estado">Estado</label>
-          <select class="custom-select d-block w-100"  [(ngModel)]="encuestado.dtoLugar._id"  formControlName="lugarEncuestado" id="estado" value="encuestado.dtoLugar._id">
+          <select class="custom-select d-block w-100"  [(ngModel)]="encuestado.dtoLugar._id"  formControlName="lugarEncuestado" (click)="busquedaCiudad(encuestado.dtoLugar._id)" id="estado" value="encuestado.dtoLugar._id">
             <option selected>Choose...</option>
             <option  *ngFor="let estado of estados" [ngValue]= "estado._id"  >{{estado.nombre}}</option>
           </select>
@@ -181,7 +180,7 @@
         </div>
         <div class="form-group col-md-3">
           <label for="ciudad">Ciudad</label>
-          <select class="custom-select d-block w-100"  [(ngModel)]="encuestado.dtoLugar._id" formControlName="lugarEncuestado" id="ciudad" value="encuestado.dtoLugar._id">
+          <select class="custom-select d-block w-100"  [(ngModel)]="encuestado.dtoLugar._id" formControlName="lugarEncuestado" (click)="busquedaMunicipio(encuestado.dtoLugar._id)" id="ciudad" value="encuestado.dtoLugar._id">
             <option selected>Choose...</option>
             <option  *ngFor="let ciudad of ciudades" [ngValue]= "ciudad._id"  >{{ciudad.nombre}}</option>
           </select>
@@ -195,7 +194,7 @@
       <div class="form-row">
         <div class="form-group col-md-3">
           <label for="municipio">Municipio</label>
-          <select class="custom-select d-block w-100"  [(ngModel)]="encuestado.dtoLugar._id" formControlName="lugarEncuestado" id="municipio" value="encuestado.dtoLugar._id">
+          <select class="custom-select d-block w-100"  [(ngModel)]="encuestado.dtoLugar._id" formControlName="lugarEncuestado" (click)="busquedaParroquia(encuestado.dtoLugar._id)" id="municipio" value="encuestado.dtoLugar._id">
             <option selected>Choose...</option>
             <option  *ngFor="let municipio of municipios" [ngValue]= "municipio._id"  >{{municipio.nombre}}</option>
           </select>
@@ -217,7 +216,22 @@
             </div>
           </div>
         </div>
-      </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" [(ngModel)]="encuestado.dtoUsuario.username" formControlName="usuarioEncuestado" id="username" value="">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="clave">Clave</label>
+            <input type="text" class="form-control" [(ngModel)]="encuestado.dtoUsuario.clave" formControlName="usuarioEncuestado" id="clave" value="">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="correo">Correo electronico</label>
+            <input type="text" class="form-control" [(ngModel)]="encuestado.dtoUsuario.correoElectronico" formControlName="usuarioEncuestado" id="correo" value="">
+          </div>
+        </div>
+
+        </div>
     <button (click)="addEncuestado(encuestado)" type="submit" class="btn btn-primary">Registrar</button>
   </form>
 </div>

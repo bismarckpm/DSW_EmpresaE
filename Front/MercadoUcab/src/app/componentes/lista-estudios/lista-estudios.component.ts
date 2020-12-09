@@ -18,7 +18,7 @@ import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 export class ListaEstudiosComponent implements OnInit {
 
 
-  //Declaracion de variables 
+  //Declaracion de variables
  estudios: Estudio[]=[];
  _id = this.actRoute.snapshot.params['_id'];
  @Input() estudioData={_id:0, nombre:'',estado:'',comentarioAnalista :'', edadMinima:0,edadMaxima:0 ,fechaInicio:'', fechaFin: '',
@@ -33,9 +33,14 @@ export class ListaEstudiosComponent implements OnInit {
 
   ///// Atributos para la busqueda de acuerdo a lo seleccionado
   estados: any;
+  ciudades: any;
+  municipios: any;
   parroquias: any;
   auxPaisID: number;
   auxEstadoID: number;
+  auxCiudadID: number;
+  auxMunicipioID: number;
+  auxParroquiaID: number;
 
   // Declaracion para validar
   formEstudio: FormGroup;
@@ -89,23 +94,42 @@ export class ListaEstudiosComponent implements OnInit {
 }
 
 /// Busqueda para los drop de lugar por pais seleccionado previamente
-BusquedaEstado(id){
-  // El ID es del pais
-  this.auxPaisID = id;
-  // Esta peticion se realiza para mostar todos los estados aasociado a ese pais
-  this.lugarService.getEstado(id).subscribe((data: {}) => {
-    this.estados = data;
-  });
-}
-BusquedaParroquia(id){
-  // El ID es del estado
-  this.auxEstadoID = id;
-  // Esta peticion se realiza para mostar todoas las parroquias aasociado al estado
-  this.lugarService.getParroquia(this.auxPaisID, id).subscribe((data: {}) => {
-    this.parroquias = data;
-  });
-}
+  busquedaEstado(id){
+    // El ID es del pais
+    this.auxPaisID = id;
+    // Esta peticion se realiza para mostar todos los estados aasociados a ese pais
+    this.lugarService.getEstado(id).subscribe((data: {}) => {
+      this.estados = data;
+    });
+  }
 
+  busquedaCiudad(id){
+    // El ID es del estado
+    this.auxEstadoID = id;
+    // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
+    this.lugarService.getCiudad(this.auxPaisID, id).subscribe((data: {}) => {
+      this.ciudades = data;
+    });
+  }
+
+  busquedaMunicipio(id){
+    // El ID es del estado
+    this.auxCiudadID = id;
+    // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
+    this.lugarService.getMunicipio(this.auxPaisID, this.auxEstadoID, id).subscribe((data: {}) => {
+      this.ciudades = data;
+    });
+  }
+
+
+  busquedaParroquia(id){
+    // El ID es del estado
+    this.auxMunicipioID = id;
+    // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
+    this.lugarService.getParroquia(this.auxPaisID, this.auxEstadoID, this.auxCiudadID, id).subscribe((data: {}) => {
+      this.parroquias = data;
+    });
+  }
 
 
 /// Esto es para mostrar en los drops doww

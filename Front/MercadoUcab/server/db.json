@@ -328,6 +328,185 @@
       "id": 3,
       "nombre": "Estados Unidos",
       "tipo": "pais"
+    },
+    {
+      "id": 4,
+      "nombre": "Miranda",
+      "tipo": "estado",
+      "dtoLugar": {
+        "id": 1
+      }
+    },
+    {
+      "id": 5,
+      "nombre": "Cartagena",
+      "tipo": "estado",
+      "dtoLugar": {
+        "id": 2
+      }
+    },
+    {
+      "id": 6,
+      "nombre": "Florida",
+      "tipo": "estado",
+      "dtoLugar": {
+        "id": 3
+      }
+    },
+    {
+      "id": 7,
+      "nombre": "Caracas",
+      "tipo": "ciudad",
+      "dtoLugar": {
+        "id": 4
+      }
+    },
+    {
+      "id": 8,
+      "nombre": "Bogota",
+      "tipo": "ciudad",
+      "dtoLugar": {
+        "id": 5
+      }
+    },
+    {
+      "id": 9,
+      "nombre": "Miami",
+      "tipo": "ciudad",
+      "dtoLugar": {
+        "id": 6
+      }
+    },
+    {
+      "id": 10,
+      "nombre": "Sucre",
+      "tipo": "municipio",
+      "dtoLugar": {
+        "id": 7
+      }
+    },
+    {
+      "id": 11,
+      "nombre": "municipioBogota",
+      "tipo": "municipio",
+      "dtoLugar": {
+        "id": 8
+      }
+    },
+    {
+      "id": 12,
+      "nombre": "municipioMiami",
+      "tipo": "municipio",
+      "dtoLugar": {
+        "id": 9
+      }
+    },
+    {
+      "id": 13,
+      "nombre": "Petare",
+      "tipo": "parroquia",
+      "dtoLugar": {
+        "id": 10
+      }
+    },
+    {
+      "id": 14,
+      "nombre": "parroquiabogota",
+      "tipo": "parroquia",
+      "dtoLugar": {
+        "id": 11
+      }
+    },
+    {
+      "id": 15,
+      "nombre": "parroquiamiami",
+      "tipo": "parroquia",
+      "dtoLugar": {
+        "id": 12
+      }
+    }
+  ],
+  "ocupacion": [
+    {
+      "id": 1,
+      "estado": "a",
+      "nombre": "ingeniero"
+    },
+    {
+      "id": 2,
+      "estado": "a",
+      "nombre": "medico"
+    },
+    {
+      "id": 3,
+      "estado": "a",
+      "nombre": "comerciante"
+    },
+    {
+      "id": 4,
+      "estado": "a",
+      "nombre": "periodista"
+    }
+  ],
+  "estadocivil": [
+    {
+      "id": 1,
+      "estado": "a",
+      "nombre": "soltero(a)"
+    },
+    {
+      "id": 2,
+      "estado": "a",
+      "nombre": "casado(a)"
+    },
+    {
+      "id": 3,
+      "estado": "a",
+      "nombre": "divorciado(a)"
+    }
+  ],
+  "medioconexion": [
+    {
+      "id": 1,
+      "estado": "a",
+      "nombre": "telefono"
+    },
+    {
+      "id": 2,
+      "estado": "a",
+      "nombre": "laptop"
+    },
+    {
+      "id": 3,
+      "estado": "a",
+      "nombre": "pc"
+    },
+    {
+      "id": 4,
+      "estado": "a",
+      "nombre": "tablet"
+    }
+  ],
+  "nivelacademico": [
+    {
+      "id": 1,
+      "estado": "a",
+      "nombre": "bachiller"
+    },
+    {
+      "id": 2,
+      "estado": "a",
+      "nombre": "estudios superiores"
+    },
+    {
+      "id": 3,
+      "estado": "a",
+      "nombre": "posgrado"
+    },
+    {
+      "id": 4,
+      "estado": "a",
+      "nombre": "doctorado"
     }
   ],
   "nivelsocioeconomico": [
@@ -354,6 +533,18 @@
       "estado": "a",
       "nombre": "sin recurso",
       "descripcion": ""
+    }
+  ],
+  "genero": [
+    {
+      "id": 1,
+      "nombre": "masculino",
+      "estado": "a"
+    },
+    {
+      "id": 2,
+      "nombre": "femenino",
+      "estado": "a"
     }
   ]
 }

@@ -131,7 +131,7 @@
                           <div class="row">
                             <div class="col-md-5 mb-3">
                               <label for="estado">Pais</label>
-                              <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.dtoLugar._id" formControlName="lugarEstudio" (click)="BusquedaEstado(estudioData.dtoLugar._id)"   value="estudioData.dtoLugar._id">
+                              <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.dtoLugar._id" formControlName="lugarEstudio" (click)="busquedaEstado(estudioData.dtoLugar._id)"   value="estudioData.dtoLugar._id">
                                 <option value="">Choose...</option>
                                 <option  *ngFor="let lu of lugar"  [ngValue]= "lu._id"   >{{lu.nombre}}</option>
                               </select>
@@ -144,7 +144,7 @@
 
                             <div class="col-md-5 mb-3">
                               <label for="estado">Estado</label>
-                              <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.dtoLugar._id" (click)="BusquedaParroquia(estudioData.dtoLugar._id)"formControlName="lugarEstudio"  value="estudioData.dtoLugar._id">
+                              <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.dtoLugar._id" (click)="busquedaParroquia(estudioData.dtoLugar._id)"formControlName="lugarEstudio"  value="estudioData.dtoLugar._id">
                                 <option value="">Choose...</option>
                                 <option  *ngFor="let estado of estados" [ngValue]= "estado._id"  >{{estado.nombre}}</option>
                               </select>
@@ -169,8 +169,8 @@
                             </div>
 
                           </div>
-                  
-                         
+
+
                       <div class="col-md-5 mb-3">
                         <label for="" class="col-sm-6 col-form-label escrituerModal"> Subcategoria </label>
                             <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.dtoSubcategoria._id" formControlName="subcategoriaEstudio" value="estudioData.dtoSubcategoria._id">
@@ -221,4 +221,3 @@
     </table>
   </div>
 </div>
-  

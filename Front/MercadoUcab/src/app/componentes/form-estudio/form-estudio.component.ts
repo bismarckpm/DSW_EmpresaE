@@ -27,9 +27,14 @@ export class FormEstudioComponent implements OnInit {
 
    ///// Atributos para la busqueda de acuerdo a lo seleccionado
    estados:any;
+   ciudades:any;
+   municipios:any;
    parroquias:any;
    auxPaisID:number;
    auxEstadoID:number;
+   auxCiudadID:number;
+   auxMunicipioID:number;
+   auxParroquiaID:number;
 
   formEstudio: FormGroup;
   patronEdadEstudio: any = /^(0?[0-9]{1,2}|1[0-7][0-9]|99)$/;
@@ -68,22 +73,42 @@ export class FormEstudioComponent implements OnInit {
 
 
 ///Busqueda para los drop de lugar por pais seleccionado previamente
-BusquedaEstado(id){
-  //El ID es del pais
-  this.auxPaisID=id;
-  //Esta peticion se realiza para mostar todos los estados aasociado a ese pais
-  this.lugarService.getEstado(id).subscribe((data: {}) => {
-    this.estados= data;
-  })
-}
-BusquedaParroquia(id){
-  //El ID es del estado
-  this.auxEstadoID=id;
-  //Esta peticion se realiza para mostar todoas las parroquias aasociado al estado
-  this.lugarService.getParroquia(this.auxPaisID,id).subscribe((data: {}) => {
-    this.parroquias= data;
-  })
-}
+  busquedaEstado(id){
+    // El ID es del pais
+    this.auxPaisID = id;
+    // Esta peticion se realiza para mostar todos los estados aasociados a ese pais
+    this.lugarService.getEstado(id).subscribe((data: {}) => {
+      this.estados = data;
+    });
+  }
+
+  busquedaCiudad(id){
+    // El ID es del estado
+    this.auxEstadoID = id;
+    // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
+    this.lugarService.getCiudad(this.auxPaisID, id).subscribe((data: {}) => {
+      this.ciudades = data;
+    });
+  }
+
+  busquedaMunicipio(id){
+    // El ID es del estado
+    this.auxCiudadID = id;
+    // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
+    this.lugarService.getMunicipio(this.auxPaisID, this.auxEstadoID, id).subscribe((data: {}) => {
+      this.municipios = data;
+    });
+  }
+
+
+  busquedaParroquia(id){
+    // El ID es del estado
+    this.auxMunicipioID = id;
+    // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
+    this.lugarService.getParroquia(this.auxPaisID, this.auxEstadoID, this.auxCiudadID, id).subscribe((data: {}) => {
+      this.parroquias = data;
+    });
+  }
 
 
 

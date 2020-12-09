@@ -37,6 +37,9 @@ export class RegistrarseComponent implements OnInit {
   nivelSocioEconomico: any;
   lugar: any;
   usuario: any;
+  username: any;
+  clave: any;
+  correoElectronico: any;
 
   estados: any;
   parroquias: any;
@@ -66,7 +69,9 @@ export class RegistrarseComponent implements OnInit {
     public usuarioService: UsuarioService,
     public router: Router,
     private formBuilder: FormBuilder
-    ) { this.createForm; }
+    ) {
+    this.createForm();
+  }
 
   ngOnInit(): void {
     this.addEstadoCivil();
@@ -74,7 +79,7 @@ export class RegistrarseComponent implements OnInit {
     this.addMedioConexion();
     this.addGenero();
     this.addOcupacion();
-    this.addNivelSocioEconomico ();
+    this.addNivelSocioEconomico();
     this.addLugar();
     this.addUsuario();
   }
@@ -89,7 +94,7 @@ export class RegistrarseComponent implements OnInit {
     }
   }
 
- 
+
 
   addEstadoCivil(){
     this.estadoCivilService.getEstadosCiviles().subscribe((EstadosCiviles: {}) => {
@@ -148,11 +153,30 @@ export class RegistrarseComponent implements OnInit {
     });
   }
 
+  busquedaCiudad(id){
+    // El ID es del estado
+    this.auxEstadoID = id;
+    // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
+    this.lugarService.getCiudad(this.auxPaisID, id).subscribe((data: {}) => {
+      this.ciudades = data;
+    });
+  }
+
+  busquedaMunicipio(id){
+    // El ID es del estado
+    this.auxCiudadID = id;
+    // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
+    this.lugarService.getMunicipio(this.auxPaisID, this.auxEstadoID, id).subscribe((data: {}) => {
+      this.ciudades = data;
+    });
+  }
+
+
   busquedaParroquia(id){
     // El ID es del estado
     this.auxMunicipioID = id;
     // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
-    this.lugarService.getParroquia(this.auxPaisID, id).subscribe((data: {}) => {
+    this.lugarService.getParroquia(this.auxPaisID, this.auxEstadoID, this.auxCiudadID, id).subscribe((data: {}) => {
       this.parroquias = data;
     });
   }

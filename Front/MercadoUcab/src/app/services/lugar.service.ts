@@ -11,15 +11,15 @@ export class LugarService {
 
      //Definimos el url del api
      apiurl='http://localhost:3000';
-   
+
      constructor(private http:HttpClient) { }
    // Http Options
      httpOptions = {
      headers: new HttpHeaders({
        'Content-Type': 'application/json'
      })
-   } 
-   
+   }
+
    ///////// Metodos para ejecutar//////////////
    getLugars():Observable<Lugar[]>{
      return this.http.get<Lugar[]>(this.apiurl+'/lugar')
@@ -28,7 +28,7 @@ export class LugarService {
        catchError(this.handleError)
      )
    }
-   
+
    getLugar(id):Observable<Lugar[]>{
      return this.http.get<Lugar[]>(this.apiurl+'/lugar/'+id)
      .pipe(
@@ -45,14 +45,30 @@ export class LugarService {
     )
    }
 
-   getParroquia(paisID,estadoID):Observable<Lugar[]>{
+  getCiudad(paisID, estadoID):Observable<Lugar[]>{
     return this.http.get<Lugar[]>(this.apiurl+'/lugar/'+paisID+estadoID )
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
+  }
+
+  getMunicipio(paisID, estadoID, ciudadID):Observable<Lugar[]>{
+    return this.http.get<Lugar[]>(this.apiurl+'/lugar/'+paisID+estadoID+ciudadID )
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
+  }
+
+  getParroquia(paisID, estadoID, ciudadID, municipioID):Observable<Lugar[]>{
+    return this.http.get<Lugar[]>(this.apiurl+'/lugar/'+paisID+estadoID+ciudadID+municipioID )
     .pipe(
       retry(1),
       catchError(this.handleError)
     )
    }
-   
+
    createLugar(Lugar):Observable<Lugar[]>{
      return this.http.post<Lugar[]>(this.apiurl+'/lugar',JSON.stringify(Lugar), this.httpOptions)
      .pipe(
@@ -60,7 +76,7 @@ export class LugarService {
        catchError(this.handleError)
      )
    }
-   
+
    updateLugar(id,Lugar):Observable<Lugar[]>{
      return this.http.put<Lugar[]>(this.apiurl+'/lugar/'+id,JSON.stringify(Lugar), this.httpOptions)
      .pipe(
@@ -68,7 +84,7 @@ export class LugarService {
        catchError(this.handleError)
      )
    }
-   
+
    deleteLugar(id){
      return this.http.delete<Lugar[]>(this.apiurl + '/lugar/' + id, this.httpOptions)
      .pipe(
@@ -76,7 +92,7 @@ export class LugarService {
        catchError(this.handleError)
      )
    }
-   
+
    ///////////////////// Error HandleError
    handleError(error) {
      let errorMessage = '';

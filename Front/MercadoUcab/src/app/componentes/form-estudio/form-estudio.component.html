@@ -95,7 +95,7 @@
         <div class="row">
           <div class="col-md-5 mb-3">
             <label for="estado">Pais</label>
-            <select class="custom-select d-block w-100"  [(ngModel)]="estudio.dtoLugar._id" formControlName="lugarEstudio"  value="dtoLugar._id">
+            <select class="custom-select d-block w-100"  [(ngModel)]="estudio.dtoLugar._id" formControlName="lugarEstudio" (click)="busquedaEstado(estudio.dtoLugar._id)" value="dtoLugar._id">
               <option value="">Choose...</option>
               <option  *ngFor="let lu of lugar" [ngValue]= "lu._id"  >{{lu.nombre}}</option>
             </select>
@@ -141,7 +141,7 @@
           <div class="row">
             <div class="col-md-5 mb-3">
               <label for="estado">Pais</label>
-              <select class="custom-select d-block w-100"  [(ngModel)]="estudio.dtoLugar._id" formControlName="lugarEstudio" (click)="BusquedaEstado(estudio.dtoLugar._id)"   value="estudio.dtoLugar._id">
+              <select class="custom-select d-block w-100"  [(ngModel)]="estudio.dtoLugar._id" formControlName="lugarEstudio" (click)="busquedaEstado(estudio.dtoLugar._id)"   value="estudio.dtoLugar._id">
                 <option value="">Choose...</option>
                 <option  *ngFor="let lu of lugar"  [ngValue]= "lu._id"   >{{lu.nombre}}</option>
               </select>
@@ -154,7 +154,7 @@
 
             <div class="col-md-5 mb-3">
               <label for="estado">Estado</label>
-              <select class="custom-select d-block w-100"  [(ngModel)]="estudio.dtoLugar._id" (click)="BusquedaParroquia(estudio.dtoLugar._id)"formControlName="lugarEstudio"  value="estudio.dtoLugar._id">
+              <select class="custom-select d-block w-100"  [(ngModel)]="estudio.dtoLugar._id" (click)="busquedaParroquia(estudio.dtoLugar._id)"formControlName="lugarEstudio"  value="estudio.dtoLugar._id">
                 <option value="">Choose...</option>
                 <option  *ngFor="let estado of estados" [ngValue]= "estado._id"  >{{estado.nombre}}</option>
               </select>

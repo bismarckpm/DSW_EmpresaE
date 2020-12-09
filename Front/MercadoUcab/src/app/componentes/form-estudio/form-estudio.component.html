@@ -1,0 +1,196 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">Estudio</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <form [formGroup]="formEstudio">
+        <div class="row">
+          <div class="col-md-4">
+              <label for="nombre">Nombre</label>
+              <input type="text" class="form-control"  [(ngModel)]="estudio.nombre" value="nombre" placeholder=" " formControlName="nombreEstudio">
+              <div *ngIf="nombreEstudio.invalid && (nombreEstudio.dirty || nombreEstudio.touched)" class="alert alert-danger">
+                <div *ngIf="nombreEstudio.errors.required">
+                  Este campo es obligatorio
+                </div>
+                <div *ngIf="nombreEstudio.errors.pattern">
+                  Introduzca un formato valido
+                </div>
+              </div>
+          </div>
+            <div class="col-md-4 mb-3">
+            <label for="edadMinima">Edad Minima</label>
+              <input type="text" class="form-control"   [(ngModel)]="estudio.edadMinima" value="edadMinima" formControlName="edadMinimaEstudio">
+              <div *ngIf="edadMinimaEstudio.invalid && (edadMinimaEstudio.dirty || edadMinimaEstudio.touched)" class="alert alert-danger">
+                <div *ngIf="edadMinimaEstudio.errors.required">
+                  Este campo es obligatorio
+                </div>
+                <div *ngIf="edadMinimaEstudio.errors.pattern">
+                  Introduzca una edad valida
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="edadMaxima">Edad Maxima</label>
+              <input type="text" class="form-control"  [(ngModel)]="estudio.edadMaxima" formControlName="edadMaximaEstudio" value="edadMaxima">
+              <div *ngIf="edadMaximaEstudio.invalid && (edadMaximaEstudio.dirty || edadMaximaEstudio.touched)" class="alert alert-danger">
+                <div *ngIf="edadMaximaEstudio.errors.required">
+                  Este campo es obligatorio
+                </div>
+                <div *ngIf="edadMaximaEstudio.errors.pattern">
+                  Introduzca una edad valida
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="fechaInicio">Fecha inicio</label>
+            <input type="text" class="form-control"  placeholder="DD/MM/AAAA"  [(ngModel)]="estudio.fechaInicio" formControlName="fechaInicioEstudio" value="fechaInicio">
+            <div *ngIf="fechaInicioEstudio.invalid && (fechaInicioEstudio.dirty || fechaInicioEstudio.touched)" class="alert alert-danger">
+              <div *ngIf="fechaInicioEstudio.errors.required">
+                Este campo es obligatorio
+              </div>
+              <div *ngIf="fechaInicioEstudio.errors.pattern">
+                Introduzca un formato valido
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="fechaFin">Fecha fin</label>
+            <input type="text" class="form-control"  placeholder="DD/MM/AAAA"  [(ngModel)]="estudio.fechaFin" formControlName="fechaFinEstudio" value="fechaFin">
+            <div *ngIf="fechaFinEstudio.invalid && (fechaFinEstudio.dirty || fechaFinEstudio.touched)" class="alert alert-danger">
+              <div *ngIf="fechaFinEstudio.errors.required">
+                Este campo es obligatorio
+              </div>
+              <div *ngIf="fechaFinEstudio.errors.pattern">
+                Introduzca un formato valido
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5 mb-3">
+            <label for="estado">Estado del Estudio </label>
+            <select class="custom-select d-block w-100"  [(ngModel)]="estudio.estado" formControlName="estadoEstudio"  value="estado">
+              <option value="">Choose...</option>
+              <option value="solicitado">Solicitado</option>
+              <option value="procesado">Procesado</option>
+              <option value="en ejecucion">En ejecucion</option>
+              <option value="culminado">Culminado</option>
+            </select>
+            <div *ngIf="estadoEstudio.invalid && (estadoEstudio.dirty || estadoEstudio.touched)" class="alert alert-danger">
+              <div *ngIf="estadoEstudio.errors.required">
+                Este campo es obligatorio
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5 mb-3">
+            <label for="estado">Pais</label>
+            <select class="custom-select d-block w-100"  [(ngModel)]="estudio.dtoLugar._id" formControlName="lugarEstudio"  value="dtoLugar._id">
+              <option value="">Choose...</option>
+              <option  *ngFor="let lu of lugar" [ngValue]= "lu._id"  >{{lu.nombre}}</option>
+            </select>
+            <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
+              <div *ngIf="lugarEstudio.errors.required">
+                Este campo es obligatorio
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-5 mb-3">
+          <label for="" class="col-sm-6 col-form-label escrituerModal"> Subcategoria </label>
+              <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudio.dtoSubcategoria._id" formControlName="subcategoriaEstudio" >
+                  <option  value=""> Slecciones una ...</option>
+                  <option  *ngFor="let sub of subcategoria" [ngValue]= "sub._id"  >{{sub.nombre}}</option>
+              </select>
+              <div *ngIf="subcategoriaEstudio.invalid && (subcategoriaEstudio.dirty || subcategoriaEstudio.touched)" class="alert alert-danger">
+                  <div *ngIf="subcategoriaEstudio.errors.required">
+                    Este campo es obligatorio
+                  </div>
+                </div>
+              </div>
+
+
+
+
+          <div class="col-md-5 mb-3">
+            <label for="" class="col-sm-6 col-form-label escrituerModal">Nivel Socio Economico  </label>
+                <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudio.dtoNivelSocioEconomico._id" formControlName="nivelEstudio" >
+                    <option  value=""> Slecciones una ...</option>
+                    <option  *ngFor="let nivel of nivelSocioEconomico" [ngValue]= "nivel._id"  >{{nivel.nombre}}</option>
+                </select>
+                <div *ngIf="nivelEstudio.invalid && (nivelEstudio.dirty || nivelEstudio.touched)" class="alert alert-danger">
+                    <div *ngIf="nivelEstudio.errors.required">
+                      Este campo es obligatorio
+                    </div>
+                  </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-5 mb-3">
+              <label for="estado">Pais</label>
+              <select class="custom-select d-block w-100"  [(ngModel)]="estudio.dtoLugar._id" formControlName="lugarEstudio" (click)="BusquedaEstado(estudio.dtoLugar._id)"   value="estudio.dtoLugar._id">
+                <option value="">Choose...</option>
+                <option  *ngFor="let lu of lugar"  [ngValue]= "lu._id"   >{{lu.nombre}}</option>
+              </select>
+              <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
+                <div *ngIf="lugarEstudio.errors.required">
+                  Este campo es obligatorio
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-5 mb-3">
+              <label for="estado">Estado</label>
+              <select class="custom-select d-block w-100"  [(ngModel)]="estudio.dtoLugar._id" (click)="BusquedaParroquia(estudio.dtoLugar._id)"formControlName="lugarEstudio"  value="estudio.dtoLugar._id">
+                <option value="">Choose...</option>
+                <option  *ngFor="let estado of estados" [ngValue]= "estado._id"  >{{estado.nombre}}</option>
+              </select>
+              <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
+                <div *ngIf="lugarEstudio.errors.required">
+                  Este campo es obligatorio
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-5 mb-3">
+              <label for="estado">Parroquia</label>
+              <select class="custom-select d-block w-100"  [(ngModel)]="estudio.dtoLugar._id" formControlName="lugarEstudio"  value="estudio.dtoLugar._id">
+                <option value="">Choose...</option>
+                <option  *ngFor="let parroquia of parroquias" [ngValue]= "parroquia._id"  >{{parroquia.nombre}}</option>
+              </select>
+              <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
+                <div *ngIf="lugarEstudio.errors.required">
+                  Este campo es obligatorio
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+
+
+
+
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      <button type="submit" class="btn btn-primary" (click)="addEstudio()" data-dismiss="modal">Guardar</button>
+    </div>
+  </div>
+</div>

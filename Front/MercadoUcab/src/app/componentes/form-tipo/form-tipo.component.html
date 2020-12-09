@@ -1,0 +1,60 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">Tipo</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="formTipo">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="nombre">Nombre</label>
+            <input type="text" [(ngModel)]="tipo.nombre" class="form-control" id="nombre" placeholder="" formControlName="nombreTipo" name="nombre" value="">
+            <div *ngIf="nombreTipo.invalid && (nombreTipo.dirty || nombreTipo.touched)" class="alert alert-danger">
+              <div *ngIf="nombreTipo.errors.required">
+                Este campo es obligatorio
+              </div>
+              <div *ngIf="nombreTipo.errors.pattern">
+                Introduzca un nombre valido
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="descripcion">Descripcion</label>
+            <input type="text" [(ngModel)]="tipo.descripcion" class="form-control" id="descripcion" placeholder="" formControlName="descripcionTipo" name="descripcion" value="">
+            <div *ngIf="descripcionTipo.invalid && (descripcionTipo.dirty || descripcionTipo.touched)" class="alert alert-danger">
+              <div *ngIf="descripcionTipo.errors.required">
+                Este campo es obligatorio
+              </div>
+              <div *ngIf="descripcionTipo.errors.pattern">
+                Introduzca una descripcion valida
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5 mb-3">
+            <label for="estado">Estado</label>
+            <select class="custom-select d-block w-100" [(ngModel)]="tipo.estado" id="estado" name="estado" formControlName="estadoTipo">
+              <option value="">Choose...</option>
+              <option value="a">Activo</option>
+              <option value="i">Inactivo</option>
+            </select>
+            <div *ngIf="estadoTipo.invalid && (estadoTipo.dirty || estadoTipo.touched)" class="alert alert-danger">
+              <div *ngIf="estadoTipo.errors.required">
+                Este campo es obligatorio
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      <button type="submit" class="btn btn-primary" (click)="addTipo(tipo)" data-dismiss="modal">Guardar</button>
+    </div>
+  </div>
+</div>

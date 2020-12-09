@@ -1,0 +1,52 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+
+      <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Marca</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+
+      <div class="modal-body">
+        <form [formGroup]="formMarca">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="nombre">Nombre</label>
+              <input type="text" [(ngModel)]="marca.nombre" class="form-control" id="nombre" placeholder="" formControlName="nombreMarca" name="nombre" value="">
+              <div *ngIf="nombreMarca.invalid && (nombreMarca.dirty || nombreMarca.touched)" class="alert alert-danger">
+                <div *ngIf="nombreMarca.errors.required">
+                  Este campo es obligatorio
+                </div>
+                <div *ngIf="nombreMarca.errors.pattern">
+                  Introduzca un nombre valido
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-5 mb-3">
+              <label for="estado">Estado</label>
+              <select class="custom-select d-block w-100" [(ngModel)]="marca.estado" formControlName="estadoMarca" id="estado" name="estado">
+                <option value="">Choose...</option>
+                <option value="a">Activo</option>
+                <option value="i">Inactivo</option>
+              </select>
+              <div *ngIf="estadoMarca.invalid && (estadoMarca.dirty || estadoMarca.touched)" class="alert alert-danger">
+                <div *ngIf="estadoMarca.errors.required">
+                  Este campo es obligatorio
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+          <button type="submit" class="btn btn-primary" (click)="addMarca(marca)" data-dismiss="modal">Guardar</button>
+
+      </div>
+  </div>
+</div>

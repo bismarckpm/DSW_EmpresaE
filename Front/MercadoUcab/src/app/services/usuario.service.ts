@@ -1,26 +1,76 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Usuario } from '../models/usuario';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { retry, catchError } from 'rxjs/operators';
+import {Usuario} from '../models/usuario';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
+  apiurl = 'http://localhost:3000';
 
-  API_URI= 'http://';
+  constructor(private http: HttpClient) { }
+// Http Options
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
 
-  constructor( private http: HttpClient) { }
-
-  getUsuario(){
-      return this.http.get(`${this.API_URI}/usuario`);
+///////// Metodos para ejecutar//////////////
+  getUsuarios(): Observable<Usuario[]>{
+    return this.http.get<Usuario[]>(this.apiurl + '/Usuario')
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
   }
-  
-  registarUsuario(usuario: Usuario){
-    return this.http.post(`${this.API_URI}/usuario`, usuario);
+
+  getUsuario(id): Observable<Usuario[]>{
+    return this.http.get<Usuario[]>(this.apiurl + '/Usuario/' + id)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
   }
 
-  updateUsuario(id ,updateUser){
-    return this.http.post(`${this.API_URI}/usuario/${id}`,updateUser);
+  createUsuario(Usuario): Observable<Usuario[]>{
+    return this.http.post<Usuario[]>(this.apiurl + '/Usuario', JSON.stringify(Usuario), this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+
+  updateUsuario(id, Usuario): Observable<Usuario[]>{
+    return this.http.put<Usuario[]>(this.apiurl + '/Usuario/' + id, JSON.stringify(Usuario), this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+
+  deleteUsuario(id){
+    return this.http.delete<Usuario[]>(this.apiurl + '/Usuario/' + id, this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+
+///////////////////// Error HandleError
+  handleError(error) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // Get client-side error
+      errorMessage = error.error.message;
+    } else {
+      // Get server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    window.alert(errorMessage);
+    return throwError(errorMessage);
   }
 }

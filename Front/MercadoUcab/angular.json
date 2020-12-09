@@ -128,5 +128,8 @@
       }
     }
   },
-  "defaultProject": "MercadoUcab"
+  "defaultProject": "MercadoUcab",
+  "cli": {
+    "analytics": false
+  }
 }

@@ -1,0 +1,80 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">Pregunta</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="formPregunta">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="descripcion">Descripcion</label>
+            <input type="text" class="form-control" [(ngModel)]= "Pregunta.descripcion" formControlName="descripcionPregunta" value="descripcion">
+            <div *ngIf="descripcionPregunta.invalid && (descripcionPregunta.dirty || descripcionPregunta.touched)" class="alert alert-danger">
+              <div *ngIf="descripcionPregunta.errors.required">
+                Este campo es obligatorio
+              </div>
+              <div *ngIf="descripcionPregunta.errors.pattern">
+                Introduzca una descripcion valida
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5 mb-3">
+            <label for="country">Estado</label>
+            <select class="custom-select d-block w-100" [(ngModel)]= "Pregunta.estado" formControlName="estadoPregunta" value="estado">
+              <option value="">Choose...</option>
+              <option value="a">Activo</option>
+              <option value="I">Inactivo</option>
+            </select>
+            <div *ngIf="estadoPregunta.invalid && (estadoPregunta.dirty || estadoPregunta.touched)" class="alert alert-danger">
+              <div *ngIf="estadoPregunta.errors.required">
+                Este campo es obligatorio
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5 mb-3">
+            <label for="country">Tipo de Pregunta</label>
+            <select class="custom-select d-block w-100" [(ngModel)]= "Pregunta.tipo._id" formControlName="tipoPregunta" value="Pregunta.tipo._id"><!-- Hacer lo de *ngFor-->
+              <option  *ngFor="let tp of tipopregunta" [ngValue]= "tp._id" >{{tp.tipo}}</option>
+            </select>
+            <div *ngIf="tipoPregunta.invalid && (tipoPregunta.dirty || tipoPregunta.touched)" class="alert alert-danger">
+              <div *ngIf="tipoPregunta.errors.required">
+                Este campo es obligatorio
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5 mb-3">
+            <label for="country">Subcategoria asociada</label>
+            <select class="custom-select d-block w-100"   [(ngModel)]= "Pregunta.subcategoria._id"  formControlName="nombreSubcategoria" value="Pregunta.subcategoria._id"><!-- Hacer lo de *ngFor-->
+              <option value="">Choose...</option>
+              <option *ngFor="let sub of subcategoria" [ngValue]="sub._id">{{sub.nombre}}</option>
+            </select>
+            <div *ngIf="nombreSubcategoria.invalid && (nombreSubcategoria.dirty || nombreSubcategoria.touched)" class="alert alert-danger">
+                    <div *ngIf="nombreSubcategoria.errors.required">
+                      Este campo es obligatorio
+                    </div>
+           
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      <button type="submit" class="btn btn-primary" (click)="addPregunta()" data-dismiss="modal">Guardar</button>
+    </div>
+  </div>
+</div>

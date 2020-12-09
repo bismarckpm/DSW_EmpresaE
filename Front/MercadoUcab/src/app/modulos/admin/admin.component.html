@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <div class="row">
+        <app-sidebar></app-sidebar>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom" >
+                <div [ngSwitch]="seccion">
+                    <div *ngSwitchCase="'Inicio'"><h1 class="h2 text-white"f>Panel de Administracion</h1></div>
+                    <div *ngSwitchDefault><h1 class="h2 text-white"f>Lista de {{seccion}}</h1></div>
+                </div>
+                <div class="btn-toolbar mb-2 mb-md-0">
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop"
+                    *ngIf="seccion != 'Inicio'" >
+                        Agregar
+                    </button>
+
+                    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div [ngSwitch]="seccion">
+                            <div *ngSwitchCase="'Clientes'"><app-form-clientes></app-form-clientes></div>
+                            <div *ngSwitchCase="'Encuestados'"><app-form-encuestado></app-form-encuestado></div>
+                            <div *ngSwitchCase="'Analistas'"></div>
+                            <div *ngSwitchCase="'Analistas'"><form-analista></form-analista></div>
+                            <div *ngSwitchCase="'Estudios'"><app-form-estudio></app-form-estudio></div>
+                            <div *ngSwitchCase="'Encuestas'"><app-form-encuesta></app-form-encuesta></div>
+                            <div *ngSwitchCase="'Preguntas'"><app-form-pregunta></app-form-pregunta></div>
+                            <div *ngSwitchCase="'Categorias'"><app-form-categoria></app-form-categoria></div>
+                            <div *ngSwitchCase="'Subcategorias'"><app-form-subcategoria></app-form-subcategoria></div>
+                            <div *ngSwitchCase="'Presentaciones'"><app-form-presentacion></app-form-presentacion></div>
+                            <div *ngSwitchCase="'Marcas'"><app-form-marca></app-form-marca></div>
+                            <div *ngSwitchCase="'Tipos'"><app-form-tipo></app-form-tipo></div>
+                            <div *ngSwitchDefault></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div [ngSwitch]="seccion">
+                <div *ngSwitchCase="'Inicio'"><app-main-admin></app-main-admin></div>
+                <div *ngSwitchCase="'Clientes'"><app-lista-clientes></app-lista-clientes></div>
+                <div *ngSwitchCase="'Encuestados'"><app-lista></app-lista></div>
+                <div *ngSwitchCase="'Analistas'"><lista-analista></lista-analista></div>
+                <div *ngSwitchCase="'Estudios'"><app-lista-estudios></app-lista-estudios></div>
+                <div *ngSwitchCase="'Encuestas'"><app-lista-encuesta></app-lista-encuesta></div>
+                <div *ngSwitchCase="'Preguntas'"><app-lista-preguntas></app-lista-preguntas></div>
+                <div *ngSwitchCase="'Categorias'"> <app-lista-categoria></app-lista-categoria> </div>
+                <div *ngSwitchCase="'Subcategorias'"><app-lista-subcategoria></app-lista-subcategoria></div>
+                <div *ngSwitchCase="'Presentaciones'"><app-lista-presentacion></app-lista-presentacion></div>
+                <div *ngSwitchCase="'Marcas'"><app-lista-marca></app-lista-marca></div>
+                <div *ngSwitchCase="'Tipos'"><app-lista-tipo></app-lista-tipo></div>
+                <div *ngSwitchDefault></div>
+            </div>
+        </main>
+    </div>
+</div>

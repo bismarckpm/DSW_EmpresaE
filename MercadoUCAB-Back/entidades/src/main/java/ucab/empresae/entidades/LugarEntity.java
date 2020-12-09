@@ -101,4 +101,8 @@ public class LugarEntity extends BaseEntity{
     public void setEstudios(List<EstudioEntity> estudios) {
         this.estudios = estudios;
     }
+
+    public LugarEntity(long id) {
+        super(id);
+    }
 }

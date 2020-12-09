@@ -69,4 +69,8 @@ public class NivelSocioeconomicoEntity extends BaseEntity{
     public void setEstudios(List<EstudioEntity> estudios) {
         this.estudios = estudios;
     }
+
+    public NivelSocioeconomicoEntity(long id) {
+        super(id);
+    }
 }

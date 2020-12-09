@@ -1,6 +1,7 @@
 package ucab.empresae.entidades;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "usuario", schema = "mercadeoucab")
@@ -11,6 +12,7 @@ public class UsuarioEntity extends BaseEntity{
     private TipoUsuarioEntity tipousuario;
     private ClienteEntity cliente;
     private EncuestadoEntity encuestado;
+    private List<EstudioEntity> estudiosAnalista;
 
     @Basic
     @Column(name = "estado")
@@ -69,4 +71,14 @@ public class UsuarioEntity extends BaseEntity{
     public void setEncuestado(EncuestadoEntity encuestado) {
         this.encuestado = encuestado;
     }
+
+    /*@OneToMany(mappedBy = "analista")
+    public List<EstudioEntity> getEstudiosAnalista() {
+        return this.estudiosAnalista;
+    }
+
+    public void setEstudioAnalista(List<EstudioEntity> respuestas) {
+        this.estudiosAnalista = respuestas;
+    }*/
+
 }

@@ -1,10 +1,5 @@
 package ucab.empresae.dtos;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.OneToMany;
-import java.util.List;
-
 public class DtoEstadoCivil extends DtoBase {
 
     //Atributos

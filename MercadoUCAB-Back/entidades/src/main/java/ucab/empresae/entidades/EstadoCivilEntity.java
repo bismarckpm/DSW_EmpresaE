@@ -10,6 +10,13 @@ public class EstadoCivilEntity extends BaseEntity{
     private String nombre;
     private List<EncuestadoEntity> encuestados;
 
+    public EstadoCivilEntity( long id )
+    {
+        super( id );
+    }
+
+    public EstadoCivilEntity( ) { }
+
     @Basic
     @Column(name = "estado")
     public String getEstado() {

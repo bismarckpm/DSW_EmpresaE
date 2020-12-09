@@ -14,6 +14,10 @@ public class UsuarioEntity extends BaseEntity{
     private EncuestadoEntity encuestado;
     private List<EstudioEntity> estudiosAnalista;
 
+    public UsuarioEntity(long id){super(id);}
+
+    public UsuarioEntity(){}
+
     @Basic
     @Column(name = "estado")
     public String getEstado() {

@@ -10,6 +10,13 @@ public class MedioConexionEntity extends BaseEntity{
     private String nombre;
     private List<EncuestadoEntity> encuestados;
 
+    public MedioConexionEntity( long id )
+    {
+        super( id );
+    }
+
+    public MedioConexionEntity( ) { }
+
     @Basic
     @Column(name = "estado")
     public String getEstado() {

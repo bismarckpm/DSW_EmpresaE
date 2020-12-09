@@ -10,6 +10,13 @@ public class NivelAcademicoEntity extends BaseEntity{
     private String nombre;
     private List<EncuestadoEntity> encuestados;
 
+    public NivelAcademicoEntity( long id )
+    {
+        super( id );
+    }
+
+    public NivelAcademicoEntity( ) { }
+
     @Basic
     @Column(name = "estado")
     public String getEstado() {

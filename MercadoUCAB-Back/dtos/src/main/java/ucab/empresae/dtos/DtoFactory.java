@@ -1,5 +1,9 @@
 package ucab.empresae.dtos;
 
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
 public class DtoFactory {
 
     public static DtoCategoria DtoCategoriaInstance() {
@@ -105,5 +109,4 @@ public class DtoFactory {
     public static DtoUsuario DtoUsuarioInstance() {
         return new DtoUsuario();
     }
-
 }

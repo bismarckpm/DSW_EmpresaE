@@ -1,7 +1,7 @@
 package ucab.empresae.entidades;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -25,6 +25,10 @@ public class EncuestadoEntity extends BaseEntity{
     private UsuarioEntity usuario;
     private List<EstudioEncuestadoEntity> estudioencuestados;
     private List<RespuestaEntity> respuestas;
+
+    public EncuestadoEntity(){}
+
+    public EncuestadoEntity(long id){super(id);}
 
     @Basic
     @Column(name = "estado")

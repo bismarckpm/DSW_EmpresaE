@@ -12,6 +12,13 @@ public class GeneroEntity extends BaseEntity {
     private List<EncuestadoEntity> encuestados;
     private List<EstudioEntity> estudios;
 
+    public GeneroEntity( long id )
+    {
+        super( id );
+    }
+
+    public GeneroEntity( ) { }
+
     @Basic
     @Column(name = "estado")
     public String getEstado() {

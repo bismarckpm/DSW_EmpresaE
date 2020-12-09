@@ -10,6 +10,13 @@ public class OcupacionEntity extends BaseEntity{
     private String nombre;
     private List<EncuestadoEntity> encuestados;
 
+    public OcupacionEntity( long id )
+    {
+        super( id );
+    }
+
+    public OcupacionEntity( ) { }
+
     @Basic
     @Column(name = "estado")
     public String getEstado() {

@@ -19,14 +19,14 @@ import {NivelAcademicoService} from '../../../services/nivel-academico.service';
 export class RegistrarseComponent implements OnInit {
 
   @Input() encuestado = {_id: 0, primerNombre: '', segundoNombre: '' , primerApellido: '', segundoApellido: 0, fechaNacimiento: '', estado: '',
-    estadoCivil: {_id: 0, nombre: '', estado: ''},
-    nivelAcademico: {_id: 0, nombre: '', estado: ''},
-    medioConexion: {_id: 0, nombre: '', estado: ''},
-    genero: {_id: 0, nombre: '', estado: ''},
-    ocupacion: {_id: 0, nombre: '', estado: ''},
-    nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
-    lugar: {_id: 0, estado: '', nombre: '', tipo: ''},
-    usuario: {_id: 0, username: '', estado: '', clave: '', correoElectronico: ''},
+    dtoEstadoCivil: {_id: 0, nombre: '', estado: ''},
+    dtoNivelAcademico: {_id: 0, nombre: '', estado: ''},
+    dtoMedioConexion: {_id: 0, nombre: '', estado: ''},
+    dtoGenero: {_id: 0, nombre: '', estado: ''},
+    dtoOcupacion: {_id: 0, nombre: '', estado: ''},
+    dtoNivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
+    dtoLugar: {_id: 0, estado: '', nombre: '', tipo: ''},
+    dtoUsuario: {_id: 0, username: '', estado: '', clave: '', correoElectronico: '', dtoTipoUsuario: {_id: 0, estado: '', descripcion: ''}},
   };
 
   estadoCivil: any;
@@ -54,7 +54,6 @@ export class RegistrarseComponent implements OnInit {
 
   patronFechaNacimientoEncuestado: any = /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/;
   patronNombreEncuestado: any = /^[A-Za-z\s]+$/;
-  patronCorreoEncuestado: any = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
   formRegistroEncuestado: FormGroup;
 
@@ -82,12 +81,11 @@ export class RegistrarseComponent implements OnInit {
     this.addOcupacion();
     this.addNivelSocioEconomico();
     this.addLugar();
+    this.addUsuario();
   }
 
   addEncuestado(encuestado){
     if (this.formRegistroEncuestado.valid) {
-      this.usuarioService.createUsuario(this.usuario).subscribe((data: {}) => {
-      });
       this.encuestadoService.createEncuestado(this.encuestado).subscribe((data: {}) => {
       });
     }
@@ -137,6 +135,12 @@ export class RegistrarseComponent implements OnInit {
   addLugar(){
     this.lugarService.getLugars().subscribe((Lugares: {}) => {
       this.lugar = Lugares;
+    });
+  }
+
+  addUsuario(){
+    this.usuarioService.getUsuarios().subscribe((Usuarios: {}) => {
+      this.usuario = Usuarios;
     });
   }
 
@@ -191,10 +195,6 @@ export class RegistrarseComponent implements OnInit {
   get nivelSocioEconomicoEncuestado(){ return this.formRegistroEncuestado.get('nivelSocioEconomicoEncuestado'); }
   get lugarEncuestado(){return this.formRegistroEncuestado.get('lugarEncuestado'); }
   get usuarioEncuestado(){return this.formRegistroEncuestado.get('usuarioEncuestado'); }
-  get usernameEncuestado(){return this.formRegistroEncuestado.get('usernameEncuestado'); }
-  get claveEncuestado(){return this.formRegistroEncuestado.get('claveEncuestado'); }
-  get correoElectronicoEncuestado(){return this.formRegistroEncuestado.get('correoElectronicoEncuestado'); }
-
 
   createForm(){
     this.formRegistroEncuestado = this.formBuilder.group({
@@ -204,7 +204,7 @@ export class RegistrarseComponent implements OnInit {
       segundoApellidoEncuestado: ['', [Validators.required, Validators.pattern(this.patronNombreEncuestado)]],
       estadoEncuestado: ['', Validators.required],
       fechaNacimientoEncuestado: ['', [Validators.required, Validators.pattern(this.patronFechaNacimientoEncuestado)]],
-      lugarEncuestado: ['', Validators.required],
+      lugarEncuestado: ['', [Validators.required]],
       estadoCivilEncuestado: ['', Validators.required],
       nivelAcademicoEncuestado: ['', Validators.required],
       medioConexionEncuestado: ['', Validators.required],
@@ -212,9 +212,6 @@ export class RegistrarseComponent implements OnInit {
       ocupacionEncuestado: ['', Validators.required],
       nivelSocioEconomicoEncuestado: ['', Validators.required],
       usuarioEncuestado: ['', Validators.required],
-      usernameEncuestado: ['', Validators.required],
-      claveEncuestado: ['', Validators.required],
-      correoElectronicoEncuestado: ['', [Validators.required, Validators.pattern(this.patronCorreoEncuestado)]],
     });
   }
 

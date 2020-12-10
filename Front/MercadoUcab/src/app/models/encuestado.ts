@@ -14,14 +14,14 @@ export interface Encuestado {
    primerApeliido:string;
    segundoApeliido:string;
    fechaNacimiento:string;
-
-   estadoCivil: EstadoCivil;
-   nivelAcademico:NivelAcademico;
-   medioConexion:MedioConexion;
-   genero:Genero;
-   ocupacion:Ocupacion;
-   nivelSocioeconomico:NivelSocioEconomico;
-   lugar:Lugar;
-   usuario:Usuario;
+   
+   dtoEstado:EstadoCivil;
+   dtoNivelAcademico:NivelAcademico;
+   dtoMedioConexion:MedioConexion;
+   dtoGenero:Genero;
+   dtoOcupacion:Ocupacion;
+   dtoNivelSocioeconomico:NivelSocioEconomico;
+   dtoLugar:Lugar;
+   dtoUsuario:Usuario;
 
 }

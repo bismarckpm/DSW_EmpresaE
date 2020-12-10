@@ -5,7 +5,7 @@ export interface EstudioEncuestado {
     _id:number;
     estado:string;
     fechaRealizacion:string;
-    encuestado:Encuestado;
-    estudio:Estudio;
-
+    dtoEncuestado:Encuestado;
+    dtoEstudio:Estudio;
+    
 }

@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SidebarModule } from 'ng-sidebar';
 
 // Componentes
@@ -19,7 +19,6 @@ import { AdminComponent } from './modulos/admin/admin.component';
 import { ClienteComponent } from './modulos/cliente/cliente.component';
 import { EncuestadoComponent } from './modulos/encuestado/encuestado.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
-import { FomrAnalistaComponent } from './componentes/fomr-analista/fomr-analista.component';
 import { ListaAnalistaComponent } from './componentes/lista-analista/lista-analista.component';
 import { CambiarClaveComponent } from './componentes/cambiar-clave/cambiar-clave.component';
 import { EditClienteComponent } from './componentes/edit-cliente/edit-cliente.component';
@@ -53,13 +52,9 @@ import { SubcategoriaService } from './services/subcategoria.service';
 import { CategoriaService } from './services/categoria.service';
 import { EncuestaService } from './services/encuesta.service';
 import { TipoService } from './services/tipo.service';
-import { TipoPregunta } from './models/tipo-pregunta';
 import { TipoPreguntaService } from './services/tipo-pregunta.service';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
-
-
-
-
+import { FormAnalistaComponent } from './componentes/form-analista/form-analista.component';
 
 
 
@@ -84,10 +79,7 @@ import { PerfilComponent } from './componentes/perfil/perfil.component';
     ListaEstudiosComponent,
     ListaCategoriaComponent,
     FormCategoriaComponent,
-
     FormEncuestadoComponent,
- 
-  
     ListaSubcategoriaComponent,
     FormSubcategoriaComponent,
     FormTipoComponent,
@@ -98,15 +90,15 @@ import { PerfilComponent } from './componentes/perfil/perfil.component';
     ListaClientesComponent,
     FormPresentacionComponent,
     ListaPresentacionComponent,
-    FomrAnalistaComponent,
+    FormEncuestaComponent,
+    ListaEncuestaComponent,
     ListaAnalistaComponent,
     CambiarClaveComponent,
     EditClienteComponent,
     EditUsuarioComponent,
-
     FormPreguntaComponent,
-
-    PerfilComponent
+    PerfilComponent,
+    FormAnalistaComponent,
   ],
   imports: [
     BrowserModule,
@@ -116,7 +108,6 @@ import { PerfilComponent } from './componentes/perfil/perfil.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-
   ],
   providers: [
     EncuestadoService,

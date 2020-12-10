@@ -1,20 +1,20 @@
 
-import { Lugar } from './Lugar';  
+import { Lugar } from './Lugar';
 import { NivelSocioEconomico } from './nivel-socio-economico';
 import { Subcategoria } from './subcategoria';
- 
+
 export interface Estudio {
     _id: number;
-    estado : string;
+    estado: string;
     nombre: string;
     comentarioAnalista ?: string;
-    edadMinima:number;
-    edadMaxima:number;
+    edadMinima: number;
+    edadMaxima: number;
     fechaInicio: string;
     fechaFin: string;
-    dtoLugar : Lugar;
-    dtoNivelSocioEconomico:NivelSocioEconomico;
-    dtoSubcategoria :Subcategoria;
+    dtoLugar: Lugar;
+    dtoNivelSocioEconomico: NivelSocioEconomico;
+    dtoSubcategoria: Subcategoria;
   }
 
 

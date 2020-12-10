@@ -13,18 +13,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class FormSubcategoriaComponent implements OnInit {
 
-  @Input() subcategoria ={ _id:0, nombre:'',estado:'', dtoCategoria:{_id:0}};
-  categoria:any;
+  @Input() subcategoria = { _id: 0, nombre: '', estado: '', dtoCategoria: {_id: 0}};
+  categoria: any;
   // Validacion de datos
   formSubcategoria: FormGroup;
   namePattern: any = /^[A-Za-z0-9\s]+$/;
 
   constructor(
     public subcategoriaService: SubcategoriaService,
-    public categoriaService:CategoriaService,
-    public router:Router,
+    public categoriaService: CategoriaService,
+    public router: Router,
     private formBuilder: FormBuilder
-  ) {  this.createForm();}
+  ) {  this.createForm(); }
 
   ngOnInit(): void {
     this.addcategoria();
@@ -48,7 +48,7 @@ export class FormSubcategoriaComponent implements OnInit {
     addcategoria(){
 
       this.categoriaService.getCategorias().subscribe((Categorias: {}) => {
-        this.categoria= Categorias;
+        this.categoria = Categorias;
       })
 
     }

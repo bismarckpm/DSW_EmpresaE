@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Encuesta } from 'src/app/models/encuesta';
 import { EstudioService } from 'src/app/services/estudio.service';
 import { TipoPreguntaService } from 'src/app/services/tipo-pregunta.service';
@@ -16,30 +17,34 @@ export class ListaEncuestaComponent implements OnInit {
   cantPreguntas = [];
   encuestas: any = [];
   estudios: any = [];
+  _id = this.actRoute.snapshot.params._id;
+
   formEncuesta: FormGroup;
-  namePattern: any = /^[A-Za-z0-9\s]+$/;
-  @Input() encuesta: Encuesta = {
+  patronFechaEstudio: any = /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/;
+  patronNombreEstudio: any = /^[A-Za-z\s]+$/;
+
+  @Input() encuestaData = {
     _id: 0,
     estado: '',
     fechaInicio: '',
     fechaFin: '',
-    dtoEstudio: null,
-    dtoPregunta: null
+    estudio: {_id: 0},
+    pregunta: [
+      {descripcion: ''}
+    ]
   };
 
   constructor(
     private servicio: EncuestaService,
     private servicioEstudio: EstudioService,
     private servicioTipoPregunta: TipoPreguntaService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public actRoute: ActivatedRoute,
   ) {
+    this.createForm();
     this.loadEncuestas();
-    this.servicioEstudio.getEstudios().subscribe((data: {}) => {
-      this.estudios = data;
-    });
-    this.servicioTipoPregunta.getTipoPreguntas().subscribe((data: {}) => {
-      this.tipoPreguntas = data;
-    });
+    this.cargarEstudios();
+    this.cargarTipoPreguntas();
   }
 
   ngOnInit(): void {
@@ -60,11 +65,21 @@ export class ListaEncuestaComponent implements OnInit {
     }
   }
 
-  updateEncuesta() {
-
+  updateEncuesta(id): any {
+    if (this.formEncuesta.valid) {
+      this.servicio.updateEncuesta(this.encuestaData._id, this.encuestaData).subscribe(data => {
+       });
+      this.loadEncuestas();
+      }
+      else{
+        alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
+      }
   }
   // Sustitucion de variables para el update
-  editar(encuesta){
+  editar(encuesta): void{
+    this.cargarEstudios();
+    this.cargarTipoPreguntas();
+    this.encuestaData = encuesta;
   }
 
   asigCantPregunta(cant: number): void {
@@ -73,19 +88,43 @@ export class ListaEncuestaComponent implements OnInit {
     }
   }
 
-  ///// Metodos para las validaciones
-  get nombreEncuesta(): AbstractControl{
-    return this.formEncuesta.get('nombreEncuesta');
+  // tslint:disable-next-line: typedef
+  cargarEstudios() {
+    this.servicioEstudio.getEstudios().subscribe((data: {}) => {
+      this.estudios = data;
+    });
   }
 
+  // tslint:disable-next-line: typedef
+  cargarTipoPreguntas() {
+    this.servicioTipoPregunta.getTipoPreguntas().subscribe((data: {}) => {
+      this.tipoPreguntas = data;
+    });
+  }
+
+  ///// Metodos para las validaciones
   get estadoEncuesta(): AbstractControl{
     return this.formEncuesta.get('estadoEncuesta');
   }
 
-  createForm(): any {
+  get fechaInicioEstudio(): AbstractControl{
+    return this.formEncuesta.get('fechaInicioEstudio');
+  }
+
+  get fechaFinEstudio(): AbstractControl{
+    return this.formEncuesta.get('fechaFinEstudio');
+  }
+
+  get nombreEstudio(): AbstractControl{
+    return this.formEncuesta.get('estudio');
+  }
+
+  createForm(): void{
     this.formEncuesta = this.formBuilder.group({
-      nombreEncuesta: ['', [Validators.pattern(this.namePattern), Validators.required]],
       estadoEncuesta: ['', Validators.required],
+      fechaInicioEstudio: ['', [Validators.required, Validators.pattern(this.patronFechaEstudio)]],
+      fechaFinEstudio: ['', [ Validators.pattern(this.patronFechaEstudio)]],
+      estudio: ['', Validators.required],
     });
   }
 }

@@ -2,8 +2,6 @@ package ucab.empresae.servicio;
 
 import ucab.empresae.daos.*;
 import ucab.empresae.dtos.DtoEncuestado;
-import ucab.empresae.dtos.DtoFactory;
-import ucab.empresae.dtos.DtoTipoUsuario;
 import ucab.empresae.entidades.*;
 
 import javax.ws.rs.*;

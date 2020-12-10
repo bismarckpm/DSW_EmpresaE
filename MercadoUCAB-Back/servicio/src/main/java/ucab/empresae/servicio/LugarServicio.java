@@ -1,10 +1,11 @@
 package ucab.empresae.servicio;
 
 import ucab.empresae.daos.DaoLugar;
-import ucab.empresae.daos.DaoMarca;
 import ucab.empresae.entidades.LugarEntity;
-import ucab.empresae.entidades.MarcaEntity;
 
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -12,18 +13,20 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.jar.JarOutputStream;
 
 
 @Path("/lugar")
 public class LugarServicio {
 
     @GET
+    @Produces(value= MediaType.APPLICATION_JSON)
     public Response getLugares(){
 
         List<LugarEntity> lugares = null;
         try {
             DaoLugar dao = new DaoLugar();
-            lugares = dao.findAll(LugarEntity.class);
+            lugares = dao.getLugaresByTipo("estado");
         } catch (Exception ex) {
             String problema = ex.getMessage();
         }
@@ -33,15 +36,18 @@ public class LugarServicio {
     @GET
     @Produces(value= MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public Response getLugar(@PathParam("id") long id)
-    {
+    public Response getLugar(@PathParam("id") long id) {
+
+        List<LugarEntity> resultado;
         DaoLugar dao = new DaoLugar();
         LugarEntity lugar = dao.find(id, LugarEntity.class);
 
         if(lugar != null) {
-            return Response.ok(lugar).build();
+            resultado = dao.getLugaresById(lugar);
+            return Response.ok(resultado).build();
         }else{
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
+
 }

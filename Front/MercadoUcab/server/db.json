@@ -149,46 +149,36 @@
       "segundoApellido": "",
       "fechaNacimiento": "",
       "estado": "",
-      "dtoLugar":
-        {
+      "dtoLugar": {
+        "id": ""
+      },
+      "dtoEstadoCivil": {
+        "id": ""
+      },
+      "dtoNivelAcademico": {
+        "id": ""
+      },
+      "dtoMedioConexion": {
+        "id": ""
+      },
+      "dtoGenero": {
+        "id": ""
+      },
+      "dtoOcupacion": {
+        "id": ""
+      },
+      "dtoNivelSocioeconomico": {
+        "id": ""
+      },
+      "dtoUsuario": {
+        "id": "",
+        "username": "",
+        "clave": "",
+        "correoelectronico": "",
+        "dtoTipoUsuario": {
           "id": ""
-        },
-      "dtoEstadoCivil":
-        {
-          "id": ""
-        },
-      "dtoNivelAcademico":
-        {
-          "id": ""
-        },
-      "dtoMedioConexion":
-        {
-          "id": ""
-        },
-      "dtoGenero":
-        {
-          "id": ""
-        },
-      "dtoOcupacion":
-        {
-          "id": ""
-        },
-      "dtoNivelSocioeconomico":
-        {
-          "id": ""
-        },
-      "dtoUsuario":
-        {
-          "id": "",
-          "username": "",
-          "clave": "",
-          "correoelectronico": "",
-          "dtoTipoUsuario":
-            {
-              "id": ""
-            }
-
         }
+      }
     }
   ],
   "estudio": [

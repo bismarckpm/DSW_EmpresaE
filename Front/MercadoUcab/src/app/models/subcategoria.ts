@@ -5,7 +5,7 @@ export interface Subcategoria {
     _id: number;
     nombre:string;
     estado:string;
-    dtoCategoria: Categoria;
+    categoria: Categoria;
 
 }
 

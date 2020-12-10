@@ -5,6 +5,6 @@ export interface ClienteEstudio {
     _id:number;
     estado: string;
     comentarioCliente:string;
-    dtoCliente:Cliente;
-    dtoEstudio:Estudio;
+    cliente:Cliente;
+    estudio:Estudio;
 }

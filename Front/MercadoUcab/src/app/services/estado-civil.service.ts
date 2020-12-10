@@ -21,7 +21,7 @@ export class EstadoCivilService {
 
 ///////// Metodos para ejecutar//////////////
   getEstadosCiviles(): Observable<EstadoCivil[]>{
-    return this.http.get<EstadoCivil[]>(this.apiurl + '/EstadoCivil')
+    return this.http.get<EstadoCivil[]>(this.apiurl + '/estadocivil')
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -29,7 +29,7 @@ export class EstadoCivilService {
   }
 
   getEstadoCivil(id): Observable<EstadoCivil[]>{
-    return this.http.get<EstadoCivil[]>(this.apiurl + '/EstadoCivil/' + id)
+    return this.http.get<EstadoCivil[]>(this.apiurl + '/estadocivil/' + id)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -37,7 +37,7 @@ export class EstadoCivilService {
   }
 
   createEstadoCivil(EstadoCivil): Observable<EstadoCivil[]>{
-    return this.http.post<EstadoCivil[]>(this.apiurl + '/EstadoCivil', JSON.stringify(EstadoCivil), this.httpOptions)
+    return this.http.post<EstadoCivil[]>(this.apiurl + '/estadocivil', JSON.stringify(EstadoCivil), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -45,7 +45,7 @@ export class EstadoCivilService {
   }
 
   updateEstadoCivil(id, EstadoCivil): Observable<EstadoCivil[]>{
-    return this.http.put<EstadoCivil[]>(this.apiurl + '/EstadoCivil/' + id, JSON.stringify(EstadoCivil), this.httpOptions)
+    return this.http.put<EstadoCivil[]>(this.apiurl + '/estadocivil/' + id, JSON.stringify(EstadoCivil), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -53,7 +53,7 @@ export class EstadoCivilService {
   }
 
   deleteEstadoCivil(id){
-    return this.http.delete<EstadoCivil[]>(this.apiurl + '/EstadoCivil/' + id, this.httpOptions)
+    return this.http.delete<EstadoCivil[]>(this.apiurl + '/estadocivil/' + id, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)

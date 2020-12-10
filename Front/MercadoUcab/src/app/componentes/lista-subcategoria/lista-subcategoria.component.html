@@ -14,7 +14,7 @@
           <td>{{ subcategoria._id }}</td>
           <td>{{ subcategoria.nombre }}</td>
           <td>{{ subcategoria.estado }}</td>
-          <td>{{ subcategoria.dtoCategoria.nombre}}</td>
+          <td>{{ subcategoria.categoria.nombre}}</td>
           <td>
             <div class="d-flex justify-content-around">
               <button type="button" class="btn btn-primary" data-toggle="modal" (click)="editar(subcategoria)" data-target="#exampleModal">
@@ -73,7 +73,7 @@
                               <br>
                               <label for="" class="col-sm-4 col-form-label escrituerModal">Seleccione una categorias</label>
                               <div class="col-sm-8">
-                                <select name="dtoCategoria._id" id="dtoCategoria._id" class="form-control escrituerModal " [(ngModel)]="subcategoriaData.dtoCategoria._id" formControlName="CATEGORIA" >
+                                <select name="categoria._id" id="categoria._id" class="form-control escrituerModal " [(ngModel)]="subcategoriaData.categoria._id" formControlName="CATEGORIA" >
                                   <option value=""> Selecciones una ...</option>
                                   <option class="escrituraModal" *ngFor="let cat of categoria"   [ngValue]= "cat._id" >{{cat.nombre}}</option>
                                 </select>

@@ -19,14 +19,14 @@ import {NivelAcademicoService} from '../../../services/nivel-academico.service';
 export class RegistrarseComponent implements OnInit {
 
   @Input() encuestado = {_id: 0, primerNombre: '', segundoNombre: '' , primerApellido: '', segundoApellido: 0, fechaNacimiento: '', estado: '',
-    dtoEstadoCivil: {_id: 0, nombre: '', estado: ''},
-    dtoNivelAcademico: {_id: 0, nombre: '', estado: ''},
-    dtoMedioConexion: {_id: 0, nombre: '', estado: ''},
-    dtoGenero: {_id: 0, nombre: '', estado: ''},
-    dtoOcupacion: {_id: 0, nombre: '', estado: ''},
-    dtoNivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
-    dtoLugar: {_id: 0, estado: '', nombre: '', tipo: ''},
-    dtoUsuario: {_id: 0, username: '', estado: '', clave: '', correoElectronico: '', dtoTipoUsuario: {_id: 0, estado: '', descripcion: ''}},
+    estadoCivil: {_id: 0, nombre: '', estado: ''},
+    nivelAcademico: {_id: 0, nombre: '', estado: ''},
+    medioConexion: {_id: 0, nombre: '', estado: ''},
+    genero: {_id: 0, nombre: '', estado: ''},
+    ocupacion: {_id: 0, nombre: '', estado: ''},
+    nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
+    lugar: {_id: 0, estado: '', nombre: '', tipo: ''},
+    usuario: {_id: 0, username: '', estado: '', clave: '', correoElectronico: ''},
   };
 
   estadoCivil: any;
@@ -37,20 +37,20 @@ export class RegistrarseComponent implements OnInit {
   nivelSocioEconomico: any;
   lugar: any;
   usuario: any;
+  username: any;
+  clave: any;
+  correoElectronico: any;
 
   estados: any;
   parroquias: any;
-  ciudades: any;
   municipios: any;
-  auxPaisID: number;
   auxEstadoID: number;
-  auxCiudadID: number;
   auxMunicipioID: number;
-  auxParroquiaID: number;
 
 
   patronFechaNacimientoEncuestado: any = /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/;
   patronNombreEncuestado: any = /^[A-Za-z\s]+$/;
+  patronCorreoEncuestado: any = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
   formRegistroEncuestado: FormGroup;
 
@@ -66,7 +66,9 @@ export class RegistrarseComponent implements OnInit {
     public usuarioService: UsuarioService,
     public router: Router,
     private formBuilder: FormBuilder
-    ) { this.createForm; }
+    ) {
+    this.createForm();
+  }
 
   ngOnInit(): void {
     this.addEstadoCivil();
@@ -74,13 +76,14 @@ export class RegistrarseComponent implements OnInit {
     this.addMedioConexion();
     this.addGenero();
     this.addOcupacion();
-    this.addNivelSocioEconomico ();
+    this.addNivelSocioEconomico();
     this.addLugar();
-    this.addUsuario();
   }
 
   addEncuestado(encuestado){
     if (this.formRegistroEncuestado.valid) {
+      this.usuarioService.createUsuario(this.usuario).subscribe((data: {}) => {
+      });
       this.encuestadoService.createEncuestado(this.encuestado).subscribe((data: {}) => {
       });
     }
@@ -89,7 +92,7 @@ export class RegistrarseComponent implements OnInit {
     }
   }
 
- 
+
 
   addEstadoCivil(){
     this.estadoCivilService.getEstadosCiviles().subscribe((EstadosCiviles: {}) => {
@@ -132,27 +135,21 @@ export class RegistrarseComponent implements OnInit {
       this.lugar = Lugares;
     });
   }
-
-  addUsuario(){
-    this.usuarioService.getUsuarios().subscribe((Usuarios: {}) => {
-      this.usuario = Usuarios;
+  busquedaMunicipio(id){
+    // El ID es del estado
+    this.auxEstadoID = id;
+    // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
+    this.lugarService.getMunicipio(id).subscribe((data: {}) => {
+      this.municipios = data;
     });
   }
 
-  busquedaEstado(id){
-    // El ID es del pais
-    this.auxPaisID = id;
-    // Esta peticion se realiza para mostar todos los estados aasociados a ese pais
-    this.lugarService.getEstado(id).subscribe((data: {}) => {
-      this.estados = data;
-    });
-  }
 
   busquedaParroquia(id){
     // El ID es del estado
     this.auxMunicipioID = id;
     // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
-    this.lugarService.getParroquia(this.auxPaisID, id).subscribe((data: {}) => {
+    this.lugarService.getParroquia(this.auxMunicipioID, id).subscribe((data: {}) => {
       this.parroquias = data;
     });
   }
@@ -171,6 +168,10 @@ export class RegistrarseComponent implements OnInit {
   get nivelSocioEconomicoEncuestado(){ return this.formRegistroEncuestado.get('nivelSocioEconomicoEncuestado'); }
   get lugarEncuestado(){return this.formRegistroEncuestado.get('lugarEncuestado'); }
   get usuarioEncuestado(){return this.formRegistroEncuestado.get('usuarioEncuestado'); }
+  get usernameEncuestado(){return this.formRegistroEncuestado.get('usernameEncuestado'); }
+  get claveEncuestado(){return this.formRegistroEncuestado.get('claveEncuestado'); }
+  get correoElectronicoEncuestado(){return this.formRegistroEncuestado.get('correoElectronicoEncuestado'); }
+
 
   createForm(){
     this.formRegistroEncuestado = this.formBuilder.group({
@@ -180,7 +181,7 @@ export class RegistrarseComponent implements OnInit {
       segundoApellidoEncuestado: ['', [Validators.required, Validators.pattern(this.patronNombreEncuestado)]],
       estadoEncuestado: ['', Validators.required],
       fechaNacimientoEncuestado: ['', [Validators.required, Validators.pattern(this.patronFechaNacimientoEncuestado)]],
-      lugarEncuestado: ['', [Validators.required]],
+      lugarEncuestado: ['', Validators.required],
       estadoCivilEncuestado: ['', Validators.required],
       nivelAcademicoEncuestado: ['', Validators.required],
       medioConexionEncuestado: ['', Validators.required],
@@ -188,6 +189,9 @@ export class RegistrarseComponent implements OnInit {
       ocupacionEncuestado: ['', Validators.required],
       nivelSocioEconomicoEncuestado: ['', Validators.required],
       usuarioEncuestado: ['', Validators.required],
+      usernameEncuestado: ['', Validators.required],
+      claveEncuestado: ['', Validators.required],
+      correoElectronicoEncuestado: ['', [Validators.required, Validators.pattern(this.patronCorreoEncuestado)]],
     });
   }
 

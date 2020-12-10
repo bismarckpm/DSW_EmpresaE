@@ -58,7 +58,7 @@
                           <select class="custom-select d-block w-100" name="preguntaData.estado" [(ngModel)]= "preguntaData.estado" formControlName="estadoPregunta" value="preguntaData.estado">
                             <option value="">Choose...</option>
                             <option value="a">Activo</option>
-                            <option value="I">Inactivo</option>
+                            <option value="i">Inactivo</option>
                           </select>
                           <div *ngIf="estadoPregunta.invalid && (estadoPregunta.dirty || estadoPregunta.touched)" class="alert alert-danger">
                             <div *ngIf="estadoPregunta.errors.required">
@@ -67,12 +67,12 @@
                           </div>
                         </div>
                       </div>
-              
+
                       <div class="row">
                         <div class="col-md-5 mb-3">
                           <label for="country">Tipo de Pregunta</label>
                           <select class="custom-select d-block w-100" [(ngModel)]= "preguntaData.tipo._id" formControlName="tipoPregunta"  name="preguntaData.tipo._id"value="preguntaData.tipo._id"><!-- Hacer lo de *ngFor-->
-                            <option  *ngFor="let tp of tipopreguntas" [ngValue]= "tp._id" >{{tp.tipo}}</option>
+                            <option  *ngFor="let tp of tipopregunta" [ngValue]= "tp._id" >{{tp.tipo}}</option>
                           </select>
                           <div *ngIf="tipoPregunta.invalid && (tipoPregunta.dirty || tipoPregunta.touched)" class="alert alert-danger">
                             <div *ngIf="tipoPregunta.errors.required">
@@ -81,7 +81,7 @@
                           </div>
                         </div>
                       </div>
-              
+
                       <div class="row">
                         <div class="col-md-5 mb-3">
                           <label for="country">Subcategoria asociada</label>
@@ -93,7 +93,7 @@
                                   <div *ngIf="nombreSubcategoria.errors.required">
                                     Este campo es obligatorio
                                   </div>
-                         
+
                           </div>
                         </div>
                       </div>

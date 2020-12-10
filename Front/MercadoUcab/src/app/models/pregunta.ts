@@ -5,6 +5,6 @@ export interface Pregunta {
     _id: number;
     estado: string;
     descripcion: string;
-    tipo:TipoPregunta;
+    tipoPregunta:TipoPregunta;
     subcategoria:Subcategoria;
 }

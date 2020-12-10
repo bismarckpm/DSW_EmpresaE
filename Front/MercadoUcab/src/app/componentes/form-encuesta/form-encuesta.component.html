@@ -1,13 +1,13 @@
 <div class="modal-dialog">
     <div class="modal-content">
-  
+
         <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">encuesta</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="asigCantPregunta(0)">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-    
+
         <div class="modal-body">
             <form class="needs-validation" novalidate>
                 <div class="form-row">
@@ -36,7 +36,7 @@
                         <label for="estudio">Estudio relacionado</label>
                     </div>
                     <div class="col-md-8 col-sm-6 mb-3">
-                        <select class="custom-select d-block w-100"  value="encuesta.dtoEstudio" name="encuesta.dtoEstudio" >
+                        <select class="custom-select d-block w-100"  value="encuesta.estudio" name="encuesta.estudio" >
                             <option value="">Choose...</option>
                             <option *ngFor="let estudio of estudios">{{ estudio.nombre }}</option>
                         </select>
@@ -82,6 +82,6 @@
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cancelar</button>
             <button type="submit" class="btn btn-primary"  data-dismiss="modal">Guardar</button>
-        </div>    
+        </div>
     </div>
 </div>

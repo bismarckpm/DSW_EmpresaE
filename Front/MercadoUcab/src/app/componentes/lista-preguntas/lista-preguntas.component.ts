@@ -15,7 +15,7 @@ export class ListaPreguntasComponent implements OnInit {
 
   preguntas: Pregunta[] = [];
   _id = this.actRoute.snapshot.params['_id'];
-  @Input() preguntaData ={ _id:0, descripcion:'',estado:'',tipo:{_id:0,estado:'',tipo:''} ,subcategoria:{_id:0, nombre:'',estado:'' }};
+  @Input() preguntaData ={ _id:0, descripcion:'',estado:'',tipoPregunta:{_id:0,estado:'',tipo:''} ,subcategoria:{_id:0, nombre:'',estado:'', }};
    subcategorias:any;
    tipopreguntas:any;
 

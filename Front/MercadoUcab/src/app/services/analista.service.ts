@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Analista } from '../models/analista';
-import { Subcategoria } from '../models/subcategoria';
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,40 +21,40 @@ export class AnalistaService {
 }
 
 ///////// Metodos para ejecutar//////////////
-getsubcategorias():Observable<Analista[]>{
-  return this.http.get<Subcategoria[]>(this.apiurl+'/analista')
+getAnalistas():Observable<Analista[]>{
+  return this.http.get<Analista[]>(this.apiurl+'/analista')
   .pipe(
     retry(1),
     catchError(this.handleError)
   )
 }
 
-getsubcategoria(id):Observable<Subcategoria[]>{
-  return this.http.get<Subcategoria[]>(this.apiurl+'/analista/'+id)
+getAnalista(id):Observable<Analista[]>{
+  return this.http.get<Analista[]>(this.apiurl+'/analista/'+id)
   .pipe(
     retry(1),
     catchError(this.handleError)
   )
 }
 
-createsubcategoria(subcategoria):Observable<Subcategoria[]>{
-  return this.http.post<Subcategoria[]>(this.apiurl+'/analista',JSON.stringify(subcategoria), this.httpOptions)
+createAnalista(Analista):Observable<Analista[]>{
+  return this.http.post<Analista[]>(this.apiurl+'/analista',JSON.stringify(Analista), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
   )
 }
 
-updatesubcategoria(id,subcategoria):Observable<Subcategoria[]>{
-  return this.http.put<Subcategoria[]>(this.apiurl+'/analista/'+id,JSON.stringify(subcategoria), this.httpOptions)
+updateAnalista(id,Analista):Observable<Analista[]>{
+  return this.http.put<Analista[]>(this.apiurl+'/analista/'+id,JSON.stringify(Analista), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
   )
 }
 
-deletesubcategoria(id){
-  return this.http.delete<Subcategoria[]>(this.apiurl + '/analista/' + id, this.httpOptions)
+deleteAnalista(id){
+  return this.http.delete<Analista[]>(this.apiurl + '/analista/' + id, this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)

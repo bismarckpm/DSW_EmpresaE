@@ -38,6 +38,22 @@ export class EstudioService {
     );
   }
 
+  getEstudioCliente(user): Observable<Estudio[]>{
+    return this.http.get<Estudio[]>(this.apiurl + '/estudio/' + user)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
+  getEstudioAnalista(user): Observable<Estudio[]>{
+    return this.http.get<Estudio[]>(this.apiurl + '/estudio/' + user)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
   createEstudio(Estudio): Observable<Estudio[]>{
     return this.http.post<Estudio[]>(this.apiurl + '/estudio', JSON.stringify(Estudio), this.httpOptions)
     .pipe(

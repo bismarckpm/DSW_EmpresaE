@@ -43,13 +43,9 @@ export class RegistrarseComponent implements OnInit {
 
   estados: any;
   parroquias: any;
-  ciudades: any;
   municipios: any;
-  auxPaisID: number;
   auxEstadoID: number;
-  auxCiudadID: number;
   auxMunicipioID: number;
-  auxParroquiaID: number;
 
 
   patronFechaNacimientoEncuestado: any = /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/;
@@ -139,31 +135,12 @@ export class RegistrarseComponent implements OnInit {
       this.lugar = Lugares;
     });
   }
-
-  busquedaEstado(id){
-    // El ID es del pais
-    this.auxPaisID = id;
-    // Esta peticion se realiza para mostar todos los estados aasociados a ese pais
-    this.lugarService.getEstado(id).subscribe((data: {}) => {
-      this.estados = data;
-    });
-  }
-
-  busquedaCiudad(id){
+  busquedaMunicipio(id){
     // El ID es del estado
     this.auxEstadoID = id;
     // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
-    this.lugarService.getCiudad(this.auxPaisID, id).subscribe((data: {}) => {
-      this.ciudades = data;
-    });
-  }
-
-  busquedaMunicipio(id){
-    // El ID es del estado
-    this.auxCiudadID = id;
-    // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
-    this.lugarService.getMunicipio(this.auxPaisID, this.auxEstadoID, id).subscribe((data: {}) => {
-      this.ciudades = data;
+    this.lugarService.getMunicipio(id).subscribe((data: {}) => {
+      this.municipios = data;
     });
   }
 
@@ -172,7 +149,7 @@ export class RegistrarseComponent implements OnInit {
     // El ID es del estado
     this.auxMunicipioID = id;
     // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
-    this.lugarService.getParroquia(this.auxPaisID, this.auxEstadoID, this.auxCiudadID, id).subscribe((data: {}) => {
+    this.lugarService.getParroquia(this.auxMunicipioID, id).subscribe((data: {}) => {
       this.parroquias = data;
     });
   }

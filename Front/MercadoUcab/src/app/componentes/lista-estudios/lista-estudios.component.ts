@@ -22,9 +22,9 @@ export class ListaEstudiosComponent implements OnInit {
  estudios: Estudio[]=[];
  _id = this.actRoute.snapshot.params['_id'];
  @Input() estudioData={_id:0, nombre:'',estado:'',comentarioAnalista :'', edadMinima:0,edadMaxima:0 ,fechaInicio:'', fechaFin: '',
-             dtoLugar : {_id:0,estado:'',nombre:'',tipo:''},
-             dtoNivelSocioEconomico:{_id:0,nombre:'',estado:'', descripcion:''},
-             dtoSubcategoria : {_id:0, nombre:'',estado:''},
+             lugar : {_id:0,estado:'',nombre:'',tipo:''},
+             nivelSocioEconomico:{_id:0,nombre:'',estado:'', descripcion:''},
+             subcategoria : {_id:0, nombre:'',estado:''},
             };
   // Declaracion para los dropdown
   nivelSocioEconomico: any;
@@ -33,14 +33,10 @@ export class ListaEstudiosComponent implements OnInit {
 
   ///// Atributos para la busqueda de acuerdo a lo seleccionado
   estados: any;
-  ciudades: any;
   municipios: any;
   parroquias: any;
-  auxPaisID: number;
   auxEstadoID: number;
-  auxCiudadID: number;
   auxMunicipioID: number;
-  auxParroquiaID: number;
 
   // Declaracion para validar
   formEstudio: FormGroup;
@@ -94,30 +90,12 @@ export class ListaEstudiosComponent implements OnInit {
 }
 
 /// Busqueda para los drop de lugar por pais seleccionado previamente
-  busquedaEstado(id){
-    // El ID es del pais
-    this.auxPaisID = id;
-    // Esta peticion se realiza para mostar todos los estados aasociados a ese pais
-    this.lugarService.getEstado(id).subscribe((data: {}) => {
-      this.estados = data;
-    });
-  }
-
-  busquedaCiudad(id){
+  busquedaMunicipio(id){
     // El ID es del estado
     this.auxEstadoID = id;
     // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
-    this.lugarService.getCiudad(this.auxPaisID, id).subscribe((data: {}) => {
-      this.ciudades = data;
-    });
-  }
-
-  busquedaMunicipio(id){
-    // El ID es del estado
-    this.auxCiudadID = id;
-    // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
-    this.lugarService.getMunicipio(this.auxPaisID, this.auxEstadoID, id).subscribe((data: {}) => {
-      this.ciudades = data;
+    this.lugarService.getMunicipio(id).subscribe((data: {}) => {
+      this.municipios = data;
     });
   }
 
@@ -126,7 +104,7 @@ export class ListaEstudiosComponent implements OnInit {
     // El ID es del estado
     this.auxMunicipioID = id;
     // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
-    this.lugarService.getParroquia(this.auxPaisID, this.auxEstadoID, this.auxCiudadID, id).subscribe((data: {}) => {
+    this.lugarService.getParroquia(this.auxMunicipioID, id).subscribe((data: {}) => {
       this.parroquias = data;
     });
   }

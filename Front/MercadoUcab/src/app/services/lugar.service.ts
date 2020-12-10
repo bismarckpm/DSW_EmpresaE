@@ -37,32 +37,17 @@ export class LugarService {
      )
    }
 
-   getEstado(paisID):Observable<Lugar[]>{
-    return this.http.get<Lugar[]>(this.apiurl+'/lugar/'+paisID )
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-    )
-   }
 
-  getCiudad(paisID, estadoID):Observable<Lugar[]>{
-    return this.http.get<Lugar[]>(this.apiurl+'/lugar/'+paisID+estadoID )
+  getMunicipio(estadoID):Observable<Lugar[]>{
+    return this.http.get<Lugar[]>(this.apiurl+'/lugar/'+estadoID )
       .pipe(
         retry(1),
         catchError(this.handleError)
       )
   }
 
-  getMunicipio(paisID, estadoID, ciudadID):Observable<Lugar[]>{
-    return this.http.get<Lugar[]>(this.apiurl+'/lugar/'+paisID+estadoID+ciudadID )
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      )
-  }
-
-  getParroquia(paisID, estadoID, ciudadID, municipioID):Observable<Lugar[]>{
-    return this.http.get<Lugar[]>(this.apiurl+'/lugar/'+paisID+estadoID+ciudadID+municipioID )
+  getParroquia(estadoID, municipioID):Observable<Lugar[]>{
+    return this.http.get<Lugar[]>(this.apiurl+'/lugar/'+estadoID+municipioID )
     .pipe(
       retry(1),
       catchError(this.handleError)

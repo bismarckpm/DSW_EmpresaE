@@ -14,23 +14,23 @@ import { TipoPreguntaService } from 'src/app/services/tipo-pregunta.service';
 })
 export class FormPreguntaComponent implements OnInit {
 
-  ///Declaracion de l obejto Pregunta 
-  @Input() Pregunta ={ 
-    _id:0, 
+  ///Declaracion de l obejto Pregunta
+  @Input() Pregunta ={
+    _id:0,
     descripcion:'',
     estado:'',
-    dtoTipoPregunta:{
+    tipoPregunta:{
       _id:0,
       estado:'',
       tipo:''
     } ,
-    dtoSubcategoria:{
-      _id:0, 
+    subcategoria:{
+      _id:0,
       nombre:'',
-      estado:'', 
+      estado:'',
       }
     };
-    
+
     tipopregunta:any;
     subcategoria:any;
 
@@ -59,7 +59,7 @@ export class FormPreguntaComponent implements OnInit {
       else{
         alert(' LLenar todos los campos por favor');
       }
-  }  
+  }
 
   /////Para los dropdown////////////////////////////////////////////
   addsubcategoria(){

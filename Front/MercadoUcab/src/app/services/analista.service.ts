@@ -11,18 +11,18 @@ import { Subcategoria } from '../models/subcategoria';
 export class AnalistaService {
 
   apiurl='http://localhost:3000';
-   
+
   constructor(private http:HttpClient) { }
 // Http Options
   httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
   })
-} 
+}
 
 ///////// Metodos para ejecutar//////////////
 getsubcategorias():Observable<Analista[]>{
-  return this.http.get<Subcategoria[]>(this.apiurl+'/subcategoria')
+  return this.http.get<Subcategoria[]>(this.apiurl+'/analista')
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -30,7 +30,7 @@ getsubcategorias():Observable<Analista[]>{
 }
 
 getsubcategoria(id):Observable<Subcategoria[]>{
-  return this.http.get<Subcategoria[]>(this.apiurl+'/subcategoria/'+id)
+  return this.http.get<Subcategoria[]>(this.apiurl+'/analista/'+id)
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -38,7 +38,7 @@ getsubcategoria(id):Observable<Subcategoria[]>{
 }
 
 createsubcategoria(subcategoria):Observable<Subcategoria[]>{
-  return this.http.post<Subcategoria[]>(this.apiurl+'/subcategoria',JSON.stringify(subcategoria), this.httpOptions)
+  return this.http.post<Subcategoria[]>(this.apiurl+'/analista',JSON.stringify(subcategoria), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -46,7 +46,7 @@ createsubcategoria(subcategoria):Observable<Subcategoria[]>{
 }
 
 updatesubcategoria(id,subcategoria):Observable<Subcategoria[]>{
-  return this.http.put<Subcategoria[]>(this.apiurl+'/subcategoria/'+id,JSON.stringify(subcategoria), this.httpOptions)
+  return this.http.put<Subcategoria[]>(this.apiurl+'/analista/'+id,JSON.stringify(subcategoria), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -54,7 +54,7 @@ updatesubcategoria(id,subcategoria):Observable<Subcategoria[]>{
 }
 
 deletesubcategoria(id){
-  return this.http.delete<Subcategoria[]>(this.apiurl + '/subcategoria/' + id, this.httpOptions)
+  return this.http.delete<Subcategoria[]>(this.apiurl + '/analista/' + id, this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)

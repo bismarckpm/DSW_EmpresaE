@@ -41,6 +41,14 @@
         "nombre": "pedro gutierres",
         "estado": "i"
       }
+    },
+    {
+      "_id": 5,
+      "nombre": "yyy",
+      "estado": "i",
+      "categoria": {
+        "_id": 5
+      }
     }
   ],
   "marca": [
@@ -52,6 +60,11 @@
     {
       "_id": 2,
       "nombre": "Chucheria",
+      "estado": "a"
+    },
+    {
+      "_id": 3,
+      "nombre": "adidas",
       "estado": "a"
     }
   ],
@@ -70,6 +83,11 @@
       "_id": 4,
       "descripcion": "pedro",
       "estado": "i"
+    },
+    {
+      "_id": 5,
+      "descripcion": "adios",
+      "estado": "a"
     }
   ],
   "tipopregunta": [
@@ -99,12 +117,12 @@
       "_id": 1,
       "descripcion": "asdsad",
       "estado": "a",
-      "dtoTipoPregunta": {
+      "tipoPregunta": {
         "_id": 1,
         "estado": "a",
         "tipo": "verdadero y Falso"
       },
-      "dtoSubcategoria": {
+      "subcategoria": {
         "_id": 1,
         "nombre": "pedro gutierres",
         "estado": "i"
@@ -114,15 +132,30 @@
       "_id": 2,
       "descripcion": "Prueba exitosa Editar",
       "estado": "a",
-      "dtoTipoPregunta": {
+      "tipoPregunta": {
         "_id": 1,
         "estado": "i",
         "tipo": "multiple"
       },
-      "dtoSubcategoria": {
+      "subcategoria": {
         "_id": 3,
         "nombre": "pedro gutierres",
         "estado": "i"
+      }
+    },
+    {
+      "_id": 3,
+      "descripcion": "qqqqq",
+      "estado": "I",
+      "tipoPregunta": {
+        "_id": 4,
+        "estado": "",
+        "tipo": ""
+      },
+      "subcategoria": {
+        "_id": 1,
+        "nombre": "",
+        "estado": ""
       }
     }
   ],
@@ -138,6 +171,12 @@
       "nombre": "ttttt",
       "estado": "a",
       "descripcion": "jojoj"
+    },
+    {
+      "_id": 3,
+      "nombre": "eee",
+      "estado": "i",
+      "descripcion": "eeeeee"
     }
   ],
   "encuestado": [

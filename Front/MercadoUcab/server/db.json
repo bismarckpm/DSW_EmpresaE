@@ -59,12 +59,17 @@
     },
     {
       "_id": 2,
-      "nombre": "Chucheria",
+      "nombre": "chu",
       "estado": "a"
     },
     {
       "_id": 3,
       "nombre": "adidas",
+      "estado": "a"
+    },
+    {
+      "_id": 4,
+      "nombre": "coca",
       "estado": "a"
     }
   ],
@@ -323,6 +328,22 @@
         "nombre": "",
         "estado": ""
       }
+    }
+  ],
+  "analista": [
+    {
+      "_id": 1,
+      "username": "juancito",
+      "clave": "clavejuan",
+      "correoElectronico": "juan@gmail.com",
+      "estado": "a"
+    },
+    {
+      "_id": 2,
+      "username": "aaapppp",
+      "clave": "aaapppp",
+      "correoElectronico": "aaappp@gmail.com",
+      "estado": "i"
     }
   ],
   "lugar": [

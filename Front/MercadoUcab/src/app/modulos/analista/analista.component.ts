@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AnalistaService} from '../../services/analista.service';
 
 @Component({
   selector: 'app-analista',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AnalistaComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private ruta: ActivatedRoute,
+    private servicio: AnalistaService,
+    private rutaActual: Router
+  ) { }
 
   ngOnInit(): void {
   }

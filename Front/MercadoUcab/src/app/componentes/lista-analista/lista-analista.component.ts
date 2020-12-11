@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Analista} from '../../models/analista';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AnalistaService} from '../../services/analista.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-lista-analista',
@@ -7,9 +11,69 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListaAnalistaComponent implements OnInit {
 
-  constructor() { }
+  Analista: Analista[] = [];
+  _id = this.actRoute.snapshot.params._id;
+  @Input() analistaData = {_id: 0, username: '', clave: '', correoElectronico: '', estado: ''};
 
-  ngOnInit(): void {
+  formAnalista: FormGroup;
+  patronCorreoAnalista: any = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+  constructor(
+    public analistaService: AnalistaService,
+    public actRoute: ActivatedRoute,
+    public router: Router,
+    private formBuilder: FormBuilder
+  ) {
+    this.createForm();
   }
 
+  ngOnInit(): void {
+    this.loadAnalista();
+  }
+
+  loadAnalista(): void{
+    this.analistaService.getAnalistas().subscribe(data => {
+      this.Analista = data;
+    });
+  }
+
+  deleteAnalista(id){
+    this.analistaService.deleteAnalista(id).subscribe(data => {
+      this.loadAnalista();
+    });
+  }
+
+  updateAnalista(){
+    this.analistaService.updateAnalista(this.analistaData._id, this.analistaData).subscribe(data => {
+    });
+  }
+
+  editar(analista){
+    this.analistaData = analista;
+  }
+
+  get usernameAnalista(){
+    return this.formAnalista.get('usernameAnalista');
+  }
+
+  get claveAnalista(){
+    return this.formAnalista.get('claveAnalista');
+  }
+
+  get estadoAnalista(){
+    return this.formAnalista.get('estadoAnalista');
+  }
+
+  get correoElectronicoAnalista(){
+    return this.formAnalista.get('correoElectronicoAnalista');
+  }
+
+  createForm(){
+    this.formAnalista = this.formBuilder.group({
+      usernameAnalista: ['', Validators.required],
+      estadoAnalista: ['',  Validators.required],
+      claveAnalista: ['', Validators.required],
+      correoElectronicoAnalista: ['', [Validators.required, Validators.pattern(this.patronCorreoAnalista)]],
+    });
+  }
 }

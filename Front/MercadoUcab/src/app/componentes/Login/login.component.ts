@@ -13,7 +13,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class LoginComponent implements OnInit {
   
 
-  @Input() usuario:{username:'', clave:''}
+  @Input() usuario:{ username:'', clave:''}
   formLogin: FormGroup;
 
   constructor(
@@ -24,20 +24,23 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
   
-  onSubmit() {
-    
-    if (this.formLogin.invalid) {
-        return;
-    }
- 
-    this.usuarioService.Logear(this.usuario)
-        .pipe(first())
-        .subscribe(
-            error => {
-             //   this.alertService.error(error);
-            ///    this.loading = false;
-            });
+
+
+Loggearse(){
+  if (this.formLogin.invalid) {
+    return;
 }
+
+return this.usuarioService.Logear(this.usuario).subscribe( 
+ data => {
+        console.log(data);
+    },
+      error=> console.log(error)
+
+);
+
+}
+
 
 
 logout() {

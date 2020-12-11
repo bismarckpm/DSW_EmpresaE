@@ -86,10 +86,7 @@ import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estud
     ListaEstudiosComponent,
     ListaCategoriaComponent,
     FormCategoriaComponent,
-
     FormEncuestadoComponent,
- 
-  
     ListaSubcategoriaComponent,
     FormSubcategoriaComponent,
     FormTipoComponent,
@@ -105,11 +102,8 @@ import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estud
     CambiarClaveComponent,
     EditClienteComponent,
     EditUsuarioComponent,
-
     FormPreguntaComponent,
-
     PerfilComponent,
-
     ListaEstudioComponent
   ],
   imports: [

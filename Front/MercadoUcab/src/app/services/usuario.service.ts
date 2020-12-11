@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError, map } from 'rxjs/operators';
 import {Usuario} from '../models/usuario';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 
 @Injectable({
@@ -11,17 +10,11 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 })
 export class UsuarioService {
 
-  private currentUserSubject: BehaviorSubject<Usuario>;
-  public currentUser: Observable<Usuario>;
 
 
   apiurl = 'http://localhost:3000';
 
-  constructor(private http: HttpClient) { 
-
-    this.currentUserSubject = new BehaviorSubject<Usuario>(JSON.parse(localStorage.getItem('currentUser')));
-    this.currentUser = this.currentUserSubject.asObservable();
-  }
+  constructor(private http: HttpClient) { }
 // Http Options
   httpOptions = {
     headers: new HttpHeaders({
@@ -64,21 +57,16 @@ export class UsuarioService {
 
   deleteUsuario(id){
     return this.http.delete<Usuario[]>(this.apiurl + '/usuario/' + id, this.httpOptions)
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      );
   }
 
   Logear(usuario): Observable<Usuario[]>{
       
       return  this.http.post<Usuario[]>(this.apiurl+'/usuario/',JSON.stringify(usuario),this.httpOptions)
-      .pipe(map(user => {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', JSON.stringify(user));
-       // this.currentUserSubject.next(user);
-        return user;
-    }));
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+  
+      );
 
   }
 
@@ -86,19 +74,6 @@ export class UsuarioService {
   handleError(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
-      // Get client-side error
-      errorMessage = error.error.message;
-    } else {
-      // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    window.alert(errorMessage);
-    return throwError(errorMessage);
-  }
-
-  handleErrorLogin(error) {
-    let errorMessage = '';
-    if (error= invali) {
       // Get client-side error
       errorMessage = error.error.message;
     } else {

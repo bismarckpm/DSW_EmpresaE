@@ -56,7 +56,7 @@ import { TipoService } from './services/tipo.service';
 import { TipoPregunta } from './models/tipo-pregunta';
 import { TipoPreguntaService } from './services/tipo-pregunta.service';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
-import { ListaEstudioComponent } from './modulos/cliente/lista-estudio/lista-estudio.component';
+import { ListaEncuestadosComponent } from './componentes/lista-encuestados/lista-encuestados.component';
 import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
 
 
@@ -103,8 +103,10 @@ import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estud
     EditClienteComponent,
     EditUsuarioComponent,
     FormPreguntaComponent,
+
     PerfilComponent,
-    ListaEstudioComponent
+
+    ListaEncuestadosComponent
   ],
   imports: [
     BrowserModule,

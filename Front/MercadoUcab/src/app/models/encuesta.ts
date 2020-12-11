@@ -6,6 +6,6 @@ export interface Encuesta {
     estado: string;
     fechaInicio: string;
     fechaFin: string;
-    dtoEstudio: Estudio;
-    dtoPregunta: Pregunta;
+    estudio: Estudio;
+    pregunta: Pregunta;
 }

@@ -38,8 +38,8 @@ export class EstudioService {
     );
   }
 
-  getEstudioCliente(user): Observable<Estudio[]>{
-    return this.http.get<Estudio[]>(this.apiurl + '/estudio/' + user)
+  getEstudioCliente(id): Observable<Estudio[]>{
+    return this.http.get<Estudio[]>(this.apiurl + '/estudio/' + id)
     .pipe(
       retry(1),
       catchError(this.handleError)

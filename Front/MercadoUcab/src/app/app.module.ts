@@ -43,6 +43,9 @@ import {FormPresentacionComponent} from './componentes/form-presentacion/form-pr
 import {ListaPresentacionComponent} from './componentes/lista-presentacion/lista-presentacion.component';
 import {FormPreguntaComponent} from './componentes/form-pregunta/form-pregunta.component';
 
+//Modulo de Cliente !!!!!!!!!!!!!!!!!
+import{ListaEstudioClienteComponent} from './modulos/cliente/lista-estudio/lista-estudio.component'
+import{ FormEstudioClienteComponent} from './modulos/cliente/form-estudio/form-estudio.component'
 
 // Services
 import { EncuestadoService } from './services/encuestado.service';
@@ -56,6 +59,7 @@ import { TipoPreguntaService } from './services/tipo-pregunta.service';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { ListaEncuestadosComponent } from './componentes/lista-encuestados/lista-encuestados.component';
 import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
+import { ClienteService } from './services/cliente.service';
 
 
 
@@ -102,7 +106,10 @@ import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estud
     EditUsuarioComponent,
     FormPreguntaComponent,
     PerfilComponent,
-    ListaEncuestadosComponent
+    ListaEncuestadosComponent,
+    ListaEstudioClienteComponent,
+    FormEstudioClienteComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -117,6 +124,7 @@ import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estud
   providers: [
     EncuestadoService,
     AdminService,
+    ClienteService,
     MarcaService,
     SubcategoriaService,
     CategoriaService,

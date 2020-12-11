@@ -7,7 +7,6 @@ import { RecuperacionComponent } from './componentes/login/recuperacion/recupera
 import { AdminComponent } from './modulos/admin/admin.component';
 import { ClienteComponent } from './modulos/cliente/cliente.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
-
 import { EncuestadoComponent } from './modulos/encuestado/encuestado.component';
 
 

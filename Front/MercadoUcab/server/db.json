@@ -1,12 +1,11 @@
 {   "usuario":[
-
   {
-    "id":1,
+    "_id":50,
     "username":"Pedro",
     "clave ":"pedro",
-    "rol":"Encuestado",
+    "rol":"Cliente",
     "autenticacion":"valida"
-  }
+  } 
 ],
 
   "categoria": [

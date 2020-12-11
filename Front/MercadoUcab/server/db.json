@@ -336,7 +336,7 @@
         },
         {
           "_id": 3,
-          "descripcion": "prueba json 2",
+          "descripcion": "prueba json 3",
           "estado": "a",
           "dtoTipoPregunta": {
             "_id": 1,
@@ -354,15 +354,22 @@
     {
       "_id": 2,
       "estado": "A",
-      "fechaInicio": "10/10/1010",
-      "fechaFin": "10/10/1011",
+      "fechaInicio": "10/01/2000",
+      "fechaFin": null,
       "estudio": {
-        "_id": 3
+        "_id": 2,
+        "nombre": "asd",
+        "estado": "solicitado",
+        "comentarioAnalista": "",
+        "edadMinima": "25",
+        "edadMaxima": "26",
+        "fechaInicio": "18/05/2020",
+        "fechaFin": "19/05/2020"
       },
       "pregunta": [
         {
           "_id": 1,
-          "descripcion": "asdsad",
+          "descripcion": "prueba de preguntas 1",
           "estado": "a",
           "dtoTipoPregunta": {
             "_id": 1,
@@ -377,7 +384,22 @@
         },
         {
           "_id": 2,
-          "descripcion": "Prueba exitosa Editar",
+          "descripcion": "prueba de preguntas 2",
+          "estado": "a",
+          "dtoTipoPregunta": {
+            "_id": 1,
+            "estado": "i",
+            "tipo": "multiple"
+          },
+          "dtoSubcategoria": {
+            "_id": 3,
+            "nombre": "pedro gutierres",
+            "estado": "i"
+          }
+        },
+        {
+          "_id": 3,
+          "descripcion": "prueba de preguntas 35",
           "estado": "a",
           "dtoTipoPregunta": {
             "_id": 1,
@@ -393,12 +415,12 @@
       ]
     },
     {
-      "_id": 4,
-      "estado": "A",
-      "fechaInicio": "10/10/1010",
-      "fechaFin": "10/10/1010",
+      "_id": 3,
+      "estado": "I",
+      "fechaInicio": "10/11/2020",
+      "fechaFin": "10/11/2021",
       "estudio": {
-        "_id": 1
+        "_id": 3
       },
       "pregunta": [
         {
@@ -407,12 +429,12 @@
       ]
     },
     {
-      "_id": 5,
-      "estado": "I",
-      "fechaInicio": "11/11/2019",
-      "fechaFin": "11/11/2020",
+      "_id": 4,
+      "estado": "A",
+      "fechaInicio": "10/10/2000",
+      "fechaFin": "10/10/2001",
       "estudio": {
-        "_id": 2
+        "_id": 3
       },
       "pregunta": [
         {

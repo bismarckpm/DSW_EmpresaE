@@ -26,6 +26,7 @@ export class FormEncuestaComponent implements OnInit {
   cantPreguntas: number[] = [];
   estudios: any = [];
   tipoPreguntas: any = [];
+
   /// PAra validar
   formEncuesta: FormGroup;
   patronFechaEstudio: any = /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/;
@@ -47,6 +48,7 @@ export class FormEncuestaComponent implements OnInit {
   addEncuesta(): any{
 
     if (this.formEncuesta.valid) {
+      console.log(this.encuesta);
       this.servicio.createEncuesta(this.encuesta).subscribe((data: {}) => {
       });
       this.encuesta = {
@@ -59,12 +61,12 @@ export class FormEncuestaComponent implements OnInit {
           {descripcion: ''}
         ]
       };
-      this.cargarEstudios();
-      console.log(this.encuesta);
+      // this.cargarEstudios();
       console.log(this.preguntas);
+      alert('Agregó');
     }
     else{
-      alert('FILL ALL FIELDS');
+      alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
     }
 
   }
@@ -108,7 +110,7 @@ export class FormEncuestaComponent implements OnInit {
   get estudio(): AbstractControl{
     return this.formEncuesta.get('estudio');
   }
-  
+
   get pregunta(): AbstractControl{
     return this.formEncuesta.get('pregunta');
   }

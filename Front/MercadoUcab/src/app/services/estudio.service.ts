@@ -22,7 +22,7 @@ export class EstudioService {
     })
   };
 
-  getEstudios(): any{
+  getEstudios(): Observable<Estudio[]>{
     return this.http.get<Estudio[]>(this.apiurl + '/estudio')
     .pipe(
       retry(1),

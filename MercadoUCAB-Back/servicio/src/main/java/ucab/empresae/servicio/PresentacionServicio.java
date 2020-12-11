@@ -1,15 +1,8 @@
 package ucab.empresae.servicio;
 
-
-import ucab.empresae.daos.DaoPregunta;
 import ucab.empresae.daos.DaoPresentacion;
-
-import ucab.empresae.dtos.DtoPregunta;
 import ucab.empresae.dtos.DtoPresentacion;
-import ucab.empresae.entidades.PreguntaEntity;
 import ucab.empresae.entidades.PresentacionEntity;
-import ucab.empresae.entidades.SubcategoriaEntity;
-import ucab.empresae.entidades.TipoPreguntaEntity;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -67,7 +60,7 @@ public class PresentacionServicio {
     }
 
     @PUT
-    @Path("/updatePresentacion/{id}")
+    @Path("/{id}")
     public Response updatePresentacion(@PathParam("id") long id, DtoPresentacion dtoPresentacion) {
 
         DaoPresentacion dao = new DaoPresentacion();

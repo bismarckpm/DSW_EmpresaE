@@ -156,7 +156,7 @@
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="estado">Estado</label>
-        <select class="custom-select d-block w-100"  [(ngModel)]="encuestado.lugar._id" (click)="busquedaMunicipio(encuestado.lugar._id)" id="estado" formControlName="lugarEncuestado" value="encuestado.Lugar._id">
+        <select class="custom-select d-block w-100"  [(ngModel)]="encuestado.lugar._id" (click)="busquedaMunicipio(encuestado.lugar._id)" id="estado" formControlName="lugarEncuestado" value="encuestado.lugar._id">
           <option selected>Choose...</option>
           <option  *ngFor="let estado of estados" [ngValue]= "estado._id"  >{{estado.nombre}}</option>
         </select>
@@ -168,7 +168,7 @@
       </div>
       <div class="form-group col-md-4">
         <label for="municipio">Municipio</label>
-        <select class="custom-select d-block w-100"  [(ngModel)]="encuestado.lugar._id" (click)="busquedaParroquia(encuestado.lugar._id)" id="municipio" formControlName="lugarEncuestado" value="encuestado.Lugar._id">
+        <select class="custom-select d-block w-100"  [(ngModel)]="encuestado.lugar.lugar._id" (click)="busquedaParroquia(encuestado.lugar.lugar._id)" id="municipio" formControlName="lugarEncuestado" value="encuestado.lugar.lugar._id">
           <option selected>Choose...</option>
           <option  *ngFor="let municipio of municipios" [ngValue]= "municipio._id"  >{{municipio.nombre}}</option>
         </select>
@@ -180,7 +180,7 @@
       </div>
       <div class="form-group col-md-4">
         <label for="parroquia">Parroquia</label>
-        <select class="custom-select d-block w-100"  [(ngModel)]="encuestado.lugar._id" id="parroquia" formControlName="lugarEncuestado" value="encuestado.Lugar._id">
+        <select class="custom-select d-block w-100"  [(ngModel)]="encuestado.lugar.lugar.lugar._id" (click)="seleccionarParroquia(encuestado.lugar.lugar.lugar._id)" id="parroquia" formControlName="lugarEncuestado" value="encuestado.lugar.lugar.lugar._id">
           <option selected>Choose...</option>
           <option  *ngFor="let parroquia of parroquias" [ngValue]= "parroquia._id"  >{{parroquia.nombre}}</option>
         </select>
@@ -194,11 +194,11 @@
         <div class="form-row">
           <div class="form-group col-md-4">
             <label for="username">Username</label>
-            <input type="text" class="form-control" [(ngModel)]="encuestado.usuario.username" id="username" value="">
+            <input type="text" class="form-control" [(ngModel)]="encuestado.usuario.username" formControlName="usernameEncuestado" id="username" value="">
           </div>
           <div class="form-group col-md-4">
             <label for="clave">Clave</label>
-            <input type="text" class="form-control" [(ngModel)]="encuestado.usuario.clave" id="clave" value="">
+            <input type="text" class="form-control" [(ngModel)]="encuestado.usuario.clave" formControlName="claveEncuestado" id="clave" value="">
           </div>
           <div class="form-group col-md-6">
             <label for="correo">Correo electronico</label>

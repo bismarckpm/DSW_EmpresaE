@@ -66,9 +66,9 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>ucab.empresae</groupId>
-            <artifactId>directorioactivo</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>com.airhacks</groupId>
+            <artifactId>jaxrs-cors</artifactId>
+            <version>0.0.2</version>
         </dependency>
     </dependencies>
 

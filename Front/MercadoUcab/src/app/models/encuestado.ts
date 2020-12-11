@@ -11,18 +11,17 @@ export interface Encuestado {
    _id:number;
    primerNombre:string;
    segundoNombre:string;
-   primerApellido:string;
-   segundoApellido:string;
+   primerApeliido:string;
+   segundoApeliido:string;
    fechaNacimiento:string;
-   estado:string;
-
-   estadoCivil: EstadoCivil;
-   nivelAcademico:NivelAcademico;
-   medioConexion:MedioConexion;
-   genero:Genero;
-   ocupacion:Ocupacion;
-   nivelSocioeconomico:NivelSocioEconomico;
-   lugar:Lugar;
-   usuario:Usuario;
+   
+   dtoEstado:EstadoCivil;
+   dtoNivelAcademico:NivelAcademico;
+   dtoMedioConexion:MedioConexion;
+   dtoGenero:Genero;
+   dtoOcupacion:Ocupacion;
+   dtoNivelSocioeconomico:NivelSocioEconomico;
+   dtoLugar:Lugar;
+   dtoUsuario:Usuario;
 
 }

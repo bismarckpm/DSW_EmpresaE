@@ -5,6 +5,6 @@ export interface Respuesta {
     _id:number;
     estado:string;
     texto:string;
-    preguntaOpcion:PreguntaOpcion;
-    encuestado:Encuestado;
+    dtoPreguntaOpcion:PreguntaOpcion;
+    dtoEncuestado:Encuestado;
 }

@@ -5,6 +5,6 @@ export interface Hijo {
     _id:number;
     estado:string;
     fechaNacimiento:string;
-    encuestado:Encuestado;
-    genero:Genero;
+    dtoEncuestado:Encuestado;
+    dtoGenero:Genero;
 }

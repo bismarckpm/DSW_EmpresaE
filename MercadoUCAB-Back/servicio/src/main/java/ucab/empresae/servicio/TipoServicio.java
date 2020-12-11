@@ -17,7 +17,6 @@ public class TipoServicio {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/addTipo")
     public Response addTipo(DtoTipo dtoTipo) {
 
         DaoTipo dao = new DaoTipo();
@@ -38,7 +37,6 @@ public class TipoServicio {
 
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
-    @Path("/getTipos")
     public Response geTipos() {
         List<TipoEntity> tipos = null;
         try {
@@ -53,7 +51,7 @@ public class TipoServicio {
 
     @GET
     @Produces(value=MediaType.APPLICATION_JSON)
-    @Path("getTipo/{id}")
+    @Path("/{id}")
     public Response getTipo(@PathParam("id") long id)
     {
         DaoTipo dao = new DaoTipo();
@@ -70,7 +68,7 @@ public class TipoServicio {
     @PUT
     @Consumes(value=MediaType.APPLICATION_JSON)
     @Produces(value=MediaType.APPLICATION_JSON)
-    @Path("/updateTipo/{id}")
+    @Path("/{id}")
     public Response updateTipo(@PathParam("id") long id, DtoTipo dtoTipo) {
         DaoTipo dao = new DaoTipo();
         TipoEntity tipo = dao.find(id, TipoEntity.class);
@@ -79,6 +77,7 @@ public class TipoServicio {
             tipo.setNombre(dtoTipo.getNombre());
             tipo.setEstado(dtoTipo.getEstado());
             tipo.setDescripcion(dtoTipo.getDescripcion());
+            TipoEntity resul = dao.update(tipo);
             return Response.ok().entity(tipo).build();
         }
         else{
@@ -88,7 +87,7 @@ public class TipoServicio {
 
     @DELETE
     @Produces(value=MediaType.APPLICATION_JSON)
-    @Path("deleteTipo/{id}")
+    @Path("/{id}")
     public Response deleteTipo(@PathParam("id") long id)
     {
         try

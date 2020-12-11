@@ -10,7 +10,7 @@ import { Lugar } from '../models/Lugar';
 export class LugarService {
 
      //Definimos el url del api
-     apiurl='http://localhost:3000';
+     apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
 
      constructor(private http:HttpClient) { }
    // Http Options
@@ -47,7 +47,7 @@ export class LugarService {
   }
 
   getParroquia(estadoID, municipioID):Observable<Lugar[]>{
-    return this.http.get<Lugar[]>(this.apiurl+'/lugar/'+estadoID+municipioID )
+    return this.http.get<Lugar[]>(this.apiurl+'/lugar/'+municipioID )
     .pipe(
       retry(1),
       catchError(this.handleError)

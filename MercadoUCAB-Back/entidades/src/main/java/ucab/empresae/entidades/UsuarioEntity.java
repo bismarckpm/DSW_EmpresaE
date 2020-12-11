@@ -1,19 +1,26 @@
 package ucab.empresae.entidades;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "usuario", schema = "mercadeoucab")
+@NamedQueries({
+        @NamedQuery(name = "getUsuarioByUsername", query = "select u from UsuarioEntity u where u.username = :username")
+})
 public class UsuarioEntity extends BaseEntity{
-    private String estado;
-    private String username;
-    private String clave;
-    private TipoUsuarioEntity tipousuario;
-    private ClienteEntity cliente;
-    private EncuestadoEntity encuestado;
+    //private ClienteEntity cliente;
+    //private EncuestadoEntity encuestado;
+    //private List<EstudioEntity> estudiosAnalista;
+
+    public UsuarioEntity(long id){super(id);}
+
+    public UsuarioEntity(){}
 
     @Basic
     @Column(name = "estado")
+    private String estado;
+
     public String getEstado() {
         return estado;
     }
@@ -24,6 +31,7 @@ public class UsuarioEntity extends BaseEntity{
 
     @Basic
     @Column(name = "username")
+    private String username;
     public String getUsername() {
         return username;
     }
@@ -34,6 +42,7 @@ public class UsuarioEntity extends BaseEntity{
 
     @Basic
     @Column(name = "clave")
+    private String clave;
     public String getClave() {
         return clave;
     }
@@ -44,6 +53,7 @@ public class UsuarioEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_tipo", referencedColumnName = "id", nullable = false)
+    private TipoUsuarioEntity tipousuario;
     public TipoUsuarioEntity getTipousuario() {
         return tipousuario;
     }
@@ -52,7 +62,7 @@ public class UsuarioEntity extends BaseEntity{
         this.tipousuario = tipousuario;
     }
 
-    @OneToOne(mappedBy = "usuario")
+    /*@OneToOne(mappedBy = "usuario")
     public ClienteEntity getCliente() {
         return cliente;
     }
@@ -69,4 +79,14 @@ public class UsuarioEntity extends BaseEntity{
     public void setEncuestado(EncuestadoEntity encuestado) {
         this.encuestado = encuestado;
     }
+
+    @OneToMany(mappedBy = "analista")
+    public List<EstudioEntity> getEstudiosAnalista() {
+        return this.estudiosAnalista;
+    }
+
+    public void setEstudioAnalista(List<EstudioEntity> respuestas) {
+        this.estudiosAnalista = respuestas;
+    }*/
+
 }

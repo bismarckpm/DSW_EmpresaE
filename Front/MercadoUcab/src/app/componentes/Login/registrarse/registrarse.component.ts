@@ -25,7 +25,11 @@ export class RegistrarseComponent implements OnInit {
     genero: {_id: 0, nombre: '', estado: ''},
     ocupacion: {_id: 0, nombre: '', estado: ''},
     nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
+<<<<<<< HEAD
+    lugar: {_id: 0, estado: '', nombre: '', tipo: '',lugar:{_id: 0, estado: '', nombre: '', tipo: '',lugar:{_id: 0, estado: '', nombre: '', tipo: '',lugar:{_id: 0, estado: '', nombre: '', tipo: ''}}}},
+=======
     lugar:  {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: ''}}}},
+>>>>>>> 7771cb27e7b75c7bf7ee529744af3e89e14a796a
     usuario: {_id: 0, username: '', estado: '', clave: '', correoElectronico: ''},
   };
 

@@ -33,7 +33,7 @@ import {FormMarcaComponent} from './componentes/form-marca/form-marca.component'
 import {ListaMarcaComponent} from './componentes/lista-marca/lista-marca.component';
 import {ListaPreguntasComponent} from './componentes/lista-preguntas/lista-preguntas.component';
 import {MainAdminComponent} from './componentes/main-admin/main-admin.component';
-import {ListaEstudiosComponent} from './componentes/lista-estudios/lista-estudios.component';
+
 import {FormCategoriaComponent} from './componentes/form-categoria/form-categoria.component';
 import {ListaCategoriaComponent} from './componentes/lista-categoria/lista-categoria.component';
 import {FormEncuestadoComponent} from './componentes/form-encuestado/form-encuestado.component';
@@ -56,6 +56,8 @@ import { TipoService } from './services/tipo.service';
 import { TipoPregunta } from './models/tipo-pregunta';
 import { TipoPreguntaService } from './services/tipo-pregunta.service';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
+import { ListaEstudioComponent } from './modulos/cliente/lista-estudio/lista-estudio.component';
+import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
 
 
 
@@ -106,7 +108,9 @@ import { PerfilComponent } from './componentes/perfil/perfil.component';
 
     FormPreguntaComponent,
 
-    PerfilComponent
+    PerfilComponent,
+
+    ListaEstudioComponent
   ],
   imports: [
     BrowserModule,

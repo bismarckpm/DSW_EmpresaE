@@ -1,4 +1,34 @@
-{
+{   "usuario":[
+    {
+      "id":1,
+      "user":"jose",
+      "clave ":"admin",
+      "rol":"admin"
+    },
+    {
+      "id":1,
+      "user":"omar",
+      "clave ":"cliente",
+      "rol":"cliente"
+    },
+    {
+      "id":1,
+      "user":"victor",
+      "clave ":"encuestado",
+      "rol":"encuestado"
+    },
+    {
+      "id":1,
+      "user":"juan",
+      "clave ":"analista",
+      "rol":"analista"
+    }
+],
+
+
+
+
+
   "categoria": [
     {
       "_id": 5,
@@ -38,6 +68,17 @@
       "estado": "a",
       "categoria": {
         "_id": 5
+<<<<<<< HEAD
+      }
+    },
+    {
+      "_id": 5,
+      "nombre": "yyy",
+      "estado": "i",
+      "categoria": {
+        "_id": 5
+=======
+>>>>>>> 7771cb27e7b75c7bf7ee529744af3e89e14a796a
       }
     }
   ],
@@ -48,9 +89,20 @@
       "estado": "i"
     },
     {
+<<<<<<< HEAD
+      "_id": 2,
+      "nombre": "Chucheria",
+      "estado": "a"
+    },
+    {
+      "_id": 3,
+      "nombre": "adidas",
+      "estado": "a"
+=======
       "_id": 3,
       "nombre": "hahahahahahaa",
       "estado": "i"
+>>>>>>> 7771cb27e7b75c7bf7ee529744af3e89e14a796a
     }
   ],
   "presentacion": [
@@ -67,6 +119,14 @@
     {
       "_id": 4,
       "descripcion": "pedro",
+<<<<<<< HEAD
+      "estado": "i"
+    },
+    {
+      "_id": 5,
+      "descripcion": "adios",
+=======
+>>>>>>> 7771cb27e7b75c7bf7ee529744af3e89e14a796a
       "estado": "a"
     }
   ],
@@ -132,6 +192,24 @@
         "_id": 3,
         "nombre": "",
         "estado": ""
+<<<<<<< HEAD
+      }
+    },
+    {
+      "_id": 3,
+      "descripcion": "qqqqq",
+      "estado": "I",
+      "tipoPregunta": {
+        "_id": 4,
+        "estado": "",
+        "tipo": ""
+      },
+      "subcategoria": {
+        "_id": 1,
+        "nombre": "",
+        "estado": ""
+=======
+>>>>>>> 7771cb27e7b75c7bf7ee529744af3e89e14a796a
       }
     }
   ],
@@ -177,6 +255,8 @@
       "NivelSocioeconomico": {
         "_id": ""
       },
+
+      
       "Usuario": {
         "_id": "",
         "username": "",

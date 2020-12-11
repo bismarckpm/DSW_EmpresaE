@@ -10,7 +10,7 @@ export  interface Usuario {
       estado: string;
       tipoUsuario: TipoUsuario;
       autenticacion:string;
-      rol:string;
+      rol :string;
  }
 
 

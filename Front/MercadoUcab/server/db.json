@@ -1,37 +1,12 @@
 {   "usuario":[
-    {
-      "id":1,
-      "user":"jose",
-      "clave ":"admin",
-      "rol":"admin",
-      "autenticacion":"valida"
-    },
-    {
-      "id":1,
-      "user":"omar",
-      "clave ":"cliente",
-      "rol":"cliente",
-      "autenticacion":"valida"
-    },
-    {
-      "id":1,
-      "user":"victor",
-      "clave ":"encuestado",
-      "rol":"encuestado",
-      "autenticacion":"invalida"
-    },
-    {
-      "id":1,
-      "user":"juan",
-      "clave ":"analista",
-      "rol":"analista",
-      "autenticacion":"valida"
-    }
+  {
+    "_id":50,
+    "username":"Pedro",
+    "clave ":"pedro",
+    "rol":"Cliente",
+    "autenticacion":"valida"
+  } 
 ],
-
-
-
-
 
   "categoria": [
     {

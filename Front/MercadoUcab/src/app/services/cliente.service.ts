@@ -10,18 +10,18 @@ import { retry, catchError } from 'rxjs/operators';
 export class ClienteService {
 
   apiurl='http://localhost:3000';
-   
+
   constructor(private http:HttpClient) { }
 // Http Options
   httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
   })
-} 
+}
 
 ///////// Metodos para ejecutar//////////////
 getClientes():Observable<Cliente[]>{
-  return this.http.get<Cliente[]>(this.apiurl+'/Cliente')
+  return this.http.get<Cliente[]>(this.apiurl+'/cliente')
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -29,7 +29,7 @@ getClientes():Observable<Cliente[]>{
 }
 
 getCliente(id):Observable<Cliente[]>{
-  return this.http.get<Cliente[]>(this.apiurl+'/Cliente/'+id)
+  return this.http.get<Cliente[]>(this.apiurl+'/cliente/'+id)
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -37,7 +37,7 @@ getCliente(id):Observable<Cliente[]>{
 }
 
 createCliente(Cliente):Observable<Cliente[]>{
-  return this.http.post<Cliente[]>(this.apiurl+'/Cliente',JSON.stringify(Cliente), this.httpOptions)
+  return this.http.post<Cliente[]>(this.apiurl+'/cliente',JSON.stringify(Cliente), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -45,7 +45,7 @@ createCliente(Cliente):Observable<Cliente[]>{
 }
 
 updateCliente(id,Cliente):Observable<Cliente[]>{
-  return this.http.put<Cliente[]>(this.apiurl+'/Cliente/'+id,JSON.stringify(Cliente), this.httpOptions)
+  return this.http.put<Cliente[]>(this.apiurl+'/cliente/'+id,JSON.stringify(Cliente), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -53,7 +53,7 @@ updateCliente(id,Cliente):Observable<Cliente[]>{
 }
 
 deleteCliente(id){
-  return this.http.delete<Cliente[]>(this.apiurl + '/Cliente/' + id, this.httpOptions)
+  return this.http.delete<Cliente[]>(this.apiurl + '/cliente/' + id, this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)

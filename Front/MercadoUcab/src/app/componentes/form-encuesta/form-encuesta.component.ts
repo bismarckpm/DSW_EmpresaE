@@ -18,8 +18,8 @@ export class FormEncuestaComponent implements OnInit {
     estado:'',
     fechaInicio:'',
     fechaFin:'',
-    dtoEstudio:{id:0},
-    dtoPregunta:{id:0}
+    estudio:{id:0},
+    pregunta:{id:0}
   };
   cantPreguntas = [];
   estudios: any = [];

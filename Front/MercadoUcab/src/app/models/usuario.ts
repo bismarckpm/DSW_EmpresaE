@@ -1,18 +1,16 @@
 import {TipoUsuario} from './tipo-usuario';
-import {Encuestado} from './encuestado';
-import {Cliente} from './cliente';
 
-export  class Usuario {
+
+export  interface Usuario {
 
       _id: number;
-      nombre: string;
-      nombre2: string;
-      apellido: string;
-      apellido2: string;
+      username: string;
+      clave: string;
+      correoElectronico: string;
       estado: string;
-      fechaNacimiento: string;
-
-
+      tipoUsuario: TipoUsuario;
+      autenticacion:string;
+      rol:string;
  }
 
 

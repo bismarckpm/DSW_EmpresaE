@@ -56,9 +56,9 @@ import { TipoService } from './services/tipo.service';
 import { TipoPregunta } from './models/tipo-pregunta';
 import { TipoPreguntaService } from './services/tipo-pregunta.service';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
-import { ListaEstudioComponent } from './modulos/cliente/lista-estudio/lista-estudio.component';
+import { ListaEncuestadosComponent } from './componentes/lista-encuestados/lista-encuestados.component';
 import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
-
+import { CookieService } from 'ngx-cookie-service';
 
 
 
@@ -86,10 +86,7 @@ import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estud
     ListaEstudiosComponent,
     ListaCategoriaComponent,
     FormCategoriaComponent,
-
     FormEncuestadoComponent,
- 
-  
     ListaSubcategoriaComponent,
     FormSubcategoriaComponent,
     FormTipoComponent,
@@ -105,12 +102,11 @@ import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estud
     CambiarClaveComponent,
     EditClienteComponent,
     EditUsuarioComponent,
-
     FormPreguntaComponent,
 
     PerfilComponent,
 
-    ListaEstudioComponent
+    ListaEncuestadosComponent
   ],
   imports: [
     BrowserModule,
@@ -130,7 +126,8 @@ import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estud
     CategoriaService,
     EncuestaService,
     TipoService,
-    TipoPreguntaService
+    TipoPreguntaService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

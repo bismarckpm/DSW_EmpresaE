@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { first } from 'rxjs/operators';
 import { Usuario } from 'src/app/models/usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -12,32 +11,35 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class LoginComponent implements OnInit {
   
-
-  @Input() usuario:{username:'', clave:''}
+  user :Usuario[]=[]
+  @Input() usuario={username:'', clave:'' };
   formLogin: FormGroup;
-
+ 
   constructor(
     public usuarioService:UsuarioService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public router:Router
   ) { this.createForm() }
 
   ngOnInit(): void {
   }
   
-  onSubmit() {
-    
-    if (this.formLogin.invalid) {
-        return;
-    }
- 
-    this.usuarioService.Logear(this.usuario)
-        .pipe(first())
-        .subscribe(
-            error => {
-             //   this.alertService.error(error);
-            ///    this.loading = false;
-            });
+
+
+Loggearse(){
+   if (this.formLogin.valid) {
+    return this.usuarioService.Logear(this.usuario)
+    .subscribe( data => {
+          
+    })  
 }
+
+}
+
+
+
+
+
 
 
 logout() {
@@ -56,7 +58,7 @@ logout() {
   createForm(){
     this.formLogin = this.formBuilder.group({
       userName: ['',Validators.required] ,
-      estadoMarca: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
 

@@ -71,11 +71,7 @@
                       <div class="row">
                         <div class="col-md-5 mb-3">
                           <label for="country">Tipo de Pregunta</label>
-<<<<<<< HEAD
-                          <select class="custom-select d-block w-100" [(ngModel)]= "preguntaData.tipo._id" formControlName="tipoPregunta"  name="preguntaData.tipo._id"value="preguntaData.tipo._id"><!-- Hacer lo de *ngFor-->
-=======
                           <select class="custom-select d-block w-100" [(ngModel)]= "preguntaData.tipoPregunta._id" formControlName="tipoPregunta"  name="preguntaData.tipoPregunta._id"value="preguntaData.tipoPregunta._id"><!-- Hacer lo de *ngFor-->
->>>>>>> 7771cb27e7b75c7bf7ee529744af3e89e14a796a
                             <option  *ngFor="let tp of tipopregunta" [ngValue]= "tp._id" >{{tp.tipo}}</option>
                           </select>
                           <div *ngIf="tipoPregunta.invalid && (tipoPregunta.dirty || tipoPregunta.touched)" class="alert alert-danger">

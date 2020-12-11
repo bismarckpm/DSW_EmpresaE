@@ -17,11 +17,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'recuperacion', component: RecuperacionComponent},
   { path: 'admin/:id', component: AdminComponent},
-  { path: 'cliente', component: ClienteComponent},
-  { path: 'analista', component: AnalistaComponent},
-  { path: 'usuario', component: EncuestadoComponent},
-
- { path: '**', redirectTo: 'login', pathMatch: 'full'},
+  { path: 'cliente/:id', component: ClienteComponent},
+  { path: 'analista/:id', component: AnalistaComponent},
+  { path: 'encuestado/:id', component: EncuestadoComponent},
+  { path: '**', redirectTo: 'login', pathMatch: 'full'},
 ];
 
 

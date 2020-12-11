@@ -1,37 +1,34 @@
 {   "usuario":[
     {
       "id":1,
-      "user":"jose",
+      "username":"jose",
       "clave ":"admin",
-      "rol":"admin",
+      "rol":"Administrador",
       "autenticacion":"valida"
     },
     {
       "id":1,
-      "user":"omar",
+      "username":"omar",
       "clave ":"cliente",
       "rol":"cliente",
       "autenticacion":"valida"
     },
     {
       "id":1,
-      "user":"victor",
+      "username":"victor",
       "clave ":"encuestado",
       "rol":"encuestado",
       "autenticacion":"invalida"
     },
     {
       "id":1,
-      "user":"juan",
+      "username":"juan",
       "clave ":"analista",
       "rol":"analista",
       "autenticacion":"valida"
     }
+    
 ],
-
-
-
-
 
   "categoria": [
     {

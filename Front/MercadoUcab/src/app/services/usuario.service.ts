@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { retry, catchError, map } from 'rxjs/operators';
+import { retry, catchError } from 'rxjs/operators';
 import {Usuario} from '../models/usuario';
-import { CookieService } from "ngx-cookie-service";
+
 
 
 @Injectable({
@@ -11,12 +11,13 @@ import { CookieService } from "ngx-cookie-service";
 })
 export class UsuarioService {
 
+    usuario:any;
 
   apiurl = 'http://localhost:3000';
   
 
   constructor(private http: HttpClient,
-    private cookies: CookieService) { }
+    ) { }
 // Http Options
   httpOptions = {
     headers: new HttpHeaders({
@@ -62,13 +63,13 @@ export class UsuarioService {
   }
 
   Logear(usuario): Observable<Usuario[]>{
-      
-      return  this.http.post<Usuario[]>(this.apiurl+'/usuario/',JSON.stringify(usuario),this.httpOptions)
+
+     return  this.http.post<Usuario[]>(this.apiurl+'/usuario/',JSON.stringify(usuario),this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
   
-      );
+      )
 
   }
 

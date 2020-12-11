@@ -1,10 +1,13 @@
 package ucab.empresae.entidades;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "lugar", schema = "mercadeoucab")
+@NamedQueries({
+        @NamedQuery(name = "getLugaresById", query = "select l from LugarEntity l where l.lugar = :lugar"),
+        @NamedQuery(name = "getLugaresByTipo", query = "select l from LugarEntity  l where l.tipo = :tipo")
+})
 public class LugarEntity extends BaseEntity{
     private String estado;
     private String nombre;

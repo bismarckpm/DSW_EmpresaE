@@ -9,7 +9,7 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class PresentacionService {
 
-  apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+  apiurl='http://localhost:3000';
 
   constructor(private http:HttpClient) { }
 // Http Options
@@ -37,7 +37,7 @@ getPresentacion(id):Observable<Presentacion[]>{
 }
 
 createPresentacion(Presentacion):Observable<Presentacion[]>{
-  return this.http.post<Presentacion[]>(this.apiurl+'/presentacion/addPresentacion',JSON.stringify(Presentacion), this.httpOptions)
+  return this.http.post<Presentacion[]>(this.apiurl+'/presentacion',JSON.stringify(Presentacion), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -45,7 +45,7 @@ createPresentacion(Presentacion):Observable<Presentacion[]>{
 }
 
 updatePresentacion(id,Presentacion):Observable<Presentacion[]>{
-  return this.http.put<Presentacion[]>(this.apiurl+'/presentacion/updatePresentacion/'+id,JSON.stringify(Presentacion), this.httpOptions)
+  return this.http.put<Presentacion[]>(this.apiurl+'/presentacion/'+id,JSON.stringify(Presentacion), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)

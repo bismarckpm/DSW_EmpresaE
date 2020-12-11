@@ -10,7 +10,7 @@ import { Ocupacion } from '../models/ocupacion';
 export class OcupacionService {
 
      //Definimos el url del api
-     apiurl='http://localhost:3000';
+     apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
 
      constructor(private http:HttpClient) { }
    // Http Options
@@ -22,7 +22,7 @@ export class OcupacionService {
 
    ///////// Metodos para ejecutar//////////////
    getOcupaciones():Observable<Ocupacion[]>{
-     return this.http.get<Ocupacion[]>(this.apiurl+'/Ocupacion')
+     return this.http.get<Ocupacion[]>(this.apiurl+'/ocupacion')
      .pipe(
        retry(1),
        catchError(this.handleError)
@@ -30,7 +30,7 @@ export class OcupacionService {
    }
 
    getOcupacion(id):Observable<Ocupacion[]>{
-     return this.http.get<Ocupacion[]>(this.apiurl+'/Ocupacion/'+id)
+     return this.http.get<Ocupacion[]>(this.apiurl+'/ocupacion/'+id)
      .pipe(
        retry(1),
        catchError(this.handleError)
@@ -38,7 +38,7 @@ export class OcupacionService {
    }
 
    createOcupacion(Ocupacion):Observable<Ocupacion[]>{
-     return this.http.post<Ocupacion[]>(this.apiurl+'/Ocupacion',JSON.stringify(Ocupacion), this.httpOptions)
+     return this.http.post<Ocupacion[]>(this.apiurl+'/ocupacion',JSON.stringify(Ocupacion), this.httpOptions)
      .pipe(
        retry(1),
        catchError(this.handleError)
@@ -46,7 +46,7 @@ export class OcupacionService {
    }
 
    updateOcupacion(id,Ocupacion):Observable<Ocupacion[]>{
-     return this.http.put<Ocupacion[]>(this.apiurl+'/Ocupacion/'+id,JSON.stringify(Ocupacion), this.httpOptions)
+     return this.http.put<Ocupacion[]>(this.apiurl+'/ocupacion/'+id,JSON.stringify(Ocupacion), this.httpOptions)
      .pipe(
        retry(1),
        catchError(this.handleError)
@@ -54,7 +54,7 @@ export class OcupacionService {
    }
 
    deleteOcupacion(id){
-     return this.http.delete<Ocupacion[]>(this.apiurl + '/Ocupacion/' + id, this.httpOptions)
+     return this.http.delete<Ocupacion[]>(this.apiurl + '/ocupacion/' + id, this.httpOptions)
      .pipe(
        retry(1),
        catchError(this.handleError)

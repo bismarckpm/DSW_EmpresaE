@@ -10,57 +10,57 @@ import { Genero } from '../models/genero';
 export class GeneroService {
 
      //Definimos el url del api
-     apiurl='http://localhost:3000';
-   
+     apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+
      constructor(private http:HttpClient) { }
    // Http Options
      httpOptions = {
      headers: new HttpHeaders({
        'Content-Type': 'application/json'
      })
-   } 
-   
+   }
+
    ///////// Metodos para ejecutar//////////////
    getGeneros():Observable<Genero[]>{
-     return this.http.get<Genero[]>(this.apiurl+'/Genero')
+     return this.http.get<Genero[]>(this.apiurl+'/genero')
      .pipe(
        retry(1),
        catchError(this.handleError)
      )
    }
-   
+
    getGenero(id):Observable<Genero[]>{
-     return this.http.get<Genero[]>(this.apiurl+'/Genero/'+id)
+     return this.http.get<Genero[]>(this.apiurl+'/genero/'+id)
      .pipe(
        retry(1),
        catchError(this.handleError)
      )
    }
-   
+
    createGenero(Genero):Observable<Genero[]>{
-     return this.http.post<Genero[]>(this.apiurl+'/Genero',JSON.stringify(Genero), this.httpOptions)
+     return this.http.post<Genero[]>(this.apiurl+'/genero',JSON.stringify(Genero), this.httpOptions)
      .pipe(
        retry(1),
        catchError(this.handleError)
      )
    }
-   
+
    updateGenero(id,Genero):Observable<Genero[]>{
-     return this.http.put<Genero[]>(this.apiurl+'/Genero/'+id,JSON.stringify(Genero), this.httpOptions)
+     return this.http.put<Genero[]>(this.apiurl+'/genero/'+id,JSON.stringify(Genero), this.httpOptions)
      .pipe(
        retry(1),
        catchError(this.handleError)
      )
    }
-   
+
    deleteGenero(id){
-     return this.http.delete<Genero[]>(this.apiurl + '/Genero/' + id, this.httpOptions)
+     return this.http.delete<Genero[]>(this.apiurl + '/genero/' + id, this.httpOptions)
      .pipe(
        retry(1),
        catchError(this.handleError)
      )
    }
-   
+
    ///////////////////// Error HandleError
    handleError(error) {
      let errorMessage = '';

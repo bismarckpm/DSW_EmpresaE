@@ -16,7 +16,7 @@ public class DtoEncuestado extends DtoBase {
     private DtoMedioConexion medioConexion;
     private DtoGenero genero;
     private DtoOcupacion ocupacion;
-    private DtoNivelSocioEconomico nivelSocioeco;
+    private DtoNivelSocioEconomico nivelSocioEconomico;
     private DtoLugar lugar;
     private DtoUsuario usuario;
 
@@ -118,12 +118,12 @@ public class DtoEncuestado extends DtoBase {
         this.ocupacion = ocupacion;
     }
 
-    public DtoNivelSocioEconomico getNivelSocioeco() {
-        return nivelSocioeco;
+    public DtoNivelSocioEconomico getNivelSocioEconomico() {
+        return nivelSocioEconomico;
     }
 
-    public void setNivelSocioeco(DtoNivelSocioEconomico nivelsocioeconomico) {
-        this.nivelSocioeco = nivelsocioeconomico;
+    public void setNivelSocioEconomico(DtoNivelSocioEconomico nivelSocioEconomico) {
+        this.nivelSocioEconomico = nivelSocioEconomico;
     }
 
     public DtoLugar getLugar() {

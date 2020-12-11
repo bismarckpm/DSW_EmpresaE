@@ -5,10 +5,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "usuario", schema = "mercadeoucab")
+@NamedQueries({
+        @NamedQuery(name = "getUsuarioByUsername", query = "select u from UsuarioEntity u where u.username = :username")
+})
 public class UsuarioEntity extends BaseEntity{
-    private String estado;
-    private String username;
-    private String clave;
     //private ClienteEntity cliente;
     //private EncuestadoEntity encuestado;
     //private List<EstudioEntity> estudiosAnalista;
@@ -19,6 +19,8 @@ public class UsuarioEntity extends BaseEntity{
 
     @Basic
     @Column(name = "estado")
+    private String estado;
+
     public String getEstado() {
         return estado;
     }
@@ -29,6 +31,7 @@ public class UsuarioEntity extends BaseEntity{
 
     @Basic
     @Column(name = "username")
+    private String username;
     public String getUsername() {
         return username;
     }
@@ -39,6 +42,7 @@ public class UsuarioEntity extends BaseEntity{
 
     @Basic
     @Column(name = "clave")
+    private String clave;
     public String getClave() {
         return clave;
     }

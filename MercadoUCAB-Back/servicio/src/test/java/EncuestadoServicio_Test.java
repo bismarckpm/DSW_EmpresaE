@@ -33,7 +33,7 @@ public class EncuestadoServicio_Test {
         dtoEncuestado.setOcupacion(dtoOcupacion);
 
         DtoNivelSocioEconomico dtoNivelSocioEconomico = new DtoNivelSocioEconomico(1);
-        dtoEncuestado.setNivelSocioeco(dtoNivelSocioEconomico);
+        dtoEncuestado.setNivelSocioEconomico(dtoNivelSocioEconomico);
 
         DtoLugar dtoLugar = new DtoLugar(1045);
         dtoEncuestado.setLugar(dtoLugar);

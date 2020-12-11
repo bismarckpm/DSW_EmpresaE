@@ -21,7 +21,7 @@ export class UsuarioService {
 
 ///////// Metodos para ejecutar//////////////
   getUsuarios(): Observable<Usuario[]>{
-    return this.http.get<Usuario[]>(this.apiurl + '/Usuario')
+    return this.http.get<Usuario[]>(this.apiurl + '/usuario')
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -29,7 +29,7 @@ export class UsuarioService {
   }
 
   getUsuario(id): Observable<Usuario[]>{
-    return this.http.get<Usuario[]>(this.apiurl + '/Usuario/' + id)
+    return this.http.get<Usuario[]>(this.apiurl + '/usuario/' + id)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -37,7 +37,7 @@ export class UsuarioService {
   }
 
   createUsuario(Usuario): Observable<Usuario[]>{
-    return this.http.post<Usuario[]>(this.apiurl + '/Usuario', JSON.stringify(Usuario), this.httpOptions)
+    return this.http.post<Usuario[]>(this.apiurl + '/usuario', JSON.stringify(Usuario), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -45,7 +45,7 @@ export class UsuarioService {
   }
 
   updateUsuario(id, Usuario): Observable<Usuario[]>{
-    return this.http.put<Usuario[]>(this.apiurl + '/Usuario/' + id, JSON.stringify(Usuario), this.httpOptions)
+    return this.http.put<Usuario[]>(this.apiurl + '/usuario/' + id, JSON.stringify(Usuario), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -53,7 +53,7 @@ export class UsuarioService {
   }
 
   deleteUsuario(id){
-    return this.http.delete<Usuario[]>(this.apiurl + '/Usuario/' + id, this.httpOptions)
+    return this.http.delete<Usuario[]>(this.apiurl + '/usuario/' + id, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)

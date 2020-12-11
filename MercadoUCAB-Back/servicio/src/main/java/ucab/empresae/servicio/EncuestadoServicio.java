@@ -2,8 +2,6 @@ package ucab.empresae.servicio;
 
 import ucab.empresae.daos.*;
 import ucab.empresae.dtos.DtoEncuestado;
-import ucab.empresae.dtos.DtoFactory;
-import ucab.empresae.dtos.DtoTipoUsuario;
 import ucab.empresae.entidades.*;
 
 import javax.ws.rs.*;
@@ -64,7 +62,7 @@ public class EncuestadoServicio {
         OcupacionEntity ocupacionEntity = daoOcupacion.find(dtoEncuestado.getOcupacion().getId(), OcupacionEntity.class);
         encuestadoEntity.setOcupacion(ocupacionEntity);
 
-        NivelSocioeconomicoEntity nivelSocioeconomicoEntity = daoNivelSocioeconomico.find(dtoEncuestado.getNivelSocioeco().getId(), NivelSocioeconomicoEntity.class);
+        NivelSocioeconomicoEntity nivelSocioeconomicoEntity = daoNivelSocioeconomico.find(dtoEncuestado.getNivelSocioEconomico().getId(), NivelSocioeconomicoEntity.class);
         encuestadoEntity.setNivelsocioeco(nivelSocioeconomicoEntity);
 
         LugarEntity lugarEntity = daoLugar.find(dtoEncuestado.getLugar().getId(), LugarEntity.class);
@@ -72,7 +70,7 @@ public class EncuestadoServicio {
 
         usuarioEntity.setUsername(dtoEncuestado.getUsuario().getUsername());
         usuarioEntity.setClave(dtoEncuestado.getUsuario().getClave());
-        usuarioEntity.setEstado(dtoEncuestado.getUsuario().getEstado());
+        usuarioEntity.setEstado("a");
         usuarioEntity.setTipousuario(daoTipoUsuario.find(tipoUsuario, TipoUsuarioEntity.class));
         daoUsuario.insert(usuarioEntity);
 

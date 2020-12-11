@@ -68,6 +68,7 @@
       "estado": "a",
       "categoria": {
         "_id": 5
+<<<<<<< HEAD
       }
     },
     {
@@ -76,6 +77,8 @@
       "estado": "i",
       "categoria": {
         "_id": 5
+=======
+>>>>>>> 7771cb27e7b75c7bf7ee529744af3e89e14a796a
       }
     }
   ],
@@ -86,6 +89,7 @@
       "estado": "i"
     },
     {
+<<<<<<< HEAD
       "_id": 2,
       "nombre": "Chucheria",
       "estado": "a"
@@ -94,6 +98,11 @@
       "_id": 3,
       "nombre": "adidas",
       "estado": "a"
+=======
+      "_id": 3,
+      "nombre": "hahahahahahaa",
+      "estado": "i"
+>>>>>>> 7771cb27e7b75c7bf7ee529744af3e89e14a796a
     }
   ],
   "presentacion": [
@@ -110,11 +119,14 @@
     {
       "_id": 4,
       "descripcion": "pedro",
+<<<<<<< HEAD
       "estado": "i"
     },
     {
       "_id": 5,
       "descripcion": "adios",
+=======
+>>>>>>> 7771cb27e7b75c7bf7ee529744af3e89e14a796a
       "estado": "a"
     }
   ],
@@ -180,6 +192,7 @@
         "_id": 3,
         "nombre": "",
         "estado": ""
+<<<<<<< HEAD
       }
     },
     {
@@ -195,6 +208,8 @@
         "_id": 1,
         "nombre": "",
         "estado": ""
+=======
+>>>>>>> 7771cb27e7b75c7bf7ee529744af3e89e14a796a
       }
     }
   ],
@@ -210,12 +225,6 @@
       "nombre": "ttttt",
       "estado": "a",
       "descripcion": "jojoj"
-    },
-    {
-      "_id": 3,
-      "nombre": "eee",
-      "estado": "i",
-      "descripcion": "eeeeee"
     }
   ],
   "encuestado": [
@@ -396,185 +405,6 @@
       "_id": 3,
       "nombre": "Estados Un_idos",
       "tipo": "pais"
-    },
-    {
-      "_id": 4,
-      "nombre": "Miranda",
-      "tipo": "estado",
-      "dtoLugar": {
-        "_id": 1
-      }
-    },
-    {
-      "_id": 5,
-      "nombre": "Cartagena",
-      "tipo": "estado",
-      "dtoLugar": {
-        "_id": 2
-      }
-    },
-    {
-      "_id": 6,
-      "nombre": "Flor_ida",
-      "tipo": "estado",
-      "dtoLugar": {
-        "_id": 3
-      }
-    },
-    {
-      "_id": 7,
-      "nombre": "Caracas",
-      "tipo": "ciudad",
-      "dtoLugar": {
-        "_id": 4
-      }
-    },
-    {
-      "_id": 8,
-      "nombre": "Bogota",
-      "tipo": "ciudad",
-      "dtoLugar": {
-        "_id": 5
-      }
-    },
-    {
-      "_id": 9,
-      "nombre": "Miami",
-      "tipo": "ciudad",
-      "dtoLugar": {
-        "_id": 6
-      }
-    },
-    {
-      "_id": 10,
-      "nombre": "Sucre",
-      "tipo": "municipio",
-      "dtoLugar": {
-        "_id": 7
-      }
-    },
-    {
-      "_id": 11,
-      "nombre": "municipioBogota",
-      "tipo": "municipio",
-      "dtoLugar": {
-        "_id": 8
-      }
-    },
-    {
-      "_id": 12,
-      "nombre": "municipioMiami",
-      "tipo": "municipio",
-      "dtoLugar": {
-        "_id": 9
-      }
-    },
-    {
-      "_id": 13,
-      "nombre": "Petare",
-      "tipo": "parroquia",
-      "dtoLugar": {
-        "_id": 10
-      }
-    },
-    {
-      "_id": 14,
-      "nombre": "parroquiabogota",
-      "tipo": "parroquia",
-      "dtoLugar": {
-        "_id": 11
-      }
-    },
-    {
-      "_id": 15,
-      "nombre": "parroquiamiami",
-      "tipo": "parroquia",
-      "dtoLugar": {
-        "_id": 12
-      }
-    }
-  ],
-  "ocupacion": [
-    {
-      "_id": 1,
-      "estado": "a",
-      "nombre": "ingeniero"
-    },
-    {
-      "_id": 2,
-      "estado": "a",
-      "nombre": "medico"
-    },
-    {
-      "_id": 3,
-      "estado": "a",
-      "nombre": "comerciante"
-    },
-    {
-      "_id": 4,
-      "estado": "a",
-      "nombre": "periodista"
-    }
-  ],
-  "estadocivil": [
-    {
-      "_id": 1,
-      "estado": "a",
-      "nombre": "soltero(a)"
-    },
-    {
-      "_id": 2,
-      "estado": "a",
-      "nombre": "casado(a)"
-    },
-    {
-      "_id": 3,
-      "estado": "a",
-      "nombre": "divorciado(a)"
-    }
-  ],
-  "medioconexion": [
-    {
-      "_id": 1,
-      "estado": "a",
-      "nombre": "telefono"
-    },
-    {
-      "_id": 2,
-      "estado": "a",
-      "nombre": "laptop"
-    },
-    {
-      "_id": 3,
-      "estado": "a",
-      "nombre": "pc"
-    },
-    {
-      "_id": 4,
-      "estado": "a",
-      "nombre": "tablet"
-    }
-  ],
-  "nivelacademico": [
-    {
-      "_id": 1,
-      "estado": "a",
-      "nombre": "bachiller"
-    },
-    {
-      "_id": 2,
-      "estado": "a",
-      "nombre": "estudios superiores"
-    },
-    {
-      "_id": 3,
-      "estado": "a",
-      "nombre": "posgrado"
-    },
-    {
-      "_id": 4,
-      "estado": "a",
-      "nombre": "doctorado"
     }
   ],
   "nivelsocioeconomico": [
@@ -601,18 +431,6 @@
       "estado": "a",
       "nombre": "sin recurso",
       "descripcion": ""
-    }
-  ],
-  "genero": [
-    {
-      "_id": 1,
-      "nombre": "masculino",
-      "estado": "a"
-    },
-    {
-      "_id": 2,
-      "nombre": "femenino",
-      "estado": "a"
     }
   ]
 }

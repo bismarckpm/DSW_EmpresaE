@@ -9,10 +9,10 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class MarcaService {
    //Definimos el url del api
-   apiurl='http://localhost:3000';
-   
+   apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+
   constructor(private http:HttpClient) { }
-  
+
 // Http Options
   httpOptions = {
     headers: new HttpHeaders({
@@ -20,7 +20,7 @@ export class MarcaService {
     })
   }
 
-  
+
 
   ///////// Metodos para ejecutar//////////////
 getMarcas():Observable<Marca[]>{

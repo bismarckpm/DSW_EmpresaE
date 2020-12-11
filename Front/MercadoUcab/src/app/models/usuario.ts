@@ -5,12 +5,12 @@ import {Cliente} from './cliente';
 export  class Usuario {
 
       _id: number;
-      username: string;
-      clave: string;
-      correoElectronico: string;
+      nombre: string;
+      nombre2: string;
+      apellido: string;
+      apellido2: string;
       estado: string;
-
-      tipoUsuario: TipoUsuario;
+      fechaNacimiento: string;
 
 
  }

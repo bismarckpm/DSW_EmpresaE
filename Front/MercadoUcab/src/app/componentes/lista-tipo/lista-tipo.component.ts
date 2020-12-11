@@ -12,7 +12,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class ListaTipoComponent implements OnInit {
 
   Tipo: Tipo[] = [];
-  _id = this.actRoute.snapshot.params['_id'];
+  _id = this.actRoute.snapshot.params._id;
   @Input() tipoData = {_id: 0, nombre: '', estado: '', descripcion: ''};
 
   formTipo: FormGroup;

@@ -25,7 +25,11 @@ export class RegistrarseComponent implements OnInit {
     genero: {_id: 0, nombre: '', estado: ''},
     ocupacion: {_id: 0, nombre: '', estado: ''},
     nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
+<<<<<<< HEAD
     lugar: {_id: 0, estado: '', nombre: '', tipo: '',lugar:{_id: 0, estado: '', nombre: '', tipo: '',lugar:{_id: 0, estado: '', nombre: '', tipo: '',lugar:{_id: 0, estado: '', nombre: '', tipo: ''}}}},
+=======
+    lugar:  {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: ''}}}},
+>>>>>>> 7771cb27e7b75c7bf7ee529744af3e89e14a796a
     usuario: {_id: 0, username: '', estado: '', clave: '', correoElectronico: ''},
   };
 
@@ -46,6 +50,7 @@ export class RegistrarseComponent implements OnInit {
   municipios: any;
   auxEstadoID: number;
   auxMunicipioID: number;
+  auxParroquiaID: number;
 
 
   patronFechaNacimientoEncuestado: any = /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/;
@@ -81,13 +86,9 @@ export class RegistrarseComponent implements OnInit {
   }
 
   addEncuestado(encuestado){
-  
-    console.log(encuestado)  ;
-    console.log("=========")
 
-     /* this.encuestadoService.createEncuestado(this.encuestado).subscribe((data: {}) => {
-      });*/
-    
+    this.encuestado.lugar._id = this.auxParroquiaID;
+    this.encuestadoService.createEncuestado(this.encuestado).subscribe((data: {}) => {});
 
   }
 
@@ -131,16 +132,20 @@ export class RegistrarseComponent implements OnInit {
 
   addLugar(){
     this.lugarService.getLugars().subscribe((Lugares: {}) => {
-      this.lugar = Lugares;
+      this.estados = Lugares;
     });
   }
+
   busquedaMunicipio(id){
     // El ID es del estado
     this.auxEstadoID = id;
     // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
-    this.lugarService.getMunicipio(id).subscribe((data: {}) => {
-      this.municipios = data;
-    });
+    if (id > 0 ){
+      this.lugarService.getMunicipio(this.auxEstadoID).subscribe((data: {}) => {
+        this.municipios = data;
+      });
+    }
+
   }
 
 
@@ -148,9 +153,15 @@ export class RegistrarseComponent implements OnInit {
     // El ID es del estado
     this.auxMunicipioID = id;
     // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
-    this.lugarService.getParroquia(this.auxMunicipioID, id).subscribe((data: {}) => {
-      this.parroquias = data;
-    });
+    if (id > 0 ) {
+      this.lugarService.getParroquia(this.auxMunicipioID, id).subscribe((data: {}) => {
+        this.parroquias = data;
+      });
+    }
+  }
+
+  seleccionarParroquia(id){
+    this.auxParroquiaID = id;
   }
 
   get primerNombreEncuestado(){return this.formRegistroEncuestado.get('primerNombreEncuestado'); }

@@ -15,9 +15,9 @@ export class ListaPreguntasComponent implements OnInit {
 
   preguntas: Pregunta[] = [];
   _id = this.actRoute.snapshot.params['_id'];
-  @Input() preguntaData ={ _id:0, descripcion:'',estado:'',tipo:{_id:0,estado:'',tipo:''} ,subcategoria:{_id:0, nombre:'',estado:'', }};
-   subcategorias:any;
-   tipopreguntas:any;
+  @Input() preguntaData ={ _id:0, descripcion:'',estado:'',tipoPregunta:{_id:0,estado:'',tipo:''} ,subcategoria:{_id:0, nombre:'',estado:'', }};
+   subcategoria:any;
+   tipopregunta:any;
 
    formPregunta: FormGroup;
    namePattern: any = /^[A-Za-z0-9\s]+$/;
@@ -68,12 +68,12 @@ export class ListaPreguntasComponent implements OnInit {
   ///Esto es para mostrar en los drops doww
   addSubcategoria(){
     this.subcategoriaService.getsubcategorias().subscribe((data: {}) => {
-      this.subcategorias= data;
+      this.subcategoria= data;
     })
   }
   addTipoPregunta(){
     this.tipopreguntaService.getTipoPreguntas().subscribe((data: {}) => {
-      this.tipopreguntas= data;
+      this.tipopregunta= data;
     })
   }
 

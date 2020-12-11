@@ -7,7 +7,7 @@ export interface Cliente {
     razonSocial: string;
     rif: number;
 
-    lugar:Lugar;
-    usuairo:Usuario;
+    dtoLugar:Lugar;
+    dtoUsuairo:Usuario;
 
 }

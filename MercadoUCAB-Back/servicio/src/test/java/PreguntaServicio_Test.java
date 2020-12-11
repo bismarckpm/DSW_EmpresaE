@@ -26,9 +26,9 @@ public class PreguntaServicio_Test {
         dtoPregunta.setEstado("a");
 
         DtoTipoPregunta tipoPregunta = new DtoTipoPregunta(1);
-        dtoPregunta.setDtoTipoPregunta(tipoPregunta);
+        dtoPregunta.setTipo(tipoPregunta);
         DtoSubcategoria subcategoria = new DtoSubcategoria(1);
-        dtoPregunta.setDtoSubcategoria(subcategoria);
+        dtoPregunta.setSubcategoria(subcategoria);
 
         Response respuesta = servicio.addPregunta(dtoPregunta);
         Assert.assertEquals(respuesta.getStatus(), Response.Status.OK.getStatusCode());
@@ -51,9 +51,9 @@ public class PreguntaServicio_Test {
         dtoPregunta.setEstado("a");
 
         DtoTipoPregunta tipoPregunta = new DtoTipoPregunta(2);
-        dtoPregunta.setDtoTipoPregunta(tipoPregunta);
+        dtoPregunta.setTipo(tipoPregunta);
         DtoSubcategoria subcategoria = new DtoSubcategoria(2);
-        dtoPregunta.setDtoSubcategoria(subcategoria);
+        dtoPregunta.setSubcategoria(subcategoria);
 
         Response respuesta = servicio.updatePregunta(3,dtoPregunta);
         Assert.assertEquals(respuesta.getStatus(), Response.Status.OK.getStatusCode());

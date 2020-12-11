@@ -5,6 +5,6 @@ export interface Lugar {
     estado:string;
     nombre:string;
     tipo:string;
-    lugar:Lugar;
-    nivelSocioEconomico:NivelSocioEconomico;
+    dtoLugar:Lugar;
+    dtoNivelSocioEconomico:NivelSocioEconomico;
 }

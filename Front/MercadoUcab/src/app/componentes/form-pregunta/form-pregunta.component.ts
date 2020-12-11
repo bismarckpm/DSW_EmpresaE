@@ -19,13 +19,13 @@ export class FormPreguntaComponent implements OnInit {
     _id:0,
     descripcion:'',
     estado:'',
-    tipo:{
+    tipoPregunta:{
       _id:0,
       estado:'',
       tipo:''
     } ,
     subcategoria:{
-      _id:0, 
+      _id:0,
       nombre:'',
       estado:'',
       }

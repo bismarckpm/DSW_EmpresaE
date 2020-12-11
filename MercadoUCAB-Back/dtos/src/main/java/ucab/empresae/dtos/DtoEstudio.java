@@ -1,6 +1,7 @@
 package ucab.empresae.dtos;
 
 import java.sql.Date;
+import java.util.List;
 
 public class DtoEstudio extends DtoBase {
 
@@ -14,9 +15,11 @@ public class DtoEstudio extends DtoBase {
     private Date fechaFin;
 
     //Relaciones
-    private DtoLugar dtoLugar;
-    private DtoNivelSocioEconomico dtoNivelSocioEconomico;
-    private DtoSubcategoria dtoSubcategoria;
+    private DtoLugar lugar;
+    private DtoNivelSocioEconomico nivelsocioeco;
+    private DtoSubcategoria subcategoria;
+    private DtoUsuario analista;
+    private List<DtoGenero> generos;
 
     //Constructores
     public DtoEstudio() {
@@ -84,28 +87,43 @@ public class DtoEstudio extends DtoBase {
         this.fechaFin = fechaFin;
     }
 
-    public DtoLugar getDtoLugar() {
-        return dtoLugar;
+    public DtoLugar getLugar() {
+        return lugar;
     }
 
-    public void setDtoLugar(DtoLugar dtoLugar) {
-        this.dtoLugar = dtoLugar;
+    public void setLugar(DtoLugar lugar) {
+        this.lugar = lugar;
     }
 
-    public DtoNivelSocioEconomico getDtoNivelSocioEconomico() {
-        return dtoNivelSocioEconomico;
+    public DtoNivelSocioEconomico getNivelsocioeco() {
+        return nivelsocioeco;
     }
 
-    public void setDtoNivelSocioEconomico(DtoNivelSocioEconomico dtoNivelSocioEconomico) {
-        this.dtoNivelSocioEconomico = dtoNivelSocioEconomico;
+    public void setNivelsocioeco(DtoNivelSocioEconomico nivelsocioeco) {
+        this.nivelsocioeco = nivelsocioeco;
     }
 
-    public DtoSubcategoria getDtoSubcategoria() {
-        return dtoSubcategoria;
+    public DtoSubcategoria getSubcategoria() {
+        return subcategoria;
     }
 
-    public void setDtoSubcategoria(DtoSubcategoria dtoSubcategoria) {
-        this.dtoSubcategoria = dtoSubcategoria;
+    public void setSubcategoria(DtoSubcategoria subcategoria) {
+        this.subcategoria = subcategoria;
     }
 
+    public DtoUsuario getAnalista() {
+        return analista;
+    }
+
+    public void setAnalista(DtoUsuario analista) {
+        this.analista = analista;
+    }
+
+    public List<DtoGenero> getGeneros() {
+        return generos;
+    }
+
+    public void setGeneros(List<DtoGenero> generos) {
+        this.generos = generos;
+    }
 }

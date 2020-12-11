@@ -25,7 +25,7 @@ export class RegistrarseComponent implements OnInit {
     genero: {_id: 0, nombre: '', estado: ''},
     ocupacion: {_id: 0, nombre: '', estado: ''},
     nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
-    lugar: {_id: 0, estado: '', nombre: '', tipo: ''},
+    lugar: {_id: 0, estado: '', nombre: '', tipo: '',lugar:{_id: 0, estado: '', nombre: '', tipo: '',lugar:{_id: 0, estado: '', nombre: '', tipo: '',lugar:{_id: 0, estado: '', nombre: '', tipo: ''}}}},
     usuario: {_id: 0, username: '', estado: '', clave: '', correoElectronico: ''},
   };
 
@@ -81,15 +81,14 @@ export class RegistrarseComponent implements OnInit {
   }
 
   addEncuestado(encuestado){
-    if (this.formRegistroEncuestado.valid) {
-      this.usuarioService.createUsuario(this.usuario).subscribe((data: {}) => {
-      });
-      this.encuestadoService.createEncuestado(this.encuestado).subscribe((data: {}) => {
-      });
-    }
-    else{
-      alert(' LLenar todos los campos por favor');
-    }
+  
+    console.log(encuestado)  ;
+    console.log("=========")
+
+     /* this.encuestadoService.createEncuestado(this.encuestado).subscribe((data: {}) => {
+      });*/
+    
+
   }
 
 

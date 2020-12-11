@@ -2,7 +2,7 @@ import {TipoUsuario} from './tipo-usuario';
 import {Encuestado} from './encuestado';
 import {Cliente} from './cliente';
 
-export interface Usuario {
+export  class Usuario {
 
       _id: number;
       username: string;

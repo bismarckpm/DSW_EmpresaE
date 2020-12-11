@@ -1,4 +1,34 @@
-{
+{   "usuario":[
+    {
+      "id":1,
+      "user":"jose",
+      "clave ":"admin",
+      "rol":"admin"
+    },
+    {
+      "id":1,
+      "user":"omar",
+      "clave ":"cliente",
+      "rol":"cliente"
+    },
+    {
+      "id":1,
+      "user":"victor",
+      "clave ":"encuestado",
+      "rol":"encuestado"
+    },
+    {
+      "id":1,
+      "user":"juan",
+      "clave ":"analista",
+      "rol":"analista"
+    }
+],
+
+
+
+
+
   "categoria": [
     {
       "_id": 5,
@@ -216,6 +246,8 @@
       "NivelSocioeconomico": {
         "_id": ""
       },
+
+      
       "Usuario": {
         "_id": "",
         "username": "",

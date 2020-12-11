@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'analista', component: AnalistaComponent},
   { path: 'usuario', component: EncuestadoComponent},
 
- // { path: '**', redirectTo: '/login', pathMatch: 'full'},
+ { path: '**', redirectTo: 'login', pathMatch: 'full'},
 ];
 
 

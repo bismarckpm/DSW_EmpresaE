@@ -23,8 +23,8 @@ export class ListaEncuestaComponent implements OnInit {
     estado: '',
     fechaInicio: '',
     fechaFin: '',
-    dtoEstudio: null,
-    dtoPregunta: null
+    estudio: null,
+    pregunta: null
   };
 
   constructor(

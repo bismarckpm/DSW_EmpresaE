@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError, map } from 'rxjs/operators';
 import {Usuario} from '../models/usuario';
+import { CookieService } from "ngx-cookie-service";
 
 
 @Injectable({
@@ -11,10 +12,11 @@ import {Usuario} from '../models/usuario';
 export class UsuarioService {
 
 
-
   apiurl = 'http://localhost:3000';
+  
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private cookies: CookieService) { }
 // Http Options
   httpOptions = {
     headers: new HttpHeaders({
@@ -70,19 +72,19 @@ export class UsuarioService {
 
   }
 
-///////////////////// Error HandleError
-  handleError(error) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // Get client-side error
-      errorMessage = error.error.message;
-    } else {
-      // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    window.alert(errorMessage);
-    return throwError(errorMessage);
-  }
 
+///////////////////// Error HandleError
+handleError(error) {
+  let errorMessage = '';
+  if(error.error instanceof ErrorEvent) {
+    // Get client-side error
+    errorMessage = error.error.message;
+  } else {
+    // Get server-side error
+    errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+  }
+  window.alert(errorMessage);
+  return throwError(errorMessage);
+}
 
 }

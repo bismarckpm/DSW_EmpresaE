@@ -58,7 +58,7 @@ import { TipoPreguntaService } from './services/tipo-pregunta.service';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { ListaEncuestadosComponent } from './componentes/lista-encuestados/lista-encuestados.component';
 import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
-
+import { CookieService } from 'ngx-cookie-service';
 
 
 
@@ -126,7 +126,8 @@ import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estud
     CategoriaService,
     EncuestaService,
     TipoService,
-    TipoPreguntaService
+    TipoPreguntaService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

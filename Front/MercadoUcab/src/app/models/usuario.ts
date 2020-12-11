@@ -1,7 +1,5 @@
 import {TipoUsuario} from './tipo-usuario';
-import {Encuestado} from './encuestado';
-import {Cliente} from './cliente';
-import { Interface } from 'readline';
+
 
 export  interface Usuario {
 
@@ -12,6 +10,7 @@ export  interface Usuario {
       estado: string;
       tipoUsuario: TipoUsuario;
       autenticacion:string;
+      rol:string;
  }
 
 

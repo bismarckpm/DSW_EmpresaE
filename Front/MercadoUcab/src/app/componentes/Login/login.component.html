@@ -7,7 +7,7 @@
     </div>
 <!-- arreglar lo rojo de los inputs -->
     <div class="form-label-group">
-      <input #email type="email" id="inputEmail" class="form-control"  [(ngModel)]="usuario.username"  formControlName="userName" >
+      <input  class="form-control" [(ngModel)]="usuario.username"  formControlName="userName" value="usuario.username" >
       <div *ngIf="userName.invalid && (userName.dirty || userName.touched)" class="alert alert-danger">
         <div *ngIf="userName.errors.required">
           Este campo es obligatorio

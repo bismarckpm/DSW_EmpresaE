@@ -56,6 +56,7 @@ import { TipoService } from './services/tipo.service';
 import { TipoPregunta } from './models/tipo-pregunta';
 import { TipoPreguntaService } from './services/tipo-pregunta.service';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
+import { ListaEncuestadosComponent } from './componentes/lista-encuestados/lista-encuestados.component';
 
 
 
@@ -106,7 +107,9 @@ import { PerfilComponent } from './componentes/perfil/perfil.component';
 
     FormPreguntaComponent,
 
-    PerfilComponent
+    PerfilComponent,
+
+    ListaEncuestadosComponent
   ],
   imports: [
     BrowserModule,

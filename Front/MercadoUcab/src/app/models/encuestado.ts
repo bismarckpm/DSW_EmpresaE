@@ -11,9 +11,10 @@ export interface Encuestado {
    _id:number;
    primerNombre:string;
    segundoNombre:string;
-   primerApeliido:string;
-   segundoApeliido:string;
+   primerApellido:string;
+   segundoApellido:string;
    fechaNacimiento:string;
+   estado:string;
 
    estadoCivil: EstadoCivil;
    nivelAcademico:NivelAcademico;

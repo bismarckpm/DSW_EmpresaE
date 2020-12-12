@@ -346,6 +346,21 @@
       "estado": "i"
     }
   ],
+  "cliente": [
+    {
+      "_id": 1,
+      "rif": "12345678",
+      "razonSocial": "J",
+      "estado": "a",
+      "usuario": {
+        "_id": 1,
+        "username": "juancinho",
+        "clave": "12345",
+        "correoElectronico": "juaneee@gmail.com",
+        "estado": "a"
+      }
+    }
+  ],
   "lugar": [
     {
       "_id": 1,

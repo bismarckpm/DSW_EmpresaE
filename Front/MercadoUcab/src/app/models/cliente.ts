@@ -8,6 +8,6 @@ export interface Cliente {
     rif: number;
 
     lugar:Lugar;
-    usuairo:Usuario;
+    usuario:Usuario;
 
 }

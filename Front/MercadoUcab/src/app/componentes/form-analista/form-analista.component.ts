@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AnalistaService} from "../../services/analista.service";
-import {Router} from "@angular/router";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AnalistaService} from '../../services/analista.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-form-analista',

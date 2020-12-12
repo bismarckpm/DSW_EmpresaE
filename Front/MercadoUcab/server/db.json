@@ -333,16 +333,16 @@
   "analista": [
     {
       "_id": 1,
-      "username": "juancito",
+      "username": "juancitooooo",
       "clave": "clavejuan",
       "correoElectronico": "juan@gmail.com",
       "estado": "a"
     },
     {
       "_id": 2,
-      "username": "aaapppp",
-      "clave": "aaapppp",
-      "correoElectronico": "aaappp@gmail.com",
+      "username": "hola",
+      "clave": "11111",
+      "correoElectronico": "joseeqqqq@gmail.com",
       "estado": "i"
     }
   ],

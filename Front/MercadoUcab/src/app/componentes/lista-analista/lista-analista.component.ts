@@ -44,8 +44,13 @@ export class ListaAnalistaComponent implements OnInit {
   }
 
   updateAnalista(){
-    this.analistaService.updateAnalista(this.analistaData._id, this.analistaData).subscribe(data => {
-    });
+    if (this.formAnalista.valid) {
+      this.analistaService.updateAnalista(this.analistaData._id, this.analistaData).subscribe(data => {
+      });
+    }
+    else{
+      alert('FILL ALL FIELDS');
+    }
   }
 
   editar(analista){

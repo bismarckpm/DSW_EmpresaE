@@ -10,6 +10,13 @@ import { Analista } from '../models/analista';
 })
 export class AnalistaService {
 
+  secciones: string[] = [
+    'Perfil',
+    'Encuestados',
+    'Analistas',
+  
+  ];
+
   apiurl='http://localhost:3000';
 
   constructor(private http:HttpClient) { }
@@ -19,6 +26,19 @@ export class AnalistaService {
     'Content-Type': 'application/json'
   })
 }
+
+////////////// Sidbard////////////
+
+
+getSecciones(): string[] {
+  return this.secciones;
+}
+
+getSeccion(i): string {
+  return this.secciones[i];
+}
+
+
 
 ///////// Metodos para ejecutar//////////////
 getAnalistas():Observable<Analista[]>{

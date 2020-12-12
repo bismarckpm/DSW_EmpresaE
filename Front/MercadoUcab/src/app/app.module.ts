@@ -42,8 +42,10 @@ import {ListaClientesComponent} from './componentes/lista-clientes/lista-cliente
 import {FormPresentacionComponent} from './componentes/form-presentacion/form-presentacion.component';
 import {ListaPresentacionComponent} from './componentes/lista-presentacion/lista-presentacion.component';
 import {FormPreguntaComponent} from './componentes/form-pregunta/form-pregunta.component';
-import { FormEncuestaComponent } from './componentes/form-encuesta/form-encuesta.component';
-import { ListaEncuestaComponent } from './componentes/lista-encuesta/lista-encuesta.component';
+
+//Modulo de Cliente !!!!!!!!!!!!!!!!!
+import{ListaEstudioClienteComponent} from './modulos/cliente/lista-estudio/lista-estudio.component'
+import{ FormEstudioClienteComponent} from './modulos/cliente/form-estudio/form-estudio.component'
 
 // Services
 import { EncuestadoService } from './services/encuestado.service';
@@ -53,12 +55,12 @@ import { SubcategoriaService } from './services/subcategoria.service';
 import { CategoriaService } from './services/categoria.service';
 import { EncuestaService } from './services/encuesta.service';
 import { TipoService } from './services/tipo.service';
-import { TipoPregunta } from './models/tipo-pregunta';
 import { TipoPreguntaService } from './services/tipo-pregunta.service';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { ListaEncuestadosComponent } from './componentes/lista-encuestados/lista-encuestados.component';
 import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
-import { CookieService } from 'ngx-cookie-service';
+import { ClienteService } from './services/cliente.service';
+
 
 
 
@@ -103,10 +105,11 @@ import { CookieService } from 'ngx-cookie-service';
     EditClienteComponent,
     EditUsuarioComponent,
     FormPreguntaComponent,
-
     PerfilComponent,
-
-    ListaEncuestadosComponent
+    ListaEncuestadosComponent,
+    ListaEstudioClienteComponent,
+    FormEstudioClienteComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -121,13 +124,13 @@ import { CookieService } from 'ngx-cookie-service';
   providers: [
     EncuestadoService,
     AdminService,
+    ClienteService,
     MarcaService,
     SubcategoriaService,
     CategoriaService,
     EncuestaService,
     TipoService,
-    TipoPreguntaService,
-    CookieService
+    TipoPreguntaService
   ],
   bootstrap: [AppComponent]
 })

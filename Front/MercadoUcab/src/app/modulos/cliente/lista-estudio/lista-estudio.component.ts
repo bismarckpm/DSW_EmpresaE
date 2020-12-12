@@ -7,17 +7,19 @@ import { Estudio } from 'src/app/models/estudio';
 import { EstudioService } from 'src/app/services/estudio.service';
 
 @Component({
-  selector: 'app-lista-estudio',
+  selector: 'app-lista-estudio-cliente',
   templateUrl: './lista-estudio.component.html',
   styleUrls: ['./lista-estudio.component.css']
 })
-export class ListaEstudioComponent implements OnInit {
+export class ListaEstudioClienteComponent implements OnInit {
 
  //Declaracion de variables
  estudios: Estudio[]=[];
  _id = this.actRoute.snapshot.params['_id'];
 
-user: Cliente;
+
+
+
 
 
   constructor(
@@ -32,7 +34,8 @@ user: Cliente;
   }
 
   loadEstudios(): void {
-    this.estudioService.getEstudioCliente(this.user).subscribe(data => {
+  let id = JSON.parse(localStorage.getItem("usuarioID"));
+    this.estudioService.getEstudioCliente(id).subscribe(data => {
       this.estudios = data;
     });
   }

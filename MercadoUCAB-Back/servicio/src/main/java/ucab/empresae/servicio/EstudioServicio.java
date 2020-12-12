@@ -67,6 +67,7 @@ public class EstudioServicio extends AplicacionBase {
     }
 
     @PUT
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateEstudio(DtoEstudio dtoEstudio) {
@@ -77,6 +78,19 @@ public class EstudioServicio extends AplicacionBase {
             this.estudio = this.dao.find(dtoEstudio.getId(), EstudioEntity.class);
             estudioAtributos(dtoEstudio);
             return Response.ok(this.dao.update(this.estudio)).build();
+        } catch (Exception ex) {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+        }
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response deleteEstudio(DtoEstudio dtoEstudio) {
+        try {
+            this.estudio = this.dao.find(dtoEstudio.getId(), EstudioEntity.class);
+            return Response.ok(this.dao.delete(this.estudio)).build();
         } catch (Exception ex) {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }

@@ -1,6 +1,7 @@
 package ucab.empresae.servicio;
 
 import ucab.empresae.daos.*;
+import ucab.empresae.dtos.DtoCategoria;
 import ucab.empresae.dtos.DtoEstudio;
 import ucab.empresae.entidades.*;
 
@@ -54,7 +55,19 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    @GET
+    @Path("/{id}")
+    @Produces(value = MediaType.APPLICATION_JSON)
+    public Response getEstudios(@PathParam("id") long id) {
+        try {
+            return Response.ok(this.dao.find(id, EstudioEntity.class)).build();
+        } catch (Exception ex) {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+        }
+    }
+
     @POST
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addEstudio(DtoEstudio dtoEstudio) {
@@ -87,11 +100,11 @@ public class EstudioServicio extends AplicacionBase {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response deleteEstudio(DtoEstudio dtoEstudio) {
+    public Response deleteEstudio(DtoCategoria dtoCategoria) {
         try {
-            this.estudio = this.dao.find(dtoEstudio.getId(), EstudioEntity.class);
+            this.estudio = this.dao.find(dtoCategoria.getId(), EstudioEntity.class);
             return Response.ok(this.dao.delete(this.estudio)).build();
-        } catch (Exception ex) {
+        } catch(Exception ex){
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
     }

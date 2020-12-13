@@ -8,7 +8,14 @@ import java.util.List;
 public class OcupacionEntity extends BaseEntity{
     private String estado;
     private String nombre;
-    private List<EncuestadoEntity> encuestados;
+    //private List<EncuestadoEntity> encuestados;
+
+    public OcupacionEntity( long id )
+    {
+        super( id );
+    }
+
+    public OcupacionEntity( ) { }
 
     @Basic
     @Column(name = "estado")
@@ -30,12 +37,12 @@ public class OcupacionEntity extends BaseEntity{
         this.nombre = nombre;
     }
 
-    @OneToMany(mappedBy = "ocupacion")
+    /*@OneToMany(mappedBy = "ocupacion")
     public List<EncuestadoEntity> getEncuestados() {
         return encuestados;
     }
 
     public void setEncuestados(List<EncuestadoEntity> encuestados) {
         this.encuestados = encuestados;
-    }
+    }*/
 }

@@ -33,7 +33,7 @@ import {FormMarcaComponent} from './componentes/form-marca/form-marca.component'
 import {ListaMarcaComponent} from './componentes/lista-marca/lista-marca.component';
 import {ListaPreguntasComponent} from './componentes/lista-preguntas/lista-preguntas.component';
 import {MainAdminComponent} from './componentes/main-admin/main-admin.component';
-import {ListaEstudiosComponent} from './componentes/lista-estudios/lista-estudios.component';
+
 import {FormCategoriaComponent} from './componentes/form-categoria/form-categoria.component';
 import {ListaCategoriaComponent} from './componentes/lista-categoria/lista-categoria.component';
 import {FormEncuestadoComponent} from './componentes/form-encuestado/form-encuestado.component';
@@ -42,8 +42,10 @@ import {ListaClientesComponent} from './componentes/lista-clientes/lista-cliente
 import {FormPresentacionComponent} from './componentes/form-presentacion/form-presentacion.component';
 import {ListaPresentacionComponent} from './componentes/lista-presentacion/lista-presentacion.component';
 import {FormPreguntaComponent} from './componentes/form-pregunta/form-pregunta.component';
-import { FormEncuestaComponent } from './componentes/form-encuesta/form-encuesta.component';
-import { ListaEncuestaComponent } from './componentes/lista-encuesta/lista-encuesta.component';
+
+//Modulo de Cliente !!!!!!!!!!!!!!!!!
+import{ListaEstudioClienteComponent} from './modulos/cliente/lista-estudio/lista-estudio.component'
+import{ FormEstudioClienteComponent} from './modulos/cliente/form-estudio/form-estudio.component'
 
 // Services
 import { EncuestadoService } from './services/encuestado.service';
@@ -53,9 +55,11 @@ import { SubcategoriaService } from './services/subcategoria.service';
 import { CategoriaService } from './services/categoria.service';
 import { EncuestaService } from './services/encuesta.service';
 import { TipoService } from './services/tipo.service';
-import { TipoPregunta } from './models/tipo-pregunta';
 import { TipoPreguntaService } from './services/tipo-pregunta.service';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
+import { ListaEncuestadosComponent } from './componentes/lista-encuestados/lista-encuestados.component';
+import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
+import { ClienteService } from './services/cliente.service';
 
 
 
@@ -84,10 +88,7 @@ import { PerfilComponent } from './componentes/perfil/perfil.component';
     ListaEstudiosComponent,
     ListaCategoriaComponent,
     FormCategoriaComponent,
-
     FormEncuestadoComponent,
- 
-  
     ListaSubcategoriaComponent,
     FormSubcategoriaComponent,
     FormTipoComponent,
@@ -103,10 +104,12 @@ import { PerfilComponent } from './componentes/perfil/perfil.component';
     CambiarClaveComponent,
     EditClienteComponent,
     EditUsuarioComponent,
-
     FormPreguntaComponent,
-
-    PerfilComponent
+    PerfilComponent,
+    ListaEncuestadosComponent,
+    ListaEstudioClienteComponent,
+    FormEstudioClienteComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -121,6 +124,7 @@ import { PerfilComponent } from './componentes/perfil/perfil.component';
   providers: [
     EncuestadoService,
     AdminService,
+    ClienteService,
     MarcaService,
     SubcategoriaService,
     CategoriaService,

@@ -9,7 +9,14 @@ import {Encuestado} from '../models/encuestado';
   providedIn: 'root'
 })
 export class EncuestadoService {
-  apiurl='http://localhost:3000';
+
+  secciones: string[] = [
+    'Perfil', 
+    'Encuestas',
+
+  ];
+  /// apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+  apiurl = 'http://localhost:3000';
 
   constructor(private http:HttpClient) { }
 // Http Options
@@ -19,9 +26,21 @@ export class EncuestadoService {
   })
 }
 
+
+////////////// Sidbard////////////
+
+
+getSecciones(): string[] {
+  return this.secciones;
+}
+
+getSeccion(i): string {
+  return this.secciones[i];
+}
+
 ///////// Metodos para ejecutar//////////////
 getEncuestados():Observable<Encuestado[]>{
-  return this.http.get<Encuestado[]>(this.apiurl+'/Encuestado')
+  return this.http.get<Encuestado[]>(this.apiurl+'/encuestado')
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -29,7 +48,7 @@ getEncuestados():Observable<Encuestado[]>{
 }
 
 getEncuestado(id):Observable<Encuestado[]>{
-  return this.http.get<Encuestado[]>(this.apiurl+'/Encuestado/'+id)
+  return this.http.get<Encuestado[]>(this.apiurl+'/encuestado/'+id)
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -37,7 +56,7 @@ getEncuestado(id):Observable<Encuestado[]>{
 }
 
 createEncuestado(Encuestado):Observable<Encuestado[]>{
-  return this.http.post<Encuestado[]>(this.apiurl+'/Encuestado',JSON.stringify(Encuestado), this.httpOptions)
+  return this.http.post<Encuestado[]>(this.apiurl+'/encuestado',JSON.stringify(Encuestado), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -45,7 +64,7 @@ createEncuestado(Encuestado):Observable<Encuestado[]>{
 }
 
 updateEncuestado(id,Encuestado):Observable<Encuestado[]>{
-  return this.http.put<Encuestado[]>(this.apiurl+'/Encuestado/'+id,JSON.stringify(Encuestado), this.httpOptions)
+  return this.http.put<Encuestado[]>(this.apiurl+'/encuestado/'+id,JSON.stringify(Encuestado), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -53,7 +72,7 @@ updateEncuestado(id,Encuestado):Observable<Encuestado[]>{
 }
 
 deleteEncuestado(id){
-  return this.http.delete<Encuestado[]>(this.apiurl + '/Encuestado/' + id, this.httpOptions)
+  return this.http.delete<Encuestado[]>(this.apiurl + '/encuestado/' + id, this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)

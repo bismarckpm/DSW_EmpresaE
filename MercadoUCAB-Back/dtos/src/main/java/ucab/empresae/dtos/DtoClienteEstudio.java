@@ -1,10 +1,5 @@
 package ucab.empresae.dtos;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
 public class DtoClienteEstudio extends DtoBase{
 
     //Atributos

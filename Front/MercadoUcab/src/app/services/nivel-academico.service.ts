@@ -10,7 +10,7 @@ import {NivelAcademico} from '../models/nivel-academico';
   providedIn: 'root'
 })
 export class NivelAcademicoService {
-  apiurl = 'http://localhost:3000';
+  apiurl = 'http://localhost:8080/servicio-1.0-SNAPSHOT/api';
 
   constructor(private http: HttpClient) { }
 // Http Options
@@ -22,7 +22,7 @@ export class NivelAcademicoService {
 
 ///////// Metodos para ejecutar//////////////
   getNivelesAcademicos(): Observable<NivelAcademico[]>{
-    return this.http.get<NivelAcademico[]>(this.apiurl + '/NivelAcademico')
+    return this.http.get<NivelAcademico[]>(this.apiurl + '/nivelacademico')
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -30,7 +30,7 @@ export class NivelAcademicoService {
   }
 
   getNivelAcademico(id): Observable<NivelAcademico[]>{
-    return this.http.get<EstadoCivil[]>(this.apiurl + '/NivelAcademico/' + id)
+    return this.http.get<EstadoCivil[]>(this.apiurl + '/nivelacademico/' + id)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -38,7 +38,7 @@ export class NivelAcademicoService {
   }
 
   createNivelAcademico(NivelAcademico): Observable<EstadoCivil[]>{
-    return this.http.post<NivelAcademico[]>(this.apiurl + '/NivelAcademico', JSON.stringify(NivelAcademico), this.httpOptions)
+    return this.http.post<NivelAcademico[]>(this.apiurl + '/nivelacademico', JSON.stringify(NivelAcademico), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -46,7 +46,7 @@ export class NivelAcademicoService {
   }
 
   updateNivelAcademico(id, NivelAcademico): Observable<NivelAcademico[]>{
-    return this.http.put<NivelAcademico[]>(this.apiurl + '/NivelAcademico/' + id, JSON.stringify(NivelAcademico), this.httpOptions)
+    return this.http.put<NivelAcademico[]>(this.apiurl + '/nivelacademico/' + id, JSON.stringify(NivelAcademico), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -54,7 +54,7 @@ export class NivelAcademicoService {
   }
 
   deleteNivelAcademico(id){
-    return this.http.delete<NivelAcademico[]>(this.apiurl + '/NivelAcademico/' + id, this.httpOptions)
+    return this.http.delete<NivelAcademico[]>(this.apiurl + '/nivelacademico/' + id, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)

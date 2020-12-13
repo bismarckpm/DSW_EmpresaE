@@ -5,13 +5,19 @@ import { retry, catchError } from 'rxjs/operators';
 import {Usuario} from '../models/usuario';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
-  apiurl = 'http://localhost:3000';
 
-  constructor(private http: HttpClient) { }
+    usuario:any;
+
+  apiurl = 'http://localhost:3000';
+  
+
+  constructor(private http: HttpClient,
+    ) { }
 // Http Options
   httpOptions = {
     headers: new HttpHeaders({
@@ -21,7 +27,7 @@ export class UsuarioService {
 
 ///////// Metodos para ejecutar//////////////
   getUsuarios(): Observable<Usuario[]>{
-    return this.http.get<Usuario[]>(this.apiurl + '/Usuario')
+    return this.http.get<Usuario[]>(this.apiurl + '/usuario')
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -29,7 +35,7 @@ export class UsuarioService {
   }
 
   getUsuario(id): Observable<Usuario[]>{
-    return this.http.get<Usuario[]>(this.apiurl + '/Usuario/' + id)
+    return this.http.get<Usuario[]>(this.apiurl + '/usuario/' + id)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -37,7 +43,7 @@ export class UsuarioService {
   }
 
   createUsuario(Usuario): Observable<Usuario[]>{
-    return this.http.post<Usuario[]>(this.apiurl + '/Usuario', JSON.stringify(Usuario), this.httpOptions)
+    return this.http.post<Usuario[]>(this.apiurl + '/usuario', JSON.stringify(Usuario), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -45,7 +51,7 @@ export class UsuarioService {
   }
 
   updateUsuario(id, Usuario): Observable<Usuario[]>{
-    return this.http.put<Usuario[]>(this.apiurl + '/Usuario/' + id, JSON.stringify(Usuario), this.httpOptions)
+    return this.http.put<Usuario[]>(this.apiurl + '/usuario/' + id, JSON.stringify(Usuario), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -53,24 +59,33 @@ export class UsuarioService {
   }
 
   deleteUsuario(id){
-    return this.http.delete<Usuario[]>(this.apiurl + '/Usuario/' + id, this.httpOptions)
+    return this.http.delete<Usuario[]>(this.apiurl + '/usuario/' + id, this.httpOptions)
+  }
+
+  Logear(usuario): Observable<Usuario[]>{
+
+     return  this.http.post<Usuario[]>(this.apiurl+'/usuario/',JSON.stringify(usuario),this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
-      );
+  
+      )
+
   }
 
+
 ///////////////////// Error HandleError
-  handleError(error) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // Get client-side error
-      errorMessage = error.error.message;
-    } else {
-      // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    window.alert(errorMessage);
-    return throwError(errorMessage);
+handleError(error) {
+  let errorMessage = '';
+  if(error.error instanceof ErrorEvent) {
+    // Get client-side error
+    errorMessage = error.error.message;
+  } else {
+    // Get server-side error
+    errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
   }
+  window.alert(errorMessage);
+  return throwError(errorMessage);
+}
+
 }

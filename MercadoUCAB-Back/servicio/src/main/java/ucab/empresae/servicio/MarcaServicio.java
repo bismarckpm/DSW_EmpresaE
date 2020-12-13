@@ -17,7 +17,6 @@ public class MarcaServicio {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/addMarca")
     public Response addMarca(DtoMarca dtoMarca) {
 
         DaoMarca dao = new DaoMarca();
@@ -37,7 +36,6 @@ public class MarcaServicio {
 
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
-    @Path("/getMarcas")
     public Response getMarcas() {
         List<MarcaEntity> marcas = null;
         try {
@@ -52,7 +50,7 @@ public class MarcaServicio {
 
     @GET
     @Produces(value=MediaType.APPLICATION_JSON)
-    @Path("getMarca/{id}")
+    @Path("/{id}")
     public Response getMarca(@PathParam("id") long id)
     {
         DaoMarca dao = new DaoMarca();
@@ -68,7 +66,7 @@ public class MarcaServicio {
     @PUT
     @Consumes(value=MediaType.APPLICATION_JSON)
     @Produces(value=MediaType.APPLICATION_JSON)
-    @Path("/updateMarca/{id}")
+    @Path("/{id}")
     public Response updateMarca(@PathParam("id") long id, DtoMarca dtoMarca) {
         DaoMarca dao = new DaoMarca();
         MarcaEntity marca = dao.find(id, MarcaEntity.class);
@@ -86,7 +84,7 @@ public class MarcaServicio {
 
     @DELETE
     @Produces(value=MediaType.APPLICATION_JSON)
-    @Path("deleteMarca/{id}")
+    @Path("/{id}")
     public Response deleteMarca(@PathParam("id") long id)
     {
         try

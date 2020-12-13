@@ -1,7 +1,5 @@
 package ucab.empresae.entidades;
 
-import java.lang.annotation.Repeatable;
-
 public class EntidadesFactory {
 
     public static BaseEntity BaseEntityInstance() {

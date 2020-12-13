@@ -67,11 +67,11 @@ public class PreguntaServicio {
             // Tipo de Pregunta de Seleccion
             if(dtoPregunta.getTipo().getId() == 3 || dtoPregunta.getTipo().getId() == 4) {
 
-                String[] opcionesString = dtoPregunta.getOpcionesString();
+                String[] opciones = dtoPregunta.getOpciones();
                 int contador = 0;
-                while (contador<opcionesString.length) {
+                while (contador<opciones.length) {
                     OpcionEntity opcion_entidad = new OpcionEntity();
-                    opcion_entidad.setDescripcion(opcionesString[contador]);
+                    opcion_entidad.setDescripcion(opciones[contador]);
                     opcion_entidad.setEstado("a");
                     OpcionEntity resultadoOpcion = daoOpcion.insert(opcion_entidad);
 
@@ -175,11 +175,11 @@ public class PreguntaServicio {
             // Tipo de Pregunta de Seleccion
             if(dtoPregunta.getTipo().getId() == 3 || dtoPregunta.getTipo().getId() == 4) {
 
-                String[] opcionesString = dtoPregunta.getOpcionesString();
+                String[] opciones = dtoPregunta.getOpciones();
                 int contador = 0;
-                while (contador<opcionesString.length) {
+                while (contador<opciones.length) {
                     OpcionEntity opcion_entidad = new OpcionEntity();
-                    opcion_entidad.setDescripcion(opcionesString[contador]);
+                    opcion_entidad.setDescripcion(opciones[contador]);
                     opcion_entidad.setEstado("a");
                     OpcionEntity resultadoOpcion = daoOpcion.insert(opcion_entidad);
 

@@ -12,9 +12,7 @@ public class DtoPregunta extends DtoBase {
     private DtoTipoPregunta tipo;
     private DtoSubcategoria subcategoria;
 
-    private List<DtoOpcion> opciones;
-
-    private String[] opcionesString;
+    private String[] opciones;
 
     //Constructores
     public DtoPregunta() {
@@ -57,20 +55,12 @@ public class DtoPregunta extends DtoBase {
         this.subcategoria = subcategoria;
     }
 
-    public List<DtoOpcion> getOpciones() {
+    public String[] getOpciones() {
         return opciones;
     }
 
-    public void setOpciones(List<DtoOpcion> opciones) {
+    public void setOpciones(String[] opciones) {
         this.opciones = opciones;
-    }
-
-    public String[] getOpcionesString() {
-        return opcionesString;
-    }
-
-    public void setOpcionesString(String[] opcionesString) {
-        this.opcionesString = opcionesString;
     }
 
 }

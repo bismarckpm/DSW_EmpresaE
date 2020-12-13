@@ -1,22 +1,18 @@
 package ucab.empresae.servicio;
 
 import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
 import ucab.empresae.daos.DaoUsuario;
 import ucab.empresae.dtos.DtoUsuario;
-import ucab.empresae.entidades.TipoUsuarioEntity;
 import ucab.empresae.entidades.UsuarioEntity;
 
 import javax.json.Json;
-import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.util.List;
+
 
 @Path("/login")
 public class LoginServicio {
@@ -31,7 +27,7 @@ public class LoginServicio {
         DaoUsuario daoUsuario = new DaoUsuario();
         DirectorioActivo directorioActivo = new DirectorioActivo();
         UsuarioEntity usuario;
-        JsonObject respuesta= Json.createObjectBuilder().build();
+        JsonObject respuesta;
 
         registrado = directorioActivo.userAuthentication(dtoUsuario);
 

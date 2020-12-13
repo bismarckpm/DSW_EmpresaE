@@ -6,16 +6,11 @@ import java.util.List;
 @Entity
 @Table(name = "cliente", schema = "mercadeoucab")
 public class ClienteEntity extends BaseEntity{
-    private String estado;
-    private String razonSocial;
-    private int rif;
-    private LugarEntity lugar;
-    private UsuarioEntity usuario;
-    private List<TelefonoEntity> telefonos;
-    private List<ClienteEstudioEntity> clienteestudios;
+
 
     @Basic
     @Column(name = "estado")
+    private String estado;
     public String getEstado() {
         return estado;
     }
@@ -26,6 +21,7 @@ public class ClienteEntity extends BaseEntity{
 
     @Basic
     @Column(name = "razon_social")
+    private String razonSocial;
     public String getRazonSocial() {
         return razonSocial;
     }
@@ -36,17 +32,19 @@ public class ClienteEntity extends BaseEntity{
 
     @Basic
     @Column(name = "rif")
-    public int getRif() {
+    private String rif;
+    public String getRif() {
         return rif;
     }
 
-    public void setRif(int rif) {
+    public void setRif(String rif) {
         this.rif = rif;
     }
 
 
     @ManyToOne
     @JoinColumn(name = "id_lugar", referencedColumnName = "id", nullable = false)
+    private LugarEntity lugar;
     public LugarEntity getLugar() {
         return lugar;
     }
@@ -57,6 +55,7 @@ public class ClienteEntity extends BaseEntity{
 
     @OneToOne
     @JoinColumn(name = "id_usuario", referencedColumnName = "id", nullable = false)
+    private UsuarioEntity usuario;
     public UsuarioEntity getUsuario() {
         return usuario;
     }
@@ -65,7 +64,8 @@ public class ClienteEntity extends BaseEntity{
         this.usuario = usuario;
     }
 
-    @OneToMany(mappedBy = "cliente")
+    /*@OneToMany(mappedBy = "cliente")
+    private List<TelefonoEntity> telefonos;
     public List<TelefonoEntity> getTelefonos() {
         return telefonos;
     }
@@ -75,11 +75,12 @@ public class ClienteEntity extends BaseEntity{
     }
 
     @OneToMany(mappedBy = "cliente")
+    private List<ClienteEstudioEntity> clienteestudios;
     public List<ClienteEstudioEntity> getClienteestudios() {
         return clienteestudios;
     }
 
     public void setClienteestudios(List<ClienteEstudioEntity> clienteestudios) {
         this.clienteestudios = clienteestudios;
-    }
+    }*/
 }

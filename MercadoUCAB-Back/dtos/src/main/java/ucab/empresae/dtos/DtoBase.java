@@ -15,7 +15,7 @@ public class DtoBase {
     {
     }
 
-    public long getId()
+    public long get_id()
     {
         return _id;
     }

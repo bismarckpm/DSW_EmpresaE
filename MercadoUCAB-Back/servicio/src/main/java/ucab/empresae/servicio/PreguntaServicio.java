@@ -44,9 +44,9 @@ public class PreguntaServicio {
             pregunta.setDescripcion(dtoPregunta.getDescripcion());
             pregunta.setEstado(dtoPregunta.getEstado());
 
-            SubcategoriaEntity subcategoria = daoSubcategoria.find(dtoPregunta.getSubcategoria().getId(), SubcategoriaEntity.class);
+            SubcategoriaEntity subcategoria = daoSubcategoria.find(dtoPregunta.getSubcategoria().get_id(), SubcategoriaEntity.class);
             pregunta.setSubcategoria(subcategoria);
-            TipoPreguntaEntity tipoPregunta = daoTipoPregunta.find(dtoPregunta.getTipo().getId(), TipoPreguntaEntity.class);
+            TipoPreguntaEntity tipoPregunta = daoTipoPregunta.find(dtoPregunta.getTipo().get_id(), TipoPreguntaEntity.class);
             pregunta.setTipo(tipoPregunta);
 
             PreguntaEntity resul = dao.insert(pregunta);
@@ -83,9 +83,9 @@ public class PreguntaServicio {
             pregunta.setEstado(dtoPregunta.getEstado());
             pregunta.setDescripcion(dtoPregunta.getDescripcion());
 
-            SubcategoriaEntity subcategoria = new SubcategoriaEntity(dtoPregunta.getSubcategoria().getId());
+            SubcategoriaEntity subcategoria = new SubcategoriaEntity(dtoPregunta.getSubcategoria().get_id());
             pregunta.setSubcategoria(subcategoria);
-            TipoPreguntaEntity tipoPregunta = new TipoPreguntaEntity(dtoPregunta.getTipo().getId());
+            TipoPreguntaEntity tipoPregunta = new TipoPreguntaEntity(dtoPregunta.getTipo().get_id());
             pregunta.setTipo(tipoPregunta);
 
             PreguntaEntity resul = dao.update(pregunta);

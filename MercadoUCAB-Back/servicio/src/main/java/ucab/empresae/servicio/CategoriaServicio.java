@@ -65,7 +65,7 @@ public class CategoriaServicio extends AplicacionBase {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateCategoria(DtoCategoria dtoCategoria) {
         try {
-            this.categoria = this.dao.find(dtoCategoria.getId(), CategoriaEntity.class);
+            this.categoria = this.dao.find(dtoCategoria.get_id(), CategoriaEntity.class);
             categoriAtributos(dtoCategoria);
             return Response.ok(this.dao.update(this.categoria)).build();
         } catch(Exception ex){
@@ -79,7 +79,7 @@ public class CategoriaServicio extends AplicacionBase {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response deleteCategoria(DtoCategoria dtoCategoria) {
         try {
-            this.categoria = this.dao.find(dtoCategoria.getId(), CategoriaEntity.class);
+            this.categoria = this.dao.find(dtoCategoria.get_id(), CategoriaEntity.class);
             return Response.ok(this.dao.delete(this.categoria)).build();
         } catch(Exception ex){
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();

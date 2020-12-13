@@ -31,7 +31,7 @@ public class DirectorioActivo_Test {
         DtoUsuario user = new DtoUsuario();
         user.setUsername( "prueba" );
         DirectorioActivo ldap = new DirectorioActivo();
-        ldap.getEntry( user );
+        ldap.getCorreo( user );
     }
 
     @Test
@@ -49,7 +49,7 @@ public class DirectorioActivo_Test {
         rol = "Encuestado";
         user.setUsername( "prueba2" );
         user.setClave( "Prueba654321" );
-        user.setCorreoelectronico("updatePrueba@gmail.com");
+        user.setCorreoelectronico("updatePrueba222@gmail.com");
         DirectorioActivo ldap = new DirectorioActivo();
         ldap.updateEntry(user, rol);
     }

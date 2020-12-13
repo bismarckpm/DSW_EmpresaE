@@ -6,6 +6,8 @@ import ucab.empresae.daos.DaoMarca;
 import ucab.empresae.dtos.DtoMarca;
 import ucab.empresae.entidades.MarcaEntity;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;

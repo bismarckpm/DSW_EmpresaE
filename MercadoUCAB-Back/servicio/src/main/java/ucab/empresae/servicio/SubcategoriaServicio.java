@@ -25,7 +25,7 @@ public class SubcategoriaServicio extends AplicacionBase {
 
         if(dtoSubcategoria.getCategoria() != null) {
             DaoCategoria daoCategoria = DaoFactory.DaoCategoriaInstancia();
-            this.subcategoria.setCategoria(daoCategoria.find(dtoSubcategoria.getCategoria().getId(), CategoriaEntity.class));
+            this.subcategoria.setCategoria(daoCategoria.find(dtoSubcategoria.getCategoria().get_id(), CategoriaEntity.class));
         }
     }
 
@@ -71,7 +71,7 @@ public class SubcategoriaServicio extends AplicacionBase {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateSubcategoria(DtoSubcategoria dtoSubcategoria) {
         try {
-            this.subcategoria = this.dao.find(dtoSubcategoria.getId(), SubcategoriaEntity.class);
+            this.subcategoria = this.dao.find(dtoSubcategoria.get_id(), SubcategoriaEntity.class);
             subcategoriaAtributos(dtoSubcategoria);
             return Response.ok(this.dao.delete(this.subcategoria)).build();
         } catch(Exception ex){

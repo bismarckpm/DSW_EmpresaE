@@ -19,8 +19,7 @@ import { AdminComponent } from './modulos/admin/admin.component';
 import { ClienteComponent } from './modulos/cliente/cliente.component';
 import { EncuestadoComponent } from './modulos/encuestado/encuestado.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
-import { FomrAnalistaComponent } from './componentes/fomr-analista/fomr-analista.component';
-import { ListaAnalistaComponent } from './componentes/lista-analista/lista-analista.component';
+import { FormAnalistaComponent } from './componentes/form-analista/form-analista.component';
 import { CambiarClaveComponent } from './componentes/cambiar-clave/cambiar-clave.component';
 import { EditClienteComponent } from './componentes/edit-cliente/edit-cliente.component';
 import { EditUsuarioComponent } from './componentes/edit-usuario/edit-usuario.component';
@@ -60,6 +59,8 @@ import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { ListaEncuestadosComponent } from './componentes/lista-encuestados/lista-encuestados.component';
 import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
 import { ClienteService } from './services/cliente.service';
+import { ListaAnalistaComponent } from './componentes/lista-analista/lista-analista.component';
+import { AnalistaService } from './services/analista.service';
 
 
 
@@ -89,6 +90,8 @@ import { ClienteService } from './services/cliente.service';
     ListaCategoriaComponent,
     FormCategoriaComponent,
     FormEncuestadoComponent,
+
+
     ListaSubcategoriaComponent,
     FormSubcategoriaComponent,
     FormTipoComponent,
@@ -99,8 +102,7 @@ import { ClienteService } from './services/cliente.service';
     ListaClientesComponent,
     FormPresentacionComponent,
     ListaPresentacionComponent,
-    FomrAnalistaComponent,
-    ListaAnalistaComponent,
+    FormAnalistaComponent,
     CambiarClaveComponent,
     EditClienteComponent,
     EditUsuarioComponent,
@@ -108,8 +110,12 @@ import { ClienteService } from './services/cliente.service';
     PerfilComponent,
     ListaEncuestadosComponent,
     ListaEstudioClienteComponent,
-    FormEstudioClienteComponent
+    FormEstudioClienteComponent,
     
+
+    ListaEncuestadosComponent,
+
+    ListaAnalistaComponent
   ],
   imports: [
     BrowserModule,
@@ -120,7 +126,9 @@ import { ClienteService } from './services/cliente.service';
     FormsModule,
     ReactiveFormsModule,
 
-  ],
+
+],
+
   providers: [
     EncuestadoService,
     AdminService,
@@ -130,6 +138,7 @@ import { ClienteService } from './services/cliente.service';
     CategoriaService,
     EncuestaService,
     TipoService,
+    AnalistaService,
     TipoPreguntaService
   ],
   bootstrap: [AppComponent]

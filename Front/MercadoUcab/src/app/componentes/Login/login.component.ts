@@ -28,11 +28,12 @@ export class LoginComponent implements OnInit {
 
 
 Loggearse(){
-
+  if (this.formLogin.valid) {
     this.usuarioService.getUsuarios().subscribe( data  => {
       console.log(data) ;
 
-      if(data[0].autenticacion=="valida"){
+      if(data[0].autenticacion=="valida")
+      {
         console.log("==============") ;
         console.log(data[0].username) ;
         console.log(data[0].rol) ; ;
@@ -61,45 +62,14 @@ Loggearse(){
                 localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
                localStorage.setItem('rol',JSON.stringify(data[0].rol));
               }
-      }else{
-        window.alert("Usuario no registrado o Informacion Incorrecta");
-      }
-     
-  /*    this.userID=localStorage.getItem("usuarioID");
-      this.user=localStorage.getItem("rol")
-      console.log("==========Local Storeg Pruebas========");
-      console.log( JSON.parse( this.userID));
-      console.log(JSON.parse( this.user));
-      console.log("==================");
-      console.log("========== Local Storeg Pruebas del parse  ========");
-     
-      console.log("==================");*/
+      }else
+        {
+          window.alert("Usuario no registrado o Informacion Incorrecta");
+        }
 
-})  
-  /* if (this.formLogin.valid) {
-    return this.usuarioService.Logear(this.usuario)
-    .subscribe( data  => {
-          if(data[0].autenticacion ="valido"){
-                  if(data[0].rol='Administradro'){
-                    this.router.navigateByUrl('/admin/0')
-                  }
-                  if(data[0].rol='Encuestado'){
-                    this.router.navigateByUrl('/encuestado/0')
-                  }
-                  if(data[0].rol='Analista'){
-                    this.router.navigateByUrl('/analista/0')
-                  }
-                  if(data[0].rol='Cliente'){
-                    this.router.navigateByUrl('/cliente/0')
-            }
-          }else{
-            window.alert("Usuario no registrado o Informacion Incorrecta");
-          }
-         
-       
     })  
-}*/
-
+  
+  }
 }
 
 

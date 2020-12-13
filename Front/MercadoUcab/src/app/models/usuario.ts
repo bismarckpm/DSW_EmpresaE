@@ -11,6 +11,8 @@ export  interface Usuario {
       tipoUsuario: TipoUsuario;
       autenticacion:string;
       rol :string;
+      respuesta:string;
+      nuevaClave:string;
  }
 
 

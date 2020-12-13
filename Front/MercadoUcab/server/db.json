@@ -4,7 +4,7 @@
       "_id": 50,
       "username": "Pedro",
       "clave ": "pedro",
-      "rol": "Administrador",
+      "rol": "Cliente",
       "autenticacion": "valida"
     }
   ],
@@ -25,7 +25,7 @@
       "_id": 1,
       "nombre": "pedro gutierres",
       "estado": "i",
-      "dtoCategoria": {
+      "categoria": {
         "_id": 5,
         "nombre": "pedro gutierres",
         "estado": "i"
@@ -35,7 +35,7 @@
       "_id": 3,
       "nombre": "tt",
       "estado": "a",
-      "dtoCategoria": {
+      "categoria": {
         "_id": 5,
         "nombre": "pedro gutierres",
         "estado": "i"
@@ -45,7 +45,7 @@
       "_id": 4,
       "nombre": "eee",
       "estado": "a",
-      "dtoCategoria": {
+      "categoria": {
         "_id": 5,
         "nombre": "pedro gutierres",
         "estado": "i"

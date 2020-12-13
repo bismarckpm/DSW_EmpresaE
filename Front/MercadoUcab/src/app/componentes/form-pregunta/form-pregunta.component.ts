@@ -26,7 +26,7 @@ export class FormPreguntaComponent implements OnInit {
     _id:0,
     descripcion:'',
     estado:'',
-    tipoPregunta:{
+    tipo:{
       _id:0,
       estado:'',
       tipo:''

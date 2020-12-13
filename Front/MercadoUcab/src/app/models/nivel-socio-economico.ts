@@ -1,4 +1,4 @@
-export interface NivelSocioEconomico {
+export class NivelSocioEconomico {
     _id:number;
     estado:string;
     nombre:string;

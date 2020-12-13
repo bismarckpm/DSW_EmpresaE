@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EncuestadoService} from '../../../services/encuestado.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GeneroService} from '../../../services/genero.service';
 import {OcupacionService} from '../../../services/ocupacion.service';
 import {NivelSocioEconomicoService} from '../../../services/nivel-socio-economico.service';
@@ -10,6 +10,7 @@ import {UsuarioService} from '../../../services/usuario.service';
 import {MedioConexionService} from '../../../services/medio-conexion.service';
 import {EstadoCivilService} from '../../../services/estado-civil.service';
 import {NivelAcademicoService} from '../../../services/nivel-academico.service';
+import {HijoService} from '../../../services/hijo.service';
 
 @Component({
   selector: 'app-registrarse',
@@ -25,6 +26,7 @@ export class RegistrarseComponent implements OnInit {
     genero: {_id: 0, nombre: '', estado: ''},
     ocupacion: {_id: 0, nombre: '', estado: ''},
     nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
+    telefono: {_id: 0, numero: ''},
     lugar:  {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: ''}}}},
     usuario: {_id: 0, username: '', estado: '', clave: '', correoElectronico: ''},
   };
@@ -35,6 +37,7 @@ export class RegistrarseComponent implements OnInit {
   genero: any;
   ocupacion: any;
   nivelSocioEconomico: any;
+  hijo: any;
   lugar: any;
   usuario: any;
   username: any;
@@ -54,6 +57,9 @@ export class RegistrarseComponent implements OnInit {
   patronCorreoEncuestado: any = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   patronUsernameEncuestado: any = / ^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$/;
   patronClaveEncuestado: any = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  patronTelefonoEncuestado: any = /^[0-9\s]+$/;
+
+  // /[\(]?[\+]?(\d{2}|\d{3})[\)]?[\s]?((\d{6}|\d{8})|(\d{3}[\*\.\-]){2}\d{3}|(\d{2}[\*\.\-\s]){3}\d{2}|(\d{4}[\*\.\-\s]){1}\d{4})|\d{8}|\d{10}|\d{12}/;
 
   /// Reglas para el username
   /// 1. caracteres alfanumericos, guion bajo y punto.
@@ -79,6 +85,7 @@ export class RegistrarseComponent implements OnInit {
     public generoService: GeneroService,
     public ocupacionService: OcupacionService,
     public nivelSocioEconomicoService: NivelSocioEconomicoService,
+    public hijoService: HijoService,
     public lugarService: LugarService,
     public usuarioService: UsuarioService,
     public router: Router,
@@ -98,12 +105,9 @@ export class RegistrarseComponent implements OnInit {
   }
 
   addEncuestado(encuestado){
-
     this.encuestado.lugar._id = this.auxParroquiaID;
     this.encuestadoService.createEncuestado(this.encuestado).subscribe((data: {}) => {});
-
   }
-
 
 
   addEstadoCivil(){
@@ -160,7 +164,6 @@ export class RegistrarseComponent implements OnInit {
 
   }
 
-
   busquedaParroquia(id){
     // El ID es del estado
     this.auxMunicipioID = id;
@@ -188,6 +191,7 @@ export class RegistrarseComponent implements OnInit {
   get generoEncuestado(){return this.formRegistroEncuestado.get('generoEncuestado'); }
   get ocupacionEncuestado(){return this.formRegistroEncuestado.get('ocupacionEncuestado'); }
   get nivelSocioEconomicoEncuestado(){ return this.formRegistroEncuestado.get('nivelSocioEconomicoEncuestado'); }
+  get telefonoEncuestado(){ return this.formRegistroEncuestado.get('telefonoEncuestado'); }
   get lugarEncuestado(){return this.formRegistroEncuestado.get('lugarEncuestado'); }
   get usuarioEncuestado(){return this.formRegistroEncuestado.get('usuarioEncuestado'); }
   get usernameEncuestado(){return this.formRegistroEncuestado.get('usernameEncuestado'); }
@@ -210,6 +214,7 @@ export class RegistrarseComponent implements OnInit {
       generoEncuestado: ['', Validators.required],
       ocupacionEncuestado: ['', Validators.required],
       nivelSocioEconomicoEncuestado: ['', Validators.required],
+      telefonoEncuestado: ['', [Validators.required, Validators.pattern(this.patronTelefonoEncuestado)]],
       usuarioEncuestado: ['', Validators.required],
       usernameEncuestado: ['', [Validators.required, Validators.pattern(this.patronUsernameEncuestado)]],
       claveEncuestado: ['', [Validators.required, Validators.pattern(this.patronClaveEncuestado)]],

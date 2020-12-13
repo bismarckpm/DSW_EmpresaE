@@ -20,6 +20,8 @@ export class EncuestaService {
     })
   };
 
+  
+
   ///////// Metodos para ejecutar//////////////
   getEncuestas(): Observable<Encuesta[]>{
     return this.http.get<Encuesta[]>(this.apiurl + '/encuesta')

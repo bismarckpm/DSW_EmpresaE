@@ -6,6 +6,7 @@ import ucab.empresae.dtos.DtoCategoria;
 import ucab.empresae.entidades.CategoriaEntity;
 import ucab.empresae.entidades.EntidadesFactory;
 import ucab.empresae.entidades.EstudioEntity;
+import ucab.empresae.entidades.SubcategoriaEntity;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -34,7 +35,19 @@ public class CategoriaServicio extends AplicacionBase {
         }
     }
 
+    @GET
+    @Path("/{id}")
+    @Produces(value = MediaType.APPLICATION_JSON)
+    public Response getCategoria(@PathParam("id") long id) {
+        try {
+            return Response.ok(this.dao.find(id, CategoriaEntity.class)).build();
+        } catch (Exception ex) {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+        }
+    }
+
     @POST
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addCategoria(DtoCategoria dtoCategoria) {
@@ -47,6 +60,7 @@ public class CategoriaServicio extends AplicacionBase {
     }
 
     @PUT
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateCategoria(DtoCategoria dtoCategoria) {
@@ -54,6 +68,19 @@ public class CategoriaServicio extends AplicacionBase {
             this.categoria = this.dao.find(dtoCategoria.getId(), CategoriaEntity.class);
             categoriAtributos(dtoCategoria);
             return Response.ok(this.dao.update(this.categoria)).build();
+        } catch(Exception ex){
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+        }
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response deleteCategoria(DtoCategoria dtoCategoria) {
+        try {
+            this.categoria = this.dao.find(dtoCategoria.getId(), CategoriaEntity.class);
+            return Response.ok(this.dao.delete(this.categoria)).build();
         } catch(Exception ex){
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }

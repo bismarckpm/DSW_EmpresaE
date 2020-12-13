@@ -10,15 +10,35 @@ import { Analista } from '../models/analista';
 })
 export class AnalistaService {
 
+  secciones: string[] = [
+    'Perfil',
+    'Encuestados',
+    'Analistas',
+  
+  ];
+
   apiurl='http://localhost:3000';
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 // Http Options
   httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json'
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
   })
+};
+
+////////////// Sidbard////////////
+
+
+getSecciones(): string[] {
+  return this.secciones;
 }
+
+getSeccion(i): string {
+  return this.secciones[i];
+}
+
+
 
 ///////// Metodos para ejecutar//////////////
 getAnalistas():Observable<Analista[]>{
@@ -61,17 +81,17 @@ deleteAnalista(id){
   )
 }
 
-///////////////////// Error HandleError
-handleError(error) {
-  let errorMessage = '';
-  if(error.error instanceof ErrorEvent) {
-    // Get client-side error
-    errorMessage = error.error.message;
-  } else {
-    // Get server-side error
-    errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+  ///////////////////// Error HandleError
+  handleError(error) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // Get client-side error
+      errorMessage = error.error.message;
+    } else {
+      // Get server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    window.alert(errorMessage);
+    return throwError(errorMessage);
   }
-  window.alert(errorMessage);
-  return throwError(errorMessage);
-}
 }

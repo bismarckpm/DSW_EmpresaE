@@ -6,11 +6,11 @@ import { NivelSocioEconomicoService } from 'src/app/services/nivel-socio-economi
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 
 @Component({
-  selector: 'app-form-estudio',
+  selector: 'app-form-estudio-cliente',
   templateUrl: './form-estudio.component.html',
   styleUrls: ['./form-estudio.component.css']
 })
-export class FormEstudioComponent implements OnInit {
+export class FormEstudioClienteComponent implements OnInit {
   @Input() estudio={_id:0, nombre:'',estado:'' ,comentarioAnalista:'', edadMinima:0,edadMaxima:0 ,fechaInicio:'', fechaFin: '',
   lugar : {_id:0,estado:'',nombre:'',tipo:''},
   nivelSocioEconomico:{_id:0,nombre:'',estado:'', descripcion:''},

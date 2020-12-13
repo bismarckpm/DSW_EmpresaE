@@ -1,34 +1,13 @@
-{   "usuario":[
+{
+  "usuario": [
     {
-      "id":1,
-      "user":"jose",
-      "clave ":"admin",
-      "rol":"admin"
-    },
-    {
-      "id":1,
-      "user":"omar",
-      "clave ":"cliente",
-      "rol":"cliente"
-    },
-    {
-      "id":1,
-      "user":"victor",
-      "clave ":"encuestado",
-      "rol":"encuestado"
-    },
-    {
-      "id":1,
-      "user":"juan",
-      "clave ":"analista",
-      "rol":"analista"
+      "_id": 50,
+      "username": "Pedro",
+      "clave ": "pedro",
+      "rol": "Cliente",
+      "autenticacion": "valida"
     }
-],
-
-
-
-
-
+  ],
   "categoria": [
     {
       "_id": 5,
@@ -36,8 +15,8 @@
       "estado": "i"
     },
     {
-      "_id": 6,
-      "nombre": "shah",
+      "_id": 8,
+      "nombre": "asd",
       "estado": "a"
     }
   ],
@@ -64,11 +43,12 @@
     },
     {
       "_id": 4,
-      "nombre": "hahsha",
+      "nombre": "eee",
       "estado": "a",
       "categoria": {
-        "_id": 5
-<<<<<<< HEAD
+        "_id": 5,
+        "nombre": "pedro gutierres",
+        "estado": "i"
       }
     },
     {
@@ -77,8 +57,6 @@
       "estado": "i",
       "categoria": {
         "_id": 5
-=======
->>>>>>> 7771cb27e7b75c7bf7ee529744af3e89e14a796a
       }
     }
   ],
@@ -89,20 +67,14 @@
       "estado": "i"
     },
     {
-<<<<<<< HEAD
       "_id": 2,
-      "nombre": "Chucheria",
+      "nombre": "chu",
       "estado": "a"
     },
     {
       "_id": 3,
-      "nombre": "adidas",
-      "estado": "a"
-=======
-      "_id": 3,
       "nombre": "hahahahahahaa",
       "estado": "i"
->>>>>>> 7771cb27e7b75c7bf7ee529744af3e89e14a796a
     }
   ],
   "presentacion": [
@@ -119,14 +91,11 @@
     {
       "_id": 4,
       "descripcion": "pedro",
-<<<<<<< HEAD
       "estado": "i"
     },
     {
       "_id": 5,
       "descripcion": "adios",
-=======
->>>>>>> 7771cb27e7b75c7bf7ee529744af3e89e14a796a
       "estado": "a"
     }
   ],
@@ -134,22 +103,22 @@
     {
       "_id": 1,
       "estado": "a",
-      "tipo": "verdadero y Falso"
+      "tipo": "verdadero y falso"
     },
     {
       "_id": 2,
       "estado": "a",
-      "tipo": "simple"
+      "tipo": "seleccion simple"
     },
     {
       "_id": 4,
       "estado": "i",
-      "tipo": "multiple"
+      "tipo": "seleccion multiple"
     },
     {
       "_id": 5,
       "estado": "i",
-      "tipo": "libre"
+      "tipo": "abiertas"
     }
   ],
   "pregunta": [
@@ -157,8 +126,10 @@
       "_id": 1,
       "descripcion": "asdsad",
       "estado": "a",
-      "tipo": {
-        "_id": 1
+      "tipoPregunta": {
+        "_id": 1,
+        "estado": "a",
+        "tipo": "verdadero y Falso"
       },
       "subcategoria": {
         "_id": 1,
@@ -168,48 +139,17 @@
     },
     {
       "_id": 2,
-      "descripcion": "jairo debe de funcionar",
+      "descripcion": "Prueba exitosa Editar",
       "estado": "a",
-      "tipo": {
-        "_id": 5
-      },
-      "subcategoria": {
+      "tipoPregunta": {
         "_id": 1,
-        "nombre": "tt",
-        "estado": "a"
-      }
-    },
-    {
-      "_id": 3,
-      "descripcion": "asd",
-      "estado": "a",
-      "tipo": {
-        "_id": 4,
-        "estado": "",
-        "tipo": ""
+        "estado": "i",
+        "tipo": "multiple"
       },
       "subcategoria": {
         "_id": 3,
-        "nombre": "",
-        "estado": ""
-<<<<<<< HEAD
-      }
-    },
-    {
-      "_id": 3,
-      "descripcion": "qqqqq",
-      "estado": "I",
-      "tipoPregunta": {
-        "_id": 4,
-        "estado": "",
-        "tipo": ""
-      },
-      "subcategoria": {
-        "_id": 1,
-        "nombre": "",
-        "estado": ""
-=======
->>>>>>> 7771cb27e7b75c7bf7ee529744af3e89e14a796a
+        "nombre": "pedro gutierres",
+        "estado": "i"
       }
     }
   ],
@@ -225,47 +165,36 @@
       "nombre": "ttttt",
       "estado": "a",
       "descripcion": "jojoj"
+    },
+    {
+      "_id": 3,
+      "nombre": "eee",
+      "estado": "i",
+      "descripcion": "eeeeee"
     }
   ],
   "encuestado": [
     {
       "_id": 1,
-      "primerNombre": "",
-      "segundoNombre": "",
-      "fechaNacimiento": "",
-      "estado": "",
-      "Lugar": {
-        "_id": ""
-      },
-      "EstadoCivil": {
-        "_id": ""
-      },
-      "NivelAcademico": {
-        "_id": ""
-      },
-      "MedioConexion": {
-        "_id": ""
-      },
-      "Genero": {
-        "_id": ""
-      },
-      "Ocupacion": {
-        "_id": ""
-      },
-      "NivelSocioeconomico": {
-        "_id": ""
-      },
-
-      
-      "Usuario": {
-        "_id": "",
-        "username": "",
-        "clave": "",
-        "correoelectronico": "",
-        "TipoUsuario": {
-          "_id": ""
-        }
+      "primerNombre": "juan",
+      "segundoNombre": "eduardo",
+      "primerApellido": "escobar",
+      "segundoApellido": "alfaro",
+      "fechaNacimiento": "10/11/1998",
+      "estado": "a",
+      "usuario": {
+        "_id": 1,
+        "username": "juanee",
+        "clave": "12345",
+        "correoElectronico": "juan@gmail.com"
       }
+    }
+  ],
+  "tipoUsuario": [
+    {
+      "_id": 1,
+      "estado": "a",
+      "descripcion": "rol encuestado"
     }
   ],
   "estudio": [
@@ -278,14 +207,14 @@
       "edadMaxima": 19,
       "fechaInicio": "19/8/20",
       "fechaFin": "20/8/20",
-      "Lugar": [
+      "dtoLugar": [
         {
           "_id": 1,
           "nombre": "Venezuela",
           "tipo": "pais"
         }
       ],
-      "NivelSocioEconomico": [
+      "dtoNivelSocioEconomico": [
         {
           "_id": 1,
           "estado": "a",
@@ -303,19 +232,19 @@
       "edadMaxima": "26",
       "fechaInicio": "18/05/2020",
       "fechaFin": "19/05/2020",
-      "Lugar": {
+      "dtoLugar": {
         "_id": 0,
         "estado": "",
         "nombre": "",
         "tipo": ""
       },
-      "NivelSocioEconomico": {
+      "dtoNivelSocioEconomico": {
         "_id": 0,
         "nombre": "",
         "estado": "",
         "descripcion": ""
       },
-      "Subcategoria": {
+      "dtoSubcategoria": {
         "_id": 0,
         "nombre": "",
         "estado": ""
@@ -328,18 +257,18 @@
       "estado": "A",
       "fechaInicio": "10/01/2000",
       "fechaFin": null,
-      "Estudio": null,
-      "Pregunta": [
+      "dtoEstudio": null,
+      "dtoPregunta": [
         {
           "_id": 1,
           "descripcion": "asdsad",
           "estado": "a",
-          "TipoPregunta": {
+          "dtoTipoPregunta": {
             "_id": 1,
             "estado": "a",
             "tipo": "verdadero y Falso"
           },
-          "Subcategoria": {
+          "dtoSubcategoria": {
             "_id": 1,
             "nombre": "pedro gutierres",
             "estado": "i"
@@ -349,12 +278,12 @@
           "_id": 2,
           "descripcion": "Prueba exitosa Editar",
           "estado": "a",
-          "TipoPregunta": {
+          "dtoTipoPregunta": {
             "_id": 1,
             "estado": "i",
             "tipo": "multiple"
           },
-          "Subcategoria": {
+          "dtoSubcategoria": {
             "_id": 3,
             "nombre": "pedro gutierres",
             "estado": "i"
@@ -371,22 +300,53 @@
       "edadMaxima": "26",
       "fechaInicio": "18/05/2020",
       "fechaFin": "19/05/2020",
-      "Lugar": {
+      "dtoLugar": {
         "_id": 0,
         "estado": "",
         "nombre": "",
         "tipo": ""
       },
-      "NivelSocioEconomico": {
+      "dtoNivelSocioEconomico": {
         "_id": 0,
         "nombre": "",
         "estado": "",
         "descripcion": ""
       },
-      "Subcategoria": {
+      "dtoSubcategoria": {
         "_id": 0,
         "nombre": "",
         "estado": ""
+      }
+    }
+  ],
+  "analista": [
+    {
+      "_id": 1,
+      "username": "juancitooooo",
+      "clave": "clavejuan",
+      "correoElectronico": "juan@gmail.com",
+      "estado": "a"
+    },
+    {
+      "_id": 2,
+      "username": "hola",
+      "clave": "11111",
+      "correoElectronico": "joseeqqqq@gmail.com",
+      "estado": "i"
+    }
+  ],
+  "cliente": [
+    {
+      "_id": 1,
+      "rif": "12345678",
+      "razonSocial": "J",
+      "estado": "a",
+      "usuario": {
+        "_id": 1,
+        "username": "juancinho",
+        "clave": "12345",
+        "correoElectronico": "juaneee@gmail.com",
+        "estado": "a"
       }
     }
   ],
@@ -405,6 +365,185 @@
       "_id": 3,
       "nombre": "Estados Un_idos",
       "tipo": "pais"
+    },
+    {
+      "_id": 4,
+      "nombre": "Miranda",
+      "tipo": "estado",
+      "dtoLugar": {
+        "_id": 1
+      }
+    },
+    {
+      "_id": 5,
+      "nombre": "Cartagena",
+      "tipo": "estado",
+      "dtoLugar": {
+        "_id": 2
+      }
+    },
+    {
+      "_id": 6,
+      "nombre": "Flor_ida",
+      "tipo": "estado",
+      "dtoLugar": {
+        "_id": 3
+      }
+    },
+    {
+      "_id": 7,
+      "nombre": "Caracas",
+      "tipo": "ciudad",
+      "dtoLugar": {
+        "_id": 4
+      }
+    },
+    {
+      "_id": 8,
+      "nombre": "Bogota",
+      "tipo": "ciudad",
+      "dtoLugar": {
+        "_id": 5
+      }
+    },
+    {
+      "_id": 9,
+      "nombre": "Miami",
+      "tipo": "ciudad",
+      "dtoLugar": {
+        "_id": 6
+      }
+    },
+    {
+      "_id": 10,
+      "nombre": "Sucre",
+      "tipo": "municipio",
+      "dtoLugar": {
+        "_id": 7
+      }
+    },
+    {
+      "_id": 11,
+      "nombre": "municipioBogota",
+      "tipo": "municipio",
+      "dtoLugar": {
+        "_id": 8
+      }
+    },
+    {
+      "_id": 12,
+      "nombre": "municipioMiami",
+      "tipo": "municipio",
+      "dtoLugar": {
+        "_id": 9
+      }
+    },
+    {
+      "_id": 13,
+      "nombre": "Petare",
+      "tipo": "parroquia",
+      "dtoLugar": {
+        "_id": 10
+      }
+    },
+    {
+      "_id": 14,
+      "nombre": "parroquiabogota",
+      "tipo": "parroquia",
+      "dtoLugar": {
+        "_id": 11
+      }
+    },
+    {
+      "_id": 15,
+      "nombre": "parroquiamiami",
+      "tipo": "parroquia",
+      "dtoLugar": {
+        "_id": 12
+      }
+    }
+  ],
+  "ocupacion": [
+    {
+      "_id": 1,
+      "estado": "a",
+      "nombre": "ingeniero"
+    },
+    {
+      "_id": 2,
+      "estado": "a",
+      "nombre": "medico"
+    },
+    {
+      "_id": 3,
+      "estado": "a",
+      "nombre": "comerciante"
+    },
+    {
+      "_id": 4,
+      "estado": "a",
+      "nombre": "periodista"
+    }
+  ],
+  "estadocivil": [
+    {
+      "_id": 1,
+      "estado": "a",
+      "nombre": "soltero(a)"
+    },
+    {
+      "_id": 2,
+      "estado": "a",
+      "nombre": "casado(a)"
+    },
+    {
+      "_id": 3,
+      "estado": "a",
+      "nombre": "divorciado(a)"
+    }
+  ],
+  "medioconexion": [
+    {
+      "_id": 1,
+      "estado": "a",
+      "nombre": "telefono"
+    },
+    {
+      "_id": 2,
+      "estado": "a",
+      "nombre": "laptop"
+    },
+    {
+      "_id": 3,
+      "estado": "a",
+      "nombre": "pc"
+    },
+    {
+      "_id": 4,
+      "estado": "a",
+      "nombre": "tablet"
+    }
+  ],
+  "nivelacademico": [
+    {
+      "_id": 1,
+      "estado": "a",
+      "nombre": "bachiller"
+    },
+    {
+      "_id": 2,
+      "estado": "a",
+      "nombre": "estudios superiores"
+    },
+    {
+      "_id": 3,
+      "estado": "a",
+      "nombre": "posgrado"
+    },
+    {
+      "_id": 4,
+      "estado": "a",
+      "nombre": "doctorado"
     }
   ],
   "nivelsocioeconomico": [
@@ -431,6 +570,18 @@
       "estado": "a",
       "nombre": "sin recurso",
       "descripcion": ""
+    }
+  ],
+  "genero": [
+    {
+      "_id": 1,
+      "nombre": "masculino",
+      "estado": "a"
+    },
+    {
+      "_id": 2,
+      "nombre": "femenino",
+      "estado": "a"
     }
   ]
 }

@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { first } from 'rxjs/operators';
 import { Usuario } from 'src/app/models/usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -12,37 +11,71 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class LoginComponent implements OnInit {
   
-
-  @Input() usuario:{username:'', clave:''}
+  user :any;
+  @Input() usuario={username:'', clave:'' };
   formLogin: FormGroup;
-
+  userID:any;
+  
   constructor(
     public usuarioService:UsuarioService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public router:Router
   ) { this.createForm() }
 
   ngOnInit(): void {
   }
   
-  onSubmit() {
-    
-    if (this.formLogin.invalid) {
-        return;
-    }
- 
-    this.usuarioService.Logear(this.usuario)
-        .pipe(first())
-        .subscribe(
-            error => {
-             //   this.alertService.error(error);
-            ///    this.loading = false;
-            });
+
+
+Loggearse(){
+  if (this.formLogin.valid) {
+    this.usuarioService.getUsuarios().subscribe( data  => {
+      console.log(data) ;
+
+      if(data[0].autenticacion=="valida")
+      {
+        console.log("==============") ;
+        console.log(data[0].username) ;
+        console.log(data[0].rol) ; ;
+        console.log("==============") ;
+              if(data[0].rol=="Administrador"){
+                console.log("Entre en  administrador");
+               this.router.navigate(['/admin/0']);
+               localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
+               localStorage.setItem('rol',JSON.stringify(data[0].rol));
+              }
+              if(data[0].rol=="Encuestado"){
+                console.log("Entre en  Encuestado")
+                 this.router.navigate(['encuestado/0'])
+                 localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
+                 localStorage.setItem('rol',JSON.stringify(data[0].rol));
+              }
+              if(data[0].rol=="Analista"){
+                console.log("Entre en  Analsita");
+                this.router.navigate(['/analista/0']);
+                localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
+               localStorage.setItem('rol',JSON.stringify(data[0].rol));
+              }
+              if(data[0].rol=="Cliente"){
+                console.log("Entre en  Cliente");
+                this.router.navigate(['/cliente/0']);
+                localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
+               localStorage.setItem('rol',JSON.stringify(data[0].rol));
+              }
+      }else
+        {
+          window.alert("Usuario no registrado o Informacion Incorrecta");
+        }
+
+    })  
+  
+  }
 }
 
 
 logout() {
   // remove user from local storage and set current user to null
-  localStorage.removeItem('currentUser');
+  localStorage.removeItem('usuario');
  // this.currentUserSubject.next(null);
 }
 
@@ -56,7 +89,7 @@ logout() {
   createForm(){
     this.formLogin = this.formBuilder.group({
       userName: ['',Validators.required] ,
-      estadoMarca: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
 

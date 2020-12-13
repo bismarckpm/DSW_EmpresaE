@@ -25,11 +25,7 @@ export class RegistrarseComponent implements OnInit {
     genero: {_id: 0, nombre: '', estado: ''},
     ocupacion: {_id: 0, nombre: '', estado: ''},
     nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
-<<<<<<< HEAD
-    lugar: {_id: 0, estado: '', nombre: '', tipo: '',lugar:{_id: 0, estado: '', nombre: '', tipo: '',lugar:{_id: 0, estado: '', nombre: '', tipo: '',lugar:{_id: 0, estado: '', nombre: '', tipo: ''}}}},
-=======
     lugar:  {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: ''}}}},
->>>>>>> 7771cb27e7b75c7bf7ee529744af3e89e14a796a
     usuario: {_id: 0, username: '', estado: '', clave: '', correoElectronico: ''},
   };
 
@@ -56,6 +52,22 @@ export class RegistrarseComponent implements OnInit {
   patronFechaNacimientoEncuestado: any = /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/;
   patronNombreEncuestado: any = /^[A-Za-z\s]+$/;
   patronCorreoEncuestado: any = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  patronUsernameEncuestado: any = / ^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$/;
+  patronClaveEncuestado: any = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+  /// Reglas para el username
+  /// 1. caracteres alfanumericos, guion bajo y punto.
+  // 2. guion bajo y punto no puede estar al inicio o fin de la cadena.
+  // 3. guion bajo y punto no pueden ir seguidos.
+  // 4. solo se puede usar uno de cada uno.
+  // 5. entre 8 y 20 caracteres
+
+  // Reglas para la clave
+  // 1. al menos una mayuscula
+  // 2. al menos una minuscula
+  // 3. al menos un numero
+  // 4. al menos un caracter especial (?=.*?[#?!@$%^&*-)
+  // 5. al menos 8 caracteres
 
   formRegistroEncuestado: FormGroup;
 
@@ -199,8 +211,8 @@ export class RegistrarseComponent implements OnInit {
       ocupacionEncuestado: ['', Validators.required],
       nivelSocioEconomicoEncuestado: ['', Validators.required],
       usuarioEncuestado: ['', Validators.required],
-      usernameEncuestado: ['', Validators.required],
-      claveEncuestado: ['', Validators.required],
+      usernameEncuestado: ['', [Validators.required, Validators.pattern(this.patronUsernameEncuestado)]],
+      claveEncuestado: ['', [Validators.required, Validators.pattern(this.patronClaveEncuestado)]],
       correoElectronicoEncuestado: ['', [Validators.required, Validators.pattern(this.patronCorreoEncuestado)]],
     });
   }

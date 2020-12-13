@@ -195,10 +195,26 @@
           <div class="form-group col-md-4">
             <label for="username">Username</label>
             <input type="text" class="form-control" [(ngModel)]="encuestado.usuario.username" formControlName="usernameEncuestado" id="username" value="">
+            <div *ngIf="usernameEncuestado.invalid && (usernameEncuestado.dirty || usernameEncuestado.touched)" class="alert alert-danger">
+              <div *ngIf="usernameEncuestado.errors.required">
+                Este campo es obligatorio
+              </div>
+              <div *ngIf="correoElectronicoEncuestado.errors.pattern">
+                Introduzca un formato valido
+              </div>
+            </div>
           </div>
           <div class="form-group col-md-4">
             <label for="clave">Clave</label>
             <input type="text" class="form-control" [(ngModel)]="encuestado.usuario.clave" formControlName="claveEncuestado" id="clave" value="">
+            <div *ngIf="claveEncuestado.invalid && (claveEncuestado.dirty || claveEncuestado.touched)" class="alert alert-danger">
+              <div *ngIf="claveEncuestado.errors.required">
+                Este campo es obligatorio
+              </div>
+              <div *ngIf="claveEncuestado.errors.pattern">
+                Introduzca un formato valido
+              </div>
+            </div>
           </div>
           <div class="form-group col-md-6">
             <label for="correo">Correo electronico</label>
@@ -213,6 +229,6 @@
             </div>
           </div>
         </div>
-    <button (click)="addEncuestado(encuestado)" type="submit" class="btn btn-primary">Registrar</button>
+    <button (click)="addEncuestado(encuestado)" [routerLink]="['/login']"  type="submit" class="btn btn-primary">Registrar</button>
   </form>
 </div>

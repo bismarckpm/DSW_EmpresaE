@@ -9,7 +9,14 @@ import {Encuestado} from '../models/encuestado';
   providedIn: 'root'
 })
 export class EncuestadoService {
-  apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+
+  secciones: string[] = [
+    'Perfil', 
+    'Encuestas',
+
+  ];
+  /// apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+  apiurl = 'http://localhost:3000';
 
   constructor(private http:HttpClient) { }
 // Http Options
@@ -17,6 +24,18 @@ export class EncuestadoService {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
   })
+}
+
+
+////////////// Sidbard////////////
+
+
+getSecciones(): string[] {
+  return this.secciones;
+}
+
+getSeccion(i): string {
+  return this.secciones[i];
 }
 
 ///////// Metodos para ejecutar//////////////

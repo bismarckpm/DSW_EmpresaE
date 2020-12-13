@@ -4,7 +4,7 @@
       "_id": 50,
       "username": "Pedro",
       "clave ": "pedro",
-      "rol": "Cliente",
+      "rol": "Administrador",
       "autenticacion": "valida"
     }
   ],
@@ -151,6 +151,27 @@
         "nombre": "pedro gutierres",
         "estado": "i"
       }
+    },
+    {
+      "_id": 3,
+      "descripcion": "asdasd",
+      "estado": "a",
+      "tipoPregunta": {
+        "_id": "4",
+        "estado": "",
+        "tipo": ""
+      },
+      "subcategoria": {
+        "_id": 5,
+        "nombre": "",
+        "estado": ""
+      },
+      "opciones": [
+        "asdas",
+        "asdsad",
+        "asdsad",
+        "asdasds"
+      ]
     }
   ],
   "tipo": [

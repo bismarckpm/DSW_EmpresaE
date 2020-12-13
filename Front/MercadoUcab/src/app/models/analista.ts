@@ -1,4 +1,4 @@
-export interface Analista {
+export class Analista {
 
   _id: number;
   username: string;

@@ -75,6 +75,7 @@ Loggearse(){
 
 logout() {
   // remove user from local storage and set current user to null
+  localStorage.removeItem('usuarioID');
   localStorage.removeItem('usuario');
  // this.currentUserSubject.next(null);
 }

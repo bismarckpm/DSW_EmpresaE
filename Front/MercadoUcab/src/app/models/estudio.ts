@@ -12,9 +12,9 @@ export interface Estudio {
     edadMaxima: number;
     fechaInicio: string;
     fechaFin: string;
-    dtoLugar: Lugar;
-    dtoNivelSocioEconomico: NivelSocioEconomico;
-    dtoSubcategoria: Subcategoria;
-  }
+    lugar: Lugar;
+    nivelSocioEconomico: NivelSocioEconomico;
+    subcategoria: Subcategoria;
+}
 
 

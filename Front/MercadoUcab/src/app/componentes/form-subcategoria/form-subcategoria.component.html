@@ -41,7 +41,7 @@
 
             <div class="form-group row">
                 <label for="" class="col-sm-6 col-form-label escrituerModal"> Seleccione una categoria</label>
-                    <select name="id_categoria"  class="custom-select col-sm-4 form-control escrituerModal"  [(ngModel)]="subcategoria.dtoCategoria._id" formControlName="CATEGORIA" >
+                    <select name="id_categoria"  class="custom-select col-sm-4 form-control escrituerModal"  [(ngModel)]="subcategoria.categoria._id" formControlName="CATEGORIA" >
                         <option  value=""> Slecciones una ...</option>
                         <option  *ngFor="let cat of categoria" [ngValue]= "cat._id"  >{{cat.nombre}}</option>
                     </select>

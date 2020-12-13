@@ -1,1 +1,71 @@
-<p>form-analista works!</p>
+<div class="modal-dialog">
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">Analista</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <form [formGroup]="formAnalista">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="username">Username</label>
+            <input type="text" [(ngModel)]="analista.username" class="form-control" id="username" placeholder="" formControlName="usernameAnalista" name="username" value="">
+            <div *ngIf="usernameAnalista.invalid && (usernameAnalista.dirty || usernameAnalista.touched)" class="alert alert-danger">
+              <div *ngIf="usernameAnalista.errors.required">
+                Este campo es obligatorio
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="clave">Clave</label>
+            <input type="text" [(ngModel)]="analista.clave" class="form-control" id="clave" placeholder="" formControlName="claveAnalista" name="clave" value="">
+            <div *ngIf="claveAnalista.invalid && (claveAnalista.dirty || claveAnalista.touched)" class="alert alert-danger">
+              <div *ngIf="claveAnalista.errors.required">
+                Este campo es obligatorio
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="correo">Correo Electronico</label>
+            <input type="text" [(ngModel)]="analista.correoElectronico" class="form-control" id="correo" placeholder="" formControlName="correoElectronicoAnalista" name="correoElectronico" value="">
+            <div *ngIf="correoElectronicoAnalista.invalid && (correoElectronicoAnalista.dirty || correoElectronicoAnalista.touched)" class="alert alert-danger">
+              <div *ngIf="correoElectronicoAnalista.errors.required">
+                Este campo es obligatorio
+              </div>
+              <div *ngIf="correoElectronicoAnalista.errors.pattern">
+                Introduzca un formato valido
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="estado">Estado</label>
+            <select class="custom-select d-block w-100" [(ngModel)]="analista.estado" formControlName="estadoAnalista" id="estado" name="estado">
+              <option value="">Choose...</option>
+              <option value="a">Activo</option>
+              <option value="i">Inactivo</option>
+            </select>
+            <div *ngIf="estadoAnalista.invalid && (estadoAnalista.dirty || estadoAnalista.touched)" class="alert alert-danger">
+              <div *ngIf="estadoAnalista.errors.required">
+                Este campo es obligatorio
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+      <button type="submit" class="btn btn-primary" (click)="addAnalista(analista)" data-dismiss="modal">Guardar</button>
+
+    </div>
+  </div>
+</div>

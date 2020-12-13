@@ -9,15 +9,16 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class PreguntaService {
 
-  apiurl='http://localhost:3000';
-   
+ // apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+ apiurl = 'http://localhost:3000';
+
   constructor(private http:HttpClient) { }
 // Http Options
   httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
   })
-} 
+}
 
 ///////// Metodos para ejecutar//////////////
 getPreguntas():Observable<Pregunta[]>{
@@ -45,6 +46,10 @@ createPregunta(Pregunta):Observable<Pregunta[]>{
 }
 
 updatePregunta(id,Pregunta):Observable<Pregunta[]>{
+  console.log("=========Imprimiendo el objeto=============");
+  console.log(Pregunta);
+  console.log("=========Imprimiendo el objeto=============");
+
   return this.http.put<Pregunta[]>(this.apiurl+'/pregunta/'+id,JSON.stringify(Pregunta), this.httpOptions)
   .pipe(
     retry(1),

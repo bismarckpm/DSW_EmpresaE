@@ -19,7 +19,7 @@ export class ListaSubcategoriaComponent implements OnInit {
     // Declaracion de las varibales del componente que se usa
   Subcategoria: Subcategoria[] = [];
   _id = this.actRoute.snapshot.params._id;
-  @Input()subcategoriaData = { _id: 0, nombre: '', estado: '', dtoCategoria: {_id: 0}};
+  @Input()subcategoriaData = { _id: 0, nombre: '', estado: '', categoria: {_id: 0}};
   categoria: any;
 
   // Declaracion para las Validaciones

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Opcion } from 'src/app/models/opcion';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 import { TipoPreguntaService } from 'src/app/services/tipo-pregunta.service';
 import { Pregunta } from '../../models/pregunta';
@@ -12,10 +13,13 @@ import { PreguntaService } from '../../services/pregunta.service';
   styleUrls: ['./lista-preguntas.component.css']
 })
 export class ListaPreguntasComponent implements OnInit {
-
+  desplegarRango=false;
+  desplegar=false;
   preguntas: Pregunta[] = [];
+  Opciones: Opcion[]=[];
+
   _id = this.actRoute.snapshot.params['_id'];
-  @Input() preguntaData ={ _id:0, descripcion:'',estado:'',dtoTipoPregunta:{_id:0,estado:'',tipo:''} ,dtoSubcategoria:{_id:0, nombre:'',estado:'', }};
+  @Input() preguntaData ={ _id:0, descripcion:'',estado:'',tipoPregunta:{_id:0,estado:'',tipo:''} ,subcategoria:{_id:0, nombre:'',estado:'',}, opciones:[] };
    subcategoria:any;
    tipopregunta:any;
 
@@ -38,6 +42,40 @@ export class ListaPreguntasComponent implements OnInit {
 
   }
 
+
+  //////////////////////////// Metodo para las opciones //////////////////
+
+MeterOpciones(){
+  console.log("Entro en el meterOpciones");
+  let i;
+  for(i=0;  i < this.Opciones.length ; i++){
+    console.log("ejecuto el for ");
+     this.preguntaData.opciones[i]=this.Opciones[i]
+     console.log(this.preguntaData.opciones);
+ }  
+}
+
+ValidarTipopregunta(tipoid){
+  console.log("entre en validar ")
+  if(tipoid>0){ 
+      if( tipoid == 3|| tipoid==4){
+        this.desplegar= true;
+        this.desplegarRango= false;
+        this.Opciones.length=0;
+      }else if( tipoid==5){
+        this.desplegar= false;
+        this.desplegarRango= true;
+        this.Opciones.length=0;
+      } else{
+        this.desplegarRango= false;
+        this.desplegar= false;
+        this.Opciones.length=0;
+      }  
+  }  
+}
+
+
+
   loadpregunta():void {
     this.preguntaService.getPreguntas().subscribe(data => {
       this.preguntas = data;
@@ -53,6 +91,13 @@ export class ListaPreguntasComponent implements OnInit {
   }
 
   updatePregunta(){
+      
+    if(this.Opciones.length > 0){
+      console.log("if de opciones ")
+        this.MeterOpciones()          
+    }
+
+
      this.preguntaService.updatePregunta(this.preguntaData._id, this.preguntaData).subscribe(data => {
       })
       this.loadpregunta();
@@ -82,6 +127,8 @@ export class ListaPreguntasComponent implements OnInit {
   get estadoPregunta(){ return this.formPregunta.get('estadoPregunta');}
   get tipoPregunta(){return this.formPregunta.get('tipoPregunta');}
   get nombreSubcategoria(){return this.formPregunta.get('nombreSubcategoria');}
+  get opciocPregunta(){return this.formPregunta.get('opciocPregunta');}
+  get opciocPreguntaRango(){return this.formPregunta.get('opciocPreguntaRango');}
 
   createForm(){
     this.formPregunta = this.formBuilder.group({
@@ -89,6 +136,8 @@ export class ListaPreguntasComponent implements OnInit {
       estadoPregunta: ['', Validators.required],
       tipoPregunta: ['', Validators.required],
       nombreSubcategoria: ['', Validators.required],
+      opciocPregunta: ['', Validators.pattern(this.namePattern)],
+      opciocPreguntaRango: ['', Validators.pattern(this.namePattern)],
     });
   }
 

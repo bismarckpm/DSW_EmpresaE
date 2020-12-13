@@ -7,8 +7,8 @@ public class DtoPregunta extends DtoBase {
     private String descripcion;
 
     //Relaciones
-    private DtoTipoPregunta dtoTipoPregunta;
-    private DtoSubcategoria dtoSubcategoria;
+    private DtoTipoPregunta tipo;
+    private DtoSubcategoria subcategoria;
 
     //Constructores
     public DtoPregunta() {
@@ -35,20 +35,20 @@ public class DtoPregunta extends DtoBase {
         this.descripcion = descripcion;
     }
 
-    public DtoTipoPregunta getDtoTipoPregunta() {
-        return dtoTipoPregunta;
+    public DtoTipoPregunta getTipo() {
+        return tipo;
     }
 
-    public void setDtoTipoPregunta(DtoTipoPregunta dtoTipoPregunta) {
-        this.dtoTipoPregunta = dtoTipoPregunta;
+    public void setTipo(DtoTipoPregunta tipo) {
+        this.tipo = tipo;
     }
 
-    public DtoSubcategoria getDtoSubcategoria() {
-        return dtoSubcategoria;
+    public DtoSubcategoria getSubcategoria() {
+        return subcategoria;
     }
 
-    public void setDtoSubcategoria(DtoSubcategoria dtoSubcategoria) {
-        this.dtoSubcategoria = dtoSubcategoria;
+    public void setSubcategoria(DtoSubcategoria subcategoria) {
+        this.subcategoria = subcategoria;
     }
 
 }

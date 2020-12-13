@@ -1,4 +1,4 @@
-package ucab.empresae.directorioactivo;
+package ucab.empresae.servicio;
 
 import ucab.empresae.dtos.DtoUsuario;
 
@@ -187,16 +187,14 @@ public class DirectorioActivo {
     }
 
 
-    public void userAuthentication(DtoUsuario user) {
+    public boolean userAuthentication(DtoUsuario user) {
         try {
             String rol;
             DirContext context = connectLDAPUsers( user.getUsername(), user.getClave());
             if (context != null){
-                System.out.println("Autenticacion del usuario CORRECTA");
-                //Esto esta momentaneo, hay que añadirle funcionalidad
+                return true;
             }else{
-                System.out.println("Autenticacion del usuario INCORRECTA");
-                //Esto esta momentaneo, hay que añadirle funcionalidad
+                return false;
             }
         }
         catch(Exception exception) {
@@ -205,6 +203,7 @@ public class DirectorioActivo {
         finally {
             disconnectLDAP();
         }
+        return false;
     }
 
 }

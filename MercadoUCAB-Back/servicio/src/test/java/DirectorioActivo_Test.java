@@ -1,6 +1,6 @@
 import org.junit.Test;
 import ucab.empresae.dtos.DtoUsuario;
-import ucab.empresae.directorioactivo.DirectorioActivo;
+import ucab.empresae.servicio.DirectorioActivo;
 
 
 public class DirectorioActivo_Test {

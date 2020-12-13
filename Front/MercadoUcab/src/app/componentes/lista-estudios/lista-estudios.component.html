@@ -117,6 +117,7 @@
                                 <option value="procesado">Procesado</option>
                                 <option value="en ejecucion">En ejecucion</option>
                                 <option value="culminado">Culminado</option>
+                                <option value="rechazado">Rechazado</option>
                               </select>
                               <div *ngIf="estadoEstudio.invalid && (estadoEstudio.dirty || estadoEstudio.touched)" class="alert alert-danger">
                                 <div *ngIf="estadoEstudio.errors.required">
@@ -130,21 +131,8 @@
 
                           <div class="row">
                             <div class="col-md-5 mb-3">
-                              <label for="estado">Pais</label>
-                              <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.dtoLugar._id" formControlName="lugarEstudio" (click)="BusquedaEstado(estudioData.dtoLugar._id)"   value="estudioData.dtoLugar._id">
-                                <option value="">Choose...</option>
-                                <option  *ngFor="let lu of lugar"  [ngValue]= "lu._id"   >{{lu.nombre}}</option>
-                              </select>
-                              <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
-                                <div *ngIf="lugarEstudio.errors.required">
-                                  Este campo es obligatorio
-                                </div>
-                              </div>
-                            </div>
-
-                            <div class="col-md-5 mb-3">
                               <label for="estado">Estado</label>
-                              <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.dtoLugar._id" (click)="BusquedaParroquia(estudioData.dtoLugar._id)"formControlName="lugarEstudio"  value="estudioData.dtoLugar._id">
+                              <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.lugar._id" (click)="busquedaMunicipio(estudioData.lugar._id)"formControlName="lugarEstudio"  value="estudioData.lugar._id">
                                 <option value="">Choose...</option>
                                 <option  *ngFor="let estado of estados" [ngValue]= "estado._id"  >{{estado.nombre}}</option>
                               </select>
@@ -154,10 +142,22 @@
                                 </div>
                               </div>
                             </div>
+                            <div class="col-md-5 mb-3">
+                              <label for="municipio">Municipio</label>
+                              <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.lugar._id" (click)="busquedaParroquia(estudioData.lugar._id)" formControlName="lugarEstudio"  value="estudioData.lugar._id">
+                                <option value="">Choose...</option>
+                                <option  *ngFor="let parroquia of parroquias" [ngValue]= "parroquia._id"  >{{parroquia.nombre}}</option>
+                              </select>
+                              <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
+                                <div *ngIf="lugarEstudio.errors.required">
+                                  Este campo es obligatorio
+                                </div>
+                              </div>
+                            </div>
 
                             <div class="col-md-5 mb-3">
-                              <label for="estado">Parroquia</label>
-                              <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.dtoLugar._id" formControlName="lugarEstudio"  value="estudioData.dtoLugar._id">
+                              <label for="parroquia">Parroquia</label>
+                              <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.lugar._id" formControlName="lugarEstudio"  value="estudioData.lugar._id">
                                 <option value="">Choose...</option>
                                 <option  *ngFor="let parroquia of parroquias" [ngValue]= "parroquia._id"  >{{parroquia.nombre}}</option>
                               </select>
@@ -169,11 +169,11 @@
                             </div>
 
                           </div>
-                  
-                         
+
+
                       <div class="col-md-5 mb-3">
                         <label for="" class="col-sm-6 col-form-label escrituerModal"> Subcategoria </label>
-                            <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.dtoSubcategoria._id" formControlName="subcategoriaEstudio" value="estudioData.dtoSubcategoria._id">
+                            <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.subcategoria._id" formControlName="subcategoriaEstudio" value="estudioData.subcategoria._id">
                                 <option  value=""> Slecciones una ...</option>
                                 <option  *ngFor="let sub of subcategoria" [ngValue]= "sub._id"  >{{sub.nombre}}</option>
                             </select>
@@ -186,7 +186,7 @@
 
                         <div class="col-md-5 mb-3">
                           <label for="" class="col-sm-6 col-form-label escrituerModal">Nivel Socio Economico  </label>
-                              <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.dtoNivelSocioEconomico._id" formControlName="nivelEstudio" value="estudioData.dtoNivelSocioEconomico._id" >
+                              <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.nivelSocioEconomico._id" formControlName="nivelEstudio" value="estudioData.nivelSocioEconomico._id" >
                                   <option  value=""> Slecciones una ...</option>
                                   <option  *ngFor="let nivel of nivelSocioEconomico" [ngValue]= "nivel._id"  >{{nivel.nombre}}</option>
                               </select>
@@ -221,4 +221,3 @@
     </table>
   </div>
 </div>
-  

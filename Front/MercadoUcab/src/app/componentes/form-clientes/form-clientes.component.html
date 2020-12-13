@@ -25,20 +25,9 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <div class="mb-3">
-                        <label for="address">Address (aqui seria la fk de lugar)</label>
-                        <input type="text" class="form-control" id="address" placeholder="1234 Main St">
-                        <div class="invalid-feedback">
-                            Please enter your shipping address.
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
                   <div class="col-md-5 mb-3">
-                    <label for="estado">Estado</label>
-                    <select class="custom-select d-block w-100" id="estado" formControlName="estadoCliente">
+                    <label for="estatus">Estado</label>
+                    <select class="custom-select d-block w-100" id="estatus" formControlName="estadoCliente">
                       <option value="">Choose...</option>
                       <option>Activo</option>
                       <option>Inactivo</option>
@@ -55,13 +44,13 @@
                   <label for="razonSocial">Razon Social</label>
                   <select class="custom-select d-block w-100" id="razonSocial" formControlName="razonSocialCliente">
                     <option value="">Choose...</option>
-                    <option>Juridico (J)</option>
-                    <option>P</option>
-                    <option>CA</option>
-                    <option>SA</option>
-                    <option>SRL</option>
-                    <option>ONG</option>
-                    <option>ASFL</option>
+                    <option value="J">Juridico (J)</option>
+                    <option value="P">P</option>
+                    <option value="CA">CA</option>
+                    <option value="SA">SA</option>
+                    <option value="SRL">SRL</option>
+                    <option value="ONG">ONG</option>
+                    <option value="ASFL">ASFL</option>
                   </select>
                   <div *ngIf="razonSocialCliente.invalid && (razonSocialCliente.dirty || razonSocialCliente.touched)" class="alert alert-danger">
                     <div *ngIf="razonSocialCliente.errors.required">
@@ -70,11 +59,49 @@
                   </div>
                 </div>
               </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="estado">Estado</label>
+                <select class="custom-select d-block w-100"  [(ngModel)]="cliente.lugar._id" (click)="busquedaMunicipio(cliente.lugar._id)" id="estado" formControlName="lugarCliente" value="cliente.lugar._id">
+                  <option selected>Choose...</option>
+                  <option  *ngFor="let estado of estados" [ngValue]= "estado._id"  >{{estado.nombre}}</option>
+                </select>
+                <div *ngIf="lugarCliente.invalid && (lugarCliente.dirty || lugarCliente.touched)" class="alert alert-danger">
+                  <div *ngIf="lugarCliente.errors.required">
+                    Este campo es obligatorio
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="municipio">Municipio</label>
+                <select class="custom-select d-block w-100"  [(ngModel)]="cliente.lugar.lugar._id" (click)="busquedaParroquia(cliente.lugar.lugar._id)" id="municipio" formControlName="lugarCliente" value="cliente.lugar.lugar._id">
+                  <option selected>Choose...</option>
+                  <option  *ngFor="let municipio of municipios" [ngValue]= "municipio._id"  >{{municipio.nombre}}</option>
+                </select>
+                <div *ngIf="lugarCliente.invalid && (lugarCliente.dirty || lugarCliente.touched)" class="alert alert-danger">
+                  <div *ngIf="lugarCliente.errors.required">
+                    Este campo es obligatorio
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="parroquia">Parroquia</label>
+                <select class="custom-select d-block w-100"  [(ngModel)]="cliente.lugar.lugar.lugar._id" (click)="seleccionarParroquia(cliente.lugar.lugar.lugar._id)" id="parroquia" formControlName="lugarCliente" value="cliente.lugar.lugar.lugar._id">
+                  <option selected>Choose...</option>
+                  <option  *ngFor="let parroquia of parroquias" [ngValue]= "parroquia._id"  >{{parroquia.nombre}}</option>
+                </select>
+                <div *ngIf="lugarCliente.invalid && (lugarCliente.dirty || lugarCliente.touched)" class="alert alert-danger">
+                  <div *ngIf="lugarCliente.errors.required">
+                    Este campo es obligatorio
+                  </div>
+                </div>
+              </div>
+            </div>
             </form>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary" (click)="onSubmit()" data-dismiss="modal">Guardar</button>
+            <button type="submit" class="btn btn-primary" (click)="addCliente(cliente)" data-dismiss="modal">Guardar</button>
         </div>
     </div>
 </div>

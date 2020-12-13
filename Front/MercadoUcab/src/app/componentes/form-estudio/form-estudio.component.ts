@@ -16,9 +16,9 @@ import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 export class FormEstudioComponent implements OnInit {
 
   @Input() estudio = {_id: 0, nombre: '', estado: '' , comentarioAnalista: '', edadMinima: 0, edadMaxima: 0 , fechaInicio: '', fechaFin: '',
-  dtoLugar : {_id: 0, estado: '', nombre: '', tipo: ''},
-  dtoNivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
-  dtoSubcategoria : {_id: 0, nombre: '', estado: ''},
+  lugar : {_id: 0, estado: '', nombre: '', tipo: ''},
+  nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
+  subcategoria : {_id: 0, nombre: '', estado: ''},
  };
 
   nivelSocioEconomico: any;
@@ -26,10 +26,11 @@ export class FormEstudioComponent implements OnInit {
   lugar: any;
 
    ///// Atributos para la busqueda de acuerdo a lo seleccionado
-  estados: any;
-  parroquias: any;
-  auxPaisID: number;
-  auxEstadoID: number;
+   estados: any;
+   municipios: any;
+   parroquias: any;
+   auxEstadoID: number;
+   auxMunicipioID: number;
 
   formEstudio: FormGroup;
   patronEdadEstudio: any = /^(0?[0-9]{1,2}|1[0-7][0-9]|99)$/;
@@ -52,7 +53,7 @@ export class FormEstudioComponent implements OnInit {
     this.addSubcategoria();
   }
 
-  agregarEstudio(){
+  agregarEstudio(): void {
     console.log('agregó estudio');
   }
 
@@ -67,23 +68,26 @@ export class FormEstudioComponent implements OnInit {
   }
 
 
-  /// Busqueda para los drop de lugar por pais seleccionado previamente
-  BusquedaEstado(id){
-    // El ID es del pais
-    this.auxPaisID = id;
-    // Esta peticion se realiza para mostar todos los estados aasociado a ese pais
-    this.lugarService.getEstado(id).subscribe((data: {}) => {
-      this.estados = data;
-    });
-  }
-  BusquedaParroquia(id){
+/// Busqueda para los drop de lugar por pais seleccionado previamente
+  busquedaMunicipio(id){
     // El ID es del estado
     this.auxEstadoID = id;
-    // Esta peticion se realiza para mostar todoas las parroquias aasociado al estado
-    this.lugarService.getParroquia(this.auxPaisID, id).subscribe((data: {}) => {
+    // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
+    this.lugarService.getMunicipio(id).subscribe((data: {}) => {
+      this.municipios = data;
+    });
+  }
+
+
+  busquedaParroquia(id){
+    // El ID es del estado
+    this.auxMunicipioID = id;
+    // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
+    this.lugarService.getParroquia(this.auxMunicipioID, id).subscribe((data: {}) => {
       this.parroquias = data;
     });
   }
+
 
   /////////////// Dropdowns ///////////////////////
   addSubcategoria(){
@@ -115,7 +119,7 @@ export class FormEstudioComponent implements OnInit {
   get subcategoriaEstudio(){return this.formEstudio.get('subcategoriaEstudio'); }
   get nivelEstudio(){return this.formEstudio.get('nivelEstudio'); }
 
-  createForm(){
+  createForm(): void {
     this.formEstudio = this.formBuilder.group({
       nombreEstudio: ['', [Validators.required, Validators.pattern(this.patronNombreEstudio)]],
       estadoEstudio: ['', Validators.required],

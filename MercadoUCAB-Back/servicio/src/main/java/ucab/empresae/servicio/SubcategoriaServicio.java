@@ -23,10 +23,8 @@ public class SubcategoriaServicio extends AplicacionBase {
         this.subcategoria.setNombre(dtoSubcategoria.getNombre());
         this.subcategoria.setEstado(dtoSubcategoria.getEstado());
 
-        if(dtoSubcategoria.getCategoria() != null) {
-            DaoCategoria daoCategoria = DaoFactory.DaoCategoriaInstancia();
-            this.subcategoria.setCategoria(daoCategoria.find(dtoSubcategoria.getCategoria().getId(), CategoriaEntity.class));
-        }
+        DaoCategoria daoCategoria = DaoFactory.DaoCategoriaInstancia();
+        this.subcategoria.setCategoria(daoCategoria.find(dtoSubcategoria.getCategoria().getId(), CategoriaEntity.class));
     }
 
     //http://localhost:8080/servicio-1.0-SNAPSHOT/api/subcategoria
@@ -53,7 +51,6 @@ public class SubcategoriaServicio extends AplicacionBase {
     }
 
     @POST
-    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addSubcategoria(DtoSubcategoria dtoSubcategoria) {
@@ -73,7 +70,7 @@ public class SubcategoriaServicio extends AplicacionBase {
         try {
             this.subcategoria = this.dao.find(dtoSubcategoria.getId(), SubcategoriaEntity.class);
             subcategoriaAtributos(dtoSubcategoria);
-            return Response.ok(this.dao.delete(this.subcategoria)).build();
+            return Response.ok(this.dao.update(this.subcategoria)).build();
         } catch(Exception ex){
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
@@ -85,8 +82,8 @@ public class SubcategoriaServicio extends AplicacionBase {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response deleteSubcategoria(@PathParam("id") long id) {
         try {
-            this.subcategoria = this.dao.find(id, SubcategoriaEntity.class);
-            return Response.ok(this.dao.delete(this.subcategoria)).build();
+            this.subcategoria = this.dao.delete(this.dao.find(id,SubcategoriaEntity.class));
+            return Response.ok().build();
         } catch(Exception ex){
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }

@@ -7,6 +7,7 @@ import { RecuperacionComponent } from './componentes/login/recuperacion/recupera
 import { AdminComponent } from './modulos/admin/admin.component';
 import { ClienteComponent } from './modulos/cliente/cliente.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
+
 import { EncuestadoComponent } from './modulos/encuestado/encuestado.component';
 
 
@@ -16,10 +17,11 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'recuperacion', component: RecuperacionComponent},
   { path: 'admin/:id', component: AdminComponent},
-  { path: 'cliente/:id', component: ClienteComponent},
-  { path: 'analista/:id', component: AnalistaComponent},
-  { path: 'encuestado/:id', component: EncuestadoComponent},
-  { path: '**', redirectTo: 'login', pathMatch: 'full'},
+  { path: 'cliente', component: ClienteComponent},
+  { path: 'analista', component: AnalistaComponent},
+  { path: 'usuario', component: EncuestadoComponent},
+
+  { path: '**', redirectTo: '/login', pathMatch: 'full'},
 ];
 
 

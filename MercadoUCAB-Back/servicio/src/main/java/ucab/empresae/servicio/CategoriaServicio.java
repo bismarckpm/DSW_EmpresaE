@@ -1,11 +1,8 @@
 package ucab.empresae.servicio;
 
 import ucab.empresae.daos.DaoCategoria;
-import ucab.empresae.daos.DaoFactory;
 import ucab.empresae.dtos.DtoCategoria;
 import ucab.empresae.entidades.CategoriaEntity;
-import ucab.empresae.entidades.EntidadesFactory;
-import ucab.empresae.entidades.EstudioEntity;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -15,33 +12,35 @@ import java.util.List;
 @Path("/categoria")
 public class CategoriaServicio extends AplicacionBase {
 
-    private DaoCategoria dao = DaoFactory.DaoCategoriaInstancia();
-    private CategoriaEntity categoria = EntidadesFactory.CategoriaInstance();
-
-    private void categoriAtributos(DtoCategoria dtoCategoria) {
-        this.categoria.setNombre(dtoCategoria.getNombre());
-        this.categoria.setEstado(dtoCategoria.getEstado());
-    }
-
-    //http://localhost:8080/servicio-1.0-SNAPSHOT/api/categoria
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getCategorias() {
+        List<CategoriaEntity> categorias = null;
         try {
-            return Response.ok(this.dao.findAll(CategoriaEntity.class)).build();
+            DaoCategoria dao = new DaoCategoria();
+            categorias = dao.findAll(CategoriaEntity.class);
         } catch (Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+            String problema = ex.getMessage();
         }
+        return Response.ok(categorias).build();
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/addCategoria")
     public Response addCategoria(DtoCategoria dtoCategoria) {
-        try {
-            categoriAtributos(dtoCategoria);
-            return Response.ok(this.dao.insert(this.categoria)).build();
-        } catch(Exception ex) {
+
+        DaoCategoria dao = new DaoCategoria();
+        CategoriaEntity categoria = new CategoriaEntity();
+
+        if(categoria != null) {
+            categoria.setNombre(dtoCategoria.getNombre());
+            categoria.setEstado(dtoCategoria.getEstado());
+            CategoriaEntity resul = dao.insert(categoria);
+            return Response.ok(categoria).build();
+        }
+        else {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
     }
@@ -49,11 +48,16 @@ public class CategoriaServicio extends AplicacionBase {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/updateCategoria")
     public Response updateCategoria(DtoCategoria dtoCategoria) {
+
         try {
-            this.categoria = this.dao.find(dtoCategoria.getId(), CategoriaEntity.class);
-            categoriAtributos(dtoCategoria);
-            return Response.ok(this.dao.update(this.categoria)).build();
+            DaoCategoria dao = new DaoCategoria();
+            CategoriaEntity categoria = new CategoriaEntity();
+            categoria.setNombre(dtoCategoria.getNombre());
+            categoria.setEstado(dtoCategoria.getEstado());
+            CategoriaEntity resul = dao.update(categoria);
+            return Response.ok(categoria).build();
         } catch(Exception ex){
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }

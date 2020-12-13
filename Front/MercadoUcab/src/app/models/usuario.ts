@@ -1,7 +1,8 @@
 import {TipoUsuario} from './tipo-usuario';
+import {Encuestado} from './encuestado';
+import {Cliente} from './cliente';
 
-
-export  interface Usuario {
+export interface Usuario {
 
       _id: number;
       username: string;
@@ -9,8 +10,6 @@ export  interface Usuario {
       correoElectronico: string;
       estado: string;
       tipoUsuario: TipoUsuario;
-      autenticacion:string;
-      rol :string;
  }
 
 

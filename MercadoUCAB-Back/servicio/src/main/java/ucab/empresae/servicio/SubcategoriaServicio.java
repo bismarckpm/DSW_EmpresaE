@@ -1,11 +1,8 @@
 package ucab.empresae.servicio;
 
-import ucab.empresae.daos.DaoCategoria;
-import ucab.empresae.daos.DaoFactory;
 import ucab.empresae.daos.DaoSubcategoria;
 import ucab.empresae.dtos.DtoSubcategoria;
 import ucab.empresae.entidades.CategoriaEntity;
-import ucab.empresae.entidades.EntidadesFactory;
 import ucab.empresae.entidades.SubcategoriaEntity;
 
 import javax.ws.rs.*;
@@ -16,39 +13,35 @@ import java.util.List;
 @Path("/subcategoria")
 public class SubcategoriaServicio extends AplicacionBase {
 
-    private DaoSubcategoria dao = DaoFactory.DaoSubcategoriaInstancia();
-    private SubcategoriaEntity subcategoria = EntidadesFactory.SubcategoriaInstance();
-
-    private void subcategoriaAtributos(DtoSubcategoria dtoSubcategoria) {
-        this.subcategoria.setNombre(dtoSubcategoria.getNombre());
-        this.subcategoria.setEstado(dtoSubcategoria.getEstado());
-
-        if(dtoSubcategoria.getCategoria() != null) {
-            DaoCategoria daoCategoria = DaoFactory.DaoCategoriaInstancia();
-            this.subcategoria.setCategoria(daoCategoria.find(dtoSubcategoria.getCategoria().getId(), CategoriaEntity.class));
-        }
-    }
-
-    //http://localhost:8080/servicio-1.0-SNAPSHOT/api/subcategoria
-
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getSubCategorias() {
+        List<SubcategoriaEntity> subCategorias = null;
         try {
-            return Response.ok(this.dao.findAll(SubcategoriaEntity.class)).build();
+            DaoSubcategoria dao = new DaoSubcategoria();
+            subCategorias = dao.findAll(SubcategoriaEntity.class);
         } catch (Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+            String problema = ex.getMessage();
         }
+        return Response.ok(subCategorias).build();
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/addSubcategoria")
     public Response addSubcategoria(DtoSubcategoria dtoSubcategoria) {
-        try {
-            subcategoriaAtributos(dtoSubcategoria);
-            return Response.ok(this.dao.insert(subcategoria)).build();
-        } catch(Exception ex) {
+
+        DaoSubcategoria dao = new DaoSubcategoria();
+        SubcategoriaEntity subcategoria = new SubcategoriaEntity();
+
+        if(subcategoria != null) {
+            subcategoria.setNombre(dtoSubcategoria.getNombre());
+            subcategoria.setEstado(dtoSubcategoria.getEstado());
+            SubcategoriaEntity resul = dao.insert(subcategoria);
+            return Response.ok(subcategoria).build();
+        }
+        else {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
     }
@@ -56,11 +49,17 @@ public class SubcategoriaServicio extends AplicacionBase {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/updateSubcategoria")
     public Response updateSubcategoria(DtoSubcategoria dtoSubcategoria) {
+
         try {
-            this.subcategoria = this.dao.find(dtoSubcategoria.getId(), SubcategoriaEntity.class);
-            subcategoriaAtributos(dtoSubcategoria);
-            return Response.ok(this.dao.update(this.subcategoria)).build();
+            DaoSubcategoria dao = new DaoSubcategoria();
+            SubcategoriaEntity subcategoriaEntity = new SubcategoriaEntity();
+            subcategoriaEntity.setNombre(dtoSubcategoria.getNombre());
+            subcategoriaEntity.setEstado(dtoSubcategoria.getEstado());
+            subcategoriaEntity.setCategoria(new CategoriaEntity(dtoSubcategoria.getCategoria().getId()));
+
+            return Response.ok(dao.update(subcategoriaEntity)).build();
         } catch(Exception ex){
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }

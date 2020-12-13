@@ -58,7 +58,7 @@
                           <select class="custom-select d-block w-100" name="preguntaData.estado" [(ngModel)]= "preguntaData.estado" formControlName="estadoPregunta" value="preguntaData.estado">
                             <option value="">Choose...</option>
                             <option value="a">Activo</option>
-                            <option value="i">Inactivo</option>
+                            <option value="I">Inactivo</option>
                           </select>
                           <div *ngIf="estadoPregunta.invalid && (estadoPregunta.dirty || estadoPregunta.touched)" class="alert alert-danger">
                             <div *ngIf="estadoPregunta.errors.required">

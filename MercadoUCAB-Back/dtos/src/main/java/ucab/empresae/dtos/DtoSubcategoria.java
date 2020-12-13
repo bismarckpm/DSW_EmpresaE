@@ -7,7 +7,7 @@ public class DtoSubcategoria extends DtoBase {
     private String nombre;
 
     //Relaciones
-    private DtoCategoria categoria;
+    private DtoCategoria Categoria;
 
     public String getEstado() {
         return estado;
@@ -35,11 +35,11 @@ public class DtoSubcategoria extends DtoBase {
     }
 
     public DtoCategoria getCategoria() {
-        return categoria;
+        return Categoria;
     }
 
     public void setCategoria(DtoCategoria Categoria) {
-        this.categoria = Categoria;
+        this.Categoria = Categoria;
     }
 
 }

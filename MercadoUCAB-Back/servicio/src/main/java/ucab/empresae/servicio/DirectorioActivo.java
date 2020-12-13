@@ -187,14 +187,16 @@ public class DirectorioActivo {
     }
 
 
-    public boolean userAuthentication(DtoUsuario user) {
+    public void userAuthentication(DtoUsuario user) {
         try {
             String rol;
             DirContext context = connectLDAPUsers( user.getUsername(), user.getClave());
             if (context != null){
-                return true;
+                System.out.println("Autenticacion del usuario CORRECTA");
+                //Esto esta momentaneo, hay que añadirle funcionalidad
             }else{
-                return false;
+                System.out.println("Autenticacion del usuario INCORRECTA");
+                //Esto esta momentaneo, hay que añadirle funcionalidad
             }
         }
         catch(Exception exception) {
@@ -203,7 +205,6 @@ public class DirectorioActivo {
         finally {
             disconnectLDAP();
         }
-        return false;
     }
 
 }

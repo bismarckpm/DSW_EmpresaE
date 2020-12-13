@@ -9,12 +9,6 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class ClienteService {
 
-  secciones: string[] = [
-    'Perfil',
-    'Estudios',
-  ];
-
-
   apiurl='http://localhost:3000';
 
   constructor(private http:HttpClient) { }
@@ -24,19 +18,6 @@ export class ClienteService {
     'Content-Type': 'application/json'
   })
 }
-
-
-
-////////////////////Metodos para el sidbar//////////////////////
-
-getSecciones(): string[] {
-  return this.secciones;
-}
-
-getSeccion(i): string {
-  return this.secciones[i];
-}
-
 
 ///////// Metodos para ejecutar//////////////
 getClientes():Observable<Cliente[]>{

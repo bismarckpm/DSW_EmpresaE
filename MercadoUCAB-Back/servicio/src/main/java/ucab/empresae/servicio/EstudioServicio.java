@@ -7,58 +7,61 @@ import ucab.empresae.entidades.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 @Path("/estudio")
 public class EstudioServicio extends AplicacionBase {
 
+    private DaoEstudio dao = DaoFactory.DaoEstudioInstancia();
+    private EstudioEntity estudio = EntidadesFactory.EstudioInstance();
+
+    private void estudioAtributos(DtoEstudio dtoEstudio) {
+        this.estudio.setEstado(dtoEstudio.getEstado());
+        this.estudio.setNombre(dtoEstudio.getNombre());
+        this.estudio.setComentarioAnalista(dtoEstudio.getComentarioAnalista());
+        this.estudio.setEdadMinima(dtoEstudio.getEdadMinima());
+        this.estudio.setEdadMaxima(dtoEstudio.getEdadMaxima());
+        this.estudio.setFechaInicio(dtoEstudio.getFechaInicio());
+        this.estudio.setFechaFin(dtoEstudio.getFechaFin());
+
+        if(dtoEstudio.getSubcategoria() != null) {
+            DaoSubcategoria daoSubcategoria = DaoFactory.DaoSubcategoriaInstancia();
+            this.estudio.setSubcategoria(daoSubcategoria.find(dtoEstudio.getSubcategoria().getId(), SubcategoriaEntity.class));
+        }
+
+        if(dtoEstudio.getNivelsocioeco() != null) {
+            DaoNivelSocioeconomico daoNivelSocioeconomico = DaoFactory.DaoNivelSocioeconomicoInstancia();
+            this.estudio.setNivelsocioeco(daoNivelSocioeconomico.find(dtoEstudio.getNivelsocioeco().getId(), NivelSocioeconomicoEntity.class));
+        }
+
+        if(dtoEstudio.getLugar() != null) {
+            DaoLugar daoLugar = DaoFactory.DaoLugarInstancia();
+            this.estudio.setLugar(daoLugar.find(dtoEstudio.getLugar().getId(), LugarEntity.class));
+        }
+
+        if(dtoEstudio.getAnalista() != null) {
+            DaoUsuario daoAnalista = DaoFactory.DaoUsuarioInstancia();
+            this.estudio.setAnalista(daoAnalista.find(dtoEstudio.getAnalista().getId(), UsuarioEntity.class));
+        }
+    }
+
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getEstudios() {
-        List<EstudioEntity> estudios = null;
         try {
-            DaoEstudio dao = new DaoEstudio();
-            estudios = dao.findAll(EstudioEntity.class);
+            return Response.ok(this.dao.findAll(EstudioEntity.class)).build();
         } catch (Exception ex) {
-            String problema = ex.getMessage();
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
-        return Response.ok(estudios).build();
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/addEstudio")
     public Response addEstudio(DtoEstudio dtoEstudio) {
-
-        DaoEstudio dao = new DaoEstudio();
-        EstudioEntity estudio = new EstudioEntity();
-
-        if(estudio != null) {
-            estudio.setNombre(dtoEstudio.getNombre());
-            estudio.setEstado(dtoEstudio.getEstado());
-            estudio.setComentarioAnalista(dtoEstudio.getComentarioAnalista());
-            estudio.setEdadMinima(dtoEstudio.getEdadMinima());
-            estudio.setEdadMaxima(dtoEstudio.getEdadMaxima());
-            estudio.setFechaInicio(dtoEstudio.getFechaInicio());
-            estudio.setFechaFin(dtoEstudio.getFechaFin());
-
-            DaoSubcategoria daoSubcategoria = new DaoSubcategoria();
-            SubcategoriaEntity subCategoria = new SubcategoriaEntity(dtoEstudio.getDtoSubcategoria().getId());
-            estudio.setSubcategoria(subCategoria);
-
-            DaoNivelSocioeconomico daoNivelSocioeconomico = new DaoNivelSocioeconomico();
-            NivelSocioeconomicoEntity nivelSocioeconomico = new NivelSocioeconomicoEntity(dtoEstudio.getDtoNivelSocioEconomico().getId());
-            estudio.setNivelsocioeco(nivelSocioeconomico);
-
-            DaoLugar daoLugar = new DaoLugar();
-            LugarEntity lugar = new LugarEntity(dtoEstudio.getDtoLugar().getId());
-            estudio.setLugar(lugar);
-
-            EstudioEntity resul = dao.insert(estudio);
-            return Response.ok(estudio).build();
-        }
-        else {
+        try {
+            estudioAtributos(dtoEstudio);
+            return Response.ok(this.dao.insert(this.estudio)).build();
+        } catch(Exception ex) {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
     }
@@ -66,42 +69,17 @@ public class EstudioServicio extends AplicacionBase {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/updateEstudio/{id}")
-    public DtoEstudio updateEstudio(@PathParam("id") long id, DtoEstudio dtoEstudio) {
-
-        DtoEstudio resultado = new DtoEstudio();
+    public Response updateEstudio(DtoEstudio dtoEstudio) {
         try {
-            DaoEstudio dao = new DaoEstudio();
-            EstudioEntity estudio = dao.find(id, EstudioEntity.class);
-
-            estudio.setNombre(dtoEstudio.getNombre());
-            estudio.setEstado(dtoEstudio.getEstado());
-            estudio.setComentarioAnalista(dtoEstudio.getComentarioAnalista());
-            estudio.setEdadMinima(dtoEstudio.getEdadMinima());
-            estudio.setEdadMaxima(dtoEstudio.getEdadMaxima());
-            estudio.setFechaInicio(dtoEstudio.getFechaInicio());
-            estudio.setFechaFin(dtoEstudio.getFechaFin());
-
-            DaoSubcategoria daoSubcategoria = new DaoSubcategoria();
-            SubcategoriaEntity subCategoria = new SubcategoriaEntity(dtoEstudio.getDtoSubcategoria().getId());
-            estudio.setSubcategoria(subCategoria);
-
-            DaoNivelSocioeconomico daoNivelSocioeconomico = new DaoNivelSocioeconomico();
-            NivelSocioeconomicoEntity nivelSocioeconomico = new NivelSocioeconomicoEntity(dtoEstudio.getDtoNivelSocioEconomico().getId());
-            estudio.setNivelsocioeco(nivelSocioeconomico);
-
-            DaoLugar daoLugar = new DaoLugar();
-            LugarEntity lugar = new LugarEntity(dtoEstudio.getDtoLugar().getId());
-            estudio.setLugar(lugar);
-
-            EstudioEntity resul = dao.update(estudio);
-
-            resultado.setId(resul.get_id());
+            if(dtoEstudio.getId() == 0) {
+                return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+            }
+            this.estudio = this.dao.find(dtoEstudio.getId(), EstudioEntity.class);
+            estudioAtributos(dtoEstudio);
+            return Response.ok(this.dao.update(this.estudio)).build();
         } catch (Exception ex) {
-            String problema = ex.getMessage();
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
-
-        return resultado;
     }
 
 }

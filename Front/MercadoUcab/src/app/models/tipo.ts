@@ -1,4 +1,4 @@
-export interface Tipo {
+export class Tipo {
   _id: number;
   nombre: string;
   estado: string;

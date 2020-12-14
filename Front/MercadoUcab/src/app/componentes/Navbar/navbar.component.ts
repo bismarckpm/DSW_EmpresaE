@@ -23,4 +23,12 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  logout() {
+    // remove user from local storage and set current user to null
+    localStorage.removeItem('usuarioID');
+    localStorage.removeItem('rol');
+    this.router.navigate[('/Login')]
+   // this.currentUserSubject.next(null);
+  }
+
 }

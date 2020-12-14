@@ -1,6 +1,6 @@
 import { NivelSocioEconomico } from './nivel-socio-economico';
 
-export interface Lugar {
+export class Lugar {
     _id:number;
     estado:string;
     nombre:string;

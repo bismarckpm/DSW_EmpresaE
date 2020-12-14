@@ -1,7 +1,7 @@
 import { Encuestado } from './encuestado';
 import { PreguntaOpcion } from './pregunta-opcion';
 
-export interface Respuesta {
+export class Respuesta {
     _id:number;
     estado:string;
     texto:string;

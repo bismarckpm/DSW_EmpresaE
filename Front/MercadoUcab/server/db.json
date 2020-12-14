@@ -4,8 +4,23 @@
       "_id": 50,
       "username": "Pedro",
       "clave ": "pedro",
-      "rol": "Cliente",
+      "rol": "Administrador",
       "autenticacion": "valida"
+    },
+    {
+      "username": "asdsa",
+      "clave": "asdasd",
+      "_id": 51
+    },
+    {
+      "username": "asdsa",
+      "clave": "asdasd",
+      "_id": 52
+    },
+    {
+      "username": "asdas",
+      "clave": "asdas",
+      "_id": 53
     }
   ],
   "categoria": [
@@ -126,7 +141,7 @@
       "_id": 1,
       "descripcion": "asdsad",
       "estado": "a",
-      "tipoPregunta": {
+      "tipo": {
         "_id": 1,
         "estado": "a",
         "tipo": "verdadero y Falso"
@@ -141,7 +156,7 @@
       "_id": 2,
       "descripcion": "Prueba exitosa Editar",
       "estado": "a",
-      "tipoPregunta": {
+      "tipo": {
         "_id": 1,
         "estado": "i",
         "tipo": "multiple"
@@ -151,6 +166,27 @@
         "nombre": "pedro gutierres",
         "estado": "i"
       }
+    },
+    {
+      "_id": 3,
+      "descripcion": "asdasd",
+      "estado": "a",
+      "tipo": {
+        "_id": "4",
+        "estado": "",
+        "tipo": ""
+      },
+      "subcategoria": {
+        "_id": 5,
+        "nombre": "",
+        "estado": ""
+      },
+      "opciones": [
+        "asdas",
+        "asdsad",
+        "asdsad",
+        "asdasds"
+      ]
     }
   ],
   "tipo": [

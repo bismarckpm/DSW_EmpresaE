@@ -45,4 +45,35 @@ public class LoginServicio {
 
         return respuesta;
     }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/cambiarClave")
+    public JsonObject cambiarClave(DtoUsuario usuario){
+
+        Boolean registrado;
+        JsonObject respuesta;
+
+        DirectorioActivo directorioActivo = new DirectorioActivo();
+
+        DaoUsuario daoUsuario = new DaoUsuario();
+        DtoUsuario dtoUsuario = new DtoUsuario();
+        UsuarioEntity usuarioEntity = daoUsuario.find(usuario.get_id(), UsuarioEntity.class);
+        dtoUsuario.setUsername(usuarioEntity.getUsername());
+        dtoUsuario.setClave(usuario.getClave());
+        registrado = directorioActivo.userAuthentication(dtoUsuario);
+
+        if(registrado){
+            dtoUsuario.setClave(usuario.getNuevaClave());
+            directorioActivo.changePassword(dtoUsuario);
+            usuarioEntity.setClave(usuario.getNuevaClave());
+            daoUsuario.update(usuarioEntity);
+            respuesta = Json.createObjectBuilder().add("Respuesta", "Cambio Satisfactorio").build();
+        }else{
+            respuesta = Json.createObjectBuilder().add("Respuesta", "Contraseña invalida").build();
+        }
+
+        return respuesta;
+    }
 }

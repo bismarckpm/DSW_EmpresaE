@@ -42,7 +42,9 @@
         <div class="row">
           <div class="col-md-5 mb-3">
             <label for="country">Tipo de Pregunta</label>
+
             <select class="custom-select d-block w-100" [(ngModel)]= "Pregunta.tipo._id" formControlName="tipoPregunta"  (click)="ValidarTipopregunta(Pregunta.tipo._id)"value="Pregunta.tipo._id"><!-- Hacer lo de *ngFor-->
+              
               <option  value="1">Abiertas</option>
               <option value="2">Verdadero y Falso</option>
               <option value="3">Seleccion Simple</option>

@@ -1,20 +1,30 @@
 package ucab.empresae.servicio;
 
-import ucab.empresae.daos.DaoPregunta;
-import ucab.empresae.daos.DaoSubcategoria;
-import ucab.empresae.daos.DaoTipoPregunta;
+import ucab.empresae.daos.*;
+import ucab.empresae.dtos.DtoOpcion;
 import ucab.empresae.dtos.DtoPregunta;
-import ucab.empresae.entidades.PreguntaEntity;
-import ucab.empresae.entidades.SubcategoriaEntity;
-import ucab.empresae.entidades.TipoPreguntaEntity;
+import ucab.empresae.entidades.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("/pregunta")
 public class PreguntaServicio {
+
+    public void borrarOpciones(PreguntaEntity pregunta) {
+        DaoOpcion daoOpcion = new DaoOpcion();
+
+        List<OpcionEntity> opciones = daoOpcion.getOpciones(pregunta);
+
+        for(OpcionEntity opcion : opciones){
+            OpcionEntity opcionEliminar = daoOpcion.find(opcion.get_id(), OpcionEntity.class);
+            daoOpcion.delete(opcionEliminar);
+        }
+
+    }
 
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
@@ -37,6 +47,8 @@ public class PreguntaServicio {
         DaoPregunta dao = new DaoPregunta();
         DaoTipoPregunta daoTipoPregunta = new DaoTipoPregunta();
         DaoSubcategoria daoSubcategoria = new DaoSubcategoria();
+        DaoOpcion daoOpcion = new DaoOpcion();
+        DaoPreguntaOpcion daoPreguntaOpcion= new DaoPreguntaOpcion();
 
         PreguntaEntity pregunta = new PreguntaEntity();
 
@@ -44,13 +56,73 @@ public class PreguntaServicio {
             pregunta.setDescripcion(dtoPregunta.getDescripcion());
             pregunta.setEstado(dtoPregunta.getEstado());
 
-            SubcategoriaEntity subcategoria = daoSubcategoria.find(dtoPregunta.getSubcategoria().getId(), SubcategoriaEntity.class);
+            SubcategoriaEntity subcategoria = daoSubcategoria.find(dtoPregunta.getSubcategoria().get_id(), SubcategoriaEntity.class);
             pregunta.setSubcategoria(subcategoria);
-            TipoPreguntaEntity tipoPregunta = daoTipoPregunta.find(dtoPregunta.getTipo().getId(), TipoPreguntaEntity.class);
+            TipoPreguntaEntity tipoPregunta = daoTipoPregunta.find(dtoPregunta.getTipo().get_id(), TipoPreguntaEntity.class);
             pregunta.setTipo(tipoPregunta);
 
-            PreguntaEntity resul = dao.insert(pregunta);
-            return Response.ok().entity(resul).build();
+
+            PreguntaEntity preguntaInsert = dao.insert(pregunta);
+
+            // Tipo de Pregunta de Seleccion
+            if(dtoPregunta.getTipo().getId() == 3 || dtoPregunta.getTipo().getId() == 4) {
+
+                String[] opciones = dtoPregunta.getOpciones();
+                int contador = 0;
+                while (contador<opciones.length) {
+                    OpcionEntity opcion_entidad = new OpcionEntity();
+                    opcion_entidad.setDescripcion(opciones[contador]);
+                    opcion_entidad.setEstado("a");
+                    OpcionEntity resultadoOpcion = daoOpcion.insert(opcion_entidad);
+
+
+                    PreguntaOpcionEntity pregunta_opcion_nn = new PreguntaOpcionEntity();
+                    pregunta_opcion_nn.setEstado("a");
+                    pregunta_opcion_nn.setOpcion(resultadoOpcion);
+                    pregunta_opcion_nn.setPregunta(preguntaInsert);
+                    daoPreguntaOpcion.insert(pregunta_opcion_nn);
+
+                    contador = contador+1;
+                }
+            }
+
+            // Tipo de pregunta de Verdadero y Falso
+            if(dtoPregunta.getTipo().getId() == 2) {   //Asigna en la n a n el verdadero o falso
+                List<OpcionEntity> opciones = new ArrayList<>();
+                opciones.add(new OpcionEntity("Verdadero", "a"));
+                opciones.add(new OpcionEntity("Falso", "a"));
+
+                for (OpcionEntity opcion: opciones) {
+                    daoOpcion.insert(opcion);
+
+                    PreguntaOpcionEntity pregunta_opcion_nn = new PreguntaOpcionEntity();
+                    pregunta_opcion_nn.setEstado("a");
+                    pregunta_opcion_nn.setOpcion(opcion);
+                    pregunta_opcion_nn.setPregunta(preguntaInsert);
+                    daoPreguntaOpcion.insert(pregunta_opcion_nn);
+                }
+            }
+
+            if(dtoPregunta.getTipo().getId() == 5) {   //Asigna en la n a n EL rango
+                List<OpcionEntity> opciones = new ArrayList<>();
+                opciones.add(new OpcionEntity("1", "a"));
+                opciones.add(new OpcionEntity("2", "a"));
+                opciones.add(new OpcionEntity("3", "a"));
+                opciones.add(new OpcionEntity("4", "a"));
+                opciones.add(new OpcionEntity("5", "a"));
+
+                for (OpcionEntity opcion: opciones) {
+                    daoOpcion.insert(opcion);
+
+                    PreguntaOpcionEntity pregunta_opcion_nn = new PreguntaOpcionEntity();
+                    pregunta_opcion_nn.setEstado("a");
+                    pregunta_opcion_nn.setOpcion(opcion);
+                    pregunta_opcion_nn.setPregunta(preguntaInsert);
+                    daoPreguntaOpcion.insert(pregunta_opcion_nn);
+                }
+            }
+
+            return Response.ok().entity(preguntaInsert).build();
         }
         else {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
@@ -78,29 +150,91 @@ public class PreguntaServicio {
 
         DaoPregunta dao = new DaoPregunta();
         PreguntaEntity pregunta = dao.find(id, PreguntaEntity.class);
+        DaoPreguntaOpcion daoPreguntaOpcion= new DaoPreguntaOpcion();
+        DaoOpcion daoOpcion = new DaoOpcion();
 
         if(pregunta != null) {
+
+            // SI LA PREGUNTA EXISTENTE TIENE OPCIONES ASOCIADAS, SE ELIMINAN.
+
+            if(pregunta.getTipo().get_id() == 2 || pregunta.getTipo().get_id() == 3 || pregunta.getTipo().get_id() == 4 || pregunta.getTipo().get_id() == 5){
+                this.borrarOpciones(pregunta);
+            }
+
+
             pregunta.setEstado(dtoPregunta.getEstado());
             pregunta.setDescripcion(dtoPregunta.getDescripcion());
 
-            SubcategoriaEntity subcategoria = new SubcategoriaEntity(dtoPregunta.getSubcategoria().getId());
+            SubcategoriaEntity subcategoria = new SubcategoriaEntity(dtoPregunta.getSubcategoria().get_id());
             pregunta.setSubcategoria(subcategoria);
-            TipoPreguntaEntity tipoPregunta = new TipoPreguntaEntity(dtoPregunta.getTipo().getId());
+            TipoPreguntaEntity tipoPregunta = new TipoPreguntaEntity(dtoPregunta.getTipo().get_id());
             pregunta.setTipo(tipoPregunta);
 
-            PreguntaEntity resul = dao.update(pregunta);
+            PreguntaEntity preguntaUpdate = dao.update(pregunta);
+
+            // Tipo de Pregunta de Seleccion
+            if(dtoPregunta.getTipo().getId() == 3 || dtoPregunta.getTipo().getId() == 4) {
+
+                String[] opciones = dtoPregunta.getOpciones();
+                int contador = 0;
+                while (contador<opciones.length) {
+                    OpcionEntity opcion_entidad = new OpcionEntity();
+                    opcion_entidad.setDescripcion(opciones[contador]);
+                    opcion_entidad.setEstado("a");
+                    OpcionEntity resultadoOpcion = daoOpcion.insert(opcion_entidad);
+
+
+                    PreguntaOpcionEntity pregunta_opcion_nn = new PreguntaOpcionEntity();
+                    pregunta_opcion_nn.setEstado("a");
+                    pregunta_opcion_nn.setOpcion(resultadoOpcion);
+                    pregunta_opcion_nn.setPregunta(preguntaUpdate);
+                    daoPreguntaOpcion.insert(pregunta_opcion_nn);
+
+                    contador = contador+1;
+                }
+            }
+
+            // Tipo de pregunta de Verdadero y Falso
+            if(dtoPregunta.getTipo().getId() == 2) {   //Asigna en la n a n el verdadero o falso
+                List<OpcionEntity> opciones = new ArrayList<>();
+                opciones.add(new OpcionEntity("Verdadero", "a"));
+                opciones.add(new OpcionEntity("Falso", "a"));
+
+                for (OpcionEntity opcion: opciones) {
+                    daoOpcion.insert(opcion);
+
+                    PreguntaOpcionEntity pregunta_opcion_nn = new PreguntaOpcionEntity();
+                    pregunta_opcion_nn.setEstado("a");
+                    pregunta_opcion_nn.setOpcion(opcion);
+                    pregunta_opcion_nn.setPregunta(preguntaUpdate);
+                    daoPreguntaOpcion.insert(pregunta_opcion_nn);
+                }
+            }
+
+            if(dtoPregunta.getTipo().getId() == 5) {   //Asigna en la n a n EL rango
+                List<OpcionEntity> opciones = new ArrayList<>();
+                opciones.add(new OpcionEntity("1", "a"));
+                opciones.add(new OpcionEntity("2", "a"));
+                opciones.add(new OpcionEntity("3", "a"));
+                opciones.add(new OpcionEntity("4", "a"));
+                opciones.add(new OpcionEntity("5", "a"));
+
+                for (OpcionEntity opcion: opciones) {
+                    daoOpcion.insert(opcion);
+
+                    PreguntaOpcionEntity pregunta_opcion_nn = new PreguntaOpcionEntity();
+                    pregunta_opcion_nn.setEstado("a");
+                    pregunta_opcion_nn.setOpcion(opcion);
+                    pregunta_opcion_nn.setPregunta(preguntaUpdate);
+                    daoPreguntaOpcion.insert(pregunta_opcion_nn);
+                }
+            }
+
             return Response.ok(pregunta).build();
         }
         else {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
-    }
-
-    @GET
-    @Path( "/consulta" )
-    public String consulta()
-    {
-        return "Epa";
     }
 
 }

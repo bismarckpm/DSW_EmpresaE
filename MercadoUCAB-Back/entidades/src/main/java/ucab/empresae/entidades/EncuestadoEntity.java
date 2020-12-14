@@ -86,13 +86,13 @@ public class EncuestadoEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_civil", referencedColumnName = "id", nullable = false)
-    private EstadoCivilEntity edocivil;
-    public EstadoCivilEntity getEdocivil() {
-        return edocivil;
+    private EstadoCivilEntity estadoCivil;
+    public EstadoCivilEntity getEstadoCivil() {
+        return estadoCivil;
     }
 
-    public void setEdocivil(EstadoCivilEntity edocivil) {
-        this.edocivil = edocivil;
+    public void setEdocivil(EstadoCivilEntity estadoCivil) {
+        this.estadoCivil = estadoCivil;
     }
 
     @ManyToOne

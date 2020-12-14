@@ -1,3 +1,5 @@
+import { Usuario } from './usuario';
+
 export class Analista {
 
   _id: number;
@@ -5,5 +7,6 @@ export class Analista {
   clave: string;
   estado: string;
   correoElectronico: string;
+  usuario:Usuario;
 
 }

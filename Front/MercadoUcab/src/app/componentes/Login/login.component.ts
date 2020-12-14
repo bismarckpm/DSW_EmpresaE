@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
 Loggearse(){
   if (this.formLogin.valid) {
     this.usuarioService.getUsuarios().subscribe( data  => {
+   // this.usuarioService.Logear(this.usuario).subscribe( data  => {
       console.log(data) ;
 
       if(data[0].autenticacion=="valida")
@@ -76,7 +77,8 @@ Loggearse(){
 logout() {
   // remove user from local storage and set current user to null
   localStorage.removeItem('usuarioID');
-  localStorage.removeItem('usuario');
+  localStorage.removeItem('rol');
+  this.router.navigate[('/Login')]
  // this.currentUserSubject.next(null);
 }
 

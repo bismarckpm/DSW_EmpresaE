@@ -10,7 +10,8 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class CambiarClaveComponent implements OnInit {
   
-  @Input() usuario={ _id:0,claveNueva:"",clave:'' };
+  @Input() usuario={ claveNueva:"" };
+  @Input() auxUsuario={ claveNueva:"" };
 
   constructor(
     public usuarioService: UsuarioService,
@@ -22,8 +23,8 @@ export class CambiarClaveComponent implements OnInit {
   }
   
 
-  CambioDeClave(clavenueva){
-    this.HacerUsuario(clavenueva);
+  CambioDeClave(){
+    
     this.usuarioService.Logear(this.usuario).subscribe(data=>{
         if(data[0].respuesta=="Cambio Satisfactorio"){
           window.alert("Cambio Realizado");
@@ -35,14 +36,6 @@ export class CambiarClaveComponent implements OnInit {
 
   }
 
-  HacerUsuario(clavenueva){
-    this.usuario._id= parseInt(localStorage.getItem('usuarioID'));
-    this.usuarioService.getUsuario(this.usuario._id).subscribe(data=>{
-          this.usuario.clave=data[0].clave;   
-    })
-    this.usuario.claveNueva= clavenueva;
-    console.log(this.usuario);
 
-}
 
 }

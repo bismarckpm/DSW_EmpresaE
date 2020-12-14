@@ -73,11 +73,11 @@ public class EstudioServicio extends AplicacionBase {
     public Response getEstudiosAnalista(@PathParam("id") long id) {
         try {
             List<EstudioEntity> estudioEntityList = this.dao.findAll(EstudioEntity.class);
-            for(EstudioEntity obj: estudioEntityList) {
+            /*for(EstudioEntity obj: estudioEntityList) {
                 if(obj.getAnalista().get_id() != id) {
                     estudioEntityList.remove(obj);
                 }
-            }
+            }*/
             return Response.ok(estudioEntityList).build();
         } catch (Exception ex) {
             return Response.status(Response.Status.NOT_ACCEPTABLE).entity(ex).build();

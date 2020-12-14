@@ -1,5 +1,6 @@
 package ucab.empresae.entidades;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
@@ -10,6 +11,14 @@ public class EstudioEntity extends BaseEntity{
     //private List<ClienteEstudioEntity> clienteestudios;
     //private List<EstudioEncuestadoEntity> estudioencuestados;
     // List<EncuestaEntity> encuestas;
+
+    //Constructores
+    public EstudioEntity(long id) {
+        super(id);
+    }
+
+    public EstudioEntity() {
+    }
 
     @Basic
     @Column(name = "estado")
@@ -123,13 +132,14 @@ public class EstudioEntity extends BaseEntity{
 
 
     @ManyToOne
-    @JoinColumn(name = "id_usuario_analista", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "id_usuario_analista", referencedColumnName = "id")
     private UsuarioEntity analista;
     public UsuarioEntity getAnalista() { return analista; }
 
     public void setAnalista(UsuarioEntity analista) { this.analista = analista; }
 
     @ManyToMany
+    @JsonbTransient
     @JoinTable(name = "estudio_genero", schema = "mercadeoucab", joinColumns = @JoinColumn(name = "id_estudio", referencedColumnName = "id", nullable = false), inverseJoinColumns = @JoinColumn(name = "id_genero", referencedColumnName = "id", nullable = false))
     private List<GeneroEntity> generos;
     public List<GeneroEntity> getGeneros() {

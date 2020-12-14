@@ -7,7 +7,7 @@ import { NivelSocioEconomico } from './nivel-socio-economico';
 import { Ocupacion } from './ocupacion';
 import { Usuario } from './usuario';
 
-export interface Encuestado {
+export class Encuestado {
    _id:number;
    primerNombre:string;
    segundoNombre:string;

@@ -85,8 +85,8 @@ export class FormPreguntaComponent implements OnInit {
 
 MeterOpciones(){
   console.log("Entro en el meterOpciones");
-  let i;
-
+let i
+  ///Esto lo de abajo funciona solo con arreglo
   for(i=0;  i < this.Opciones.length ; i++){
     console.log("ejecuto el for ");
      this.Pregunta.opciones[i]=this.Opciones[i]
@@ -94,9 +94,14 @@ MeterOpciones(){
  }
 }
 
+
 ValidarTipopregunta(tipoid){
+
   console.log("entre en validar ")
-  if(tipoid>0){
+
+
+  console.log("entre en validar ")
+  if(tipoid>0){ 
       if( tipoid == 3|| tipoid==4){
         this.desplegar= true;
         this.desplegarRango= false;
@@ -109,9 +114,14 @@ ValidarTipopregunta(tipoid){
         this.desplegarRango= false;
         this.desplegar= false;
         this.Opciones.length=0;
-      }
-  }
+      }  
+  } 
 }
+
+
+
+
+
 
 
   /////Para los dropdown////////////////////////////////////////////

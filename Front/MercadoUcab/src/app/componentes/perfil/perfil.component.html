@@ -1,0 +1,202 @@
+
+<div class="form-group">
+
+
+
+    <div *ngIf="admin == true">
+
+
+
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                    
+              <label > Nombre del Administrador</label>   
+              <input type="text" value="Administrador.usuario.username" readonly="readonly">
+                </div>
+                <div class="form-group col-md-6">
+                  <label > Nombre del Administrador</label>   
+                  <input type="text" value="Administrador.usuario.username" readonly="readonly">
+                </div>
+              </div>
+              <div class="form-group">
+                <label > Clave</label>  
+                <input type="text" value="Administrador.usuario.clave" readonly="readonly">
+                <button type="button" class="btn btn-primary" data-toggle="modal" (click)="editar(marca)" data-target="#exampleModal"> Cambio de clave </button>
+
+              </div>
+              <div class="form-group">
+                <label > Correo</label>  
+                <input type="text" value="Administrador.usuario.correoElectronico"  readonly="readonly">
+
+              </div>
+              <div class="form-row">
+                <label > Rol en nuestro sistema </label>  
+                <input type="text" value="Administrador.usuario.rol" readonly="readonly">
+              </div>
+
+
+
+
+    </div> <!-- DIf del administradro-->
+
+
+
+        
+
+ 
+
+
+
+
+    <div  *ngIf="cli == true">
+        <label > Nombre del usuario</label>   
+        <input type="text" value="Cliente.usuario.username" readonly="readonly">
+
+        <label >  Clave</label>  
+        <input type="text" value="Cliente.usuario.clave" readonly="readonly">
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" (click)="editar(marca)" data-target="#exampleModal"> Cambio de clave </button>
+
+        <label > Correo</label>  
+        <input type="text" value="Cliente.usuario.correoElectronico"  readonly="readonly">
+
+        <label > Rol en nuestro sistema </label>  
+        <input type="text" value="Cliente.usuario.rol" readonly="readonly">
+        
+        <label > Razon Social</label>  
+        <input type="text" value="Cliente.razonSocail" readonly="readonly">
+        
+        <label > Rif </label>  
+        <input type="text" value="Cliente.rif" readonly="readonly">
+
+        <label for=""> Estado</label> 
+        <input type="text" value="Cliente.lugar" readonly="readonly">
+
+        <label for=""> Municipio </label>
+        <input type="text" value="Cliente.lugar.lugar" readonly="readonly">
+
+        <label for=""> Parroquia </label>
+        <input type="text" value="Cliente.lugar.lugar.lugar" readonly="readonly">
+
+    </div>
+
+
+    <div *ngIf="encue == true">
+
+        <label > Nombre del usuario</label>   
+        <input type="text" value="Encuestado.usuario.username" readonly="readonly">
+
+        <label >  Clave</label>  
+        <input type="text" value="Encuestado.usuario.clave" readonly="readonly">
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" (click)="editar(marca)" data-target="#exampleModal"> Cambio de clave </button>
+
+        <label > Correo</label>  
+        <input type="text" value="Encuestado.usuario.correoElectronico"  readonly="readonly">
+
+        <label > Rol en nuestro sistema </label>  
+        <input type="text" value="Encuestado.usuario.rol" readonly="readonly">
+
+        <label for=""> Primer nombre </label>
+        <input type="text" value="Encuestado.primerNombre" readonly="readonly">
+
+        <label for="">Segundo Nombre </label>
+        <input type="text" value="Encuestado.segundoNombre" readonly="readonly">
+
+        <label for=""> Primer Apellido </label>
+        <input type="text" value="Encuestado.primerApellido" readonly="readonly">
+
+        <label for="">Segundo Apellido </label>
+        <input type="text" value="Encuestado.segundoApellido" readonly="readonly">
+
+        <label for=""> Fecha Nacimiento</label>
+        <input type="text" value="Encuestado.fechaNacimiento" readonly="readonly">
+
+        <label for=""> Estado civil </label>
+        <input type="text" value="Encuestado.fechaNacimiento" readonly="readonly">
+
+        <label for=""> Nivel Economico </label>
+        <input type="text" value="Encuestado.fechaNacimiento" readonly="readonly">
+
+        <label for=""> Medio de Conexion </label>
+        <input type="text" value="Encuestado.fechaNacimiento" readonly="readonly">
+
+        <label for=""> Ocupacion</label>
+        <input type="text" value="Encuestado.fechaNacimiento" readonly="readonly">
+
+        <label for=""> Nivee Socio economico</label>
+        <input type="text" value="Encuestado.fechaNacimiento" readonly="readonly">
+
+        <label for="">  Estado </label>
+        <input type="text" value="Encuestado.fechaNacimiento" readonly="readonly">
+
+        <label for="">  Municipio </label>
+        <input type="text" value="Encuestado.fechaNacimiento" readonly="readonly">
+
+        <label for=""> Parroquia</label>
+        <input type="text" value="Encuestado.fechaNacimiento" readonly="readonly">
+
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" (click)="editar(marca)" data-target="#exampleModal"> Cambio de clave </button>
+
+
+    </div>
+
+    <div *ngIf="analist == true">
+
+    </div>
+
+
+
+     <!-- Modal -->
+     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <!-- Cabezado Modal -->
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Cambio de clave </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <!-- Cuerpo completo del Modal -->
+            <div class="modal-body">
+              <form >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-6 mb-3">
+                          <label for="nombre">Clave nueva</label>
+                            <input type="password" [(ngModel)]="usuario.claveNueva" class="form-control"   name="nombre" id="nombre" placeholder="" >
+                              
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-6 mb-3">
+                          <label for="nombre">Repetir la nueva contraseña </label>
+                            <input type="password" [(ngModel)]="auxUsuario.claveNueva" class="form-control"   name="nombre" id="nombre" placeholder="" >
+          
+                        </div>
+                      </div>
+                    </div>
+
+                    <br>
+                    <!-- Parte inferior del modal -->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                      <button type="submit" class="btn btn-success" (click)="CambioDeClave()" data-dismiss="modal">Actualizar</button>
+
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div><!-- cierre del cuerpo modal -->
+          </div>
+        </div>
+      </div> <!-- Finall Modal -->
+
+
+</div>

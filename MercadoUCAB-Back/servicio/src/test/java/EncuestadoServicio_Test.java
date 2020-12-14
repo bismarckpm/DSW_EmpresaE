@@ -2,12 +2,13 @@ import org.junit.Assert;
 import org.junit.Test;
 import ucab.empresae.dtos.*;
 import javax.ws.rs.core.Response;
+import ucab.empresae.servicio.EncuestadoServicio;
 
 public class EncuestadoServicio_Test {
 
     @Test
     public void addEncuestadoTest() throws Exception{
-        ucab.empresae.servicio.EncuestadoServicio servicio = new ucab.empresae.servicio.EncuestadoServicio();
+        EncuestadoServicio servicio = new EncuestadoServicio();
         DtoEncuestado dtoEncuestado = new DtoEncuestado();
 
         dtoEncuestado.setPrimerNombre("nombre1");
@@ -48,4 +49,30 @@ public class EncuestadoServicio_Test {
         Response respuesta = servicio.addEncuestado(dtoEncuestado);
         Assert.assertEquals(respuesta.getStatus(), Response.Status.OK.getStatusCode());
     }
+
+    @Test
+    public void getEncuestadoTest() throws Exception{
+        EncuestadoServicio servicio = new EncuestadoServicio();
+        Response resultado = servicio.getEncuestado(3);
+        Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
+    }
+
+
+    @Test
+    public void getEncuestadosTest() throws Exception{
+        EncuestadoServicio servicio = new EncuestadoServicio();
+        Response resultado = servicio.getEncuestados();
+        Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
+
+    }
+
+
+    @Test
+    public void deleteEncuestadoTest() throws Exception{
+        EncuestadoServicio servicio = new EncuestadoServicio();
+        Response resultado = servicio.deleteEncuestado(5);
+        Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
+    }
+
+
 }

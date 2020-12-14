@@ -1,5 +1,7 @@
 package ucab.empresae.dtos;
 
+import java.util.List;
+
 public class DtoPregunta extends DtoBase {
 
     //Atributps
@@ -9,6 +11,8 @@ public class DtoPregunta extends DtoBase {
     //Relaciones
     private DtoTipoPregunta tipo;
     private DtoSubcategoria subcategoria;
+
+    private String[] opciones;
 
     //Constructores
     public DtoPregunta() {
@@ -49,6 +53,14 @@ public class DtoPregunta extends DtoBase {
 
     public void setSubcategoria(DtoSubcategoria subcategoria) {
         this.subcategoria = subcategoria;
+    }
+
+    public String[] getOpciones() {
+        return opciones;
+    }
+
+    public void setOpciones(String[] opciones) {
+        this.opciones = opciones;
     }
 
 }

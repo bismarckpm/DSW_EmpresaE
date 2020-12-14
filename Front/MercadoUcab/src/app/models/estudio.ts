@@ -3,7 +3,7 @@ import { Lugar } from './Lugar';
 import { NivelSocioEconomico } from './nivel-socio-economico';
 import { Subcategoria } from './subcategoria';
 
-export interface Estudio {
+export class Estudio {
     _id: number;
     estado: string;
     nombre: string;

@@ -1,4 +1,4 @@
-export interface MedioConexion {
+export class MedioConexion {
     _id:number;
     nombre:string;
     estado:string;

@@ -19,7 +19,7 @@ export class ListaPreguntasComponent implements OnInit {
   Opciones: Opcion[]=[];
 
   _id = this.actRoute.snapshot.params['_id'];
-  @Input() preguntaData ={ _id:0, descripcion:'',estado:'',tipoPregunta:{_id:0,estado:'',tipo:''} ,subcategoria:{_id:0, nombre:'',estado:'',}, opciones:[] };
+  @Input() preguntaData ={ _id:0, descripcion:'',estado:'',tipo:{_id:0,estado:'',tipo:''} ,subcategoria:{_id:0, nombre:'',estado:'',}, opciones:[] };
    subcategoria:any;
    tipopregunta:any;
 
@@ -52,12 +52,12 @@ MeterOpciones(){
     console.log("ejecuto el for ");
      this.preguntaData.opciones[i]=this.Opciones[i]
      console.log(this.preguntaData.opciones);
- }  
+ }
 }
 
 ValidarTipopregunta(tipoid){
   console.log("entre en validar ")
-  if(tipoid>0){ 
+  if(tipoid>0){
       if( tipoid == 3|| tipoid==4){
         this.desplegar= true;
         this.desplegarRango= false;
@@ -70,8 +70,8 @@ ValidarTipopregunta(tipoid){
         this.desplegarRango= false;
         this.desplegar= false;
         this.Opciones.length=0;
-      }  
-  }  
+      }
+  }
 }
 
 
@@ -91,10 +91,10 @@ ValidarTipopregunta(tipoid){
   }
 
   updatePregunta(){
-      
+
     if(this.Opciones.length > 0){
       console.log("if de opciones ")
-        this.MeterOpciones()          
+        this.MeterOpciones()
     }
 
 

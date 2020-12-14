@@ -26,7 +26,7 @@ export class FormPreguntaComponent implements OnInit {
     _id:0,
     descripcion:'',
     estado:'',
-    tipoPregunta:{
+    tipo:{
       _id:0,
       estado:'',
       tipo:''
@@ -38,7 +38,7 @@ export class FormPreguntaComponent implements OnInit {
       },
       opciones:[]
     };
-  
+
      Opciones: Opcion[]=[];
 
 
@@ -70,7 +70,7 @@ export class FormPreguntaComponent implements OnInit {
 
             if(this.Opciones.length > 0){
               console.log("if de opciones ")
-                this.MeterOpciones()          
+                this.MeterOpciones()
             }
 
         this.preguntaService.createPregunta(this.Pregunta).subscribe((data: {}) => {
@@ -85,16 +85,21 @@ export class FormPreguntaComponent implements OnInit {
 
 MeterOpciones(){
   console.log("Entro en el meterOpciones");
-  let i;
-
+let i
+  ///Esto lo de abajo funciona solo con arreglo
   for(i=0;  i < this.Opciones.length ; i++){
     console.log("ejecuto el for ");
      this.Pregunta.opciones[i]=this.Opciones[i]
      console.log(this.Pregunta.opciones);
- }  
+ }
 }
 
+
 ValidarTipopregunta(tipoid){
+
+  console.log("entre en validar ")
+
+
   console.log("entre en validar ")
   if(tipoid>0){ 
       if( tipoid == 3|| tipoid==4){
@@ -110,8 +115,13 @@ ValidarTipopregunta(tipoid){
         this.desplegar= false;
         this.Opciones.length=0;
       }  
-  }  
+  } 
 }
+
+
+
+
+
 
 
   /////Para los dropdown////////////////////////////////////////////

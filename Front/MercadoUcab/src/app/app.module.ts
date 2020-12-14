@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SidebarModule } from 'ng-sidebar';
 
 // Componentes
@@ -41,10 +41,16 @@ import {ListaClientesComponent} from './componentes/lista-clientes/lista-cliente
 import {FormPresentacionComponent} from './componentes/form-presentacion/form-presentacion.component';
 import {ListaPresentacionComponent} from './componentes/lista-presentacion/lista-presentacion.component';
 import {FormPreguntaComponent} from './componentes/form-pregunta/form-pregunta.component';
+import { PerfilComponent } from './componentes/perfil/perfil.component';
+import { ListaEncuestadosComponent } from './componentes/lista-encuestados/lista-encuestados.component';
+import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
+import { ListaAnalistaComponent } from './componentes/lista-analista/lista-analista.component';
+import { FormEncuestaComponent } from './componentes/form-encuesta/form-encuesta.component';
+import { ListaEncuestaComponent } from './componentes/lista-encuesta/lista-encuesta.component';
 
-//Modulo de Cliente !!!!!!!!!!!!!!!!!
-import{ListaEstudioClienteComponent} from './modulos/cliente/lista-estudio/lista-estudio.component'
-import{ FormEstudioClienteComponent} from './modulos/cliente/form-estudio/form-estudio.component'
+// Modulo de Cliente !!!!!!!!!!!!!!!!!
+import {ListaEstudioClienteComponent} from './modulos/cliente/lista-estudio/lista-estudio.component';
+import { FormEstudioClienteComponent} from './modulos/cliente/form-estudio/form-estudio.component';
 
 // Services
 import { EncuestadoService } from './services/encuestado.service';
@@ -55,17 +61,8 @@ import { CategoriaService } from './services/categoria.service';
 import { EncuestaService } from './services/encuesta.service';
 import { TipoService } from './services/tipo.service';
 import { TipoPreguntaService } from './services/tipo-pregunta.service';
-import { PerfilComponent } from './componentes/perfil/perfil.component';
-import { ListaEncuestadosComponent } from './componentes/lista-encuestados/lista-encuestados.component';
-import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
 import { ClienteService } from './services/cliente.service';
-import { ListaAnalistaComponent } from './componentes/lista-analista/lista-analista.component';
 import { AnalistaService } from './services/analista.service';
-
-
-
-
-
 
 
 @NgModule({
@@ -90,8 +87,6 @@ import { AnalistaService } from './services/analista.service';
     ListaCategoriaComponent,
     FormCategoriaComponent,
     FormEncuestadoComponent,
-
-
     ListaSubcategoriaComponent,
     FormSubcategoriaComponent,
     FormTipoComponent,
@@ -102,6 +97,9 @@ import { AnalistaService } from './services/analista.service';
     ListaClientesComponent,
     FormPresentacionComponent,
     ListaPresentacionComponent,
+    FormEncuestaComponent,
+    ListaEncuestaComponent,
+    ListaAnalistaComponent,
     FormAnalistaComponent,
     CambiarClaveComponent,
     EditClienteComponent,
@@ -111,10 +109,7 @@ import { AnalistaService } from './services/analista.service';
     ListaEncuestadosComponent,
     ListaEstudioClienteComponent,
     FormEstudioClienteComponent,
-    
-
     ListaEncuestadosComponent,
-
     ListaAnalistaComponent
   ],
   imports: [
@@ -125,8 +120,6 @@ import { AnalistaService } from './services/analista.service';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-
-
 ],
 
   providers: [

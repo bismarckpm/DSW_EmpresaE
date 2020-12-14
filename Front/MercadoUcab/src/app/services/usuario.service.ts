@@ -13,7 +13,8 @@ export class UsuarioService {
 
     usuario:any;
 
-  apiurl = 'http://localhost:3000';
+  //apiurl = 'http://localhost:3000';
+  apiurl = 'http://localhost:8080/servicio-1.0-SNAPSHOT/api';
   
 
   constructor(private http: HttpClient,
@@ -64,7 +65,7 @@ export class UsuarioService {
 
   Logear(usuario): Observable<Usuario[]>{
 
-     return  this.http.post<Usuario[]>(this.apiurl+'/usuario/',JSON.stringify(usuario),this.httpOptions)
+     return  this.http.post<Usuario[]>(this.apiurl+'/login',JSON.stringify(usuario),this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -72,6 +73,28 @@ export class UsuarioService {
       )
 
   }
+
+  cambiarclave( usuario){
+
+    return  this.http.post<Usuario[]>(this.apiurl+'/login/cambiarClave',JSON.stringify(usuario),this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+
+      )
+  }
+
+  recuperarclave( usuario){
+
+    return  this.http.post<Usuario[]>(this.apiurl+'/login/recuperarClave',JSON.stringify(usuario),this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+
+      )
+  }
+
+
 
 
 

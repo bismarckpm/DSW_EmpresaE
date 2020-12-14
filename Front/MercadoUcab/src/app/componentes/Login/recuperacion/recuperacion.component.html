@@ -10,7 +10,7 @@
       <div class="form-row">
         <div class="form-group col-md-3">
           <label for="inputEmail4" style="color: azure;">Email</label>
-          <input type="email"  [(ngModel)]="usuario.correoElectronico"  formControlName="userCorreo"class="form-control"  name="email">
+          <input type="email"  [(ngModel)]="usuario.username"  formControlName="userCorreo"class="form-control"  name="email">
           <div *ngIf="userCorreo.invalid && (userCorreo.dirty || userCorreo.touched)" class="alert alert-danger">
             <div *ngIf="userCorreo.errors.required">
               Este campo es obligatorio
@@ -24,4 +24,3 @@
       <button (click)="confirmarCorreo()" type="submit" class="btn btn-light">confirmar</button>   
     </form>
   </div>
-  

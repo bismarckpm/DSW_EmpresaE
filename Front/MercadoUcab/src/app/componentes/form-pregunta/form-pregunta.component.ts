@@ -38,7 +38,7 @@ export class FormPreguntaComponent implements OnInit {
       },
       opciones:[]
     };
-  
+
      Opciones: Opcion[]=[];
 
 
@@ -70,7 +70,7 @@ export class FormPreguntaComponent implements OnInit {
 
             if(this.Opciones.length > 0){
               console.log("if de opciones ")
-                this.MeterOpciones()          
+                this.MeterOpciones()
             }
 
         this.preguntaService.createPregunta(this.Pregunta).subscribe((data: {}) => {
@@ -91,8 +91,9 @@ let i
     console.log("ejecuto el for ");
      this.Pregunta.opciones[i]=this.Opciones[i]
      console.log(this.Pregunta.opciones);
- }  
+ }
 }
+
 
 ValidarTipopregunta(tipoid){
 

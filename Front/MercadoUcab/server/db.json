@@ -4,7 +4,7 @@
       "_id": 50,
       "username": "Pedro",
       "clave ": "pedro",
-      "rol": "Administrador",
+      "rol": "Cliente",
       "autenticacion": "valida"
     },
     {

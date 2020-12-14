@@ -12,7 +12,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 
 export class RecuperacionComponent implements OnInit {
 
-@Input() usuario={ correoElectronico:'' };
+@Input() usuario={ username:'' };
   formRecuperacion: FormGroup;
  
 
@@ -26,7 +26,7 @@ export class RecuperacionComponent implements OnInit {
 
   confirmarCorreo(){
     if(this.formRecuperacion.valid){
-    this.usuarioService.Logear(this.usuario).subscribe(data=>{
+    this.usuarioService.recuperarclave(this.usuario).subscribe(data=>{
         
     })
     }

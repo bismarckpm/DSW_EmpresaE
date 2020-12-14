@@ -87,7 +87,7 @@ export class PerfilComponent implements OnInit {
 
     if(this.auxUsuario.claveNueva = this.usuario.claveNueva){
     this.HacerUsuario();
-    this.usuarioService.Logear(this.usuario).subscribe(data=>{
+    this.usuarioService.cambiarclave(this.usuario).subscribe(data=>{
         if(data[0].respuesta=="Cambio Satisfactorio"){
           window.alert("Cambio Realizado");
         }else{

@@ -58,6 +58,15 @@
                     </div>
                   </div>
                 </div>
+                <div class="form-group col-md-4">
+                  <label for="telefono">Telefono</label>
+                  <input type="text" class="form-control" [(ngModel)]="cliente.telefono.numero" formControlName="telefonoEncuestado" id="telefono" name="telefono" value="">
+                  <div *ngIf="telefonoCliente.invalid && (telefonoCliente.dirty || telefonoCliente)" class="alert alert-danger">
+                    <div *ngIf="telefonoCliente.errors.required">
+                      Este campo es obligatorio
+                    </div>
+                  </div>
+                </div>
               </div>
             <div class="form-row">
               <div class="form-group col-md-4">

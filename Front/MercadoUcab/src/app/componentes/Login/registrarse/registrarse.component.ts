@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EncuestadoService} from '../../../services/encuestado.service';
-import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, Form, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GeneroService} from '../../../services/genero.service';
 import {OcupacionService} from '../../../services/ocupacion.service';
 import {NivelSocioEconomicoService} from '../../../services/nivel-socio-economico.service';
@@ -27,6 +27,7 @@ export class RegistrarseComponent implements OnInit {
     ocupacion: {_id: 0, nombre: '', estado: ''},
     nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
     telefono: {_id: 0, numero: ''},
+    hijo: {_id: 0, fechaNacimientoHijo: '', generoHijo: ''},
     lugar:  {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: ''}}}},
     usuario: {_id: 0, username: '', estado: '', clave: '', correoElectronico: ''},
   };
@@ -43,6 +44,7 @@ export class RegistrarseComponent implements OnInit {
   username: any;
   clave: any;
   correoElectronico: any;
+  telefono: any;
 
   estados: any;
   parroquias: any;
@@ -76,6 +78,7 @@ export class RegistrarseComponent implements OnInit {
   // 5. al menos 8 caracteres
 
   formRegistroEncuestado: FormGroup;
+  hijos: FormArray;
 
   constructor(
     public encuestadoService: EncuestadoService,
@@ -192,12 +195,13 @@ export class RegistrarseComponent implements OnInit {
   get ocupacionEncuestado(){return this.formRegistroEncuestado.get('ocupacionEncuestado'); }
   get nivelSocioEconomicoEncuestado(){ return this.formRegistroEncuestado.get('nivelSocioEconomicoEncuestado'); }
   get telefonoEncuestado(){ return this.formRegistroEncuestado.get('telefonoEncuestado'); }
+  get fechaNacimientoHijoEncuestado(){ return this.formRegistroEncuestado.get('fechaNacimientoHijoEncuestaod'); }
+  get generoHijoEncuestado(){ return this.formRegistroEncuestado.get('generoHijoEncuestado'); }
   get lugarEncuestado(){return this.formRegistroEncuestado.get('lugarEncuestado'); }
   get usuarioEncuestado(){return this.formRegistroEncuestado.get('usuarioEncuestado'); }
   get usernameEncuestado(){return this.formRegistroEncuestado.get('usernameEncuestado'); }
   get claveEncuestado(){return this.formRegistroEncuestado.get('claveEncuestado'); }
   get correoElectronicoEncuestado(){return this.formRegistroEncuestado.get('correoElectronicoEncuestado'); }
-
 
   createForm(){
     this.formRegistroEncuestado = this.formBuilder.group({
@@ -214,6 +218,8 @@ export class RegistrarseComponent implements OnInit {
       generoEncuestado: ['', Validators.required],
       ocupacionEncuestado: ['', Validators.required],
       nivelSocioEconomicoEncuestado: ['', Validators.required],
+      fechaNacimientoHijoEncuestado: ['', [Validators.required, Validators.pattern(this.patronFechaNacimientoEncuestado)]],
+      generoHijoEncuestado: ['', Validators.required],
       telefonoEncuestado: ['', [Validators.required, Validators.pattern(this.patronTelefonoEncuestado), Validators.maxLength(11)]],
       usuarioEncuestado: ['', Validators.required],
       usernameEncuestado: ['', [Validators.required, Validators.pattern(this.patronUsernameEncuestado)]],

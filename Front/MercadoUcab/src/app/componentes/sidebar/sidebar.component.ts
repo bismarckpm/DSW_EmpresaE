@@ -13,26 +13,25 @@ export class SidebarComponent {
 
   secciones: string[] = [];
 
-  // tslint:disable-next-line: variable-name
   constructor(
-    private _adminService: AdminService, 
-    private encuestadoService: EncuestadoService, 
-    private  analistaService: AnalistaService, 
-    private clienteService :ClienteService ) {
+    private _adminService: AdminService,
+    private encuestadoService: EncuestadoService,
+    private  analistaService: AnalistaService,
+    private clienteService: ClienteService ) {
 
-    if((JSON.parse(localStorage.getItem("rol") )) == "Administrador"){
+    if ((JSON.parse(localStorage.getItem('rol') )) == 'Administrador'){
       this.secciones = this._adminService.getSecciones();
     }
 
-    if((JSON.parse(localStorage.getItem("rol") )) == "Cliente"){
+    if ((JSON.parse(localStorage.getItem('rol') )) == 'Cliente'){
       this.secciones = this.clienteService.getSecciones();
     }
 
-    if((JSON.parse(localStorage.getItem("rol") )) == "Encuestado"){
+    if ((JSON.parse(localStorage.getItem('rol') )) == 'Encuestado'){
       this.secciones = this.encuestadoService.getSecciones();
     }
 
-    if((JSON.parse(localStorage.getItem("rol") )) == "Analista"){
+    if ((JSON.parse(localStorage.getItem('rol') )) == 'Analista'){
       this.secciones = this.analistaService.getSecciones();
     }
 

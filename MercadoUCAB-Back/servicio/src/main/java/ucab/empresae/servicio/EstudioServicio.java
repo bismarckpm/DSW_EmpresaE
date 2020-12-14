@@ -15,6 +15,7 @@ public class EstudioServicio extends AplicacionBase {
 
     private DaoEstudio dao = DaoFactory.DaoEstudioInstancia();
     private EstudioEntity estudio = EntidadesFactory.EstudioInstance();
+    private List<EstudioEntity> estudioEntityList = null;
 
     private void estudioAtributos(DtoEstudio dtoEstudio) {
         this.estudio.setEstado(dtoEstudio.getEstado());
@@ -68,17 +69,17 @@ public class EstudioServicio extends AplicacionBase {
     }
 
     @GET
-    @Produces(value = MediaType.APPLICATION_JSON)
     @Path("/analista/{id}")
+    @Produces(value = MediaType.APPLICATION_JSON)
     public Response getEstudiosAnalista(@PathParam("id") long id) {
         try {
-            List<EstudioEntity> estudioEntityList = this.dao.findAll(EstudioEntity.class);
-            /*for(EstudioEntity obj: estudioEntityList) {
-                if(obj.getAnalista().get_id() != id) {
-                    estudioEntityList.remove(obj);
+            this.estudioEntityList = this.dao.findAll(EstudioEntity.class);
+            for(EstudioEntity obj: this.estudioEntityList) {
+                if(obj.getAnalista() != null && obj.getAnalista().get_id() != id) {
+                    this.estudioEntityList.remove(obj);
                 }
-            }*/
-            return Response.ok(estudioEntityList).build();
+            }
+            return Response.ok(this.estudioEntityList).build();
         } catch (Exception ex) {
             return Response.status(Response.Status.NOT_ACCEPTABLE).entity(ex).build();
         }

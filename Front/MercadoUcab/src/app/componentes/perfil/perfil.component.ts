@@ -49,7 +49,7 @@ export class PerfilComponent implements OnInit {
   ngOnInit(): void {
 
     if((JSON.parse(localStorage.getItem("rol") )) == "Administrador"){
-        this.administradroService.getAdministrador(parseInt(localStorage.getItem('usuarioID'))).subscribe(data => {
+        this.administradroService.getAdministradorDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data => {
           this.Administrador= data;
         })
         this.admin=true;
@@ -57,7 +57,7 @@ export class PerfilComponent implements OnInit {
     }
 
     if((JSON.parse(localStorage.getItem("rol") )) == "Cliente"){
-      this.clienteService.getCliente(parseInt(localStorage.getItem('usuarioID'))).subscribe(data=>{
+      this.clienteService.getClienteDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data=>{
         this.Cliente=data;
       })
 
@@ -65,14 +65,14 @@ export class PerfilComponent implements OnInit {
     }
 
     if((JSON.parse(localStorage.getItem("rol") )) == "Encuestado"){
-      this.encuestadoservice.getEncuestado( parseInt(localStorage.getItem('usuarioID'))).subscribe( data => {
+      this.encuestadoservice.getEncuestadoDelUsuario( parseInt(localStorage.getItem('usuarioID'))).subscribe( data => {
         this.Encuestado =data
       })
       this.encue=true;  
     }
 
     if((JSON.parse(localStorage.getItem("rol") )) == "Analista"){
-     this.analistaService.getAnalista(parseInt(localStorage.getItem('usuarioID'))).subscribe(data =>{
+     this.analistaService.getAnalistaDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data =>{
        this.Analista =data 
      })
 
@@ -99,6 +99,8 @@ export class PerfilComponent implements OnInit {
     window.alert(" Metistes dos claves diferentes  intentalo de nuevo ");
   }
   }
+
+
 
 
   HacerUsuario(){

@@ -28,9 +28,9 @@ export class LoginComponent implements OnInit {
 
 
   Loggearse(){
-    if (this.formLogin.valid) {
-      //this.usuarioService.getUsuarios().subscribe( data  => {
 
+  ////////////////////////// Para el proyecto como tal //////////////////////////////////  
+   if (this.formLogin.valid) {
       this.usuarioService.Logear(this.usuario).subscribe( data  => {
         this.user=data
 
@@ -68,7 +68,55 @@ export class LoginComponent implements OnInit {
         }
       });
     }
+    ////////////////////////////////Para trabajar en el front Unicamente////////////////
+
+   /* if (this.formLogin.valid) {
+      this.usuarioService.getUsuarios().subscribe( data  => {
+        console.log(data) ;
+
+        if(data[0].autenticacion=="valida") {
+          console.log("==============") ;
+          console.log(data[0].username) ;
+          console.log(data[0].rol) ; ;
+          console.log("==============") ;
+          if(data[0].rol=="Administrador"){
+            console.log("Entre en  administrador");
+            this.router.navigate(['/admin/0']);
+            localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
+            localStorage.setItem('rol',JSON.stringify(data[0].rol));
+          }
+          if(data[0].rol=="Encuestado"){
+            console.log("Entre en  Encuestado")
+            this.router.navigate(['encuestado/0'])
+            localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
+            localStorage.setItem('rol',JSON.stringify(data[0].rol));
+          }
+          if(data[0].rol=="Analista"){
+            console.log("Entre en  Analsita");
+            this.router.navigate(['/analista/0']);
+            localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
+          localStorage.setItem('rol',JSON.stringify(data[0].rol));
+          }
+          if(data[0].rol=="Cliente"){
+            console.log("Entre en  Cliente");
+            this.router.navigate(['/cliente/0']);
+            localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
+            localStorage.setItem('rol',JSON.stringify(data[0].rol));
+          }
+        }else {
+          window.alert("Usuario no registrado o Informacion Incorrecta");
+        }
+      });
+    }
+      */  
+
   }
+
+
+
+  
+
+
 
 
 logout() {

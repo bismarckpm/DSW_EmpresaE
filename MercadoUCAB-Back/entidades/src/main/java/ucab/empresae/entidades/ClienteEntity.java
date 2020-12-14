@@ -7,6 +7,13 @@ import java.util.List;
 @Table(name = "cliente", schema = "mercadeoucab")
 public class ClienteEntity extends BaseEntity{
 
+    public ClienteEntity(long id) {
+        super(id);
+    }
+
+    public ClienteEntity() {
+    }
+
     @Basic
     @Column(name = "estado")
     private String estado;

@@ -2,6 +2,7 @@ package ucab.empresae.servicio;
 
 import ucab.empresae.daos.*;
 import ucab.empresae.dtos.DtoCategoria;
+import ucab.empresae.dtos.DtoClienteEstudio;
 import ucab.empresae.dtos.DtoEstudio;
 import ucab.empresae.entidades.*;
 
@@ -117,6 +118,29 @@ public class EstudioServicio extends AplicacionBase {
             this.estudio = this.dao.find(dtoEstudio.getId(), EstudioEntity.class);
             estudioAtributos(dtoEstudio);
             return Response.ok(this.dao.update(this.estudio)).build();
+        } catch (Exception ex) {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).entity(ex).build();
+        }
+    }
+
+    @POST
+    @Path("/asignarEstudio/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response solicitarEstudio(DtoClienteEstudio dtoClienteEstudio) {
+        try {
+            DaoClienteEstudio daoClienteEstudio = new DaoClienteEstudio();
+            ClienteEstudioEntity clienteEstudioEntity = new ClienteEstudioEntity();
+
+            clienteEstudioEntity.setComentarioCliente(dtoClienteEstudio.getComentarioCliente());
+            clienteEstudioEntity.setEstado(dtoClienteEstudio.getEstado());
+
+            clienteEstudioEntity.setEstudio(this.dao.find(dtoClienteEstudio.getEstudio().getId(), EstudioEntity.class));
+
+            DaoCliente daoCliente = new DaoCliente();
+            clienteEstudioEntity.setCliente(daoCliente.find(dtoClienteEstudio.getCliente().getId(), ClienteEntity.class));
+
+            return Response.ok(daoClienteEstudio.insert(clienteEstudioEntity)).build();
         } catch (Exception ex) {
             return Response.status(Response.Status.NOT_ACCEPTABLE).entity(ex).build();
         }

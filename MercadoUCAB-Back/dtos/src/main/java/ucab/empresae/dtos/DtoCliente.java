@@ -8,8 +8,8 @@ public class DtoCliente extends DtoBase{
     private int rif;
 
     //Relaciones
-    private DtoLugar dtoLugar;
-    private DtoUsuario dtoUsuario;
+    private DtoLugar lugar;
+    private DtoUsuario usuario;
 
     //Constructores
     public DtoCliente() {
@@ -46,19 +46,19 @@ public class DtoCliente extends DtoBase{
     }
 
     public DtoLugar getLugar() {
-        return dtoLugar;
+        return lugar;
     }
 
     public void setLugar(DtoLugar lugar) {
-        this.dtoLugar = lugar;
+        this.lugar = lugar;
     }
 
     public DtoUsuario getUsuario() {
-        return dtoUsuario;
+        return usuario;
     }
 
     public void setUsuario(DtoUsuario usuario) {
-        this.dtoUsuario = usuario;
+        this.usuario = usuario;
     }
 
 }

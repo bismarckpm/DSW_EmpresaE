@@ -5,16 +5,16 @@ import { Subcategoria } from './subcategoria';
 
 export class Estudio {
     _id: number;
-    estado : string;
+    estado: string;
     nombre: string;
     comentarioAnalista ?: string;
-    edadMinima:number;
-    edadMaxima:number;
+    edadMinima: number;
+    edadMaxima: number;
     fechaInicio: string;
     fechaFin: string;
-    lugar : Lugar;
-    nivelSocioEconomico:NivelSocioEconomico;
-    subcategoria :Subcategoria;
-  }
+    lugar: Lugar;
+    nivelSocioEconomico: NivelSocioEconomico;
+    subcategoria: Subcategoria;
+}
 
 

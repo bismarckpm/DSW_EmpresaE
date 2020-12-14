@@ -28,8 +28,6 @@ export class EncuestadoService {
 
 
 ////////////// Sidbard////////////
-
-
 getSecciones(): string[] {
   return this.secciones;
 }
@@ -37,6 +35,7 @@ getSecciones(): string[] {
 getSeccion(i): string {
   return this.secciones[i];
 }
+
 
 ///////// Metodos para ejecutar//////////////
 getEncuestados():Observable<Encuestado[]>{
@@ -49,6 +48,14 @@ getEncuestados():Observable<Encuestado[]>{
 
 getEncuestado(id):Observable<Encuestado[]>{
   return this.http.get<Encuestado[]>(this.apiurl+'/encuestado/'+id)
+  .pipe(
+    retry(1),
+    catchError(this.handleError)
+  )
+}
+
+getEncuestadoDelUsuario(idUsuario):Observable<Encuestado[]>{
+  return this.http.get<Encuestado[]>(this.apiurl+'/usuario/'+idUsuario)
   .pipe(
     retry(1),
     catchError(this.handleError)

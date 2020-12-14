@@ -18,13 +18,13 @@ import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 export class ListaEstudiosComponent implements OnInit {
 
 
-  //Declaracion de variables
- estudios: Estudio[]=[];
- _id = this.actRoute.snapshot.params['_id'];
- @Input() estudioData={_id:0, nombre:'',estado:'',comentarioAnalista :'', edadMinima:0,edadMaxima:0 ,fechaInicio:'', fechaFin: '',
-             lugar : {_id:0,estado:'',nombre:'',tipo:''},
-             nivelSocioEconomico:{_id:0,nombre:'',estado:'', descripcion:''},
-             subcategoria : {_id:0, nombre:'',estado:''},
+  // Declaracion de variables
+  estudios: Estudio[] = [];
+  _id = this.actRoute.snapshot.params._id;
+  @Input() estudioData = {_id: 0, nombre: '', estado: '', comentarioAnalista : '', edadMinima: 0, edadMaxima: 0 , fechaInicio: '', fechaFin: '',
+             lugar : {_id: 0, estado: '', nombre: '', tipo: ''},
+             nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
+             subcategoria : {_id: 0, nombre: '', estado: ''},
             };
   // Declaracion para los dropdown
   nivelSocioEconomico: any;
@@ -53,7 +53,7 @@ export class ListaEstudiosComponent implements OnInit {
     public actRoute: ActivatedRoute,
     public router: Router,
     private formBuilder: FormBuilder
-    ) {this.createForm();}
+    ) {this.createForm(); }
 
   ngOnInit(): void {
    this.loadEstudios();
@@ -74,15 +74,15 @@ export class ListaEstudiosComponent implements OnInit {
   updateEstudio(){
     if (this.formEstudio.valid) {
     this.estudioService.updateEstudio(this.estudioData._id, this.estudioData).subscribe(data => {
-     })
-     this.loadEstudios();
+     });
+    this.loadEstudios();
     }
     else{
       alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
     }
  }
 
- editar(estudio){
+ editar(estudio): void{
   this.addSubcategoria();
   this.addLugar();
   this.addNivelSocioEconomico();
@@ -110,24 +110,24 @@ export class ListaEstudiosComponent implements OnInit {
   }
 
 
-/// Esto es para mostrar en los drops doww
-addSubcategoria(){
-  this.subcategoriaService.getsubcategorias().subscribe((data: {}) => {
-    this.subcategoria = data;
-  });
-}
+  /// Esto es para mostrar en los drops doww
+  addSubcategoria(){
+    this.subcategoriaService.getsubcategorias().subscribe((data: {}) => {
+      this.subcategoria = data;
+    });
+  }
 
-addNivelSocioEconomico(){
-  this.nivelsocioeconomicoService.getNivelesSocioEconomicos().subscribe((data: {}) => {
-    this.nivelSocioEconomico = data;
-  });
-}
+  addNivelSocioEconomico(){
+    this.nivelsocioeconomicoService.getNivelesSocioEconomicos().subscribe((data: {}) => {
+      this.nivelSocioEconomico = data;
+    });
+  }
 
-addLugar(){
-  this.lugarService.getLugars().subscribe((data: {}) => {
-    this.lugar = data;
-  });
-}
+  addLugar(){
+    this.lugarService.getLugars().subscribe((data: {}) => {
+      this.lugar = data;
+    });
+  }
 
 
   // Validaciones de Pregunta
@@ -142,7 +142,7 @@ addLugar(){
   get subcategoriaEstudio(){return this.formEstudio.get('subcategoriaEstudio'); }
   get nivelEstudio(){return this.formEstudio.get('nivelEstudio'); }
 
-  createForm(){
+  createForm(): void {
     this.formEstudio = this.formBuilder.group({
       nombreEstudio: ['', [Validators.required, Validators.pattern(this.patronNombreEstudio)]],
       estadoEstudio: ['', Validators.required],

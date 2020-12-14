@@ -49,6 +49,14 @@ getAnalistas():Observable<Analista[]>{
   )
 }
 
+getAnalistaDelUsuario(Analista):Observable<Analista[]>{
+  return this.http.get<Analista[]>(this.apiurl+'/usuario/'+Analista)
+  .pipe(
+    retry(1),
+    catchError(this.handleError)
+  )
+}
+
 getAnalista(id):Observable<Analista[]>{
   return this.http.get<Analista[]>(this.apiurl+'/analista/'+id)
   .pipe(

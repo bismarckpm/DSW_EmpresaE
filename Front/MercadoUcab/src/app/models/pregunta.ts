@@ -6,7 +6,7 @@ export class Pregunta {
     _id: number;
     estado: string;
     descripcion: string;
-    tipo:TipoPregunta;
-    subcategoria:Subcategoria;
-    opciones:Opcion;
+    tipo: TipoPregunta;
+    subcategoria: Subcategoria;
+    opciones: Opcion;
 }

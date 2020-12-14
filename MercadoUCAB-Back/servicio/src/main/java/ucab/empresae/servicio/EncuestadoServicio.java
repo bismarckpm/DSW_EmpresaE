@@ -79,6 +79,8 @@ public class EncuestadoServicio {
 
         encuestadoEntity.setUsuario(usuarioEntity);
 
+        EncuestadoEntity resul = dao.insert(encuestadoEntity);
+
         DaoTelefono daoTelefono = new DaoTelefono();
         TelefonoEntity telefonoEntity = new TelefonoEntity();
         telefonoEntity.setNumero(dtoEncuestado.getTelefono().getNumero());
@@ -86,7 +88,6 @@ public class EncuestadoServicio {
         telefonoEntity.setEncuestado(encuestadoEntity);
         daoTelefono.insert(telefonoEntity);
 
-        EncuestadoEntity resul = dao.insert(encuestadoEntity);
 
         DirectorioActivo ldap = new DirectorioActivo();
         ldap.addEntryToLdap( dtoEncuestado.getUsuario(), rol );

@@ -6,6 +6,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "encuestado", schema = "mercadeoucab")
+@NamedQueries({
+        @NamedQuery(name = "getEncuestadoByUsuario", query = "select e from EncuestadoEntity e where e.usuario = :usuario")
+})
 public class EncuestadoEntity extends BaseEntity{
 
     //private List<HijoEntity> hijos;

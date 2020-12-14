@@ -7,6 +7,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "estudio", schema = "mercadeoucab")
+@NamedQueries({
+        @NamedQuery(name = "getEstudiosCliente", query = "SELECT e FROM EstudioEntity e where e._id in (select c.estudio._id from ClienteEstudioEntity c where c.cliente._id = :id)")
+})
 public class EstudioEntity extends BaseEntity{
     //private List<ClienteEstudioEntity> clienteestudios;
     //private List<EstudioEncuestadoEntity> estudioencuestados;

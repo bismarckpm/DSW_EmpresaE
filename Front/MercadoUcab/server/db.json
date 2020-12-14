@@ -6,29 +6,8 @@
       "clave ": "pedro",
       "rol": "Administrador",
       "autenticacion": "valida"
-    },
-    {
-      "_id": 51,
-      "username": "Mario",
-      "clave ": "mario",
-      "rol": "Administrador",
-      "autenticacion": "valida"
-    },
-    {
-      "username": "asdsa",
-      "clave": "asdasd",
-      "_id": 51
-    },
-    {
-      "username": "asdsa",
-      "clave": "asdasd",
-      "_id": 52
-    },
-    {
-      "username": "asdas",
-      "clave": "asdas",
-      "_id": 53
     }
+
   ],
   "categoria": [
     {

@@ -74,6 +74,8 @@ export class UsuarioService {
   }
 
 
+
+
 ///////////////////// Error HandleError
 handleError(error) {
   let errorMessage = '';

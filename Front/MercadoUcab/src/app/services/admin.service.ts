@@ -67,6 +67,14 @@ getAdministrador(id):Observable<Administrador[]>{
   )
 }
 
+getAdministradorDelUsuario(Administrador):Observable<Administrador[]>{
+  return this.http.get<Administrador[]>(this.apiurl+'/usuario/'+Administrador)
+  .pipe(
+    retry(1),
+    catchError(this.handleError)
+  )
+}
+
 createAdministrador(Administrador):Observable<Administrador[]>{
   return this.http.post<Administrador[]>(this.apiurl+'/Administrador',JSON.stringify(Administrador), this.httpOptions)
   .pipe(

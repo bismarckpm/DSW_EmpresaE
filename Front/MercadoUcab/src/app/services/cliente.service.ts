@@ -47,6 +47,14 @@ export class ClienteService {
     )
   }
 
+  getClienteDelUsuario(usuario):Observable<Cliente[]>{
+    return this.http.get<Cliente[]>(this.apiurl+'/usuario/'+usuario)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+
   getCliente(id):Observable<Cliente[]>{
     return this.http.get<Cliente[]>(this.apiurl+'/cliente/'+id)
     .pipe(

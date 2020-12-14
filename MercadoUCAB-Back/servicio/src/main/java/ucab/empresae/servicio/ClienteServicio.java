@@ -5,8 +5,6 @@ import ucab.empresae.dtos.*;
 import ucab.empresae.entidades.*;
 import ucab.empresae.excepciones.PruebaExcepcion;
 
-import javax.json.Json;
-import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -145,10 +143,15 @@ public class ClienteServicio {
 
             DaoUsuario daoUsuario = new DaoUsuario();
             UsuarioEntity usuarioEntity = daoUsuario.find(clienteEntity.getUsuario().get_id(), UsuarioEntity.class);
+            DtoUsuario dtoUsuario = new DtoUsuario();
+            dtoUsuario.setUsername(clienteEntity.getUsuario().getUsername());
 
             DaoTelefono daoTelefono = new DaoTelefono();
             TelefonoEntity telefonoEntity = daoTelefono.getTelefonoByCliente(clienteEntity);
             daoTelefono.delete(telefonoEntity);
+
+            DirectorioActivo ldap = new DirectorioActivo();
+            ldap.deleteEntry(dtoUsuario);
 
             ClienteEntity clienteResul = daoCliente.delete(clienteEntity);
             UsuarioEntity usuarioResul = daoUsuario.delete(usuarioEntity);
@@ -187,6 +190,11 @@ public class ClienteServicio {
             telefonoEntity.setCliente(clienteEntity);
             TelefonoEntity resulTlf = daoTelefono.update(telefonoEntity);
 
+            DtoUsuario dtoUsuario = new DtoUsuario();
+            dtoUsuario.setUsername(dtoCliente.getUsuario().getUsername());
+            dtoUsuario.setCorreoelectronico(dtoCliente.getUsuario().getCorreoelectronico());
+            DirectorioActivo ldap = new DirectorioActivo();
+            ldap.updateEntry(dtoUsuario, "Cliente");
 
             ClienteEntity resul = dao.update(clienteEntity);
             return Response.ok().entity(clienteEntity).build();

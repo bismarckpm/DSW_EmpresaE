@@ -19,7 +19,7 @@ import { AdminComponent } from './modulos/admin/admin.component';
 import { ClienteComponent } from './modulos/cliente/cliente.component';
 import { EncuestadoComponent } from './modulos/encuestado/encuestado.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
-import { FomrAnalistaComponent } from './componentes/fomr-analista/fomr-analista.component';
+import { FormAnalistaComponent } from './componentes/form-analista/form-analista.component';
 import { ListaAnalistaComponent } from './componentes/lista-analista/lista-analista.component';
 import { CambiarClaveComponent } from './componentes/cambiar-clave/cambiar-clave.component';
 import { EditClienteComponent } from './componentes/edit-cliente/edit-cliente.component';
@@ -43,9 +43,9 @@ import {FormPresentacionComponent} from './componentes/form-presentacion/form-pr
 import {ListaPresentacionComponent} from './componentes/lista-presentacion/lista-presentacion.component';
 import {FormPreguntaComponent} from './componentes/form-pregunta/form-pregunta.component';
 
-//Modulo de Cliente !!!!!!!!!!!!!!!!!
-import{ListaEstudioClienteComponent} from './modulos/cliente/lista-estudio/lista-estudio.component'
-import{ FormEstudioClienteComponent} from './modulos/cliente/form-estudio/form-estudio.component'
+// Modulo de Cliente !!!!!!!!!!!!!!!!!
+import {ListaEstudioClienteComponent} from './modulos/cliente/lista-estudio/lista-estudio.component';
+import { FormEstudioClienteComponent} from './modulos/cliente/form-estudio/form-estudio.component';
 
 // Services
 import { EncuestadoService } from './services/encuestado.service';
@@ -60,6 +60,7 @@ import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { ListaEncuestadosComponent } from './componentes/lista-encuestados/lista-encuestados.component';
 import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
 import { ClienteService } from './services/cliente.service';
+import { SidebarClienteComponent } from './modulos/cliente/sidebar-cliente/sidebar-cliente.component';
 
 
 
@@ -99,7 +100,7 @@ import { ClienteService } from './services/cliente.service';
     ListaClientesComponent,
     FormPresentacionComponent,
     ListaPresentacionComponent,
-    FomrAnalistaComponent,
+    FormAnalistaComponent,
     ListaAnalistaComponent,
     CambiarClaveComponent,
     EditClienteComponent,
@@ -108,8 +109,9 @@ import { ClienteService } from './services/cliente.service';
     PerfilComponent,
     ListaEncuestadosComponent,
     ListaEstudioClienteComponent,
-    FormEstudioClienteComponent
-    
+    FormEstudioClienteComponent,
+    SidebarClienteComponent
+
   ],
   imports: [
     BrowserModule,

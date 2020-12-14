@@ -8,8 +8,8 @@ public class DtoLugar extends DtoBase {
     private String tipo;
 
     //Relaciones
-    private DtoLugar dtoLugar;
-    private DtoNivelSocioEconomico dtoNivelSocioEconomico;
+    private DtoLugar lugar;
+    private DtoNivelSocioEconomico nivelSocioEconomico;
 
     //Constructores
     public DtoLugar() {
@@ -45,20 +45,19 @@ public class DtoLugar extends DtoBase {
         this.tipo = tipo;
     }
 
-    public DtoLugar getDtoLugar() {
-        return dtoLugar;
+    public DtoLugar getLugar() {
+        return lugar;
     }
 
-    public void setDtoLugar(DtoLugar dtoLugar) {
-        this.dtoLugar = dtoLugar;
+    public void setLugar(DtoLugar lugar) {
+        this.lugar = lugar;
     }
 
-    public DtoNivelSocioEconomico getDtoNivelSocioEconomico() {
-        return dtoNivelSocioEconomico;
+    public DtoNivelSocioEconomico getNivelSocioEconomico() {
+        return nivelSocioEconomico;
     }
 
-    public void setDtoNivelSocioEconomico(DtoNivelSocioEconomico dtoNivelSocioEconomico) {
-        this.dtoNivelSocioEconomico = dtoNivelSocioEconomico;
+    public void setNivelSocioEconomico(DtoNivelSocioEconomico nivelSocioEconomico) {
+        this.nivelSocioEconomico = nivelSocioEconomico;
     }
-
 }

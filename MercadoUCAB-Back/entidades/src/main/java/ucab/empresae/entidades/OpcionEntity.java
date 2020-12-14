@@ -5,10 +5,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "opcion", schema = "mercadeoucab")
+@NamedQueries({
+        @NamedQuery(name = "getOpciones", query = "SELECT op from OpcionEntity op INNER JOIN PreguntaOpcionEntity pregopc ON pregopc.opcion = op where pregopc.pregunta = :pregunta")
+})
 public class OpcionEntity extends BaseEntity{
     private String estado;
     private String descripcion;
-    private List<PreguntaOpcionEntity> preguntaOpcion;
+    //private List<PreguntaOpcionEntity> preguntaOpcion;
 
     @Basic
     @Column(name = "estado")
@@ -30,6 +33,15 @@ public class OpcionEntity extends BaseEntity{
         this.descripcion = descripcion;
     }
 
+    public OpcionEntity(String descripcion, String estado){
+        this.descripcion = descripcion;
+        this.estado = estado;
+    }
+
+    public OpcionEntity() {
+    }
+
+    /*
     @OneToMany(mappedBy = "opcion")
     public List<PreguntaOpcionEntity> getPreguntaOpcion() {
         return preguntaOpcion;
@@ -38,4 +50,5 @@ public class OpcionEntity extends BaseEntity{
     public void setPreguntaOpcion(List<PreguntaOpcionEntity> preguntaOpcion) {
         this.preguntaOpcion = preguntaOpcion;
     }
+    */
 }

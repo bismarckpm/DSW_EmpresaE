@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 
 @Path("/encuestado")
@@ -47,25 +48,25 @@ public class EncuestadoServicio {
         encuestadoEntity.setFechaNacimiento(fechaNacimiento);
         encuestadoEntity.setEstado(dtoEncuestado.getEstado());
 
-        EstadoCivilEntity estadoCivilEntity = daoEstadoCivil.find(dtoEncuestado.getEstadoCivil().getId(), EstadoCivilEntity.class);
+        EstadoCivilEntity estadoCivilEntity = daoEstadoCivil.find(dtoEncuestado.getEstadoCivil().get_id(), EstadoCivilEntity.class);
         encuestadoEntity.setEdocivil(estadoCivilEntity);
 
-        NivelAcademicoEntity nivelAcademicoEntity = daoNivelAcademico.find(dtoEncuestado.getNivelAcademico().getId(), NivelAcademicoEntity.class);
+        NivelAcademicoEntity nivelAcademicoEntity = daoNivelAcademico.find(dtoEncuestado.getNivelAcademico().get_id(), NivelAcademicoEntity.class);
         encuestadoEntity.setNivelacademico(nivelAcademicoEntity);
 
-        MedioConexionEntity medioConexionEntity = daoMedioConexion.find(dtoEncuestado.getMedioConexion().getId(), MedioConexionEntity.class);
+        MedioConexionEntity medioConexionEntity = daoMedioConexion.find(dtoEncuestado.getMedioConexion().get_id(), MedioConexionEntity.class);
         encuestadoEntity.setMedioconexion(medioConexionEntity);
 
-        GeneroEntity generoEntity = daoGenero.find(dtoEncuestado.getGenero().getId(), GeneroEntity.class);
+        GeneroEntity generoEntity = daoGenero.find(dtoEncuestado.getGenero().get_id(), GeneroEntity.class);
         encuestadoEntity.setGenero(generoEntity);
 
-        OcupacionEntity ocupacionEntity = daoOcupacion.find(dtoEncuestado.getOcupacion().getId(), OcupacionEntity.class);
+        OcupacionEntity ocupacionEntity = daoOcupacion.find(dtoEncuestado.getOcupacion().get_id(), OcupacionEntity.class);
         encuestadoEntity.setOcupacion(ocupacionEntity);
 
-        NivelSocioeconomicoEntity nivelSocioeconomicoEntity = daoNivelSocioeconomico.find(dtoEncuestado.getNivelSocioEconomico().getId(), NivelSocioeconomicoEntity.class);
+        NivelSocioeconomicoEntity nivelSocioeconomicoEntity = daoNivelSocioeconomico.find(dtoEncuestado.getNivelSocioEconomico().get_id(), NivelSocioeconomicoEntity.class);
         encuestadoEntity.setNivelsocioeco(nivelSocioeconomicoEntity);
 
-        LugarEntity lugarEntity = daoLugar.find(dtoEncuestado.getLugar().getId(), LugarEntity.class);
+        LugarEntity lugarEntity = daoLugar.find(dtoEncuestado.getLugar().get_id(), LugarEntity.class);
         encuestadoEntity.setLugar(lugarEntity);
 
         usuarioEntity.setUsername(dtoEncuestado.getUsuario().getUsername());
@@ -83,5 +84,60 @@ public class EncuestadoServicio {
 
         return Response.ok(encuestadoEntity).build();
     }
+
+
+    @GET
+    @Produces(value = MediaType.APPLICATION_JSON)
+    public Response getEncuestados() {
+        List<EncuestadoEntity> encuestados = null;
+        try {
+            DaoEncuestado dao = new DaoEncuestado();
+                encuestados = dao.findAll(EncuestadoEntity.class);
+        } catch (Exception ex) {
+            String problema = ex.getMessage();
+        }
+        return Response.ok(encuestados).build();
+    }
+
+    @GET
+    @Produces(value=MediaType.APPLICATION_JSON)
+    @Path("/{id}")
+    public Response getEncuestado(@PathParam("id") long id)
+    {
+        DaoEncuestado dao = new DaoEncuestado();
+        EncuestadoEntity encuestadoEntity = dao.find(id, EncuestadoEntity.class);
+
+        if(encuestadoEntity != null) {
+            return Response.ok(encuestadoEntity).build();
+        }else{
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
+
+
+    @DELETE
+    @Produces(value = MediaType.APPLICATION_JSON)
+    @Path("/{id}")
+    public Response deleteEncuestado(@PathParam("id") long id){
+
+        try{
+            DaoEncuestado daoEncuestado = new DaoEncuestado();
+            EncuestadoEntity encuestadoEntity = daoEncuestado.find(id, EncuestadoEntity.class);
+
+            DaoUsuario daoUsuario = new DaoUsuario();
+            UsuarioEntity usuarioEntity = daoUsuario.find(encuestadoEntity.getUsuario().get_id(), UsuarioEntity.class);
+
+            EncuestadoEntity escuestadoResul = daoEncuestado.delete(encuestadoEntity);
+            UsuarioEntity usuarioResul = daoUsuario.delete(usuarioEntity);
+
+            return Response.ok().build();
+
+        }catch (Exception ex){
+            String problema = ex.getMessage();
+        }
+
+        return Response.status(Response.Status.NOT_FOUND).build();
+    }
+
 
 }

@@ -24,72 +24,62 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  
 
 
-Loggearse(){
-  if (this.formLogin.valid) {
-    this.usuarioService.getUsuarios().subscribe( data  => {
-   // this.usuarioService.Logear(this.usuario).subscribe( data  => {
-      console.log(data) ;
+  Loggearse(){
+    if (this.formLogin.valid) {
+      this.usuarioService.getUsuarios().subscribe( data  => {
+        console.log(data) ;
 
-      if(data[0].autenticacion=="valida")
-      {
-        console.log("==============") ;
-        console.log(data[0].username) ;
-        console.log(data[0].rol) ; ;
-        console.log("==============") ;
-              if(data[0].rol=="Administrador"){
-                console.log("Entre en  administrador");
-               this.router.navigate(['/admin/0']);
-               localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
-               localStorage.setItem('rol',JSON.stringify(data[0].rol));
-              }
-              if(data[0].rol=="Encuestado"){
-                console.log("Entre en  Encuestado")
-                 this.router.navigate(['encuestado/0'])
-                 localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
-                 localStorage.setItem('rol',JSON.stringify(data[0].rol));
-              }
-              if(data[0].rol=="Analista"){
-                console.log("Entre en  Analsita");
-                this.router.navigate(['/analista/0']);
-                localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
-               localStorage.setItem('rol',JSON.stringify(data[0].rol));
-              }
-              if(data[0].rol=="Cliente"){
-                console.log("Entre en  Cliente");
-                this.router.navigate(['/cliente/0']);
-                localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
-               localStorage.setItem('rol',JSON.stringify(data[0].rol));
-              }
-      }else
-        {
+        if(data[0].autenticacion=="valida") {
+          console.log("==============") ;
+          console.log(data[0].username) ;
+          console.log(data[0].rol) ; ;
+          console.log("==============") ;
+          if(data[0].rol=="Administrador"){
+            console.log("Entre en  administrador");
+            this.router.navigate(['/admin/0']);
+            localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
+            localStorage.setItem('rol',JSON.stringify(data[0].rol));
+          }
+          if(data[0].rol=="Encuestado"){
+            console.log("Entre en  Encuestado")
+            this.router.navigate(['encuestado/0'])
+            localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
+            localStorage.setItem('rol',JSON.stringify(data[0].rol));
+          }
+          if(data[0].rol=="Analista"){
+            console.log("Entre en  Analsita");
+            this.router.navigate(['/analista/0']);
+            localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
+          localStorage.setItem('rol',JSON.stringify(data[0].rol));
+          }
+          if(data[0].rol=="Cliente"){
+            console.log("Entre en  Cliente");
+            this.router.navigate(['/cliente/0']);
+            localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
+            localStorage.setItem('rol',JSON.stringify(data[0].rol));
+          }
+        }else {
           window.alert("Usuario no registrado o Informacion Incorrecta");
         }
-
-    })  
-  
+      });
+    }
   }
-}
 
 
-logout() {
-  // remove user from local storage and set current user to null
-  localStorage.removeItem('usuarioID');
-  localStorage.removeItem('rol');
-  this.router.navigate[('/Login')]
- // this.currentUserSubject.next(null);
-}
-
-
+  logout() {
+    // remove user from local storage and set current user to null
+    localStorage.removeItem('usuario');
+    // this.currentUserSubject.next(null);
+  }
 
   /// Validacion de Datos
   get userName(){return this.formLogin.get('userName');}
 
   get password(){return this.formLogin.get('password');}
 
-  createForm(){
+  createForm(): void {
     this.formLogin = this.formBuilder.group({
       userName: ['',Validators.required] ,
       password: ['', Validators.required],

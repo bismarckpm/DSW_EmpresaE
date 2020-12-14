@@ -25,7 +25,7 @@ public class SubcategoriaServicio extends AplicacionBase {
 
         if(dtoSubcategoria.getCategoria() != null) {
             DaoCategoria daoCategoria = DaoFactory.DaoCategoriaInstancia();
-            this.subcategoria.setCategoria(daoCategoria.find(dtoSubcategoria.getCategoria().getId(), CategoriaEntity.class));
+            this.subcategoria.setCategoria(daoCategoria.find(dtoSubcategoria.getCategoria().get_id(), CategoriaEntity.class));
         }
     }
 
@@ -41,7 +41,19 @@ public class SubcategoriaServicio extends AplicacionBase {
         }
     }
 
+    @GET
+    @Path("/{id}")
+    @Produces(value = MediaType.APPLICATION_JSON)
+    public Response getSubCategoria(@PathParam("id") long id) {
+        try {
+            return Response.ok(this.dao.find(id, SubcategoriaEntity.class)).build();
+        } catch (Exception ex) {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+        }
+    }
+
     @POST
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addSubcategoria(DtoSubcategoria dtoSubcategoria) {
@@ -54,13 +66,27 @@ public class SubcategoriaServicio extends AplicacionBase {
     }
 
     @PUT
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateSubcategoria(DtoSubcategoria dtoSubcategoria) {
         try {
-            this.subcategoria = this.dao.find(dtoSubcategoria.getId(), SubcategoriaEntity.class);
+            this.subcategoria = this.dao.find(dtoSubcategoria.get_id(), SubcategoriaEntity.class);
             subcategoriaAtributos(dtoSubcategoria);
-            return Response.ok(this.dao.update(this.subcategoria)).build();
+            return Response.ok(this.dao.delete(this.subcategoria)).build();
+        } catch(Exception ex){
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+        }
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response deleteSubcategoria(@PathParam("id") long id) {
+        try {
+            this.subcategoria = this.dao.find(id, SubcategoriaEntity.class);
+            return Response.ok(this.dao.delete(this.subcategoria)).build();
         } catch(Exception ex){
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }

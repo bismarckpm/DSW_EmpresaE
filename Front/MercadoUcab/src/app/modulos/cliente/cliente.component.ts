@@ -15,17 +15,18 @@ export class ClienteComponent implements OnInit {
 
   accion = 1;
 
-  
+
   constructor(
     private ruta: ActivatedRoute,
     private servicio: ClienteService,
     private rutaActtual: Router
-  ) { this.ruta.params.subscribe(params => {
-    console.log(params);
-    this.seccion = this.servicio.getSeccion(params.id);
-  });
-  console.log(this.rutaActtual.url);
-}
+  ) {
+    this.ruta.params.subscribe(params => {
+      // console.log(params);
+      this.seccion = this.servicio.getSeccion(params.id);
+    });
+    console.log(this.rutaActtual.url);
+  }
 
   ngOnInit(): void {
   }

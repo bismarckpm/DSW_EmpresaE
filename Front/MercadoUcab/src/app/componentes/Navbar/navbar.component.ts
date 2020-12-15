@@ -8,11 +8,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
+bool=true;
   constructor(private router:Router) { 
   }
 
   ngOnInit(): void {
+    if(localStorage.getItem('rol').length!=0){
+      this.bool=false;
+    }else{
+      this.bool=true;
+    }
   }
 
   navegarHaciaRegistro(){

@@ -10,6 +10,7 @@ import { ClienteService } from 'src/app/services/cliente.service';
 import { AdminService } from 'src/app/services/admin.service';
 import { AnalistaService } from 'src/app/services/analista.service';
 import { EncuestadoService } from 'src/app/services/encuestado.service';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-perfil',
@@ -54,7 +55,6 @@ export class PerfilComponent implements OnInit {
           this.Administrador= data;
         })
         this.admin=true;
-
     }
 
     if((JSON.parse(localStorage.getItem("rol") )) == "Cliente"){
@@ -79,11 +79,10 @@ export class PerfilComponent implements OnInit {
      this.analistaService.getAnalistaDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data =>{
        this.Analista =data 
      })
-
+      console.log("")
      this.analist=true;
-
     }
-    
+
   }
 
 
@@ -100,6 +99,7 @@ export class PerfilComponent implements OnInit {
         }
     })
 
+    
   }
 
 

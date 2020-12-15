@@ -3,6 +3,8 @@ package ucab.empresae.servicio;
 import ucab.empresae.daos.DaoCliente;
 import ucab.empresae.daos.DaoEncuestado;
 import ucab.empresae.daos.DaoUsuario;
+import ucab.empresae.dtos.DtoTipoUsuario;
+import ucab.empresae.dtos.DtoUsuario;
 import ucab.empresae.entidades.ClienteEntity;
 import ucab.empresae.entidades.EncuestadoEntity;
 import ucab.empresae.entidades.UsuarioEntity;
@@ -24,6 +26,7 @@ public class UsuarioServicio {
     public Response getUsuario(@PathParam("id") long id) throws PruebaExcepcion {
 
         DaoUsuario dao = new DaoUsuario();
+        DtoUsuario dtoUsuario = new DtoUsuario();
         UsuarioEntity usuarioEntity = dao.find(id, UsuarioEntity.class);
         Response usuario = null;
 
@@ -44,7 +47,19 @@ public class UsuarioServicio {
         }else if(usuarioEntity.getTipousuario().getDescripcion().equals("Administrador") ||
                 usuarioEntity.getTipousuario().getDescripcion().equals("Analista")){
 
-            usuario = Response.ok(usuarioEntity).build();
+            dtoUsuario.set_id(usuarioEntity.get_id());
+            dtoUsuario.setUsername(usuarioEntity.getUsername());
+
+            DirectorioActivo ldap = new DirectorioActivo();
+            String correo = ldap.getCorreo(dtoUsuario);
+            dtoUsuario.setCorreoelectronico(correo);
+
+            DtoTipoUsuario dtoTipoUsuario = new DtoTipoUsuario();
+            dtoTipoUsuario.set_id(usuarioEntity.getTipousuario().get_id());
+            dtoTipoUsuario.setDescripcion(usuarioEntity.getTipousuario().getDescripcion());
+            dtoUsuario.setTipoUsuario(dtoTipoUsuario);
+
+            usuario = Response.ok(dtoUsuario).build();
 
         }
 

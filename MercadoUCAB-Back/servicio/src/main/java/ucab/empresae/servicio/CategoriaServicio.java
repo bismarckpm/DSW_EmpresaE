@@ -57,7 +57,7 @@ public class CategoriaServicio extends AplicacionBase {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
     }
-
+    //http://localhost:8080/servicio-1.0-SNAPSHOT/api/categoria/1
     @PUT
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)

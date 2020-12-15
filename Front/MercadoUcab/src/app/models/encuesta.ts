@@ -7,5 +7,12 @@ export class Encuesta {
     fechaInicio: string;
     fechaFin: string;
     estudio: Estudio;
-    pregunta: Pregunta;
+    pregunta: Pregunta[];
+
+    constructor(){}
+
+    agregarPregunta(): void {
+        // this.pregunta.push()
+    }
+
 }

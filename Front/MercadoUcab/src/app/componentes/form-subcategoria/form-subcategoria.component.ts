@@ -13,18 +13,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class FormSubcategoriaComponent implements OnInit {
 
-  @Input() subcategoria ={ _id:0, nombre:'',estado:'', categoria:{_id:0}};
-  categoria:any;
+  @Input() subcategoria = { _id: 0, nombre: '', estado: '', categoria: {_id: 0}};
+  categoria: any;
   // Validacion de datos
   formSubcategoria: FormGroup;
   namePattern: any = /^[A-Za-z0-9\s]+$/;
 
   constructor(
     public subcategoriaService: SubcategoriaService,
-    public categoriaService:CategoriaService,
-    public router:Router,
+    public categoriaService: CategoriaService,
+    public router: Router,
     private formBuilder: FormBuilder
-  ) {  this.createForm();}
+  ) {  this.createForm(); }
 
   ngOnInit(): void {
     this.addcategoria();
@@ -35,7 +35,7 @@ export class FormSubcategoriaComponent implements OnInit {
   addSubcategoria(subcategoria){
     if (this.formSubcategoria.valid) {
     this.subcategoriaService.createsubcategoria(this.subcategoria).subscribe((data: {}) => {
-    })
+    });
   }
   else{
     alert(' LLenar todos los campos por favor');
@@ -44,12 +44,12 @@ export class FormSubcategoriaComponent implements OnInit {
 
 
 
-    ///Esto es para mostrar en los drops doww
+    /// Esto es para mostrar en los drops doww
     addcategoria(){
 
       this.categoriaService.getCategorias().subscribe((Categorias: {}) => {
-        this.categoria= Categorias;
-      })
+        this.categoria = Categorias;
+      });
 
     }
 
@@ -67,7 +67,7 @@ export class FormSubcategoriaComponent implements OnInit {
       return this.formSubcategoria.get('CATEGORIA');
     }
 
-    createForm(){
+    createForm(): void{
       this.formSubcategoria = this.formBuilder.group({
         nombreSubcategoria: ['', [Validators.pattern(this.namePattern), Validators.required]],
         estadoSubcategoria: ['', Validators.required],

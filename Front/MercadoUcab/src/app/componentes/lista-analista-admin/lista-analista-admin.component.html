@@ -44,37 +44,10 @@
                             <div class="row">
                               <div class="col-md-6 mb-3">
                                 <label for="user">Username</label>
-                                <input type="text" [(ngModel)]="usuarioData.username" class="form-control"  formControlName="usernameUsuario" name="username" id="user" placeholder="" >
+                                <input type="text" readonly="readonly" [(ngModel)]="usuarioData.username" class="form-control"  formControlName="usernameUsuario" name="username" id="user" placeholder="" >
                                 <div *ngIf="usernameUsuario.invalid && (usernameUsuario.dirty || usernameUsuario.touched)" class="alert alert-danger">
                                   <div *ngIf="usernameUsuario.errors.required">
                                     Este campo es obligatorio
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-6 mb-3">
-                              <label for="clave">Clave</label>
-                              <input type="text" [(ngModel)]="usuarioData.clave" class="form-control"  formControlName="claveUsuario" name="clave" id="clave" placeholder="" >
-                              <div *ngIf="claveUsuario.invalid && (claveUsuario.dirty || claveUsuario.touched)" class="alert alert-danger">
-                                <div *ngIf="claveUsuario.errors.required">
-                                  Este campo es obligatorio
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-6 mb-3">
-                              <label for="correo">Correo Electronico</label>
-                              <input type="text" [(ngModel)]="usuarioData.correoElectronico" class="form-control"  formControlName="correoElectronicoUsuario" name="correoElectronico" id="correo" placeholder="" >
-                              <div *ngIf="correoElectronicoUsuario.invalid && (correoElectronicoUsuario.dirty || correoElectronicoUsuario.touched)" class="alert alert-danger">
-                                <div *ngIf="correoElectronicoUsuario.errors.required">
-                                  Este campo es obligatorio
-                                </div>
-                                <div>
-                                  <div *ngIf="correoElectronicoUsuario.errors.pattern">
-                                    Introduzca un formato valido
                                   </div>
                                 </div>
                               </div>

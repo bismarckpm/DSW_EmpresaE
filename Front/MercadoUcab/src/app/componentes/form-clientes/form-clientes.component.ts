@@ -108,11 +108,11 @@ export class FormClientesComponent implements OnInit {
       rifCliente: ['', [Validators.required, Validators.pattern(this.patronRIFCliente)]],
       razonSocialCliente: ['', Validators.required],
       estadoCliente: ['', Validators.required],
-      lugarEncuestado: ['', Validators.required],
+      lugarCliente: ['', Validators.required],
       usernameCliente: ['', Validators.required],
       claveCliente: ['', Validators.required],
       telefonoCliente: ['', [Validators.required, Validators.pattern(this.patronRIFCliente), Validators.maxLength(11)]],
-      correoElectronicoCliente: ['', [Validators.required, Validators.pattern(this.patronCorreoCliente)]]
+      correoElectronicoCliente: ['', [Validators.required, Validators.pattern(this.patronCorreoCliente)]],
     });
   }
 }

@@ -53,7 +53,6 @@ public class SubcategoriaServicio extends AplicacionBase {
     }
 
     @POST
-    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addSubcategoria(DtoSubcategoria dtoSubcategoria) {
@@ -73,7 +72,7 @@ public class SubcategoriaServicio extends AplicacionBase {
         try {
             this.subcategoria = this.dao.find(dtoSubcategoria.get_id(), SubcategoriaEntity.class);
             subcategoriaAtributos(dtoSubcategoria);
-            return Response.ok(this.dao.delete(this.subcategoria)).build();
+            return Response.ok(this.dao.update(this.subcategoria)).build();
         } catch(Exception ex){
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }

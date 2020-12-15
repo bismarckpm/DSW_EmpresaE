@@ -6,6 +6,7 @@ export class Cliente {
     estado: string;
     razonSocial: string;
     rif: number;
+    telefono: string;
 
     lugar:Lugar;
     usuario:Usuario;

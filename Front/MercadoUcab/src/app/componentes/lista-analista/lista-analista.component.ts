@@ -13,7 +13,7 @@ export class ListaAnalistaComponent implements OnInit {
 
   Analista: Analista[] = [];
   _id = this.actRoute.snapshot.params._id;
-  @Input() analistaData = {_id: 0, username: '', clave: '', correoElectronico: '', estado: ''};
+  @Input() analistaData = {_id: 0, username: '', clave: '', correoElectronico: '', estado: '', rol: ''};
 
   formAnalista: FormGroup;
   patronCorreoAnalista: any = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -37,13 +37,13 @@ export class ListaAnalistaComponent implements OnInit {
     });
   }
 
-  deleteAnalista(id): void{
+  deleteAnalista(id){
     this.analistaService.deleteAnalista(id).subscribe(data => {
       this.loadAnalista();
     });
   }
 
-  updateAnalista(): void{
+  updateAnalista(){
     if (this.formAnalista.valid) {
       this.analistaService.updateAnalista(this.analistaData._id, this.analistaData).subscribe(data => {
       });
@@ -53,7 +53,7 @@ export class ListaAnalistaComponent implements OnInit {
     }
   }
 
-  editar(analista): void{
+  editar(analista){
     this.analistaData = analista;
   }
 
@@ -73,11 +73,16 @@ export class ListaAnalistaComponent implements OnInit {
     return this.formAnalista.get('correoElectronicoAnalista');
   }
 
-  createForm(): void{
+  get rolAnalista(){
+    return this.formAnalista.get('rolAnalista');
+  }
+
+  createForm(){
     this.formAnalista = this.formBuilder.group({
       usernameAnalista: ['', Validators.required],
       estadoAnalista: ['',  Validators.required],
       claveAnalista: ['', Validators.required],
+      rolAnalista: ['', Validators.required],
       correoElectronicoAnalista: ['', [Validators.required, Validators.pattern(this.patronCorreoAnalista)]],
     });
   }

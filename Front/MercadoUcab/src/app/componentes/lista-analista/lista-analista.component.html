@@ -6,7 +6,8 @@
         <th>ID</th>
         <th>Username</th>
         <th>Correo</th>
-        <th>Estado </th>
+        <th>Estado</th>
+        <th>Rol</th>
       </tr>
       </thead>
       <tbody>
@@ -15,6 +16,7 @@
         <td>{{ analista.username }}</td>
         <td>{{ analista.correoElectronico }}</td>
         <td>{{ analista.estado }}</td>
+        <td>{{ analista.rol }}</td>
         <td>
           <div class="d-flex justify-content-around">
             <button type="button" class="btn btn-primary" data-toggle="modal" (click)="editar(analista)" data-target="#exampleModal">
@@ -28,7 +30,7 @@
                 <div class="modal-content">
                   <!-- Cabezado Modal -->
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Editar Marca </h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -85,11 +87,24 @@
                                 <option value="a">Activa</option>
                                 <option value="i">Inactiva</option>
                               </select>
+                              <div *ngIf="estadoAnalista.invalid && (estadoAnalista.dirty || estadoAnalista.touched)" class="alert alert-danger">
+                                <div *ngIf="estadoAnalista.errors.required">
+                                  Este campo es obligatorio
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                          <div *ngIf="estadoAnalista.invalid && (estadoAnalista.dirty || estadoAnalista.touched)" class="alert alert-danger">
-                            <div *ngIf="estadoAnalista.errors.required">
-                              Este campo es obligatorio
+                            <div class="col-md-4 mb-3">
+                              <label for="rol">Rol</label>
+                              <select class="custom-select d-block w-100" [(ngModel)]="analista.rol" formControlName="rolAnalista" id="rol" name="rol">
+                                <option value="">Choose...</option>
+                                <option value="Administrador">Administrador</option>
+                                <option value="Analista">Analista</option>
+                              </select>
+                              <div *ngIf="rolAnalista.invalid && (rolAnalista.dirty || rolAnalista.touched)" class="alert alert-danger">
+                                <div *ngIf="rolAnalista.errors.required">
+                                  Este campo es obligatorio
+                                </div>
+                              </div>
                             </div>
                           </div>
                           <br>

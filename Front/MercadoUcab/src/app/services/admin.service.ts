@@ -24,7 +24,9 @@ export class AdminService {
     'Tipos'
   ];
   
-  apiurl='http://localhost:3000';
+  //apiurl='http://localhost:3000';
+  apiurl = 'http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+
   constructor(
     private http: HttpClient
   ) { console.log('servicio ADMIN'); }
@@ -61,6 +63,14 @@ getAdministradors():Observable<Administrador[]>{
 
 getAdministrador(id):Observable<Administrador[]>{
   return this.http.get<Administrador[]>(this.apiurl+'/Administrador/'+id)
+  .pipe(
+    retry(1),
+    catchError(this.handleError)
+  )
+}
+
+getAdministradorDelUsuario(Administrador):Observable<Administrador[]>{
+  return this.http.get<Administrador[]>(this.apiurl+'/usuario/'+Administrador)
   .pipe(
     retry(1),
     catchError(this.handleError)

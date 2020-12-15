@@ -14,13 +14,14 @@ export class Encuestado {
    primerApellido:string;
    segundoApellido:string;
    fechaNacimiento:string;
+   telefono: string;
 
-   estado:EstadoCivil;
+   estadoCivil:EstadoCivil;
    nivelAcademico:NivelAcademico;
    medioConexion:MedioConexion;
    genero:Genero;
    ocupacion:Ocupacion;
-   nivelSocioeconomico:NivelSocioEconomico;
+   nivelSocioEconomico:NivelSocioEconomico;
    lugar:Lugar;
    usuario:Usuario;
 

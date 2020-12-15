@@ -65,7 +65,7 @@ public class PreguntaServicio {
             PreguntaEntity preguntaInsert = dao.insert(pregunta);
 
             // Tipo de Pregunta de Seleccion
-            if(dtoPregunta.getTipo().getId() == 3 || dtoPregunta.getTipo().getId() == 4) {
+            if(dtoPregunta.getTipo().get_id() == 3 || dtoPregunta.getTipo().get_id() == 4) {
 
                 String[] opciones = dtoPregunta.getOpciones();
                 int contador = 0;
@@ -87,7 +87,7 @@ public class PreguntaServicio {
             }
 
             // Tipo de pregunta de Verdadero y Falso
-            if(dtoPregunta.getTipo().getId() == 2) {   //Asigna en la n a n el verdadero o falso
+            if(dtoPregunta.getTipo().get_id() == 2) {   //Asigna en la n a n el verdadero o falso
                 List<OpcionEntity> opciones = new ArrayList<>();
                 opciones.add(new OpcionEntity("Verdadero", "a"));
                 opciones.add(new OpcionEntity("Falso", "a"));
@@ -103,7 +103,7 @@ public class PreguntaServicio {
                 }
             }
 
-            if(dtoPregunta.getTipo().getId() == 5) {   //Asigna en la n a n EL rango
+            if(dtoPregunta.getTipo().get_id() == 5) {   //Asigna en la n a n EL rango
                 List<OpcionEntity> opciones = new ArrayList<>();
                 opciones.add(new OpcionEntity("1", "a"));
                 opciones.add(new OpcionEntity("2", "a"));
@@ -173,7 +173,7 @@ public class PreguntaServicio {
             PreguntaEntity preguntaUpdate = dao.update(pregunta);
 
             // Tipo de Pregunta de Seleccion
-            if(dtoPregunta.getTipo().getId() == 3 || dtoPregunta.getTipo().getId() == 4) {
+            if(dtoPregunta.getTipo().get_id() == 3 || dtoPregunta.getTipo().get_id() == 4) {
 
                 String[] opciones = dtoPregunta.getOpciones();
                 int contador = 0;
@@ -195,7 +195,7 @@ public class PreguntaServicio {
             }
 
             // Tipo de pregunta de Verdadero y Falso
-            if(dtoPregunta.getTipo().getId() == 2) {   //Asigna en la n a n el verdadero o falso
+            if(dtoPregunta.getTipo().get_id() == 2) {   //Asigna en la n a n el verdadero o falso
                 List<OpcionEntity> opciones = new ArrayList<>();
                 opciones.add(new OpcionEntity("Verdadero", "a"));
                 opciones.add(new OpcionEntity("Falso", "a"));
@@ -211,7 +211,7 @@ public class PreguntaServicio {
                 }
             }
 
-            if(dtoPregunta.getTipo().getId() == 5) {   //Asigna en la n a n EL rango
+            if(dtoPregunta.getTipo().get_id() == 5) {   //Asigna en la n a n EL rango
                 List<OpcionEntity> opciones = new ArrayList<>();
                 opciones.add(new OpcionEntity("1", "a"));
                 opciones.add(new OpcionEntity("2", "a"));

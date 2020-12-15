@@ -19,7 +19,7 @@ public class EncuestadoServicio_Test {
         dtoEncuestado.setEstado("A");
 
         DtoEstadoCivil dtoEstadoCivil = new DtoEstadoCivil(1);
-        dtoEncuestado.setEstadocivil(dtoEstadoCivil);
+        dtoEncuestado.setEstadoCivil(dtoEstadoCivil);
 
         DtoNivelAcademico dtoNivelAcademico = new DtoNivelAcademico(1);
         dtoEncuestado.setNivelAcademico(dtoNivelAcademico);

@@ -15,7 +15,9 @@ export class ClienteService {
   ];
 
 
-  apiurl='http://localhost:3000';
+  //apiurl='http://localhost:3000';
+  apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+
 
   constructor(private http:HttpClient) { }
   // Http Options
@@ -41,6 +43,14 @@ export class ClienteService {
   ///////// Metodos para ejecutar//////////////
   getClientes():Observable<Cliente[]>{
     return this.http.get<Cliente[]>(this.apiurl+'/cliente')
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+
+  getClienteDelUsuario(usuario):Observable<Cliente[]>{
+    return this.http.get<Cliente[]>(this.apiurl+'/usuario/'+usuario)
     .pipe(
       retry(1),
       catchError(this.handleError)

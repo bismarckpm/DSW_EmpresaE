@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, KeyValueDiffers, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Lugar} from '../../models/lugar';
 import {LugarService} from '../../services/lugar.service';
@@ -16,9 +16,12 @@ export class FormClientesComponent implements OnInit {
   @Input() cliente = {_id: 0, rif: '', razonSocial: '', estado: '',
     lugar:  {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: ''}}}},
     usuario: {_id: 0, username: '', estado: '', clave: '', correoElectronico: ''},
+    telefono: {_id: 0, numero: ''},
+
   };
 
   lugar: any;
+  telefono: any;
   usuario: any;
   username: any;
   clave: any;
@@ -97,6 +100,7 @@ export class FormClientesComponent implements OnInit {
   get razonSocialCliente() {return this.formCliente.get('razonSocialCliente'); }
   get estadoCliente() {return this.formCliente.get('estadoCliente'); }
   get lugarCliente() {return this.formCliente.get('lugarCliente'); }
+  get telefonoCliente(){return this.formCliente.get('telefonoCliente'); }
 
 
   createForm() {
@@ -107,6 +111,7 @@ export class FormClientesComponent implements OnInit {
       lugarEncuestado: ['', Validators.required],
       usernameCliente: ['', Validators.required],
       claveCliente: ['', Validators.required],
+      telefonoCliente: ['', [Validators.required, Validators.pattern(this.patronRIFCliente), Validators.maxLength(11)]],
       correoElectronicoCliente: ['', [Validators.required, Validators.pattern(this.patronCorreoCliente)]]
     });
   }

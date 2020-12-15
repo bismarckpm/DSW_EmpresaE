@@ -523,6 +523,32 @@
           "descripcion": ""
         }
       ]
+    },
+    {
+      "_id": 5,
+      "estado": "I",
+      "fechaInicio": "10/10/2010",
+      "fechaFin": "10/10/2011",
+      "estudio": {
+        "_id": 1
+      },
+      "pregunta": [
+        {
+          "_id": 1
+        },
+        {
+          "_id": 1
+        },
+        {
+          "_id": 2
+        },
+        {
+          "_id": 2
+        },
+        {
+          "_id": 1
+        }
+      ]
     }
   ],
   "analista": [
@@ -789,6 +815,38 @@
       "_id": 2,
       "nombre": "femenino",
       "estado": "a"
+    }
+  ],
+  "preguntassubcategoria": [
+    {
+      "_id": 1,
+      "descripcion": "Preguntas subcate 1",
+      "estado": "a",
+      "tipo": {
+        "_id": 1,
+        "estado": "a",
+        "tipo": "verdadero y Falso"
+      },
+      "subcategoria": {
+        "_id": 1,
+        "nombre": "subcategoria 1",
+        "estado": "i"
+      }
+    },
+    {
+      "_id": 2,
+      "descripcion": "Preguntas subcate 2",
+      "estado": "a",
+      "tipo": {
+        "_id": 1,
+        "estado": "i",
+        "tipo": "multiple"
+      },
+      "subcategoria": {
+        "_id": 3,
+        "nombre": "subcategoria",
+        "estado": "i"
+      }
     }
   ]
 }

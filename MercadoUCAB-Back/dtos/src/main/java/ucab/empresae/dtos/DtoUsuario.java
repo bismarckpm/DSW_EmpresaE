@@ -10,9 +10,9 @@ public class DtoUsuario extends DtoBase {
     private String nuevaClave;
     
     //Relaciones
-    private DtoTipoUsuario dtoTipoUsuario;
-    private DtoCliente dtoCliente;
-    private DtoEncuestado dtoEncuestado;
+    private DtoTipoUsuario tipoUsuario;
+    private DtoCliente cliente;
+    private DtoEncuestado encuestado;
 
     //Constructores
     public DtoUsuario() {
@@ -59,28 +59,27 @@ public class DtoUsuario extends DtoBase {
         this.nuevaClave = nuevaClave;
     }
 
-    public DtoTipoUsuario getDtoTipoUsuario() {
-        return dtoTipoUsuario;
+    public DtoTipoUsuario getTipoUsuario() {
+        return tipoUsuario;
     }
 
-    public void setDtoTipoUsuario(DtoTipoUsuario dtoTipoUsuario) {
-        this.dtoTipoUsuario = dtoTipoUsuario;
+    public void setTipoUsuario(DtoTipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
-    public DtoCliente getDtoCliente() {
-        return dtoCliente;
+    public DtoCliente getCliente() {
+        return cliente;
     }
 
-    public void setDtoCliente(DtoCliente dtoCliente) {
-        this.dtoCliente = dtoCliente;
+    public void setCliente(DtoCliente cliente) {
+        this.cliente = cliente;
     }
 
-    public DtoEncuestado getDtoEncuestado() {
-        return dtoEncuestado;
+    public DtoEncuestado getEncuestado() {
+        return encuestado;
     }
 
-    public void setDtoEncuestado(DtoEncuestado dtoEncuestado) {
-        this.dtoEncuestado = dtoEncuestado;
+    public void setEncuestado(DtoEncuestado encuestado) {
+        this.encuestado = encuestado;
     }
-
 }

@@ -3,7 +3,7 @@
 
         <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">encuesta</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="asigCantPregunta(0)">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="auxIterador = []">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
@@ -49,6 +49,7 @@
                         </div> -->
                     </div>
                 </div>
+
                 <div class="form-row">
                     <div class="col-md-4 col-sm-6 mb-3">
                         <label for="estudio">Estudio relacionado</label>
@@ -63,28 +64,31 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="form-row">
                     <div class="col-md-8 col-sm-6 mb-3">
                         <label for="cantidadPreguntas">Cantidad de preguntas</label>
                     </div>
                     <div class="col-md-4 col-sm-6 mb-3">
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-light" (click)="cargarPreguntas()">5</button>
-                            <button type="button" class="btn btn-light" (click)="cargarPreguntas()">10</button>
-                            <button type="button" class="btn btn-light" (click)="cargarPreguntas()">15</button>
+                            <button type="button" class="btn btn-light" *ngFor="let opcion of opcionesCantidad" (click)="cargarPreguntas(opcion)">
+                                {{ opcion }}
+                            </button>
                           </div>
                         <div class="invalid-feedback">
                             Please select a valid option.
                         </div>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="col-md-2 col-sm-2 mb-3">
-                        <label for="pregunta">Pregunta </label>
+
+                <div class="form-row" *ngFor="let item of auxIterador; let i=index">
+                    <div class="col-md-3 col-sm-2 mb-3">
+                        <label for="pregunta">Pregunta {{ i+1 }}</label>
                     </div>
-                    <div class="col-md-8 col-sm-8 mb-3">
+                    <div class="col-md-7 col-sm-8 mb-3">
                         <select class="custom-select d-block w-100" [(ngModel)]="preguntaInsertar._id" id="pregunta" value="preguntaInsertar._id" 
                         name="preguntaInsertar._id" formControlName="pregunta" >
+                            <option>Choose...</option>
                             <option *ngFor="let pregunta of preguntasMostrar" [ngValue]= "pregunta._id">{{ pregunta.descripcion }}</option>
                         </select>
                         <div class="invalid-feedback">
@@ -92,38 +96,14 @@
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-2 mb-2">
-                        <button type="button" class="btn btn-primary" (click)="addPreguntaEstudio()">
-                            +
-                        </button>
+                        <button type="button" class="btn btn-primary" (click)="addPreguntaEncuesta()"> + </button>
                     </div>
                 </div>
-                <!-- arreglar esta parte de agregar preguntas a una encuesta -->
-                <!-- <div class="form-row">
-                    <div class="col-md-6 col-sm-8 mb-4">
-                        <label for="pregunta">Pregunta</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="col-md-4  col-sm-4 mb-2">
-                        <label for="tipoPregunta">Tipo de pregunta</label>
-                        <select class="custom-select d-block w-100" id="tipoPregunta">
-                            <option value="">Choose...</option>
-                            <option *ngFor="let tipoPregunta of tipoPreguntas">{{ tipoPregunta.tipo }}</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Please select a valid option.
-                        </div>
-                    </div>
-                    <div class="col-md-2  col-sm-4 mb-2 mt-2">
-                        <br>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" >
-                            +
-                        </button>
-                    </div>
-                </div> -->
             </form>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="asigCantPregunta(0)">Cancelar</button>
+            <button type="button" class="btn btn-success">Crear pregunta inexistente</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="auxIterador = []">Cancelar</button>
             <button type="submit" class="btn btn-primary" (click)="addEncuesta()"  data-dismiss="modal" >Guardar</button>
         </div>    
     </div>

@@ -465,6 +465,32 @@
           "descripcion": ""
         }
       ]
+    },
+    {
+      "_id": 5,
+      "estado": "I",
+      "fechaInicio": "10/10/2010",
+      "fechaFin": "10/10/2011",
+      "estudio": {
+        "_id": 1
+      },
+      "pregunta": [
+        {
+          "_id": 1
+        },
+        {
+          "_id": 1
+        },
+        {
+          "_id": 2
+        },
+        {
+          "_id": 2
+        },
+        {
+          "_id": 1
+        }
+      ]
     }
   ],
   "analista": [

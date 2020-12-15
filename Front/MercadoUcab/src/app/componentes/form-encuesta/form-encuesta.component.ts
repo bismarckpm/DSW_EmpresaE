@@ -20,9 +20,7 @@ export class FormEncuestaComponent implements OnInit {
     fechaInicio: '',
     fechaFin: '',
     estudio: {_id: 0},
-    pregunta: [
-      { descripcion: '', tipo: '' }
-    ]
+    pregunta: []
   };
   @Input() preguntaEstudio = { };
   @Input() preguntaInsertar = {_id: 0};
@@ -30,7 +28,8 @@ export class FormEncuestaComponent implements OnInit {
   preguntasMostrar: any = [];
   estudios: any = [];
   tipoPreguntas: any = [];
-  cantPreguntas: number[] = [];
+  opcionesCantidad: number[] = [5, 10, 15];
+  auxIterador = [];
 
   /// PAra validar
   formEncuesta: FormGroup;
@@ -54,7 +53,7 @@ export class FormEncuestaComponent implements OnInit {
   addEncuesta(): any{
 
     if (this.formEncuesta.valid) {
-      console.log(this.encuesta);
+      this.encuesta.pregunta = this.listaPreguntasInsertar;
       this.servicio.createEncuesta(this.encuesta).subscribe((data: {}) => {
       });
       this.encuesta = {
@@ -63,13 +62,9 @@ export class FormEncuestaComponent implements OnInit {
         fechaInicio: '',
         fechaFin: '',
         estudio: {_id: 0},
-        pregunta: [
-          {descripcion: '', tipo: ''}
-        ]
+        pregunta: []
       };
-      // this.cargarEstudios();
-      console.log(this.preguntaInsertar);
-      alert('Agregó');
+      alert('Agregó la encuesta');
     }
     else{
       alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
@@ -77,7 +72,8 @@ export class FormEncuestaComponent implements OnInit {
 
   }
 
-  addPreguntaEstudio(): void {
+  // agregar pregunta a la lista de preguntas
+  addPreguntaEncuesta(): void {
     this.listaPreguntasInsertar.push(this.preguntaInsertar);
     console.log(this.listaPreguntasInsertar);
     this.preguntaInsertar = {_id: 0};
@@ -85,10 +81,7 @@ export class FormEncuestaComponent implements OnInit {
 
   asigCantPregunta(cant: number): void {
     for (let i = 0; i < cant; i++) {
-      this.cantPreguntas.push(i);
-    }
-    for (let j = 0; j < cant; j++) {
-      this.encuesta.pregunta.push();
+      this.auxIterador.push(i);
     }
   }
 
@@ -105,11 +98,14 @@ export class FormEncuestaComponent implements OnInit {
     });
   }
 
-  cargarPreguntas(): void {
+  // aqui yo mando el id del estudio para que me devuelva una lista de preguntas
+  // asociadas a la subcategoria del estudio
+  cargarPreguntas(i: number): void {
     this.servicioPregunta.getPreguntasXSubcategoria(this.encuesta.estudio._id).subscribe((data: {}) => {
       this.preguntasMostrar = data;
     });
-    console.log(this.preguntasMostrar);
+    this.auxIterador = [];
+    this.asigCantPregunta(i);
   }
 
   ///// Metodos para las validaciones

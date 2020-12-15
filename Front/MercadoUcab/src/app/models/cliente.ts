@@ -1,7 +1,7 @@
 import { Lugar } from './Lugar';
 import { Usuario } from './usuario';
 
-export interface Cliente {
+export class Cliente {
     _id: number;
     estado: string;
     razonSocial: string;

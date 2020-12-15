@@ -130,10 +130,10 @@
                           </div>
 
                           <div class="row">
-                            <div class="col-md-5 mb-3">
+                            <div class="col-md-4 mb-3">
                               <label for="estado">Estado</label>
-                              <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.lugar._id" (click)="busquedaMunicipio(estudioData.lugar._id)"formControlName="lugarEstudio"  value="estudioData.lugar._id">
-                                <option value="">Choose...</option>
+                              <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.lugar._id" (click)="busquedaMunicipio(estudioData.lugar._id)"formControlName="lugarEstudio"  value="estudio.lugar._id">
+                                <option value="0">Choose...</option>
                                 <option  *ngFor="let estado of estados" [ngValue]= "estado._id"  >{{estado.nombre}}</option>
                               </select>
                               <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
@@ -142,11 +142,12 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="col-md-5 mb-3">
+                  
+                            <div class="col-md-4 mb-3">
                               <label for="municipio">Municipio</label>
-                              <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.lugar._id" (click)="busquedaParroquia(estudioData.lugar._id)" formControlName="lugarEstudio"  value="estudioData.lugar._id">
-                                <option value="">Choose...</option>
-                                <option  *ngFor="let parroquia of parroquias" [ngValue]= "parroquia._id"  >{{parroquia.nombre}}</option>
+                              <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.lugar.lugar._id" (click)="busquedaParroquia(estudioData.lugar.lugar._id)"formControlName="lugarEstudio"  value="estudio.lugar._id">
+                                <option value="0">Choose...</option>
+                                <option  *ngFor="let municipio of municipios" [ngValue]= "municipio._id"  >{{municipio.nombre}}</option>
                               </select>
                               <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
                                 <div *ngIf="lugarEstudio.errors.required">
@@ -154,20 +155,19 @@
                                 </div>
                               </div>
                             </div>
-
-                            <div class="col-md-5 mb-3">
-                              <label for="parroquia">Parroquia</label>
-                              <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.lugar._id" formControlName="lugarEstudio"  value="estudioData.lugar._id">
-                                <option value="">Choose...</option>
-                                <option  *ngFor="let parroquia of parroquias" [ngValue]= "parroquia._id"  >{{parroquia.nombre}}</option>
-                              </select>
-                              <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
-                                <div *ngIf="lugarEstudio.errors.required">
-                                  Este campo es obligatorio
-                                </div>
+                          </div>
+                  
+                          <div class="col-md-4 mb-3">
+                            <label for="estado">Parroquia</label>
+                            <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.lugar.lugar.lugar._id" formControlName="lugarEstudio" (click)="seleccionarParroquia(estudioData.lugar.lugar.lugar._id)" value="estudio.lugar._id">
+                              <option value="0">Choose...</option>
+                              <option  *ngFor="let parroquia of parroquias" [ngValue]= "parroquia._id"  >{{parroquia.nombre}}</option>
+                            </select>
+                            <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
+                              <div *ngIf="lugarEstudio.errors.required">
+                                Este campo es obligatorio
                               </div>
                             </div>
-
                           </div>
 
 

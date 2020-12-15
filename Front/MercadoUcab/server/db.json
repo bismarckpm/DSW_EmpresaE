@@ -4,30 +4,42 @@
       "_id": 50,
       "username": "Pedro",
       "clave ": "pedro",
-      "rol": "Administrador",
+      "rol": "Analista",
       "autenticacion": "valida"
     },
     {
       "_id": 51,
-      "username": "Mario",
-      "clave ": "mario",
-      "rol": "Administrador",
-      "autenticacion": "valida"
+      "username": "Juan",
+      "clave": "juan",
+      "correoElectronico": "juan@gmail.com",
+      "estado": "a",
+      "tipoUsuario": {
+        "_id": 0,
+        "descripcion": "Administrador"
+      }
     },
     {
-      "username": "asdsa",
-      "clave": "asdasd",
-      "_id": 51
+      "_id": 52,
+      "username": "Victor",
+      "clave": "victor",
+      "correoElectronico": "victor@gmail.com",
+      "estado": "a",
+      "tipoUsuario": {
+        "_id": 0,
+        "descripcion": "Analista"
+      }
     },
     {
-      "username": "asdsa",
-      "clave": "asdasd",
-      "_id": 52
-    },
-    {
-      "username": "asdas",
-      "clave": "asdas",
-      "_id": 53
+      "_id": 53,
+      "rol": "",
+      "username": "Victor",
+      "clave": "victor",
+      "correoElectronico": "victor@gmail.com",
+      "estado": "a",
+      "tipoUsuario": {
+        "_id": 0,
+        "descripcion": "Administrador"
+      }
     }
   ],
   "categoria": [
@@ -561,6 +573,28 @@
       "clave": "11111",
       "correoElectronico": "joseeqqqq@gmail.com",
       "estado": "i"
+    },
+    {
+      "_id": 3,
+      "username": "juan",
+      "clave": "juan",
+      "correoElectronico": "juan@gmail.com",
+      "estado": "a",
+      "tipoUsuario": {
+        "_id": 0,
+        "descripcion": "Analista"
+      }
+    },
+    {
+      "_id": 4,
+      "username": "josee",
+      "clave": "josee",
+      "correoElectronico": "josee@gmail.com",
+      "estado": "a",
+      "tipoUsuario": {
+        "_id": 0,
+        "descripcion": "Administrador"
+      }
     }
   ],
   "cliente": [

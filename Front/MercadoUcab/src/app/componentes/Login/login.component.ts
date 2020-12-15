@@ -10,12 +10,12 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
+
   user :any;
   @Input() usuario={username:'', clave:'' };
   formLogin: FormGroup;
   userID:any;
-  
+
   constructor(
     public usuarioService:UsuarioService,
     private formBuilder: FormBuilder,
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
           }
           if(data[0].rol=="Encuestado"){
             console.log("Entre en  Encuestado")
-            this.router.navigate(['encuestado/0'])
+            this.router.navigate(['encuestado/0']);
             localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
             localStorage.setItem('rol',JSON.stringify(data[0].rol));
           }

@@ -26,10 +26,10 @@ export class PerfilComponent implements OnInit {
   @Input() usuario={ _id:0, claveNueva:"",clave:'' };
    @Input() auxUsuario={claveNueva:''};
    
-  Cliente :Cliente []=[];
-  Administrador :Administrador []=[];
-  Analista :Analista []=[];
-  Encuestado :Encuestado []=[];
+  @Input() Cliente :any
+  @Input() Administrador :any
+  @Input() Analista :any
+  @Input() Encuestado :any
 
   
   constructor(

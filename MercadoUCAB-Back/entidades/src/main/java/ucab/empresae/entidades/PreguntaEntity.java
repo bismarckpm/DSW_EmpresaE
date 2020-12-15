@@ -5,6 +5,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "pregunta", schema = "mercadeoucab")
+@NamedQueries({
+        @NamedQuery(name = "getPreguntasbySubcategoria", query = "select p from PreguntaEntity p WHERE p.subcategoria._id = :id")
+})
 public class PreguntaEntity extends BaseEntity{
     private String estado;
     private String descripcion;

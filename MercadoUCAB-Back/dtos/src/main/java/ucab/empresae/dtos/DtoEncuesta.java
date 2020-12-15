@@ -10,8 +10,8 @@ public class DtoEncuesta extends DtoBase {
     private Date fechaFin;
 
     //Relaciones
-    private DtoEstudio dtoEstudio;
-    private DtoPregunta dtoPregunta;
+    private DtoEstudio estudio;
+    private DtoPregunta pregunta;
 
     //Constructores
     public DtoEncuesta() {
@@ -48,19 +48,19 @@ public class DtoEncuesta extends DtoBase {
     }
 
     public DtoEstudio getEstudio() {
-        return dtoEstudio;
+        return estudio;
     }
 
     public void setEstudio(DtoEstudio estudio) {
-        this.dtoEstudio = estudio;
+        this.estudio = estudio;
     }
 
     public DtoPregunta getPregunta() {
-        return dtoPregunta;
+        return pregunta;
     }
 
     public void setPregunta(DtoPregunta pregunta) {
-        this.dtoPregunta = pregunta;
+        this.pregunta = pregunta;
     }
 
 }

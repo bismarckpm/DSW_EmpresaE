@@ -16,9 +16,12 @@
         <td>{{ pregunta.descripcion }}</td>
         <td>{{ pregunta.estado }}</td>
         <td>{{ pregunta.subcategoria.nombre}}</td>
-        <td>{{ pregunta.tipoPregunta.tipo}}</td>
+        <td>{{ pregunta.tipo.tipo}}</td>
         <td>
           <div class="d-flex justify-content-around">
+
+            <button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#exampleModal">+</button>
+
             <button type="button" class="btn btn-primary" data-toggle="modal" (click)="editar(pregunta)" data-target="#exampleModal">
               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
@@ -71,8 +74,12 @@
                       <div class="row">
                         <div class="col-md-5 mb-3">
                           <label for="country">Tipo de Pregunta</label>
-                          <select class="custom-select d-block w-100" [(ngModel)]= "preguntaData.tipoPregunta._id" formControlName="tipoPregunta"  name="preguntaData.tipoPregunta._id"value="preguntaData.tipoPregunta._id"><!-- Hacer lo de *ngFor-->
-                            <option  *ngFor="let tp of tipopregunta" [ngValue]= "tp._id" >{{tp.tipo}}</option>
+                          <select class="custom-select d-block w-100" [(ngModel)]= "preguntaData.tipo._id"  (click)="ValidarTipopregunta(preguntaData.tipo._id)" formControlName="tipoPregunta"  name="preguntaData.tipoPregunta._id"value="preguntaData.tipoPregunta._id"><!-- Hacer lo de *ngFor-->
+                            <option  value="1">Abiertas</option>
+                            <option value="2">Verdadero y Falso</option>
+                            <option value="3">Seleccion Simple</option>
+                            <option value="4">Seleccion Multiple</option>
+                            <option value="5">Rango </option>
                           </select>
                           <div *ngIf="tipoPregunta.invalid && (tipoPregunta.dirty || tipoPregunta.touched)" class="alert alert-danger">
                             <div *ngIf="tipoPregunta.errors.required">
@@ -81,6 +88,46 @@
                           </div>
                         </div>
                       </div>
+
+                      <div class="form-group col-md-5" *ngIf="desplegar == true" >
+                        <label >Opcion1</label>
+                        <input  [(ngModel)]="Opciones[0]"type="text" class="form-control" [ngModelOptions]="{standalone: true} "formControlName="opciocPregunta" value="descripcion">
+                        <div *ngIf="opciocPregunta.invalid && (opciocPregunta.dirty || opciocPregunta.touched)" class="alert alert-danger">
+                          <div *ngIf="opciocPregunta.errors.pattern">
+                            Introduzca una descripcion valida
+                          </div>
+                        </div>
+                        <label >Opcion2</label>
+                        <input [(ngModel)]="Opciones[1]"type="text" class="form-control" [ngModelOptions]="{standalone: true} "formControlName="opciocPregunta" value="descripcion">
+                        <div *ngIf="opciocPregunta.invalid && (opciocPregunta.dirty || opciocPregunta.touched)" class="alert alert-danger">
+                          <div *ngIf="opciocPregunta.errors.pattern">
+                            Introduzca una descripcion valida
+                          </div>
+                        </div>
+                        <label >Opcion3</label>
+                        <input [(ngModel)]="Opciones[2]"type="text" class="form-control"  [ngModelOptions]="{standalone: true}" formControlName="opciocPregunta" value="descripcion">
+                        <div *ngIf="opciocPregunta.invalid && (opciocPregunta.dirty || opciocPregunta.touched)" class="alert alert-danger">
+                          <div *ngIf="opciocPregunta.errors.pattern">
+                            Introduzca una descripcion valida
+                          </div>
+                        </div>
+                        <label >Opcion4</label>
+                        <input [(ngModel)]="Opciones[3]"type="text" class="form-control" [ngModelOptions]="{standalone: true}" value="descripcion">
+                        <div *ngIf="opciocPregunta.invalid && (opciocPregunta.dirty || opciocPregunta.touched)" class="alert alert-danger">
+                          <div *ngIf="opciocPregunta.errors.pattern">
+                            Introduzca una descripcion valida
+                          </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group col-md-5" *ngIf="desplegarRango == true" >
+                      <select class="custom-select d-block w-100" formControlName="tipoPregunta"><!-- Hacer lo de *ngFor-->
+                        <option  >Choose.....</option>
+                        <option > 1 - 5</option>
+
+                      </select>
+                  </div>
 
                       <div class="row">
                         <div class="col-md-5 mb-3">

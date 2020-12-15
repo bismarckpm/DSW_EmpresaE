@@ -1,19 +1,23 @@
 package ucab.empresae.servicio;
 
 import ucab.empresae.daos.DaoCategoria;
+import ucab.empresae.daos.DaoFactory;
 import ucab.empresae.dtos.DtoCategoria;
-import ucab.empresae.dtos.DtoEstudio;
 import ucab.empresae.entidades.CategoriaEntity;
+import ucab.empresae.entidades.EntidadesFactory;
+import ucab.empresae.entidades.EstudioEntity;
+import ucab.empresae.entidades.SubcategoriaEntity;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path("/categoria")
 public class CategoriaServicio extends AplicacionBase {
 
-    private DaoCategoria dao = new DaoCategoria();
-    private CategoriaEntity categoria = new CategoriaEntity();
+    private DaoCategoria dao = DaoFactory.DaoCategoriaInstancia();
+    private CategoriaEntity categoria = EntidadesFactory.CategoriaInstance();
 
     private void categoriAtributos(DtoCategoria dtoCategoria) {
         this.categoria.setNombre(dtoCategoria.getNombre());
@@ -43,6 +47,7 @@ public class CategoriaServicio extends AplicacionBase {
     }
 
     @POST
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addCategoria(DtoCategoria dtoCategoria) {
@@ -60,7 +65,7 @@ public class CategoriaServicio extends AplicacionBase {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateCategoria(DtoCategoria dtoCategoria) {
         try {
-            this.categoria = this.dao.find(dtoCategoria.getId(), CategoriaEntity.class);
+            this.categoria = this.dao.find(dtoCategoria.get_id(), CategoriaEntity.class);
             categoriAtributos(dtoCategoria);
             return Response.ok(this.dao.update(this.categoria)).build();
         } catch(Exception ex){
@@ -69,15 +74,15 @@ public class CategoriaServicio extends AplicacionBase {
     }
 
     @DELETE
-    @Produces(value=MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response deleteCategoria(DtoCategoria dtoCategoria) {
         try {
-            this.dao.delete(this.dao.find(dtoCategoria.getId(), CategoriaEntity.class));
-            return Response.ok().build();
-        } catch(Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).entity(ex).build();
+            this.categoria = this.dao.find(dtoCategoria.get_id(), CategoriaEntity.class);
+            return Response.ok(this.dao.delete(this.categoria)).build();
+        } catch(Exception ex){
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
     }
 

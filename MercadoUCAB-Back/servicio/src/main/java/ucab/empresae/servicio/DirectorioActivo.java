@@ -102,7 +102,8 @@ public class DirectorioActivo {
     /*
      Method that obtains user data from ldap
     */
-    public void getEntry(DtoUsuario user) {
+    public String getCorreo(DtoUsuario user) {
+        String correo = null;
         try {
             connectLDAP( _user, _password );
             SearchControls searcCon = new SearchControls();
@@ -113,8 +114,8 @@ public class DirectorioActivo {
                 while ( results.hasMore() ) {
                     SearchResult res = ( SearchResult ) results.next();
                     Attributes atbs = res.getAttributes();
-                    Attribute atb = atbs.get( "cn" );
-                    String name = ( String ) atb.get();
+                    Attribute atb = atbs.get( "sn" );
+                    correo = ( String ) atb.get();
                 }
             }
             else {
@@ -127,6 +128,7 @@ public class DirectorioActivo {
         finally {
             disconnectLDAP();
         }
+        return correo;
     }
 
     /*

@@ -1,7 +1,7 @@
 import {TipoUsuario} from './tipo-usuario';
 
 
-export  interface Usuario {
+export  class Usuario {
 
       _id: number;
       username: string;
@@ -11,6 +11,8 @@ export  interface Usuario {
       tipoUsuario: TipoUsuario;
       autenticacion:string;
       rol :string;
+      respuesta:string;
+      nuevaClave:string;
  }
 
 

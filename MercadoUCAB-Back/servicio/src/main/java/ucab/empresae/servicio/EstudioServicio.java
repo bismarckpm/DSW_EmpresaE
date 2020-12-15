@@ -2,21 +2,18 @@ package ucab.empresae.servicio;
 
 import ucab.empresae.daos.*;
 import ucab.empresae.dtos.DtoCategoria;
-import ucab.empresae.dtos.DtoClienteEstudio;
 import ucab.empresae.dtos.DtoEstudio;
 import ucab.empresae.entidades.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 @Path("/estudio")
 public class EstudioServicio extends AplicacionBase {
 
     private DaoEstudio dao = DaoFactory.DaoEstudioInstancia();
     private EstudioEntity estudio = EntidadesFactory.EstudioInstance();
-    private List<EstudioEntity> estudioEntityList;
 
     private void estudioAtributos(DtoEstudio dtoEstudio) {
         this.estudio.setEstado(dtoEstudio.getEstado());
@@ -29,22 +26,22 @@ public class EstudioServicio extends AplicacionBase {
 
         if(dtoEstudio.getSubcategoria() != null) {
             DaoSubcategoria daoSubcategoria = DaoFactory.DaoSubcategoriaInstancia();
-            this.estudio.setSubcategoria(daoSubcategoria.find(dtoEstudio.getSubcategoria().getId(), SubcategoriaEntity.class));
+            this.estudio.setSubcategoria(daoSubcategoria.find(dtoEstudio.getSubcategoria().get_id(), SubcategoriaEntity.class));
         }
 
         if(dtoEstudio.getNivelsocioeco() != null) {
             DaoNivelSocioeconomico daoNivelSocioeconomico = DaoFactory.DaoNivelSocioeconomicoInstancia();
-            this.estudio.setNivelsocioeco(daoNivelSocioeconomico.find(dtoEstudio.getNivelsocioeco().getId(), NivelSocioeconomicoEntity.class));
+            this.estudio.setNivelsocioeco(daoNivelSocioeconomico.find(dtoEstudio.getNivelsocioeco().get_id(), NivelSocioeconomicoEntity.class));
         }
 
         if(dtoEstudio.getLugar() != null) {
             DaoLugar daoLugar = DaoFactory.DaoLugarInstancia();
-            this.estudio.setLugar(daoLugar.find(dtoEstudio.getLugar().getId(), LugarEntity.class));
+            this.estudio.setLugar(daoLugar.find(dtoEstudio.getLugar().get_id(), LugarEntity.class));
         }
 
         if(dtoEstudio.getAnalista() != null) {
             DaoUsuario daoAnalista = DaoFactory.DaoUsuarioInstancia();
-            this.estudio.setAnalista(daoAnalista.find(dtoEstudio.getAnalista().getId(), UsuarioEntity.class));
+            this.estudio.setAnalista(daoAnalista.find(dtoEstudio.getAnalista().get_id(), UsuarioEntity.class));
         }
     }
 
@@ -54,7 +51,7 @@ public class EstudioServicio extends AplicacionBase {
         try {
             return Response.ok(this.dao.findAll(EstudioEntity.class)).build();
         } catch (Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).entity(ex).build();
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
     }
 
@@ -65,39 +62,12 @@ public class EstudioServicio extends AplicacionBase {
         try {
             return Response.ok(this.dao.find(id, EstudioEntity.class)).build();
         } catch (Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).entity(ex).build();
-        }
-    }
-
-    @GET
-    @Path("/analista/{id}")
-    @Produces(value = MediaType.APPLICATION_JSON)
-    public Response getEstudiosAnalista(@PathParam("id") long id) {
-        try {
-            this.estudioEntityList = this.dao.findAll(EstudioEntity.class);
-            for(EstudioEntity obj: this.estudioEntityList) {
-                if(obj.getAnalista() != null && obj.getAnalista().get_id() != id) {
-                    this.estudioEntityList.remove(obj);
-                }
-            }
-            return Response.ok(this.estudioEntityList).build();
-        } catch (Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).entity(ex).build();
-        }
-    }
-
-    @GET
-    @Path("/cliente/{id}")
-    @Produces(value = MediaType.APPLICATION_JSON)
-    public Response getEstudiosSolicitados(@PathParam("id") long id) {
-        try {
-            return Response.ok(this.dao.estudiosCliente(id)).build();
-        } catch (Exception ex) {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
     }
 
     @POST
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addEstudio(DtoEstudio dtoEstudio) {
@@ -105,7 +75,7 @@ public class EstudioServicio extends AplicacionBase {
             estudioAtributos(dtoEstudio);
             return Response.ok(this.dao.insert(this.estudio)).build();
         } catch(Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).entity(ex).build();
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
     }
 
@@ -115,34 +85,14 @@ public class EstudioServicio extends AplicacionBase {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateEstudio(DtoEstudio dtoEstudio) {
         try {
-            this.estudio = this.dao.find(dtoEstudio.getId(), EstudioEntity.class);
+            if(dtoEstudio.get_id() == 0) {
+                return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+            }
+            this.estudio = this.dao.find(dtoEstudio.get_id(), EstudioEntity.class);
             estudioAtributos(dtoEstudio);
             return Response.ok(this.dao.update(this.estudio)).build();
         } catch (Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).entity(ex).build();
-        }
-    }
-
-    @POST
-    @Path("/asignarEstudio/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response solicitarEstudio(DtoClienteEstudio dtoClienteEstudio) {
-        try {
-            DaoClienteEstudio daoClienteEstudio = new DaoClienteEstudio();
-            ClienteEstudioEntity clienteEstudioEntity = new ClienteEstudioEntity();
-
-            clienteEstudioEntity.setComentarioCliente(dtoClienteEstudio.getComentarioCliente());
-            clienteEstudioEntity.setEstado(dtoClienteEstudio.getEstado());
-
-            clienteEstudioEntity.setEstudio(this.dao.find(dtoClienteEstudio.getEstudio().getId(), EstudioEntity.class));
-
-            DaoCliente daoCliente = new DaoCliente();
-            clienteEstudioEntity.setCliente(daoCliente.find(dtoClienteEstudio.getCliente().getId(), ClienteEntity.class));
-
-            return Response.ok(daoClienteEstudio.insert(clienteEstudioEntity)).build();
-        } catch (Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).entity(ex).build();
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
     }
 
@@ -150,11 +100,12 @@ public class EstudioServicio extends AplicacionBase {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response deleteEstudio(DtoEstudio dtoEstudio) {
+    public Response deleteEstudio(DtoCategoria dtoCategoria) {
         try {
-            return Response.ok(this.dao.delete(this.dao.find(dtoEstudio.getId(), EstudioEntity.class))).build();
+            this.estudio = this.dao.find(dtoCategoria.get_id(), EstudioEntity.class);
+            return Response.ok(this.dao.delete(this.estudio)).build();
         } catch(Exception ex){
-            return Response.status(Response.Status.NOT_ACCEPTABLE).entity(ex).build();
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
     }
 

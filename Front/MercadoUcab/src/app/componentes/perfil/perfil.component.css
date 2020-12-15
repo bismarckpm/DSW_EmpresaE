@@ -1,0 +1,12 @@
+.container {
+    background-color: #f4f4f4;
+    box-shadow: 0 0 2.5em rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    width: auto;
+    height: auto;
+    
+}
+
+.registro{
+    padding-top: 50px;
+}

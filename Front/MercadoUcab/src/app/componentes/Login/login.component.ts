@@ -24,88 +24,106 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+
+
+  Loggearse(){
+
+  ////////////////////////// Para el proyecto como tal //////////////////////////////////  
+   if (this.formLogin.valid) {
+      this.usuarioService.Logear(this.usuario).subscribe( data  => {
+        this.user=data
+
+        if(this.user.autenticacion=="valida") {
+          console.log("==============") ;
+          console.log(this.user.username) ;
+          console.log(this.user.rol) ; ;
+          console.log("==============") ;
+          if(this.user.rol=="Administrador"){
+            console.log("Entre en  administrador");
+            this.router.navigate(['/admin/0']);
+            localStorage.setItem('usuarioID',JSON.stringify(this.user._id));
+            localStorage.setItem('rol',JSON.stringify(this.user.rol));
+          }
+          if(this.user.rol=="Encuestado"){
+            console.log("Entre en  Encuestado")
+            this.router.navigate(['encuestado/0'])
+            localStorage.setItem('usuarioID',JSON.stringify(this.user._id));
+            localStorage.setItem('rol',JSON.stringify(this.user.rol));
+          }
+          if(this.user.rol=="Analista"){
+            console.log("Entre en  Analsita");
+            this.router.navigate(['/analista/0']);
+            localStorage.setItem('usuarioID',JSON.stringify(this.user._id));
+            localStorage.setItem('rol',JSON.stringify(this.user.rol));
+          }
+          if(this.user.rol=="Cliente"){
+            console.log("Entre en  Cliente");
+            this.router.navigate(['/cliente/0']);
+            localStorage.setItem('usuarioID',JSON.stringify(this.user._id));
+            localStorage.setItem('rol',JSON.stringify(this.user.rol));
+          }
+        }else {
+          window.alert("Usuario no registrado o Informacion Incorrecta");
+        }
+      });
+    }
+    ////////////////////////////////Para trabajar en el front Unicamente////////////////
+
+   /* if (this.formLogin.valid) {
+      this.usuarioService.getUsuarios().subscribe( data  => {
+        console.log(data) ;
+
+        if(data[0].autenticacion=="valida") {
+          console.log("==============") ;
+          console.log(data[0].username) ;
+          console.log(data[0].rol) ; ;
+          console.log("==============") ;
+          if(data[0].rol=="Administrador"){
+            console.log("Entre en  administrador");
+            this.router.navigate(['/admin/0']);
+            localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
+            localStorage.setItem('rol',JSON.stringify(data[0].rol));
+          }
+          if(data[0].rol=="Encuestado"){
+            console.log("Entre en  Encuestado")
+            this.router.navigate(['encuestado/0'])
+            localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
+            localStorage.setItem('rol',JSON.stringify(data[0].rol));
+          }
+          if(data[0].rol=="Analista"){
+            console.log("Entre en  Analsita");
+            this.router.navigate(['/analista/0']);
+            localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
+          localStorage.setItem('rol',JSON.stringify(data[0].rol));
+          }
+          if(data[0].rol=="Cliente"){
+            console.log("Entre en  Cliente");
+            this.router.navigate(['/cliente/0']);
+            localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
+            localStorage.setItem('rol',JSON.stringify(data[0].rol));
+          }
+        }else {
+          window.alert("Usuario no registrado o Informacion Incorrecta");
+        }
+      });
+    }
+      */  
+
+  }
+
+
+
   
 
 
-Loggearse(){
-
-    this.usuarioService.getUsuarios().subscribe( data  => {
-      console.log(data) ;
-
-      if(data[0].autenticacion=="valida"){
-        console.log("==============") ;
-        console.log(data[0].username) ;
-        console.log(data[0].rol) ; ;
-        console.log("==============") ;
-              if(data[0].rol=="Administrador"){
-                console.log("Entre en  administrador");
-               this.router.navigate(['/admin/0']);
-               localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
-               localStorage.setItem('rol',JSON.stringify(data[0].rol));
-              }
-              if(data[0].rol=="Encuestado"){
-                console.log("Entre en  Encuestado")
-                 this.router.navigate(['encuestado/0'])
-                 localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
-                 localStorage.setItem('rol',JSON.stringify(data[0].rol));
-              }
-              if(data[0].rol=="Analista"){
-                console.log("Entre en  Analsita");
-                this.router.navigate(['/analista/0']);
-                localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
-               localStorage.setItem('rol',JSON.stringify(data[0].rol));
-              }
-              if(data[0].rol=="Cliente"){
-                console.log("Entre en  Cliente");
-                this.router.navigate(['/cliente/0']);
-                localStorage.setItem('usuarioID',JSON.stringify(data[0]._id));
-               localStorage.setItem('rol',JSON.stringify(data[0].rol));
-              }
-      }else{
-        window.alert("Usuario no registrado o Informacion Incorrecta");
-      }
-     
-  /*    this.userID=localStorage.getItem("usuarioID");
-      this.user=localStorage.getItem("rol")
-      console.log("==========Local Storeg Pruebas========");
-      console.log( JSON.parse( this.userID));
-      console.log(JSON.parse( this.user));
-      console.log("==================");
-      console.log("========== Local Storeg Pruebas del parse  ========");
-     
-      console.log("==================");*/
-
-})  
-  /* if (this.formLogin.valid) {
-    return this.usuarioService.Logear(this.usuario)
-    .subscribe( data  => {
-          if(data[0].autenticacion ="valido"){
-                  if(data[0].rol='Administradro'){
-                    this.router.navigateByUrl('/admin/0')
-                  }
-                  if(data[0].rol='Encuestado'){
-                    this.router.navigateByUrl('/encuestado/0')
-                  }
-                  if(data[0].rol='Analista'){
-                    this.router.navigateByUrl('/analista/0')
-                  }
-                  if(data[0].rol='Cliente'){
-                    this.router.navigateByUrl('/cliente/0')
-            }
-          }else{
-            window.alert("Usuario no registrado o Informacion Incorrecta");
-          }
-         
-       
-    })  
-}*/
-
-}
 
 
 logout() {
   // remove user from local storage and set current user to null
-  localStorage.removeItem('usuario');
+  localStorage.removeItem('usuarioID');
+  localStorage.removeItem('rol');
+  this.router.navigate[('/Login')]
  // this.currentUserSubject.next(null);
 }
 
@@ -116,7 +134,7 @@ logout() {
 
   get password(){return this.formLogin.get('password');}
 
-  createForm(){
+  createForm(): void {
     this.formLogin = this.formBuilder.group({
       userName: ['',Validators.required] ,
       password: ['', Validators.required],

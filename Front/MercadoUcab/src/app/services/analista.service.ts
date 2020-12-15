@@ -17,15 +17,16 @@ export class AnalistaService {
   
   ];
 
-  apiurl='http://localhost:3000';
+  //apiurl='http://localhost:3000';
+  apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 // Http Options
   httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json'
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
   })
-}
+};
 
 ////////////// Sidbard////////////
 
@@ -43,6 +44,14 @@ getSeccion(i): string {
 ///////// Metodos para ejecutar//////////////
 getAnalistas():Observable<Analista[]>{
   return this.http.get<Analista[]>(this.apiurl+'/analista')
+  .pipe(
+    retry(1),
+    catchError(this.handleError)
+  )
+}
+
+getAnalistaDelUsuario(Analista):Observable<Analista[]>{
+  return this.http.get<Analista[]>(this.apiurl+'/usuario/'+Analista)
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -81,17 +90,17 @@ deleteAnalista(id){
   )
 }
 
-///////////////////// Error HandleError
-handleError(error) {
-  let errorMessage = '';
-  if(error.error instanceof ErrorEvent) {
-    // Get client-side error
-    errorMessage = error.error.message;
-  } else {
-    // Get server-side error
-    errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+  ///////////////////// Error HandleError
+  handleError(error) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // Get client-side error
+      errorMessage = error.error.message;
+    } else {
+      // Get server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    window.alert(errorMessage);
+    return throwError(errorMessage);
   }
-  window.alert(errorMessage);
-  return throwError(errorMessage);
-}
 }

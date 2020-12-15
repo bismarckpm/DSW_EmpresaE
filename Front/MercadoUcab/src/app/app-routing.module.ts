@@ -8,6 +8,7 @@ import { AdminComponent } from './modulos/admin/admin.component';
 import { ClienteComponent } from './modulos/cliente/cliente.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
 import { EncuestadoComponent } from './modulos/encuestado/encuestado.component';
+import { PerfilComponent } from './componentes/perfil/perfil.component';
 
 
 
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'cliente/:id', component: ClienteComponent},
   { path: 'analista/:id', component: AnalistaComponent},
   { path: 'encuestado/:id', component: EncuestadoComponent},
+  { path: 'perfil', component: PerfilComponent},
   { path: '**', redirectTo: 'login', pathMatch: 'full'},
 ];
 

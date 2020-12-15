@@ -5,14 +5,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "cliente", schema = "mercadeoucab")
+@NamedQueries({
+        @NamedQuery(name = "getClienteByUsuario", query = "select c from ClienteEntity c where c.usuario = :usuario")
+})
 public class ClienteEntity extends BaseEntity{
 
-    public ClienteEntity(long id) {
-        super(id);
-    }
-
-    public ClienteEntity() {
-    }
 
     @Basic
     @Column(name = "estado")
@@ -38,12 +35,12 @@ public class ClienteEntity extends BaseEntity{
 
     @Basic
     @Column(name = "rif")
-    private int rif;
-    public int getRif() {
+    private String rif;
+    public String getRif() {
         return rif;
     }
 
-    public void setRif(int rif) {
+    public void setRif(String rif) {
         this.rif = rif;
     }
 

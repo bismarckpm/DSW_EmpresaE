@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SidebarModule } from 'ng-sidebar';
 
 // Componentes
@@ -19,8 +19,7 @@ import { AdminComponent } from './modulos/admin/admin.component';
 import { ClienteComponent } from './modulos/cliente/cliente.component';
 import { EncuestadoComponent } from './modulos/encuestado/encuestado.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
-import { FomrAnalistaComponent } from './componentes/fomr-analista/fomr-analista.component';
-import { ListaAnalistaComponent } from './componentes/lista-analista/lista-analista.component';
+import { FormAnalistaComponent } from './componentes/form-analista/form-analista.component';
 import { CambiarClaveComponent } from './componentes/cambiar-clave/cambiar-clave.component';
 import { EditClienteComponent } from './componentes/edit-cliente/edit-cliente.component';
 import { EditUsuarioComponent } from './componentes/edit-usuario/edit-usuario.component';
@@ -42,10 +41,16 @@ import {ListaClientesComponent} from './componentes/lista-clientes/lista-cliente
 import {FormPresentacionComponent} from './componentes/form-presentacion/form-presentacion.component';
 import {ListaPresentacionComponent} from './componentes/lista-presentacion/lista-presentacion.component';
 import {FormPreguntaComponent} from './componentes/form-pregunta/form-pregunta.component';
+import { PerfilComponent } from './componentes/perfil/perfil.component';
+import { ListaEncuestadosComponent } from './componentes/lista-encuestados/lista-encuestados.component';
+import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
+import { ListaAnalistaComponent } from './componentes/lista-analista/lista-analista.component';
+import { FormEncuestaComponent } from './componentes/form-encuesta/form-encuesta.component';
+import { ListaEncuestaComponent } from './componentes/lista-encuesta/lista-encuesta.component';
 
-//Modulo de Cliente !!!!!!!!!!!!!!!!!
-import{ListaEstudioClienteComponent} from './modulos/cliente/lista-estudio/lista-estudio.component'
-import{ FormEstudioClienteComponent} from './modulos/cliente/form-estudio/form-estudio.component'
+// Modulo de Cliente !!!!!!!!!!!!!!!!!
+import {ListaEstudioClienteComponent} from './modulos/cliente/lista-estudio/lista-estudio.component';
+import { FormEstudioClienteComponent} from './modulos/cliente/form-estudio/form-estudio.component';
 
 // Services
 import { EncuestadoService } from './services/encuestado.service';
@@ -56,15 +61,8 @@ import { CategoriaService } from './services/categoria.service';
 import { EncuestaService } from './services/encuesta.service';
 import { TipoService } from './services/tipo.service';
 import { TipoPreguntaService } from './services/tipo-pregunta.service';
-import { PerfilComponent } from './componentes/perfil/perfil.component';
-import { ListaEncuestadosComponent } from './componentes/lista-encuestados/lista-encuestados.component';
-import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
 import { ClienteService } from './services/cliente.service';
-
-
-
-
-
+import { AnalistaService } from './services/analista.service';
 
 
 @NgModule({
@@ -99,8 +97,10 @@ import { ClienteService } from './services/cliente.service';
     ListaClientesComponent,
     FormPresentacionComponent,
     ListaPresentacionComponent,
-    FomrAnalistaComponent,
+    FormEncuestaComponent,
+    ListaEncuestaComponent,
     ListaAnalistaComponent,
+    FormAnalistaComponent,
     CambiarClaveComponent,
     EditClienteComponent,
     EditUsuarioComponent,
@@ -108,8 +108,9 @@ import { ClienteService } from './services/cliente.service';
     PerfilComponent,
     ListaEncuestadosComponent,
     ListaEstudioClienteComponent,
-    FormEstudioClienteComponent
-    
+    FormEstudioClienteComponent,
+    ListaEncuestadosComponent,
+    ListaAnalistaComponent
   ],
   imports: [
     BrowserModule,
@@ -119,8 +120,8 @@ import { ClienteService } from './services/cliente.service';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+],
 
-  ],
   providers: [
     EncuestadoService,
     AdminService,
@@ -130,6 +131,7 @@ import { ClienteService } from './services/cliente.service';
     CategoriaService,
     EncuestaService,
     TipoService,
+    AnalistaService,
     TipoPreguntaService
   ],
   bootstrap: [AppComponent]

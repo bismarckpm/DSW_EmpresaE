@@ -134,7 +134,7 @@
                               <label for="estado">Estado</label>
                               <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.lugar._id" (click)="busquedaMunicipio(estudioData.lugar._id)"formControlName="lugarEstudio"  value="estudio.lugar._id">
                                 <option value="0">Choose...</option>
-                                <option  *ngFor="let estado of estados" [ngValue]= "estado._id"  >{{estado.nombre}}</option>
+                                <option  *ngFor="let estado of estados" [ngValue]= "estado._id">{{estado.nombre}}</option>
                               </select>
                               <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
                                 <div *ngIf="lugarEstudio.errors.required">
@@ -161,7 +161,7 @@
                             <label for="estado">Parroquia</label>
                             <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.lugar.lugar.lugar._id" formControlName="lugarEstudio" (click)="seleccionarParroquia(estudioData.lugar.lugar.lugar._id)" value="estudio.lugar._id">
                               <option value="0">Choose...</option>
-                              <option  *ngFor="let parroquia of parroquias" [ngValue]= "parroquia._id"  >{{parroquia.nombre}}</option>
+                              <option  *ngFor="let parroquia of parroquias" [ngValue]= "parroquia._id" >{{parroquia.nombre}}</option>
                             </select>
                             <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
                               <div *ngIf="lugarEstudio.errors.required">
@@ -172,7 +172,7 @@
 
 
                       <div class="col-md-5 mb-3">
-                        <label for="" class="col-sm-6 col-form-label escrituerModal"> Subcategoria </label>
+                        <label for="" class="col-sm-6 col-form-label escrituerModal">Subcategoria </label>
                             <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.subcategoria._id" formControlName="subcategoriaEstudio" value="estudioData.subcategoria._id">
                                 <option  value=""> Slecciones una ...</option>
                                 <option  *ngFor="let sub of subcategoria" [ngValue]= "sub._id"  >{{sub.nombre}}</option>

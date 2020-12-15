@@ -11,6 +11,7 @@ import { AdminService } from 'src/app/services/admin.service';
 import { AnalistaService } from 'src/app/services/analista.service';
 import { EncuestadoService } from 'src/app/services/encuestado.service';
 import { Console } from 'console';
+import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'app-perfil',
@@ -54,6 +55,7 @@ export class PerfilComponent implements OnInit {
         this.administradroService.getAdministradorDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data => {
           this.Administrador= data;
         })
+        console.log("++++++++++++++++++++++++++++++++++ADmin")
         this.admin=true;
     }
 
@@ -61,7 +63,7 @@ export class PerfilComponent implements OnInit {
       this.clienteService.getClienteDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data=>{
         this.Cliente=data;
       })
-
+      console.log("++++++++++++++++++++++++++++++++++Cliente")
       this.cli=true;
     }
 
@@ -72,6 +74,7 @@ export class PerfilComponent implements OnInit {
         console.log("GUARDO LA INFORMACION");
         console.log(this.Encuestado);
       })
+
       this.encue=true;  
     }
 
@@ -79,7 +82,7 @@ export class PerfilComponent implements OnInit {
      this.analistaService.getAnalistaDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data =>{
        this.Analista =data 
      })
-      console.log("")
+      console.log("loqueseas")
      this.analist=true;
     }
 

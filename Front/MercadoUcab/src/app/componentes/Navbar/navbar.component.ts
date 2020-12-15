@@ -13,10 +13,10 @@ bool=true;
   }
 
   ngOnInit(): void {
-    if(localStorage.getItem('rol').length!=0){
-      this.bool=false;
-    }else{
+    if(localStorage.getItem('rol').length == 0){
       this.bool=true;
+    }else{
+      this.bool=false;
     }
   }
 
@@ -33,6 +33,7 @@ bool=true;
     localStorage.removeItem('usuarioID');
     localStorage.removeItem('rol');
     this.router.navigate[('/Login')]
+    this.bool=true;
    // this.currentUserSubject.next(null);
   }
 

@@ -37,13 +37,13 @@ export class ListaAnalistaComponent implements OnInit {
     });
   }
 
-  deleteAnalista(id){
+  deleteAnalista(id): void{
     this.analistaService.deleteAnalista(id).subscribe(data => {
       this.loadAnalista();
     });
   }
 
-  updateAnalista(){
+  updateAnalista(): void{
     if (this.formAnalista.valid) {
       this.analistaService.updateAnalista(this.analistaData._id, this.analistaData).subscribe(data => {
       });
@@ -53,7 +53,7 @@ export class ListaAnalistaComponent implements OnInit {
     }
   }
 
-  editar(analista){
+  editar(analista): void{
     this.analistaData = analista;
   }
 
@@ -73,7 +73,7 @@ export class ListaAnalistaComponent implements OnInit {
     return this.formAnalista.get('correoElectronicoAnalista');
   }
 
-  createForm(){
+  createForm(): void{
     this.formAnalista = this.formBuilder.group({
       usernameAnalista: ['', Validators.required],
       estadoAnalista: ['',  Validators.required],

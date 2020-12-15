@@ -17,7 +17,8 @@ export class AnalistaService {
   
   ];
 
-  apiurl='http://localhost:3000';
+  //apiurl='http://localhost:3000';
+  apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
 
   constructor(private http: HttpClient) { }
 // Http Options
@@ -43,6 +44,14 @@ getSeccion(i): string {
 ///////// Metodos para ejecutar//////////////
 getAnalistas():Observable<Analista[]>{
   return this.http.get<Analista[]>(this.apiurl+'/analista')
+  .pipe(
+    retry(1),
+    catchError(this.handleError)
+  )
+}
+
+getAnalistaDelUsuario(Analista):Observable<Analista[]>{
+  return this.http.get<Analista[]>(this.apiurl+'/usuario/'+Analista)
   .pipe(
     retry(1),
     catchError(this.handleError)

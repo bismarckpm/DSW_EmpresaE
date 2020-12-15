@@ -22,14 +22,15 @@ export class PerfilComponent implements OnInit {
   analist=false;
   encue=false;
   cli=false;
-  
-  @Input() usuario={ _id:0, claveNueva:"",clave:'' };
-   @Input() auxUsuario={claveNueva:''};
-   
-  Cliente :Cliente []=[];
-  Administrador :Administrador []=[];
-  Analista :Analista []=[];
-  Encuestado :Encuestado []=[];
+
+  @Input() usuario={ _id:0, nuevaClave:"",clave:'' };
+   @Input() auxUsuario={nuevaClave:''};
+
+  @Input() Cliente :any
+  @Input() Administrador :any
+  @Input() Analista :any
+  @Input() Encuestado :any
+  aux:any;
 
   
   constructor(
@@ -49,7 +50,7 @@ export class PerfilComponent implements OnInit {
   ngOnInit(): void {
 
     if((JSON.parse(localStorage.getItem("rol") )) == "Administrador"){
-        this.administradroService.getAdministrador(parseInt(localStorage.getItem('usuarioID'))).subscribe(data => {
+        this.administradroService.getAdministradorDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data => {
           this.Administrador= data;
         })
         this.admin=true;
@@ -57,7 +58,7 @@ export class PerfilComponent implements OnInit {
     }
 
     if((JSON.parse(localStorage.getItem("rol") )) == "Cliente"){
-      this.clienteService.getCliente(parseInt(localStorage.getItem('usuarioID'))).subscribe(data=>{
+      this.clienteService.getClienteDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data=>{
         this.Cliente=data;
       })
 
@@ -65,14 +66,17 @@ export class PerfilComponent implements OnInit {
     }
 
     if((JSON.parse(localStorage.getItem("rol") )) == "Encuestado"){
-      this.encuestadoservice.getEncuestado( parseInt(localStorage.getItem('usuarioID'))).subscribe( data => {
-        this.Encuestado =data
+      console.log("ENTRO EN LA LLAMADA");
+      this.encuestadoservice.getEncuestadoDelUsuario( parseInt(localStorage.getItem('usuarioID'))).subscribe( data => {
+        this.Encuestado = data;
+        console.log("GUARDO LA INFORMACION");
+        console.log(this.Encuestado);
       })
       this.encue=true;  
     }
 
     if((JSON.parse(localStorage.getItem("rol") )) == "Analista"){
-     this.analistaService.getAnalista(parseInt(localStorage.getItem('usuarioID'))).subscribe(data =>{
+     this.analistaService.getAnalistaDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data =>{
        this.Analista =data 
      })
 
@@ -85,29 +89,26 @@ export class PerfilComponent implements OnInit {
 
   CambioDeClave(){
 
-    if(this.auxUsuario.claveNueva = this.usuario.claveNueva){
     this.HacerUsuario();
     this.usuarioService.cambiarclave(this.usuario).subscribe(data=>{
-        if(data[0].respuesta=="Cambio Satisfactorio"){
+        this.aux = data;
+        console.log(this.usuario);
+        if(this.aux.Respuesta=="Cambio Satisfactorio"){
           window.alert("Cambio Realizado");
         }else{
           window.alert(" Algo fallo y no soy yo ");
         }
     })
-  }else{
 
-    window.alert(" Metistes dos claves diferentes  intentalo de nuevo ");
   }
-  }
+
+
 
 
   HacerUsuario(){
 
     this.usuario._id= parseInt(localStorage.getItem('usuarioID'));
-    this.usuarioService.getUsuario(this.usuario._id).subscribe(data=>{
-          this.usuario.clave=data[0].clave;   
-    })
-    this.usuario.claveNueva= this.auxUsuario.claveNueva;
+    this.usuario.nuevaClave= this.auxUsuario.nuevaClave;
     console.log(this.usuario);
 
 }

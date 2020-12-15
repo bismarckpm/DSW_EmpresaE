@@ -1,5 +1,5 @@
 export class Categoria {
     _id: number;
-    nombre:string;
-    estado:string;
+    nombre: string;
+    estado: string;
 }

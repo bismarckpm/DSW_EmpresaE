@@ -6,15 +6,15 @@
         <th>ID</th>
         <th>Username</th>
         <th>RIF</th>
-        <th>Correo</th>
+        <th>Razon Social</th>
         <th>Estado </th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let cliente of Cliente " >
         <td>{{ cliente._id }}</td>
+        <td>{{ cliente.razonSocial}}</td>
         <td>{{ cliente.usuario.username }}</td>
-        <td>{{ cliente.usuario.correoElectronico }}</td>
         <td>{{ cliente.rif }}</td>
         <td>{{ cliente.estado }}</td>
         <td>
@@ -30,7 +30,7 @@
                 <div class="modal-content">
                   <!-- Cabezado Modal -->
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Editar Marca </h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Cliente </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -59,16 +59,7 @@
                           <div class="row">
                             <div class="col-md-5 mb-3">
                               <label for="razonSocial">Razon Social</label>
-                              <select class="custom-select d-block w-100" id="razonSocial" formControlName="razonSocialCliente">
-                                <option value="">Choose...</option>
-                                <option value="J">Juridico (J)</option>
-                                <option value="P">P</option>
-                                <option value="CA">CA</option>
-                                <option value="SA">SA</option>
-                                <option value="SRL">SRL</option>
-                                <option value="ONG">ONG</option>
-                                <option value="ASFL">ASFL</option>
-                              </select>
+                              <input type="text" class="form-control" id="razonSocial" formControlName="razonSocialCliente">
                               <div *ngIf="razonSocialCliente.invalid && (razonSocialCliente.dirty || razonSocialCliente.touched)" class="alert alert-danger">
                                 <div *ngIf="razonSocialCliente.errors.required">
                                   Este campo es obligatorio
@@ -79,7 +70,7 @@
                             <div class="row">
                               <div class="col-md-6 mb-3">
                                 <label for="user">Username</label>
-                                <input type="text" [(ngModel)]="clienteData.usuario.username" class="form-control"  formControlName="usernameCliente" name="username" id="user" placeholder="" >
+                                <input type="text" readonly="readonly" [(ngModel)]="clienteData.usuario.username" class="form-control"  formControlName="usernameCliente" name="username" id="user" placeholder="" >
                                 <div *ngIf="usernameCliente.invalid && (usernameCliente.dirty || usernameCliente.touched)" class="alert alert-danger">
                                   <div *ngIf="usernameCliente.errors.required">
                                     Este campo es obligatorio
@@ -87,31 +78,6 @@
                                 </div>
                               </div>
                             </div>
-                          <div class="row">
-                            <div class="col-md-6 mb-3">
-                              <label for="clave">Clave</label>
-                              <input type="text" [(ngModel)]="clienteData.usuario.clave" class="form-control"  formControlName="claveCliente" name="clave" id="clave" placeholder="" >
-                              <div *ngIf="claveCliente.invalid && (claveCliente.dirty || claveCliente.touched)" class="alert alert-danger">
-                                <div *ngIf="claveCliente.errors.required">
-                                  Este campo es obligatorio
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-6 mb-3">
-                              <label for="correo">Correo Electronico</label>
-                              <input type="text" [(ngModel)]="clienteData.usuario.correoElectronico" class="form-control"  formControlName="correoElectronicoCliente" name="correoElectronico" id="correo" placeholder="" >
-                              <div *ngIf="correoElectronicoCliente.invalid && (correoElectronicoCliente.dirty || correoElectronicoCliente.touched)" class="alert alert-danger">
-                                <div *ngIf="correoElectronicoCliente.errors.required">
-                                  Este campo es obligatorio
-                                </div>
-                                <div *ngIf="correoElectronicoCliente.errors.pattern">
-                                  Introduzca un formato valido
-                                </div>
-                              </div>
-                            </div>
-                          </div>
                           <div class="row">
                             <div class="col-md-4 mb-3">
                               <label for="estatus"> Estado</label>

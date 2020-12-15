@@ -9,8 +9,8 @@ import { catchError, retry } from 'rxjs/operators';
 })
 export class SubcategoriaService {
    //Definimos el url del api
-  //apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
-  apiurl = 'http://localhost:3000';
+  apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+  //apiurl = 'http://localhost:3000';
 
   constructor(private http:HttpClient) { }
 // Http Options

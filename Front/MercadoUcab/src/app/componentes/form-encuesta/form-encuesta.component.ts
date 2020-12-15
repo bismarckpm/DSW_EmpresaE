@@ -4,6 +4,8 @@ import { Encuesta } from 'src/app/models/encuesta';
 import { EncuestaService } from 'src/app/services/encuesta.service';
 import { EstudioService } from '../../services/estudio.service';
 import { TipoPreguntaService } from '../../services/tipo-pregunta.service';
+import { PreguntaService } from '../../services/pregunta.service';
+import { Pregunta } from 'src/app/models/pregunta';
 
 @Component({
   selector: 'app-form-encuesta',
@@ -19,13 +21,16 @@ export class FormEncuestaComponent implements OnInit {
     fechaFin: '',
     estudio: {_id: 0},
     pregunta: [
-      {descripcion: ''}
+      { descripcion: '', tipo: '' }
     ]
   };
-  @Input() preguntas: string[] = [];
-  cantPreguntas: number[] = [];
+  @Input() preguntaEstudio = { };
+  @Input() preguntaInsertar = {_id: 0};
+  listaPreguntasInsertar = [];
+  preguntasMostrar: any = [];
   estudios: any = [];
   tipoPreguntas: any = [];
+  cantPreguntas: number[] = [];
 
   /// PAra validar
   formEncuesta: FormGroup;
@@ -35,6 +40,7 @@ export class FormEncuestaComponent implements OnInit {
     private servicio: EncuestaService,
     private servicioEstudio: EstudioService,
     private servicioTipoPregunta: TipoPreguntaService,
+    private servicioPregunta: PreguntaService,
     private formBuilder: FormBuilder
   ) {
     this.createForm();
@@ -58,17 +64,23 @@ export class FormEncuestaComponent implements OnInit {
         fechaFin: '',
         estudio: {_id: 0},
         pregunta: [
-          {descripcion: ''}
+          {descripcion: '', tipo: ''}
         ]
       };
       // this.cargarEstudios();
-      console.log(this.preguntas);
+      console.log(this.preguntaInsertar);
       alert('Agregó');
     }
     else{
       alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
     }
 
+  }
+
+  addPreguntaEstudio(): void {
+    this.listaPreguntasInsertar.push(this.preguntaInsertar);
+    console.log(this.listaPreguntasInsertar);
+    this.preguntaInsertar = {_id: 0};
   }
 
   asigCantPregunta(cant: number): void {
@@ -80,18 +92,24 @@ export class FormEncuestaComponent implements OnInit {
     }
   }
 
-  // tslint:disable-next-line: typedef
-  cargarEstudios() {
+  ////// cargar de servicios
+  cargarEstudios(): void {
     this.servicioEstudio.getEstudios().subscribe((data: {}) => {
       this.estudios = data;
     });
   }
 
-  // tslint:disable-next-line: typedef
-  cargarTipoPreguntas() {
+  cargarTipoPreguntas(): void {
     this.servicioTipoPregunta.getTipoPreguntas().subscribe((data: {}) => {
       this.tipoPreguntas = data;
     });
+  }
+
+  cargarPreguntas(): void {
+    this.servicioPregunta.getPreguntasXSubcategoria(this.encuesta.estudio._id).subscribe((data: {}) => {
+      this.preguntasMostrar = data;
+    });
+    console.log(this.preguntasMostrar);
   }
 
   ///// Metodos para las validaciones

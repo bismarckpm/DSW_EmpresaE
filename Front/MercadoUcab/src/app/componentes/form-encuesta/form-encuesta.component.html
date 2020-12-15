@@ -54,8 +54,8 @@
                         <label for="estudio">Estudio relacionado</label>
                     </div>
                     <div class="col-md-8 col-sm-6 mb-3">
-                        <select class="custom-select d-block w-100" [(ngModel)]="encuesta.estudio._id" id="estudio" value="estudio._id" name="estudio._id" formControlName="estudio">
-                            <option value="">Choose...</option>
+                        <select class="custom-select d-block w-100" [(ngModel)]="encuesta.estudio._id" id="estudio" 
+                        value="estudio._id" name="estudio._id" formControlName="estudio">
                             <option *ngFor="let est of estudios" [ngValue]= "est._id">{{ est.nombre }}</option>
                         </select>
                         <div class="invalid-feedback">
@@ -69,20 +69,39 @@
                     </div>
                     <div class="col-md-4 col-sm-6 mb-3">
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-light" >5</button>
-                            <button type="button" class="btn btn-light" >10</button>
-                            <button type="button" class="btn btn-light" >15</button>
+                            <button type="button" class="btn btn-light" (click)="cargarPreguntas()">5</button>
+                            <button type="button" class="btn btn-light" (click)="cargarPreguntas()">10</button>
+                            <button type="button" class="btn btn-light" (click)="cargarPreguntas()">15</button>
                           </div>
                         <div class="invalid-feedback">
                             Please select a valid option.
                         </div>
                     </div>
                 </div>
-                <!-- arreglar esta parte de agregar preguntas a una encuesta -->
                 <div class="form-row">
+                    <div class="col-md-2 col-sm-2 mb-3">
+                        <label for="pregunta">Pregunta </label>
+                    </div>
+                    <div class="col-md-8 col-sm-8 mb-3">
+                        <select class="custom-select d-block w-100" [(ngModel)]="preguntaInsertar._id" id="pregunta" value="preguntaInsertar._id" 
+                        name="preguntaInsertar._id" formControlName="pregunta" >
+                            <option *ngFor="let pregunta of preguntasMostrar" [ngValue]= "pregunta._id">{{ pregunta.descripcion }}</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a valid option.
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 mb-2">
+                        <button type="button" class="btn btn-primary" (click)="addPreguntaEstudio()">
+                            +
+                        </button>
+                    </div>
+                </div>
+                <!-- arreglar esta parte de agregar preguntas a una encuesta -->
+                <!-- <div class="form-row">
                     <div class="col-md-6 col-sm-8 mb-4">
                         <label for="pregunta">Pregunta</label>
-                        <input type="text" class="form-control" [(ngModel)]="preguntas" formControlName="pregunta" id="pregunta" placeholder="" value="" name="encuesta.pregunta">
+                        <input type="text" class="form-control">
                     </div>
                     <div class="col-md-4  col-sm-4 mb-2">
                         <label for="tipoPregunta">Tipo de pregunta</label>
@@ -100,7 +119,7 @@
                             +
                         </button>
                     </div>
-                </div>
+                </div> -->
             </form>
         </div>
         <div class="modal-footer">

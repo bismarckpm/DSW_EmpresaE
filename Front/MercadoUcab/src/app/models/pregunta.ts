@@ -9,4 +9,8 @@ export class Pregunta {
     tipo: TipoPregunta;
     subcategoria: Subcategoria;
     opciones: Opcion;
+
+    constructor(id: number){
+        this._id = id;
+    }
 }

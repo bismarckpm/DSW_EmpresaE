@@ -107,8 +107,8 @@ export class LoginComponent implements OnInit {
           window.alert("Usuario no registrado o Informacion Incorrecta");
         }
       });
-    }
-      */  
+    }*/
+      
 
   }
 

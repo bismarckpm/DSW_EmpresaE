@@ -8,5 +8,6 @@ export class Analista {
   estado: string;
   correoElectronico: string;
   usuario:Usuario;
+  rol: string;
 
 }

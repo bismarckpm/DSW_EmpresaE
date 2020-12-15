@@ -5,7 +5,8 @@
       "username": "Pedro",
       "clave ": "pedro",
       "rol": "Encuestado",
-      "autenticacion": "valida"
+      "autenticacion": "valida",
+      "correoelectronico":"xxx_pornhub@gmail.com"
     }
 
   ],
@@ -209,6 +210,85 @@
         "username": "juanee",
         "clave": "12345",
         "correoElectronico": "juan@gmail.com"
+      }
+    },
+    {
+      "_id": 2,
+      "primerNombre": "qqq",
+      "segundoNombre": "qqq",
+      "primerApellido": "qqq",
+      "segundoApellido": "qqq",
+      "fechaNacimiento": "10/11/1998",
+      "estado": "a",
+      "estadoCivil": {
+        "_id": 0,
+        "nombre": "",
+        "estado": ""
+      },
+      "nivelAcademico": {
+        "_id": 0,
+        "nombre": "",
+        "estado": ""
+      },
+      "medioConexion": {
+        "_id": 0,
+        "nombre": "",
+        "estado": ""
+      },
+      "genero": {
+        "_id": 0,
+        "nombre": "",
+        "estado": ""
+      },
+      "ocupacion": {
+        "_id": 0,
+        "nombre": "",
+        "estado": ""
+      },
+      "nivelSocioEconomico": {
+        "_id": 0,
+        "nombre": "",
+        "estado": "",
+        "descripcion": ""
+      },
+      "telefono": {
+        "_id": 0,
+        "numero": "04241896545"
+      },
+      "hijo": {
+        "_id": 0,
+        "fechaNacimientoHijo": "10/11/1998",
+        "generoHijo": ""
+      },
+      "lugar": {
+        "estado": "",
+        "nombre": "",
+        "tipo": "",
+        "lugar": {
+          "_id": 0,
+          "estado": "",
+          "nombre": "",
+          "tipo": "",
+          "lugar": {
+            "_id": 0,
+            "estado": "",
+            "nombre": "",
+            "tipo": "",
+            "lugar": {
+              "_id": 0,
+              "estado": "",
+              "nombre": "",
+              "tipo": ""
+            }
+          }
+        }
+      },
+      "usuario": {
+        "_id": 0,
+        "username": "",
+        "estado": "",
+        "clave": "",
+        "correoElectronico": ""
       }
     }
   ],
@@ -444,6 +524,32 @@
           "descripcion": ""
         }
       ]
+    },
+    {
+      "_id": 5,
+      "estado": "I",
+      "fechaInicio": "10/10/2010",
+      "fechaFin": "10/10/2011",
+      "estudio": {
+        "_id": 1
+      },
+      "pregunta": [
+        {
+          "_id": 1
+        },
+        {
+          "_id": 1
+        },
+        {
+          "_id": 2
+        },
+        {
+          "_id": 2
+        },
+        {
+          "_id": 1
+        }
+      ]
     }
   ],
   "analista": [
@@ -452,7 +558,8 @@
       "username": "juancitooooo",
       "clave": "clavejuan",
       "correoElectronico": "juan@gmail.com",
-      "estado": "a"
+      "estado": "a",
+      "rol": "Administrador"
     },
     {
       "_id": 2,
@@ -709,6 +816,38 @@
       "_id": 2,
       "nombre": "femenino",
       "estado": "a"
+    }
+  ],
+  "preguntassubcategoria": [
+    {
+      "_id": 1,
+      "descripcion": "Preguntas subcate 1",
+      "estado": "a",
+      "tipo": {
+        "_id": 1,
+        "estado": "a",
+        "tipo": "verdadero y Falso"
+      },
+      "subcategoria": {
+        "_id": 1,
+        "nombre": "subcategoria 1",
+        "estado": "i"
+      }
+    },
+    {
+      "_id": 2,
+      "descripcion": "Preguntas subcate 2",
+      "estado": "a",
+      "tipo": {
+        "_id": 1,
+        "estado": "i",
+        "tipo": "multiple"
+      },
+      "subcategoria": {
+        "_id": 3,
+        "nombre": "subcategoria",
+        "estado": "i"
+      }
     }
   ]
 }

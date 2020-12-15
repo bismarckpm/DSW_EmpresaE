@@ -24,7 +24,7 @@ export class PerfilComponent implements OnInit {
   cli=false;
 
   @Input() usuario={ _id:0, nuevaClave:"",clave:'' };
-   @Input() auxUsuario={nuevaClave:''};
+  @Input() auxUsuario={nuevaClave:''};
 
   @Input() Cliente :any
   @Input() Administrador :any

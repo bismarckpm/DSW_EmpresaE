@@ -4,11 +4,43 @@
       "_id": 50,
       "username": "Pedro",
       "clave ": "pedro",
-      "rol": "Encuestado",
-      "autenticacion": "valida",
-      "correoelectronico":"xxx_pornhub@gmail.com"
+      "rol": "Analista",
+      "autenticacion": "valida"
+    },
+    {
+      "_id": 51,
+      "username": "Juan",
+      "clave": "juan",
+      "correoElectronico": "juan@gmail.com",
+      "estado": "a",
+      "tipoUsuario": {
+        "_id": 0,
+        "descripcion": "Administrador"
+      }
+    },
+    {
+      "_id": 52,
+      "username": "Victor",
+      "clave": "victor",
+      "correoElectronico": "victor@gmail.com",
+      "estado": "a",
+      "tipoUsuario": {
+        "_id": 0,
+        "descripcion": "Analista"
+      }
+    },
+    {
+      "_id": 53,
+      "rol": "",
+      "username": "Victor",
+      "clave": "victor",
+      "correoElectronico": "victor@gmail.com",
+      "estado": "a",
+      "tipoUsuario": {
+        "_id": 0,
+        "descripcion": "Administrador"
+      }
     }
-
   ],
   "categoria": [
     {
@@ -524,32 +556,6 @@
           "descripcion": ""
         }
       ]
-    },
-    {
-      "_id": 5,
-      "estado": "I",
-      "fechaInicio": "10/10/2010",
-      "fechaFin": "10/10/2011",
-      "estudio": {
-        "_id": 1
-      },
-      "pregunta": [
-        {
-          "_id": 1
-        },
-        {
-          "_id": 1
-        },
-        {
-          "_id": 2
-        },
-        {
-          "_id": 2
-        },
-        {
-          "_id": 1
-        }
-      ]
     }
   ],
   "analista": [
@@ -567,6 +573,28 @@
       "clave": "11111",
       "correoElectronico": "joseeqqqq@gmail.com",
       "estado": "i"
+    },
+    {
+      "_id": 3,
+      "username": "juan",
+      "clave": "juan",
+      "correoElectronico": "juan@gmail.com",
+      "estado": "a",
+      "tipoUsuario": {
+        "_id": 0,
+        "descripcion": "Analista"
+      }
+    },
+    {
+      "_id": 4,
+      "username": "josee",
+      "clave": "josee",
+      "correoElectronico": "josee@gmail.com",
+      "estado": "a",
+      "tipoUsuario": {
+        "_id": 0,
+        "descripcion": "Administrador"
+      }
     }
   ],
   "cliente": [
@@ -816,38 +844,6 @@
       "_id": 2,
       "nombre": "femenino",
       "estado": "a"
-    }
-  ],
-  "preguntassubcategoria": [
-    {
-      "_id": 1,
-      "descripcion": "Preguntas subcate 1",
-      "estado": "a",
-      "tipo": {
-        "_id": 1,
-        "estado": "a",
-        "tipo": "verdadero y Falso"
-      },
-      "subcategoria": {
-        "_id": 1,
-        "nombre": "subcategoria 1",
-        "estado": "i"
-      }
-    },
-    {
-      "_id": 2,
-      "descripcion": "Preguntas subcate 2",
-      "estado": "a",
-      "tipo": {
-        "_id": 1,
-        "estado": "i",
-        "tipo": "multiple"
-      },
-      "subcategoria": {
-        "_id": 3,
-        "nombre": "subcategoria",
-        "estado": "i"
-      }
     }
   ]
 }

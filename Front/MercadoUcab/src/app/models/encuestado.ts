@@ -14,6 +14,7 @@ export class Encuestado {
    primerApellido:string;
    segundoApellido:string;
    fechaNacimiento:string;
+   telefono: string;
 
    estado:EstadoCivil;
    nivelAcademico:NivelAcademico;

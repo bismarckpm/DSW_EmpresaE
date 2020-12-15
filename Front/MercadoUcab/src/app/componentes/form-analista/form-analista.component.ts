@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class FormAnalistaComponent implements OnInit {
 
-  @Input() analista = {_id: 0, username: '', clave: '', correoElectronico: '', estado: ''};
+  @Input() analista = {_id: 0, username: '', clave: '', correoElectronico: '', estado: '', rol: ''};
   formAnalista: FormGroup;
   patronCorreoAnalista: any = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -48,11 +48,16 @@ export class FormAnalistaComponent implements OnInit {
     return this.formAnalista.get('correoElectronicoAnalista');
   }
 
+  get rolAnalista(){
+    return this.formAnalista.get('rolAnalista');
+  }
+
   createForm(){
     this.formAnalista = this.formBuilder.group({
       usernameAnalista: ['', Validators.required],
       estadoAnalista: ['',  Validators.required],
       claveAnalista: ['', Validators.required],
+      rolAnalista: ['', Validators.required],
       correoElectronicoAnalista: ['', [Validators.required, Validators.pattern(this.patronCorreoAnalista)]],
     });
   }

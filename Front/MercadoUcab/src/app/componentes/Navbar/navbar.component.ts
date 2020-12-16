@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,10 +8,20 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
+  ruta: string;
+
+bool=true;
   constructor(private router:Router) { 
+    console.log(this.router.url.toString().substr(1));
+    this.ruta = this.router.url.toString().substr(1);
   }
 
   ngOnInit(): void {
+    if(localStorage.getItem('rol').length == 0){
+      this.bool=true;
+    }else{
+      this.bool=false;
+    }
   }
 
   navegarHaciaRegistro(){
@@ -27,7 +36,7 @@ export class NavbarComponent implements OnInit {
     // remove user from local storage and set current user to null
     localStorage.removeItem('usuarioID');
     localStorage.removeItem('rol');
-    this.router.navigate[('/Login')]
+    this.bool=true;
    // this.currentUserSubject.next(null);
   }
 

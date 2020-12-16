@@ -5,6 +5,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "tipo_usuario", schema = "mercadeoucab")
+@NamedQueries({
+        @NamedQuery(name = "getTipoUsuarioByDescripcion", query = "select t from TipoUsuarioEntity t where t.descripcion = :descripcion")
+})
 public class TipoUsuarioEntity extends BaseEntity{
     private String descripcion;
     private String estado;

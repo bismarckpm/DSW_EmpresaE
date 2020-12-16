@@ -1,11 +1,9 @@
 import { Usuario } from './usuario';
+import {TipoUsuario} from './tipo-usuario';
 
 export class Administrador{
-    
+
     _id: number;
-    username: string;
-    clave: string;
-    estado: string;
-    correoElectronico: string;
-    usuario:Usuario;
+    usuario: Usuario;
+    tipoUsuario: TipoUsuario;
 }

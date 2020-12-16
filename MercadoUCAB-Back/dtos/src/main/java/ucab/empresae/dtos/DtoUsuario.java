@@ -7,11 +7,12 @@ public class DtoUsuario extends DtoBase {
     private String username;
     private String clave;
     private String correoelectronico;
+    private String nuevaClave;
     
     //Relaciones
-    private DtoTipoUsuario dtoTipoUsuario;
-    private DtoCliente dtoCliente;
-    private DtoEncuestado dtoEncuestado;
+    private DtoTipoUsuario tipoUsuario;
+    private DtoCliente cliente;
+    private DtoEncuestado encuestado;
 
     //Constructores
     public DtoUsuario() {
@@ -50,28 +51,35 @@ public class DtoUsuario extends DtoBase {
 
     public void setCorreoelectronico(String correoelectronico){this.correoelectronico = correoelectronico;}
 
-    public DtoTipoUsuario getDtoTipoUsuario() {
-        return dtoTipoUsuario;
+    public String getNuevaClave() {
+        return nuevaClave;
     }
 
-    public void setDtoTipoUsuario(DtoTipoUsuario dtoTipoUsuario) {
-        this.dtoTipoUsuario = dtoTipoUsuario;
+    public void setNuevaClave(String nuevaClave) {
+        this.nuevaClave = nuevaClave;
     }
 
-    public DtoCliente getDtoCliente() {
-        return dtoCliente;
+    public DtoTipoUsuario getTipoUsuario() {
+        return tipoUsuario;
     }
 
-    public void setDtoCliente(DtoCliente dtoCliente) {
-        this.dtoCliente = dtoCliente;
+    public void setTipoUsuario(DtoTipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
-    public DtoEncuestado getDtoEncuestado() {
-        return dtoEncuestado;
+    public DtoCliente getCliente() {
+        return cliente;
     }
 
-    public void setDtoEncuestado(DtoEncuestado dtoEncuestado) {
-        this.dtoEncuestado = dtoEncuestado;
+    public void setCliente(DtoCliente cliente) {
+        this.cliente = cliente;
     }
 
+    public DtoEncuestado getEncuestado() {
+        return encuestado;
+    }
+
+    public void setEncuestado(DtoEncuestado encuestado) {
+        this.encuestado = encuestado;
+    }
 }

@@ -5,19 +5,19 @@
       <tr>
         <th>ID</th>
         <th>Username</th>
-        <th>Correo</th>
-        <th>Estado </th>
+        <th>Rol</th>
+        <th>Estado</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let analista of Analista " >
-        <td>{{ analista._id }}</td>
-        <td>{{ analista.username }}</td>
-        <td>{{ analista.correoElectronico }}</td>
-        <td>{{ analista.estado }}</td>
+      <tr *ngFor="let usuario of Usuario" >
+        <td>{{ usuario._id }}</td>
+        <td>{{ usuario.username }}</td>
+        <td>{{ usuario.tipousuario.descripcion }}</td>
+        <td>{{ usuario.estado }}</td>
         <td>
           <div class="d-flex justify-content-around">
-            <button type="button" class="btn btn-primary" data-toggle="modal" (click)="editar(analista)" data-target="#exampleModal">
+            <button type="button" class="btn btn-primary" data-toggle="modal" (click)="editar(usuario)" data-target="#exampleModal">
               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
               </svg>
@@ -28,51 +28,24 @@
                 <div class="modal-content">
                   <!-- Cabezado Modal -->
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Editar Marca </h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <!-- Cuerpo completo del Modal -->
                   <div class="modal-body">
-                    <form [formGroup]="formAnalista">
+                    <form [formGroup]="formUsuario">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="form-group">
                             <div class="row">
                               <div class="col-md-6 mb-3">
                                 <label for="user">Username</label>
-                                <input type="text" [(ngModel)]="analistaData.username" class="form-control"  formControlName="usernameAnalista" name="username" id="user" placeholder="" >
-                                <div *ngIf="usernameAnalista.invalid && (usernameAnalista.dirty || usernameAnalista.touched)" class="alert alert-danger">
-                                  <div *ngIf="usernameAnalista.errors.required">
+                                <input type="text" readonly="readonly" [(ngModel)]="usuarioData.username" class="form-control"  formControlName="usernameUsuario" name="username" id="user" placeholder="" >
+                                <div *ngIf="usernameUsuario.invalid && (usernameUsuario.dirty || usernameUsuario.touched)" class="alert alert-danger">
+                                  <div *ngIf="usernameUsuario.errors.required">
                                     Este campo es obligatorio
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-6 mb-3">
-                              <label for="clave">Clave</label>
-                              <input type="text" [(ngModel)]="analistaData.clave" class="form-control"  formControlName="claveAnalista" name="clave" id="clave" placeholder="" >
-                              <div *ngIf="claveAnalista.invalid && (claveAnalista.dirty || claveAnalista.touched)" class="alert alert-danger">
-                                <div *ngIf="claveAnalista.errors.required">
-                                  Este campo es obligatorio
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-6 mb-3">
-                              <label for="correo">Correo Electronico</label>
-                              <input type="text" [(ngModel)]="analistaData.correoElectronico" class="form-control"  formControlName="correoElectronicoAnalista" name="correoElectronico" id="correo" placeholder="" >
-                              <div *ngIf="correoElectronicoAnalista.invalid && (correoElectronicoAnalista.dirty || correoElectronicoAnalista.touched)" class="alert alert-danger">
-                                <div *ngIf="correoElectronicoAnalista.errors.required">
-                                  Este campo es obligatorio
-                                </div>
-                                <div>
-                                  <div *ngIf="correoElectronicoAnalista.errors.pattern">
-                                    Introduzca un formato valido
                                   </div>
                                 </div>
                               </div>
@@ -81,22 +54,35 @@
                           <div class="row">
                             <div class="col-md-4 mb-3">
                               <label for="estado"> Estado</label>
-                              <select class="custom-select d-block w-100" [(ngModel)]= "analistaData.estado" formControlName="estadoAnalista" id="estado" name="estado" >
+                              <select class="custom-select d-block w-100" [(ngModel)]= "usuarioData.estado" formControlName="estadoUsuario" id="estado" name="estado" >
                                 <option value="a">Activa</option>
                                 <option value="i">Inactiva</option>
                               </select>
+                              <div *ngIf="estadoUsuario.invalid && (estadoUsuario.dirty || estadoUsuario.touched)" class="alert alert-danger">
+                                <div *ngIf="estadoUsuario.errors.required">
+                                  Este campo es obligatorio
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                          <div *ngIf="estadoAnalista.invalid && (estadoAnalista.dirty || estadoAnalista.touched)" class="alert alert-danger">
-                            <div *ngIf="estadoAnalista.errors.required">
-                              Este campo es obligatorio
+                            <div class="col-md-4 mb-3">
+                              <label for="rol">Rol</label>
+                              <select class="custom-select d-block w-100" [(ngModel)]="usuarioData.tipousuario.descripcion" formControlName="descripcionTipoUsuario" id="rol" name="descripcion">
+                                <option value="">Choose...</option>
+                                <option value="Administrador">Administrador</option>
+                                <option value="Analista">Analista</option>
+                              </select>
+                              <div *ngIf="descripcionTipoUsuario.invalid && (descripcionTipoUsuario.dirty || descripcionTipoUsuario.touched)" class="alert alert-danger">
+                                <div *ngIf="descripcionTipoUsuario.errors.required">
+                                  Este campo es obligatorio
+                                </div>
+                              </div>
                             </div>
                           </div>
                           <br>
                           <!-- Parte inferior del modal -->
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-success" (click)="updateAnalista()" data-dismiss="modal">Actualizar</button>
+                            <button type="submit" class="btn btn-success" (click)="updateUsuario()" data-dismiss="modal">Actualizar</button>
 
                           </div>
                         </div>
@@ -106,7 +92,7 @@
                 </div>
               </div>
             </div> <!-- Finall Modal -->
-            <button type="button" class="btn btn-danger btn-sm" (click)="deleteAnalista(analista._id)">
+            <button type="button" class="btn btn-danger btn-sm" (click)="deleteUsuario(usuario._id)">
               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                 <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>

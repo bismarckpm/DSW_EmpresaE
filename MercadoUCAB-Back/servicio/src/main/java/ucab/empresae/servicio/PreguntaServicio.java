@@ -256,4 +256,23 @@ public class PreguntaServicio {
         return Response.ok(preguntas).build();
     }
 
+    @GET
+    @Produces(value= MediaType.APPLICATION_JSON)
+    @Path("/preguntasEstudio/{id}")
+    public Response getPreguntasbyEstudio(@PathParam("id") long id){
+
+        List<PreguntaEntity> preguntas = null;
+        try {
+            DaoEstudio daoEstudio = new DaoEstudio();
+            DaoPregunta dao = new DaoPregunta();
+
+            //Busco el estudio con el id de la url, y a su vez hago la busqueda de las preguntas que tienen ese estudio
+            preguntas = dao.getPreguntasbyEstudio(id);
+
+        } catch (Exception ex) {
+            String problema = ex.getMessage();
+        }
+        return Response.ok(preguntas).build();
+    }
+
 }

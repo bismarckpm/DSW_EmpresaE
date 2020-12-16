@@ -4,10 +4,14 @@ import ucab.empresae.daos.*;
 import ucab.empresae.dtos.DtoCategoria;
 import ucab.empresae.dtos.DtoEstudio;
 import ucab.empresae.entidades.*;
+import ucab.empresae.excepciones.PruebaExcepcion;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.List;
 
 @Path("/estudio")
 public class EstudioServicio extends AplicacionBase {
@@ -67,7 +71,6 @@ public class EstudioServicio extends AplicacionBase {
     }
 
     @POST
-    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addEstudio(DtoEstudio dtoEstudio) {
@@ -107,6 +110,29 @@ public class EstudioServicio extends AplicacionBase {
         } catch(Exception ex){
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
+    }
+
+
+    @GET
+    @Produces(value= MediaType.APPLICATION_JSON)
+    @Path("/encuestado/{id}")                   //RECIBO EL ID DEL USUARIO
+    public Response getEstudiosbyEncuestado(@PathParam("id") long id) throws PruebaExcepcion {
+
+        List<EstudioEntity> estudios = null;
+        try {
+            DaoUsuario daoUsuario = new DaoUsuario();
+            DaoEncuestado daoEncuestado = new DaoEncuestado();
+            UsuarioEntity usuarioEntity = daoUsuario.find(id, UsuarioEntity.class);
+
+            EncuestadoEntity encuestadoEntity = daoEncuestado.getEncuestadoByUsuario(usuarioEntity);
+
+            DaoEstudio daoEstudio = new DaoEstudio();
+            estudios = daoEstudio.getEstudios(encuestadoEntity.getLugar(), encuestadoEntity.getNivelsocioeco());
+
+        } catch (Exception ex) {
+            String problema = ex.getMessage();
+        }
+        return Response.ok(estudios).build();
     }
 
 }

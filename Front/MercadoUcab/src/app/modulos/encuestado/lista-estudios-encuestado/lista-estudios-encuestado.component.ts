@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {EstudioService} from '../../../services/estudio.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Estudio} from '../../../models/estudio';
+import {EncuestaService} from '../../../services/encuesta.service';
+import {Encuesta} from '../../../models/encuesta';
 
 @Component({
   selector: 'app-lista-estudios-encuestado',
@@ -12,12 +14,14 @@ import {Estudio} from '../../../models/estudio';
 export class ListaEstudiosEncuestadoComponent implements OnInit {
 
   estudios: Estudio[] = [];
+  encuestas: Encuesta[] = [];
   _id = this.actRoute.snapshot.params._id;
   @Input() encuestadoData = {};
   formEstudioEncuestado: FormGroup;
 
   constructor(
     public estudioService: EstudioService,
+    public encuestaService: EncuestaService,
     private formBuilder: FormBuilder,
     public actRoute: ActivatedRoute,
     public router: Router
@@ -28,9 +32,16 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
   }
 
   loadEstudios(): void{
-    const id = JSON.parse(localStorage.getItem('usuarioID'));
+    let id = JSON.parse(localStorage.getItem('usuarioID'));
     this.estudioService.getEstudioEncuestado(id).subscribe(data => {
       this.estudios = data;
+    });
+  }
+
+  loadEncuesta(): void{
+    let id = JSON.parse(localStorage.getItem('estudioID'));
+    this.encuestaService.getEncuestaEstudio(id).subscribe(data => {
+      this.encuestas = data;
     });
   }
 

@@ -6,6 +6,7 @@
         <th>ID</th>
         <th>Estado</th>
         <th>Nombre</th>
+        <th>Estado</th>
         <th>Fecha de Inicio</th>
         <th>Fecha de Culminación</th>
         <th>Subcategoria</th>
@@ -13,9 +14,10 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let estudioEncuestado estudios " >
+      <tr *ngFor="let estudioEncuestado of estudios">
         <td>{{ estudioEncuestado._id }}</td>
         <td>{{ estudioEncuestado.nombre }}</td>
+        <td>{{ estudioEncuestado.estado }}</td>
         <td>{{ estudioEncuestado.fechaInicio }}</td>
         <td>{{ estudioEncuestado.fechaFin }}</td>
         <td>{{ estudioEncuestado.subcategoria.nombre }}</td>

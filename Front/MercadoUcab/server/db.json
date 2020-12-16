@@ -468,9 +468,9 @@
     },
     {
       "_id": 5,
-      "estado": "I",
-      "fechaInicio": "10/10/2010",
-      "fechaFin": "10/10/2011",
+      "estado": "A",
+      "fechaInicio": "10/10/1010",
+      "fechaFin": "10/10/1012",
       "estudio": {
         "_id": 1
       },
@@ -479,6 +479,44 @@
           "_id": 1
         },
         {
+          "_id": 2
+        },
+        {
+          "_id": 2
+        },
+        {
+          "_id": 5
+        },
+        {
+          "_id": 1
+        },
+        {
+          "_id": 0
+        },
+        {
+          "_id": 3
+        },
+        {
+          "_id": 5
+        },
+        {
+          "_id": 4
+        },
+        {
+          "_id": 3
+        }
+      ]
+    },
+    {
+      "_id": 6,
+      "estado": "A",
+      "fechaInicio": "10/10/1010",
+      "fechaFin": "10/10/1018",
+      "estudio": {
+        "_id": 1
+      },
+      "pregunta": [
+        {
           "_id": 1
         },
         {
@@ -488,7 +526,34 @@
           "_id": 2
         },
         {
+          "_id": 5
+        },
+        {
           "_id": 1
+        },
+        {
+          "_id": 0
+        },
+        {
+          "_id": 3
+        },
+        {
+          "_id": 5
+        },
+        {
+          "_id": 4
+        },
+        {
+          "_id": 3
+        },
+        {
+          "_id": 1
+        },
+        {
+          "_id": 5
+        },
+        {
+          "_id": 9
         }
       ]
     }
@@ -787,6 +852,66 @@
         "_id": 3,
         "nombre": "subcategoria",
         "estado": "i"
+      }
+    },
+    {
+      "_id": 3,
+      "descripcion": "SubcategoriaPruebaU",
+      "estado": "a",
+      "subcategoria": {
+        "_id": 1,
+        "categoria": {
+          "_id": 1,
+          "estado": "i",
+          "nombre": "CategoriaPrueba"
+        },
+        "estado": "a",
+        "nombre": "SubcategoriaPrueba"
+      },
+      "tipo": {
+        "_id": 1,
+        "estado": "a",
+        "tipo": "Comp"
+      }
+    },
+    {
+      "_id": 4,
+      "descripcion": "SubcategoriaPrueba2",
+      "estado": "a",
+      "subcategoria": {
+        "_id": 1,
+        "categoria": {
+          "_id": 1,
+          "estado": "i",
+          "nombre": "CategoriaPrueba"
+        },
+        "estado": "a",
+        "nombre": "SubcategoriaPrueba"
+      },
+      "tipo": {
+        "_id": 1,
+        "estado": "a",
+        "tipo": "Comp"
+      }
+    },
+    {
+      "_id": 9,
+      "descripcion": "PreguntaPostmanID",
+      "estado": "a",
+      "subcategoria": {
+        "_id": 1,
+        "categoria": {
+          "_id": 1,
+          "estado": "i",
+          "nombre": "CategoriaPrueba"
+        },
+        "estado": "a",
+        "nombre": "SubcategoriaPrueba"
+      },
+      "tipo": {
+        "_id": 1,
+        "estado": "a",
+        "tipo": "Comp"
       }
     }
   ]

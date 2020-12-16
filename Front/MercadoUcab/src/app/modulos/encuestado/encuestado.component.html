@@ -16,14 +16,14 @@
                     </button>
 
                     <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        
+
                     </div>
                 </div> -->
             </div>
             <div [ngSwitch]="seccion">
                 <div *ngSwitchCase="'Inicio'"><app-main-admin></app-main-admin></div>
                 <div *ngSwitchCase="'Perfil'"><app-perfil></app-perfil></div>
-                <div *ngSwitchCase="'Encuestas'"><app-lista-encuestados></app-lista-encuestados></div>
+                <div *ngSwitchCase="'Estudios'"><app-lista-estudios-encuestado></app-lista-estudios-encuestado></div>
             </div>
         </main>
     </div>

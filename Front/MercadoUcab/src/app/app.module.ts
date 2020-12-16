@@ -65,6 +65,8 @@ import { FormAnalistaAdminComponent } from './componentes/form-analista-admin/fo
 import { ListaAnalistaAdminComponent } from './componentes/lista-analista-admin/lista-analista-admin.component';
 import { PreguntaService } from './services/pregunta.service';
 import { PresentacionService } from './services/presentacion.service';
+import {ListaEstudiosAnalistaComponent} from './modulos/analista/lista-estudios-analista/lista-estudios-analista.component';
+import {ListaEstudiosEncuestadoComponent} from './modulos/encuestado/lista-estudios-encuestado/lista-estudios-encuestado.component';
 
 
 @NgModule({
@@ -111,7 +113,9 @@ import { PresentacionService } from './services/presentacion.service';
     FormEstudioClienteComponent,
     ListaEncuestadosComponent,
     FormAnalistaAdminComponent,
-    ListaAnalistaAdminComponent
+    ListaAnalistaAdminComponent,
+    ListaEstudiosAnalistaComponent,
+    ListaEstudiosEncuestadoComponent
   ],
   imports: [
     BrowserModule,

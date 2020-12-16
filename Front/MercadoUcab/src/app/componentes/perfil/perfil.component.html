@@ -4,7 +4,7 @@
 
     <div *ngIf="admin == true">
 
-
+   
       <div class="form-row">
         <div class="form-group col-md-6">
           <h1> Perfil</h1>
@@ -197,14 +197,12 @@
                 <input type="text" class="form-control" [(ngModel)]="Encuestado.lugar.lugar.lugar.nombre" value="Encuestado.lugar.lugar.lugar.nombre" readonly="readonly">
               </div>
             </div>
-
-
         </div>
     </div>   
 
 
 
-<div *ngIf="analist == true">
+<div *ngIf="analist==true">
 
     <div class="form-row">
         <div class="form-group col-md-6">
@@ -215,17 +213,17 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label > Nombre del Analista</label>
-            <input type="text" [(ngModel)]="Analista.username" value="Analista.username" readonly="readonly">
+            <input type="text" class="form-control" [(ngModel)]="Analista.username" value="Analista.username" readonly="readonly">
         </div>
         <div class="form-group col-md-6">
             <label>Correo</label>
-            <input type="text" [(ngModel)]="Analista.correoelectronico" value="Analista.correoelectronico"  readonly="readonly">
+            <input type="text" class="form-control" [(ngModel)]="Analista.correoelectronico" value="Analista.correoelectronico"  readonly="readonly">
         </div>
     </div>
 
     <div class="form-group">
       <label > Rol en nuestro sistema </label>
-      <input type="text" [(ngModel)]="Analista.tipoUsuario.descripcion" value="Analista.tipoUsuario.descripcion" readonly="readonly">
+      <input type="text"  class="form-control" [(ngModel)]="Analista.tipoUsuario.descripcion" value="Analista.tipoUsuario.descripcion" readonly="readonly">
     </div>
 
     <div class="form-row">

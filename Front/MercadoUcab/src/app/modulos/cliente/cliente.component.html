@@ -4,26 +4,33 @@
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom" >
                 <div [ngSwitch]="seccion">
-                    <div *ngSwitchCase="'Estudios'"><h1 class="h2 text-white">Lista de {{seccion}}</h1></div>
-                    <div *ngSwitchDefault><h1 class="h2 text-white">{{seccion}}</h1></div>
+                    <div *ngSwitchCase="'Inicio'"><h1 class="h2 text-white"f>Panel de Cliente</h1></div>
+                    <div *ngSwitchDefault><h1 class="h2 text-white"f>Lista de {{seccion}}</h1></div>
                 </div>
                 <div class="btn-toolbar mb-2 mb-md-0">
 
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop"
-                    *ngIf="seccion == 'Estudios'" >
-                        Solicitar estudio
+                    *ngIf="seccion != 'Inicio'" >
+                        Agregar
                     </button>
 
                     <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div [ngSwitch]="seccion">
-                            <div *ngSwitchCase="'Estudios'"><app-form-estudio-cliente></app-form-estudio-cliente></div>
+                            <div *ngSwitchCase="'Perfil'"><app-perfil></app-perfil></div>
+                            <div *ngSwitchCase="'Estudios'"><app-lista-estudio-cliente></app-lista-estudio-cliente></div>
+
+
+                            
                         </div>
                     </div>
                 </div>
             </div>
             <div [ngSwitch]="seccion">
-                <div *ngSwitchCase="'Perfil'"><p class="bg-warning">Perfil del cliente</p></div>
+                <div *ngSwitchCase="'Inicio'"><app-main-admin></app-main-admin></div>
+                <div *ngSwitchCase="'Perfil'"><app-perfil></app-perfil></div>
                 <div *ngSwitchCase="'Estudios'"><app-lista-estudio-cliente></app-lista-estudio-cliente></div>
+
+               
             </div>
         </main>
     </div>

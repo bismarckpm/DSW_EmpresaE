@@ -113,16 +113,19 @@ public class EstudioServicio extends AplicacionBase {
     }
 
     @POST
-    @Path("solicitar/{idCliente}/{idEstudio}")
+    @Path("cliente/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response solicitarEstudio(@PathParam("idCliente") long idCliente, @PathParam("idEstudio") long idEstudio) {
+    public Response solicitarEstudio(@PathParam("id") long id, DtoEstudio dtoEstudio) {
         try {
+            estudioAtributos(dtoEstudio);
+            this.estudio = this.dao.insert(this.estudio);
+
             DaoClienteEstudio daoClienteEstudio = new DaoClienteEstudio();
             DaoCliente daoCliente = new DaoCliente();
             DaoUsuario daoUsuario = new DaoUsuario();
-            this.estudio = this.dao.find(idEstudio, EstudioEntity.class);
+            this.estudio = this.dao.find(estudio.get_id(), EstudioEntity.class);
 
-            ClienteEntity clienteEntity = daoCliente.getClienteByUsuario(daoUsuario.find(idCliente, UsuarioEntity.class));
+            ClienteEntity clienteEntity = daoCliente.getClienteByUsuario(daoUsuario.find(id, UsuarioEntity.class));
 
             ClienteEstudioEntity clienteEstudioEntity = new ClienteEstudioEntity();
             clienteEstudioEntity.setEstudio(this.estudio);

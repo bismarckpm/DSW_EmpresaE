@@ -1,11 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Encuesta } from 'src/app/models/encuesta';
 import { EncuestaService } from 'src/app/services/encuesta.service';
 import { EstudioService } from '../../services/estudio.service';
 import { TipoPreguntaService } from '../../services/tipo-pregunta.service';
 import { PreguntaService } from '../../services/pregunta.service';
-import { Pregunta } from 'src/app/models/pregunta';
 
 @Component({
   selector: 'app-form-encuesta',
@@ -20,7 +18,7 @@ export class FormEncuestaComponent implements OnInit {
     fechaInicio: '',
     fechaFin: '',
     estudio: {_id: 0},
-    pregunta: []
+    preguntas: []
   };
   @Input() preguntaEstudio = { };
   @Input() preguntaInsertar = {_id: 0};
@@ -33,7 +31,7 @@ export class FormEncuestaComponent implements OnInit {
 
   /// PAra validar
   formEncuesta: FormGroup;
-  patronFechaEstudio: any = /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/;
+  patronFechaEstudio: any = /^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/;
 
   constructor(
     private servicio: EncuestaService,
@@ -53,7 +51,7 @@ export class FormEncuestaComponent implements OnInit {
   addEncuesta(): any{
 
     if (this.formEncuesta.valid) {
-      this.encuesta.pregunta = this.listaPreguntasInsertar;
+      this.encuesta.preguntas = this.listaPreguntasInsertar;
       this.servicio.createEncuesta(this.encuesta).subscribe((data: {}) => {
       });
       this.encuesta = {
@@ -62,8 +60,9 @@ export class FormEncuestaComponent implements OnInit {
         fechaInicio: '',
         fechaFin: '',
         estudio: {_id: 0},
-        pregunta: []
+        preguntas: []
       };
+      this.auxIterador = [];
       alert('Agregó la encuesta');
     }
     else{

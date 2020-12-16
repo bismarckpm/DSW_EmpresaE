@@ -39,4 +39,15 @@ public class DaoUsuario extends Dao<UsuarioEntity>{
             return null;
         }
     }
+
+    public List<UsuarioEntity> getUsuariosEmpleados(){
+
+        try{
+            TypedQuery<UsuarioEntity> empleados = this._em.createNamedQuery("getUsuariosEmpleados", UsuarioEntity.class);
+            List<UsuarioEntity> resultado = empleados.getResultList();
+            return resultado;
+        }catch (Exception e){
+            return null;
+        }
+    }
 }

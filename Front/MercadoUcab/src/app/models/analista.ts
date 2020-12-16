@@ -1,13 +1,10 @@
 import { Usuario } from './usuario';
+import {TipoUsuario} from './tipo-usuario';
 
 export class Analista {
 
   _id: number;
-  username: string;
-  clave: string;
-  estado: string;
-  correoElectronico: string;
-  usuario:Usuario;
-  rol: string;
+  usuario: Usuario;
+  tipoUsuario: TipoUsuario;
 
 }

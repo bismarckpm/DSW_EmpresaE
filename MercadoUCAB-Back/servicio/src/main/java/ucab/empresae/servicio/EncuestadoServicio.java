@@ -73,7 +73,7 @@ public class EncuestadoServicio {
 
         usuarioEntity.setUsername(dtoEncuestado.getUsuario().getUsername());
         usuarioEntity.setClave(dtoEncuestado.getUsuario().getClave());
-        usuarioEntity.setEstado("a");
+        usuarioEntity.setEstado(dtoEncuestado.getEstado());
         usuarioEntity.setTipousuario(daoTipoUsuario.find(tipoUsuario, TipoUsuarioEntity.class));
         daoUsuario.insert(usuarioEntity);
 

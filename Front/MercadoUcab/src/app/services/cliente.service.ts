@@ -74,7 +74,7 @@ export class ClienteService {
   }
 
   updateCliente(id,Cliente):Observable<Cliente[]>{
-    return this.http.put<Cliente[]>(this.apiurl+'/cliente/'+id,JSON.stringify(Cliente), this.httpOptions)
+    return this.http.put<Cliente[]>(this.apiurl+'/cliente/update/'+id,JSON.stringify(Cliente), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)

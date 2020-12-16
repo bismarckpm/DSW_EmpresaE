@@ -28,7 +28,7 @@ export class UsuarioService {
 
 ///////// Metodos para ejecutar//////////////
   getUsuarios(): Observable<Usuario[]>{
-    return this.http.get<Usuario[]>(this.apiurl + '/usuario')
+    return this.http.get<Usuario[]>(this.apiurl + '/usuario/empleados')
       .pipe(
         retry(1),
         catchError(this.handleError)

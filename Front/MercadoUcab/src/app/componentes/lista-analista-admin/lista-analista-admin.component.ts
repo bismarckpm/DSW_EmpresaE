@@ -14,7 +14,7 @@ export class ListaAnalistaAdminComponent implements OnInit {
 
   Usuario: Usuario[] = [];
   _id = this.actRoute.snapshot.params._id;
-  @Input() usuarioData = {_id: 0, username: '', clave: '', correoElectronico: '', estado: '', tipoUsuario: {_id: 0, descripcion: ''}};
+  @Input() usuarioData = {_id: 0, username: '', clave: '', correoElectronico: '', estado: '', tipousuario: {_id: 0, descripcion: ''}};
 
   tipoUsuario: any;
   formUsuario: FormGroup;

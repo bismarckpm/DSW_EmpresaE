@@ -10,8 +10,8 @@ import { Estudio } from '../models/estudio';
 export class EstudioService {
 
 
-  apiurl = 'http://localhost:3000';
-  //apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+  //apiurl = 'http://localhost:3000';
+  apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
 
   constructor(private http: HttpClient) { }
 
@@ -56,7 +56,7 @@ export class EstudioService {
   }
 
   getEstudioEncuestado(id): Observable<Estudio[]>{
-    return this.http.get<Estudio[]>(this.apiurl + '/estudio' + id)
+    return this.http.get<Estudio[]>(this.apiurl + '/estudio/encuestado/' + id)
       .pipe(
         retry(1),
         catchError(this.handleError)

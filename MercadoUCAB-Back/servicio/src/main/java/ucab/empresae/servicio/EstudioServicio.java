@@ -8,6 +8,9 @@ import ucab.empresae.entidades.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Path("/estudio")
 public class EstudioServicio extends AplicacionBase {
@@ -21,21 +24,30 @@ public class EstudioServicio extends AplicacionBase {
         this.estudio.setComentarioAnalista(dtoEstudio.getComentarioAnalista());
         this.estudio.setEdadMinima(dtoEstudio.getEdadMinima());
         this.estudio.setEdadMaxima(dtoEstudio.getEdadMaxima());
-        this.estudio.setFechaInicio(dtoEstudio.getFechaInicio());
-        this.estudio.setFechaFin(dtoEstudio.getFechaFin());
+
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+            Date fecha = dateFormat.parse(dtoEstudio.getFechaInicio());
+            this.estudio.setFechaInicio(fecha);
+
+            fecha = dateFormat.parse(dtoEstudio.getFechaFin());
+            this.estudio.setFechaFin(fecha);
+        }catch (Exception ex) {
+            System.out.println(ex);
+        }
 
         if(dtoEstudio.getSubcategoria() != null) {
             DaoSubcategoria daoSubcategoria = DaoFactory.DaoSubcategoriaInstancia();
             this.estudio.setSubcategoria(daoSubcategoria.find(dtoEstudio.getSubcategoria().get_id(), SubcategoriaEntity.class));
         }
 
-        if(dtoEstudio.getNivelsocioeco() != null) {
+        if(dtoEstudio.getNivelSocioEconomico() != null) {
             DaoNivelSocioeconomico daoNivelSocioeconomico = DaoFactory.DaoNivelSocioeconomicoInstancia();
-            this.estudio.setNivelsocioeco(daoNivelSocioeconomico.find(dtoEstudio.getNivelsocioeco().get_id(), NivelSocioeconomicoEntity.class));
+            this.estudio.setNivelSocioEconomico(daoNivelSocioeconomico.find(dtoEstudio.getNivelSocioEconomico().get_id(), NivelSocioeconomicoEntity.class));
         }
 
         if(dtoEstudio.getLugar() != null) {
-            DaoLugar daoLugar = DaoFactory.DaoLugarInstancia();
+            DaoLugar daoLugar = new DaoLugar();
             this.estudio.setLugar(daoLugar.find(dtoEstudio.getLugar().get_id(), LugarEntity.class));
         }
 
@@ -67,7 +79,6 @@ public class EstudioServicio extends AplicacionBase {
     }
 
     @POST
-    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addEstudio(DtoEstudio dtoEstudio) {
@@ -75,7 +86,7 @@ public class EstudioServicio extends AplicacionBase {
             estudioAtributos(dtoEstudio);
             return Response.ok(this.dao.insert(this.estudio)).build();
         } catch(Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+            return Response.status(Response.Status.NOT_ACCEPTABLE).entity(ex).build();
         }
     }
 

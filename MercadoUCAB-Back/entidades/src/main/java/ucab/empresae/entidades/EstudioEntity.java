@@ -2,7 +2,7 @@ package ucab.empresae.entidades;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -113,13 +113,13 @@ public class EstudioEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_nivelsocioeco", referencedColumnName = "id", nullable = false)
-    private NivelSocioeconomicoEntity nivelsocioeco;
-    public NivelSocioeconomicoEntity getNivelsocioeco() {
-        return nivelsocioeco;
+    private NivelSocioeconomicoEntity nivelSocioEconomico;
+    public NivelSocioeconomicoEntity getNivelSocioEconomico() {
+        return nivelSocioEconomico;
     }
 
-    public void setNivelsocioeco(NivelSocioeconomicoEntity nivelsocioeco) {
-        this.nivelsocioeco = nivelsocioeco;
+    public void setNivelSocioEconomico(NivelSocioeconomicoEntity nivelsocioeco) {
+        this.nivelSocioEconomico = nivelsocioeco;
     }
 
     @ManyToOne

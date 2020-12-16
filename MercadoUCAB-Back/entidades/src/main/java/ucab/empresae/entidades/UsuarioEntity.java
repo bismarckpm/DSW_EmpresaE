@@ -6,7 +6,8 @@ import java.util.List;
 @Entity
 @Table(name = "usuario", schema = "mercadeoucab")
 @NamedQueries({
-        @NamedQuery(name = "getUsuarioByUsername", query = "select u from UsuarioEntity u where u.username = :username")
+        @NamedQuery(name = "getUsuarioByUsername", query = "select u from UsuarioEntity u where u.username = :username"),
+        @NamedQuery(name = "getAnalistas", query = "select a from UsuarioEntity a where a.tipousuario.descripcion = 'analista'")
 })
 public class UsuarioEntity extends BaseEntity{
     //private ClienteEntity cliente;

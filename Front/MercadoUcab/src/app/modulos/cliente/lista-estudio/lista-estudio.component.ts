@@ -62,6 +62,7 @@ export class ListaEstudioClienteComponent implements OnInit {
   }
 
   loadEstudios(): void {
+    localStorage.setItem("usuarioId", JSON.stringify("1"));
   let id = JSON.parse(localStorage.getItem("usuarioID"));
 
     this.estudioService.getEstudioCliente(id).subscribe(data => {
@@ -78,7 +79,7 @@ export class ListaEstudioClienteComponent implements OnInit {
 
   updateEstudio(){
     if (this.formEstudio.valid) {
-    this.estudioService.updateEstudio(this.estudioData._id, this.estudioData).subscribe(data => {
+    this.estudioService.createEstudioCliente(JSON.parse(localStorage.getItem("usuarioID")), this.estudioData).subscribe(data => {
      })
      this.loadEstudios();
     }
@@ -164,7 +165,6 @@ addNivelSocioEconomico(){
       edadMinimaEstudio: ['', [Validators.required, Validators.maxLength(2), Validators.pattern(this.patronEdadEstudio)]],
       edadMaximaEstudio: ['', [Validators.required, Validators.maxLength(2), Validators.pattern(this.patronEdadEstudio)]],
       comentarioAnalistaEstudio: ['', Validators.pattern(this.patronNombreEstudio)],
-      lugarEstudio: ['', [Validators.required]],
       subcategoriaEstudio: ['', [Validators.required]],
       nivelEstudio: ['', [Validators.required]],
 

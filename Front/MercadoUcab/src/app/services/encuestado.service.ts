@@ -11,7 +11,8 @@ import {Encuestado} from '../models/encuestado';
 export class EncuestadoService {
 
   secciones: string[] = [
-    'Perfil', 
+    'Inicio',
+    'Perfil',
     'Encuestas',
 
   ];

@@ -10,6 +10,7 @@ import { retry, catchError } from 'rxjs/operators';
 export class ClienteService {
 
   secciones: string[] = [
+    'Inicio',
     'Perfil',
     'Estudios',
   ];

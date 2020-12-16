@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
     }
     ////////////////////////////////Para trabajar en el front Unicamente////////////////
 
-   /* if (this.formLogin.valid) {
+    /*if (this.formLogin.valid) {
       this.usuarioService.getUsuarios().subscribe( data  => {
         console.log(data) ;
 

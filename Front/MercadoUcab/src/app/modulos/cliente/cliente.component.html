@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div [ngSwitch]="seccion">
-                <div *ngSwitchCase="'Perfil'"><p class="bg-warning">Perfil del cliente</p></div>
+                <div *ngSwitchCase="'Perfil'"><app-perfil></app-perfil></div>
                 <div *ngSwitchCase="'Estudios'"><app-lista-estudio-cliente></app-lista-estudio-cliente></div>
             </div>
         </main>

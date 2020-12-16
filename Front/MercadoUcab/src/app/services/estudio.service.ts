@@ -40,7 +40,7 @@ export class EstudioService {
   }
 
   getEstudioCliente(id): Observable<Estudio[]>{
-    return this.http.get<Estudio[]>(this.apiurl + '/estudio/cliente/' + 1)
+    return this.http.get<Estudio[]>(this.apiurl + '/estudio/cliente/' + id)
     .pipe(
       retry(1),
       catchError(this.handleError)

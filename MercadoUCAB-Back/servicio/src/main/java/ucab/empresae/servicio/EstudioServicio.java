@@ -79,7 +79,7 @@ public class EstudioServicio extends AplicacionBase {
     }
 
     @GET
-    @Path("cliente/{id}")
+    @Path("/cliente/{id}")
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getEstudiosCliente(@PathParam("id") long id) {
         try {
@@ -90,7 +90,7 @@ public class EstudioServicio extends AplicacionBase {
     }
 
     @GET
-    @Path("analista/{id}")
+    @Path("/analista/{id}")
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getEstudiosAnalista(@PathParam("id") long id) {
         try {
@@ -113,7 +113,7 @@ public class EstudioServicio extends AplicacionBase {
     }
 
     @POST
-    @Path("cliente/{id}")
+    @Path("/cliente/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response solicitarEstudio(@PathParam("id") long id, DtoEstudio dtoEstudio) {
         try {

@@ -118,6 +118,10 @@ public class EstudioServicio extends AplicacionBase {
     @Path("/encuestado/{id}")                   //RECIBO EL ID DEL USUARIO
     public Response getEstudiosbyEncuestado(@PathParam("id") long id) throws PruebaExcepcion {
 
+        /*PERMITE FILTRAR LOS ESTUDIOS QUE PUEDE VER EL ENCUESTADO
+        SEGUN LAS CARACTERISTICAS DEL ESTUDIO
+         */
+
         List<EstudioEntity> estudios = null;
         try {
             DaoUsuario daoUsuario = new DaoUsuario();
@@ -134,5 +138,30 @@ public class EstudioServicio extends AplicacionBase {
         }
         return Response.ok(estudios).build();
     }
+
+    @GET
+    @Produces(value= MediaType.APPLICATION_JSON)
+    @Path("/dataMuestra/{id}")                   //RECIBO EL ID DEL ESTUDIO
+    public Response getDataMuestraEstudio(@PathParam("id") long id) throws PruebaExcepcion {
+
+        /*PERMITE DEVOLVER LA DATA MUESTRA ESTUDIO
+         */
+
+        List<EncuestadoEntity> dataMuestraEncuestados = null;
+        try {
+            DaoUsuario daoUsuario = new DaoUsuario();
+
+            DaoEstudio daoEstudio = new DaoEstudio();
+            EstudioEntity estudio = daoEstudio.find(id, EstudioEntity.class);
+
+            DaoEncuestado daoEncuestado = new DaoEncuestado();
+            dataMuestraEncuestados = daoEncuestado.getDataMuestraEstudio(estudio.getLugar(), estudio.getNivelsocioeco());
+
+        } catch (Exception ex) {
+            String problema = ex.getMessage();
+        }
+        return Response.ok(dataMuestraEncuestados).build();
+    }
+
 
 }

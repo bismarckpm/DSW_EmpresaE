@@ -17,6 +17,16 @@ public class DaoUsuario extends Dao<UsuarioEntity>{
         this._em = _handler.getSession();
     }
 
+    public List<UsuarioEntity> getAnalistas() {
+        try{
+            TypedQuery<UsuarioEntity> analistas = this._em.createNamedQuery("getAnalistas", UsuarioEntity.class);
+            List<UsuarioEntity> resultado = analistas.getResultList();
+            return resultado;
+        }catch (Exception ex) {
+            return null;
+        }
+    }
+
     public UsuarioEntity getUsuarioByUsername(String username){
 
         try{

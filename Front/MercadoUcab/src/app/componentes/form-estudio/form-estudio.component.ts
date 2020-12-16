@@ -2,6 +2,7 @@ import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AttachSession } from 'protractor/built/driverProviders';
+import { AnalistaService } from 'src/app/services/analista.service';
 
 import { EstudioService } from 'src/app/services/estudio.service';
 import { LugarService } from 'src/app/services/lugar.service';
@@ -19,10 +20,12 @@ export class FormEstudioComponent implements OnInit {
   lugar : {_id: 0, estado: '', nombre: '', tipo: '',lugar : {_id: 0, estado: '', nombre: '', tipo: '',lugar : {_id: 0, estado: '', nombre: '', tipo: '',lugar : {_id: 0, estado: '', nombre: '', tipo: ''}}}},
   nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
   subcategoria : {_id: 0, nombre: '', estado: ''},
+  analista:{_id:0}
  };
 
   nivelSocioEconomico: any;
   subcategoria: any;
+  analistas:any;
 
 
 
@@ -45,6 +48,7 @@ export class FormEstudioComponent implements OnInit {
     public estudioService: EstudioService,
     public lugarService: LugarService,
     public subcategoriaService: SubcategoriaService,
+    public analistaService:AnalistaService,
     public nivelsocioeconomicoService: NivelSocioEconomicoService
     ) {
     this.createForm();
@@ -54,6 +58,13 @@ export class FormEstudioComponent implements OnInit {
     this.addLugar();
     this.addNivelSocioEconomico();
     this.addSubcategoria();
+    this.addAnalistas();
+  }
+
+  addAnalistas(){
+      this.analistaService.getAnalistas().subscribe( data =>{
+        this.analistas=data;
+      })
   }
 
   agregarEstudio(): void {

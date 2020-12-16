@@ -14,7 +14,7 @@ export class ListaAnalistaAdminComponent implements OnInit {
 
   Usuario: Usuario[] = [];
   _id = this.actRoute.snapshot.params._id;
-  @Input() usuarioData = {_id: 0, username: '', clave: '', correoElectronico: '', estado: '', tipousuario: {_id: 0, descripcion: ''}};
+  @Input() usuarioData = {_id: 0, username: '', estado: '', tipousuario: {_id: 0, descripcion: ''}};
 
   tipoUsuario: any;
   formUsuario: FormGroup;
@@ -84,9 +84,7 @@ export class ListaAnalistaAdminComponent implements OnInit {
     this.formUsuario = this.formBuilder.group({
       usernameUsuario: ['', Validators.required],
       estadoUsuario: ['',  Validators.required],
-      claveUsuario: ['', Validators.required],
       descripcionTipoUsuario: ['', Validators.required],
-      correoElectronicoUsuario: ['', [Validators.required, Validators.pattern(this.patronCorreoUsuario)]],
     });
   }
 

@@ -119,6 +119,7 @@ public class EncuestadoServicio {
         if(encuestadoEntity != null) {
 
             DtoEncuestado dtoEncuestado = new DtoEncuestado();
+            dtoEncuestado.set_id(encuestadoEntity.get_id());
             dtoEncuestado.setEstado(encuestadoEntity.getEstado());
             dtoEncuestado.setPrimerNombre(encuestadoEntity.getPrimerNombre());
             dtoEncuestado.setSegundoNombre(encuestadoEntity.getSegundoNombre());

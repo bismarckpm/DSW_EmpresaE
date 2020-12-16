@@ -11,45 +11,30 @@
         <div class="modal-body">
           <form [formGroup]="formCliente">
                 <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="rif">RIF</label>
-                        <input type="text" class="form-control" [(ngModel)]="cliente.rif" id="rif" name="rif" placeholder="" formControlName="rifCliente" value="" >
-                          <div *ngIf="rifCliente.invalid && (rifCliente.dirty || rifCliente.touched)" class="alert alert-danger">
-                            <div *ngIf="rifCliente.errors.required">
-                              Este campo es obligatorio
-                            </div>
-                            <div *ngIf="rifCliente.errors.pattern">
-                              Introduzca un formato valido
-                            </div>
-                          </div>
-                    </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-5 mb-3">
-                    <label for="estatus">Estado</label>
-                    <select class="custom-select d-block w-100" [(ngModel)]="cliente.estado" id="estatus" name="estado" formControlName="estadoCliente">
-                      <option value="">Choose...</option>
-                      <option value="a">Activo</option>
-                      <option value="i">Inactivo</option>
-                    </select>
-                    <div *ngIf="estadoCliente.invalid && (estadoCliente.dirty || estadoCliente.touched)" class="alert alert-danger">
-                      <div *ngIf="estadoCliente.errors.required">
+                  <div class="col-md-12 mb-3">
+                    <label for="razonSocial">Razon Social</label>
+                    <input class="form-control" id="razonSocial" [(ngModel)]="cliente.razonSocial" name="razonSocial" formControlName="razonSocialCliente">
+                    <div *ngIf="razonSocialCliente.invalid && (razonSocialCliente.dirty || razonSocialCliente.touched)" class="alert alert-danger">
+                      <div *ngIf="razonSocialCliente.errors.required">
                         Este campo es obligatorio
                       </div>
                     </div>
                   </div>
                 </div>
               <div class="row">
-                <div class="col-md-5 mb-3">
-                  <label for="razonSocial">Razon Social</label>
-                  <input class="form-control" id="razonSocial" [(ngModel)]="cliente.razonSocial" name="razonSocial" formControlName="razonSocialCliente">
-                  <div *ngIf="razonSocialCliente.invalid && (razonSocialCliente.dirty || razonSocialCliente.touched)" class="alert alert-danger">
-                    <div *ngIf="razonSocialCliente.errors.required">
+                <div class="col-md-6 mb-3">
+                  <label for="rif">RIF</label>
+                  <input type="text" class="form-control" [(ngModel)]="cliente.rif" id="rif" name="rif" placeholder="" formControlName="rifCliente" value="" >
+                  <div *ngIf="rifCliente.invalid && (rifCliente.dirty || rifCliente.touched)" class="alert alert-danger">
+                    <div *ngIf="rifCliente.errors.required">
                       Este campo es obligatorio
+                    </div>
+                    <div *ngIf="rifCliente.errors.pattern">
+                      Introduzca un formato valido
                     </div>
                   </div>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6 mb-3">
                   <label for="telefono">Telefono</label>
                   <input type="text" class="form-control" [(ngModel)]="cliente.telefono.numero" formControlName="telefonoCliente" id="telefono" name="telefono">
                   <div *ngIf="telefonoCliente.invalid && (telefonoCliente.dirty || telefonoCliente)" class="alert alert-danger">
@@ -122,7 +107,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-12 mb-3">
+              <div class="col-md-9 mb-3">
                 <label for="correo">Correo Electronico</label>
                 <input type="text" [(ngModel)]="cliente.usuario.correoElectronico" class="form-control"  formControlName="correoElectronicoCliente" name="correoElectronico" id="correo" placeholder="" >
                 <div *ngIf="correoElectronicoCliente.invalid && (correoElectronicoCliente.dirty || correoElectronicoCliente.touched)" class="alert alert-danger">
@@ -136,6 +121,23 @@
                   </div>
                 </div>
               </div>
+              <div class="col-md-3 mb-3">
+                <label for="estatus">Estado</label>
+                <select class="custom-select d-block w-100" [(ngModel)]="cliente.estado" id="estatus" name="estado" formControlName="estadoCliente">
+                  <option value="">Choose...</option>
+                  <option value="a">Activo</option>
+                  <option value="i">Inactivo</option>
+                </select>
+                <div *ngIf="estadoCliente.invalid && (estadoCliente.dirty || estadoCliente.touched)" class="alert alert-danger">
+                  <div *ngIf="estadoCliente.errors.required">
+                    Este campo es obligatorio
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="row">
+
             </div>
             </form>
         </div>

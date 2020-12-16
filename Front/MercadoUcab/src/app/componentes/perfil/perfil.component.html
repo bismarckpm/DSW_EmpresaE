@@ -1,10 +1,8 @@
-<!-- <div class="registro">
+<div class="registro">
   <div class="container">
 
-
+    
     <div *ngIf="admin == true">
-
-   
       <div class="form-row">
         <div class="form-group col-md-6">
           <h1> Perfil</h1>
@@ -18,13 +16,14 @@
         </div>
         <div class="form-group col-md-6">
           <label > Correo</label>
-          <input type="text" class="form-control" [(ngModel)]="Administrador.correoelectronico" value="Administrador.correoelectronico"  readonly="readonly">
+          <input type="text" class="form-control" [(ngModel)]="Administrador.correoelectronico" value="Administrador.correoelectronico">
         </div>
-      </div>
+        </div>
+     
       <div class="form-group">
         <label > Rol en nuestro sistema </label>
         <input type="text" class="form-control"[(ngModel)]="Administrador.tipoUsuario.descripcion" value="Administrador.tipousuario.descripcion" readonly="readonly">
-      </div>
+    </div>
 
 
       <div class="form-row">
@@ -32,13 +31,17 @@
           <button type="button"  class=" btn btn-primary" data-toggle="modal"  data-target="#exampleModal" > Cambio de clave </button>
         </div>
       </div>
-   
-    </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-2">
+          <button type="button"  class="btn btn-success" (click)=GuardarPerfil > Guardar cambios </button>
+        </div>
+      </div>
+
+  </div> <!-- DIf del administradro-->
 
 
-
-    <div  *ngIf="cli == true">
-
+  <div  *ngIf="cli == true">
       <div class="form-row">
         <div class="form-group col-md-6">
           <h1> Perfil</h1>
@@ -49,13 +52,13 @@
         <div class="form-group col-md-6">
           <label > Nombre del usuario</label>
           <input type="text" class="form-control" [(ngModel)]="Cliente.usuario.username" value="Cliente.usuario.username" readonly="readonly">
-      
         </div>
+
         <div class="form-group col-md-6">
           <label > Correo</label>
           <input type="text" class="form-control" [(ngModel)]="Cliente.usuario.correoelectronico" value="Cliente.usuario.correoelectronico"  readonly="readonly">
-  
         </div>
+
       </div>
 
         <div class="form-row">
@@ -89,6 +92,12 @@
                 <input type="text" class="form-control" [(ngModel)]="Cliente.lugar.lugar.lugar.nombre" value="Cliente.lugar.lugar.nombre" readonly="readonly">
               </div>
         </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-2">
+            <button type="button"  class="btn btn-success" (click)=GuardarPerfil > Guardar cambios </button>
+          </div>
+        </div>
     </div>
 
 
@@ -110,7 +119,8 @@
 
           <div class="form-group col-md-3">
             <label > Correo</label>
-            <input type="text" class="form-control" [(ngModel)]="Encuestado.usuario.correoelectronico" value="Encuestado.usuario.correoelectronico"  readonly="readonly">
+            <input type="text" class="form-control" [(ngModel)]="Encuestado.usuario.correoelectronico" value="Encuestado.usuario.correoelectronico" >
+
           </div>
 
         </div>
@@ -128,19 +138,22 @@
 
           <div class="form-group col-md-2">
             <label for=""> Primer nombre </label>
-            <input type="text" class="form-control" [(ngModel)]="Encuestado.primerNombre" value="Encuestado.primerNombre" readonly="readonly">
-          </div>
+            <input type="text" class="form-control" [(ngModel)]="Encuestado.primerNombre" value="Encuestado.primerNombre">
+
           <div class="form-group col-md-2">
             <label for="">Segundo Nombre </label>
-            <input type="text" class="form-control" [(ngModel)]="Encuestado.segundoNombre" value="Encuestado.segundoNombre" readonly="readonly">
+            <input type="text" class="form-control" [(ngModel)]="Encuestado.segundoNombre" value="Encuestado.segundoNombre" >
+
           </div>
           <div class="form-group col-md-2">
             <label for=""> Primer Apellido </label>
-            <input type="text" class="form-control" [(ngModel)]="Encuestado.primerApellido" value="Encuestado.primerApellido" readonly="readonly">
+            <input type="text" class="form-control" [(ngModel)]="Encuestado.primerApellido" value="Encuestado.primerApellido" >
+
           </div>
           <div class="form-group col-md-2">
             <label for="">Segundo Apellido </label>
-            <input type="text" class="form-control" [(ngModel)]="Encuestado.segundoApellido" value="Encuestado.segundoApellido" readonly="readonly">
+            <input type="text" class="form-control" [(ngModel)]="Encuestado.segundoApellido" value="Encuestado.segundoApellido">
+
           </div>
 
 
@@ -148,7 +161,7 @@
 
             <div class="form-group col-md-4">
               <label for=""> Fecha Nacimiento</label>
-              <input type="text" class="form-control" [(ngModel)]="Encuestado.fechaNacimiento" value="Encuestado.fechaNacimiento" readonly="readonly">
+              <input type="text" class="form-control" [(ngModel)]="Encuestado.fechaNacimiento" value="Encuestado.fechaNacimiento" readonly="readonly" >
 
             </div>
             <div class="form-group col-md-4">
@@ -198,42 +211,47 @@
               </div>
             </div>
         </div>
-    </div>   
-
-
-
-    <div *ngIf="analist==true">
-
-        <div class="form-row">
-            <div class="form-group col-md-6">
-              <h1> Perfil</h1>
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label > Nombre del Analista</label>
-                <input type="text" class="form-control" [(ngModel)]="Analista.username" value="Analista.username" readonly="readonly">
-            </div>
-            <div class="form-group col-md-6">
-                <label>Correo</label>
-                <input type="text" class="form-control" [(ngModel)]="Analista.correoelectronico" value="Analista.correoelectronico"  readonly="readonly">
-            </div>
-        </div>
-
-        <div class="form-group">
-          <label > Rol en nuestro sistema </label>
-          <input type="text"  class="form-control" [(ngModel)]="Analista.tipoUsuario.descripcion" value="Analista.tipoUsuario.descripcion" readonly="readonly">
-        </div>
 
         <div class="form-row">
           <div class="form-group col-md-2">
-            <button type="button"  class=" btn btn-primary" data-toggle="modal"  data-target="#exampleModal" > Cambio de clave </button>
+            <button type="button"  class="btn btn-success" (click)=GuardarPerfil > Guardar cambios </button>
           </div>
         </div>
-          
+        
+    </div> 
+  </div>   
 
+
+<div  *ngIf="analist == true"> 
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <h1> Perfil</h1>
     </div>
+</div>
+
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label > Nombre del Analista</label>
+        <input type="text" class="form-control" [(ngModel)]="Analista.username" value="Analista.username" readonly="readonly">
+    </div>
+    <div class="form-group col-md-6">
+        <label>Correo</label>
+        <input type="text" class="form-control" [(ngModel)]="Analista.correoelectronico" value="Analista.correoelectronico"  readonly="readonly">
+    </div>
+</div>
+
+<div class="form-group">
+  <label > Rol en nuestro sistema </label>
+  <input type="text"  class="form-control" [(ngModel)]="Analista.tipoUsuario.descripcion" value="Analista.tipoUsuario.descripcion" readonly="readonly">
+</div>
+
+<div class="form-row">
+  <div class="form-group col-md-2">
+    <button type="button"  class=" btn btn-primary" data-toggle="modal"  data-target="#exampleModal" > Cambio de clave </button>
+  </div>
+</div>
+
+</div>
 
 
 
@@ -288,5 +306,4 @@
 
     <br>
   </div>
-</div> -->
-<p class="bg-success">Perfil</p>
+</div>

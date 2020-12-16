@@ -112,6 +112,29 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    @POST
+    @Path("solicitar/{idCliente}/{idEstudio}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response solicitarEstudio(@PathParam("idCliente") long idCliente, @PathParam("idEstudio") long idEstudio) {
+        try {
+            DaoClienteEstudio daoClienteEstudio = new DaoClienteEstudio();
+            DaoCliente daoCliente = new DaoCliente();
+            DaoUsuario daoUsuario = new DaoUsuario();
+            this.estudio = this.dao.find(idEstudio, EstudioEntity.class);
+
+            ClienteEntity clienteEntity = daoCliente.getClienteByUsuario(daoUsuario.find(idCliente, UsuarioEntity.class));
+
+            ClienteEstudioEntity clienteEstudioEntity = new ClienteEstudioEntity();
+            clienteEstudioEntity.setEstudio(this.estudio);
+            clienteEstudioEntity.setCliente(clienteEntity);
+            clienteEstudioEntity.setEstado("a");
+            return Response.ok(daoClienteEstudio.insert(clienteEstudioEntity)).build();
+
+        } catch(Exception ex) {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).entity(ex).build();
+        }
+    }
+
     @PUT
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)

@@ -97,7 +97,8 @@
           </div>
         </div>
 
-        <div class="col-md-5 mb-3">
+        <div class="row">
+        <div class="col-md-4">
           <label for="" class="col-sm-6 col-form-label escrituerModal"> Subcategoria </label>
           <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudio.subcategoria._id" formControlName="subcategoriaEstudio" >
               <option  value=""> Slecciones una ...</option>
@@ -108,6 +109,21 @@
               Este campo es obligatorio
             </div>
           </div>
+        </div>
+
+        <div class="col-md-4">
+          <label for="" class="col-sm-6 col-form-label escrituerModal">Selecciones un Analista  </label>
+          <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudio.analista._id" formControlName="nivelEstudio" >
+              <option  value=""> Slecciones una ...</option>
+              <option  *ngFor="let analista of analistas" [ngValue]= "analista._id">{{analista.nombre}}</option>
+          </select>
+          <div *ngIf="nivelEstudio.invalid && (nivelEstudio.dirty || nivelEstudio.touched)" class="alert alert-danger">
+            <div *ngIf="nivelEstudio.errors.required">
+              Este campo es obligatorio
+            </div>
+          </div>
+        </div>
+
         </div>
 
         <div class="col-md-5 mb-3">

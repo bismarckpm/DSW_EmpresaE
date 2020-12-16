@@ -4,14 +4,11 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <ul class="navbar-nav px-3 d-flex flex-row-reverse">
-        <li class="nav-item text-nowrap ml-3">
+        <li  *ngIf="bool == true" class="nav-item text-nowrap ml-3">
         <a class="nav-link" [routerLink]="['/registro']" >Sign Up</a>
         </li>
         <li class="nav-item text-nowrap ml-3">
-        <a class="nav-link" (click)=logout() href="#" >Logout</a>
-        </li>
-        <li class="nav-item text-nowrap ml-3">
-        <a class="nav-link"  [routerLink]="['/perfil']">Perfil</a>
+        <a class="nav-link" (click)=logout() [routerLink]="['/login']">Logout</a>
         </li>
     </ul>
 </nav>

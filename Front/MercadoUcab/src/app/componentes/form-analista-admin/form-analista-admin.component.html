@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6 mb-3">
+          <div class="col-md-12 mb-3">
             <label for="correo">Correo Electronico</label>
             <input type="text" [(ngModel)]="usuario.correoElectronico" class="form-control" id="correo" placeholder="" formControlName="correoElectronicoUsuario" name="correoElectronico" value="">
             <div *ngIf="correoElectronicoUsuario.invalid && (correoElectronicoUsuario.dirty || correoElectronicoUsuario.touched)" class="alert alert-danger">
@@ -45,7 +45,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4 mb-3">
+          <div class="col-md-6 mb-3">
             <label for="estado">Estado</label>
             <select class="custom-select d-block w-100" [(ngModel)]="usuario.estado" formControlName="estadoUsuario" id="estado" name="estado">
               <option value="">Choose...</option>
@@ -58,7 +58,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4 mb-3">
+          <div class="col-md-6 mb-3">
             <label for="rol">Rol</label>
             <select class="custom-select d-block w-100" [(ngModel)]="usuario.tipoUsuario.descripcion" formControlName="descripcionTipoUsuario" id="rol" name="descripcion">
               <option value="">Choose...</option>

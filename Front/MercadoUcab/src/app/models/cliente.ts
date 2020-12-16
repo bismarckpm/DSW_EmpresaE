@@ -6,7 +6,7 @@ export class Cliente {
     _id: number;
     estado: string;
     razonSocial: string;
-    rif: number;
+    rif: string;
     telefono: Telefono;
 
     lugar:Lugar;

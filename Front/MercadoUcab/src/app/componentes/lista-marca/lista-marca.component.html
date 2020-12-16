@@ -50,22 +50,21 @@
                                       </div>
                                     </div>
                               </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-5 mb-3">
-                              <label for="estado"> Estado</label>
+                              <div class="col-md-6 mb-3">
+                                <label for="estado"> Estado</label>
                                 <select class="custom-select d-block w-100" [(ngModel)]= "marcaData.estado" formControlName="estadoMarca" id="estado" name="estado" >
                                   <option value="a">Activa</option>
                                   <option value="i">Inactiva</option>
                                 </select>
+                                <div *ngIf="estadoMarca.invalid && (estadoMarca.dirty || estadoMarca.touched)" class="alert alert-danger">
+                                  <div *ngIf="estadoMarca.errors.required">
+                                    Este campo es obligatorio
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                           </div>
-                          <div *ngIf="estadoMarca.invalid && (estadoMarca.dirty || estadoMarca.touched)" class="alert alert-danger">
-                            <div *ngIf="estadoMarca.errors.required">
-                              Este campo es obligatorio
-                            </div>
-                          </div>
+
                           <br>
                           <!-- Parte inferior del modal -->
                           <div class="modal-footer">

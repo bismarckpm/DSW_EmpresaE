@@ -68,9 +68,10 @@ export class ListaEncuestaComponent implements OnInit {
   }
 
   // Delete Encuesta
-  deleteEncuesta(id: number): void {
+  deleteEncuesta(idEstudio: number): void {
+    console.log('estudio: ' + idEstudio);
     if (window.confirm('Are you sure, you want to delete?')){
-      this.servicio.deleteEncuesta(id).subscribe(data => {
+      this.servicio.deleteEncuesta(idEstudio).subscribe(data => {
         this.loadEncuestas();
       });
     }

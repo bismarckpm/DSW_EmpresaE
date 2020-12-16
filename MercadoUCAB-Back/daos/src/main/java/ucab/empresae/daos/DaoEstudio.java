@@ -33,6 +33,20 @@ public class DaoEstudio extends Dao<EstudioEntity> {
         }
     }
 
+    public List<EstudioEntity> estudiosAnalista(long id) {
+        try{
+            TypedQuery<EstudioEntity> estudios = this._em
+                    .createNamedQuery("getEstudiosAnalista", EstudioEntity.class);
+            estudios.setParameter("id", id).getResultList();
+
+            List<EstudioEntity> resultado = estudios.getResultList();
+
+            return resultado;
+        }catch (Exception e){
+            return null;
+        }
+    }
+
 
 
 }

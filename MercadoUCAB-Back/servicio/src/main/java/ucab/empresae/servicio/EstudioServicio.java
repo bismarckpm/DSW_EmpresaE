@@ -78,6 +78,28 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    @GET
+    @Path("cliente/{id}")
+    @Produces(value = MediaType.APPLICATION_JSON)
+    public Response getEstudiosCliente(@PathParam("id") long id) {
+        try {
+            return Response.ok(this.dao.estudiosCliente(id)).build();
+        } catch (Exception ex) {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+        }
+    }
+
+    @GET
+    @Path("analista/{id}")
+    @Produces(value = MediaType.APPLICATION_JSON)
+    public Response getEstudiosAnalista(@PathParam("id") long id) {
+        try {
+            return Response.ok(this.dao.estudiosAnalista(id)).build();
+        } catch (Exception ex) {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+        }
+    }
+
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)

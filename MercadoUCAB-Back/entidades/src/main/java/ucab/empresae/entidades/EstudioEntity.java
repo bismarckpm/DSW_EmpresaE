@@ -8,7 +8,8 @@ import java.util.List;
 @Entity
 @Table(name = "estudio", schema = "mercadeoucab")
 @NamedQueries({
-        @NamedQuery(name = "getEstudiosCliente", query = "SELECT e FROM EstudioEntity e where e._id in (select c.estudio._id from ClienteEstudioEntity c where c.cliente._id = :id)")
+        @NamedQuery(name = "getEstudiosCliente", query = "SELECT e FROM EstudioEntity e where e in (select c.estudio from ClienteEstudioEntity c where c.cliente.usuario._id = :id)"),
+        @NamedQuery(name = "getEstudiosAnalista", query = "SELECT e FROM EstudioEntity e where e.analista._id = :id")
 })
 public class EstudioEntity extends BaseEntity{
     //private List<ClienteEstudioEntity> clienteestudios;

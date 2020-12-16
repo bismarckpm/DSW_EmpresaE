@@ -26,7 +26,7 @@
             </div>
 
             <div class="form-group">
-                <label class="col-sm-6">Estado de la subcategoria</label>
+                <label class="col-sm-6">Estado de la Subcategoria</label>
                 <select class="mdb-select md-form" [(ngModel)]= "subcategoria.estado" formControlName="estadoSubcategoria" name="estado" >
                    <option value="a">Activa</option>
                    <option value="i">Inactiva</option>
@@ -40,9 +40,9 @@
             </div>
 
             <div class="form-group row">
-                <label for="" class="col-sm-6 col-form-label escrituerModal"> Seleccione una categoria</label>
+                <label for="" class="col-sm-6 col-form-label escrituerModal"> Seleccione una Categoria</label>
                     <select name="id_categoria"  class="custom-select col-sm-4 form-control escrituerModal"  [(ngModel)]="subcategoria.categoria._id" formControlName="CATEGORIA" >
-                        <option  value=""> Slecciones una ...</option>
+                        <option  value=""> Seleccione una ...</option>
                         <option  *ngFor="let cat of categoria" [ngValue]= "cat._id"  >{{cat.nombre}}</option>
                     </select>
                     <div *ngIf="CATEGORIA.invalid && (CATEGORIA.dirty || CATEGORIA.touched)" class="alert alert-danger">
@@ -53,9 +53,9 @@
             </div>
 
           </form>
-          <label for="">Si la categoria no se esta, seleccional el boton agregar categoria </label>
+          <label for="">Si la categoria no esta registrada, seleccione el boton agregar categoria </label>
 
-          <button type="button" class=" col-sm-4 btn btn-success" data-dismiss="modal">agregar categoria</button>
+          <button type="button" class=" col-sm-6 btn btn-success" data-dismiss="modal">Agregar Categoria</button>
 
         </div>
         <div class="modal-footer">

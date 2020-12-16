@@ -1,24 +1,46 @@
 package ucab.empresae.servicio;
 
-import ucab.empresae.daos.DaoCliente;
-import ucab.empresae.daos.DaoEncuestado;
-import ucab.empresae.daos.DaoUsuario;
+import ucab.empresae.daos.*;
 import ucab.empresae.dtos.DtoTipoUsuario;
 import ucab.empresae.dtos.DtoUsuario;
 import ucab.empresae.entidades.ClienteEntity;
 import ucab.empresae.entidades.EncuestadoEntity;
+import ucab.empresae.entidades.TipoUsuarioEntity;
 import ucab.empresae.entidades.UsuarioEntity;
 import ucab.empresae.excepciones.PruebaExcepcion;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path("/usuario")
 public class UsuarioServicio {
+
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addUsuario(DtoUsuario dtoUsuario){
+
+        DaoUsuario daoUsuario = new DaoUsuario();
+        UsuarioEntity usuarioEntity = new UsuarioEntity();
+
+        DaoTipoUsuario daoTipoUsuario = new DaoTipoUsuario();
+        TipoUsuarioEntity tipoUsuarioEntity = daoTipoUsuario.getTipoUsuarioByDescripcion(dtoUsuario.getTipoUsuario().getDescripcion());
+
+        usuarioEntity.setEstado(dtoUsuario.getEstado());
+        usuarioEntity.setUsername(dtoUsuario.getUsername());
+        usuarioEntity.setClave(dtoUsuario.getClave());
+        usuarioEntity.setTipousuario(tipoUsuarioEntity);
+        daoUsuario.insert(usuarioEntity);
+
+        DirectorioActivo ldap = new DirectorioActivo();
+        ldap.addEntryToLdap(dtoUsuario, tipoUsuarioEntity.getDescripcion());
+
+        return Response.ok(usuarioEntity).build();
+    }
+
 
     @GET
     @Produces(value= MediaType.APPLICATION_JSON)
@@ -64,5 +86,47 @@ public class UsuarioServicio {
         }
 
         return usuario;
+    }
+
+
+    @GET
+    @Path("/empleados")
+    @Produces(value = MediaType.APPLICATION_JSON)
+    public Response getEmpleados() {
+        List<UsuarioEntity> empleados = null;
+        try {
+            DaoUsuario daoUsuario = new DaoUsuario();
+            empleados = daoUsuario.getUsuariosEmpleados();
+        } catch (Exception ex) {
+            String problema = ex.getMessage();
+        }
+        return Response.ok(empleados).build();
+    }
+
+
+    @DELETE
+    @Produces(value=MediaType.APPLICATION_JSON)
+    @Path("/{id}")
+    public Response deleteUsuario(@PathParam("id") long id) {
+
+        try
+        {
+            DaoUsuario daoUsuario = new DaoUsuario();
+            DtoUsuario dtoUsuario = new DtoUsuario();
+            DirectorioActivo ldap = new DirectorioActivo();
+            UsuarioEntity usuarioEntity = daoUsuario.find(id, UsuarioEntity.class);
+            if(usuarioEntity != null) {
+
+                dtoUsuario.setUsername(usuarioEntity.getUsername());
+                ldap.deleteEntry(dtoUsuario);
+                UsuarioEntity resul = daoUsuario.delete(usuarioEntity);
+
+                return Response.ok().build();
+            }
+        }
+        catch (Exception er){
+            String problema = er.getMessage();
+        }
+        return Response.status(Response.Status.NOT_FOUND).build();
     }
 }

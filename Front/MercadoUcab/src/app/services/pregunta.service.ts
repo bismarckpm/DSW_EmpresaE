@@ -9,7 +9,7 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class PreguntaService {
 
- //apiurl = 'http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+ // apiurl = 'http://localhost:8080/servicio-1.0-SNAPSHOT/api';
  apiurl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }

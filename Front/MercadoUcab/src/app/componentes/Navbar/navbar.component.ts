@@ -32,7 +32,6 @@ bool=true;
     // remove user from local storage and set current user to null
     localStorage.removeItem('usuarioID');
     localStorage.removeItem('rol');
-    this.router.navigate[('/Login')]
     this.bool=true;
    // this.currentUserSubject.next(null);
   }

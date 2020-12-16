@@ -36,7 +36,8 @@ export class ListaClientesComponent implements OnInit {
   patronCorreoCliente: any = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   patronUsernameCliente: any = / ^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$/;
   patronClaveCliente: any = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-  patronRIFCliente: any = /^[0-9]+$/;
+  patronRIFCliente: any = /^([VEJPGvejpg]{1})-([0-9]{8})-([0-9]{1}$)/;
+  patronTelefonoCliente: any = /^[0-9]+$/;
   formCliente: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
@@ -47,6 +48,7 @@ export class ListaClientesComponent implements OnInit {
               public usuarioService: UsuarioService) {this.createForm(); }
 
   ngOnInit(): void {
+    this.addLugar();
     this.loadCliente();
   }
 
@@ -71,7 +73,7 @@ export class ListaClientesComponent implements OnInit {
   }
 
   editar(cliente){
-    this.addLugar();
+    //this.addLugar();
     this.clienteData = cliente;
   }
 

@@ -14,7 +14,7 @@ export class AdminService {
     'Perfil',
     'Clientes',
     'Encuestados',
-    'Administradors',
+    'Administradores y Analistas',
     'Estudios',
     'Encuestas',
     'Preguntas',

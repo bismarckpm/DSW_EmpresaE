@@ -5,13 +5,17 @@ import javax.persistence.*;
 @Entity
 @Table(name = "cliente_estudio", schema = "mercadeoucab")
 public class ClienteEstudioEntity extends BaseEntity{
-    private String estado;
-    private String comentarioCliente;
-    private ClienteEntity cliente;
-    private EstudioEntity estudio;
+
+    public ClienteEstudioEntity(long id) {
+        super(id);
+    }
+
+    public ClienteEstudioEntity() {
+    }
 
     @Basic
     @Column(name = "estado")
+    private String estado;
     public String getEstado() {
         return estado;
     }
@@ -22,6 +26,7 @@ public class ClienteEstudioEntity extends BaseEntity{
 
     @Basic
     @Column(name = "comentario_cliente")
+    private String comentarioCliente;
     public String getComentarioCliente() {
         return comentarioCliente;
     }
@@ -32,6 +37,7 @@ public class ClienteEstudioEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_cliente", referencedColumnName = "id", nullable = false)
+    private ClienteEntity cliente;
     public ClienteEntity getCliente() {
         return cliente;
     }
@@ -42,6 +48,7 @@ public class ClienteEstudioEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_estudio", referencedColumnName = "id", nullable = false)
+    private EstudioEntity estudio;
     public EstudioEntity getEstudio() {
         return estudio;
     }

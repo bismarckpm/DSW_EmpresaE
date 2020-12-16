@@ -5,11 +5,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'app-lista-estudios',
-  templateUrl: './lista-estudios.component.html',
-  styleUrls: ['./lista-estudios.component.css']
+  selector: 'app-lista-estudios-analista',
+  templateUrl: './lista-estudios-analista.component.html',
+  styleUrls: ['./lista-estudios-analista.component.css']
 })
-export class ListaEstudiosComponent implements OnInit {
+export class ListaEstudiosAnalistaComponent implements OnInit {
 
   // Declaracion de variables
   estudios: Estudio[] = [];
@@ -20,9 +20,9 @@ export class ListaEstudiosComponent implements OnInit {
 
   constructor(
     public estudioService: EstudioService,
-    public formBuilder: FormBuilder,
+    private formBuilder: FormBuilder,
     public actRoute: ActivatedRoute,
-    public router: Router,
+    public router: Router
 
   ) { this.createForm(); }
 

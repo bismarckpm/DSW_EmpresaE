@@ -55,6 +55,14 @@ export class EstudioService {
     );
   }
 
+  getEstudioEncuestado(id): Observable<Estudio[]>{
+    return this.http.get<Estudio[]>(this.apiurl + '/estudio' + id)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+
   createEstudio(Estudio): Observable<Estudio[]>{
     return this.http.post<Estudio[]>(this.apiurl + '/estudio', JSON.stringify(Estudio), this.httpOptions)
     .pipe(

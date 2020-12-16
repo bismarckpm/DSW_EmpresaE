@@ -12,9 +12,7 @@ export class AnalistaService {
 
   secciones: string[] = [
     'Perfil',
-    'Encuestados',
-    'Analistas',
-  
+    'Estudios',
   ];
 
   //apiurl='http://localhost:3000';

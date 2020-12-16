@@ -64,8 +64,8 @@
                                   <option value="Aprobado">Aprobado</option>
                                   <option value="Rechazado">Rechazado</option>
                                 </select>
-                                <div *ngIf="comentarioAnalistaEstudio.invalid && (comentarioAnalistaEstudio.dirty || comentarioAnalistaEstudio.touched)" class="alert alert-danger">
-                                  <div *ngIf="comentarioAnalistaEstudio.errors.required">
+                                <div *ngIf="estadoEstudioAnalista.invalid && (estadoEstudioAnalista.dirty || estadoEstudioAnalista.touched)" class="alert alert-danger">
+                                  <div *ngIf="estadoEstudioAnalista.errors.required">
                                     Este campo es obligatorio
                                   </div>
                                 </div>

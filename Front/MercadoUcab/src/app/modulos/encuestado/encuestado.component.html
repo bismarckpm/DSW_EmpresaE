@@ -16,8 +16,7 @@
 
                     <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div [ngSwitch]="seccion">
-                            <div *ngSwitchCase="'Clientes'"><app-form-clientes></app-form-clientes></div>
-                            <div *ngSwitchCase="'Encuestados'"><app-form-encuestado></app-form-encuestado></div>
+                          <div *ngSwitchCase="'Estudios'"><app-form-encuestado></app-form-encuestado></div>
 
 
                             <div *ngSwitchDefault></div>
@@ -26,10 +25,7 @@
                 </div>
             </div>
             <div [ngSwitch]="seccion">
-                <div *ngSwitchCase="'Perfil'"><app-main-admin></app-main-admin></div>
-                <div *ngSwitchCase="'Clientes'"><app-lista-clientes></app-lista-clientes></div>
-                <div *ngSwitchCase="'Encuestados'"><app-lista-encuestados></app-lista-encuestados></div>
-                <div *ngSwitchCase="'Analistas'"><lista-analista></lista-analista></div>
+                <div *ngSwitchCase="'Estudios'"><app-lista-estudio-cliente></app-lista-estudio-cliente></div>
 
                 <div *ngSwitchDefault></div>
             </div>

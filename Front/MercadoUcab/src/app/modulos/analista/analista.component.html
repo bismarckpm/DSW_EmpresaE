@@ -16,14 +16,14 @@
 
           <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div [ngSwitch]="seccion">
-              <div *ngSwitchCase="'Estudios'"><app-form-estudio-cliente></app-form-estudio-cliente></div>
+              <div *ngSwitchCase="'Estudios'"><app-lista-estudios-analista></app-lista-estudios-analista></div>
             </div>
           </div>
         </div>
       </div>
       <div [ngSwitch]="seccion">
         <div *ngSwitchCase="'Perfil'"><p class="bg-warning">Perfil del Analista</p></div>
-        <div *ngSwitchCase="'Estudios'"><app-lista-estudio-cliente></app-lista-estudio-cliente></div>
+        <div *ngSwitchCase="'Estudios'"><app-lista-estudios-analista></app-lista-estudios-analista></div>
       </div>
     </main>
   </div>

@@ -3,8 +3,6 @@
 
     
     <div *ngIf="admin == true">
-
-   <form [formGroup]="formAdmin" ></form>
       <div class="form-row">
         <div class="form-group col-md-6">
           <h1> Perfil</h1>
@@ -19,16 +17,9 @@
         <div class="form-group col-md-6">
           <label > Correo</label>
           <input type="text" class="form-control" [(ngModel)]="Administrador.correoelectronico" value="Administrador.correoelectronico">
-          <div *ngIf="correoElectronicoAdmin.invalid && (correoElectronicoAdmin.dirty || correoElectronicoAdmin.touched)" class="alert alert-danger">
-            <div *ngIf="correoElectronicoAdmin.errors.required">
-              Este campo es obligatorio
-            </div>
-            <div *ngIf="correoElectronicoAdmin.errors.pattern">
-              Introduzca un formato valido
-            </div>
         </div>
         </div>
-      </div>
+     
       <div class="form-group">
         <label > Rol en nuestro sistema </label>
         <input type="text" class="form-control"[(ngModel)]="Administrador.tipoUsuario.descripcion" value="Administrador.tipousuario.descripcion" readonly="readonly">
@@ -46,13 +37,11 @@
           <button type="button"  class="btn btn-success" (click)=GuardarPerfil > Guardar cambios </button>
         </div>
       </div>
-   </form>
 
   </div> <!-- DIf del administradro-->
 
 
-    <div  *ngIf="cli == true">
-
+  <div  *ngIf="cli == true">
       <div class="form-row">
         <div class="form-group col-md-6">
           <h1> Perfil</h1>
@@ -63,21 +52,13 @@
         <div class="form-group col-md-6">
           <label > Nombre del usuario</label>
           <input type="text" class="form-control" [(ngModel)]="Cliente.usuario.username" value="Cliente.usuario.username" readonly="readonly">
-      
         </div>
+
         <div class="form-group col-md-6">
           <label > Correo</label>
           <input type="text" class="form-control" [(ngModel)]="Cliente.usuario.correoelectronico" value="Cliente.usuario.correoelectronico"  readonly="readonly">
-          <div *ngIf="correoElectronicoCliente.invalid && (correoElectronicoCliente.dirty || correoElectronicoCliente.touched)" class="alert alert-danger">
-            <div *ngIf="correoElectronicoCliente.errors.required">
-              Este campo es obligatorio
-            </div>
-            <div *ngIf="correoElectronicoCliente.errors.pattern">
-              Introduzca un formato valido
-            </div>
         </div>
-  
-        </div>
+
       </div>
 
         <div class="form-row">
@@ -139,14 +120,7 @@
           <div class="form-group col-md-3">
             <label > Correo</label>
             <input type="text" class="form-control" [(ngModel)]="Encuestado.usuario.correoelectronico" value="Encuestado.usuario.correoelectronico" >
-            <div *ngIf="correoElectronicoEncuestado.invalid && (correoElectronicoEncuestado.dirty || correoElectronicoEncuestado.touched)" class="alert alert-danger">
-              <div *ngIf="correoElectronicoEncuestado.errors.required">
-                Este campo es obligatorio
-              </div>
-              <div *ngIf="correoElectronicoEncuestado.errors.pattern">
-                Introduzca un formato valido
-              </div>
-          </div>
+
           </div>
 
         </div>
@@ -160,76 +134,49 @@
         <div>
           <h3> <label > Informacion como Encuestado </label></h3>
         </div>
+        
         <div class="form-row">
 
-          <div class="form-group col-md-2">
+          <div class="form-group col-md-4">
             <label for=""> Primer nombre </label>
             <input type="text" class="form-control" [(ngModel)]="Encuestado.primerNombre" value="Encuestado.primerNombre">
-            <div *ngIf="primerNombreEncuestado.invalid && (primerNombreEncuestado.dirty || primerNombreEncuestado.touched)" class="alert alert-danger">
-              <div *ngIf="primerNombreEncuestado.errors.required">
-                Este campo es obligatorio
-              </div>
-              <div *ngIf="primerNombreEncuestado.errors.pattern">
-                Introduzca un formato valido
-              </div>
-          </div>
-          <div class="form-group col-md-2">
+          </div> 
+          <div class="form-group col-md-4">
             <label for="">Segundo Nombre </label>
             <input type="text" class="form-control" [(ngModel)]="Encuestado.segundoNombre" value="Encuestado.segundoNombre" >
-            <div *ngIf="primerNombreEncuestado.invalid && (primerNombreEncuestado.dirty || primerNombreEncuestado.touched)" class="alert alert-danger">
-              <div *ngIf="primerNombreEncuestado.errors.required">
-                Este campo es obligatorio
-              </div>
-              <div *ngIf="primerNombreEncuestado.errors.pattern">
-                Introduzca un formato valido
-              </div>
+
           </div>
-          </div>
-          <div class="form-group col-md-2">
+          <div class="form-group col-md-4">
             <label for=""> Primer Apellido </label>
             <input type="text" class="form-control" [(ngModel)]="Encuestado.primerApellido" value="Encuestado.primerApellido" >
-            <div *ngIf="primerNombreEncuestado.invalid && (primerNombreEncuestado.dirty || primerNombreEncuestado.touched)" class="alert alert-danger">
-              <div *ngIf="primerNombreEncuestado.errors.required">
-                Este campo es obligatorio
-              </div>
-              <div *ngIf="primerNombreEncuestado.errors.pattern">
-                Introduzca un formato valido
-              </div>
-          </div>
-            
+
           </div>
           <div class="form-group col-md-2">
             <label for="">Segundo Apellido </label>
             <input type="text" class="form-control" [(ngModel)]="Encuestado.segundoApellido" value="Encuestado.segundoApellido">
-            <div *ngIf="primerNombreEncuestado.invalid && (primerNombreEncuestado.dirty || primerNombreEncuestado.touched)" class="alert alert-danger">
-              <div *ngIf="primerNombreEncuestado.errors.required">
-                Este campo es obligatorio
-              </div>
-              <div *ngIf="primerNombreEncuestado.errors.pattern">
-                Introduzca un formato valido
-              </div>
-          </div>
+
           </div>
 
+        </div>
+         
+        <div class="form-row">
 
-          <div class="form-row">
-
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-2">
               <label for=""> Fecha Nacimiento</label>
               <input type="text" class="form-control" [(ngModel)]="Encuestado.fechaNacimiento" value="Encuestado.fechaNacimiento" readonly="readonly" >
 
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-2">
               <label for=""> Estado civil </label>
               <input type="text" class="form-control" [(ngModel)]="Encuestado.estadoCivil.nombre" value="Encuestado.estadoCivil.nombre" readonly="readonly">
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-2">
               <label for=""> Nivel Academico </label>
               <input type="text" class="form-control" [(ngModel)]="Encuestado.nivelAcademico.nombre" value="Encuestado.nivelAcademico.nombre" readonly="readonly">
 
             </div>
-
-          </div>
+        </div>
+       
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for=""> Medio de Conexion </label>
@@ -265,49 +212,50 @@
                 <input type="text" class="form-control" [(ngModel)]="Encuestado.lugar.lugar.lugar.nombre" value="Encuestado.lugar.lugar.lugar.nombre" readonly="readonly">
               </div>
             </div>
-        </div>
 
-        <div class="form-row">
-          <div class="form-group col-md-2">
-            <button type="button"  class="btn btn-success" (click)=GuardarPerfil > Guardar cambios </button>
+
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <button type="button"  class="btn btn-success" (click)=GuardarPerfil > Guardar cambios </button>
+              </div>
           </div>
-        </div>
-    </div>   
-
-
-
-    <div *ngIf="analist==true">
-
-        <div class="form-row">
-            <div class="form-group col-md-6">
-              <h1> Perfil</h1>
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label > Nombre del Analista</label>
-                <input type="text" class="form-control" [(ngModel)]="Analista.username" value="Analista.username" readonly="readonly">
-            </div>
-            <div class="form-group col-md-6">
-                <label>Correo</label>
-                <input type="text" class="form-control" [(ngModel)]="Analista.correoelectronico" value="Analista.correoelectronico"  readonly="readonly">
-            </div>
-        </div>
-
-        <div class="form-group">
-          <label > Rol en nuestro sistema </label>
-          <input type="text"  class="form-control" [(ngModel)]="Analista.tipoUsuario.descripcion" value="Analista.tipoUsuario.descripcion" readonly="readonly">
-        </div>
-
-        <div class="form-row">
-          <div class="form-group col-md-2">
-            <button type="button"  class=" btn btn-primary" data-toggle="modal"  data-target="#exampleModal" > Cambio de clave </button>
-          </div>
-        </div>
-          
-
     </div>
+
+
+        
+ 
+
+
+<div  *ngIf="analist == true"> 
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <h1> Perfil</h1>
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label > Nombre del Analista</label>
+        <input type="text" class="form-control" [(ngModel)]="Analista.username" value="Analista.username" readonly="readonly">
+    </div>
+    <div class="form-group col-md-6">
+        <label>Correo</label>
+        <input type="text" class="form-control" [(ngModel)]="Analista.correoelectronico" value="Analista.correoelectronico"  readonly="readonly">
+    </div>
+</div>
+
+<div class="form-group">
+  <label > Rol en nuestro sistema </label>
+  <input type="text"  class="form-control" [(ngModel)]="Analista.tipoUsuario.descripcion" value="Analista.tipoUsuario.descripcion" readonly="readonly">
+</div>
+
+<div class="form-row">
+  <div class="form-group col-md-2">
+    <button type="button"  class=" btn btn-primary" data-toggle="modal"  data-target="#exampleModal" > Cambio de clave </button>
+  </div>
+</div>
+
+</div>
 
 
 
@@ -330,7 +278,7 @@
                     <div class="row">
                       <div class="col-md-6 mb-3">
                         <label for="nombre">Clave Vieja</label>
-                        <input type="password" [(ngModel)]="usuario.clave" class="form-control"   name="nombre" id="nombre" placeholder="" >
+                        <input type="password" [(ngModel)]="usuario.clave" class="form-control"   name="nombre" id="nombre"  >
 
                       </div>
                     </div>
@@ -339,7 +287,7 @@
                     <div class="row">
                       <div class="col-md-6 mb-3">
                         <label for="nombre">Repetir la nueva contraseña </label>
-                        <input type="password" [(ngModel)]="auxUsuario.nuevaClave" class="form-control"   name="nombre" id="nombre" placeholder="" >
+                        <input type="password" [(ngModel)]="auxUsuario.nuevaClave" class="form-control"   name="nombre" id="nombre"  >
 
                       </div>
                     </div>
@@ -362,5 +310,4 @@
 
     <br>
   </div>
-</div> -->
-<p class="bg-success">Perfil</p>
+</div>

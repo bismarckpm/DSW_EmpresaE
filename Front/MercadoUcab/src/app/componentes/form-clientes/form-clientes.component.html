@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="rif">RIF</label>
-                        <input type="text" class="form-control" id="rif" placeholder="" formControlName="rifCliente" value="" >
+                        <input type="text" class="form-control" [(ngModel)]="cliente.rif" id="rif" name="rif" placeholder="" formControlName="rifCliente" value="" >
                           <div *ngIf="rifCliente.invalid && (rifCliente.dirty || rifCliente.touched)" class="alert alert-danger">
                             <div *ngIf="rifCliente.errors.required">
                               Este campo es obligatorio
@@ -27,10 +27,10 @@
                 <div class="row">
                   <div class="col-md-5 mb-3">
                     <label for="estatus">Estado</label>
-                    <select class="custom-select d-block w-100" id="estatus" formControlName="estadoCliente">
+                    <select class="custom-select d-block w-100" [(ngModel)]="cliente.estado" id="estatus" name="estado" formControlName="estadoCliente">
                       <option value="">Choose...</option>
-                      <option>Activo</option>
-                      <option>Inactivo</option>
+                      <option value="a">Activo</option>
+                      <option value="i">Inactivo</option>
                     </select>
                     <div *ngIf="estadoCliente.invalid && (estadoCliente.dirty || estadoCliente.touched)" class="alert alert-danger">
                       <div *ngIf="estadoCliente.errors.required">
@@ -42,16 +42,7 @@
               <div class="row">
                 <div class="col-md-5 mb-3">
                   <label for="razonSocial">Razon Social</label>
-                  <select class="custom-select d-block w-100" id="razonSocial" formControlName="razonSocialCliente">
-                    <option value="">Choose...</option>
-                    <option value="J">Juridico (J)</option>
-                    <option value="P">P</option>
-                    <option value="CA">CA</option>
-                    <option value="SA">SA</option>
-                    <option value="SRL">SRL</option>
-                    <option value="ONG">ONG</option>
-                    <option value="ASFL">ASFL</option>
-                  </select>
+                  <input class="form-control" id="razonSocial" [(ngModel)]="cliente.razonSocial" name="razonSocial" formControlName="razonSocialCliente">
                   <div *ngIf="razonSocialCliente.invalid && (razonSocialCliente.dirty || razonSocialCliente.touched)" class="alert alert-danger">
                     <div *ngIf="razonSocialCliente.errors.required">
                       Este campo es obligatorio
@@ -60,10 +51,13 @@
                 </div>
                 <div class="form-group col-md-4">
                   <label for="telefono">Telefono</label>
-                  <input type="text" class="form-control" [(ngModel)]="cliente.telefono.numero" formControlName="telefonoEncuestado" id="telefono" name="telefono" value="">
+                  <input type="text" class="form-control" [(ngModel)]="cliente.telefono.numero" formControlName="telefonoCliente" id="telefono" name="telefono">
                   <div *ngIf="telefonoCliente.invalid && (telefonoCliente.dirty || telefonoCliente)" class="alert alert-danger">
                     <div *ngIf="telefonoCliente.errors.required">
                       Este campo es obligatorio
+                    </div>
+                    <div *ngIf="telefonoCliente.errors.pattern">
+                      Ingrese un formato valido (Solo Numeros)
                     </div>
                   </div>
                 </div>
@@ -71,7 +65,7 @@
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="estado">Estado</label>
-                <select class="custom-select d-block w-100"  [(ngModel)]="cliente.lugar._id" (click)="busquedaMunicipio(cliente.lugar._id)" id="estado" formControlName="lugarCliente" value="cliente.lugar._id">
+                <select class="custom-select d-block w-100"  [(ngModel)]="cliente.lugar._id" (click)="busquedaMunicipio(cliente.lugar._id)" id="estado" name="lugar" formControlName="lugarCliente" value="cliente.lugar._id">
                   <option selected>Choose...</option>
                   <option  *ngFor="let estado of estados" [ngValue]= "estado._id"  >{{estado.nombre}}</option>
                 </select>
@@ -83,7 +77,7 @@
               </div>
               <div class="form-group col-md-4">
                 <label for="municipio">Municipio</label>
-                <select class="custom-select d-block w-100"  [(ngModel)]="cliente.lugar.lugar._id" (click)="busquedaParroquia(cliente.lugar.lugar._id)" id="municipio" formControlName="lugarCliente" value="cliente.lugar.lugar._id">
+                <select class="custom-select d-block w-100"  [(ngModel)]="cliente.lugar.lugar._id" (click)="busquedaParroquia(cliente.lugar.lugar._id)" id="municipio" name="lugar" formControlName="lugarCliente" value="cliente.lugar.lugar._id">
                   <option selected>Choose...</option>
                   <option  *ngFor="let municipio of municipios" [ngValue]= "municipio._id"  >{{municipio.nombre}}</option>
                 </select>
@@ -95,13 +89,50 @@
               </div>
               <div class="form-group col-md-4">
                 <label for="parroquia">Parroquia</label>
-                <select class="custom-select d-block w-100"  [(ngModel)]="cliente.lugar.lugar.lugar._id" (click)="seleccionarParroquia(cliente.lugar.lugar.lugar._id)" id="parroquia" formControlName="lugarCliente" value="cliente.lugar.lugar.lugar._id">
+                <select class="custom-select d-block w-100"  [(ngModel)]="cliente.lugar.lugar.lugar._id" (click)="seleccionarParroquia(cliente.lugar.lugar.lugar._id)" id="parroquia" name="lugar" formControlName="lugarCliente" value="cliente.lugar.lugar.lugar._id">
                   <option selected>Choose...</option>
                   <option  *ngFor="let parroquia of parroquias" [ngValue]= "parroquia._id"  >{{parroquia.nombre}}</option>
                 </select>
                 <div *ngIf="lugarCliente.invalid && (lugarCliente.dirty || lugarCliente.touched)" class="alert alert-danger">
                   <div *ngIf="lugarCliente.errors.required">
                     Este campo es obligatorio
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="user">Username</label>
+                <input type="text" [(ngModel)]="cliente.usuario.username" class="form-control"  formControlName="claveCliente" name="username" id="user" placeholder="" >
+                <div *ngIf="usernameCliente.invalid && (usernameCliente.dirty || usernameCliente.touched)" class="alert alert-danger">
+                  <div *ngIf="usernameCliente.errors.required">
+                    Este campo es obligatorio
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="clave">Clave</label>
+                <input type="text" [(ngModel)]="cliente.usuario.clave" class="form-control"  formControlName="claveCliente" name="clave" id="clave" placeholder="" >
+                <div *ngIf="claveCliente.invalid && (claveCliente.dirty || claveCliente.touched)" class="alert alert-danger">
+                  <div *ngIf="claveCliente.errors.required">
+                    Este campo es obligatorio
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 mb-3">
+                <label for="correo">Correo Electronico</label>
+                <input type="text" [(ngModel)]="cliente.usuario.correoElectronico" class="form-control"  formControlName="correoElectronicoCliente" name="correoElectronico" id="correo" placeholder="" >
+                <div *ngIf="correoElectronicoCliente.invalid && (correoElectronicoCliente.dirty || correoElectronicoCliente.touched)" class="alert alert-danger">
+                  <div *ngIf="correoElectronicoCliente.errors.required">
+                    Este campo es obligatorio
+                  </div>
+                  <div>
+                    <div *ngIf="correoElectronicoCliente.errors.pattern">
+                      Introduzca un formato valido
+                    </div>
                   </div>
                 </div>
               </div>

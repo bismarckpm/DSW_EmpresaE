@@ -19,7 +19,6 @@ import { AdminComponent } from './modulos/admin/admin.component';
 import { ClienteComponent } from './modulos/cliente/cliente.component';
 import { EncuestadoComponent } from './modulos/encuestado/encuestado.component';
 import { AnalistaComponent } from './modulos/analista/analista.component';
-import { FormAnalistaComponent } from './componentes/form-analista/form-analista.component';
 import { CambiarClaveComponent } from './componentes/cambiar-clave/cambiar-clave.component';
 import { EditClienteComponent } from './componentes/edit-cliente/edit-cliente.component';
 import { EditUsuarioComponent } from './componentes/edit-usuario/edit-usuario.component';
@@ -44,7 +43,6 @@ import {FormPreguntaComponent} from './componentes/form-pregunta/form-pregunta.c
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { ListaEncuestadosComponent } from './componentes/lista-encuestados/lista-encuestados.component';
 import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
-import { ListaAnalistaComponent } from './componentes/lista-analista/lista-analista.component';
 import { FormEncuestaComponent } from './componentes/form-encuesta/form-encuesta.component';
 import { ListaEncuestaComponent } from './componentes/lista-encuesta/lista-encuesta.component';
 
@@ -63,55 +61,60 @@ import { TipoService } from './services/tipo.service';
 import { TipoPreguntaService } from './services/tipo-pregunta.service';
 import { ClienteService } from './services/cliente.service';
 import { AnalistaService } from './services/analista.service';
+import { FormAnalistaAdminComponent } from './componentes/form-analista-admin/form-analista-admin.component';
+import { ListaAnalistaAdminComponent } from './componentes/lista-analista-admin/lista-analista-admin.component';
+import {ListaEstudiosAnalistaComponent} from './modulos/analista/lista-estudios-analista/lista-estudios-analista.component';
+import {ListaEstudiosEncuestadoComponent} from './modulos/encuestado/lista-estudios-encuestado/lista-estudios-encuestado.component';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    NavbarComponent,
-    SidebarComponent,
-    RegistrarseComponent,
-    RecuperacionComponent,
-    ListaComponent,
-    AdminComponent,
-    ClienteComponent,
-    EncuestadoComponent,
-    AnalistaComponent,
-    FormClientesComponent,
-    FormMarcaComponent,
-    ListaMarcaComponent,
-    ListaPreguntasComponent,
-    MainAdminComponent,
-    ListaEstudiosComponent,
-    ListaCategoriaComponent,
-    FormCategoriaComponent,
-    FormEncuestadoComponent,
-    ListaSubcategoriaComponent,
-    FormSubcategoriaComponent,
-    FormTipoComponent,
-    ListaTipoComponent,
-    FormEstudioComponent,
-    ListaEstudiosComponent,
-    FormClientesComponent,
-    ListaClientesComponent,
-    FormPresentacionComponent,
-    ListaPresentacionComponent,
-    FormEncuestaComponent,
-    ListaEncuestaComponent,
-    ListaAnalistaComponent,
-    FormAnalistaComponent,
-    CambiarClaveComponent,
-    EditClienteComponent,
-    EditUsuarioComponent,
-    FormPreguntaComponent,
-    PerfilComponent,
-    ListaEncuestadosComponent,
-    ListaEstudioClienteComponent,
-    FormEstudioClienteComponent,
-    ListaEncuestadosComponent,
-    ListaAnalistaComponent
-  ],
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        NavbarComponent,
+        SidebarComponent,
+        RegistrarseComponent,
+        RecuperacionComponent,
+        ListaComponent,
+        AdminComponent,
+        ClienteComponent,
+        EncuestadoComponent,
+        AnalistaComponent,
+        FormClientesComponent,
+        FormMarcaComponent,
+        ListaMarcaComponent,
+        ListaPreguntasComponent,
+        MainAdminComponent,
+        ListaEstudiosComponent,
+        ListaCategoriaComponent,
+        FormCategoriaComponent,
+        FormEncuestadoComponent,
+        ListaSubcategoriaComponent,
+        FormSubcategoriaComponent,
+        FormTipoComponent,
+        ListaTipoComponent,
+        FormEstudioComponent,
+        ListaEstudiosComponent,
+        FormClientesComponent,
+        ListaClientesComponent,
+        FormPresentacionComponent,
+        ListaPresentacionComponent,
+        FormEncuestaComponent,
+        ListaEncuestaComponent,
+        CambiarClaveComponent,
+        EditClienteComponent,
+        EditUsuarioComponent,
+        FormPreguntaComponent,
+        PerfilComponent,
+        ListaEncuestadosComponent,
+        ListaEstudioClienteComponent,
+        FormEstudioClienteComponent,
+        ListaEncuestadosComponent,
+        FormAnalistaAdminComponent,
+        ListaAnalistaAdminComponent,
+        ListaEstudiosAnalistaComponent,
+        ListaEstudiosEncuestadoComponent
+    ],
   imports: [
     BrowserModule,
     SidebarModule.forRoot(),

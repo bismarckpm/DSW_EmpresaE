@@ -5,10 +5,42 @@
       "username": "Pedro",
       "clave ": "pedro",
       "rol": "Encuestado",
-      "autenticacion": "valida",
-      "correoelectronico":"xxx_pornhub@gmail.com"
+      "autenticacion": "valida"
+    },
+    {
+      "_id": 51,
+      "username": "Juan",
+      "clave": "juan",
+      "correoElectronico": "juan@gmail.com",
+      "estado": "a",
+      "tipoUsuario": {
+        "_id": 0,
+        "descripcion": "Administrador"
+      }
+    },
+    {
+      "_id": 52,
+      "username": "Victorr",
+      "clave": "victor",
+      "correoElectronico": "victor@gmail.com",
+      "estado": "a",
+      "tipoUsuario": {
+        "_id": 0,
+        "descripcion": "Analista"
+      }
+    },
+    {
+      "_id": 53,
+      "rol": "",
+      "username": "Victor",
+      "clave": "victor",
+      "correoElectronico": "victor@gmail.com",
+      "estado": "a",
+      "tipoUsuario": {
+        "_id": 0,
+        "descripcion": "Administrador"
+      }
     }
-
   ],
   "categoria": [
     {
@@ -527,9 +559,9 @@
     },
     {
       "_id": 5,
-      "estado": "I",
-      "fechaInicio": "10/10/2010",
-      "fechaFin": "10/10/2011",
+      "estado": "A",
+      "fechaInicio": "10/10/1010",
+      "fechaFin": "10/10/1012",
       "estudio": {
         "_id": 1
       },
@@ -538,6 +570,44 @@
           "_id": 1
         },
         {
+          "_id": 2
+        },
+        {
+          "_id": 2
+        },
+        {
+          "_id": 5
+        },
+        {
+          "_id": 1
+        },
+        {
+          "_id": 0
+        },
+        {
+          "_id": 3
+        },
+        {
+          "_id": 5
+        },
+        {
+          "_id": 4
+        },
+        {
+          "_id": 3
+        }
+      ]
+    },
+    {
+      "_id": 6,
+      "estado": "A",
+      "fechaInicio": "10/10/1010",
+      "fechaFin": "10/10/1018",
+      "estudio": {
+        "_id": 1
+      },
+      "pregunta": [
+        {
           "_id": 1
         },
         {
@@ -547,7 +617,34 @@
           "_id": 2
         },
         {
+          "_id": 5
+        },
+        {
           "_id": 1
+        },
+        {
+          "_id": 0
+        },
+        {
+          "_id": 3
+        },
+        {
+          "_id": 5
+        },
+        {
+          "_id": 4
+        },
+        {
+          "_id": 3
+        },
+        {
+          "_id": 1
+        },
+        {
+          "_id": 5
+        },
+        {
+          "_id": 9
         }
       ]
     }
@@ -567,6 +664,28 @@
       "clave": "11111",
       "correoElectronico": "joseeqqqq@gmail.com",
       "estado": "i"
+    },
+    {
+      "_id": 3,
+      "username": "juan",
+      "clave": "juan",
+      "correoElectronico": "juan@gmail.com",
+      "estado": "a",
+      "tipoUsuario": {
+        "_id": 0,
+        "descripcion": "Analista"
+      }
+    },
+    {
+      "_id": 4,
+      "username": "josee",
+      "clave": "josee",
+      "correoElectronico": "josee@gmail.com",
+      "estado": "a",
+      "tipoUsuario": {
+        "_id": 0,
+        "descripcion": "Administrador"
+      }
     }
   ],
   "cliente": [
@@ -847,6 +966,66 @@
         "_id": 3,
         "nombre": "subcategoria",
         "estado": "i"
+      }
+    },
+    {
+      "_id": 3,
+      "descripcion": "SubcategoriaPruebaU",
+      "estado": "a",
+      "subcategoria": {
+        "_id": 1,
+        "categoria": {
+          "_id": 1,
+          "estado": "i",
+          "nombre": "CategoriaPrueba"
+        },
+        "estado": "a",
+        "nombre": "SubcategoriaPrueba"
+      },
+      "tipo": {
+        "_id": 1,
+        "estado": "a",
+        "tipo": "Comp"
+      }
+    },
+    {
+      "_id": 4,
+      "descripcion": "SubcategoriaPrueba2",
+      "estado": "a",
+      "subcategoria": {
+        "_id": 1,
+        "categoria": {
+          "_id": 1,
+          "estado": "i",
+          "nombre": "CategoriaPrueba"
+        },
+        "estado": "a",
+        "nombre": "SubcategoriaPrueba"
+      },
+      "tipo": {
+        "_id": 1,
+        "estado": "a",
+        "tipo": "Comp"
+      }
+    },
+    {
+      "_id": 9,
+      "descripcion": "PreguntaPostmanID",
+      "estado": "a",
+      "subcategoria": {
+        "_id": 1,
+        "categoria": {
+          "_id": 1,
+          "estado": "i",
+          "nombre": "CategoriaPrueba"
+        },
+        "estado": "a",
+        "nombre": "SubcategoriaPrueba"
+      },
+      "tipo": {
+        "_id": 1,
+        "estado": "a",
+        "tipo": "Comp"
       }
     }
   ]

@@ -34,9 +34,8 @@ export class FormClientesComponent implements OnInit {
   auxParroquiaID: number;
 
   patronCorreoCliente: any = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-  patronUsernameCliente: any = / ^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$/;
-  patronClaveCliente: any = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-  patronRIFCliente: any = /^[0-9]+$/;
+  patronRIFCliente: any = /^([VEJPGvejpg]{1})-([0-9]{8})-([0-9]{1}$)/;
+  patronTelefonoCliente: any = /^[0-9\s]+$/;
 
   formCliente: FormGroup;
 
@@ -53,7 +52,7 @@ export class FormClientesComponent implements OnInit {
     this.addLugar();
   }
 
-  addCliente(cliente){
+  addCliente(cliente): void{
     this.cliente.lugar._id = this.auxParroquiaID;
     if (this.formCliente.valid) {
       this.clienteService.createCliente(this.cliente).subscribe((data: {}) => {
@@ -64,13 +63,13 @@ export class FormClientesComponent implements OnInit {
     }
   }
 
-  addLugar(){
+  addLugar(): void {
     this.lugarService.getLugars().subscribe((Lugares: {}) => {
       this.estados = Lugares;
     });
   }
 
-  busquedaMunicipio(id){
+  busquedaMunicipio(id): void{
     // El ID es del estado
     this.auxEstadoID = id;
     // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
@@ -81,7 +80,7 @@ export class FormClientesComponent implements OnInit {
     }
   }
 
-  busquedaParroquia(id){
+  busquedaParroquia(id): void{
     // El ID es del estado
     this.auxMunicipioID = id;
     // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
@@ -92,7 +91,7 @@ export class FormClientesComponent implements OnInit {
     }
   }
 
-  seleccionarParroquia(id){
+  seleccionarParroquia(id): void{
     this.auxParroquiaID = id;
   }
 
@@ -101,14 +100,16 @@ export class FormClientesComponent implements OnInit {
   get estadoCliente() {return this.formCliente.get('estadoCliente'); }
   get lugarCliente() {return this.formCliente.get('lugarCliente'); }
   get telefonoCliente(){return this.formCliente.get('telefonoCliente'); }
+  get usernameCliente(){return this.formCliente.get('usernameCliente'); }
+  get claveCliente(){return this.formCliente.get('claveCliente'); }
+  get correoElectronicoCliente(){return this.formCliente.get('correoElectronicoCliente'); }
 
-
-  createForm() {
+  createForm(): void {
     this.formCliente = this.formBuilder.group({
       rifCliente: ['', [Validators.required, Validators.pattern(this.patronRIFCliente)]],
       razonSocialCliente: ['', Validators.required],
       estadoCliente: ['', Validators.required],
-      lugarEncuestado: ['', Validators.required],
+      lugarCliente: ['', Validators.required],
       usernameCliente: ['', Validators.required],
       claveCliente: ['', Validators.required],
       telefonoCliente: ['', [Validators.required, Validators.pattern(this.patronRIFCliente), Validators.maxLength(11)]],

@@ -11,9 +11,10 @@ export class AdminService {
 
   secciones: string[] = [
     'Inicio',
+    'Perfil',
     'Clientes',
     'Encuestados',
-    'Administradors',
+    'Administradores y Analistas',
     'Estudios',
     'Encuestas',
     'Preguntas',

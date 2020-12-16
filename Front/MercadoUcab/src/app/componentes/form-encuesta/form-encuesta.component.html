@@ -39,8 +39,8 @@
                         <label for="estado">Estado</label>
                         <select class="custom-select d-block w-100" id="estado" [(ngModel)]="encuesta.estado"  value="estado" name="estado" formControlName="estadoEncuesta">
                             <option value="">Choose...</option>
-                            <option>A</option>
-                            <option>I</option>
+                            <option value="a">Activo</option>
+                            <option value="i">Inactivo</option>
                         </select>
                         <!-- <div *ngIf="estadoEncuesta.invalid && (estadoEncuesta.dirty || estadoEncuesta.touched)" class="alert alert-danger">
                             <div *ngIf="estadoEncuesta.errors.required">

@@ -10,13 +10,14 @@ import { retry, catchError } from 'rxjs/operators';
 export class ClienteService {
 
   secciones: string[] = [
+    'Inicio',
     'Perfil',
     'Estudios',
   ];
 
 
-  //apiurl='http://localhost:3000';
-  apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+  apiurl='http://localhost:3000';
+  //apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
 
 
   constructor(private http:HttpClient) { }
@@ -74,7 +75,7 @@ export class ClienteService {
   }
 
   updateCliente(id,Cliente):Observable<Cliente[]>{
-    return this.http.put<Cliente[]>(this.apiurl+'/cliente/'+id,JSON.stringify(Cliente), this.httpOptions)
+    return this.http.put<Cliente[]>(this.apiurl+'/cliente/update/'+id,JSON.stringify(Cliente), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)

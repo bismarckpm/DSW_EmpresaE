@@ -1,11 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Encuesta } from 'src/app/models/encuesta';
 import { EncuestaService } from 'src/app/services/encuesta.service';
 import { EstudioService } from '../../services/estudio.service';
 import { TipoPreguntaService } from '../../services/tipo-pregunta.service';
 import { PreguntaService } from '../../services/pregunta.service';
-import { Pregunta } from 'src/app/models/pregunta';
 
 @Component({
   selector: 'app-form-encuesta',
@@ -64,6 +62,7 @@ export class FormEncuestaComponent implements OnInit {
         estudio: {_id: 0},
         preguntas: []
       };
+      this.auxIterador = [];
       alert('Agregó la encuesta');
     }
     else{

@@ -35,9 +35,9 @@ public class LoginServicio {
         JsonObject respuesta;
 
         registrado = directorioActivo.userAuthentication(dtoUsuario);
+        usuario = daoUsuario.getUsuarioByUsername(dtoUsuario.getUsername());
 
-        if(registrado){
-            usuario = daoUsuario.getUsuarioByUsername(dtoUsuario.getUsername());
+        if(registrado && usuario.getEstado().equals("a")){
             respuesta = Json.createObjectBuilder()
                     .add("autenticacion", "valida")
                     .add("_id", usuario.get_id())

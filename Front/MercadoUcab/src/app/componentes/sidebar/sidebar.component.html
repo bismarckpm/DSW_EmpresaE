@@ -22,7 +22,21 @@
                       {{ seccion }}
                     </button>
                   </div>
-                  <div *ngSwitchDefault></div>
+                  <div *ngSwitchCase="'analista'">
+                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" 
+                    data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
+                    [routerLink]="['/analista', i]">
+                      {{ seccion }}
+                    </button>
+                  </div>
+                  <div *ngSwitchCase="'encuestado'">
+                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" 
+                    data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
+                    [routerLink]="['/encuestado', i]">
+                      {{ seccion }}
+                    </button>
+                  </div>
+                  <div *ngSwitchDefault>No comparó</div>
                 </div>
               </h2>
             </div>

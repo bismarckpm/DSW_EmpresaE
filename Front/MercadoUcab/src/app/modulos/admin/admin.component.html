@@ -9,16 +9,20 @@
                 </div>
                 <div class="btn-toolbar mb-2 mb-md-0">
 
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop"
-                    *ngIf="seccion != 'Inicio'" >
-                        Agregar
-                    </button>
+                    <div [ngSwitch]="seccion">
+                        <div *ngSwitchCase="'Inicio'"></div>
+                        <div *ngSwitchCase="'Perfil'"></div>
+                        <div *ngSwitchDefault>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">Agregar</button>
+                        </div>
+                    </div>
+
 
                     <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div [ngSwitch]="seccion">
                             <div *ngSwitchCase="'Clientes'"><app-form-clientes></app-form-clientes></div>
                             <div *ngSwitchCase="'Encuestados'"><app-form-encuestado></app-form-encuestado></div>
-                            <div *ngSwitchCase="'Administradors'"><app-form-analista></app-form-analista></div>
+                            <div *ngSwitchCase="'Administradores y Analistas'"><app-form-analista-admin></app-form-analista-admin></div>
                             <div *ngSwitchCase="'Estudios'"><app-form-estudio></app-form-estudio></div>
                             <div *ngSwitchCase="'Encuestas'"><app-form-encuesta></app-form-encuesta></div>
                             <div *ngSwitchCase="'Preguntas'"><app-form-pregunta></app-form-pregunta></div>
@@ -34,9 +38,10 @@
             </div>
             <div [ngSwitch]="seccion">
                 <div *ngSwitchCase="'Inicio'"><app-main-admin></app-main-admin></div>
+                <div *ngSwitchCase="'Perfil'"><app-perfil></app-perfil></div>
                 <div *ngSwitchCase="'Clientes'"><app-lista-clientes></app-lista-clientes></div>
                 <div *ngSwitchCase="'Encuestados'"><app-lista-encuestados></app-lista-encuestados></div>
-                <div *ngSwitchCase="'Administradors'"><app-lista-analista></app-lista-analista></div>
+                <div *ngSwitchCase="'Administradores y Analistas'"><app-lista-analista-admin></app-lista-analista-admin></div>
                 <div *ngSwitchCase="'Estudios'"><app-lista-estudios></app-lista-estudios></div>
                 <div *ngSwitchCase="'Encuestas'"><app-lista-encuesta></app-lista-encuesta></div>
                 <div *ngSwitchCase="'Preguntas'"><app-lista-preguntas></app-lista-preguntas></div>

@@ -101,6 +101,9 @@ export class FormClientesComponent implements OnInit {
   get estadoCliente() {return this.formCliente.get('estadoCliente'); }
   get lugarCliente() {return this.formCliente.get('lugarCliente'); }
   get telefonoCliente(){return this.formCliente.get('telefonoCliente'); }
+  get usernameCliente(){return this.formCliente.get('usernameCliente'); }
+  get claveCliente(){return this.formCliente.get('claveCliente'); }
+  get correoElectronicoCliente(){return this.formCliente.get('correoElectronicoCliente'); }
 
 
   createForm() {

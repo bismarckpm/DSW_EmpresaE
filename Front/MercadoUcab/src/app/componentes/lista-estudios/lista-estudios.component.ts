@@ -41,7 +41,7 @@ export class ListaEstudiosComponent implements OnInit {
   // Declaracion para validar
   formEstudio: FormGroup;
   patronEdadEstudio: any = /^(0?[0-9]{1,2}|1[0-7][0-9]|99)$/;
-  patronFechaEstudio: any = /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/;
+  patronFechaEstudio: any = /^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/;
   patronNombreEstudio: any = /^[A-Za-z\s]+$/;
 
 

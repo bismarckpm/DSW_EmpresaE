@@ -10,7 +10,8 @@ import { Encuesta } from '../models/encuesta';
 export class EncuestaService {
 
     // Definimos el url del api
-    apiurl = 'http://localhost:3000';
+    //apiurl = 'http://localhost:3000';
+    apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
 
     constructor(private http: HttpClient) { }
   // Http Options
@@ -41,6 +42,14 @@ export class EncuestaService {
 
   createEncuesta(Encuesta): Observable<Encuesta[]>{
     return this.http.post<Encuesta[]>(this.apiurl + '/encuesta', JSON.stringify(Encuesta), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
+  createPreguntaEncuesta(pregunta): Observable<Encuesta[]>{
+    return this.http.post<Encuesta[]>(this.apiurl + '/encuesta', JSON.stringify(pregunta), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)

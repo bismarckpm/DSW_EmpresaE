@@ -47,7 +47,6 @@ public class CategoriaServicio extends AplicacionBase {
     }
 
     @POST
-    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addCategoria(DtoCategoria dtoCategoria) {
@@ -58,7 +57,7 @@ public class CategoriaServicio extends AplicacionBase {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
     }
-
+    //http://localhost:8080/servicio-1.0-SNAPSHOT/api/categoria/1
     @PUT
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -80,9 +79,10 @@ public class CategoriaServicio extends AplicacionBase {
     public Response deleteCategoria(DtoCategoria dtoCategoria) {
         try {
             this.categoria = this.dao.find(dtoCategoria.get_id(), CategoriaEntity.class);
-            return Response.ok(this.dao.delete(this.categoria)).build();
+            this.dao.delete(this.categoria);
+            return Response.ok().build();
         } catch(Exception ex){
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+            return Response.status(Response.Status.NOT_ACCEPTABLE).entity(ex).build();
         }
     }
 

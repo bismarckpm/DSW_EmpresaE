@@ -5,7 +5,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "telefono", schema = "mercadeoucab")
 @NamedQueries({
-        @NamedQuery(name = "getTelefonoByCliente", query = "select t from TelefonoEntity t where t.cliente = :cliente")
+        @NamedQuery(name = "getTelefonoByCliente", query = "select t from TelefonoEntity t where t.cliente = :cliente"),
+        @NamedQuery(name = "getTelefonoByEncuestado", query = "select t from TelefonoEntity t where t.encuestado = :encuestado")
 })
 public class TelefonoEntity extends BaseEntity{
 

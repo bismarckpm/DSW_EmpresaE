@@ -19,6 +19,8 @@ public class DtoEncuestado extends DtoBase {
     private DtoNivelSocioEconomico nivelSocioEconomico;
     private DtoLugar lugar;
     private DtoUsuario usuario;
+    private DtoTelefono telefono;
+
 
     //Constructores
     public DtoEncuestado() {
@@ -82,8 +84,8 @@ public class DtoEncuestado extends DtoBase {
         return estadoCivil;
     }
 
-    public void setEstadocivil(DtoEstadoCivil edocivil) {
-        this.estadoCivil = edocivil;
+    public void setEstadoCivil(DtoEstadoCivil estadoCivil) {
+        this.estadoCivil = estadoCivil;
     }
 
     public DtoNivelAcademico getNivelAcademico() {
@@ -140,6 +142,14 @@ public class DtoEncuestado extends DtoBase {
 
     public void setUsuario(DtoUsuario usuario) {
         this.usuario = usuario;
+    }
+
+    public DtoTelefono getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(DtoTelefono telefono) {
+        this.telefono = telefono;
     }
 
 }

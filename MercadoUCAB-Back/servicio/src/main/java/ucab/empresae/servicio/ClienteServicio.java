@@ -35,7 +35,7 @@ public class ClienteServicio {
         UsuarioEntity usuarioEntity = new UsuarioEntity();
         usuarioEntity.setUsername(dtoCliente.getUsuario().getUsername());
         usuarioEntity.setClave(dtoCliente.getUsuario().getClave());
-        usuarioEntity.setEstado("a");
+        usuarioEntity.setEstado(dtoCliente.getEstado());
         usuarioEntity.setTipousuario(daoTipoUsuario.find(tipoUsuario, TipoUsuarioEntity.class));
         daoUsuario.insert(usuarioEntity);
 
@@ -191,6 +191,7 @@ public class ClienteServicio {
             TelefonoEntity resulTlf = daoTelefono.update(telefonoEntity);
 
             DtoUsuario dtoUsuario = new DtoUsuario();
+            dtoUsuario.setEstado(dtoCliente.getEstado());
             dtoUsuario.setUsername(dtoCliente.getUsuario().getUsername());
             dtoUsuario.setCorreoelectronico(dtoCliente.getUsuario().getCorreoelectronico());
             DirectorioActivo ldap = new DirectorioActivo();
@@ -200,6 +201,23 @@ public class ClienteServicio {
             return Response.ok().entity(clienteEntity).build();
         }
         else{
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
+
+    @PUT
+    @Consumes(value=MediaType.APPLICATION_JSON)
+    @Produces(value=MediaType.APPLICATION_JSON)
+    @Path("/update/{id}")
+    public Response updateClienteAdministrador(@PathParam("id") long id, DtoCliente dtoCliente) {
+        DaoCliente dao = new DaoCliente();
+        ClienteEntity clienteEntity = dao.find(id, ClienteEntity.class);
+
+        if (clienteEntity != null){
+            clienteEntity.setEstado(dtoCliente.getEstado());
+            ClienteEntity resul = dao.update(clienteEntity);
+            return Response.ok().entity(clienteEntity).build();
+        }else{
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }

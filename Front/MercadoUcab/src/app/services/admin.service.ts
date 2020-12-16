@@ -13,7 +13,7 @@ export class AdminService {
     'Inicio',
     'Clientes',
     'Encuestados',
-    'Administradors',
+    'Administradores y Analistas',
     'Estudios',
     'Encuestas',
     'Preguntas',

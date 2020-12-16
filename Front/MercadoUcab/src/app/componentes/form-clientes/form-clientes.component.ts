@@ -34,9 +34,8 @@ export class FormClientesComponent implements OnInit {
   auxParroquiaID: number;
 
   patronCorreoCliente: any = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-  patronUsernameCliente: any = / ^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$/;
-  patronClaveCliente: any = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-  patronRIFCliente: any = /^[0-9]+$/;
+  patronRIFCliente: any = /^([VEJPGvejpg]{1})-([0-9]{8})-([0-9]{1}$)/;
+  patronTelefonoCliente: any =/^[0-9\s]+$/;
 
   formCliente: FormGroup;
 
@@ -101,18 +100,20 @@ export class FormClientesComponent implements OnInit {
   get estadoCliente() {return this.formCliente.get('estadoCliente'); }
   get lugarCliente() {return this.formCliente.get('lugarCliente'); }
   get telefonoCliente(){return this.formCliente.get('telefonoCliente'); }
-
+  get usernameCliente(){return this.formCliente.get('usernameCliente'); }
+  get claveCliente(){return this.formCliente.get('claveCliente'); }
+  get correoElectronicoCliente(){return this.formCliente.get('correoElectronicoCliente'); }
 
   createForm() {
     this.formCliente = this.formBuilder.group({
-      rifCliente: ['', [Validators.required, Validators.pattern(this.patronRIFCliente)]],
-      razonSocialCliente: ['', Validators.required],
-      estadoCliente: ['', Validators.required],
-      lugarCliente: ['', Validators.required],
-      usernameCliente: ['', Validators.required],
-      claveCliente: ['', Validators.required],
-      telefonoCliente: ['', [Validators.required, Validators.pattern(this.patronRIFCliente), Validators.maxLength(11)]],
-      correoElectronicoCliente: ['', [Validators.required, Validators.pattern(this.patronCorreoCliente)]],
+      rifCliente: '',
+      razonSocialCliente: '',
+      estadoCliente: '',
+      lugarCliente: '',
+      usernameCliente: '',
+      claveCliente: '',
+      telefonoCliente: '',
+      correoElectronicoCliente: '',
     });
   }
 }

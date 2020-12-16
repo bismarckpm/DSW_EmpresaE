@@ -5,18 +5,16 @@
       <tr>
         <th>ID</th>
         <th>Username</th>
-        <th>Correo</th>
-        <th>Estado</th>
         <th>Rol</th>
+        <th>Estado</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let usuario of Usuario" >
         <td>{{ usuario._id }}</td>
         <td>{{ usuario.username }}</td>
-        <td>{{ usuario.correoElectronico }}</td>
+        <td>{{ usuario.tipousuario.descripcion }}</td>
         <td>{{ usuario.estado }}</td>
-        <td>{{ usuario.tipoUsuario.descripcion }}</td>
         <td>
           <div class="d-flex justify-content-around">
             <button type="button" class="btn btn-primary" data-toggle="modal" (click)="editar(usuario)" data-target="#exampleModal">
@@ -68,7 +66,7 @@
                             </div>
                             <div class="col-md-4 mb-3">
                               <label for="rol">Rol</label>
-                              <select class="custom-select d-block w-100" [(ngModel)]="usuarioData.tipoUsuario.descripcion" formControlName="descripcionTipoUsuario" id="rol" name="rol">
+                              <select class="custom-select d-block w-100" [(ngModel)]="usuarioData.tipousuario.descripcion" formControlName="descripcionTipoUsuario" id="rol" name="descripcion">
                                 <option value="">Choose...</option>
                                 <option value="Administrador">Administrador</option>
                                 <option value="Analista">Analista</option>

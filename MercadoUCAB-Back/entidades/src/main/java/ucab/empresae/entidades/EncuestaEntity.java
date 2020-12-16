@@ -5,12 +5,12 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "encuesta", schema = "mercadeoucab")
+@NamedQueries({
+        @NamedQuery(name = "getEncuestas", query = "SELECT en from EncuestaEntity en where en.pregunta._id = (select MAX(en2.pregunta._id) from EncuestaEntity en2 where en2.estudio._id = en.estudio._id)")
+})
 public class EncuestaEntity extends BaseEntity{
     private String estado;
-    private Date fechaInicio;
-    private Date fechaFin;
-    private EstudioEntity estudio;
-    private PreguntaEntity pregunta;
+
 
     @Basic
     @Column(name = "estado")
@@ -24,6 +24,7 @@ public class EncuestaEntity extends BaseEntity{
 
     @Basic
     @Column(name = "fecha_inicio")
+    private Date fechaInicio;
     public Date getFechaInicio() {
         return fechaInicio;
     }
@@ -34,6 +35,7 @@ public class EncuestaEntity extends BaseEntity{
 
     @Basic
     @Column(name = "fecha_fin")
+    private Date fechaFin;
     public Date getFechaFin() {
         return fechaFin;
     }
@@ -44,6 +46,7 @@ public class EncuestaEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_estudio", referencedColumnName = "id", nullable = false)
+    private EstudioEntity estudio;
     public EstudioEntity getEstudio() {
         return estudio;
     }
@@ -54,6 +57,7 @@ public class EncuestaEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_pregunta", referencedColumnName = "id", nullable = false)
+    private PreguntaEntity pregunta;
     public PreguntaEntity getPregunta() {
         return pregunta;
     }

@@ -1,6 +1,7 @@
 package ucab.empresae.dtos;
 
 import java.sql.Date;
+import java.util.List;
 
 public class DtoEncuesta extends DtoBase {
 
@@ -12,6 +13,8 @@ public class DtoEncuesta extends DtoBase {
     //Relaciones
     private DtoEstudio estudio;
     private DtoPregunta pregunta;
+
+    private List<DtoPregunta> preguntas;
 
     //Constructores
     public DtoEncuesta() {
@@ -61,6 +64,14 @@ public class DtoEncuesta extends DtoBase {
 
     public void setPregunta(DtoPregunta pregunta) {
         this.pregunta = pregunta;
+    }
+
+    public List<DtoPregunta> getPreguntas() {
+        return preguntas;
+    }
+
+    public void setPreguntas(List<DtoPregunta> preguntas) {
+        this.preguntas = preguntas;
     }
 
 }

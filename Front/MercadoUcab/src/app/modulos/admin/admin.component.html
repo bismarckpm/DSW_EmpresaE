@@ -9,14 +9,17 @@
                 </div>
                 <div class="btn-toolbar mb-2 mb-md-0">
 
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop"
-                    *ngIf="seccion != 'Inicio'" >
-                        Agregar
-                    </button>
+                    <div [ngSwitch]="seccion">
+                        <div *ngSwitchCase="'Inicio'"></div>
+                        <div *ngSwitchCase="'Perfil'"></div>
+                        <div *ngSwitchDefault>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">Agregar</button>
+                        </div>
+                    </div>
+
 
                     <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div [ngSwitch]="seccion">
-                            <div *ngSwitchCase="'Perfil'"><app-perfil></app-perfil></div>
                             <div *ngSwitchCase="'Clientes'"><app-form-clientes></app-form-clientes></div>
                             <div *ngSwitchCase="'Encuestados'"><app-form-encuestado></app-form-encuestado></div>
                             <div *ngSwitchCase="'Administradores y Analistas'"><app-form-analista-admin></app-form-analista-admin></div>

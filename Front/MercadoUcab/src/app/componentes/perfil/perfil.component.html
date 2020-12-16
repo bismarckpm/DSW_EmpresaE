@@ -1,4 +1,4 @@
-<div class="registro">
+<!-- <div class="registro">
   <div class="container">
 
 
@@ -33,7 +33,7 @@
         </div>
       </div>
    
-    </div> <!-- DIf del administradro-->
+    </div>
 
 
 
@@ -202,91 +202,91 @@
 
 
 
-<div *ngIf="analist==true">
+    <div *ngIf="analist==true">
 
-    <div class="form-row">
-        <div class="form-group col-md-6">
-          <h1> Perfil</h1>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              <h1> Perfil</h1>
+            </div>
         </div>
-    </div>
 
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label > Nombre del Analista</label>
-            <input type="text" class="form-control" [(ngModel)]="Analista.username" value="Analista.username" readonly="readonly">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label > Nombre del Analista</label>
+                <input type="text" class="form-control" [(ngModel)]="Analista.username" value="Analista.username" readonly="readonly">
+            </div>
+            <div class="form-group col-md-6">
+                <label>Correo</label>
+                <input type="text" class="form-control" [(ngModel)]="Analista.correoelectronico" value="Analista.correoelectronico"  readonly="readonly">
+            </div>
         </div>
-        <div class="form-group col-md-6">
-            <label>Correo</label>
-            <input type="text" class="form-control" [(ngModel)]="Analista.correoelectronico" value="Analista.correoelectronico"  readonly="readonly">
+
+        <div class="form-group">
+          <label > Rol en nuestro sistema </label>
+          <input type="text"  class="form-control" [(ngModel)]="Analista.tipoUsuario.descripcion" value="Analista.tipoUsuario.descripcion" readonly="readonly">
         </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-2">
+            <button type="button"  class=" btn btn-primary" data-toggle="modal"  data-target="#exampleModal" > Cambio de clave </button>
+          </div>
+        </div>
+          
+
     </div>
 
-    <div class="form-group">
-      <label > Rol en nuestro sistema </label>
-      <input type="text"  class="form-control" [(ngModel)]="Analista.tipoUsuario.descripcion" value="Analista.tipoUsuario.descripcion" readonly="readonly">
-    </div>
-
-    <div class="form-row">
-      <div class="form-group col-md-2">
-        <button type="button"  class=" btn btn-primary" data-toggle="modal"  data-target="#exampleModal" > Cambio de clave </button>
-      </div>
-    </div>
-       
-
-</div>
 
 
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <!-- Cabezado Modal -->
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Cambio de clave </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <!-- Cuerpo completo del Modal -->
-              <div class="modal-body">
-                <form >
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="form-group">
-                        <div class="row">
-                          <div class="col-md-6 mb-3">
-                            <label for="nombre">Clave Vieja</label>
-                            <input type="password" [(ngModel)]="usuario.clave" class="form-control"   name="nombre" id="nombre" placeholder="" >
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Cambio de clave </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
 
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="row">
-                          <div class="col-md-6 mb-3">
-                            <label for="nombre">Repetir la nueva contraseña </label>
-                            <input type="password" [(ngModel)]="auxUsuario.nuevaClave" class="form-control"   name="nombre" id="nombre" placeholder="" >
-
-                          </div>
-                        </div>
-                      </div>
-
-                      <br>
-                      <!-- Parte inferior del modal -->
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-success" (click)="CambioDeClave()" data-dismiss="modal">Actualizar</button>
+          <div class="modal-body">
+            <form >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <label for="nombre">Clave Vieja</label>
+                        <input type="password" [(ngModel)]="usuario.clave" class="form-control"   name="nombre" id="nombre" placeholder="" >
 
                       </div>
                     </div>
                   </div>
-                </form>
-              </div><!-- cierre del cuerpo modal -->
-            </div>
-          </div>
-        </div> <!-- Finall Modal -->
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <label for="nombre">Repetir la nueva contraseña </label>
+                        <input type="password" [(ngModel)]="auxUsuario.nuevaClave" class="form-control"   name="nombre" id="nombre" placeholder="" >
 
-        <br>
+                      </div>
+                    </div>
+                  </div>
+
+                  <br>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success" (click)="CambioDeClave()" data-dismiss="modal">Actualizar</button>
+
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
-    </div>
+    </div> 
+
+    <br>
+  </div>
+</div> -->
+<p class="bg-success">Perfil</p>

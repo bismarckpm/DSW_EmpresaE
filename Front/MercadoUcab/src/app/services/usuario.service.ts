@@ -11,11 +11,11 @@ import {Usuario} from '../models/usuario';
 })
 export class UsuarioService {
 
-    usuario:any;
+    usuario: any;
 
   apiurl = 'http://localhost:3000';
-  //apiurl = 'http://localhost:8080/servicio-1.0-SNAPSHOT/api';
-  
+  // apiurl = 'http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+
 
   constructor(private http: HttpClient,
     ) { }
@@ -28,12 +28,19 @@ export class UsuarioService {
 
 ///////// Metodos para ejecutar//////////////
   getUsuarios(): Observable<Usuario[]>{
-    return this.http.get<Usuario[]>(this.apiurl + '/usuario/empleados')
+    return this.http.get<Usuario[]>(this.apiurl + '/usuario')
       .pipe(
         retry(1),
         catchError(this.handleError)
       );
   }
+  // getUsuarios(): Observable<Usuario[]>{
+  //   return this.http.get<Usuario[]>(this.apiurl + '/usuario/empleados')
+  //     .pipe(
+  //       retry(1),
+  //       catchError(this.handleError)
+  //     );
+  // }
 
   getUsuario(id): Observable<Usuario[]>{
     return this.http.get<Usuario[]>(this.apiurl + '/usuario/' + id)
@@ -60,38 +67,38 @@ export class UsuarioService {
   }
 
   deleteUsuario(id){
-    return this.http.delete<Usuario[]>(this.apiurl + '/usuario/' + id, this.httpOptions)
+    return this.http.delete<Usuario[]>(this.apiurl + '/usuario/' + id, this.httpOptions);
   }
 
   Logear(usuario): Observable<Usuario[]>{
 
-     return  this.http.post<Usuario[]>(this.apiurl+'/login',JSON.stringify(usuario),this.httpOptions)
+     return  this.http.post<Usuario[]>(this.apiurl + '/login', JSON.stringify(usuario), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
-  
-      )
+
+      );
 
   }
 
   cambiarclave( usuario){
 
-    return  this.http.post<Usuario[]>(this.apiurl+'/login/cambiarClave',JSON.stringify(usuario),this.httpOptions)
+    return  this.http.post<Usuario[]>(this.apiurl + '/login/cambiarClave', JSON.stringify(usuario), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
 
-      )
+      );
   }
 
   recuperarclave( usuario){
 
-    return  this.http.post<Usuario[]>(this.apiurl+'/login/recuperarClave',JSON.stringify(usuario),this.httpOptions)
+    return  this.http.post<Usuario[]>(this.apiurl + '/login/recuperarClave', JSON.stringify(usuario), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
 
-      )
+      );
   }
 
 
@@ -102,7 +109,7 @@ export class UsuarioService {
 ///////////////////// Error HandleError
 handleError(error) {
   let errorMessage = '';
-  if(error.error instanceof ErrorEvent) {
+  if (error.error instanceof ErrorEvent) {
     // Get client-side error
     errorMessage = error.error.message;
   } else {

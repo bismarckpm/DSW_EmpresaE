@@ -9,43 +9,44 @@ import { catchError, retry } from 'rxjs/operators';
 })
 export class SubcategoriaService {
    //Definimos el url del api
-   apiurl='http://localhost:3000';
-   
+  apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+  //apiurl = 'http://localhost:3000';
+
   constructor(private http:HttpClient) { }
 // Http Options
   httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
   })
-} 
+}
 
 ///////// Metodos para ejecutar//////////////
-getsubcategorias():Observable<Subcategoria>{
-  return this.http.get<Subcategoria>(this.apiurl+'/subcategoria')
+getsubcategorias():Observable<Subcategoria[]>{
+  return this.http.get<Subcategoria[]>(this.apiurl+'/subcategoria')
   .pipe(
     retry(1),
     catchError(this.handleError)
   )
 }
 
-getsubcategoria(id):Observable<Subcategoria>{
-  return this.http.get<Subcategoria>(this.apiurl+'/subcategoria/'+id)
+getsubcategoria(id):Observable<Subcategoria[]>{
+  return this.http.get<Subcategoria[]>(this.apiurl+'/subcategoria/'+id)
   .pipe(
     retry(1),
     catchError(this.handleError)
   )
 }
 
-createsubcategoria(subcategoria):Observable<Subcategoria>{
-  return this.http.post<Subcategoria>(this.apiurl+'/subcategoria',JSON.stringify(subcategoria), this.httpOptions)
+createsubcategoria(subcategoria):Observable<Subcategoria[]>{
+  return this.http.post<Subcategoria[]>(this.apiurl+'/subcategoria',JSON.stringify(subcategoria), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
   )
 }
 
-updatesubcategoria(id,subcategoria):Observable<Subcategoria>{
-  return this.http.put<Subcategoria>(this.apiurl+'/subcategoria/'+id,JSON.stringify(subcategoria), this.httpOptions)
+updatesubcategoria(id,subcategoria):Observable<Subcategoria[]>{
+  return this.http.put<Subcategoria[]>(this.apiurl+'/subcategoria/'+id,JSON.stringify(subcategoria), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -53,7 +54,7 @@ updatesubcategoria(id,subcategoria):Observable<Subcategoria>{
 }
 
 deletesubcategoria(id){
-  return this.http.delete<Subcategoria>(this.apiurl + '/subcategoria/' + id, this.httpOptions)
+  return this.http.delete<Subcategoria[]>(this.apiurl + '/subcategoria/' + id, this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)

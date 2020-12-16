@@ -10,9 +10,16 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>dtos</groupId>
     <artifactId>dtos</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>ucab.empresae</groupId>
+            <artifactId>excepciones</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
     
 </project>

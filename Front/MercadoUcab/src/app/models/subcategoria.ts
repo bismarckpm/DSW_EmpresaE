@@ -1,7 +1,15 @@
-export interface Subcategoria {
-    id: number;
+import { Categoria } from './categoria';
+
+
+export class Subcategoria {
+    _id: number;
     nombre:string;
-    estatus:string;
-    id_categoria:number;
+    estado:string;
+    categoria: Categoria;
 
 }
+
+
+
+
+

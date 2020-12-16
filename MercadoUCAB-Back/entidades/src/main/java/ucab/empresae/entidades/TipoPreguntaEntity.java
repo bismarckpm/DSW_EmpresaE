@@ -8,7 +8,17 @@ import java.util.List;
 public class TipoPreguntaEntity extends BaseEntity{
     private String estado;
     private String tipo;
-    private List<PreguntaEntity> preguntas;
+    //private List<PreguntaEntity> preguntas;
+
+    public TipoPreguntaEntity( long id )
+    {
+        super( id );
+    }
+
+    public TipoPreguntaEntity( )
+    {
+
+    }
 
     @Basic
     @Column(name = "estado")
@@ -30,6 +40,7 @@ public class TipoPreguntaEntity extends BaseEntity{
         this.tipo = tipo;
     }
 
+    /*
     @OneToMany(mappedBy = "tipo")
     public List<PreguntaEntity> getPreguntas() {
         return preguntas;
@@ -38,4 +49,5 @@ public class TipoPreguntaEntity extends BaseEntity{
     public void setPreguntas(List<PreguntaEntity> preguntas) {
         this.preguntas = preguntas;
     }
+     */
 }

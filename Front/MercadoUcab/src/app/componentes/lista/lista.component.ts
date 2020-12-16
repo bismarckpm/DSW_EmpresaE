@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from 'src/app/models/usuario';
-import { UsuarioService } from 'src/app/services/usuario.service';
+import { EncuestadoService } from 'src/app/services/encuestado.service';
+import {Encuestado} from '../../models/encuestado';
 
 @Component({
   selector: 'app-lista',
@@ -9,11 +9,11 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class ListaComponent implements OnInit {
 
-  usuarios: Usuario[] = [];
+  encuestados: Encuestado[] = [];
 
   // tslint:disable-next-line: variable-name
-  constructor(private _servicio: UsuarioService) {
-    this.usuarios = this._servicio.getUsuarios();
+  constructor(private _servicio: EncuestadoService) {
+    //this.usuarios = this._servicio.getUsuarios();
   }
 
   ngOnInit(): void {

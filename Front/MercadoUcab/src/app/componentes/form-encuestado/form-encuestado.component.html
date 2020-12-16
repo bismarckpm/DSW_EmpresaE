@@ -1,0 +1,87 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">Encuestado</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <form [formGroup]="formEncuestado">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="primerNombre">Primer nombre</label>
+            <input type="text" class="form-control" id="primerNombre" placeholder="" formControlName="primerNombreEncuestado" value="">
+            <div *ngIf="primerNombreEncuestado.invalid && (primerNombreEncuestado.dirty || primerNombreEncuestado.touched)" class="alert alert-danger">
+              <div *ngIf="primerNombreEncuestado.errors.required">
+                Este campo es obligatorio
+              </div>
+              <div *ngIf="primerNombreEncuestado.errors.pattern">
+                Introduzca un nombre valido
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="segundoNombre">Segundo nombre</label>
+            <input type="text" class="form-control" id="segundoNombre" placeholder="" formControlName="segundoNombreEncuestado" value="">
+            <div *ngIf="segundoNombreEncuestado.invalid && (segundoNombreEncuestado.dirty || segundoNombreEncuestado.touched)" class="alert alert-danger">
+              <div *ngIf="segundoNombreEncuestado.errors.required">
+                Este campo es obligatorio
+              </div>
+              <div *ngIf="segundoNombreEncuestado.errors.pattern">
+                Introduzca un nombre valido
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="primerApellido">Primer apellido</label>
+            <input type="text" class="form-control" id="primerApellido" placeholder="" formControlName="primerApellidoEncuestado" value="">
+            <div *ngIf="primerApellidoEncuestado.invalid && (primerApellidoEncuestado.dirty || primerApellidoEncuestado.touched)" class="alert alert-danger">
+              <div *ngIf="primerApellidoEncuestado.errors.required">
+                Este campo es obligatorio
+              </div>
+              <div *ngIf="primerApellidoEncuestado.errors.pattern">
+                Introduzca un nombre valido
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="segundoApellido">Segundo apellido</label>
+            <input type="text" class="form-control" id="segundoApellido" placeholder="" formControlName="segundoApellidoEncuestado" value="">
+            <div *ngIf="segundoApellidoEncuestado.invalid && (segundoApellidoEncuestado.dirty || segundoApellidoEncuestado.touched)" class="alert alert-danger">
+              <div *ngIf="segundoApellidoEncuestado.errors.required">
+                Este campo es obligatorio
+              </div>
+              <div *ngIf="segundoApellidoEncuestado.errors.pattern">
+                No se permiten caracteres especiales
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5 mb-3">
+            <label for="estado">Estado</label>
+            <select class="custom-select d-block w-100" formControlName="estadoEncuestado" id="estado">
+              <option value="">Choose...</option>
+              <option>Activo</option>
+              <option>Inactivo</option>
+            </select>
+            <div *ngIf="estadoEncuestado.invalid && (estadoEncuestado.dirty || estadoEncuestado.touched)" class="alert alert-danger">
+              <div *ngIf="estadoEncuestado.errors.required">
+                Este campo es obligatorio
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      <button type="submit" class="btn btn-primary" (click)="onSubmit()" data-dismiss="modal">Guardar</button>
+    </div>
+  </div>
+</div>

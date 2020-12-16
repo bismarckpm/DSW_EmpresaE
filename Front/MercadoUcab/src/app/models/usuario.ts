@@ -1,11 +1,21 @@
-export interface Usuario {
+import {TipoUsuario} from './tipo-usuario';
 
-      id: number;
-      nombre: string;
-      nombre2: string;
-      apellido: string;
-      apellido2: string;
+
+export  class Usuario {
+
+      _id: number;
+      username: string;
+      clave: string;
+      correoElectronico: string;
       estado: string;
-      fechaNacimiento: string;
-
+      tipoUsuario: TipoUsuario;
+      autenticacion:string;
+      rol :string;
+      respuesta:string;
+      nuevaClave:string;
  }
+
+
+
+
+

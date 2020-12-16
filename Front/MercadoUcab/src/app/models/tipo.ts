@@ -1,5 +1,5 @@
-export interface Tipo {
-  id?: number;
+export class Tipo {
+  _id: number;
   nombre: string;
   estado: string;
   descripcion: string;

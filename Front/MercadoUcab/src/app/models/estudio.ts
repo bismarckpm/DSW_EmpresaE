@@ -1,9 +1,20 @@
-export interface Estudio {
-    id: number;
+
+import { Lugar } from './Lugar';
+import { NivelSocioEconomico } from './nivel-socio-economico';
+import { Subcategoria } from './subcategoria';
+
+export class Estudio {
+    _id: number;
     estado: string;
     nombre: string;
-    edadMin: number;
-    edadMax: number;
-    fechaI: string;
-    fechaF: string;
-  }
+    comentarioAnalista ?: string;
+    edadMinima: number;
+    edadMaxima: number;
+    fechaInicio: string;
+    fechaFin: string;
+    lugar: Lugar;
+    nivelSocioEconomico: NivelSocioEconomico;
+    subcategoria: Subcategoria;
+}
+
+

@@ -1,5 +1,5 @@
-export interface Categoria {
-    id: number;
-    nombre:string;
-    estatus:string;
+export class Categoria {
+    _id: number;
+    nombre: string;
+    estado: string;
 }

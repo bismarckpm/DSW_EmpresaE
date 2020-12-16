@@ -4,14 +4,15 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "telefono", schema = "mercadeoucab")
+@NamedQueries({
+        @NamedQuery(name = "getTelefonoByCliente", query = "select t from TelefonoEntity t where t.cliente = :cliente"),
+        @NamedQuery(name = "getTelefonoByEncuestado", query = "select t from TelefonoEntity t where t.encuestado = :encuestado")
+})
 public class TelefonoEntity extends BaseEntity{
-    private String estado;
-    private int numero;
-    private EncuestadoEntity encuestado;
-    private ClienteEntity cliente;
 
     @Basic
     @Column(name = "estado")
+    private String estado;
     public String getEstado() {
         return estado;
     }
@@ -22,16 +23,18 @@ public class TelefonoEntity extends BaseEntity{
 
     @Basic
     @Column(name = "numero")
-    public int getNumero() {
+    private String numero;
+    public String  getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
     @ManyToOne
     @JoinColumn(name = "id_encuestado", referencedColumnName = "id")
+    private EncuestadoEntity encuestado;
     public EncuestadoEntity getEncuestado() {
         return encuestado;
     }
@@ -42,6 +45,7 @@ public class TelefonoEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
+    private ClienteEntity cliente;
     public ClienteEntity getCliente() {
         return cliente;
     }

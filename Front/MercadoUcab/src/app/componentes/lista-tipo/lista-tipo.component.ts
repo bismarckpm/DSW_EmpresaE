@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Tipo} from '../../models/tipo';
 import {TipoService} from '../../services/tipo.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-lista-tipo',
@@ -9,23 +11,64 @@ import {TipoService} from '../../services/tipo.service';
 })
 export class ListaTipoComponent implements OnInit {
 
-  tipos: Tipo[] = [];
+  Tipo: Tipo[] = [];
+  _id = this.actRoute.snapshot.params._id;
+  @Input() tipoData = {_id: 0, nombre: '', estado: '', descripcion: ''};
+
+  formTipo: FormGroup;
+  patronNombreTipo: any = /^[A-Za-z0-9\s]+$/;
 
   // tslint:disable-next-line:variable-name
-  constructor(private _servicio: TipoService) {
-    this.tipos = this._servicio.getTipos();
-  }
+  constructor(
+    private formBuilder: FormBuilder,
+    public actRoute: ActivatedRoute,
+    public router: Router,
+    public tipoService: TipoService) {
+    this.createForm();  }
 
   ngOnInit(): void {
+    this.loadTipo();
   }
 
-  eliminar(){
-    console.log('eliminó elemento');
+  loadTipo(): void {
+    this.tipoService.getTipos().subscribe(data => {
+      this.Tipo = data;
+    });
   }
 
-  actualizar(){
-    console.log('actualizó elemento');
+  deleteTipo(id) {
+    this.tipoService.deleteTipo(id).subscribe(data => {
+      this.loadTipo();
+    });
   }
 
+  updateTipo(){
+    this.tipoService.updateTipo(this.tipoData._id, this.tipoData).subscribe(data => {
+    });
+  }
 
+  editar(tipo){
+    this.tipoData = tipo;
+  }
+
+  /// Validacion de Datos
+  get nombreTipo(){
+    return this.formTipo.get('nombreTipo');
+  }
+
+  get estadoTipo(){
+    return this.formTipo.get('estadoTipo');
+  }
+
+  get descripcionTipo(){
+    return this.formTipo.get('descripcionTipo');
+  }
+
+  createForm(){
+    this.formTipo = this.formBuilder.group({
+      nombreTipo: ['', [Validators.pattern(this.patronNombreTipo), Validators.required]],
+      estadoTipo: ['', Validators.required],
+      descripcionTipo: ['', [Validators.required, Validators.pattern(this.patronNombreTipo)]],
+    });
+  }
 }

@@ -1,0 +1,294 @@
+<div class="registro">
+  <div class="container">
+
+
+    <div *ngIf="admin == true">
+
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <h1> Perfil</h1>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label > Nombre del Administrador</label>
+          <input type="text" class="form-control" [(ngModel)]="Administrador.username" value="Administrador.username" readonly="readonly">
+        </div>
+        <div class="form-group col-md-6">
+          <label > Correo</label>
+          <input type="text" class="form-control" [(ngModel)]="Administrador.correoelectronico" value="Administrador.correoelectronico"  readonly="readonly">
+        </div>
+      </div>
+      <div class="form-group">
+        <label > Rol en nuestro sistema </label>
+        <input type="text" class="form-control"[(ngModel)]="Administrador.tipoUsuario.descripcion" value="Administrador.tipousuario.descripcion" readonly="readonly">
+      </div>
+
+
+      <div class="form-row">
+        <div class="form-group col-md-2">
+          <button type="button"  class=" btn btn-primary" data-toggle="modal"  data-target="#exampleModal" > Cambio de clave </button>
+        </div>
+      </div>
+   
+    </div> <!-- DIf del administradro-->
+
+
+
+    <div  *ngIf="cli == true">
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <h1> Perfil</h1>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label > Nombre del usuario</label>
+          <input type="text" class="form-control" [(ngModel)]="Cliente.usuario.username" value="Cliente.usuario.username" readonly="readonly">
+      
+        </div>
+        <div class="form-group col-md-6">
+          <label > Correo</label>
+          <input type="text" class="form-control" [(ngModel)]="Cliente.usuario.correoelectronico" value="Cliente.usuario.correoelectronico"  readonly="readonly">
+  
+        </div>
+      </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <button type="button"  class=" btn btn-primary" data-toggle="modal"  data-target="#exampleModal" > Cambio de clave </button>
+            </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-groip col-md-6">
+              <label > Razon Social</label>
+              <input type="text" class="form-control" [(ngModel)]="Cliente.razonSocial" value="Cliente.razonSocial" readonly="readonly">
+          </div>
+        </div>
+
+
+
+        <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for=""> Estado</label>
+                  <input type="text" class="form-control" [(ngModel)]="Cliente.lugar.nombre" value="Cliente.lugar.nombre" readonly="readonly">
+              </div>
+
+              <div class="form-group col-md-4">
+                <label for=""> Municipio </label>
+                <input type="text" class="form-control" [(ngModel)]="Cliente.lugar.lugar.nombre" value="Cliente.lugar.lugar.nombre" readonly="readonly">
+              </div>
+
+              <div class="form-group col-md-2">
+                <label for="inputZip">Parroquia </label>
+                <input type="text" class="form-control" [(ngModel)]="Cliente.lugar.lugar.lugar.nombre" value="Cliente.lugar.lugar.nombre" readonly="readonly">
+              </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="encue == true">
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <h1> Perfil.</h1>
+        </div>
+      </div>
+
+      <h3> Informacion de tu usuario </h3>
+        <div class="form-row">
+
+          <div class="form-group col-md-2">
+            <label for=""> Nombre del usuario </label>
+            <input type="text" class="form-control" [(ngModel)]="Encuestado.usuario.username" value="Encuestado.usuario.username" readonly="readonly">
+          </div>
+
+          <div class="form-group col-md-3">
+            <label > Correo</label>
+            <input type="text" class="form-control" [(ngModel)]="Encuestado.usuario.correoelectronico" value="Encuestado.usuario.correoelectronico"  readonly="readonly">
+          </div>
+
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-2">
+            <button type="button"  class="btn btn-primary" data-toggle="modal"  data-target="#exampleModal" > Cambio de clave </button>
+          </div>
+        </div>
+
+        <div>
+          <h3> <label > Informacion como Encuestado </label></h3>
+        </div>
+        <div class="form-row">
+
+          <div class="form-group col-md-2">
+            <label for=""> Primer nombre </label>
+            <input type="text" class="form-control" [(ngModel)]="Encuestado.primerNombre" value="Encuestado.primerNombre" readonly="readonly">
+          </div>
+          <div class="form-group col-md-2">
+            <label for="">Segundo Nombre </label>
+            <input type="text" class="form-control" [(ngModel)]="Encuestado.segundoNombre" value="Encuestado.segundoNombre" readonly="readonly">
+          </div>
+          <div class="form-group col-md-2">
+            <label for=""> Primer Apellido </label>
+            <input type="text" class="form-control" [(ngModel)]="Encuestado.primerApellido" value="Encuestado.primerApellido" readonly="readonly">
+          </div>
+          <div class="form-group col-md-2">
+            <label for="">Segundo Apellido </label>
+            <input type="text" class="form-control" [(ngModel)]="Encuestado.segundoApellido" value="Encuestado.segundoApellido" readonly="readonly">
+          </div>
+
+
+          <div class="form-row">
+
+            <div class="form-group col-md-4">
+              <label for=""> Fecha Nacimiento</label>
+              <input type="text" class="form-control" [(ngModel)]="Encuestado.fechaNacimiento" value="Encuestado.fechaNacimiento" readonly="readonly">
+
+            </div>
+            <div class="form-group col-md-4">
+              <label for=""> Estado civil </label>
+              <input type="text" class="form-control" [(ngModel)]="Encuestado.estadoCivil.nombre" value="Encuestado.estadoCivil.nombre" readonly="readonly">
+            </div>
+            <div class="form-group col-md-4">
+              <label for=""> Nivel Academico </label>
+              <input type="text" class="form-control" [(ngModel)]="Encuestado.nivelAcademico.nombre" value="Encuestado.nivelAcademico.nombre" readonly="readonly">
+
+            </div>
+
+          </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for=""> Medio de Conexion </label>
+                <input type="text" class="form-control" [(ngModel)]="Encuestado.medioConexion.nombre" value="Encuestado.medioConexion.nombre" readonly="readonly">
+
+              </div>
+              <div class="form-group col-md-4">
+                <label for=""> Ocupacion</label>
+                <input type="text" class="form-control" [(ngModel)]="Encuestado.ocupacion.nombre" value="Encuestado.ocupacion.nombre" readonly="readonly">
+
+              </div>
+              <div class="form-group col-md-4">
+                <label for=""> Nivee Socio economico</label>
+                <input type="text" class="form-control" [(ngModel)]="Encuestado.nivelSocioEconomico.nombre" value="Encuestado.nivelSocioEconomico.nombre" readonly="readonly">
+
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="">  Estado </label>
+                <input type="text" class="form-control" [(ngModel)]="Encuestado.lugar.nombre" value="Encuestado.lugar.nombre" readonly="readonly">
+
+              </div>
+              <div class="form-group col-md-4">
+
+                <label for="">  Municipio </label>
+                <input type="text" class="form-control" [(ngModel)]="Encuestado.lugar.lugar.nombre" value="Encuestado.lugar.lugar.nombre" readonly="readonly">
+
+              </div>
+              <div class="form-group col-md-4">
+                <label for=""> Parroquia</label>
+                <input type="text" class="form-control" [(ngModel)]="Encuestado.lugar.lugar.lugar.nombre" value="Encuestado.lugar.lugar.lugar.nombre" readonly="readonly">
+              </div>
+            </div>
+
+
+        </div>
+    </div>   
+
+
+
+<div *ngIf="analist == true">
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+          <h1> Perfil</h1>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label > Nombre del Analista</label>
+            <input type="text" [(ngModel)]="Analista.username" value="Analista.username" readonly="readonly">
+        </div>
+        <div class="form-group col-md-6">
+            <label>Correo</label>
+            <input type="text" [(ngModel)]="Analista.correoelectronico" value="Analista.correoelectronico"  readonly="readonly">
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label > Rol en nuestro sistema </label>
+      <input type="text" [(ngModel)]="Analista.tipoUsuario.descripcion" value="Analista.tipoUsuario.descripcion" readonly="readonly">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <button type="button"  class=" btn btn-primary" data-toggle="modal"  data-target="#exampleModal" > Cambio de clave </button>
+      </div>
+    </div>
+       
+
+</div>
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <!-- Cabezado Modal -->
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cambio de clave </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <!-- Cuerpo completo del Modal -->
+              <div class="modal-body">
+                <form >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-md-6 mb-3">
+                            <label for="nombre">Clave Vieja</label>
+                            <input type="password" [(ngModel)]="usuario.clave" class="form-control"   name="nombre" id="nombre" placeholder="" >
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-md-6 mb-3">
+                            <label for="nombre">Repetir la nueva contraseña </label>
+                            <input type="password" [(ngModel)]="auxUsuario.nuevaClave" class="form-control"   name="nombre" id="nombre" placeholder="" >
+
+                          </div>
+                        </div>
+                      </div>
+
+                      <br>
+                      <!-- Parte inferior del modal -->
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success" (click)="CambioDeClave()" data-dismiss="modal">Actualizar</button>
+
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div><!-- cierre del cuerpo modal -->
+            </div>
+          </div>
+        </div> <!-- Finall Modal -->
+
+        <br>
+      </div>
+    </div>

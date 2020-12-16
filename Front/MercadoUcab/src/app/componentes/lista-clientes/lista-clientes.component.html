@@ -1,45 +1,122 @@
 <div class="container mt-2">
-    <div class="table-responsive">
-      <table class="table table-striped table-sm bg-light">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Estado</th>
-            <th>Razón Social</th>
-            <th>R.I.F</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let cliente of clientes">
-            <th>{{ cliente.id }}</th>
-            <th>{{ cliente.estado }}</th>
-            <th>{{ cliente.razonSocial }}</th>
-            <th>{{ cliente.rif }}</th>
-            <td>
-              <div class="d-flex justify-content-around">
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#staticBackdropUpdate">
-                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
-                  </svg>
-                </button>
-                
-                <div class="modal fade" id="staticBackdropUpdate" data-backdrop="static" data-keyboard="false" tabindex="-1" 
-                  aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                  <app-edit-cliente></app-edit-cliente>
-                </div>
+  <div class="table-responsive">
+    <table class="table table-striped table-sm bg-light">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Razon Social</th>
+        <th>RIF</th>
+        <th>Username</th>
+        <th>Estado </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let cliente of Cliente " >
+        <td>{{ cliente._id }}</td>
+        <td>{{ cliente.razonSocial}}</td>
+        <td>{{ cliente.rif }}</td>
+        <td>{{ cliente.usuario.username }}</td>
+        <td>{{ cliente.estado }}</td>
+        <td>
+          <div class="d-flex justify-content-around">
+            <button type="button" class="btn btn-primary" data-toggle="modal" (click)="editar(cliente)" data-target="#exampleModal">
+              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+              </svg>
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <!-- Cabezado Modal -->
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Cliente </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <!-- Cuerpo completo del Modal -->
+                  <div class="modal-body">
+                    <form [formGroup]="formCliente">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="form-group">
+                            <div class="row">
+                              <div class="col-md-12 mb-3">
+                                <label for="razonSocial">Razon Social</label>
+                                <input type="text" readonly="readonly" class="form-control" [(ngModel)]="clienteData.razonSocial" id="razonSocial" formControlName="razonSocialCliente">
+                                <div *ngIf="razonSocialCliente.invalid && (razonSocialCliente.dirty || razonSocialCliente.touched)" class="alert alert-danger">
+                                  <div *ngIf="razonSocialCliente.errors.required">
+                                    Este campo es obligatorio
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
 
-               <button type="button" class="btn btn-danger btn-sm" (click)="eliminarCliente(cliente)">
-                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                  </svg>
-                </button>
+                          <div class="row">
+                            <div class="col-md-6 mb-3">
+                              <label for="rif">RIF</label>
+                              <input type="text" readonly="readonly" class="form-control" [(ngModel)]="clienteData.rif" id="rif" placeholder="" formControlName="rifCliente" value="" >
+                              <div *ngIf="rifCliente.invalid && (rifCliente.dirty || rifCliente.touched)" class="alert alert-danger">
+                                <div *ngIf="rifCliente.errors.required">
+                                  Este campo es obligatorio
+                                </div>
+                                <div *ngIf="rifCliente.errors.pattern">
+                                  Introduzca un formato valido
+                                </div>
+                              </div>
+                            </div>
+
+                              <div class="col-md-6 mb-3">
+                                <label for="user">Username</label>
+                                <input type="text" readonly="readonly" [(ngModel)]="clienteData.usuario.username" class="form-control"  formControlName="usernameCliente" name="username" id="user" placeholder="" >
+                                <div *ngIf="usernameCliente.invalid && (usernameCliente.dirty || usernameCliente.touched)" class="alert alert-danger">
+                                  <div *ngIf="usernameCliente.errors.required">
+                                    Este campo es obligatorio
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          <div class="row">
+                            <div class="col-md-4 mb-3">
+                              <label for="estatus"> Estado</label>
+                              <select class="custom-select d-block w-100" [(ngModel)]= "clienteData.estado" formControlName="estadoCliente" id="estatus" name="estado" >
+                                <option value="a">Activa</option>
+                                <option value="i">Inactiva</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div *ngIf="estadoCliente.invalid && (estadoCliente.dirty || estadoCliente.touched)" class="alert alert-danger">
+                            <div *ngIf="estadoCliente.errors.required">
+                              Este campo es obligatorio
+                            </div>
+                          </div>
+                          <br>
+                          <!-- Parte inferior del modal -->
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-success" (click)="updateCliente()" data-dismiss="modal">Actualizar</button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div><!-- cierre del cuerpo modal -->
+                </div>
               </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+            </div> <!-- Finall Modal -->
+            <button type="button" class="btn btn-danger btn-sm" (click)="deleteCliente(cliente._id)">
+              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+              </svg>
+            </button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
-  
+</div>
+
+

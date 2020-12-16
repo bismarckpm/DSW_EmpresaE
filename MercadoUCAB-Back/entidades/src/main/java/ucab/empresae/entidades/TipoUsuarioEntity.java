@@ -5,10 +5,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "tipo_usuario", schema = "mercadeoucab")
+@NamedQueries({
+        @NamedQuery(name = "getTipoUsuarioByDescripcion", query = "select t from TipoUsuarioEntity t where t.descripcion = :descripcion")
+})
 public class TipoUsuarioEntity extends BaseEntity{
     private String descripcion;
     private String estado;
-    private List<UsuarioEntity> usuarios;
+    //private List<UsuarioEntity> usuarios;
 
     @Basic
     @Column(name = "descripcion")
@@ -30,12 +33,12 @@ public class TipoUsuarioEntity extends BaseEntity{
         this.estado = estado;
     }
 
-    @OneToMany(mappedBy = "tipousuario")
+    /*@OneToMany(mappedBy = "tipousuario")
     public List<UsuarioEntity> getUsuarios() {
         return usuarios;
     }
 
     public void setUsuarios(List<UsuarioEntity> usuarios) {
         this.usuarios = usuarios;
-    }
+    }*/
 }

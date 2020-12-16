@@ -1,1 +1,32 @@
-<p>cambiar-clave works!</p>
+<form >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="nombre">Clave nueva</label>
+                <input type="password" [(ngModel)]="usuario.claveNueva" class="form-control"  formControlName="nombreMarca" name="nombre" id="nombre" placeholder="" >
+                  <
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="nombre">Repetir la nueva contraseña </label>
+                <input type="password" [(ngModel)]="auxUsuario.claveNueva" class="form-control"  formControlName="nombreMarca" name="nombre" id="nombre" placeholder="" >
+
+            </div>
+          </div>
+        </div>
+
+        <br>
+        <!-- Parte inferior del modal -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-success" (click)="CambioDeClave()" data-dismiss="modal">Actualizar</button>
+
+        </div>
+      </div>
+    </div>
+  </form>

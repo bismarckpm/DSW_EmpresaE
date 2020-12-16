@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   Loggearse(){
 
   ////////////////////////// Para el proyecto como tal //////////////////////////////////  
-  /* if (this.formLogin.valid) {
+   if (this.formLogin.valid) {
       this.usuarioService.Logear(this.usuario).subscribe( data  => {
         this.user=data
 
@@ -67,10 +67,10 @@ export class LoginComponent implements OnInit {
           window.alert("Usuario no registrado o Informacion Incorrecta");
         }
       });
-    }*/
+    }
     ////////////////////////////////Para trabajar en el front Unicamente////////////////
 
-    if (this.formLogin.valid) {
+    /*if (this.formLogin.valid) {
       this.usuarioService.getUsuarios().subscribe( data  => {
         console.log(data) ;
 
@@ -107,7 +107,7 @@ export class LoginComponent implements OnInit {
           window.alert("Usuario no registrado o Informacion Incorrecta");
         }
       });
-    }
+    }*/
       
 
   }

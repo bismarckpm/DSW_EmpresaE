@@ -42,7 +42,7 @@ export class PerfilComponent implements OnInit {
   patronCorreo: any = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   patronTelefonoEncuestado: any = /^[0-9\s]+$/;
 
-  
+
   constructor(
 
     public usuarioService: UsuarioService,
@@ -53,22 +53,22 @@ export class PerfilComponent implements OnInit {
     public actRoute: ActivatedRoute,
     public router: Router,
     private formBuilder: FormBuilder
-  ) {  
+  ) {
     this.createFormAdmin();
     this.createFormAnalista();
     this.createFormEncuestado();
-    this.createFormCliente();  
+    this.createFormCliente();
   }
 
 
   ngOnInit(): void {
 
     if ((JSON.parse(localStorage.getItem('rol') )) == 'Administrador'){
-        this.administradroService.getAdministradorDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data => {
-          this.Administrador= data;
-        })
-        console.log("++++++++++++++++++++++++++++++++++ADmin")
-        this.admin=true;
+      this.administradroService.getAdministradorDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data => {
+        this.Administrador= data;
+      })
+      console.log("++++++++++++++++++++++++++++++++++ADmin")
+      this.admin=true;
     }else if((JSON.parse(localStorage.getItem("rol") )) == "Cliente"){
       this.clienteService.getClienteDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data=>{
         this.Cliente=data;
@@ -83,13 +83,13 @@ export class PerfilComponent implements OnInit {
         console.log(this.Encuestado);
       });
 
-      this.encue=true;  
+      this.encue=true;
     }if((JSON.parse(localStorage.getItem("rol") )) == "Analista"){
-     this.analistaService.getAnalistaDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data =>{
-       this.Analista =data 
-     })
+      this.analistaService.getAnalistaDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data =>{
+        this.Analista =data
+      })
       console.log("loqueseas")
-     this.analist=true;
+      this.analist=true;
     }else{
       console.log("NOOOOOOOOOOOOOOOOOOOOOOOOOOO ENTREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE MALDITA SEAAAAAAAAAAAAAAAAAAAA")
     }
@@ -100,13 +100,13 @@ export class PerfilComponent implements OnInit {
   CambioDeClave(){
     this.HacerUsuario();
     this.usuarioService.cambiarclave(this.usuario).subscribe(data => {
-        this.aux = data;
-        console.log(this.usuario);
-        if (this.aux.Respuesta == 'Cambio Satisfactorio'){
-          window.alert('Cambio Realizado');
-        }else{
-          window.alert(' Algo fallo y no soy yo ');
-        }
+      this.aux = data;
+      console.log(this.usuario);
+      if (this.aux.Respuesta == 'Cambio Satisfactorio'){
+        window.alert('Cambio Realizado');
+      }else{
+        window.alert(' Algo fallo y no soy yo ');
+      }
     });
 
 
@@ -118,32 +118,32 @@ export class PerfilComponent implements OnInit {
     this.usuario._id = parseInt(localStorage.getItem('usuarioID'));
     this.usuario.nuevaClave = this.auxUsuario.nuevaClave;
     console.log(this.usuario);
-}
+  }
 
 
-GuardarPerfil(){
+  GuardarPerfil(){
 
     if(this.formAdmin.valid || this.formAnalista.valid|| this.formCliente.valid|| this.formEncuestado.valid ){
 
-           if((JSON.parse(localStorage.getItem("rol") )) == "Administrador"){
-                this.administradroService.updateAdministrador(this.Administrador._id,this.Administrador)
-            }
-        
-            if((JSON.parse(localStorage.getItem("rol") )) == "Cliente"){
-              this.clienteService.updateCliente(this.Cliente._id,this.Cliente);
-            }
-        
-            if((JSON.parse(localStorage.getItem("rol") )) == "Encuestado"){
-              console.log("ENTRO EN LA LLAMADA");
-              this.encuestadoservice.updateEncuestado(this.Encuestado._id,this.Encuestado)  
-            }
-        
-            if((JSON.parse(localStorage.getItem("rol") )) == "Analista"){
-             this.analistaService.updateAnalista(this.Analista._id,this.Analista)
-            }
-        
+      if((JSON.parse(localStorage.getItem("rol") )) == "Administrador"){
+        this.administradroService.updateAdministrador(this.Administrador._id,this.Administrador)
+      }
+
+      if((JSON.parse(localStorage.getItem("rol") )) == "Cliente"){
+        this.clienteService.updateCliente(this.Cliente._id,this.Cliente);
+      }
+
+      if((JSON.parse(localStorage.getItem("rol") )) == "Encuestado"){
+        console.log("ENTRO EN LA LLAMADA");
+        this.encuestadoservice.updateEncuestado(this.Encuestado._id,this.Encuestado)
+      }
+
+      if((JSON.parse(localStorage.getItem("rol") )) == "Analista"){
+        this.analistaService.updateAnalista(this.Analista._id,this.Analista)
+      }
+
     }
-      
+
   }
 
 
@@ -154,82 +154,83 @@ GuardarPerfil(){
 
 //Validaciones de encuestado
 
-get primerNombreEncuestado(){return this.formEncuestado.get('primerNombreEncuestado'); }
-get segundoNombreEncuestado(){return this.formEncuestado.get('segundoNombreEncuestado'); }
-get primerApellidoEncuestado(){return this.formEncuestado.get('primerApellidoEncuestado'); }
-get segundoApellidoEncuestado(){return this.formEncuestado.get('segundoApellidoEncuestado'); }
-get fechaNacimientoEncuestado(){return this.formEncuestado.get('fechaNacimientoEncuestado'); }
-get estadoEncuestado(){return this.formEncuestado.get('estadoEncuestado'); }
-get estadoCivilEncuestado(){return this.formEncuestado.get('estadoCivilEncuestado'); }
-get nivelAcademicoEncuestado(){return this.formEncuestado.get('nivelAcademicoEncuestado'); }
-get medioConexionEncuestado(){return this.formEncuestado.get('medioConexionEncuestado'); }
-get generoEncuestado(){return this.formEncuestado.get('generoEncuestado'); }
-get ocupacionEncuestado(){return this.formEncuestado.get('ocupacionEncuestado'); }
-get nivelSocioEconomicoEncuestado(){ return this.formEncuestado.get('nivelSocioEconomicoEncuestado'); }
-get telefonoEncuestado(){ return this.formEncuestado.get('telefonoEncuestado'); }
-get fechaNacimientoHijoEncuestado(){ return this.formEncuestado.get('fechaNacimientoHijoEncuestaod'); }
-get generoHijoEncuestado(){ return this.formEncuestado.get('generoHijoEncuestado'); }
-get lugarEncuestado(){return this.formEncuestado.get('lugarEncuestado'); }
-get usuarioEncuestado(){return this.formEncuestado.get('usuarioEncuestado'); }
-get usernameEncuestado(){return this.formEncuestado.get('usernameEncuestado'); }
-get claveEncuestado(){return this.formEncuestado.get('claveEncuestado'); }
-get correoElectronicoEncuestado(){return this.formEncuestado.get('correoElectronicoEncuestado'); }
-get correoElectronicoAnalista(){return this.formEncuestado.get('correoElectronicoAnalista'); }
-get correoElectronicoCliente(){return this.formEncuestado.get('correoElectronicoCliente'); }
-get correoElectronicoAdmin(){return this.formEncuestado.get('correoElectronicoAdmin'); }
+  get primerNombreEncuestado(){return this.formEncuestado.get('primerNombreEncuestado'); }
+  get segundoNombreEncuestado(){return this.formEncuestado.get('segundoNombreEncuestado'); }
+  get primerApellidoEncuestado(){return this.formEncuestado.get('primerApellidoEncuestado'); }
+  get segundoApellidoEncuestado(){return this.formEncuestado.get('segundoApellidoEncuestado'); }
+  get fechaNacimientoEncuestado(){return this.formEncuestado.get('fechaNacimientoEncuestado'); }
+  get estadoEncuestado(){return this.formEncuestado.get('estadoEncuestado'); }
+  get estadoCivilEncuestado(){return this.formEncuestado.get('estadoCivilEncuestado'); }
+  get nivelAcademicoEncuestado(){return this.formEncuestado.get('nivelAcademicoEncuestado'); }
+  get medioConexionEncuestado(){return this.formEncuestado.get('medioConexionEncuestado'); }
+  get generoEncuestado(){return this.formEncuestado.get('generoEncuestado'); }
+  get ocupacionEncuestado(){return this.formEncuestado.get('ocupacionEncuestado'); }
+  get nivelSocioEconomicoEncuestado(){ return this.formEncuestado.get('nivelSocioEconomicoEncuestado'); }
+  get telefonoEncuestado(){ return this.formEncuestado.get('telefonoEncuestado'); }
+  get fechaNacimientoHijoEncuestado(){ return this.formEncuestado.get('fechaNacimientoHijoEncuestaod'); }
+  get generoHijoEncuestado(){ return this.formEncuestado.get('generoHijoEncuestado'); }
+  get lugarEncuestado(){return this.formEncuestado.get('lugarEncuestado'); }
+  get usuarioEncuestado(){return this.formEncuestado.get('usuarioEncuestado'); }
+  get usernameEncuestado(){return this.formEncuestado.get('usernameEncuestado'); }
+  get claveEncuestado(){return this.formEncuestado.get('claveEncuestado'); }
+  get correoElectronicoEncuestado(){return this.formEncuestado.get('correoElectronicoEncuestado'); }
+  get correoElectronicoAnalista(){return this.formEncuestado.get('correoElectronicoAnalista'); }
+  get correoElectronicoCliente(){return this.formEncuestado.get('correoElectronicoCliente'); }
+  get correoElectronicoAdmin(){return this.formEncuestado.get('correoElectronicoAdmin'); }
 
 
 
 
- createFormAdmin(): void {
-  this.formAdmin = this.formBuilder.group({
-    correoElectronicoAdmin: ['', [Validators.required, Validators.pattern(this.patronCorreo)]],
+  createFormAdmin(): void {
+    this.formAdmin = this.formBuilder.group({
+      correoElectronicoAdmin: ['', [Validators.required, Validators.pattern(this.patronCorreo)]],
 
-  });
+    });
+  }
+
+  createFormCliente(): void {
+    this.formCliente = this.formBuilder.group({
+      correoElectronicoCliente: ['', [Validators.required, Validators.pattern(this.patronCorreo)]],
+
+    });
+  }
+
+  createFormAnalista(): void {
+    this.formCliente = this.formBuilder.group({
+      correoElectronicoAnalista: ['', [Validators.required, Validators.pattern(this.patronCorreo)]],
+
+    });
+  }
+
+  createFormEncuestado(): void {
+    this.formCliente = this.formBuilder.group({
+      primerNombreEncuestado: ['', [Validators.required, Validators.pattern(this.patrontexto)]],
+      segundoNombreEncuestado: ['', [Validators.required, Validators.pattern(this.patrontexto)]],
+      primerApellidoEncuestado: ['', [Validators.required, Validators.pattern(this.patrontexto)]],
+      segundoApellidoEncuestado: ['', [Validators.required, Validators.pattern(this.patrontexto)]],
+      estadoEncuestado: ['', Validators.required],
+      fechaNacimientoEncuestado: ['', [Validators.required, Validators.pattern(this.patronFecha)]],
+      lugarEncuestado: ['', Validators.required],
+      estadoCivilEncuestado: ['', Validators.required],
+      nivelAcademicoEncuestado: ['', Validators.required],
+      medioConexionEncuestado: ['', Validators.required],
+      generoEncuestado: ['', Validators.required],
+      ocupacionEncuestado: ['', Validators.required],
+      nivelSocioEconomicoEncuestado: ['', Validators.required],
+      fechaNacimientoHijoEncuestado: ['', [Validators.required, Validators.pattern(this.patronFecha)]],
+      generoHijoEncuestado: ['', Validators.required],
+      telefonoEncuestado: ['', [Validators.required, Validators.pattern(this.patronTelefonoEncuestado), Validators.maxLength(11)]],
+      usuarioEncuestado: ['', Validators.required],
+      correoElectronicoEncuestado: ['', [Validators.required, Validators.pattern(this.patronCorreo)]],
+
+
+    });
+  }
+
+
+
+
+
+
 }
 
-createFormCliente(): void {
-  this.formCliente = this.formBuilder.group({
-    correoElectronicoCliente: ['', [Validators.required, Validators.pattern(this.patronCorreo)]],
-  
-  });
-}
-
-createFormAnalista(): void {
-  this.formCliente = this.formBuilder.group({
-    correoElectronicoAnalista: ['', [Validators.required, Validators.pattern(this.patronCorreo)]],
-
-  });
-}
-
-createFormEncuestado(): void {
-  this.formCliente = this.formBuilder.group({
-    primerNombreEncuestado: ['', [Validators.required, Validators.pattern(this.patrontexto)]],
-    segundoNombreEncuestado: ['', [Validators.required, Validators.pattern(this.patrontexto)]],
-    primerApellidoEncuestado: ['', [Validators.required, Validators.pattern(this.patrontexto)]],
-    segundoApellidoEncuestado: ['', [Validators.required, Validators.pattern(this.patrontexto)]],
-    estadoEncuestado: ['', Validators.required],
-    fechaNacimientoEncuestado: ['', [Validators.required, Validators.pattern(this.patronFecha)]],
-    lugarEncuestado: ['', Validators.required],
-    estadoCivilEncuestado: ['', Validators.required],
-    nivelAcademicoEncuestado: ['', Validators.required],
-    medioConexionEncuestado: ['', Validators.required],
-    generoEncuestado: ['', Validators.required],
-    ocupacionEncuestado: ['', Validators.required],
-    nivelSocioEconomicoEncuestado: ['', Validators.required],
-    fechaNacimientoHijoEncuestado: ['', [Validators.required, Validators.pattern(this.patronFecha)]],
-    generoHijoEncuestado: ['', Validators.required],
-    telefonoEncuestado: ['', [Validators.required, Validators.pattern(this.patronTelefonoEncuestado), Validators.maxLength(11)]],
-    usuarioEncuestado: ['', Validators.required],
-    correoElectronicoEncuestado: ['', [Validators.required, Validators.pattern(this.patronCorreo)]],
-  
-
-  });
-}
-
-
-
-
-
-
-}

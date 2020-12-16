@@ -5,6 +5,7 @@ import { Estudio } from 'src/app/models/estudio';
 import { Lugar } from 'src/app/models/Lugar';
 import { NivelSocioEconomico } from 'src/app/models/nivel-socio-economico';
 import { Subcategoria } from 'src/app/models/subcategoria';
+import { AnalistaService } from 'src/app/services/analista.service';
 import { EstudioService } from 'src/app/services/estudio.service';
 import { LugarService } from 'src/app/services/lugar.service';
 import { NivelSocioEconomicoService } from 'src/app/services/nivel-socio-economico.service';
@@ -25,11 +26,12 @@ export class ListaEstudiosComponent implements OnInit {
              lugar : {_id: 0, estado: '', nombre: '', tipo: '', lugar : {_id: 0, estado: '', nombre: '', tipo: '', lugar : {_id: 0, estado: '', nombre: '', tipo: '',}}},
              nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
              subcategoria : {_id: 0, nombre: '', estado: ''},
+             analista:{_id:0}
             };
   // Declaracion para los dropdown
   nivelSocioEconomico: any;
   subcategoria: any;
-
+analistas:any;
 
   ///// Atributos para la busqueda de acuerdo a lo seleccionado
   lugar: any;
@@ -52,6 +54,7 @@ export class ListaEstudiosComponent implements OnInit {
     public subcategoriaService: SubcategoriaService,
     public lugarService: LugarService,
     public nivelsocioeconomicoService: NivelSocioEconomicoService,
+    public analistaService:AnalistaService,
     public actRoute: ActivatedRoute,
     public router: Router,
     private formBuilder: FormBuilder
@@ -88,7 +91,14 @@ export class ListaEstudiosComponent implements OnInit {
   this.addSubcategoria();
   this.addLugar();
   this.addNivelSocioEconomico();
+  this.addAnalistas();
   this.estudioData = estudio;
+ 
+}
+addAnalistas(){
+  this.analistaService.getAnalistas().subscribe( data =>{
+    this.analistas=data;
+  })
 }
 
 /// Busqueda para los drop de lugar por pais seleccionado previamente
@@ -163,11 +173,9 @@ seleccionarParroquia(id){
       edadMinimaEstudio: ['', [Validators.required, Validators.maxLength(2), Validators.pattern(this.patronEdadEstudio)]],
       edadMaximaEstudio: ['', [Validators.required, Validators.maxLength(2), Validators.pattern(this.patronEdadEstudio)]],
       comentarioAnalistaEstudio: ['', Validators.pattern(this.patronNombreEstudio)],
-      lugarEstudio: ['', [Validators.required]],
       subcategoriaEstudio: ['', [Validators.required]],
       nivelEstudio: ['', [Validators.required]],
 
     });
   }
 }
-

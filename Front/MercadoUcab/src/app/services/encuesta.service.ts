@@ -21,7 +21,7 @@ export class EncuestaService {
     })
   };
 
-  
+
 
   ///////// Metodos para ejecutar//////////////
   getEncuestas(): Observable<Encuesta[]>{
@@ -38,6 +38,14 @@ export class EncuestaService {
       retry(1),
       catchError(this.handleError)
     );
+  }
+
+  getEncuestaEstudio(id): Observable<Encuesta[]>{
+    return this.http.get<Encuesta[]>(this.apiurl + 'encuesta' + id)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
   }
 
   createEncuesta(Encuesta): Observable<Encuesta[]>{

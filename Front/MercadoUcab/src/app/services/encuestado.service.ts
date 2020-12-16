@@ -13,7 +13,7 @@ export class EncuestadoService {
   secciones: string[] = [
     'Inicio',
     'Perfil',
-    'Encuestas',
+    'Estudios',
 
   ];
 

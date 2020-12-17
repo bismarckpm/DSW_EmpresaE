@@ -57,7 +57,7 @@ export class EstudioService {
   }
 
   getDataMuestra(id): Observable<Encuestado[]>{
-    return this.http.get<Encuestado[]>(this.apiurl + '/estudio/' + id)
+    return this.http.get<Encuestado[]>(this.apiurl + '/estudio/dataMuestra/' + id)
       .pipe(
         retry(1),
         catchError(this.handleError)

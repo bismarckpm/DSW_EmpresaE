@@ -45,9 +45,7 @@ public class EncuestadoServicio {
         encuestadoEntity.setSegundoNombre(dtoEncuestado.getSegundoNombre());
         encuestadoEntity.setPrimerApellido(dtoEncuestado.getPrimerApellido());
         encuestadoEntity.setSegundoApellido(dtoEncuestado.getSegundoApellido());
-        SimpleDateFormat fecha = new SimpleDateFormat("dd/mm/yyyy");
-        Date fechaNacimiento = fecha.parse(dtoEncuestado.getFechaNacimiento());
-        encuestadoEntity.setFechaNacimiento(fechaNacimiento);
+        encuestadoEntity.setFechaNacimiento(dtoEncuestado.getFechaNacimiento());
         encuestadoEntity.setEstado(dtoEncuestado.getEstado());
 
         EstadoCivilEntity estadoCivilEntity = daoEstadoCivil.find(dtoEncuestado.getEstadoCivil().get_id(), EstadoCivilEntity.class);
@@ -125,8 +123,7 @@ public class EncuestadoServicio {
             dtoEncuestado.setSegundoNombre(encuestadoEntity.getSegundoNombre());
             dtoEncuestado.setPrimerApellido(encuestadoEntity.getPrimerApellido());
             dtoEncuestado.setSegundoApellido(encuestadoEntity.getSegundoApellido());
-            DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
-            dtoEncuestado.setFechaNacimiento(dateFormat.format(encuestadoEntity.getFechaNacimiento()));
+            dtoEncuestado.setFechaNacimiento(encuestadoEntity.getFechaNacimiento());
 
             DtoEstadoCivil dtoEstadoCivil = new DtoEstadoCivil();
             dtoEstadoCivil.set_id(encuestadoEntity.getEstadoCivil().get_id());

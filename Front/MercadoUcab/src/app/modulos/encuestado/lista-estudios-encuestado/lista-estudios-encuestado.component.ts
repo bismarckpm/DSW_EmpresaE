@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Estudio} from '../../../models/estudio';
 import {EncuestaService} from '../../../services/encuesta.service';
 import {Encuesta} from '../../../models/encuesta';
+import { PreguntaService } from 'src/app/services/pregunta.service';
 
 @Component({
   selector: 'app-lista-estudios-encuestado',
@@ -15,6 +16,8 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
 
   estudios: Estudio[] = [];
   encuestas: Encuesta[] = [];
+  preguntasEncuesta: any = [];
+  opciones: any = [];
   _id = this.actRoute.snapshot.params._id;
   @Input() encuestadoData = {};
   formEstudioEncuestado: FormGroup;
@@ -22,6 +25,7 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
   constructor(
     public estudioService: EstudioService,
     public encuestaService: EncuestaService,
+    private preguntaService: PreguntaService,
     private formBuilder: FormBuilder,
     public actRoute: ActivatedRoute,
     public router: Router
@@ -38,7 +42,26 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
     });
   }
 
+  loadPreguntasResponder(idEstduio: number): void{
+    this.preguntaService.getPreguntasResponder(idEstduio).subscribe(data => {
+      this.preguntasEncuesta = data;
+    });
+  }
+
+  extraerOpciones(idPregunta: number): void {
+    this.opciones = this.preguntasEncuesta[idPregunta].opciones;
+    console.log(this.opciones);
+  }
+
+  // estos dos metodos no sé para qué son
   loadEncuesta(): void{
+    let id = JSON.parse(localStorage.getItem('estudioID'));
+    this.encuestaService.getEncuestaEstudio(id).subscribe(data => {
+      this.encuestas = data;
+    });
+  }
+
+  loadPreguntas(): void{
     let id = JSON.parse(localStorage.getItem('estudioID'));
     this.encuestaService.getEncuestaEstudio(id).subscribe(data => {
       this.encuestas = data;

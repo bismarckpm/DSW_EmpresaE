@@ -4,7 +4,7 @@
       "_id": 50,
       "username": "Pedro",
       "clave ": "pedro",
-      "rol": "Administrador",
+      "rol": "Encuestado",
       "autenticacion": "valida"
     },
     {
@@ -333,55 +333,44 @@
   ],
   "estudio": [
     {
-      "_id": 1,
-      "nombre": "Chucheria",
-      "estado": "procesado",
-      "comentarioAnalista": "",
-      "edadMinima": 18,
-      "edadMaxima": 19,
-      "fechaInicio": "19/8/20",
-      "fechaFin": "20/8/20",
-      "dtoLugar": [
-        {
-          "_id": 1,
-          "nombre": "Venezuela",
-          "tipo": "pais"
-        }
-      ],
-      "dtoNivelSocioEconomico": [
-        {
-          "_id": 1,
-          "estado": "a",
-          "nombre": "pobre",
-          "descripcion": "pobre nivel descomunal"
-        }
-      ]
-    },
-    {
-      "_id": 2,
-      "nombre": "asd",
+      "_id": 8,
+      "nombre": "estudio prueba",
+      "comentarioAnalista": "el comentario",
       "estado": "solicitado",
-      "comentarioAnalista": "",
-      "edadMinima": "25",
-      "edadMaxima": "26",
-      "fechaInicio": "18/05/2020",
-      "fechaFin": "19/05/2020",
-      "dtoLugar": {
-        "_id": 0,
-        "estado": "",
-        "nombre": "",
-        "tipo": ""
+      "fechaInicio": "2020-05-04",
+      "lugar": {
+          "_id": 18,
+          "estado": "a",
+          "lugar": {
+              "_id": 5,
+              "estado": "a",
+              "lugar": {
+                  "_id": 1,
+                  "estado": "a",
+                  "nombre": "venezuela",
+                  "tipo": "pais"
+              },
+              "nombre": "zulia",
+              "tipo": "estado"
+          },
+          "nombre": "pruebamunc3Zuli",
+          "tipo": "municipio"
       },
-      "dtoNivelSocioEconomico": {
-        "_id": 0,
-        "nombre": "",
-        "estado": "",
-        "descripcion": ""
+      "nivelsocioeco": {
+          "_id": 2,
+          "descripcion": "Nivel Alto",
+          "estado": "a",
+          "nombre": "Alto"
       },
-      "dtoSubcategoria": {
-        "_id": 0,
-        "nombre": "",
-        "estado": ""
+      "subcategoria": {
+          "_id": 2,
+          "categoria": {
+              "_id": 1,
+              "estado": "i",
+              "nombre": "CategoriaPrueba"
+          },
+          "estado": "A",
+          "nombre": "SubcategoriaPrueba2"
       }
     }
   ],
@@ -830,6 +819,56 @@
       "_id": 2,
       "nombre": "femenino",
       "estado": "a"
+    }
+  ],
+  "preguntasresponder": [
+    {
+      "descripcion": "PreguntaPostmanID",
+      "estado": "A",
+      "tipo": {
+        "_id": 3
+      },
+      "subcategoria": {
+        "_id": 1
+      },
+      "opciones": [
+        {"descripcion": "opcion 1"},
+        {"descripcion": "opcion 2"},
+        {"descripcion": "opcion 3"},
+        {"descripcion": "opcion 4"}
+      ]
+    },
+    {
+      "descripcion": "PreguntaPostmanID2",
+      "estado": "A",
+      "tipo": {
+        "_id": 3
+      },
+      "subcategoria": {
+        "_id": 1
+      },
+      "opciones": [
+        {"descripcion": "opcion 10"},
+        {"descripcion": "opcion 20"},
+        {"descripcion": "opcion 30"},
+        {"descripcion": "opcion 40"}
+      ]
+    },
+    {
+      "descripcion": "PreguntaPostmanID3",
+      "estado": "A",
+      "tipo": {
+        "_id": 3
+      },
+      "subcategoria": {
+        "_id": 1
+      },
+      "opciones": [
+        {"descripcion": "opcion 010"},
+        {"descripcion": "opcion 020"},
+        {"descripcion": "opcion 030"},
+        {"descripcion": "opcion 040"}
+      ]
     }
   ]
 }

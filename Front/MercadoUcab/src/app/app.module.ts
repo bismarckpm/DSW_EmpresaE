@@ -63,13 +63,11 @@ import { ClienteService } from './services/cliente.service';
 import { AnalistaService } from './services/analista.service';
 import { FormAnalistaAdminComponent } from './componentes/form-analista-admin/form-analista-admin.component';
 import { ListaAnalistaAdminComponent } from './componentes/lista-analista-admin/lista-analista-admin.component';
-<<<<<<< HEAD
 import { PreguntaService } from './services/pregunta.service';
 import { PresentacionService } from './services/presentacion.service';
-=======
 import {ListaEstudiosAnalistaComponent} from './modulos/analista/lista-estudios-analista/lista-estudios-analista.component';
-import {ListaEstudiosEncuestadoComponent} from './modulos/encuestado/lista-estudios-encuestado/lista-estudios-encuestado.component';
->>>>>>> 20e0536e0771387d65ca10c6c0f15b831864b7d8
+import { ResponderEncuestaComponent } from './modulos/responder/responder-encuesta/responder-encuesta.component';
+import { ListaEstudiosEncuestadoComponent } from './modulos/encuestado/lista-estudios-encuestado/lista-estudios-encuestado.component';
 
 
 @NgModule({
@@ -118,7 +116,8 @@ import {ListaEstudiosEncuestadoComponent} from './modulos/encuestado/lista-estud
         FormAnalistaAdminComponent,
         ListaAnalistaAdminComponent,
         ListaEstudiosAnalistaComponent,
-        ListaEstudiosEncuestadoComponent
+        ListaEstudiosEncuestadoComponent,
+        ResponderEncuestaComponent
     ],
   imports: [
     BrowserModule,

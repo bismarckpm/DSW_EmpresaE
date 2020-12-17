@@ -43,7 +43,7 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
     });
   }
 
-  loadDataMuestra(id): void{
+  loadDataMuestra(id): void {
     this.estudioService.getDataMuestra(id).subscribe(data => {
       this.encuestados = data;
     });

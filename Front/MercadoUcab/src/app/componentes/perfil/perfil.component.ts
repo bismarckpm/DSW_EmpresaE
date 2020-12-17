@@ -177,13 +177,15 @@ export class PerfilComponent implements OnInit {
   get correoElectronicoAnalista(){return this.formEncuestado.get('correoElectronicoAnalista'); }
   get correoElectronicoCliente(){return this.formEncuestado.get('correoElectronicoCliente'); }
   get correoElectronicoAdmin(){return this.formEncuestado.get('correoElectronicoAdmin'); }
-
+  get rol(){return this.formEncuestado.get('rol'); }
+  
 
 
 
   createFormAdmin(): void {
     this.formAdmin = this.formBuilder.group({
       correoElectronicoAdmin: ['', [Validators.required, Validators.pattern(this.patronCorreo)]],
+      rol: ['', [Validators.required, Validators.pattern(this.patrontexto)]],
 
     });
   }
@@ -198,6 +200,7 @@ export class PerfilComponent implements OnInit {
   createFormAnalista(): void {
     this.formCliente = this.formBuilder.group({
       correoElectronicoAnalista: ['', [Validators.required, Validators.pattern(this.patronCorreo)]],
+      rol: ['', [Validators.required, Validators.pattern(this.patrontexto)]],
 
     });
   }

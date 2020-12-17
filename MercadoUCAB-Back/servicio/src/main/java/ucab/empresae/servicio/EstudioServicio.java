@@ -4,6 +4,7 @@ import ucab.empresae.daos.*;
 import ucab.empresae.dtos.DtoCategoria;
 import ucab.empresae.dtos.DtoEstudio;
 import ucab.empresae.entidades.*;
+import ucab.empresae.excepciones.PruebaExcepcion;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -11,6 +12,7 @@ import javax.ws.rs.core.Response;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Path("/estudio")
 public class EstudioServicio extends AplicacionBase {
@@ -168,4 +170,53 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    @GET
+    @Produces(value= MediaType.APPLICATION_JSON)
+    @Path("/encuestado/{id}")                   //RECIBO EL ID DEL USUARIO
+    public Response getEstudiosbyEncuestado(@PathParam("id") long id) throws PruebaExcepcion {
+
+        /*PERMITE FILTRAR LOS ESTUDIOS QUE PUEDE VER EL ENCUESTADO
+        SEGUN LAS CARACTERISTICAS DEL ESTUDIO
+         */
+
+        List<EstudioEntity> estudios = null;
+        try {
+            DaoUsuario daoUsuario = new DaoUsuario();
+            DaoEncuestado daoEncuestado = new DaoEncuestado();
+            UsuarioEntity usuarioEntity = daoUsuario.find(id, UsuarioEntity.class);
+
+            EncuestadoEntity encuestadoEntity = daoEncuestado.getEncuestadoByUsuario(usuarioEntity);
+
+            DaoEstudio daoEstudio = new DaoEstudio();
+            estudios = daoEstudio.getEstudios(encuestadoEntity.getLugar(), encuestadoEntity.getNivelsocioeco());
+
+        } catch (Exception ex) {
+            String problema = ex.getMessage();
+        }
+        return Response.ok(estudios).build();
+    }
+
+    @GET
+    @Produces(value= MediaType.APPLICATION_JSON)
+    @Path("/dataMuestra/{id}")                   //RECIBO EL ID DEL ESTUDIO
+    public Response getDataMuestraEstudio(@PathParam("id") long id) throws PruebaExcepcion {
+
+        /*PERMITE DEVOLVER LA DATA MUESTRA ESTUDIO
+         */
+
+        List<EncuestadoEntity> dataMuestraEncuestados = null;
+        try {
+            DaoUsuario daoUsuario = new DaoUsuario();
+
+            DaoEstudio daoEstudio = new DaoEstudio();
+            EstudioEntity estudio = daoEstudio.find(id, EstudioEntity.class);
+
+            DaoEncuestado daoEncuestado = new DaoEncuestado();
+            dataMuestraEncuestados = daoEncuestado.getDataMuestraEstudio(estudio.getLugar(), estudio.getNivelSocioEconomico());
+
+        } catch (Exception ex) {
+            String problema = ex.getMessage();
+        }
+        return Response.ok(dataMuestraEncuestados).build();
+    }
 }

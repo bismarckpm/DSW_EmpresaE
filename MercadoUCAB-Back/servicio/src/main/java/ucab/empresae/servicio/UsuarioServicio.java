@@ -103,6 +103,31 @@ public class UsuarioServicio {
         return Response.ok(empleados).build();
     }
 
+    @PUT
+    @Consumes(value=MediaType.APPLICATION_JSON)
+    @Produces(value=MediaType.APPLICATION_JSON)
+    @Path("/{id}")
+    public Response updateTipo(@PathParam("id") long id, DtoUsuario dtoUsuario) {
+        DaoUsuario daoUsuario = new DaoUsuario();
+        DaoTipoUsuario daoTipoUsuario = new DaoTipoUsuario();
+        UsuarioEntity usuarioEntity = daoUsuario.find(id, UsuarioEntity.class);
+
+        if (usuarioEntity != null){
+            usuarioEntity.setEstado(dtoUsuario.getEstado());
+            usuarioEntity.setUsername(dtoUsuario.getUsername());
+            usuarioEntity.setTipousuario(daoTipoUsuario.getTipoUsuarioByDescripcion(dtoUsuario.getTipoUsuario().getDescripcion()));
+            UsuarioEntity resul = daoUsuario.update(usuarioEntity);
+
+            DirectorioActivo ldap = new DirectorioActivo();
+            ldap.updateRol(dtoUsuario, usuarioEntity.getTipousuario().getDescripcion());
+
+            return Response.ok().entity(usuarioEntity).build();
+        }
+        else{
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
+
 
     @DELETE
     @Produces(value=MediaType.APPLICATION_JSON)

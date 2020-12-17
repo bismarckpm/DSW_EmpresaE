@@ -40,7 +40,7 @@ export class EstudioService {
   }
 
   getEstudioCliente(id): Observable<Estudio[]>{
-    return this.http.get<Estudio[]>(this.apiurl + '/estudio/' + id)
+    return this.http.get<Estudio[]>(this.apiurl + '/estudio/cliente/' + id)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -65,6 +65,14 @@ export class EstudioService {
 
   createEstudio(Estudio): Observable<Estudio[]>{
     return this.http.post<Estudio[]>(this.apiurl + '/estudio', JSON.stringify(Estudio), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
+  createEstudioCliente(id,Estudio): Observable<Estudio[]>{
+    return this.http.post<Estudio[]>(this.apiurl + '/estudio/cliente/' + id, JSON.stringify(Estudio), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)

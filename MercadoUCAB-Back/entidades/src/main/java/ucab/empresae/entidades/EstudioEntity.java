@@ -2,14 +2,14 @@ package ucab.empresae.entidades;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "estudio", schema = "mercadeoucab")
 @NamedQueries({
-        @NamedQuery(name = "getEstudiosCliente", query = "SELECT e FROM EstudioEntity e where e._id in (select c.estudio._id from ClienteEstudioEntity c where c.cliente._id = :id)"),
-        @NamedQuery(name = "getEstudiosEncuestado", query = "select es from EstudioEntity es where es.lugar = :lugar and es.nivelsocioeco = :nivelSocioeconomico")
+        @NamedQuery(name = "getEstudiosCliente", query = "SELECT e FROM EstudioEntity e where e in (select c.estudio from ClienteEstudioEntity c where c.cliente.usuario._id = :id)"),
+        @NamedQuery(name = "getEstudiosAnalista", query = "SELECT e FROM EstudioEntity e where e.analista._id = :id")
 })
 public class EstudioEntity extends BaseEntity{
     //private List<ClienteEstudioEntity> clienteestudios;
@@ -114,13 +114,13 @@ public class EstudioEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_nivelsocioeco", referencedColumnName = "id", nullable = false)
-    private NivelSocioeconomicoEntity nivelsocioeco;
-    public NivelSocioeconomicoEntity getNivelsocioeco() {
-        return nivelsocioeco;
+    private NivelSocioeconomicoEntity nivelSocioEconomico;
+    public NivelSocioeconomicoEntity getNivelSocioEconomico() {
+        return nivelSocioEconomico;
     }
 
-    public void setNivelsocioeco(NivelSocioeconomicoEntity nivelsocioeco) {
-        this.nivelsocioeco = nivelsocioeco;
+    public void setNivelSocioEconomico(NivelSocioeconomicoEntity nivelsocioeco) {
+        this.nivelSocioEconomico = nivelsocioeco;
     }
 
     @ManyToOne

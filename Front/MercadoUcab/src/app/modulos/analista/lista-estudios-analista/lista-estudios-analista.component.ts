@@ -3,6 +3,7 @@ import {Estudio} from '../../../models/estudio';
 import {EstudioService} from '../../../services/estudio.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Encuestado} from '../../../models/encuestado';
 
 @Component({
   selector: 'app-lista-estudios-analista',
@@ -13,7 +14,8 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
 
   // Declaracion de variables
   estudios: Estudio[] = [];
-  _id = this.actRoute.snapshot.params['_id'];
+  encuestados: Encuestado[] = [];
+  _id = this.actRoute.snapshot.params._id;
   @Input() analistaData = {_id: 0, comentarioAnalista: '', estado: ''};
   formEstudioAnalista: FormGroup;
 
@@ -35,9 +37,15 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
   }
 
   loadEstudios(): void {
-    let user = JSON.parse(localStorage.getItem('usuarioID'));
+    const user = JSON.parse(localStorage.getItem('usuarioID'));
     this.estudioService.getEstudioAnalista(user).subscribe(data => {
       this.estudios = data;
+    });
+  }
+
+  loadDataMuestra(id): void{
+    this.estudioService.getDataMuestra(id).subscribe(data => {
+      this.encuestados = data;
     });
   }
 

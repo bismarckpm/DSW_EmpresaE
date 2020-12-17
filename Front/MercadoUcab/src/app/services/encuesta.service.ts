@@ -72,8 +72,8 @@ export class EncuestaService {
     );
   }
 
-  deleteEncuesta(id){
-    return this.http.delete<Encuesta[]>(this.apiurl + '/encuesta/' + id, this.httpOptions)
+  deleteEncuesta(id: number){
+    return this.http.delete<Encuesta[]>(this.apiurl + '/encuesta/preguntasEncuesta/' + id, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)

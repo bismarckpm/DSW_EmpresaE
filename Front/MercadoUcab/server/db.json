@@ -530,20 +530,6 @@
       ]
     },
     {
-      "_id": 3,
-      "estado": "I",
-      "fechaInicio": "10/11/2020",
-      "fechaFin": "10/11/2021",
-      "estudio": {
-        "_id": 3
-      },
-      "pregunta": [
-        {
-          "descripcion": ""
-        }
-      ]
-    },
-    {
       "_id": 4,
       "estado": "A",
       "fechaInicio": "10/10/2000",

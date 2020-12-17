@@ -15,6 +15,20 @@ import java.util.List;
 @Path("/encuesta")
 public class EncuestaServicio extends AplicacionBase{
 
+
+    // BORRA LAS RELACIONES N A N ENTRE ESTUDIO Y PREGUNTA = ENCUESTA
+    public void borrarPreguntasEncuesta(long id) {
+        DaoEncuesta daoEncuesta = new DaoEncuesta();
+
+        List<EncuestaEntity> preguntasEncuesta = daoEncuesta.getPreguntasEncuesta(id);
+
+        for(EncuestaEntity relacionPreguntaEstudio : preguntasEncuesta){
+            EncuestaEntity relacionEliminar = daoEncuesta.find(relacionPreguntaEstudio.get_id(), EncuestaEntity.class);
+            daoEncuesta.delete(relacionEliminar);
+        }
+
+    }
+
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getEncuestas() {
@@ -67,5 +81,20 @@ public class EncuestaServicio extends AplicacionBase{
         else {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
+    }
+
+    @DELETE
+    @Path("/preguntasEncuesta/{id}")
+    @Produces(value = MediaType.APPLICATION_JSON)
+    public Response deletePreguntasEncuesta(@PathParam("id") long id) {
+
+        DaoEstudio daoEstudio = new DaoEstudio();
+        EstudioEntity estudio = daoEstudio.find(id, EstudioEntity.class);
+
+        if (estudio != null) {
+            this.borrarPreguntasEncuesta(id);
+            return Response.ok().build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).build();
     }
 }

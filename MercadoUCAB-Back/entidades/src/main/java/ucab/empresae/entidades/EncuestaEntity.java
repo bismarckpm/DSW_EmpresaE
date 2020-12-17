@@ -6,7 +6,8 @@ import java.sql.Date;
 @Entity
 @Table(name = "encuesta", schema = "mercadeoucab")
 @NamedQueries({
-        @NamedQuery(name = "getEncuestas", query = "SELECT en from EncuestaEntity en where en.pregunta._id = (select MAX(en2.pregunta._id) from EncuestaEntity en2 where en2.estudio._id = en.estudio._id)")
+        @NamedQuery(name = "getEncuestas", query = "SELECT en from EncuestaEntity en where en.pregunta._id = (select MAX(en2.pregunta._id) from EncuestaEntity en2 where en2.estudio._id = en.estudio._id)"),
+        @NamedQuery(name = "getPreguntasEncuesta", query = "select en from EncuestaEntity en where en.estudio._id = :id")
 })
 public class EncuestaEntity extends BaseEntity{
     private String estado;

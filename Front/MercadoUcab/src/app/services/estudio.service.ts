@@ -49,7 +49,7 @@ export class EstudioService {
   }
 
   getEstudioAnalista(user): Observable<Estudio[]>{
-    return this.http.get<Estudio[]>(this.apiurl + '/analista/' + user)
+    return this.http.get<Estudio[]>(this.apiurl + '/estudio/analista/' + user)
     .pipe(
       retry(1),
       catchError(this.handleError)

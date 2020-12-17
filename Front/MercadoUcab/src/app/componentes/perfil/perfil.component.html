@@ -16,7 +16,7 @@
         </div>
         <div class="form-group col-md-6">
           <label > Correo</label>
-          <input type="text" class="form-control" [(ngModel)]="Administrador.correoelectronico" value="Administrador.correoelectronico" readonly="readonly">
+          <input type="text" class="form-control" [(ngModel)]="Administrador.correoelectronico" value="Administrador.correoelectronico">
         </div>
       </div>
 
@@ -29,7 +29,7 @@
           <button type="button"  class=" btn btn-primary" data-toggle="modal"  data-target="#exampleModal" > Cambio de clave </button>
         </div>
         <div class="form-group col-md-2 my-auto">
-          <button type="button"  class="btn btn-success" data-toggle="modal"  data-target="#cambioAdmin" (click)=GuardarPerfil > Guardar cambios </button>
+          <button type="button"  class="btn btn-success" (click)=GuardarPerfil > Guardar cambios </button>
         </div>
       </div>
 
@@ -90,7 +90,7 @@
 
       <div class="form-row">
         <div class="form-group col-md-2">
-          <button type="button"  class="btn btn-success" data-toggle="modal"  data-target="#cambioCliente"(click)=GuardarPerfil > Guardar cambios </button>
+          <button type="button"  class="btn btn-success" (click)=GuardarPerfil > Guardar cambios </button>
         </div>
       </div>
     </div>
@@ -114,7 +114,7 @@
         </div>
         <div class="form-group col-md-4">
           <label > Correo </label>
-          <input type="text" class="form-control" [(ngModel)]="Encuestado.usuario.correoelectronico" value="Encuestado.usuario.correoelectronico"readonly="readonly" >
+          <input type="text" class="form-control" [(ngModel)]="Encuestado.usuario.correoelectronico" value="Encuestado.usuario.correoelectronico" >
         </div>
         <div class="form-group col-md-2 my-auto">
           <button type="button"  class="btn btn-primary" data-toggle="modal"  data-target="#exampleModal" > Cambio de clave </button>
@@ -130,19 +130,19 @@
       <div class="form-row">
         <div class="form-group col-md-3">
           <label for=""> Primer nombre </label>
-          <input type="text" class="form-control" [(ngModel)]="Encuestado.primerNombre" value="Encuestado.primerNombrereadonly="readonly">
+          <input type="text" class="form-control" [(ngModel)]="Encuestado.primerNombre" value="Encuestado.primerNombre">
         </div>
         <div class="form-group col-md-3">
           <label for="">Segundo Nombre </label>
-          <input type="text" class="form-control" [(ngModel)]="Encuestado.segundoNombre" value="Encuestado.segundoNombre" readonly="readonly">
+          <input type="text" class="form-control" [(ngModel)]="Encuestado.segundoNombre" value="Encuestado.segundoNombre" >
         </div>
         <div class="form-group col-md-3">
           <label for=""> Primer Apellido </label>
-          <input type="text" class="form-control" [(ngModel)]="Encuestado.primerApellido" value="Encuestado.primerApellido" readonly="readonly">
+          <input type="text" class="form-control" [(ngModel)]="Encuestado.primerApellido" value="Encuestado.primerApellido" >
         </div>
         <div class="form-group col-md-3">
           <label for="">Segundo Apellido </label>
-          <input type="text" class="form-control" [(ngModel)]="Encuestado.segundoApellido" value="Encuestado.segundoApellido" readonly="readonly">
+          <input type="text" class="form-control" [(ngModel)]="Encuestado.segundoApellido" value="Encuestado.segundoApellido">
         </div>
       </div>
 
@@ -190,7 +190,7 @@
           <input type="text" class="form-control" [(ngModel)]="Encuestado.nivelSocioEconomico.nombre" value="Encuestado.nivelSocioEconomico.nombre" readonly="readonly">
         </div>
         <div class="form-group col-md-2 my-auto">
-          <button type="button"  class="btn btn-success" data-toggle="modal"  data-target="#cambioEncuestado"(click)=GuardarPerfil > Guardar cambios </button>
+          <button type="button"  class="btn btn-success" (click)=GuardarPerfil > Guardar cambios </button>
         </div>
 
       </div>
@@ -230,14 +230,10 @@
         </div>
       </div>
 
-      <div class="form-group col-md-2 my-auto">
-        <button type="button"  class="btn btn-success" data-toggle="modal"  data-target="#cambioAnalista"(click)=GuardarPerfil > Guardar cambios </button>
-      </div>
-
     </div>
 
 
-<!--/////////////////////////////////////////////////////////////Modal cambio de clave///////////////////////////////////////////////////////////////////////////////-->
+
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -286,347 +282,6 @@
         </div>
       </div>
     </div>
-
-
-<!--///////////////////////////////////////////////////////////////////////////////Modal analista Editar perfil/////////////////////////////////////////////////////////////////////////////////////////////////-->
-<div class="modal fade" id="cambioAnalista" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Cambio de clave </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <form [formGroup]="formAnalista" > 
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="form-row">
-
-                <div class="form-group col-md-6">
-                  <label > Nombre del Analista</label>
-                  <input type="text" class="form-control" [(ngModel)]="Analista.username" formControlName="correoElectronicoAnalista" value="Analista.username" readonly="readonly">
-                </div>
-                <div class="form-group col-md-6">
-                  <label>Correo</label>
-                  <input type="text" class="form-control" [(ngModel)]="AnalistaData.correoelectronico" value="AnalistaData.correoelectronico" >
-                  <div *ngIf="correoElectronicoAnalista.invalid && (correoElectronicoAnalista.dirty || correoElectronicoAnalista.touched)" class="alert alert-danger">
-                    <div *ngIf="correoElectronicoAnalista.errors.required">
-                      Este campo es obligatorio
-                    </div>
-                    <div *ngIf="correoElectronicoAnalista.errors.pattern">
-                      Introduzca una descripcion valida
-                    </div>
-                  </div>
-                </div>
-              </div>
-        
-              <div class="form-group">
-                <label > Rol en nuestro sistema </label>
-                <input type="text"  class="form-control" [(ngModel)]="AnalistaData.tipoUsuario.descripcion"  formControlName="rol" value="AnalistaData.tipoUsuario.descripcion" >
-                <div *ngIf="rol.invalid && (rol.dirty || rol.touched)" class="alert alert-danger">
-                  <div *ngIf="rol.errors.required">
-                    Este campo es obligatorio
-                  </div>
-                  <div *ngIf="descripcionPregunta.errors.pattern">
-                    Introduzca una descripcion valida
-                  </div>
-                </div>
-              </div>
-
-              <br>
-
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-success" (click)="GuardarPerfil()" data-dismiss="modal">Actualizar</button>
-
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-
-
-
-<!--///////////////////////////////////////////////////////////////////////////////Modal encuestado Editar perfil/////////////////////////////////////////////////////////////////////////////////////////////////-->
-<div class="modal fade" id="cambioEncuestado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"> Modificacion </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <form [formGroup]="formEncuestado" > 
-          <div class="modal-dialog">
-            <div class="modal-content">
-
-              <div class="form-row">
-
-                <div class="form-group col-md-4">
-                  <label for=""> Username </label>
-                  <input type="text" class="form-control" [(ngModel)]="Encuestado.usuario.username" value="Encuestado.usuario.username" readonly="readonly">
-                </div>
-                <div class="form-group col-md-4">
-                  <label > Correo </label>
-                  <input type="text" class="form-control" [(ngModel)]="EncuestadoData.usuario.correoelectronico" value="EncuestadoData.usuario.correoelectronico" >
-                </div>
-                <div class="form-group col-md-2 my-auto">
-                  <button type="button"  class="btn btn-primary" data-toggle="modal"  data-target="#exampleModal" > Cambio de clave </button>
-                </div>
-              </div>
-        
-              <hr>
-        
-              <div>
-                <h4> <label > Informacion como Encuestado </label></h4>
-              </div>
-        
-              <div class="form-row">
-                <div class="form-group col-md-3">
-                  <label for=""> Primer nombre </label>
-                  <input type="text" class="form-control" [(ngModel)]="EncuestadoData.primerNombre" value="EncuestadoData.primerNombre">
-                </div>
-                <div class="form-group col-md-3">
-                  <label for="">Segundo Nombre </label>
-                  <input type="text" class="form-control" [(ngModel)]="EncuestadoData.segundoNombre" value="EncuestadoData.segundoNombre" >
-                </div>
-                <div class="form-group col-md-3">
-                  <label for=""> Primer Apellido </label>
-                  <input type="text" class="form-control" [(ngModel)]="EncuestadoData.primerApellido" value="EncuestadoData.primerApellido" >
-                </div>
-                <div class="form-group col-md-3">
-                  <label for="">Segundo Apellido </label>
-                  <input type="text" class="form-control" [(ngModel)]="EncuestadoData.segundoApellido" value="EncuestadoData.segundoApellido">
-                </div>
-              </div>
-        
-              <div class="form-row">
-                <div class="form-group col-md-3">
-                  <label for=""> Fecha Nacimiento</label>
-                  <input type="text" class="form-control" [(ngModel)]="EncuestadoData.fechaNacimiento" value="EncuestadoData.fechaNacimiento" readonly="readonly">
-        
-                </div>
-                <div class="form-group col-md-3">
-                  <label for=""> Estado civil </label>
-                  <input type="text" class="form-control" [(ngModel)]="EncuestadoData.estadoCivil.nombre" value="EncuestadoData.estadoCivil.nombre" >
-                </div>
-                <div class="form-group col-md-3">
-                  <label for=""> Nivel Academico </label>
-                  <input type="text" class="form-control" [(ngModel)]="EncuestadoData.nivelAcademico.nombre" value="EncuestadoData.nivelAcademico.nombre" >
-                </div>
-                <div class="form-group col-md-3">
-                  <label for=""> Medio de Conexion </label>
-                  <input type="text" class="form-control" [(ngModel)]="EncuestadoData.medioConexion.nombre" value="EncuestadoData.medioConexion.nombre" >
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-4">
-                  <label for="">  Estado </label>
-                  <input type="text" class="form-control" [(ngModel)]="EncuestadoData.lugar.nombre" value="Encuestado.lugar.nombre" >
-        
-                </div>
-                <div class="form-group col-md-4">
-                  <label for="">  Municipio </label>
-                  <input type="text" class="form-control" [(ngModel)]="EncuestadoData.lugar.lugar.nombre" value="Encuestado.lugar.lugar.nombre" >
-                </div>
-                <div class="form-group col-md-4">
-                  <label for=""> Parroquia</label>
-                  <input type="text" class="form-control" [(ngModel)]="EncuestadoData.lugar.lugar.lugar.nombre" value="EncuestadoDAta.lugar.lugar.lugar.nombre" >
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-4">
-                  <label for=""> Ocupacion</label>
-                  <input type="text" class="form-control" [(ngModel)]="EncuestadoData.ocupacion.nombre" value="EncuestadoDAta.ocupacion.nombre" >
-                </div>
-                <div class="form-group col-md-4">
-                  <label for=""> Nivel Socio Economico</label>
-                  <input type="text" class="form-control" [(ngModel)]="EncuestadoData.nivelSocioEconomico.nombre" value="EncuestadoData.nivelSocioEconomico.nombre">
-                </div>
-
-        
-              </div>
-
-              <br>
-
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-success" (click)="GuardarPerfil()" data-dismiss="modal">Actualizar</button>
-
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--///////////////////////////////////////////////////////////////////////////////Modal encuestado Editar perfil/////////////////////////////////////////////////////////////////////////////////////////////////-->
-
-
-<!--///////////////////////////////////////////////////////////////////////////////Modal Cliente Editar perfil/////////////////////////////////////////////////////////////////////////////////////////////////-->
-<div class="modal fade" id="cambioCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modificacion  </h5>
-
-      </div>
-
-      <div class="modal-body">
-        <form [formGroup]="formCliente" > 
-          <div class="modal-dialog">
-            <div class="modal-content">
-
-              <div class="form-row">
-                <div class="form-group col-md-4">
-                  <label > Razon Social</label>
-                  <input type="text" class="form-control" [(ngModel)]="ClienteData.razonSocial" value="ClienteData.razonSocial" readonly="readonly">
-                </div>
-                <div class="form-group col-md-4">
-                  <label > RIF</label>
-                  <input type="text" class="form-control" [(ngModel)]="ClienteData.rif" value="ClienteData.rif" readonly="readonly">
-                </div>
-                <div class="form-group col-md-4">
-                  <label > Username </label>
-                  <input type="text" class="form-control" [(ngModel)]="ClienteData.usuario.username" value="ClienteData.usuario.username" readonly="readonly">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-4">
-                  <label > Correo</label>
-                  <input type="text" class="form-control" [(ngModel)]="ClienteData.usuario.correoelectronico" value="ClienteData.usuario.correoelectronico"  >
-                </div>
-                <div class="form-group col-md-4">
-                  <label > Numero de Telefono</label>
-                  <input type="text" class="form-control" [(ngModel)]="ClienteData.telefono.numero" value="ClienteData.usuario.correoelectronico"  >
-                </div>
-
-              </div>
-              
-              <div class="form-row">
-                <div class="form-group col-md-4">
-                  <label for=""> Estado</label>
-                  <input type="text" class="form-control" [(ngModel)]="ClienteData.lugar.nombre" value="ClienteData.lugar.nombre" >
-                </div>
-              
-                <div class="form-group col-md-4">
-                  <label for=""> Municipio </label>
-                  <input type="text" class="form-control" [(ngModel)]="ClienteData.lugar.lugar.nombre" value="ClienteData.lugar.lugar.nombre" >
-                </div>
-              
-                <div class="form-group col-md-4">
-                  <label for="inputZip">Parroquia </label>
-                  <input type="text" class="form-control" [(ngModel)]="ClienteData.lugar.lugar.lugar.nombre" value="ClienteData.lugar.lugar.nombre" >
-                </div>
-              </div>
-
-              <br>
-
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-success" (click)="GuardarPerfil()" data-dismiss="modal">Actualizar</button>
-
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-
-
-
-<!--///////////////////////////////////////////////////////////////////////////////Modal Admin Editar perfil/////////////////////////////////////////////////////////////////////////////////////////////////-->
-
-
-<div class="modal fade" id="cambioAdmin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-header">
-          <h4>Modificacion</h4>
-      </div>
-
-      <div class="modal-body">
-        <form  [formGroup]="formAdmin" >
-          <div class="modal-dialog">
-            <div class="modal-content">
-
-
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label > Nombre del Administrador</label>
-                  <input type="text" class="form-control" [(ngModel)]="AdministradorData.username" value="AdministradorData.username" readonly="readonly">
-                </div>
-                <div class="form-group col-md-6">
-                  <label > Correo</label>
-                  <input type="text" class="form-control" [(ngModel)]="AdministradorData.correoelectronico" value="AdministradorData.correoelectronico">
-                </div>
-              </div>
-        
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label > Rol en nuestro sistema </label>
-                  <input type="text" class="form-control"[(ngModel)]="AdministradorData.tipoUsuario.descripcion" value="AdministradorData.tipousuario.descripcion">
-                </div>
-              </div>
-
-              <br>
-
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-success" (click)="GuardarPerfil()" data-dismiss="modal">Actualizar</button>
-
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <br>
   </div>

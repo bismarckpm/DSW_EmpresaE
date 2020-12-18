@@ -18,6 +18,10 @@ public class EstudioServicio extends AplicacionBase {
     private DaoEstudio dao = DaoFactory.DaoEstudioInstancia();
     private EstudioEntity estudio = EntidadesFactory.EstudioInstance();
 
+    /**
+     * Método encargado de generar el objeto EstudioEntity a partir de un objeto del tipo DtoEstudio
+     * @param dtoEstudio recibe un objeto del tipo DtoEstudio
+     */
     private void estudioAtributos(DtoEstudio dtoEstudio) {
         this.estudio.setEstado(dtoEstudio.getEstado());
         this.estudio.setNombre(dtoEstudio.getNombre());
@@ -57,6 +61,13 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio
+     * Api del tipo @GET que se encarga de pedir la lista de todos los estudios de la base de datos
+     * @return retorna Response .json con una lista de objetos del tipo EstudioEntity en caso de que la transaccion
+     * sea exitosa
+     * sea exitosa
+     */
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getEstudios() {
@@ -67,6 +78,13 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio
+     * Api de tipo @GET que se encarga de pedir a la base de datos un estudio especifico
+     * @param id recibe un un parámetro del tipo long con el id del estudio pedido
+     * @return retorna Response .json con objeto del tipo EstudioEntity en caso de que la transaccion
+     * sea exitosa
+     */
     @GET
     @Path("/{id}")
     @Produces(value = MediaType.APPLICATION_JSON)
@@ -78,6 +96,13 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/cliente/id
+     * Api de tipo @GET que encargada de pedir todos los estudios solicitados por un cliente en específico
+     * @param id recibe un objeto de tipo long con el id del cliente en cuestión
+     * @return retorna un Response .json con una lista de objetos del tipo EstudioEntity en caso de que la transaccion
+     * sea exitosa
+     */
     @GET
     @Path("/cliente/{id}")
     @Produces(value = MediaType.APPLICATION_JSON)
@@ -89,6 +114,13 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/analista/id
+     * Api de tipo @GET encargada de pedir todos los estudios de los cuales un analista en específico está como encargado
+     * @param id recibe un objeto de tipo long con el id del analista en cuestión
+     * @return retorna Response .json con una lista de objetos del tipo EstudioEntity en caso de que la transaccion
+     * sea exitosa
+     */
     @GET
     @Path("/analista/{id}")
     @Produces(value = MediaType.APPLICATION_JSON)
@@ -100,6 +132,13 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio
+     * Api del tipo @POST encargada de insertar un nuevo estudio a la base de datos
+     * @param dtoEstudio recibe un parámetro del tipo DtoEstudio con el estudio a insertar
+     * @return retorna Response .json con objeto del tipo EstudioEntity con el estudio insertado  en caso de que la transaccion
+     * sea exitosa
+     */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -112,6 +151,14 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio
+     * Api del tipo @POST encargada de insertar tanto un nuevo estudio con la solicitud del mismo por parte del cliente
+     * @param id recibe objeto del tipo con con el id del cliente
+     * @param dtoEstudio recibe objeto de tipo DtoEstudio con el estudio a insertar
+     * @return retorna Response .json con el objeto del tipo ClienteEstudioEntity insertado en caso de que la transaccion
+     * sea exitosa
+     */
     @POST
     @Path("/cliente/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -138,6 +185,13 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio
+     * Api del tipo @PUT encargada de actualizar un Estudio
+     * @param dtoEstudio recibe objeto del tipo DtoEstudio con los datos ya modificados
+     * @return retorna Response .json con el objeto del tipo EstudioEntity actualizado en caso de que la transaccion
+     * sea exitosa
+     */
     @PUT
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -155,13 +209,19 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio
+     * Api del tipo @DELETE encargada de eliminar de la base de datos el estudio seleccionado
+     * @param dtoEstudio recibe un objeto del tipo DtoEstudio
+     * @return retorna Response .json con objeto del tipo Estudio
+     */
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response deleteEstudio(DtoCategoria dtoCategoria) {
+    public Response deleteEstudio(DtoEstudio dtoEstudio) {
         try {
-            this.estudio = this.dao.find(dtoCategoria.get_id(), EstudioEntity.class);
+            this.estudio = this.dao.find(dtoEstudio.get_id(), EstudioEntity.class);
             return Response.ok(this.dao.delete(this.estudio)).build();
         } catch(Exception ex){
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();

@@ -21,7 +21,7 @@ export class EncuestaService {
     })
   };
 
-  
+
 
   ///////// Metodos para ejecutar//////////////
   getEncuestas(): Observable<Encuesta[]>{
@@ -38,6 +38,14 @@ export class EncuestaService {
       retry(1),
       catchError(this.handleError)
     );
+  }
+
+  getEncuestaEstudio(id): Observable<Encuesta[]>{
+    return this.http.get<Encuesta[]>(this.apiurl + 'encuesta' + id)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
   }
 
   createEncuesta(Encuesta): Observable<Encuesta[]>{
@@ -64,8 +72,8 @@ export class EncuestaService {
     );
   }
 
-  deleteEncuesta(id){
-    return this.http.delete<Encuesta[]>(this.apiurl + '/encuesta/' + id, this.httpOptions)
+  deleteEncuesta(id: number){
+    return this.http.delete<Encuesta[]>(this.apiurl + '/encuesta/preguntasEncuesta/' + id, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)

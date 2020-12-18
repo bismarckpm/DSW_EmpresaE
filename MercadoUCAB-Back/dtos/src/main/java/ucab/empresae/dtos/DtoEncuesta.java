@@ -1,17 +1,20 @@
 package ucab.empresae.dtos;
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
 
 public class DtoEncuesta extends DtoBase {
 
     //Atributos
     private String estado;
-    private Date fechaInicio;
-    private Date fechaFin;
+    private String fechaInicio;
+    private String fechaFin;
 
     //Relaciones
-    private DtoEstudio dtoEstudio;
-    private DtoPregunta dtoPregunta;
+    private DtoEstudio estudio;
+    private DtoPregunta pregunta;
+
+    private List<DtoPregunta> preguntas;
 
     //Constructores
     public DtoEncuesta() {
@@ -31,36 +34,44 @@ public class DtoEncuesta extends DtoBase {
         this.estado = estado;
     }
 
-    public Date getFechaInicio() {
+    public String getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(String fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getFechaFin() {
+    public String getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(String fechaFin) {
         this.fechaFin = fechaFin;
     }
 
     public DtoEstudio getEstudio() {
-        return dtoEstudio;
+        return estudio;
     }
 
     public void setEstudio(DtoEstudio estudio) {
-        this.dtoEstudio = estudio;
+        this.estudio = estudio;
     }
 
     public DtoPregunta getPregunta() {
-        return dtoPregunta;
+        return pregunta;
     }
 
     public void setPregunta(DtoPregunta pregunta) {
-        this.dtoPregunta = pregunta;
+        this.pregunta = pregunta;
+    }
+
+    public List<DtoPregunta> getPreguntas() {
+        return preguntas;
+    }
+
+    public void setPreguntas(List<DtoPregunta> preguntas) {
+        this.preguntas = preguntas;
     }
 
 }

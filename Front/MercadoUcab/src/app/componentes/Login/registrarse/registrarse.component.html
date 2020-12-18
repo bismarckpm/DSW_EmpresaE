@@ -66,7 +66,7 @@
       </div>
       <div class="form-group col-md-4">
         <label for="fechanacimiento">Fecha de Nacimiento</label>
-        <input type="text" class="form-control" [(ngModel)]="encuestado.fechaNacimiento" formControlName="fechaNacimientoEncuestado" id="fechanacimiento" name="fechaNacimiento">
+        <input type="text" class="form-control" [(ngModel)]="encuestado.fechaNacimiento" formControlName="fechaNacimientoEncuestado" id="fechanacimiento" name="fechaNacimiento" placeholder="AAAA-MM-DD">
       </div>
       <div *ngIf="fechaNacimientoEncuestado.invalid && (fechaNacimientoEncuestado.dirty || fechaNacimientoEncuestado.touched)" class="alert alert-danger">
         <div *ngIf="fechaNacimientoEncuestado.errors.required">

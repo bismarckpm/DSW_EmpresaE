@@ -54,7 +54,7 @@ export class RegistrarseComponent implements OnInit {
   auxParroquiaID: number;
 
 
-  patronFechaNacimientoEncuestado: any = /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/;
+  patronFechaNacimientoEncuestado: any = /^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/;
   patronNombreEncuestado: any = /^[A-Za-z\s]+$/;
   patronCorreoEncuestado: any = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   patronUsernameEncuestado: any = / ^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$/;
@@ -222,8 +222,8 @@ export class RegistrarseComponent implements OnInit {
       generoHijoEncuestado: ['', Validators.required],
       telefonoEncuestado: ['', [Validators.required, Validators.pattern(this.patronTelefonoEncuestado), Validators.maxLength(11)]],
       usuarioEncuestado: ['', Validators.required],
-      usernameEncuestado: ['', [Validators.required, Validators.pattern(this.patronUsernameEncuestado)]],
-      claveEncuestado: ['', [Validators.required, Validators.pattern(this.patronClaveEncuestado)]],
+      usernameEncuestado: '',
+      claveEncuestado: '',
       correoElectronicoEncuestado: ['', [Validators.required, Validators.pattern(this.patronCorreoEncuestado)]],
     });
   }

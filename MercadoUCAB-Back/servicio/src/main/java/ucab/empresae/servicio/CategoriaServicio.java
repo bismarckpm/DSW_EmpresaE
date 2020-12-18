@@ -110,9 +110,9 @@ public class CategoriaServicio extends AplicacionBase {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response deleteCategoria(DtoCategoria dtoCategoria) {
+    public Response deleteCategoria(@PathParam("id") long id) {
         try {
-            this.categoria = this.dao.find(dtoCategoria.get_id(), CategoriaEntity.class);
+            this.categoria = this.dao.find(id, CategoriaEntity.class);
             this.dao.delete(this.categoria);
             return Response.ok().build();
         } catch(Exception ex){

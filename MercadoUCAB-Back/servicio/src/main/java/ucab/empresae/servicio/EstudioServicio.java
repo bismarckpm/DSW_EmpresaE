@@ -4,6 +4,7 @@ import ucab.empresae.daos.*;
 import ucab.empresae.dtos.DtoCategoria;
 import ucab.empresae.dtos.DtoEstudio;
 import ucab.empresae.entidades.*;
+import ucab.empresae.excepciones.PruebaExcepcion;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -11,6 +12,7 @@ import javax.ws.rs.core.Response;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Path("/estudio")
 public class EstudioServicio extends AplicacionBase {
@@ -18,19 +20,16 @@ public class EstudioServicio extends AplicacionBase {
     private DaoEstudio dao = DaoFactory.DaoEstudioInstancia();
     private EstudioEntity estudio = EntidadesFactory.EstudioInstance();
 
-    /**
-     * Método encargado de generar el objeto EstudioEntity a partir de un objeto del tipo DtoEstudio
-     * @param dtoEstudio recibe un objeto del tipo DtoEstudio
-     */
     private void estudioAtributos(DtoEstudio dtoEstudio) {
-        this.estudio.setEstado(dtoEstudio.getEstado());
-        this.estudio.setNombre(dtoEstudio.getNombre());
-        this.estudio.setComentarioAnalista(dtoEstudio.getComentarioAnalista());
-        this.estudio.setEdadMinima(dtoEstudio.getEdadMinima());
-        this.estudio.setEdadMaxima(dtoEstudio.getEdadMaxima());
 
         try {
-            DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+            this.estudio.setEstado(dtoEstudio.getEstado());
+            this.estudio.setNombre(dtoEstudio.getNombre());
+            this.estudio.setComentarioAnalista(dtoEstudio.getComentarioAnalista());
+            this.estudio.setEdadMinima(dtoEstudio.getEdadMinima());
+            this.estudio.setEdadMaxima(dtoEstudio.getEdadMaxima());
+
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date fecha = dateFormat.parse(dtoEstudio.getFechaInicio());
             this.estudio.setFechaInicio(fecha);
 
@@ -61,13 +60,6 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
-    /**
-     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio
-     * Api del tipo @GET que se encarga de pedir la lista de todos los estudios de la base de datos
-     * @return retorna Response .json con una lista de objetos del tipo EstudioEntity en caso de que la transaccion
-     * sea exitosa
-     * sea exitosa
-     */
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getEstudios() {
@@ -78,13 +70,6 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
-    /**
-     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio
-     * Api de tipo @GET que se encarga de pedir a la base de datos un estudio especifico
-     * @param id recibe un un parámetro del tipo long con el id del estudio pedido
-     * @return retorna Response .json con objeto del tipo EstudioEntity en caso de que la transaccion
-     * sea exitosa
-     */
     @GET
     @Path("/{id}")
     @Produces(value = MediaType.APPLICATION_JSON)
@@ -96,13 +81,6 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
-    /**
-     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/cliente/id
-     * Api de tipo @GET que encargada de pedir todos los estudios solicitados por un cliente en específico
-     * @param id recibe un objeto de tipo long con el id del cliente en cuestión
-     * @return retorna un Response .json con una lista de objetos del tipo EstudioEntity en caso de que la transaccion
-     * sea exitosa
-     */
     @GET
     @Path("/cliente/{id}")
     @Produces(value = MediaType.APPLICATION_JSON)
@@ -114,13 +92,6 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
-    /**
-     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/analista/id
-     * Api de tipo @GET encargada de pedir todos los estudios de los cuales un analista en específico está como encargado
-     * @param id recibe un objeto de tipo long con el id del analista en cuestión
-     * @return retorna Response .json con una lista de objetos del tipo EstudioEntity en caso de que la transaccion
-     * sea exitosa
-     */
     @GET
     @Path("/analista/{id}")
     @Produces(value = MediaType.APPLICATION_JSON)
@@ -132,13 +103,6 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
-    /**
-     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio
-     * Api del tipo @POST encargada de insertar un nuevo estudio a la base de datos
-     * @param dtoEstudio recibe un parámetro del tipo DtoEstudio con el estudio a insertar
-     * @return retorna Response .json con objeto del tipo EstudioEntity con el estudio insertado  en caso de que la transaccion
-     * sea exitosa
-     */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -151,20 +115,15 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
-    /**
-     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio
-     * Api del tipo @POST encargada de insertar tanto un nuevo estudio con la solicitud del mismo por parte del cliente
-     * @param id recibe objeto del tipo con con el id del cliente
-     * @param dtoEstudio recibe objeto de tipo DtoEstudio con el estudio a insertar
-     * @return retorna Response .json con el objeto del tipo ClienteEstudioEntity insertado en caso de que la transaccion
-     * sea exitosa
-     */
     @POST
     @Path("/cliente/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response solicitarEstudio(@PathParam("id") long id, DtoEstudio dtoEstudio) {
         try {
             estudioAtributos(dtoEstudio);
+            DaoUsuario daoUsuario1 = new DaoUsuario();
+            List<UsuarioEntity> listaAnalista = daoUsuario1.getAnalistas();
+            this.estudio.setAnalista(listaAnalista.get(1));
             this.estudio = this.dao.insert(this.estudio);
 
             DaoClienteEstudio daoClienteEstudio = new DaoClienteEstudio();
@@ -185,47 +144,84 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
-    /**
-     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio
-     * Api del tipo @PUT encargada de actualizar un Estudio
-     * @param dtoEstudio recibe objeto del tipo DtoEstudio con los datos ya modificados
-     * @return retorna Response .json con el objeto del tipo EstudioEntity actualizado en caso de que la transaccion
-     * sea exitosa
-     */
     @PUT
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateEstudio(DtoEstudio dtoEstudio) {
+    public Response updateEstudio(@PathParam("id") long id, DtoEstudio dtoEstudio) {
         try {
-            if(dtoEstudio.get_id() == 0) {
-                return Response.status(Response.Status.NOT_ACCEPTABLE).build();
-            }
-            this.estudio = this.dao.find(dtoEstudio.get_id(), EstudioEntity.class);
-            estudioAtributos(dtoEstudio);
-            return Response.ok(this.dao.update(this.estudio)).build();
+            DaoEstudio daoEstudio = new DaoEstudio();
+            EstudioEntity estudio = daoEstudio.find(id, EstudioEntity.class);
+            estudio.setComentarioAnalista(dtoEstudio.getComentarioAnalista());
+            estudio.setEstado(dtoEstudio.getEstado());
+            daoEstudio.update(estudio);
+
+            return Response.ok(estudio).build();
         } catch (Exception ex) {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
     }
 
-    /**
-     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio
-     * Api del tipo @DELETE encargada de eliminar de la base de datos el estudio seleccionado
-     * @param dtoEstudio recibe un objeto del tipo DtoEstudio
-     * @return retorna Response .json con objeto del tipo Estudio
-     */
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response deleteEstudio(DtoEstudio dtoEstudio) {
+    public Response deleteEstudio(@PathParam("id") long id) {
         try {
-            this.estudio = this.dao.find(dtoEstudio.get_id(), EstudioEntity.class);
+            this.estudio = this.dao.find(id, EstudioEntity.class);
             return Response.ok(this.dao.delete(this.estudio)).build();
         } catch(Exception ex){
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
     }
 
+    @GET
+    @Produces(value= MediaType.APPLICATION_JSON)
+    @Path("/encuestado/{id}")                   //RECIBO EL ID DEL USUARIO
+    public Response getEstudiosbyEncuestado(@PathParam("id") long id) throws PruebaExcepcion {
+
+        /*PERMITE FILTRAR LOS ESTUDIOS QUE PUEDE VER EL ENCUESTADO
+        SEGUN LAS CARACTERISTICAS DEL ESTUDIO
+         */
+
+        List<EstudioEntity> estudios = null;
+        try {
+            DaoUsuario daoUsuario = new DaoUsuario();
+            DaoEncuestado daoEncuestado = new DaoEncuestado();
+            UsuarioEntity usuarioEntity = daoUsuario.find(id, UsuarioEntity.class);
+
+            EncuestadoEntity encuestadoEntity = daoEncuestado.getEncuestadoByUsuario(usuarioEntity);
+
+            DaoEstudio daoEstudio = new DaoEstudio();
+            estudios = daoEstudio.getEstudios(encuestadoEntity.getLugar(), encuestadoEntity.getNivelsocioeco());
+
+        } catch (Exception ex) {
+            String problema = ex.getMessage();
+        }
+        return Response.ok(estudios).build();
+    }
+
+    @GET
+    @Produces(value= MediaType.APPLICATION_JSON)
+    @Path("/dataMuestra/{id}")                   //RECIBO EL ID DEL ESTUDIO
+    public Response getDataMuestraEstudio(@PathParam("id") long id) throws PruebaExcepcion {
+
+        /*PERMITE DEVOLVER LA DATA MUESTRA ESTUDIO
+         */
+
+        List<EncuestadoEntity> dataMuestraEncuestados = null;
+        try {
+            DaoUsuario daoUsuario = new DaoUsuario();
+
+            DaoEstudio daoEstudio = new DaoEstudio();
+            EstudioEntity estudio = daoEstudio.find(id, EstudioEntity.class);
+
+            DaoEncuestado daoEncuestado = new DaoEncuestado();
+            dataMuestraEncuestados = daoEncuestado.getDataMuestraEstudio(estudio.getLugar(), estudio.getNivelSocioEconomico());
+
+        } catch (Exception ex) {
+            String problema = ex.getMessage();
+        }
+        return Response.ok(dataMuestraEncuestados).build();
+    }
 }

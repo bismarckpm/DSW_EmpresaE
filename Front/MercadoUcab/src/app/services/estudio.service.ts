@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Estudio } from '../models/estudio';
+import {Encuestado} from "../models/encuestado";
 
 @Injectable({
   providedIn: 'root'
@@ -48,11 +49,27 @@ export class EstudioService {
   }
 
   getEstudioAnalista(user): Observable<Estudio[]>{
-    return this.http.get<Estudio[]>(this.apiurl + '/estudio/' + user)
+    return this.http.get<Estudio[]>(this.apiurl + '/estudio/analista/' + user)
     .pipe(
       retry(1),
       catchError(this.handleError)
     );
+  }
+
+  getDataMuestra(id): Observable<Encuestado[]>{
+    return this.http.get<Encuestado[]>(this.apiurl + '/estudio/dataMuestra/' + id)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+
+  getEstudioEncuestado(id): Observable<Estudio[]>{
+    return this.http.get<Estudio[]>(this.apiurl + '/estudio/encuestado/' + id)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
   }
 
   createEstudio(Estudio): Observable<Estudio[]>{

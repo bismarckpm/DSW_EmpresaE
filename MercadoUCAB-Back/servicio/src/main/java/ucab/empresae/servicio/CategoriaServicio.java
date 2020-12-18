@@ -103,7 +103,7 @@ public class CategoriaServicio extends AplicacionBase {
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/categoria/id
      * Api del tipo @DELETE que se encarga de eliminar de la base de datos a la entidad persistente
-     * @param dtoCategoria obtiene un objeto del tipo DtoCategoria
+     * @param id obtiene un objeto del tipo DtoCategoria
      * @return Retorna un Response ok en caso de que la categoria se haya eliminado de manera correcta
      */
     @DELETE

@@ -5,6 +5,7 @@ export class Analista {
 
   _id: number;
   usuario: Usuario;
+  correoelectronico: string;
   tipoUsuario: TipoUsuario;
 
 }

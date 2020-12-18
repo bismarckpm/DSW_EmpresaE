@@ -10,6 +10,9 @@ import ucab.empresae.excepciones.PruebaExcepcion;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Path("/encuesta")
@@ -46,7 +49,7 @@ public class EncuestaServicio extends AplicacionBase{
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addEncuesta(DtoEncuesta dtoEncuesta) {
+    public Response addEncuesta(DtoEncuesta dtoEncuesta) throws ParseException {
 
         DaoEncuesta dao = new DaoEncuesta();
         DaoEstudio daoEstudio = new DaoEstudio();
@@ -60,15 +63,18 @@ public class EncuestaServicio extends AplicacionBase{
             PreguntaEntity pregunta = daoPregunta.find(dtoEncuesta.getPregunta().get_id(),PreguntaEntity.class);
             encuesta.setPregunta(pregunta);*/
 
-
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             List<DtoPregunta> preguntas = dtoEncuesta.getPreguntas();
 
             for (DtoPregunta preguntaCiclo: preguntas) {
                 //Se inserta en la n a n tantas veces como preguntas relacionadas al estudio
                 EncuestaEntity encuesta = new EncuestaEntity();
                 encuesta.setEstado("a");
-                encuesta.setFechaInicio(dtoEncuesta.getFechaInicio());
-                encuesta.setFechaFin(dtoEncuesta.getFechaFin());
+                Date fechaInicio = sdf.parse(dtoEncuesta.getFechaInicio());
+                Date fechaFin = sdf.parse(dtoEncuesta.getFechaFin());
+                encuesta.setFechaInicio(fechaInicio);
+                encuesta.setFechaFin(fechaFin);
+
                 encuesta.setEstudio(estudio);
 
                 PreguntaEntity pregunta = daoPregunta.find(preguntaCiclo.get_id(), PreguntaEntity.class);

@@ -1,7 +1,7 @@
 package ucab.empresae.entidades;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name = "encuesta", schema = "mercadeoucab")

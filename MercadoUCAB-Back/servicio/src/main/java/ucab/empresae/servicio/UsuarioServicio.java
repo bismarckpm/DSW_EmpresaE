@@ -12,6 +12,7 @@ import ucab.empresae.excepciones.PruebaExcepcion;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.text.ParseException;
 import java.util.List;
 
 @Path("/usuario")
@@ -45,7 +46,7 @@ public class UsuarioServicio {
     @GET
     @Produces(value= MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public Response getUsuario(@PathParam("id") long id) throws PruebaExcepcion {
+    public Response getUsuario(@PathParam("id") long id) throws PruebaExcepcion, ParseException {
 
         DaoUsuario dao = new DaoUsuario();
         DtoUsuario dtoUsuario = new DtoUsuario();

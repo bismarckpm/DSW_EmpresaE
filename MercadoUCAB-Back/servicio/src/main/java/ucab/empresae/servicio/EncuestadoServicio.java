@@ -21,7 +21,7 @@ public class EncuestadoServicio {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addEncuestado(DtoEncuestado dtoEncuestado){
+    public Response addEncuestado(DtoEncuestado dtoEncuestado) throws ParseException {
 
         String rol = "Encuestado";
         long tipoUsuario = 1;
@@ -45,7 +45,11 @@ public class EncuestadoServicio {
         encuestadoEntity.setSegundoNombre(dtoEncuestado.getSegundoNombre());
         encuestadoEntity.setPrimerApellido(dtoEncuestado.getPrimerApellido());
         encuestadoEntity.setSegundoApellido(dtoEncuestado.getSegundoApellido());
-        encuestadoEntity.setFechaNacimiento(dtoEncuestado.getFechaNacimiento());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date fechaNacimiento = sdf.parse(dtoEncuestado.getFechaNacimiento());
+
+        encuestadoEntity.setFechaNacimiento(fechaNacimiento);
         encuestadoEntity.setEstado(dtoEncuestado.getEstado());
 
         EstadoCivilEntity estadoCivilEntity = daoEstadoCivil.find(dtoEncuestado.getEstadoCivil().get_id(), EstadoCivilEntity.class);
@@ -110,7 +114,7 @@ public class EncuestadoServicio {
     @GET
     @Produces(value=MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public Response getEncuestado(@PathParam("id") long id) throws PruebaExcepcion {
+    public Response getEncuestado(@PathParam("id") long id) throws PruebaExcepcion, ParseException {
         DaoEncuestado dao = new DaoEncuestado();
         EncuestadoEntity encuestadoEntity = dao.find(id, EncuestadoEntity.class);
 
@@ -123,7 +127,13 @@ public class EncuestadoServicio {
             dtoEncuestado.setSegundoNombre(encuestadoEntity.getSegundoNombre());
             dtoEncuestado.setPrimerApellido(encuestadoEntity.getPrimerApellido());
             dtoEncuestado.setSegundoApellido(encuestadoEntity.getSegundoApellido());
-            dtoEncuestado.setFechaNacimiento(encuestadoEntity.getFechaNacimiento());
+
+            DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String fechaNacimiento = sdf.format(encuestadoEntity.getFechaNacimiento());
+
+            //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            //Date fechaNacimiento = sdf.parse(encuestadoEntity.getFechaNacimiento());
+            dtoEncuestado.setFechaNacimiento(fechaNacimiento);
 
             DtoEstadoCivil dtoEstadoCivil = new DtoEstadoCivil();
             dtoEstadoCivil.set_id(encuestadoEntity.getEstadoCivil().get_id());
@@ -246,7 +256,7 @@ public class EncuestadoServicio {
     @PUT
     @Consumes(value=MediaType.APPLICATION_JSON)
     @Produces(value=MediaType.APPLICATION_JSON)
-    @Path("/{id}")
+    @Path("/updateEstado/{id}")
     public Response updateEstadoEncuestado(@PathParam("id") long id, DtoEncuestado dtoEncuestado) {
         DaoEncuestado daoEncuestado = new DaoEncuestado();
         EncuestadoEntity encuestadoEntity = daoEncuestado.find(id, EncuestadoEntity.class);
@@ -265,6 +275,7 @@ public class EncuestadoServicio {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/{id}")
     public Response updateEncuestado(DtoEncuestado dtoEncuestado) {
 
         String rol = "Encuestado";
@@ -284,7 +295,7 @@ public class EncuestadoServicio {
         encuestadoEntity.setSegundoNombre(dtoEncuestado.getSegundoNombre());
         encuestadoEntity.setPrimerApellido(dtoEncuestado.getPrimerApellido());
         encuestadoEntity.setSegundoApellido(dtoEncuestado.getSegundoApellido());
-        encuestadoEntity.setFechaNacimiento(dtoEncuestado.getFechaNacimiento());
+        //encuestadoEntity.setFechaNacimiento(dtoEncuestado.getFechaNacimiento());
 
         EstadoCivilEntity estadoCivilEntity = daoEstadoCivil.find(dtoEncuestado.getEstadoCivil().get_id(), EstadoCivilEntity.class);
         encuestadoEntity.setEdocivil(estadoCivilEntity);

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import {Usuario} from '../models/usuario';
+import {Analista} from "../models/analista";
 
 
 
@@ -42,6 +43,14 @@ export class UsuarioService {
        );
    }
 
+  getAnalistas(): Observable<Usuario[]>{
+    return this.http.get<Usuario[]>(this.apiurl+'/analista')
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
+  }
+
   getUsuario(id): Observable<Usuario[]>{
     return this.http.get<Usuario[]>(this.apiurl + '/usuario/' + id)
       .pipe(
@@ -59,7 +68,15 @@ export class UsuarioService {
   }
 
   updateUsuario(id, Usuario): Observable<Usuario[]>{
-    return this.http.put<Usuario[]>(this.apiurl + '/usuario/' + id, JSON.stringify(Usuario), this.httpOptions)
+    return this.http.put<Usuario[]>(this.apiurl + '/usuario/updateAdmin/' + id, JSON.stringify(Usuario), this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+
+  updateUsuarioPerfil(id, Usuario): Observable<Usuario[]>{
+    return this.http.put<Usuario[]>(this.apiurl + '/usuario/updatePerfil/' + id, JSON.stringify(Usuario), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)

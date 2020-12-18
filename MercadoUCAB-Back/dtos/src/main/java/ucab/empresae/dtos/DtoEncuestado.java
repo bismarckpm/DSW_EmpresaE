@@ -1,6 +1,6 @@
 package ucab.empresae.dtos;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class DtoEncuestado extends DtoBase {
 
@@ -10,7 +10,7 @@ public class DtoEncuestado extends DtoBase {
     private String segundoNombre;
     private String primerApellido;
     private String segundoApellido;
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
 
     //Relaciones
     private DtoEstadoCivil estadoCivil;
@@ -74,11 +74,11 @@ public class DtoEncuestado extends DtoBase {
         this.segundoApellido = segundoApellido;
     }
 
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

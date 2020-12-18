@@ -19,7 +19,7 @@ public class PreguntaServicio {
 
         List<OpcionEntity> opciones = daoOpcion.getOpciones(pregunta);
 
-        for(OpcionEntity opcion : opciones){
+        for (OpcionEntity opcion : opciones) {
             OpcionEntity opcionEliminar = daoOpcion.find(opcion.get_id(), OpcionEntity.class);
             daoOpcion.delete(opcionEliminar);
         }
@@ -48,11 +48,11 @@ public class PreguntaServicio {
         DaoTipoPregunta daoTipoPregunta = new DaoTipoPregunta();
         DaoSubcategoria daoSubcategoria = new DaoSubcategoria();
         DaoOpcion daoOpcion = new DaoOpcion();
-        DaoPreguntaOpcion daoPreguntaOpcion= new DaoPreguntaOpcion();
+        DaoPreguntaOpcion daoPreguntaOpcion = new DaoPreguntaOpcion();
 
         PreguntaEntity pregunta = new PreguntaEntity();
 
-        if(pregunta != null) {
+        if (pregunta != null) {
             pregunta.setDescripcion(dtoPregunta.getDescripcion());
             pregunta.setEstado(dtoPregunta.getEstado());
 
@@ -65,11 +65,11 @@ public class PreguntaServicio {
             PreguntaEntity preguntaInsert = dao.insert(pregunta);
 
             // Tipo de Pregunta de Seleccion
-            if(dtoPregunta.getTipo().get_id() == 3 || dtoPregunta.getTipo().get_id() == 4) {
+            if (dtoPregunta.getTipo().get_id() == 3 || dtoPregunta.getTipo().get_id() == 4) {
 
                 String[] opciones = dtoPregunta.getOpciones();
                 int contador = 0;
-                while (contador<opciones.length) {
+                while (contador < opciones.length) {
                     OpcionEntity opcion_entidad = new OpcionEntity();
                     opcion_entidad.setDescripcion(opciones[contador]);
                     opcion_entidad.setEstado("a");
@@ -82,17 +82,17 @@ public class PreguntaServicio {
                     pregunta_opcion_nn.setPregunta(preguntaInsert);
                     daoPreguntaOpcion.insert(pregunta_opcion_nn);
 
-                    contador = contador+1;
+                    contador = contador + 1;
                 }
             }
 
             // Tipo de pregunta de Verdadero y Falso
-            if(dtoPregunta.getTipo().get_id() == 2) {   //Asigna en la n a n el verdadero o falso
+            if (dtoPregunta.getTipo().get_id() == 2) {   //Asigna en la n a n el verdadero o falso
                 List<OpcionEntity> opciones = new ArrayList<>();
                 opciones.add(new OpcionEntity("Verdadero", "a"));
                 opciones.add(new OpcionEntity("Falso", "a"));
 
-                for (OpcionEntity opcion: opciones) {
+                for (OpcionEntity opcion : opciones) {
                     daoOpcion.insert(opcion);
 
                     PreguntaOpcionEntity pregunta_opcion_nn = new PreguntaOpcionEntity();
@@ -103,7 +103,7 @@ public class PreguntaServicio {
                 }
             }
 
-            if(dtoPregunta.getTipo().get_id() == 5) {   //Asigna en la n a n EL rango
+            if (dtoPregunta.getTipo().get_id() == 5) {   //Asigna en la n a n EL rango
                 List<OpcionEntity> opciones = new ArrayList<>();
                 opciones.add(new OpcionEntity("1", "a"));
                 opciones.add(new OpcionEntity("2", "a"));
@@ -111,7 +111,7 @@ public class PreguntaServicio {
                 opciones.add(new OpcionEntity("4", "a"));
                 opciones.add(new OpcionEntity("5", "a"));
 
-                for (OpcionEntity opcion: opciones) {
+                for (OpcionEntity opcion : opciones) {
                     daoOpcion.insert(opcion);
 
                     PreguntaOpcionEntity pregunta_opcion_nn = new PreguntaOpcionEntity();
@@ -123,8 +123,7 @@ public class PreguntaServicio {
             }
 
             return Response.ok().entity(preguntaInsert).build();
-        }
-        else {
+        } else {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
     }
@@ -150,14 +149,14 @@ public class PreguntaServicio {
 
         DaoPregunta dao = new DaoPregunta();
         PreguntaEntity pregunta = dao.find(id, PreguntaEntity.class);
-        DaoPreguntaOpcion daoPreguntaOpcion= new DaoPreguntaOpcion();
+        DaoPreguntaOpcion daoPreguntaOpcion = new DaoPreguntaOpcion();
         DaoOpcion daoOpcion = new DaoOpcion();
 
-        if(pregunta != null) {
+        if (pregunta != null) {
 
             // SI LA PREGUNTA EXISTENTE TIENE OPCIONES ASOCIADAS, SE ELIMINAN.
 
-            if(pregunta.getTipo().get_id() == 2 || pregunta.getTipo().get_id() == 3 || pregunta.getTipo().get_id() == 4 || pregunta.getTipo().get_id() == 5){
+            if (pregunta.getTipo().get_id() == 2 || pregunta.getTipo().get_id() == 3 || pregunta.getTipo().get_id() == 4 || pregunta.getTipo().get_id() == 5) {
                 this.borrarOpciones(pregunta);
             }
 
@@ -173,11 +172,11 @@ public class PreguntaServicio {
             PreguntaEntity preguntaUpdate = dao.update(pregunta);
 
             // Tipo de Pregunta de Seleccion
-            if(dtoPregunta.getTipo().get_id() == 3 || dtoPregunta.getTipo().get_id() == 4) {
+            if (dtoPregunta.getTipo().get_id() == 3 || dtoPregunta.getTipo().get_id() == 4) {
 
                 String[] opciones = dtoPregunta.getOpciones();
                 int contador = 0;
-                while (contador<opciones.length) {
+                while (contador < opciones.length) {
                     OpcionEntity opcion_entidad = new OpcionEntity();
                     opcion_entidad.setDescripcion(opciones[contador]);
                     opcion_entidad.setEstado("a");
@@ -190,17 +189,17 @@ public class PreguntaServicio {
                     pregunta_opcion_nn.setPregunta(preguntaUpdate);
                     daoPreguntaOpcion.insert(pregunta_opcion_nn);
 
-                    contador = contador+1;
+                    contador = contador + 1;
                 }
             }
 
             // Tipo de pregunta de Verdadero y Falso
-            if(dtoPregunta.getTipo().get_id() == 2) {   //Asigna en la n a n el verdadero o falso
+            if (dtoPregunta.getTipo().get_id() == 2) {   //Asigna en la n a n el verdadero o falso
                 List<OpcionEntity> opciones = new ArrayList<>();
                 opciones.add(new OpcionEntity("Verdadero", "a"));
                 opciones.add(new OpcionEntity("Falso", "a"));
 
-                for (OpcionEntity opcion: opciones) {
+                for (OpcionEntity opcion : opciones) {
                     daoOpcion.insert(opcion);
 
                     PreguntaOpcionEntity pregunta_opcion_nn = new PreguntaOpcionEntity();
@@ -211,7 +210,7 @@ public class PreguntaServicio {
                 }
             }
 
-            if(dtoPregunta.getTipo().get_id() == 5) {   //Asigna en la n a n EL rango
+            if (dtoPregunta.getTipo().get_id() == 5) {   //Asigna en la n a n EL rango
                 List<OpcionEntity> opciones = new ArrayList<>();
                 opciones.add(new OpcionEntity("1", "a"));
                 opciones.add(new OpcionEntity("2", "a"));
@@ -219,7 +218,7 @@ public class PreguntaServicio {
                 opciones.add(new OpcionEntity("4", "a"));
                 opciones.add(new OpcionEntity("5", "a"));
 
-                for (OpcionEntity opcion: opciones) {
+                for (OpcionEntity opcion : opciones) {
                     daoOpcion.insert(opcion);
 
                     PreguntaOpcionEntity pregunta_opcion_nn = new PreguntaOpcionEntity();
@@ -231,16 +230,15 @@ public class PreguntaServicio {
             }
 
             return Response.ok(pregunta).build();
-        }
-        else {
+        } else {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
     }
 
     @GET
-    @Produces(value= MediaType.APPLICATION_JSON)
+    @Produces(value = MediaType.APPLICATION_JSON)
     @Path("/preguntasSubcategoria/{id}")
-    public Response getPreguntasbySubcategoria(@PathParam("id") long id){
+    public Response getPreguntasbySubcategoria(@PathParam("id") long id) {
 
         List<PreguntaEntity> preguntas = null;
         try {
@@ -248,7 +246,7 @@ public class PreguntaServicio {
             DaoPregunta dao = new DaoPregunta();
 
             //Busco el estudio con el id de la url, y a su vez hago la busqueda de las preguntas que tienen esa subcategoria
-            preguntas = dao.getPreguntasbySubcategoria(daoEstudio.find(id,EstudioEntity.class).getSubcategoria().get_id());
+            preguntas = dao.getPreguntasbySubcategoria(daoEstudio.find(id, EstudioEntity.class).getSubcategoria().get_id());
 
         } catch (Exception ex) {
             String problema = ex.getMessage();
@@ -273,6 +271,66 @@ public class PreguntaServicio {
             String problema = ex.getMessage();
         }
         return Response.ok(preguntas).build();
+    }
+
+    /*EL SIQUIENTE METODO PERMITE OBTENER LAS PREGUNTAS CON SUS OPCIONES PARA PODER FORMAR
+    LA ENCUESTA
+     */
+
+    @GET
+    @Produces(value = MediaType.APPLICATION_JSON)
+    @Path("/encuestaEstudio/{id}")
+    public List<PreguntaAux> getPreguntasyOpciones(@PathParam("id") long id) {
+
+        List<PreguntaEntity> preguntas = null;
+        List<PreguntaAux> preguntaAuxList = new ArrayList<PreguntaAux>();
+        DaoOpcion daoOpcion = new DaoOpcion();
+
+        try {
+            DaoPregunta dao = new DaoPregunta();
+            preguntas = dao.getPreguntasbyEstudio(id);
+
+            for(PreguntaEntity pregunta : preguntas){
+                PreguntaAux preguntaAux = new PreguntaAux(pregunta.get_id());
+                List<OpcionEntity> opciones = daoOpcion.getOpciones(pregunta);
+
+
+                preguntaAux.setDescripcion(pregunta.getDescripcion());
+                preguntaAux.setTipo(pregunta.getTipo());
+                preguntaAux.setOpcionesPregunta(opciones);
+
+                preguntaAuxList.add(preguntaAux);
+            }
+
+            return preguntaAuxList;
+
+        } catch (Exception ex) {
+            String problema = ex.getMessage();
+        }
+        return null;
+    }
+
+    @GET
+    @Produces(value = MediaType.APPLICATION_JSON)
+    @Path("/opcionesdePregunta/{id}")
+    public List<OpcionEntity> getOpcionesdePregunta(@PathParam("id") long id) {
+
+        try {
+            DaoPregunta dao = new DaoPregunta();
+            DaoOpcion daoOpcion = new DaoOpcion();
+            PreguntaEntity pregunta = dao.find(id, PreguntaEntity.class);
+
+
+            List<OpcionEntity> opciones = daoOpcion.getOpciones(pregunta);
+
+
+
+            return opciones;
+
+        } catch (Exception ex) {
+            String problema = ex.getMessage();
+        }
+        return null;
     }
 
 }

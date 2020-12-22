@@ -7,7 +7,7 @@ import ucab.empresae.servicio.MarcaServicio;
 
 public class MarcaServicio_Test {
 
-    @Test
+  /*  @Test
     public void getMarcasTest() throws Exception{
         MarcaServicio servicio = new MarcaServicio();
         Response resultado = servicio.getMarcas();
@@ -47,5 +47,5 @@ public class MarcaServicio_Test {
         MarcaServicio servicio = new MarcaServicio();
         Response resultado = servicio.deleteMarca(7);
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
-    }
+    }*/
 }

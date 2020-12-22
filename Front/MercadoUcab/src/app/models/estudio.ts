@@ -7,7 +7,7 @@ export class Estudio {
     _id: number;
     estado: string;
     nombre: string;
-    comentarioAnalista ?: string;
+    comentarioAnalista: string;
     edadMinima: number;
     edadMaxima: number;
     fechaInicio: string;

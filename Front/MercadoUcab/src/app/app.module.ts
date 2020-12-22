@@ -63,6 +63,10 @@ import { ClienteService } from './services/cliente.service';
 import { AnalistaService } from './services/analista.service';
 import { FormAnalistaAdminComponent } from './componentes/form-analista-admin/form-analista-admin.component';
 import { ListaAnalistaAdminComponent } from './componentes/lista-analista-admin/lista-analista-admin.component';
+import { PreguntaService } from './services/pregunta.service';
+import { PresentacionService } from './services/presentacion.service';
+import {ListaEstudiosAnalistaComponent} from './modulos/analista/lista-estudios-analista/lista-estudios-analista.component';
+import {ListaEstudiosEncuestadoComponent} from './modulos/encuestado/lista-estudios-encuestado/lista-estudios-encuestado.component';
 
 
 @NgModule({
@@ -109,7 +113,9 @@ import { ListaAnalistaAdminComponent } from './componentes/lista-analista-admin/
     FormEstudioClienteComponent,
     ListaEncuestadosComponent,
     FormAnalistaAdminComponent,
-    ListaAnalistaAdminComponent
+    ListaAnalistaAdminComponent,
+    ListaEstudiosAnalistaComponent,
+    ListaEstudiosEncuestadoComponent
   ],
   imports: [
     BrowserModule,
@@ -126,6 +132,8 @@ import { ListaAnalistaAdminComponent } from './componentes/lista-analista-admin/
     AdminService,
     ClienteService,
     MarcaService,
+    PreguntaService,
+    PresentacionService,
     SubcategoriaService,
     CategoriaService,
     EncuestaService,

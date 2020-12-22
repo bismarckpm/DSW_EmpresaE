@@ -10,7 +10,8 @@ import { Opcion } from '../models/opcion';
 export class OpcionService {
 
    //Definimos el url del api
-   apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+  //apiurl='http://localhost:3000';
+  apiurl = 'http://localhost:8080/servicio-1.0-SNAPSHOT/api';
 
   constructor(private http:HttpClient) { }
 // Http Options

@@ -154,6 +154,24 @@ public class DirectorioActivo {
         }
     }
 
+    public void updateRol(DtoUsuario user, String rol) {
+        try {
+            connectLDAP( _user, _password );
+            Attributes atbs = new BasicAttributes();
+            Attribute atb = new BasicAttribute("description", rol);
+            atbs.put(atb);
+
+            _ldapContext.modifyAttributes( String.format(_userDirectory + "," + _directory, user.getUsername())
+                    , DirContext.REPLACE_ATTRIBUTE,atbs );
+        }
+        catch(Exception exception) {
+            exception.printStackTrace();
+        }
+        finally {
+            disconnectLDAP();
+        }
+    }
+
 
     public void changePassword(DtoUsuario user) {
         try {

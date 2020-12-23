@@ -59,6 +59,7 @@ export class FormEstudioClienteComponent implements OnInit {
 
   addEstudio() {
     if (this.formEstudio.valid) {
+      this.estudio.lugar._id = this.auxParroquiaID;
       this.estudioService.createEstudioCliente(JSON.parse(localStorage.getItem("usuarioID")),this.estudio).subscribe((data: {}) => {
       });
     }

@@ -63,6 +63,7 @@ export class FormPreguntaComponent implements OnInit {
       this.addtipopregunta();
     }
 
+
   addPregunta(){
   console.log(this.Opciones)
 

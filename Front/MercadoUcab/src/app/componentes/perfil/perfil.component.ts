@@ -7,6 +7,7 @@ import { ClienteService } from 'src/app/services/cliente.service';
 import { AdminService } from 'src/app/services/admin.service';
 import { AnalistaService } from 'src/app/services/analista.service';
 import { EncuestadoService } from 'src/app/services/encuestado.service';
+import {LugarService} from "../../services/lugar.service";
 
 
 
@@ -30,11 +31,68 @@ export class PerfilComponent implements OnInit {
   @Input() Encuestado :any
   aux:any;
 
+  ////////////////////////////Edicion de datos ///////////////////////
+  @Input() ClienteData = {_id: 0, rif: '', razonSocial: '', estado: '',
+    lugar:  {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: ''}}}},
+    usuario: {_id: 0, username: '', estado: '', clave: '', correoelectronico: ''},
+    telefono: {_id: 0, numero: ''},
+  };
+
+
+  @Input() AnalistaData = {_id: 0, rol: '', username: '', clave: '', correoelectronico: '', estado: '', tipoUsuario: {_id: 0, descripcion: ''}};
+  @Input() AdministradorData = {_id: 0, rol: '', username: '', clave: '', correoelectronico: '', estado: '', tipoUsuario: {_id: 0, descripcion: ''}};
+
+
+  @Input() EncuestadoData = {_id: 0, primerNombre: '', segundoNombre: '' , primerApellido: '', segundoApellido: 0, fechaNacimiento: '', estado: '',
+    estadoCivil: {_id: 0, nombre: '', estado: ''},
+    nivelAcademico: {_id: 0, nombre: '', estado: ''},
+    medioConexion: {_id: 0, nombre: '', estado: ''},
+    genero: {_id: 0, nombre: '', estado: ''},
+    ocupacion: {_id: 0, nombre: '', estado: ''},
+    nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
+    telefono: {_id: 0, numero: ''},
+    hijo: {_id: 0, fechaNacimientoHijo: '', generoHijo: ''},
+    lugar:  {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: ''}}}},
+    usuario: {_id: 0, username: '', estado: '', clave: '', correoelectronico: ''},
+  };
+
+
+//////////////////////////////////Vergas para los dropdpows//////////
+  lugar: any;
+  estados: any;
+  parroquias: any;
+  municipios: any;
+  auxEstadoID: number;
+  auxMunicipioID: number;
+  auxParroquiaID: number;
+
+  estadoCivil: any;
+  nivelAcademico: any;
+  medioConexion: any;
+  genero: any;
+  ocupacion: any;
+  nivelSocioEconomico: any;
+  hijo: any;
+  username: any;
+  clave: any;
+  correoElectronico: any;
+  telefono: any;
+
+
+
   /////////////////Vainas de los formularios
   formAnalista:FormGroup;
   formAdmin:FormGroup;
   formEncuestado:FormGroup;
   formCliente:FormGroup;
+
+////Patrones de Validaciones
+  patronCorreoUsuario: any = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+
+  patronCorreoCliente: any = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  patronRIFCliente: any = /^([VEJPGvejpg]{1})-([0-9]{8})-([0-9]{1}$)/;
+  patronTelefonoCliente: any = /^[0-9\s]+$/;
 
 
 
@@ -53,6 +111,7 @@ export class PerfilComponent implements OnInit {
     public administradroService: AdminService,
     public analistaService: AnalistaService,
     public encuestadoservice: EncuestadoService,
+    public lugarService: LugarService,
     public actRoute: ActivatedRoute,
     public router: Router,
     private formBuilder: FormBuilder
@@ -112,7 +171,13 @@ export class PerfilComponent implements OnInit {
       }
     });
 
+  }
 
+  Editar(){
+    this.AdministradorData=this.Administrador;
+    this.AnalistaData=this.Analista;
+    this.ClienteData=this.Cliente;
+    this.EncuestadoData=this.Encuestado;
   }
 
 
@@ -129,34 +194,74 @@ export class PerfilComponent implements OnInit {
     if(this.formAdmin.valid || this.formAnalista.valid|| this.formCliente.valid|| this.formEncuestado.valid ){
 
       if((JSON.parse(localStorage.getItem("rol") )) == "Administrador"){
-        this.administradroService.updateAdministrador(this.Administrador._id,this.Administrador)
+        this.usuarioService.updateUsuarioPerfil(this.Administrador._id,this.Administrador)
       }
 
       if((JSON.parse(localStorage.getItem("rol") )) == "Cliente"){
-        this.clienteService.updateCliente(this.Cliente._id,this.Cliente);
+        this.clienteService.updateClientePerfil(this.Cliente._id,this.Cliente);
       }
 
       if((JSON.parse(localStorage.getItem("rol") )) == "Encuestado"){
         console.log("ENTRO EN LA LLAMADA");
-        this.encuestadoservice.updateEncuestado(this.Encuestado._id,this.Encuestado)
+        this.encuestadoservice.updateEncuestadoPerfil(this.Encuestado._id,this.Encuestado)
       }
 
       if((JSON.parse(localStorage.getItem("rol") )) == "Analista"){
-        this.analistaService.updateAnalista(this.Analista._id,this.Analista)
+        this.usuarioService.updateUsuarioPerfil(this.Analista._id,this.Analista)
       }
 
     }
 
   }
 
+  busquedaMunicipio(id){
+    // El ID es del estado
+    this.auxEstadoID = id;
+    // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
+    if (id > 0 ){
+      this.lugarService.getMunicipio(this.auxEstadoID).subscribe((data: {}) => {
+        this.municipios = data;
+      });
+    }
+
+  }
+
+  busquedaParroquia(id){
+    // El ID es del estado
+    this.auxMunicipioID = id;
+    // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
+    if (id > 0 ) {
+      this.lugarService.getParroquia(this.auxMunicipioID, id).subscribe((data: {}) => {
+        this.parroquias = data;
+      });
+    }
+  }
+
+  seleccionarParroquia(id){
+    this.auxParroquiaID = id;
+  }
+
+//Validaciones Cliente
+  get rifCliente() {return this.formCliente.get('rifCliente'); }
+  get razonSocialCliente() {return this.formCliente.get('razonSocialCliente'); }
+  get estadoCliente() {return this.formCliente.get('estadoCliente'); }
+  get lugarCliente() {return this.formCliente.get('lugarCliente'); }
+  get telefonoCliente(){return this.formCliente.get('telefonoCliente'); }
+  get usernameCliente(){return this.formCliente.get('usernameCliente'); }
+  get claveCliente(){return this.formCliente.get('claveCliente'); }
+  get correoElectronicoCliente(){return this.formCliente.get('correoElectronicoCliente'); }
 
 
-
+////Validaciones Analista
+  get usernameUsuario(){return this.formAnalista.get('usernameUsuario');}
+  get estadoUsuario(){return this.formAnalista.get('estadoUsuario');}
+  get claveUsuario(){return this.formAnalista.get('claveUsuario');}
+  get correoElectronicoUsuario(){return this.formAnalista.get('correoElectronicoUsuario');}
+  get descripcionTipoUsuario(){return this.formAnalista.get('descripcionTipoUsuario');}
 
 
 
 //Validaciones de encuestado
-
   get primerNombreEncuestado(){return this.formEncuestado.get('primerNombreEncuestado'); }
   get segundoNombreEncuestado(){return this.formEncuestado.get('segundoNombreEncuestado'); }
   get primerApellidoEncuestado(){return this.formEncuestado.get('primerApellidoEncuestado'); }
@@ -178,7 +283,6 @@ export class PerfilComponent implements OnInit {
   get claveEncuestado(){return this.formEncuestado.get('claveEncuestado'); }
   get correoElectronicoEncuestado(){return this.formEncuestado.get('correoElectronicoEncuestado'); }
   get correoElectronicoAnalista(){return this.formEncuestado.get('correoElectronicoAnalista'); }
-  get correoElectronicoCliente(){return this.formEncuestado.get('correoElectronicoCliente'); }
   get correoElectronicoAdmin(){return this.formEncuestado.get('correoElectronicoAdmin'); }
 
 
@@ -187,21 +291,29 @@ export class PerfilComponent implements OnInit {
   createFormAdmin(): void {
     this.formAdmin = this.formBuilder.group({
       correoElectronicoAdmin: ['', [Validators.required, Validators.pattern(this.patronCorreo)]],
-
     });
   }
 
   createFormCliente(): void {
     this.formCliente = this.formBuilder.group({
-      correoElectronicoCliente: ['', [Validators.required, Validators.pattern(this.patronCorreo)]],
-
+      rifCliente: ['', [Validators.required, Validators.pattern(this.patronRIFCliente)]],
+      razonSocialCliente: ['', Validators.required],
+      estadoCliente: ['', Validators.required],
+      lugarCliente: ['', Validators.required],
+      usernameCliente: ['', Validators.required],
+      claveCliente: ['', Validators.required],
+      telefonoCliente: ['', [Validators.required, Validators.pattern(this.patronRIFCliente), Validators.maxLength(11)]],
+      correoElectronicoCliente: ['', [Validators.required, Validators.pattern(this.patronCorreoCliente)]]
     });
   }
 
   createFormAnalista(): void {
-    this.formCliente = this.formBuilder.group({
-      correoElectronicoAnalista: ['', [Validators.required, Validators.pattern(this.patronCorreo)]],
-
+    this.formAnalista = this.formBuilder.group({
+      usernameUsuario: ['', Validators.required],
+      estadoUsuario: ['',  Validators.required],
+      claveUsuario: ['', Validators.required],
+      descripcionTipoUsuario: ['', Validators.required],
+      correoElectronicoUsuario: ['', [Validators.required, Validators.pattern(this.patronCorreoUsuario)]],
     });
   }
 
@@ -225,13 +337,9 @@ export class PerfilComponent implements OnInit {
       telefonoEncuestado: ['', [Validators.required, Validators.pattern(this.patronTelefonoEncuestado), Validators.maxLength(11)]],
       usuarioEncuestado: ['', Validators.required],
       correoElectronicoEncuestado: ['', [Validators.required, Validators.pattern(this.patronCorreo)]],
-
-
     });
   }
 
 
 
-
 }
-

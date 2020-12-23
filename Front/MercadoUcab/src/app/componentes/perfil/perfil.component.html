@@ -1,3 +1,4 @@
+
 <div class="registro">
   <div class="container">
 
@@ -16,7 +17,7 @@
         </div>
         <div class="form-group col-md-6">
           <label > Correo</label>
-          <input type="text" class="form-control" [(ngModel)]="Administrador.correoelectronico" value="Administrador.correoelectronico">
+          <input type="text" class="form-control" [(ngModel)]="Administrador.correoelectronico" value="Administrador.correoelectronico" readonly="readonly">
         </div>
       </div>
 
@@ -29,7 +30,7 @@
           <button type="button"  class=" btn btn-primary" data-toggle="modal"  data-target="#exampleModal" > Cambio de clave </button>
         </div>
         <div class="form-group col-md-2 my-auto">
-          <button type="button"  class="btn btn-success" (click)=GuardarPerfil > Guardar cambios </button>
+          <button type="button"  class="btn btn-success" data-toggle="modal"  data-target="#cambioAdmin" (click)=editar() > Guardar cambios </button>
         </div>
       </div>
 
@@ -92,7 +93,7 @@
 
       <div class="form-row">
         <div class="form-group col-md-2">
-          <button type="button"  class="btn btn-success" (click)=GuardarPerfil > Guardar cambios </button>
+          <button type="button"  class="btn btn-success" data-toggle="modal"  data-target="#cambioCliente"(click)=editar() > Guardar cambios </button>
         </div>
       </div>
     </div>
@@ -116,7 +117,7 @@
         </div>
         <div class="form-group col-md-4">
           <label > Correo </label>
-          <input type="text" class="form-control" [(ngModel)]="Encuestado.usuario.correoelectronico" value="Encuestado.usuario.correoelectronico" >
+          <input type="text" class="form-control" [(ngModel)]="Encuestado.usuario.correoelectronico" value="Encuestado.usuario.correoelectronico"readonly="readonly" >
         </div>
         <div class="form-group col-md-2 my-auto">
           <button type="button"  class="btn btn-primary" data-toggle="modal"  data-target="#exampleModal" > Cambio de clave </button>
@@ -132,19 +133,19 @@
       <div class="form-row">
         <div class="form-group col-md-3">
           <label for=""> Primer nombre </label>
-          <input type="text" class="form-control" [(ngModel)]="Encuestado.primerNombre" value="Encuestado.primerNombre">
+          <input type="text" class="form-control" [(ngModel)]="Encuestado.primerNombre" value="Encuestado.primerNombre" readonly="readonly">
         </div>
         <div class="form-group col-md-3">
           <label for="">Segundo Nombre </label>
-          <input type="text" class="form-control" [(ngModel)]="Encuestado.segundoNombre" value="Encuestado.segundoNombre" >
+          <input type="text" class="form-control" [(ngModel)]="Encuestado.segundoNombre" value="Encuestado.segundoNombre" readonly="readonly">
         </div>
         <div class="form-group col-md-3">
           <label for=""> Primer Apellido </label>
-          <input type="text" class="form-control" [(ngModel)]="Encuestado.primerApellido" value="Encuestado.primerApellido" >
+          <input type="text" class="form-control" [(ngModel)]="Encuestado.primerApellido" value="Encuestado.primerApellido" readonly="readonly">
         </div>
         <div class="form-group col-md-3">
           <label for="">Segundo Apellido </label>
-          <input type="text" class="form-control" [(ngModel)]="Encuestado.segundoApellido" value="Encuestado.segundoApellido">
+          <input type="text" class="form-control" [(ngModel)]="Encuestado.segundoApellido" value="Encuestado.segundoApellido" readonly="readonly">
         </div>
       </div>
 
@@ -192,7 +193,7 @@
           <input type="text" class="form-control" [(ngModel)]="Encuestado.nivelSocioEconomico.nombre" value="Encuestado.nivelSocioEconomico.nombre" readonly="readonly">
         </div>
         <div class="form-group col-md-2 my-auto">
-          <button type="button"  class="btn btn-success" (click)=GuardarPerfil > Guardar cambios </button>
+          <button type="button"  class="btn btn-success" data-toggle="modal"  data-target="#cambioEncuestado"(click)=editar() > Guardar cambios </button>
         </div>
 
       </div>
@@ -232,11 +233,14 @@
         </div>
       </div>
 
+      <div class="form-group col-md-2 my-auto">
+        <button type="button"  class="btn btn-success" data-toggle="modal"  data-target="#cambioAnalista"(click)=editar() > Guardar cambios </button>
+      </div>
 
-</div>
+    </div>
 
 
-
+    <!--/////////////////////////////////////////////////////////////Modal cambio de clave///////////////////////////////////////////////////////////////////////////////-->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -248,14 +252,14 @@
             </button>
           </div>
 
-          <div class="modal-body">
+          <div class="modal-body ">
             <form >
               <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content ">
                   <div class="form-group">
                     <div class="row">
                       <div class="col-md-6 mb-3">
-                        <label for="nombre">Clave Vieja</label>
+                        <label for="nombre">Ingrese su Clave Actual</label>
                         <input type="password" [(ngModel)]="usuario.clave" class="form-control"   name="nombre" id="nombre"  >
 
                       </div>
@@ -264,7 +268,7 @@
                   <div class="form-group">
                     <div class="row">
                       <div class="col-md-6 mb-3">
-                        <label for="nombre">Repetir la nueva contraseña </label>
+                        <label for="nombre">Ingrese la Nueva Clave</label>
                         <input type="password" [(ngModel)]="auxUsuario.nuevaClave" class="form-control"   name="nombre" id="nombre"  >
 
                       </div>
@@ -286,7 +290,11 @@
       </div>
     </div>
 
-    <br>
   </div>
 </div>
+    <!--///////////////////////////////////////////////////////////////////////////////Modal analista Editar perfil/////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+
+
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 

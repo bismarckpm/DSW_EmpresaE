@@ -106,14 +106,14 @@ export class FormClientesComponent implements OnInit {
 
   createForm(): void {
     this.formCliente = this.formBuilder.group({
-      rifCliente: ['', [Validators.required, Validators.pattern(this.patronRIFCliente)]],
-      razonSocialCliente: ['', Validators.required],
-      estadoCliente: ['', Validators.required],
-      lugarCliente: ['', Validators.required],
-      usernameCliente: ['', Validators.required],
-      claveCliente: ['', Validators.required],
-      telefonoCliente: ['', [Validators.required, Validators.maxLength(11)]],
-      correoElectronicoCliente: ['', [Validators.required, Validators.pattern(this.patronCorreoCliente)]]
+      rifCliente: '',
+      razonSocialCliente: '',
+      estadoCliente: '',
+      lugarCliente: '',
+      usernameCliente: '',
+      claveCliente: '',
+      telefonoCliente: '',
+      correoElectronicoCliente: '',
     });
   }
 }

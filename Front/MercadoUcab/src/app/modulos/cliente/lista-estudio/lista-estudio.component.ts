@@ -79,7 +79,7 @@ export class ListaEstudioClienteComponent implements OnInit {
 
   updateEstudio(){
     if (this.formEstudio.valid) {
-    this.estudioService.createEstudioCliente(JSON.parse(localStorage.getItem("usuarioID")), this.estudioData).subscribe(data => {
+    this.estudioService.updateEstudio(JSON.parse(localStorage.getItem("usuarioID")), this.estudioData).subscribe(data => {
      })
      this.loadEstudios();
     }

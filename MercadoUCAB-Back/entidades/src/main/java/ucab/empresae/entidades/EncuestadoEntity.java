@@ -2,12 +2,12 @@ package ucab.empresae.entidades;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "encuestado", schema = "mercadeoucab")
 @NamedQueries({
-        @NamedQuery(name = "getEncuestadoByUsuario", query = "select e from EncuestadoEntity e where e.usuario = :usuario")
+        @NamedQuery(name = "getEncuestadoByUsuario", query = "select e from EncuestadoEntity e where e.usuario = :usuario"),
+        @NamedQuery(name = "getDataMuestraEstudio", query = "select enc from EncuestadoEntity enc where enc.lugar = :lugar and enc.nivelsocioeco = :nivelSocioeconomico")
 })
 public class EncuestadoEntity extends BaseEntity{
 

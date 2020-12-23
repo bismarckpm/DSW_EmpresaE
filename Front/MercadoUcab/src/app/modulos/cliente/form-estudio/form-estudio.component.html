@@ -54,7 +54,7 @@
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="fechaInicio">Fecha inicio</label>
-            <input type="text" class="form-control"  placeholder="AAAA/MM/DD"  [(ngModel)]="estudio.fechaInicio" formControlName="fechaInicioEstudio" value="fechaInicio">
+            <input type="text" class="form-control"  placeholder="AAAA-MM-DD"  [(ngModel)]="estudio.fechaInicio" formControlName="fechaInicioEstudio" value="fechaInicio">
             <div *ngIf="fechaInicioEstudio.invalid && (fechaInicioEstudio.dirty || fechaInicioEstudio.touched)" class="alert alert-danger">
               <div *ngIf="fechaInicioEstudio.errors.required">
                 Este campo es obligatorio
@@ -67,7 +67,7 @@
 
           <div class="col-md-6 mb-3">
             <label for="fechaFin">Fecha fin</label>
-            <input type="text" class="form-control"  placeholder="AAAA/MM/DD"  [(ngModel)]="estudio.fechaFin" formControlName="fechaFinEstudio" value="fechaFin">
+            <input type="text" class="form-control"  placeholder="AAAA-MM-DD"  [(ngModel)]="estudio.fechaFin" formControlName="fechaFinEstudio" value="fechaFin">
             <div *ngIf="fechaFinEstudio.invalid && (fechaFinEstudio.dirty || fechaFinEstudio.touched)" class="alert alert-danger">
               <div *ngIf="fechaFinEstudio.errors.required">
                 Este campo es obligatorio

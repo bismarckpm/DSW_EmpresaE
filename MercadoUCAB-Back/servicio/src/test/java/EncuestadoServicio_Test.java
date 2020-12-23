@@ -15,7 +15,7 @@ public class EncuestadoServicio_Test {
         dtoEncuestado.setSegundoNombre("nombre2");
         dtoEncuestado.setPrimerApellido("apellido1");
         dtoEncuestado.setSegundoApellido("apellido2");
-        dtoEncuestado.setFechaNacimiento("13/03/2020");
+        //dtoEncuestado.setFechaNacimiento("2020-03-12z");
         dtoEncuestado.setEstado("A");
 
         DtoEstadoCivil dtoEstadoCivil = new DtoEstadoCivil(1);

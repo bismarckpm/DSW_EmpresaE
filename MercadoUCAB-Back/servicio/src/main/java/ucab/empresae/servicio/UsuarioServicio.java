@@ -12,6 +12,7 @@ import ucab.empresae.excepciones.PruebaExcepcion;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.text.ParseException;
 import java.util.List;
 
 @Path("/usuario")
@@ -45,7 +46,7 @@ public class UsuarioServicio {
     @GET
     @Produces(value= MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public Response getUsuario(@PathParam("id") long id) throws PruebaExcepcion {
+    public Response getUsuario(@PathParam("id") long id) throws PruebaExcepcion, ParseException {
 
         DaoUsuario dao = new DaoUsuario();
         DtoUsuario dtoUsuario = new DtoUsuario();
@@ -106,8 +107,8 @@ public class UsuarioServicio {
     @PUT
     @Consumes(value=MediaType.APPLICATION_JSON)
     @Produces(value=MediaType.APPLICATION_JSON)
-    @Path("/{id}")
-    public Response updateTipo(@PathParam("id") long id, DtoUsuario dtoUsuario) {
+    @Path("/updateAdmin/{id}")
+    public Response updateUsuarioVistaAdmin(@PathParam("id") long id, DtoUsuario dtoUsuario) {
         DaoUsuario daoUsuario = new DaoUsuario();
         DaoTipoUsuario daoTipoUsuario = new DaoTipoUsuario();
         UsuarioEntity usuarioEntity = daoUsuario.find(id, UsuarioEntity.class);
@@ -127,6 +128,32 @@ public class UsuarioServicio {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
+
+    @PUT
+    @Consumes(value=MediaType.APPLICATION_JSON)
+    @Produces(value=MediaType.APPLICATION_JSON)
+    @Path("/updatePerfil/{id}")
+    public Response updateUsuarioVistaPerfil(@PathParam("id") long id, DtoUsuario dtoUsuario) {
+        DaoUsuario daoUsuario = new DaoUsuario();
+        DaoTipoUsuario daoTipoUsuario = new DaoTipoUsuario();
+        UsuarioEntity usuarioEntity = daoUsuario.find(id, UsuarioEntity.class);
+
+        if (usuarioEntity != null){
+            usuarioEntity.setEstado(dtoUsuario.getEstado());
+            usuarioEntity.setUsername(dtoUsuario.getUsername());
+            usuarioEntity.setTipousuario(daoTipoUsuario.getTipoUsuarioByDescripcion(dtoUsuario.getTipoUsuario().getDescripcion()));
+            UsuarioEntity resul = daoUsuario.update(usuarioEntity);
+
+            DirectorioActivo ldap = new DirectorioActivo();
+            ldap.updateEntry(dtoUsuario, usuarioEntity.getTipousuario().getDescripcion());
+
+            return Response.ok().entity(usuarioEntity).build();
+        }
+        else{
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
+
 
 
     @DELETE

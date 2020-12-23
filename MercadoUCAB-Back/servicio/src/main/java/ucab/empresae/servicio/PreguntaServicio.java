@@ -254,4 +254,83 @@ public class PreguntaServicio {
         return Response.ok(preguntas).build();
     }
 
+    @GET
+    @Produces(value= MediaType.APPLICATION_JSON)
+    @Path("/preguntasEstudio/{id}")
+    public Response getPreguntasbyEstudio(@PathParam("id") long id){
+
+        List<PreguntaEntity> preguntas = null;
+        try {
+            DaoEstudio daoEstudio = new DaoEstudio();
+            DaoPregunta dao = new DaoPregunta();
+
+            //Busco el estudio con el id de la url, y a su vez hago la busqueda de las preguntas que tienen ese estudio
+            preguntas = dao.getPreguntasbyEstudio(id);
+
+        } catch (Exception ex) {
+            String problema = ex.getMessage();
+        }
+        return Response.ok(preguntas).build();
+    }
+
+    /*EL SIQUIENTE METODO PERMITE OBTENER LAS PREGUNTAS CON SUS OPCIONES PARA PODER FORMAR
+    LA ENCUESTA
+     */
+
+    @GET
+    @Produces(value = MediaType.APPLICATION_JSON)
+    @Path("/encuestaEstudio/{id}")
+    public List<PreguntaAux> getPreguntasyOpciones(@PathParam("id") long id) {
+
+        List<PreguntaEntity> preguntas = null;
+        List<PreguntaAux> preguntaAuxList = new ArrayList<PreguntaAux>();
+        DaoOpcion daoOpcion = new DaoOpcion();
+
+        try {
+            DaoPregunta dao = new DaoPregunta();
+            preguntas = dao.getPreguntasbyEstudio(id);
+
+            for(PreguntaEntity pregunta : preguntas){
+                PreguntaAux preguntaAux = new PreguntaAux(pregunta.get_id());
+                List<OpcionEntity> opciones = daoOpcion.getOpciones(pregunta);
+
+
+                preguntaAux.setDescripcion(pregunta.getDescripcion());
+                preguntaAux.setTipo(pregunta.getTipo());
+                preguntaAux.setOpcionesPregunta(opciones);
+
+                preguntaAuxList.add(preguntaAux);
+            }
+
+            return preguntaAuxList;
+
+        } catch (Exception ex) {
+            String problema = ex.getMessage();
+        }
+        return null;
+    }
+
+    @GET
+    @Produces(value = MediaType.APPLICATION_JSON)
+    @Path("/opcionesdePregunta/{id}")
+    public List<OpcionEntity> getOpcionesdePregunta(@PathParam("id") long id) {
+
+        try {
+            DaoPregunta dao = new DaoPregunta();
+            DaoOpcion daoOpcion = new DaoOpcion();
+            PreguntaEntity pregunta = dao.find(id, PreguntaEntity.class);
+
+
+            List<OpcionEntity> opciones = daoOpcion.getOpciones(pregunta);
+
+
+
+            return opciones;
+
+        } catch (Exception ex) {
+            String problema = ex.getMessage();
+        }
+        return null;
+    }
+
 }

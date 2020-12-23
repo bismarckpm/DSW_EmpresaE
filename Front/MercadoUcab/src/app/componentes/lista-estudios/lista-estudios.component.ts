@@ -91,7 +91,7 @@ analistas:any;
   this.addSubcategoria();
   this.addLugar();
   this.addNivelSocioEconomico();
-  this.addAnalistas();
+
   this.estudioData = estudio;
  
 }

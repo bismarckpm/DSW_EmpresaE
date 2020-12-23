@@ -166,8 +166,8 @@ CREATE TABLE PREGUNTA_OPCION (
     estado ENUM('a','i') DEFAULT 'a',
     id_opcion INT NOT NULL,
     id_pregunta INT NOT NULL,
-    CONSTRAINT fk_opcion FOREIGN KEY (id_opcion) REFERENCES PREGUNTA(id) ON DELETE CASCADE,
-    CONSTRAINT fk_pregunta FOREIGN KEY (id_pregunta) REFERENCES OPCION(id) ON DELETE CASCADE,
+    CONSTRAINT fk_opcion FOREIGN KEY (id_opcion) REFERENCES OPCION(id) ON DELETE CASCADE,
+    CONSTRAINT fk_pregunta FOREIGN KEY (id_pregunta) REFERENCES PREGUNTA(id) ON DELETE CASCADE,
     CONSTRAINT unique_preg_opcion UNIQUE (id_opcion, id_pregunta)
 );
 

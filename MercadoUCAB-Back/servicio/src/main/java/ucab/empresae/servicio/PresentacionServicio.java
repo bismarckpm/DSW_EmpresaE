@@ -27,7 +27,6 @@ public class PresentacionServicio {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/addPresentacion")
     public Response addPresentacion(DtoPresentacion dtoPresentacion) {
 
         DaoPresentacion dao = new DaoPresentacion();

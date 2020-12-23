@@ -30,4 +30,18 @@ public class DaoEncuesta extends Dao<EncuestaEntity>{
             return null;
         }
     }
+
+    public List<EncuestaEntity> getPreguntasEncuesta(long id){
+
+        try{
+            TypedQuery<EncuestaEntity> encuestas = this._em.createNamedQuery("getPreguntasEncuesta", EncuestaEntity.class);
+            encuestas.setParameter("id", id).getResultList();
+
+            List<EncuestaEntity> resultado = encuestas.getResultList();
+            return resultado;
+
+        }catch (Exception e){
+            return null;
+        }
+    }
 }

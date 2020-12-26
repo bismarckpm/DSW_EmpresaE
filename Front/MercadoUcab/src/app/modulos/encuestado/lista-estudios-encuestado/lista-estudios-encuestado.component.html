@@ -18,7 +18,7 @@
           <td>{{ estudioEncuestado.subcategoria.nombre }}</td>
           <td>
             <div  class="d-flex justify-content-around">
-              <button  type="button" class="btn btn-success btn-sm" (click)="loadPreguntasResponder(i)"
+              <button  type="button" class="btn btn-success btn-sm" (click)="loadPreguntasResponder(estudioEncuestado._id)"
               data-toggle="modal" data-target="#exampleModal">Responder</button>
 
               <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -44,23 +44,27 @@
                               </div>
                             </div>
                             <div class="form-row">
-                              <div class="col-md-3 col-sm-3 mb-3">
+                              <div class="col-md-3 col-sm-2 mb-3">
                                 <label for="pregunta">Respuesta</label>
                               </div>
-                              <div class="col-md-7 col-sm-8 mb-3">
+                              <div class="col-md-7 col-sm-7 mb-3">
                                 <div [ngSwitch]="pregunta.tipo._id">
                                   <div *ngSwitchCase="1">
                                     <div class="form-group">
-                                      <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                                      <textarea class="form-control" id="campoRespuesta" rows="2" [(ngModel)]="respuestaAbierta" name="respuestaAbierta"></textarea>
                                     </div>
                                   </div>
                                   <div *ngSwitchCase="4">
-                                    <div class="form-check" *ngFor="let opcion of pregunta.opciones">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" [ngValue]= "opcion._id">
+                                    <!-- <div class="form-check" *ngFor="let opcion of pregunta.opciones">
+                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
+                                      [(ngModel)]="respuestaMultiple" name="respuestaMultiple">
                                       <label class="form-check-label" for="defaultCheck1">
                                         {{ opcion.descripcion }}
                                       </label>
-                                    </div>
+                                    </div> -->
+                                    <select class="custom-select d-block w-100" name="miselect" [(ngModel)]="respuestaMultiple" multiple="multiple">
+                                      <option [value]="opcion._id" *ngFor="let opcion of pregunta.opciones">{{opcion.descripcion}}</option>
+                                    </select>
                                   </div>
                                   <div *ngSwitchDefault>
                                     <select class="custom-select d-block w-100" id="pregunta" value="" id="pregunta" name="respuestaDOpcion._id"
@@ -75,7 +79,14 @@
                                 </div>
                               </div>
                               <div class="col-md-2 col-sm-3 mb-2">
-                                <button type="button" class="btn btn-primary" (click)="addOpcionesRespuesta(pregunta._id)">
+                                <button type="button" class="btn btn-primary" (click)="addOpcionesRespuesta(pregunta._id)" 
+                                [ngClass]="{'d-none': pregunta.tipo._id == 1 || pregunta.tipo._id == 4}">
+                                  Aceptar
+                                </button>
+                                <button type="button" class="btn btn-primary" *ngIf="pregunta.tipo._id == 1" (click)="addRespuestaAbierta(pregunta._id)">
+                                  Aceptar
+                                </button>
+                                <button type="button" class="btn btn-primary" *ngIf="pregunta.tipo._id == 4" (click)="addRespuestaMultiple(pregunta._id)">
                                   Aceptar
                                 </button>
                               </div>
@@ -87,7 +98,7 @@
 
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="listaOpciones = tipos = []">Cancelar</button>
-                      <button type="submit" class="btn btn-success" data-dismiss="modal" (click)="addEncuesRespuestaEncuesta()">Enviar respuesta</button>
+                      <button type="submit" class="btn btn-success" data-dismiss="modal" (click)="addRespuestasEncuesta()">Enviar respuesta</button>
                     </div>
                   </div>
                 </div>

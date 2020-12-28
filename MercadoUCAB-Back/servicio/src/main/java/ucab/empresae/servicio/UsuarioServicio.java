@@ -18,11 +18,11 @@ import java.util.List;
 @Path("/usuario")
 public class UsuarioServicio {
 
-
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addUsuario(DtoUsuario dtoUsuario){
+    //Registra Usuarios de Tipo Administrador y Analistas a la BD y el LDAP
+    public Response addUsuarioEmpleado(DtoUsuario dtoUsuario){
 
         DaoUsuario daoUsuario = new DaoUsuario();
         UsuarioEntity usuarioEntity = new UsuarioEntity();
@@ -46,6 +46,7 @@ public class UsuarioServicio {
     @GET
     @Produces(value= MediaType.APPLICATION_JSON)
     @Path("/{id}")
+    //Mediante el ID del usuario, retorna todos los datos de un usuario sea cual sea su tipo de usuario
     public Response getUsuario(@PathParam("id") long id) throws PruebaExcepcion, ParseException {
 
         DaoUsuario dao = new DaoUsuario();
@@ -93,6 +94,7 @@ public class UsuarioServicio {
     @GET
     @Path("/empleados")
     @Produces(value = MediaType.APPLICATION_JSON)
+    //Retorna una lista de todos los empleados registrados (Administradores y/o Analistas)
     public Response getEmpleados() {
         List<UsuarioEntity> empleados = null;
         try {
@@ -108,6 +110,7 @@ public class UsuarioServicio {
     @Consumes(value=MediaType.APPLICATION_JSON)
     @Produces(value=MediaType.APPLICATION_JSON)
     @Path("/updateAdmin/{id}")
+    //Modifica el estado de los usuarios (Activo/Inactivo) y el rol (Administrador/Analista)
     public Response updateUsuarioVistaAdmin(@PathParam("id") long id, DtoUsuario dtoUsuario) {
         DaoUsuario daoUsuario = new DaoUsuario();
         DaoTipoUsuario daoTipoUsuario = new DaoTipoUsuario();
@@ -115,7 +118,6 @@ public class UsuarioServicio {
 
         if (usuarioEntity != null){
             usuarioEntity.setEstado(dtoUsuario.getEstado());
-            usuarioEntity.setUsername(dtoUsuario.getUsername());
             usuarioEntity.setTipousuario(daoTipoUsuario.getTipoUsuarioByDescripcion(dtoUsuario.getTipoUsuario().getDescripcion()));
             UsuarioEntity resul = daoUsuario.update(usuarioEntity);
 
@@ -133,6 +135,7 @@ public class UsuarioServicio {
     @Consumes(value=MediaType.APPLICATION_JSON)
     @Produces(value=MediaType.APPLICATION_JSON)
     @Path("/updatePerfil/{id}")
+    //Modifica los datos de los usuarios
     public Response updateUsuarioVistaPerfil(@PathParam("id") long id, DtoUsuario dtoUsuario) {
         DaoUsuario daoUsuario = new DaoUsuario();
         DaoTipoUsuario daoTipoUsuario = new DaoTipoUsuario();
@@ -159,6 +162,7 @@ public class UsuarioServicio {
     @DELETE
     @Produces(value=MediaType.APPLICATION_JSON)
     @Path("/{id}")
+    //Elimina usuarios de la BD y el LDAP
     public Response deleteUsuario(@PathParam("id") long id) {
 
         try

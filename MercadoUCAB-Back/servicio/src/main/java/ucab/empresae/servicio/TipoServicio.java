@@ -1,7 +1,5 @@
 package ucab.empresae.servicio;
 
-
-import ucab.empresae.daos.Dao;
 import ucab.empresae.daos.DaoTipo;
 import ucab.empresae.dtos.DtoTipo;
 import ucab.empresae.entidades.TipoEntity;
@@ -17,6 +15,7 @@ public class TipoServicio {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
+    //Metodo para registrar tipos
     public Response addTipo(DtoTipo dtoTipo) {
 
         DaoTipo dao = new DaoTipo();
@@ -37,6 +36,7 @@ public class TipoServicio {
 
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
+    //Metodo que devuelve la lista de Tipos registrados
     public Response geTipos() {
         List<TipoEntity> tipos = null;
         try {
@@ -52,6 +52,7 @@ public class TipoServicio {
     @GET
     @Produces(value=MediaType.APPLICATION_JSON)
     @Path("/{id}")
+    //Metodo que recibiendo un ID por parametro devuelve los datos de un Tipo
     public Response getTipo(@PathParam("id") long id)
     {
         DaoTipo dao = new DaoTipo();
@@ -69,6 +70,7 @@ public class TipoServicio {
     @Consumes(value=MediaType.APPLICATION_JSON)
     @Produces(value=MediaType.APPLICATION_JSON)
     @Path("/{id}")
+    //Metodo que modifica los datos de un Tipo
     public Response updateTipo(@PathParam("id") long id, DtoTipo dtoTipo) {
         DaoTipo dao = new DaoTipo();
         TipoEntity tipo = dao.find(id, TipoEntity.class);
@@ -88,6 +90,7 @@ public class TipoServicio {
     @DELETE
     @Produces(value=MediaType.APPLICATION_JSON)
     @Path("/{id}")
+    //Elimina un tipo recibiendo el ID por parametro
     public Response deleteTipo(@PathParam("id") long id)
     {
         try

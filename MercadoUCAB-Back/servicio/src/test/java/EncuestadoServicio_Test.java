@@ -4,9 +4,11 @@ import ucab.empresae.dtos.*;
 import javax.ws.rs.core.Response;
 import ucab.empresae.servicio.EncuestadoServicio;
 
+
 public class EncuestadoServicio_Test {
 
     @Test
+    //Prueba Unitaria registro de Encuestados
     public void addEncuestadoTest() throws Exception{
         EncuestadoServicio servicio = new EncuestadoServicio();
         DtoEncuestado dtoEncuestado = new DtoEncuestado();
@@ -15,7 +17,7 @@ public class EncuestadoServicio_Test {
         dtoEncuestado.setSegundoNombre("nombre2");
         dtoEncuestado.setPrimerApellido("apellido1");
         dtoEncuestado.setSegundoApellido("apellido2");
-        //dtoEncuestado.setFechaNacimiento("2020-03-12z");
+        dtoEncuestado.setFechaNacimiento("2020-03-12");
         dtoEncuestado.setEstado("A");
 
         DtoEstadoCivil dtoEstadoCivil = new DtoEstadoCivil(1);
@@ -51,6 +53,7 @@ public class EncuestadoServicio_Test {
     }
 
     @Test
+    //Prueba Unitaria consulta de encuestados
     public void getEncuestadoTest() throws Exception{
         EncuestadoServicio servicio = new EncuestadoServicio();
         Response resultado = servicio.getEncuestado(3);
@@ -59,7 +62,8 @@ public class EncuestadoServicio_Test {
 
 
     @Test
-    public void getEncuestadosTest() throws Exception{
+    //Prueba Unitaria lista de encuestados
+    public void getEncuestadosTest(){
         EncuestadoServicio servicio = new EncuestadoServicio();
         Response resultado = servicio.getEncuestados();
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
@@ -68,7 +72,8 @@ public class EncuestadoServicio_Test {
 
 
     @Test
-    public void deleteEncuestadoTest() throws Exception{
+    //Prueba Unitaria de la eliminacion de encuestados
+    public void deleteEncuestadoTest(){
         EncuestadoServicio servicio = new EncuestadoServicio();
         Response resultado = servicio.deleteEncuestado(5);
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());

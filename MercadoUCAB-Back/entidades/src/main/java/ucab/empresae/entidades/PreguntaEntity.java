@@ -12,8 +12,6 @@ import java.util.List;
 public class PreguntaEntity extends BaseEntity{
     private String estado;
     private String descripcion;
-    //private List<EncuestaEntity> encuestas;
-    //private List<PreguntaOpcionEntity> preguntaOpcion;
 
     @Basic
     @Column(name = "estado")
@@ -57,24 +55,5 @@ public class PreguntaEntity extends BaseEntity{
         this.subcategoria = subcategoria;
     }
 
-    /*
-    @OneToMany(mappedBy = "pregunta")
-    public List<EncuestaEntity> getEncuestas() {
-        return encuestas;
-    }
-
-    public void setEncuestas(List<EncuestaEntity> encuestas) {
-        this.encuestas = encuestas;
-    }
-
-    @OneToMany(mappedBy = "pregunta")
-    public List<PreguntaOpcionEntity> getPreguntaOpcion() {
-        return preguntaOpcion;
-    }
-
-    public void setPreguntaOpcion(List<PreguntaOpcionEntity> preguntaOpcion) {
-        this.preguntaOpcion = preguntaOpcion;
-    }
-    */
 
 }

@@ -11,9 +11,17 @@ import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * API service encargada de realizar transacciones sobre la entidad Pregunta
+ */
+
 @Path("/pregunta")
 public class PreguntaServicio {
 
+    /**
+     * Metodo que recibe un objeto pregunta para borrar las opciones asociadas a esa pregunta
+     * @param pregunta objeto pregunta que se utiliza para obtener las opciones asociadas
+     */
     public void borrarOpciones(PreguntaEntity pregunta) {
         DaoOpcion daoOpcion = new DaoOpcion();
 
@@ -26,6 +34,11 @@ public class PreguntaServicio {
 
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/pregunta
+     * Metodo con anotacion GET que devuelve todas las preguntas registradas en el sistema
+     * @return Response con status ok al encontrar la informacion solicitada y la lista de preguntas
+     */
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getPreguntas() {
@@ -39,6 +52,12 @@ public class PreguntaServicio {
         return Response.ok(preguntas).build();
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/pregunta
+     * Metodo con anotacion POST que recibe un DtoPregunta y crea el objeto pregunta con los atributos en el DTO
+     * @param dtoPregunta posee todos los atributos necesarios para crear la pregunta y sus opciones
+     * @return Response con status ok al crear la pregunta con la informacion suministrada
+     */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -64,7 +83,7 @@ public class PreguntaServicio {
 
             PreguntaEntity preguntaInsert = dao.insert(pregunta);
 
-            // Tipo de Pregunta de Seleccion
+            // Tipo de Pregunta de Seleccion Simple o Seleccion multiple
             if (dtoPregunta.getTipo().get_id() == 3 || dtoPregunta.getTipo().get_id() == 4) {
 
                 String[] opciones = dtoPregunta.getOpciones();
@@ -103,6 +122,7 @@ public class PreguntaServicio {
                 }
             }
 
+            // Tipo de pregunta de Rango
             if (dtoPregunta.getTipo().get_id() == 5) {   //Asigna en la n a n EL rango
                 List<OpcionEntity> opciones = new ArrayList<>();
                 opciones.add(new OpcionEntity("1", "a"));
@@ -128,6 +148,12 @@ public class PreguntaServicio {
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/pregunta/id
+     * Metodo con anotacion DELETE que recibe un id y se encarga de eliminar de la base de datos a la entidad con ese id
+     * @param id identificador de la pregunta a ser eliminada
+     * @return Retorna un Response ok en caso de que la pregunta se haya eliminado de manera correcta
+     */
     @DELETE
     @Path("/{id}")
     @Produces(value = MediaType.APPLICATION_JSON)
@@ -143,6 +169,14 @@ public class PreguntaServicio {
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
+
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/pregunta/id
+     * Metodo con anotacion PUT que se encarga de actualizar una Pregunta en particular
+     * @param id identificador de la pregunta a ser actualizada
+     * @param dtoPregunta objeto que contiene los atributos que seran actualizados
+     * @return retorna a la Pregunta actualizada en caso de que la transacción haya sido exitosa
+     */
     @PUT
     @Path("/{id}")
     public Response updatePregunta(@PathParam("id") long id, DtoPregunta dtoPregunta) {
@@ -235,6 +269,12 @@ public class PreguntaServicio {
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/pregunta/preguntasSubcategoria/id
+     * Metodo con anotacion GET que devuelve todas las preguntas que pertenecen a la misma subcategoria de un estudio
+     * @param id identificador del estudio al que se le asignaran preguntas
+     * @return Response con status ok con la lista de Preguntas al encontrar la informacion solicitada.
+     */
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     @Path("/preguntasSubcategoria/{id}")
@@ -254,6 +294,12 @@ public class PreguntaServicio {
         return Response.ok(preguntas).build();
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/pregunta/preguntasEstudio/id
+     * Metodo con anotacion GET que devuelve todas las preguntas que fueron asignadas a un estudio
+     * @param id identificador del estudio al que se le asignaron preguntas
+     * @return Response con status ok con la lista de Preguntas asignadas a un estudio.
+     */
     @GET
     @Produces(value= MediaType.APPLICATION_JSON)
     @Path("/preguntasEstudio/{id}")
@@ -273,10 +319,12 @@ public class PreguntaServicio {
         return Response.ok(preguntas).build();
     }
 
-    /*EL SIQUIENTE METODO PERMITE OBTENER LAS PREGUNTAS CON SUS OPCIONES PARA PODER FORMAR
-    LA ENCUESTA
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/pregunta/encuestaEstudio/id
+     * Metodo con anotacion GET que permite obtener todas las preguntas con sus opciones (encuesta) de un estudio
+     * @param id identificador del estudio para obtener las preguntas con opciones (encuesta)
+     * @return Response con status ok con la lista de preguntas con opciones (encuesta) asignadas a un estudio.
      */
-
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     @Path("/encuestaEstudio/{id}")
@@ -310,6 +358,7 @@ public class PreguntaServicio {
         return null;
     }
 
+    /*
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     @Path("/opcionesdePregunta/{id}")
@@ -322,15 +371,12 @@ public class PreguntaServicio {
 
 
             List<OpcionEntity> opciones = daoOpcion.getOpciones(pregunta);
-
-
-
             return opciones;
 
         } catch (Exception ex) {
             String problema = ex.getMessage();
         }
         return null;
-    }
+    }*/
 
 }

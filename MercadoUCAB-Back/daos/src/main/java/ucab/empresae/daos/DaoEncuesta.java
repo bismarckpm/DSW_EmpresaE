@@ -7,6 +7,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
+/**
+ * Data access object de la entidad Encuesta
+ */
 public class DaoEncuesta extends Dao<EncuestaEntity>{
     private EntityManager _em;
     static DaoHandler _handler = new DaoHandler();
@@ -17,6 +20,10 @@ public class DaoEncuesta extends Dao<EncuestaEntity>{
         this._em = _handler.getSession();
     }
 
+    /**
+     * Metodo que permite obtener las encuestas
+     * @return lista de encuestas
+     */
     public List<EncuestaEntity> getEncuestas(){
 
         try{
@@ -31,6 +38,11 @@ public class DaoEncuesta extends Dao<EncuestaEntity>{
         }
     }
 
+    /**
+     * Metodo que permite obtener las preguntas asociadas a un estudio
+     * @param id identificador del estudio para obtener las preguntas de ese estudio
+     * @return lista de preguntas pertenecientes a la n a n encuesta
+     */
     public List<EncuestaEntity> getPreguntasEncuesta(long id){
 
         try{

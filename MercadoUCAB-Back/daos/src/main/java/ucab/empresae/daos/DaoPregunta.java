@@ -9,6 +9,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
+/**
+ * Data access object de la entidad Pregunta
+ */
 public class DaoPregunta extends Dao<PreguntaEntity>
 {
     private EntityManager _em;
@@ -19,6 +22,11 @@ public class DaoPregunta extends Dao<PreguntaEntity>
         this._em = _handler.getSession();
     }
 
+    /**
+     * Metodo que permite filtrar las preguntas por subcategoria
+     * @param id identificador de la subcategoria
+     * @return lista de preguntas pertenecientes a una subcategoria
+     */
     public List<PreguntaEntity> getPreguntasbySubcategoria(long id){
 
         try{
@@ -33,6 +41,11 @@ public class DaoPregunta extends Dao<PreguntaEntity>
         }
     }
 
+    /**
+     * Metodo que permite filtrar las preguntas por estudio
+     * @param id identificador del estudio
+     * @return lista de preguntas pertenecientes a un estudio
+     */
     public List<PreguntaEntity> getPreguntasbyEstudio(long id){
 
         try{

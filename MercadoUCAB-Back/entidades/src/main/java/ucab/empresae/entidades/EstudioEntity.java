@@ -1,5 +1,8 @@
 package ucab.empresae.entidades;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import javax.json.bind.annotation.JsonbDateFormat;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.Date;
@@ -82,6 +85,7 @@ public class EstudioEntity extends BaseEntity{
 
     @Basic
     @Column(name = "fecha_inicio")
+    @JsonbDateFormat(value = "yyyy-MM-dd")
     private Date fechaInicio;
     public Date getFechaInicio() {
         return fechaInicio;
@@ -93,6 +97,7 @@ public class EstudioEntity extends BaseEntity{
 
     @Basic
     @Column(name = "fecha_fin")
+    @JsonbDateFormat(value = "yyyy-MM-dd")
     private Date fechaFin;
     public Date getFechaFin() {
         return fechaFin;

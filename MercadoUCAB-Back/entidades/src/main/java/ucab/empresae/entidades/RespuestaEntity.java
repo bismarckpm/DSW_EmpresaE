@@ -7,8 +7,6 @@ import javax.persistence.*;
 public class RespuestaEntity extends BaseEntity{
     private String estado;
     private String texto;
-    private PreguntaOpcionEntity preguntaOpcion;
-    private EncuestadoEntity encuestado;
 
     @Basic
     @Column(name = "estado")
@@ -32,6 +30,7 @@ public class RespuestaEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_pregunta_opcion", referencedColumnName = "id", nullable = false)
+    private PreguntaOpcionEntity preguntaOpcion;
     public PreguntaOpcionEntity getPreguntaOpcion() {
         return preguntaOpcion;
     }
@@ -42,11 +41,23 @@ public class RespuestaEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_encuestado_pregunta", referencedColumnName = "id", nullable = false)
+    private EncuestadoEntity encuestado;
     public EncuestadoEntity getEncuestado() {
         return encuestado;
     }
 
     public void setEncuestado(EncuestadoEntity encuestado) {
         this.encuestado = encuestado;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "id_respuesta_estudio", referencedColumnName = "id", nullable = false)
+    private EstudioEntity estudio;
+    public EstudioEntity getEstudio() {
+        return estudio;
+    }
+
+    public void setEstudio(EstudioEntity estudio) {
+        this.estudio = estudio;
     }
 }

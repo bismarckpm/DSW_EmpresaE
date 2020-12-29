@@ -345,7 +345,7 @@ public class PreguntaServicio {
 
                 preguntaAux.setDescripcion(pregunta.getDescripcion());
                 preguntaAux.setTipo(pregunta.getTipo());
-                preguntaAux.setOpcionesPregunta(opciones);
+                preguntaAux.setOpciones(opciones);
 
                 preguntaAuxList.add(preguntaAux);
             }

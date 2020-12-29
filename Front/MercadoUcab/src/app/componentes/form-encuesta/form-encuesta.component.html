@@ -55,7 +55,7 @@
                         <label for="estudio">Estudio relacionado</label>
                     </div>
                     <div class="col-md-8 col-sm-6 mb-3">
-                        <select class="custom-select d-block w-100" [(ngModel)]="encuesta.estudio._id" id="estudio" 
+                        <select class="custom-select d-block w-100" [(ngModel)]="encuesta.estudio._id" id="estudio"
                         value="estudio._id" name="estudio._id" formControlName="estudio">
                             <option *ngFor="let est of estudios" [ngValue]= "est._id">{{ est.nombre }}</option>
                         </select>
@@ -86,7 +86,7 @@
                         <label for="pregunta">Pregunta {{ i+1 }}</label>
                     </div>
                     <div class="col-md-7 col-sm-8 mb-3">
-                        <select class="custom-select d-block w-100" [(ngModel)]="preguntaInsertar._id" id="pregunta" value="preguntaInsertar._id" 
+                        <select class="custom-select d-block w-100" [(ngModel)]="preguntaInsertar._id" id="pregunta" value="preguntaInsertar._id"
                         name="preguntaInsertar._id" formControlName="pregunta" >
                             <option>Choose...</option>
                             <option *ngFor="let pregunta of preguntasMostrar" [ngValue]= "pregunta._id">{{ pregunta.descripcion }}</option>
@@ -105,6 +105,6 @@
             <button type="button" class="btn btn-success">Crear pregunta inexistente</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="auxIterador = []">Cancelar</button>
             <button type="submit" class="btn btn-primary" (click)="addEncuesta()"  data-dismiss="modal" >Guardar</button>
-        </div>    
+        </div>
     </div>
 </div>

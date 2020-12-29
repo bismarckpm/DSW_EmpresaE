@@ -10,7 +10,7 @@ import { Pregunta } from '../../../models/pregunta';
 import { TipoPregunta } from '../../../models/tipo-pregunta';
 import { Opcion } from '../../../models/opcion';
 
-class Multiple { constructor(public id: number){} }
+class Multiple { constructor(public _id: number){} }
 
 @Component({
   selector: 'app-lista-estudios-encuestado',
@@ -32,10 +32,8 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
   respuestaAPregunta: any = {
     // id de la pregunta a responder
     _id: 0,
-    respuesta: {
-      texto: '',
-      opciones: []
-    }
+    texto: '',
+    opciones: []
   };
 
   // objeto para registrar la opcion seleccionada
@@ -58,6 +56,7 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
   constructor(
     public estudioService: EstudioService,
     private preguntaService: PreguntaService,
+    private encuestaService: EncuestaService,
     private formBuilder: FormBuilder,
     public actRoute: ActivatedRoute,
     public router: Router
@@ -68,11 +67,11 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
   }
 
   addRespuestasEncuesta(): void{
-    const idUsuario = JSON.parse(localStorage.getItem('usuarioID'));
     this.respuestaEncuesta.respuestas = this.listaRespuestas;
-    this.respuestaEncuesta.usuario = idUsuario;
+    this.respuestaEncuesta.usuario = JSON.parse(localStorage.getItem('usuarioID'));
     console.log('JSON a enviar....');
     console.log(this.respuestaEncuesta);
+    this.encuestaService.createRespuestaEncuesta(this.respuestaEncuesta).subscribe((data) => {});
   }
 
   loadEstudios(): void{
@@ -97,7 +96,7 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
     this.listaOpciones.push(this.respuestaDOpcion);
     this.respuestaDOpcion = {_id: 0};
     this.respuestaAPregunta._id = idPregunta;
-    this.respuestaAPregunta.respuesta.opciones = this.listaOpciones;
+    this.respuestaAPregunta.opciones = this.listaOpciones;
     this.listaOpciones = [];
     console.log('objeto respuesta a pregunta');
     console.log(this.respuestaAPregunta);
@@ -106,15 +105,13 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
     console.log(this.listaRespuestas);
     this.respuestaAPregunta = {
       _id: 0,
-      respuesta: {
-        texto: '',
-        opciones: []
-      }
+      texto: '',
+      opciones: []
     };
   }
 
   addRespuestaAbierta(idPregunta): void {
-    this.respuestaAPregunta.respuesta.texto = this.respuestaAbierta;
+    this.respuestaAPregunta.texto = this.respuestaAbierta;
     this.respuestaAbierta = '';
     this.respuestaAPregunta._id = idPregunta;
     console.log('objeto respuesta a pregunta');
@@ -124,10 +121,8 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
     console.log(this.listaRespuestas);
     this.respuestaAPregunta = {
       _id: 0,
-      respuesta: {
-        texto: '',
-        opciones: []
-      }
+      texto: '',
+      opciones: []
     };
   }
 
@@ -137,7 +132,7 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
     }
     console.log(this.listaOpciones);
     this.respuestaAPregunta._id = idPregunta;
-    this.respuestaAPregunta.respuesta.opciones = this.listaOpciones;
+    this.respuestaAPregunta.opciones = this.listaOpciones;
     this.listaOpciones = [];
     console.log('objeto respuesta a pregunta');
     console.log(this.respuestaAPregunta);
@@ -146,10 +141,8 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
     console.log(this.listaRespuestas);
     this.respuestaAPregunta = {
       _id: 0,
-      respuesta: {
-        texto: '',
-        opciones: []
-      }
+      texto: '',
+      opciones: []
     };
   }
 }

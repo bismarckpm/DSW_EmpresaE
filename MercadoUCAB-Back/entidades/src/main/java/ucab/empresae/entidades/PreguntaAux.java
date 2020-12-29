@@ -12,7 +12,7 @@ public class PreguntaAux extends BaseEntity{
         private TipoPreguntaEntity tipo;
         private SubcategoriaEntity subcategoria;
 
-        private List<OpcionEntity> opcionesPregunta; //atributo para generar la encuesta, (preguntas con opciones)
+        private List<OpcionEntity> opciones; //atributo para generar la encuesta, (preguntas con opciones)
 
         //Constructores
         public PreguntaAux() {
@@ -55,12 +55,12 @@ public class PreguntaAux extends BaseEntity{
             this.subcategoria = subcategoria;
         }
 
-        public List<OpcionEntity> getOpcionesPregunta() {
-            return opcionesPregunta;
+        public List<OpcionEntity> getOpciones() {
+            return opciones;
         }
 
-        public void setOpcionesPregunta(List<OpcionEntity> opcionesPregunta) {
-            this.opcionesPregunta = opcionesPregunta;
+        public void setOpciones(List<OpcionEntity> opciones) {
+            this.opciones = opciones;
         }
 
 

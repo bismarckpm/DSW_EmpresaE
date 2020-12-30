@@ -43,7 +43,7 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
     });
   }
 
-  loadDataMuestra(id): void{
+  loadDataMuestra(id): void {
     this.estudioService.getDataMuestra(id).subscribe(data => {
       this.encuestados = data;
     });
@@ -60,8 +60,8 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
 
   createForm() {
     this.formEstudioAnalista = this.formBuilder.group({
-      comentarioAnalista: ['', [Validators.required, Validators.maxLength(100)]],
-      estadoEstudio: ['', Validators.required],
+      comentarioAnalistaEstudio: ['', [Validators.required, Validators.maxLength(100)]],
+      estadoEstudioAnalista: ['', Validators.required],
     });
   }
 }

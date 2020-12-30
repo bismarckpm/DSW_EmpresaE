@@ -1,10 +1,10 @@
 package ucab.empresae.daos;
 
-import ucab.empresae.entidades.EncuestadoEntity;
-import ucab.empresae.entidades.UsuarioEntity;
+import ucab.empresae.entidades.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import java.util.List;
 
 public class DaoEncuestado extends Dao<EncuestadoEntity>{
 
@@ -25,6 +25,20 @@ public class DaoEncuestado extends Dao<EncuestadoEntity>{
 
             EncuestadoEntity resultado = encuestado.getSingleResult();
             return resultado;
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    public List<EncuestadoEntity> getDataMuestraEstudio(LugarEntity lugar, NivelSocioeconomicoEntity nivelSocioeconomico){
+
+        try{
+            TypedQuery<EncuestadoEntity> encuestados = this._em.createNamedQuery("getDataMuestraEstudio", EncuestadoEntity.class);
+            encuestados.setParameter("lugar", lugar).setParameter("nivelSocioeconomico", nivelSocioeconomico).getResultList();
+
+            List<EncuestadoEntity> resultado = encuestados.getResultList();
+            return resultado;
+
         }catch (Exception e){
             return null;
         }

@@ -222,8 +222,8 @@ export class RegistrarseComponent implements OnInit {
       generoHijoEncuestado: ['', Validators.required],
       telefonoEncuestado: ['', [Validators.required, Validators.pattern(this.patronTelefonoEncuestado), Validators.maxLength(11)]],
       usuarioEncuestado: ['', Validators.required],
-      usernameEncuestado: ['', [Validators.required, Validators.pattern(this.patronUsernameEncuestado)]],
-      claveEncuestado: ['', [Validators.required, Validators.pattern(this.patronClaveEncuestado)]],
+      usernameEncuestado: '',
+      claveEncuestado: '',
       correoElectronicoEncuestado: ['', [Validators.required, Validators.pattern(this.patronCorreoEncuestado)]],
     });
   }

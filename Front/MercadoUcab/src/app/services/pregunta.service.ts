@@ -60,7 +60,7 @@ export class PreguntaService {
   // }
 
   getPreguntasXSubcategoria(idEstudio): Observable<Pregunta[]>{
-    return this.http.get<Pregunta[]>(this.apiurl + '/preguntassubcategoria')
+    return this.http.get<Pregunta[]>(this.apiurl + '/pregunta/preguntasSubcategoria/' + idEstudio)
     .pipe(
       retry(1),
       catchError(this.handleError)

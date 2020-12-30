@@ -11,7 +11,6 @@ import { Analista } from '../models/analista';
 export class AnalistaService {
 
   secciones: string[] = [
-    'Inicio',
     'Perfil',
     'Estudios',
   ];

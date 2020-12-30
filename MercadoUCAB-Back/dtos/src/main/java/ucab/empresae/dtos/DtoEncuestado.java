@@ -1,5 +1,7 @@
 package ucab.empresae.dtos;
 
+import java.sql.Date;
+
 public class DtoEncuestado extends DtoBase {
 
     //Atributos

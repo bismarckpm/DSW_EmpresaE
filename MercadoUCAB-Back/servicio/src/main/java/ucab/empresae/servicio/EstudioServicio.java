@@ -4,6 +4,7 @@ import ucab.empresae.daos.*;
 import ucab.empresae.dtos.DtoCategoria;
 import ucab.empresae.dtos.DtoEstudio;
 import ucab.empresae.entidades.*;
+import ucab.empresae.excepciones.PruebaExcepcion;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -11,6 +12,7 @@ import javax.ws.rs.core.Response;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Path("/estudio")
 public class EstudioServicio extends AplicacionBase {
@@ -19,14 +21,15 @@ public class EstudioServicio extends AplicacionBase {
     private EstudioEntity estudio = EntidadesFactory.EstudioInstance();
 
     private void estudioAtributos(DtoEstudio dtoEstudio) {
-        this.estudio.setEstado(dtoEstudio.getEstado());
-        this.estudio.setNombre(dtoEstudio.getNombre());
-        this.estudio.setComentarioAnalista(dtoEstudio.getComentarioAnalista());
-        this.estudio.setEdadMinima(dtoEstudio.getEdadMinima());
-        this.estudio.setEdadMaxima(dtoEstudio.getEdadMaxima());
 
         try {
-            DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+            this.estudio.setEstado(dtoEstudio.getEstado());
+            this.estudio.setNombre(dtoEstudio.getNombre());
+            this.estudio.setComentarioAnalista(dtoEstudio.getComentarioAnalista());
+            this.estudio.setEdadMinima(dtoEstudio.getEdadMinima());
+            this.estudio.setEdadMaxima(dtoEstudio.getEdadMaxima());
+
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date fecha = dateFormat.parse(dtoEstudio.getFechaInicio());
             this.estudio.setFechaInicio(fecha);
 
@@ -118,6 +121,9 @@ public class EstudioServicio extends AplicacionBase {
     public Response solicitarEstudio(@PathParam("id") long id, DtoEstudio dtoEstudio) {
         try {
             estudioAtributos(dtoEstudio);
+            DaoUsuario daoUsuario1 = new DaoUsuario();
+            List<UsuarioEntity> listaAnalista = daoUsuario1.getAnalistas();
+            this.estudio.setAnalista(listaAnalista.get(1));
             this.estudio = this.dao.insert(this.estudio);
 
             DaoClienteEstudio daoClienteEstudio = new DaoClienteEstudio();
@@ -142,14 +148,15 @@ public class EstudioServicio extends AplicacionBase {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateEstudio(DtoEstudio dtoEstudio) {
+    public Response updateEstudio(@PathParam("id") long id, DtoEstudio dtoEstudio) {
         try {
-            if(dtoEstudio.get_id() == 0) {
-                return Response.status(Response.Status.NOT_ACCEPTABLE).build();
-            }
-            this.estudio = this.dao.find(dtoEstudio.get_id(), EstudioEntity.class);
-            estudioAtributos(dtoEstudio);
-            return Response.ok(this.dao.update(this.estudio)).build();
+            DaoEstudio daoEstudio = new DaoEstudio();
+            EstudioEntity estudio = daoEstudio.find(id, EstudioEntity.class);
+            estudio.setComentarioAnalista(dtoEstudio.getComentarioAnalista());
+            estudio.setEstado(dtoEstudio.getEstado());
+            daoEstudio.update(estudio);
+
+            return Response.ok(estudio).build();
         } catch (Exception ex) {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
@@ -159,13 +166,62 @@ public class EstudioServicio extends AplicacionBase {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response deleteEstudio(DtoCategoria dtoCategoria) {
+    public Response deleteEstudio(@PathParam("id") long id) {
         try {
-            this.estudio = this.dao.find(dtoCategoria.get_id(), EstudioEntity.class);
+            this.estudio = this.dao.find(id, EstudioEntity.class);
             return Response.ok(this.dao.delete(this.estudio)).build();
         } catch(Exception ex){
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
     }
 
+    @GET
+    @Produces(value= MediaType.APPLICATION_JSON)
+    @Path("/encuestado/{id}")                   //RECIBO EL ID DEL USUARIO
+    public Response getEstudiosbyEncuestado(@PathParam("id") long id) throws PruebaExcepcion {
+
+        /*PERMITE FILTRAR LOS ESTUDIOS QUE PUEDE VER EL ENCUESTADO
+        SEGUN LAS CARACTERISTICAS DEL ESTUDIO
+         */
+
+        List<EstudioEntity> estudios = null;
+        try {
+            DaoUsuario daoUsuario = new DaoUsuario();
+            DaoEncuestado daoEncuestado = new DaoEncuestado();
+            UsuarioEntity usuarioEntity = daoUsuario.find(id, UsuarioEntity.class);
+
+            EncuestadoEntity encuestadoEntity = daoEncuestado.getEncuestadoByUsuario(usuarioEntity);
+
+            DaoEstudio daoEstudio = new DaoEstudio();
+            estudios = daoEstudio.getEstudios(encuestadoEntity.getLugar(), encuestadoEntity.getNivelsocioeco());
+
+        } catch (Exception ex) {
+            String problema = ex.getMessage();
+        }
+        return Response.ok(estudios).build();
+    }
+
+    @GET
+    @Produces(value= MediaType.APPLICATION_JSON)
+    @Path("/dataMuestra/{id}")                   //RECIBO EL ID DEL ESTUDIO
+    public Response getDataMuestraEstudio(@PathParam("id") long id) throws PruebaExcepcion {
+
+        /*PERMITE DEVOLVER LA DATA MUESTRA ESTUDIO
+         */
+
+        List<EncuestadoEntity> dataMuestraEncuestados = null;
+        try {
+            DaoUsuario daoUsuario = new DaoUsuario();
+
+            DaoEstudio daoEstudio = new DaoEstudio();
+            EstudioEntity estudio = daoEstudio.find(id, EstudioEntity.class);
+
+            DaoEncuestado daoEncuestado = new DaoEncuestado();
+            dataMuestraEncuestados = daoEncuestado.getDataMuestraEstudio(estudio.getLugar(), estudio.getNivelSocioEconomico());
+
+        } catch (Exception ex) {
+            String problema = ex.getMessage();
+        }
+        return Response.ok(dataMuestraEncuestados).build();
+    }
 }

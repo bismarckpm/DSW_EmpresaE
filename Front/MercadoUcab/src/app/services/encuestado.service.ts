@@ -72,7 +72,7 @@ createEncuestado(Encuestado):Observable<Encuestado[]>{
   )
 }
 
-updateEncuestado(id,Encuestado):Observable<Encuestado[]>{
+updateEncuestadoPerfil(id,Encuestado):Observable<Encuestado[]>{
   return this.http.put<Encuestado[]>(this.apiurl+'/encuestado/'+id,JSON.stringify(Encuestado), this.httpOptions)
   .pipe(
     retry(1),

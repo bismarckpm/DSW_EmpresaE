@@ -6,13 +6,10 @@ import java.sql.Date;
 @Entity
 @Table(name = "estudio_encuestado", schema = "mercadeoucab")
 public class EstudioEncuestadoEntity extends BaseEntity{
-    private String estado;
-    private Date fechaRealizacion;
-    private EncuestadoEntity encuestado;
-    private EstudioEntity estudio;
 
     @Basic
     @Column(name = "estado")
+    private String estado;
     public String getEstado() {
         return estado;
     }
@@ -23,6 +20,7 @@ public class EstudioEncuestadoEntity extends BaseEntity{
 
     @Basic
     @Column(name = "fecha_realizacion")
+    private Date fechaRealizacion;
     public Date getFechaRealizacion() {
         return fechaRealizacion;
     }
@@ -33,6 +31,7 @@ public class EstudioEncuestadoEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_encuestado", referencedColumnName = "id", nullable = false)
+    private EncuestadoEntity encuestado;
     public EncuestadoEntity getEncuestado() {
         return encuestado;
     }
@@ -43,6 +42,7 @@ public class EstudioEncuestadoEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_estudio", referencedColumnName = "id", nullable = false)
+    private EstudioEntity estudio;
     public EstudioEntity getEstudio() {
         return estudio;
     }

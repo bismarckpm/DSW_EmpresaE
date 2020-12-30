@@ -48,7 +48,7 @@ public class DaoEstudio extends Dao<EstudioEntity> {
     public List<EstudioEntity> getEstudios(LugarEntity lugar, NivelSocioeconomicoEntity nivelSocioeconomico){
 
         try{
-            TypedQuery<EstudioEntity> estudios = this._em.createNamedQuery("getEstudiosEncuestado", EstudioEntity.class);
+            TypedQuery<EstudioEntity> estudios = this._em.createNamedQuery("getEstudios", EstudioEntity.class);
             estudios.setParameter("lugar", lugar).setParameter("nivelSocioeconomico", nivelSocioeconomico).getResultList();
 
             List<EstudioEntity> resultado = estudios.getResultList();
@@ -59,6 +59,19 @@ public class DaoEstudio extends Dao<EstudioEntity> {
         }
     }
 
+    public List<EstudioEntity> getEstudiosEncuestado(EncuestadoEntity encuestadoEntity){
+
+        try{
+            TypedQuery<EstudioEntity> estudios = this._em.createNamedQuery("getEstudiosEncuestado", EstudioEntity.class);
+            estudios.setParameter("encuestado", encuestadoEntity).getResultList();
+
+            List<EstudioEntity> resultado = estudios.getResultList();
+            return resultado;
+
+        }catch (Exception e){
+            return null;
+        }
+    }
 
 
 }

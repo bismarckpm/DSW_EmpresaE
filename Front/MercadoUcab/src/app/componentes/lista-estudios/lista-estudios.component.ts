@@ -99,42 +99,50 @@ addAnalistas(){
   this.analistaService.getAnalistas().subscribe( data =>{
     this.analistas = data;
     console.log(this.analistas);
-  })
-}
-
-/// Busqueda para los drop de lugar por pais seleccionado previamente
-addLugar(){
-  this.lugarService.getLugars().subscribe((Lugares: {}) => {
-    this.estados = Lugares;
   });
 }
 
-busquedaMunicipio(id){
-  // El ID es del estado
-  this.auxEstadoID = id;
-  // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
-  if (id > 0 ){
-    this.lugarService.getMunicipio(this.auxEstadoID).subscribe((data: {}) => {
-      this.municipios = data;
+/// Busqueda para los drop de lugar por pais seleccionado previamente
+  addLugar(){
+    this.lugarService.getLugars().subscribe((Lugares: {}) => {
+      this.estados = Lugares;
     });
   }
 
-}
+  busquedaMunicipio(id){
 
-busquedaParroquia(id){
-  // El ID es del estado
-  this.auxMunicipioID = id;
-  // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
-  if (id > 0 ) {
-    this.lugarService.getParroquia(this.auxMunicipioID, id).subscribe((data: {}) => {
-      this.parroquias = data;
-    });
+    // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
+    if (id > 0 ){
+      if(this.estudioData.lugar._id!= id || this.estudioData.lugar._id== id){
+        // El ID es del estado
+        this.auxEstadoID = id;
+        this.lugarService.getMunicipio(this.auxEstadoID).subscribe((data: {}) => {
+          this.municipios = data;
+        });
+      }
+    }
+
   }
-}
 
-seleccionarParroquia(id){
-  this.auxParroquiaID = id;
-}
+  busquedaParroquia(id){
+
+    // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
+    if (id > 0 ) {
+
+      if((this.estudioData.lugar.lugar._id!= id) || (this.estudioData.lugar.lugar._id == id)){
+        // El ID es del estado
+        this.auxMunicipioID = id;
+        this.lugarService.getParroquia(this.auxMunicipioID, id).subscribe((data: {}) => {
+          this.parroquias = data;
+        });
+      }
+
+    }
+  }
+
+  seleccionarParroquia(id){
+    this.auxParroquiaID = id;
+  }
 
 
   /// Esto es para mostrar en los drops doww

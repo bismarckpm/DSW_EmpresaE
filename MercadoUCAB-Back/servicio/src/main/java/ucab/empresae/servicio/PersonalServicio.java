@@ -1,7 +1,5 @@
 package ucab.empresae.servicio;
 
-import ucab.empresae.daos.Dao;
-import ucab.empresae.daos.DaoTipo;
 import ucab.empresae.daos.DaoTipoUsuario;
 import ucab.empresae.daos.DaoUsuario;
 import ucab.empresae.dtos.DtoUsuario;

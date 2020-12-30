@@ -13,6 +13,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Path("/estudio")
 public class EstudioServicio extends AplicacionBase {
@@ -23,7 +24,7 @@ public class EstudioServicio extends AplicacionBase {
     private void estudioAtributos(DtoEstudio dtoEstudio) {
 
         try {
-            this.estudio.setEstado(dtoEstudio.getEstado());
+            this.estudio.setEstado("Solicitado");
             this.estudio.setNombre(dtoEstudio.getNombre());
             this.estudio.setComentarioAnalista(dtoEstudio.getComentarioAnalista());
             this.estudio.setEdadMinima(dtoEstudio.getEdadMinima());
@@ -33,8 +34,7 @@ public class EstudioServicio extends AplicacionBase {
             Date fecha = dateFormat.parse(dtoEstudio.getFechaInicio());
             this.estudio.setFechaInicio(fecha);
 
-            fecha = dateFormat.parse(dtoEstudio.getFechaFin());
-            this.estudio.setFechaFin(fecha);
+            this.estudio.setFechaFin(null);
         }catch (Exception ex) {
             System.out.println(ex);
         }
@@ -123,7 +123,8 @@ public class EstudioServicio extends AplicacionBase {
             estudioAtributos(dtoEstudio);
             DaoUsuario daoUsuario1 = new DaoUsuario();
             List<UsuarioEntity> listaAnalista = daoUsuario1.getAnalistas();
-            this.estudio.setAnalista(listaAnalista.get(1));
+            int analistaAleatorio =  ThreadLocalRandom.current().nextInt(0, listaAnalista.size()-1);
+            this.estudio.setAnalista(listaAnalista.get(analistaAleatorio));
             this.estudio = this.dao.insert(this.estudio);
 
             DaoClienteEstudio daoClienteEstudio = new DaoClienteEstudio();
@@ -137,7 +138,22 @@ public class EstudioServicio extends AplicacionBase {
             clienteEstudioEntity.setEstudio(this.estudio);
             clienteEstudioEntity.setCliente(clienteEntity);
             clienteEstudioEntity.setEstado("a");
-            return Response.ok(daoClienteEstudio.insert(clienteEstudioEntity)).build();
+            daoClienteEstudio.insert(clienteEstudioEntity);
+
+            DaoEncuestado daoEncuestado = new DaoEncuestado();
+            List<EncuestadoEntity> dataMuestraEncuestados = null;
+            dataMuestraEncuestados = daoEncuestado.getDataMuestraEstudio(estudio.getLugar(), estudio.getNivelSocioEconomico());
+            DaoEstudioEncuestado daoEstudioEncuestado = new DaoEstudioEncuestado();
+            for(EncuestadoEntity encuestado : dataMuestraEncuestados){
+                EstudioEncuestadoEntity estudioEncuestadoEntity = new EstudioEncuestadoEntity();
+                estudioEncuestadoEntity.setEstado("Pendiente");
+                estudioEncuestadoEntity.setEstudio(this.estudio);
+                estudioEncuestadoEntity.setEncuestado(encuestado);
+
+                daoEstudioEncuestado.insert(estudioEncuestadoEntity);
+            }
+
+            return Response.ok().build();
 
         } catch(Exception ex) {
             return Response.status(Response.Status.NOT_ACCEPTABLE).entity(ex).build();
@@ -152,6 +168,9 @@ public class EstudioServicio extends AplicacionBase {
         try {
             DaoEstudio daoEstudio = new DaoEstudio();
             EstudioEntity estudio = daoEstudio.find(id, EstudioEntity.class);
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date fecha = dateFormat.parse(dtoEstudio.getFechaFin());
+            estudio.setFechaFin(fecha);
             estudio.setComentarioAnalista(dtoEstudio.getComentarioAnalista());
             estudio.setEstado(dtoEstudio.getEstado());
             daoEstudio.update(estudio);
@@ -193,7 +212,7 @@ public class EstudioServicio extends AplicacionBase {
             EncuestadoEntity encuestadoEntity = daoEncuestado.getEncuestadoByUsuario(usuarioEntity);
 
             DaoEstudio daoEstudio = new DaoEstudio();
-            estudios = daoEstudio.getEstudios(encuestadoEntity.getLugar(), encuestadoEntity.getNivelsocioeco());
+            estudios = daoEstudio.getEstudiosEncuestado(encuestadoEntity);
 
         } catch (Exception ex) {
             String problema = ex.getMessage();
@@ -224,4 +243,5 @@ public class EstudioServicio extends AplicacionBase {
         }
         return Response.ok(dataMuestraEncuestados).build();
     }
+
 }

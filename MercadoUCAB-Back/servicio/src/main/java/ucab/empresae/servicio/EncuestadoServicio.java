@@ -94,6 +94,20 @@ public class EncuestadoServicio {
         DirectorioActivo ldap = new DirectorioActivo();
         ldap.addEntryToLdap( dtoEncuestado.getUsuario(), rol );
 
+        List<EstudioEntity> estudios = null;
+        DaoEstudio daoEstudio = new DaoEstudio();
+        estudios = daoEstudio.getEstudios(lugarEntity, nivelSocioeconomicoEntity);
+        DaoEstudioEncuestado daoEstudioEncuestado = new DaoEstudioEncuestado();
+        for(EstudioEntity estudio : estudios){
+            EstudioEncuestadoEntity estudioEncuestadoEntity = new EstudioEncuestadoEntity();
+            estudioEncuestadoEntity.setEstado("Pendiente");
+            estudioEncuestadoEntity.setEstudio(estudio);
+            estudioEncuestadoEntity.setEncuestado(encuestadoEntity);
+
+            daoEstudioEncuestado.insert(estudioEncuestadoEntity);
+        }
+
+
         return Response.ok(encuestadoEntity).build();
     }
 

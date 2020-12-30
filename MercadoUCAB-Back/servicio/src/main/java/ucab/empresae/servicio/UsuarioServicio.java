@@ -102,6 +102,7 @@ public class UsuarioServicio {
             empleados = daoUsuario.getUsuariosEmpleados();
         } catch (Exception ex) {
             String problema = ex.getMessage();
+            return  Response.status(Response.Status.NOT_ACCEPTABLE).entity(problema).build();
         }
         return Response.ok(empleados).build();
     }
@@ -114,21 +115,25 @@ public class UsuarioServicio {
     public Response updateUsuarioVistaAdmin(@PathParam("id") long id, DtoUsuario dtoUsuario) {
         DaoUsuario daoUsuario = new DaoUsuario();
         DaoTipoUsuario daoTipoUsuario = new DaoTipoUsuario();
-        UsuarioEntity usuarioEntity = daoUsuario.find(id, UsuarioEntity.class);
+        UsuarioEntity usuarioEntity;
 
-        if (usuarioEntity != null){
-            usuarioEntity.setEstado(dtoUsuario.getEstado());
-            usuarioEntity.setTipousuario(daoTipoUsuario.getTipoUsuarioByDescripcion(dtoUsuario.getTipoUsuario().getDescripcion()));
-            UsuarioEntity resul = daoUsuario.update(usuarioEntity);
+        try{
+            usuarioEntity = daoUsuario.find(id, UsuarioEntity.class);
 
-            DirectorioActivo ldap = new DirectorioActivo();
-            ldap.updateRol(dtoUsuario, usuarioEntity.getTipousuario().getDescripcion());
+            if (usuarioEntity != null){
+                usuarioEntity.setEstado(dtoUsuario.getEstado());
+                usuarioEntity.setTipousuario(daoTipoUsuario.getTipoUsuarioByDescripcion(dtoUsuario.getTipoUsuario().getDescripcion()));
+                UsuarioEntity resul = daoUsuario.update(usuarioEntity);
 
-            return Response.ok().entity(usuarioEntity).build();
+                DirectorioActivo ldap = new DirectorioActivo();
+                ldap.updateRol(dtoUsuario, usuarioEntity.getTipousuario().getDescripcion());
+
+            }
+        }catch (Exception e){
+            String problema = e.getMessage();
+            return  Response.status(Response.Status.NOT_ACCEPTABLE).entity(problema).build();
         }
-        else{
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
+        return Response.ok().entity(usuarioEntity).build();
     }
 
     @PUT

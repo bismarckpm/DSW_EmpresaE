@@ -1,7 +1,5 @@
 package ucab.empresae.entidades;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import javax.json.bind.annotation.JsonbDateFormat;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
@@ -13,7 +11,8 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(name = "getEstudiosCliente", query = "SELECT e FROM EstudioEntity e where e in (select c.estudio from ClienteEstudioEntity c where c.cliente.usuario._id = :id)"),
         @NamedQuery(name = "getEstudiosAnalista", query = "SELECT e FROM EstudioEntity e where e.analista._id = :id"),
-        @NamedQuery(name = "getEstudiosEncuestado", query = "select es from EstudioEntity es where es.lugar = :lugar and es.nivelSocioEconomico = :nivelSocioeconomico")
+        @NamedQuery(name = "getEstudios", query = "select es from EstudioEntity es where es.lugar = :lugar and es.nivelSocioEconomico = :nivelSocioeconomico"),
+        @NamedQuery(name = "getEstudiosEncuestado", query = "select es from EstudioEntity es where es._id in (select estenc.estudio._id from EstudioEncuestadoEntity estenc where estenc.encuestado = :encuestado) and es.estado != 'Culminado'")
 })
 public class EstudioEntity extends BaseEntity{
     //private List<ClienteEstudioEntity> clienteestudios;

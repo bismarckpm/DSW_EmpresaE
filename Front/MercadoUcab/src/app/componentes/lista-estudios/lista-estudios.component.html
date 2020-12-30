@@ -113,11 +113,11 @@
                               <label for="estado">Estado del Estudio</label>
                               <select class="custom-select d-block w-100" [(ngModel)]="estudioData.estado" formControlName="estadoEstudio" value="estado">
                                 <option value="">Choose...</option>
-                                <option value="solicitado">Solicitado</option>
-                                <option value="procesado">Procesado</option>
-                                <option value="en ejecucion">En ejecucion</option>
-                                <option value="culminado">Culminado</option>
-                                <option value="rechazado">Rechazado</option>
+                                <option value="Solicitado">Solicitado</option>
+                                <option value="Aprobado">Aprobado</option>
+                                <option value="En Proceso">En Proceso</option>
+                                <option value="Culminado">Culminado</option>
+                                <option value="Rechazado">Rechazado</option>
                               </select>
                               <div *ngIf="estadoEstudio.invalid && (estadoEstudio.dirty || estadoEstudio.touched)" class="alert alert-danger">
                                 <div *ngIf="estadoEstudio.errors.required">

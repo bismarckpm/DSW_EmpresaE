@@ -26,7 +26,8 @@ export class UsuarioService {
     })
   };
 
-///////// Metodos para ejecutar//////////////
+  ///////// Metodos para ejecutar//////////////
+  // Front
   getUsuarios(): Observable<Usuario[]>{
     return this.http.get<Usuario[]>(this.apiurl + '/usuario')
       .pipe(
@@ -34,6 +35,7 @@ export class UsuarioService {
         catchError(this.handleError)
       );
   }
+  // Back
   //  getUsuarios(): Observable<Usuario[]>{
   //    return this.http.get<Usuario[]>(this.apiurl + '/usuario/empleados')
   //      .pipe(

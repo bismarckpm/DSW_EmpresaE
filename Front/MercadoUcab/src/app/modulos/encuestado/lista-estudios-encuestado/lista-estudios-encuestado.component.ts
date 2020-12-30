@@ -2,13 +2,12 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {EstudioService} from '../../../services/estudio.service';
-import {EncuestaService} from '../../../services/encuesta.service';
 import { PreguntaService } from 'src/app/services/pregunta.service';
 import { Estudio } from '../../../models/estudio';
-import { Encuesta } from '../../../models/encuesta';
 import { Pregunta } from '../../../models/pregunta';
 import { TipoPregunta } from '../../../models/tipo-pregunta';
 import { Opcion } from '../../../models/opcion';
+import { EncuestaService } from 'src/app/services/encuesta.service';
 
 class Multiple { constructor(public id: number){} }
 
@@ -23,8 +22,6 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
   estudios: Estudio[] = [];
   preguntasEncuesta: Pregunta[] = [];
   opciones: Opcion[] = [];
-  tipos: TipoPregunta[] = [];
-  _id = this.actRoute.snapshot.params._id;
   formEstudioEncuestado: FormGroup;
 
   // objeto individual, cada pregunta que sera agregada a la lista de respuesta
@@ -38,7 +35,15 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
     }
   };
 
-  // objeto para registrar la opcion seleccionada
+  @Input() respuestas: any = {
+    opcionesVF: [],
+    opcionesRg: [],
+    opcionesMulti: [],
+    opcionesSimple: [],
+    textos: ['prueba1', 'prueba2']
+  };
+
+  // objeto para registrar la respuesta seleccionada segun el tipo de pregunta
   @Input() respuestaDOpcion = {_id: 0};
   @Input() respuestaAbierta = '';
   @Input() respuestaMultiple = [];
@@ -46,7 +51,6 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
   // variable a asignar a la clave del objeto a devolver
   listaRespuestas: any = [];
   listaOpciones: any = [];
-  // respMultiples: Multiple[] = [];
 
   // objeto devolver en el post
   respuestaEncuesta = {
@@ -58,6 +62,7 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
   constructor(
     public estudioService: EstudioService,
     private preguntaService: PreguntaService,
+    private encuestaService: EncuestaService,
     private formBuilder: FormBuilder,
     public actRoute: ActivatedRoute,
     public router: Router
@@ -68,11 +73,11 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
   }
 
   addRespuestasEncuesta(): void{
-    const idUsuario = JSON.parse(localStorage.getItem('usuarioID'));
     this.respuestaEncuesta.respuestas = this.listaRespuestas;
-    this.respuestaEncuesta.usuario = idUsuario;
+    this.respuestaEncuesta.usuario = JSON.parse(localStorage.getItem('usuarioID'));
     console.log('JSON a enviar....');
     console.log(this.respuestaEncuesta);
+    this.encuestaService.createRespuestaEncuesta(this.respuestaEncuesta).subscribe((data) => {});
   }
 
   loadEstudios(): void{

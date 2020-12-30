@@ -38,8 +38,10 @@ export class PreguntaService {
   }
 
   // concatenar el ID del estudio que pide el endpoint
+  // esto es para el momento de RESPONDER la encuesta
+  // trae las preguntas a responder de un estudio
   getPreguntasResponder(idEstudio): Observable<Pregunta[]>{
-    return this.http.get<Pregunta[]>(this.apiurl + '/preguntasresponder')
+    return this.http.get<Pregunta[]>(this.apiurl + '/preguntasresponder'/* + idEstudio*/)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -48,6 +50,15 @@ export class PreguntaService {
 
   // recibo el idEstudio y lo concateno al path de la peticion que devuelve una lista
   // de preguntas activas asociada a la subcategoria del estudio
+  // esto es para CREAR la encuesta
+  // getPreguntasXSubcategoria(idEstudio): Observable<Pregunta[]>{
+  //   return this.http.get<Pregunta[]>(this.apiurl + '/pregunta/preguntasSubcategoria/' + idEstudio)
+  //   .pipe(
+  //     retry(1),
+  //     catchError(this.handleError)
+  //   );
+  // }
+
   getPreguntasXSubcategoria(idEstudio): Observable<Pregunta[]>{
     return this.http.get<Pregunta[]>(this.apiurl + '/preguntassubcategoria')
     .pipe(

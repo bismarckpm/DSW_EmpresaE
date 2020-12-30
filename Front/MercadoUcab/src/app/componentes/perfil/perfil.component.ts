@@ -22,19 +22,19 @@ export class PerfilComponent implements OnInit {
   encue = false;
   cli = false;
 
-  @Input() usuario={ _id:0, nuevaClave:"",clave:'' };
-  @Input() auxUsuario={nuevaClave:''};
-  @Input() Cliente :any
-  @Input() Administrador :any
-  @Input() Analista :any
-  @Input() Encuestado :any
-  aux:any;
+  @Input() usuario = { _id: 0, nuevaClave: '', clave: '' };
+  @Input() auxUsuario = {nuevaClave: ''};
+  @Input() Cliente: any;
+  @Input() Administrador: any;
+  @Input() Analista: any;
+  @Input() Encuestado: any;
+  aux: any;
 
-  /////////////////Vainas de los formularios
-  formAnalista:FormGroup;
-  formAdmin:FormGroup;
-  formEncuestado:FormGroup;
-  formCliente:FormGroup;
+  ///////////////// Vainas de los formularios
+  formAnalista: FormGroup;
+  formAdmin: FormGroup;
+  formEncuestado: FormGroup;
+  formCliente: FormGroup;
 
 
   patronFecha: any = /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/;
@@ -65,33 +65,33 @@ export class PerfilComponent implements OnInit {
 
     if ((JSON.parse(localStorage.getItem('rol') )) == 'Administrador'){
       this.administradroService.getAdministradorDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data => {
-        this.Administrador= data;
-      })
-      console.log("++++++++++++++++++++++++++++++++++ADmin")
-      this.admin=true;
-    }else if((JSON.parse(localStorage.getItem("rol") )) == "Cliente"){
-      this.clienteService.getClienteDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data=>{
-        this.Cliente=data;
-      })
-      console.log("++++++++++++++++++++++++++++++++++Cliente")
-      this.cli=true;
-    }else if((JSON.parse(localStorage.getItem("rol") )) == "Encuestado"){
-      console.log("ENTRO EN LA LLAMADA");
+        this.Administrador = data;
+      });
+      console.log('++++++++++++++++++++++++++++++++++ADmin');
+      this.admin = true;
+    }else if ((JSON.parse(localStorage.getItem('rol') )) == 'Cliente'){
+      this.clienteService.getClienteDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data => {
+        this.Cliente = data;
+      });
+      console.log('++++++++++++++++++++++++++++++++++Cliente');
+      this.cli = true;
+    }else if ((JSON.parse(localStorage.getItem('rol') )) == 'Encuestado'){
+      console.log('ENTRO EN LA LLAMADA');
       this.encuestadoservice.getEncuestadoDelUsuario( parseInt(localStorage.getItem('usuarioID'))).subscribe( data => {
         this.Encuestado = data;
         console.log('GUARDO LA INFORMACION');
         console.log(this.Encuestado);
       });
 
-      this.encue=true;
-    }if((JSON.parse(localStorage.getItem("rol") )) == "Analista"){
-      this.analistaService.getAnalistaDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data =>{
-        this.Analista =data
-      })
-      console.log("loqueseas")
-      this.analist=true;
+      this.encue = true;
+    }if ((JSON.parse(localStorage.getItem('rol') )) == 'Analista'){
+      this.analistaService.getAnalistaDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data => {
+        this.Analista = data;
+      });
+      console.log('loqueseas');
+      this.analist = true;
     }else{
-      console.log("NOOOOOOOOOOOOOOOOOOOOOOOOOOO ENTREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE MALDITA SEAAAAAAAAAAAAAAAAAAAA")
+      console.log('NOOOOOOOOOOOOOOOOOOOOOOOOOOO ENTREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE MALDITA SEAAAAAAAAAAAAAAAAAAAA');
     }
 
   }
@@ -123,23 +123,23 @@ export class PerfilComponent implements OnInit {
 
   GuardarPerfil(){
 
-    if(this.formAdmin.valid || this.formAnalista.valid|| this.formCliente.valid|| this.formEncuestado.valid ){
+    if (this.formAdmin.valid || this.formAnalista.valid || this.formCliente.valid || this.formEncuestado.valid ){
 
-      if((JSON.parse(localStorage.getItem("rol") )) == "Administrador"){
-        this.administradroService.updateAdministrador(this.Administrador._id,this.Administrador)
+      if ((JSON.parse(localStorage.getItem('rol') )) == 'Administrador'){
+        this.administradroService.updateAdministrador(this.Administrador._id, this.Administrador);
       }
 
-      if((JSON.parse(localStorage.getItem("rol") )) == "Cliente"){
-        this.clienteService.updateCliente(this.Cliente._id,this.Cliente);
+      if ((JSON.parse(localStorage.getItem('rol') )) == 'Cliente'){
+        this.clienteService.updateCliente(this.Cliente._id, this.Cliente);
       }
 
-      if((JSON.parse(localStorage.getItem("rol") )) == "Encuestado"){
-        console.log("ENTRO EN LA LLAMADA");
-        this.encuestadoservice.updateEncuestado(this.Encuestado._id,this.Encuestado)
+      if ((JSON.parse(localStorage.getItem('rol') )) == 'Encuestado'){
+        console.log('ENTRO EN LA LLAMADA');
+        this.encuestadoservice.updateEncuestado(this.Encuestado._id, this.Encuestado);
       }
 
-      if((JSON.parse(localStorage.getItem("rol") )) == "Analista"){
-        this.analistaService.updateAnalista(this.Analista._id,this.Analista)
+      if ((JSON.parse(localStorage.getItem('rol') )) == 'Analista'){
+        this.analistaService.updateAnalista(this.Analista._id, this.Analista);
       }
 
     }
@@ -152,7 +152,7 @@ export class PerfilComponent implements OnInit {
 
 
 
-//Validaciones de encuestado
+// Validaciones de encuestado
 
   get primerNombreEncuestado(){return this.formEncuestado.get('primerNombreEncuestado'); }
   get segundoNombreEncuestado(){return this.formEncuestado.get('segundoNombreEncuestado'); }

@@ -19,18 +19,20 @@ import {HijoService} from '../../../services/hijo.service';
 })
 export class RegistrarseComponent implements OnInit {
 
-  @Input() encuestado = {_id: 0, primerNombre: '', segundoNombre: '' , primerApellido: '', segundoApellido: 0, fechaNacimiento: '', estado: '',
+  @Input() encuestado = {_id: 0, primerNombre: '', segundoNombre: '' , primerApellido: '', segundoApellido: '', fechaNacimiento: '', estado: '',
     estadoCivil: {_id: 0, nombre: '', estado: ''},
     nivelAcademico: {_id: 0, nombre: '', estado: ''},
     medioConexion: {_id: 0, nombre: '', estado: ''},
     genero: {_id: 0, nombre: '', estado: ''},
     ocupacion: {_id: 0, nombre: '', estado: ''},
     nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
-    telefono: {_id: 0, numero: ''},
+    telefono: {_id: 0, numero: 0},
     hijo: {_id: 0, fechaNacimientoHijo: '', generoHijo: ''},
     lugar:  {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: ''}}}},
     usuario: {_id: 0, username: '', estado: '', clave: '', correoElectronico: ''},
   };
+
+  tieneHijos: boolean = false;
 
   estadoCivil: any;
   nivelAcademico: any;
@@ -52,7 +54,8 @@ export class RegistrarseComponent implements OnInit {
   auxEstadoID: number;
   auxMunicipioID: number;
   auxParroquiaID: number;
-
+  cantHijos = [1, 2, 3, 4, 5, 6, 7];
+  auxIterador = [];
 
   patronFechaNacimientoEncuestado: any = /^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/;
   patronNombreEncuestado: any = /^[A-Za-z\s]+$/;
@@ -180,6 +183,13 @@ export class RegistrarseComponent implements OnInit {
 
   seleccionarParroquia(id){
     this.auxParroquiaID = id;
+  }
+
+  cargarCamposHijos(num: number): void{
+    this.auxIterador = [];
+    for (let i = 1; i <= num; i++) {
+      this.auxIterador.push(i);
+    }
   }
 
   get primerNombreEncuestado(){return this.formRegistroEncuestado.get('primerNombreEncuestado'); }

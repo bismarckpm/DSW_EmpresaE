@@ -378,6 +378,7 @@
       "nombre": "estudio prueba2",
       "comentarioAnalista": "el comentario",
       "estado": "solicitado",
+      "estadoEstudioEncuestado": "Finalizado",
       "fechaInicio": "2019-10-20",
       "lugar": {
         "_id": 18,

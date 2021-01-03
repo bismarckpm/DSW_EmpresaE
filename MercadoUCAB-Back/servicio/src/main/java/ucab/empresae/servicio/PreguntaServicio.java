@@ -1,7 +1,6 @@
 package ucab.empresae.servicio;
 
 import ucab.empresae.daos.*;
-import ucab.empresae.dtos.DtoOpcion;
 import ucab.empresae.dtos.DtoPregunta;
 import ucab.empresae.entidades.*;
 
@@ -31,7 +30,6 @@ public class PreguntaServicio {
             OpcionEntity opcionEliminar = daoOpcion.find(opcion.get_id(), OpcionEntity.class);
             daoOpcion.delete(opcionEliminar);
         }
-
     }
 
     /**
@@ -46,10 +44,10 @@ public class PreguntaServicio {
         try {
             DaoPregunta dao = new DaoPregunta();
             preguntas = dao.findAll(PreguntaEntity.class);
+            return Response.ok(preguntas).build();
         } catch (Exception ex) {
-            String problema = ex.getMessage();
+            return Response.status(500).entity(ex.getMessage()).build();
         }
-        return Response.ok(preguntas).build();
     }
 
     /**
@@ -71,7 +69,7 @@ public class PreguntaServicio {
 
         PreguntaEntity pregunta = new PreguntaEntity();
 
-        if (pregunta != null) {
+        try {
             pregunta.setDescripcion(dtoPregunta.getDescripcion());
             pregunta.setEstado(dtoPregunta.getEstado());
 
@@ -79,7 +77,6 @@ public class PreguntaServicio {
             pregunta.setSubcategoria(subcategoria);
             TipoPreguntaEntity tipoPregunta = daoTipoPregunta.find(dtoPregunta.getTipo().get_id(), TipoPreguntaEntity.class);
             pregunta.setTipo(tipoPregunta);
-
 
             PreguntaEntity preguntaInsert = dao.insert(pregunta);
 
@@ -94,14 +91,13 @@ public class PreguntaServicio {
                     opcion_entidad.setEstado("a");
                     OpcionEntity resultadoOpcion = daoOpcion.insert(opcion_entidad);
 
-
                     PreguntaOpcionEntity pregunta_opcion_nn = new PreguntaOpcionEntity();
                     pregunta_opcion_nn.setEstado("a");
                     pregunta_opcion_nn.setOpcion(resultadoOpcion);
                     pregunta_opcion_nn.setPregunta(preguntaInsert);
                     daoPreguntaOpcion.insert(pregunta_opcion_nn);
 
-                    contador = contador + 1;
+                    contador++;
                 }
             }
 
@@ -143,8 +139,9 @@ public class PreguntaServicio {
             }
 
             return Response.ok().entity(preguntaInsert).build();
-        } else {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+
+        } catch (Exception ex) {
+            return Response.status(500).entity(ex.getMessage()).build();
         }
     }
 
@@ -160,15 +157,16 @@ public class PreguntaServicio {
     public Response deletePregunta(@PathParam("id") long id) {
 
         DaoPregunta dao = new DaoPregunta();
-        PreguntaEntity pregunta = dao.find(id, PreguntaEntity.class);
-        if (pregunta != null) {
+        PreguntaEntity pregunta = null;
+        try {
+            pregunta = dao.find(id, PreguntaEntity.class);
             PreguntaEntity resul = dao.delete(pregunta);
             return Response.ok().build();
+
+        } catch (Exception ex) {
+            return Response.status(500).entity(ex.getMessage()).build();
         }
-
-        return Response.status(Response.Status.NOT_FOUND).build();
     }
-
 
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/pregunta/id
@@ -186,7 +184,7 @@ public class PreguntaServicio {
         DaoPreguntaOpcion daoPreguntaOpcion = new DaoPreguntaOpcion();
         DaoOpcion daoOpcion = new DaoOpcion();
 
-        if (pregunta != null) {
+        try {
 
             // SI LA PREGUNTA EXISTENTE TIENE OPCIONES ASOCIADAS, SE ELIMINAN.
 
@@ -264,9 +262,10 @@ public class PreguntaServicio {
             }
 
             return Response.ok(pregunta).build();
-        } else {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+        } catch (Exception ex){
+            return Response.status(500).entity(ex.getMessage()).build();
         }
+
     }
 
     /**
@@ -287,11 +286,11 @@ public class PreguntaServicio {
 
             //Busco el estudio con el id de la url, y a su vez hago la busqueda de las preguntas que tienen esa subcategoria
             preguntas = dao.getPreguntasbySubcategoria(daoEstudio.find(id, EstudioEntity.class).getSubcategoria().get_id());
+            return Response.ok(preguntas).build();
 
         } catch (Exception ex) {
-            String problema = ex.getMessage();
+            return Response.status(500).entity(ex.getMessage()).build();
         }
-        return Response.ok(preguntas).build();
     }
 
     /**
@@ -312,11 +311,11 @@ public class PreguntaServicio {
 
             //Busco el estudio con el id de la url, y a su vez hago la busqueda de las preguntas que tienen ese estudio
             preguntas = dao.getPreguntasbyEstudio(id);
+            return Response.ok(preguntas).build();
 
         } catch (Exception ex) {
-            String problema = ex.getMessage();
+            return Response.status(500).entity(ex.getMessage()).build();
         }
-        return Response.ok(preguntas).build();
     }
 
     /**
@@ -349,34 +348,12 @@ public class PreguntaServicio {
 
                 preguntaAuxList.add(preguntaAux);
             }
-
             return preguntaAuxList;
-
         } catch (Exception ex) {
+            ex.printStackTrace();
             String problema = ex.getMessage();
         }
         return null;
     }
-
-    /*
-    @GET
-    @Produces(value = MediaType.APPLICATION_JSON)
-    @Path("/opcionesdePregunta/{id}")
-    public List<OpcionEntity> getOpcionesdePregunta(@PathParam("id") long id) {
-
-        try {
-            DaoPregunta dao = new DaoPregunta();
-            DaoOpcion daoOpcion = new DaoOpcion();
-            PreguntaEntity pregunta = dao.find(id, PreguntaEntity.class);
-
-
-            List<OpcionEntity> opciones = daoOpcion.getOpciones(pregunta);
-            return opciones;
-
-        } catch (Exception ex) {
-            String problema = ex.getMessage();
-        }
-        return null;
-    }*/
 
 }

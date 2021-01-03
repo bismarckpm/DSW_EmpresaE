@@ -32,6 +32,14 @@ export class EstudioService {
     );
   }
 
+  getEstudiosSinEncuesta(): Observable<Estudio[]>{
+    return this.http.get<Estudio[]>(this.apiurl + '/estudio/estudiosSinEncuesta')
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+
   getEstudio(id): Observable<Estudio[]>{
     return this.http.get<Estudio[]>(this.apiurl + '/estudio/' + id)
     .pipe(

@@ -137,6 +137,7 @@ public class EncuestaServicio extends AplicacionBase{
         //SE BUSCA AL ENCUESTADO MEDIANTE EL ID DE USUARIO SUMINISTRADO
         DaoUsuario daoUsuario = new DaoUsuario();
         DaoEncuestado daoEncuestado = new DaoEncuestado();
+        DaoEstudioEncuestado daoEstudioEncuestado = new DaoEstudioEncuestado();                 //este dao sirve para cambiar el edo de la n a n
         UsuarioEntity usuarioEntity = daoUsuario.find(dtoRespuestaAux.getUsuario(), UsuarioEntity.class);
         EncuestadoEntity encuestadoEntity = daoEncuestado.getEncuestadoByUsuario(usuarioEntity);
 
@@ -176,6 +177,11 @@ public class EncuestaServicio extends AplicacionBase{
             }
 
         }
+
+        EstudioEncuestadoEntity estudioEncuestadoEntity = daoEstudioEncuestado.getEstudioEncuestado(encuestadoEntity, estudioEntity);
+        estudioEncuestadoEntity.setEstado("Finalizado");
+        daoEstudioEncuestado.update(estudioEncuestadoEntity);
+
         return Response.ok().build();
     }
 

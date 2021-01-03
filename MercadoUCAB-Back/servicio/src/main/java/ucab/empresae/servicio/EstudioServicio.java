@@ -3,6 +3,7 @@ package ucab.empresae.servicio;
 import ucab.empresae.daos.*;
 import ucab.empresae.dtos.DtoCategoria;
 import ucab.empresae.dtos.DtoEstudio;
+import ucab.empresae.dtos.DtoSubcategoria;
 import ucab.empresae.entidades.*;
 import ucab.empresae.excepciones.PruebaExcepcion;
 
@@ -11,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -181,6 +183,8 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+
+
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -204,9 +208,11 @@ public class EstudioServicio extends AplicacionBase {
          */
 
         List<EstudioEntity> estudios = null;
+        List<EstudioAux> estudioAuxList = new ArrayList<EstudioAux>(); //entidad que incluye el estado de la n-n estudioEncuestado
         try {
             DaoUsuario daoUsuario = new DaoUsuario();
             DaoEncuestado daoEncuestado = new DaoEncuestado();
+            DaoEstudioEncuestado daoEstudioEncuestado = new DaoEstudioEncuestado();
             UsuarioEntity usuarioEntity = daoUsuario.find(id, UsuarioEntity.class);
 
             EncuestadoEntity encuestadoEntity = daoEncuestado.getEncuestadoByUsuario(usuarioEntity);
@@ -214,10 +220,32 @@ public class EstudioServicio extends AplicacionBase {
             DaoEstudio daoEstudio = new DaoEstudio();
             estudios = daoEstudio.getEstudiosEncuestado(encuestadoEntity);
 
+            //llenado del aux para que tenga el estado de la n a n
+            for(EstudioEntity estudio : estudios){
+                EstudioAux estudioAux = new EstudioAux(estudio.get_id());
+
+                estudioAux.setNombre(estudio.getNombre());
+                estudioAux.setAnalista(estudio.getAnalista());
+                estudioAux.setComentarioAnalista(estudio.getComentarioAnalista());
+                estudioAux.setEdadMinima(estudio.getEdadMinima());
+                estudioAux.setEdadMaxima(estudio.getEdadMaxima());
+                estudioAux.setNivelSocioEconomico(estudio.getNivelSocioEconomico());
+                estudioAux.setSubcategoria(estudio.getSubcategoria());
+                estudioAux.setLugar(estudio.getLugar());
+                estudioAux.setFechaInicio(estudio.getFechaInicio());
+                estudioAux.setFechaFin(estudio.getFechaFin());
+
+
+                EstudioEncuestadoEntity estudioEncuestado = daoEstudioEncuestado.getEstudioEncuestado(encuestadoEntity, estudio);
+                estudioAux.setEstadoEstudioEncuestado(estudioEncuestado.getEstado());
+
+                estudioAuxList.add(estudioAux);
+            }
+
         } catch (Exception ex) {
             String problema = ex.getMessage();
         }
-        return Response.ok(estudios).build();
+        return Response.ok(estudioAuxList).build();
     }
 
     @GET
@@ -242,6 +270,56 @@ public class EstudioServicio extends AplicacionBase {
             String problema = ex.getMessage();
         }
         return Response.ok(dataMuestraEncuestados).build();
+    }
+
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/resultadoEstudio/id
+     * Metodo con anotacion GET que permite obtener todas las preguntas con sus opciones (encuesta) de un estudio
+     * @param id identificador del estudio para obtener las preguntas con opciones (encuesta)
+     * @return Response con status ok con la lista de preguntas con opciones (encuesta) asignadas a un estudio.
+     */
+    @GET
+    @Produces(value = MediaType.APPLICATION_JSON)
+    @Path("/resultadoEstudio/{id}")
+    public List<PreguntaAux> getResultadoEstudio(@PathParam("id") long id) {
+
+        List<PreguntaEntity> preguntas = null;
+        List<PreguntaAux> preguntaAuxList = new ArrayList<PreguntaAux>();
+        DaoOpcion daoOpcion = new DaoOpcion();
+        long contadorRespuestas;
+
+        try {
+            DaoPregunta dao = new DaoPregunta();
+            DaoRespuesta daoRespuesta = new DaoRespuesta();
+            preguntas = dao.getPreguntasbyEstudio(id);
+
+            for(PreguntaEntity pregunta : preguntas){
+                PreguntaAux preguntaAux = new PreguntaAux(pregunta.get_id());
+                List<OpcionEntity> opciones = daoOpcion.getOpciones(pregunta);
+                List<OpcionAux> opcionAuxList = new ArrayList<OpcionAux>();
+
+                preguntaAux.setDescripcion(pregunta.getDescripcion());
+                preguntaAux.setTipo(pregunta.getTipo());
+
+                for(OpcionEntity opcion : opciones){
+                    OpcionAux opcionAux = new OpcionAux(opcion.get_id());
+                    opcionAux.setDescripcion(opcion.getDescripcion());
+                    opcionAux.setEstado(opcion.getEstado());
+                    contadorRespuestas = daoRespuesta.getCantidadRespuestas(id, opcion);
+                    opcionAux.setValor(contadorRespuestas);
+
+                    opcionAuxList.add(opcionAux);
+                }
+
+                preguntaAux.setOpcionesResultado(opcionAuxList);
+
+                preguntaAuxList.add(preguntaAux);
+            }
+            return preguntaAuxList;
+        } catch (Exception ex) {
+            String problema = ex.getMessage();
+        }
+        return null;
     }
 
 }

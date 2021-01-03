@@ -5,6 +5,9 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "estudio_encuestado", schema = "mercadeoucab")
+@NamedQueries({
+        @NamedQuery(name = "getEstudioEncuestado", query = "select estenc from EstudioEncuestadoEntity estenc where estenc.encuestado = :encuestado and estenc.estudio = :estudio")
+})
 public class EstudioEncuestadoEntity extends BaseEntity{
 
     @Basic

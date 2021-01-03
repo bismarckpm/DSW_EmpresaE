@@ -96,6 +96,30 @@ export class EstudioService {
     );
   }
 
+  updateEstudioAdmin(id, Estudio): Observable<Estudio[]>{
+    return this.http.put<Estudio[]>(this.apiurl + '/estudio/updateAdmin/' + id, JSON.stringify(Estudio), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
+  updateEstudioCliente(id, Estudio): Observable<Estudio[]>{
+    return this.http.put<Estudio[]>(this.apiurl + '/estudio/updateCliente/' + id, JSON.stringify(Estudio), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
+  updateEstudioAnalsita(id, Estudio): Observable<Estudio[]>{
+    return this.http.put<Estudio[]>(this.apiurl + '/estudio/updateAnalsita/' + id, JSON.stringify(Estudio), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
   deleteEstudio(id){
     return this.http.delete<Estudio[]>(this.apiurl + '/estudio/' + id, this.httpOptions)
     .pipe(

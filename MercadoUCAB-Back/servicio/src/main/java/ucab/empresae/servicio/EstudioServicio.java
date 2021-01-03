@@ -119,7 +119,7 @@ public class EstudioServicio extends AplicacionBase {
     @Path("/cliente/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response solicitarEstudio(@PathParam("id") long id, DtoEstudio dtoEstudio) {
-        try {
+
             estudioAtributos(dtoEstudio);
             DaoUsuario daoUsuario1 = new DaoUsuario();
             List<UsuarioEntity> listaAnalista = daoUsuario1.getAnalistas();
@@ -139,9 +139,6 @@ public class EstudioServicio extends AplicacionBase {
             clienteEstudioEntity.setEstado("a");
             return Response.ok(daoClienteEstudio.insert(clienteEstudioEntity)).build();
 
-        } catch(Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).entity(ex).build();
-        }
     }
 
     @PUT
@@ -154,6 +151,49 @@ public class EstudioServicio extends AplicacionBase {
             EstudioEntity estudio = daoEstudio.find(id, EstudioEntity.class);
             estudio.setComentarioAnalista(dtoEstudio.getComentarioAnalista());
             estudio.setEstado(dtoEstudio.getEstado());
+            daoEstudio.update(estudio);
+
+            return Response.ok(estudio).build();
+        } catch (Exception ex) {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+        }
+    }
+
+    @PUT
+    @Path("/updateAdmin/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateEstudioAdmin(@PathParam("id") long id, DtoEstudio dtoEstudio) {
+        try {
+            DaoEstudio daoEstudio = new DaoEstudio();
+            EstudioEntity estudio = daoEstudio.find(id, EstudioEntity.class);
+
+            estudio.setEstado(dtoEstudio.getEstado());
+            estudio.setNombre(dtoEstudio.getNombre());
+            estudio.setEdadMinima(dtoEstudio.getEdadMinima());
+            estudio.setEdadMaxima(dtoEstudio.getEdadMaxima());
+
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date fechaInicio = dateFormat.parse(dtoEstudio.getFechaInicio());
+            estudio.setFechaInicio(fechaInicio);
+            Date fechaFin = dateFormat.parse(dtoEstudio.getFechaFin());
+            estudio.setFechaFin(fechaFin);
+
+            DaoLugar daoLugar = new DaoLugar();
+            LugarEntity lugarEntity = daoLugar.find(dtoEstudio.getLugar().get_id(), LugarEntity.class);
+            estudio.setLugar(lugarEntity);
+
+            DaoNivelSocioeconomico daoNivelSocioeconomico = new DaoNivelSocioeconomico();
+            NivelSocioeconomicoEntity nivelSocioeconomicoEntity = daoNivelSocioeconomico.find(dtoEstudio.getNivelSocioEconomico().get_id(), NivelSocioeconomicoEntity.class);
+            estudio.setNivelSocioEconomico(nivelSocioeconomicoEntity);
+
+            DaoSubcategoria daoSubcategoria = new DaoSubcategoria();
+            SubcategoriaEntity subcategoriaEntity = daoSubcategoria.find(dtoEstudio.getSubcategoria().get_id(), SubcategoriaEntity.class);
+            estudio.setSubcategoria(subcategoriaEntity);
+
+            DaoUsuario daoUsuario = new DaoUsuario();
+            estudio.setAnalista(daoUsuario.find(dtoEstudio.getAnalista().get_id(), UsuarioEntity.class));
+
             daoEstudio.update(estudio);
 
             return Response.ok(estudio).build();

@@ -10,6 +10,7 @@ ucab\empresae\entidades\TipoEntity.class
 ucab\empresae\entidades\UsuarioEntity.class
 ucab\empresae\entidades\OpcionEntity.class
 ucab\empresae\entidades\PreguntaOpcionEntity.class
+ucab\empresae\entidades\PreguntaAux.class
 ucab\empresae\entidades\RespuestaEntity.class
 ucab\empresae\entidades\TipoUsuarioEntity.class
 ucab\empresae\entidades\TipoPreguntaEntity.class

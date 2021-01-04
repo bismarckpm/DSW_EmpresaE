@@ -14,6 +14,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -33,10 +34,10 @@ public class LoginServicio {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public JsonObject autenticacionUsuario(DtoUsuario dtoUsuario){
+    public Response autenticacionUsuario(DtoUsuario dtoUsuario){
 
         try{
-            Boolean registrado;
+            boolean registrado;
 
             DaoUsuario daoUsuario = new DaoUsuario();
             DirectorioActivo directorioActivo = new DirectorioActivo();
@@ -56,13 +57,11 @@ public class LoginServicio {
                 respuesta = Json.createObjectBuilder()
                         .add("autenticacion", "invalida").build();
             }
-            return respuesta;
+            return Response.ok().entity(respuesta).build();
 
         }catch (Exception ex) {
             String problema = ex.getMessage();
-            JsonObject excepcion;
-            excepcion = Json.createObjectBuilder().add("excepcion", problema).build();
-            return excepcion;
+            return  Response.status(Response.Status.NOT_ACCEPTABLE).entity(problema).build();
         }
     }
 
@@ -79,7 +78,7 @@ public class LoginServicio {
     public JsonObject cambiarClave(DtoUsuario usuario){
 
         try{
-            Boolean registrado;
+            boolean registrado;
             JsonObject respuesta;
 
             DirectorioActivo directorioActivo = new DirectorioActivo();
@@ -168,7 +167,7 @@ public class LoginServicio {
      * @param asunto asunto del correo
      * @param contenido contenido del correo que se enviara al usuario
      */
-    public void enviarCorreo(String destinatario, String asunto, String contenido) throws MessagingException {
+    public void enviarCorreo(String destinatario, String asunto, String contenido){
 
         try{
             Properties props = new Properties();

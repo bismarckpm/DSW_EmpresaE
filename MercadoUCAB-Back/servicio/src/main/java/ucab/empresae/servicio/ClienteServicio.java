@@ -100,7 +100,7 @@ public class ClienteServicio {
     @GET
     @Produces(value=MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public Response getCliente(@PathParam("id") long id) throws PruebaExcepcion {
+    public Response getCliente(@PathParam("id") long id){
 
         DaoCliente dao = new DaoCliente();
         try{

@@ -45,7 +45,7 @@ public class ClienteServicio {
         DaoTelefono daoTelefono = new DaoTelefono();
         TelefonoEntity telefonoEntity = new TelefonoEntity();
         telefonoEntity.setNumero(dtoCliente.getTelefono().getNumero());
-        telefonoEntity.setEstado("a");
+        telefonoEntity.setEstado(dtoCliente.getEstado());
         telefonoEntity.setCliente(clienteEntity);
         daoTelefono.insert(telefonoEntity);
 
@@ -186,7 +186,7 @@ public class ClienteServicio {
             DaoTelefono daoTelefono = new DaoTelefono();
             TelefonoEntity telefonoEntity = daoTelefono.getTelefonoByCliente(clienteEntity);
             telefonoEntity.setNumero(dtoCliente.getTelefono().getNumero());
-            telefonoEntity.setEstado("a");
+            telefonoEntity.setEstado(dtoCliente.getEstado());
             telefonoEntity.setCliente(clienteEntity);
             TelefonoEntity resulTlf = daoTelefono.update(telefonoEntity);
 
@@ -209,7 +209,7 @@ public class ClienteServicio {
     @Consumes(value=MediaType.APPLICATION_JSON)
     @Produces(value=MediaType.APPLICATION_JSON)
     @Path("/update/{id}")
-    public Response updateClienteAdministrador(@PathParam("id") long id, DtoCliente dtoCliente) {
+    public Response updateEstadoCliente(@PathParam("id") long id, DtoCliente dtoCliente) {
         DaoCliente dao = new DaoCliente();
         ClienteEntity clienteEntity = dao.find(id, ClienteEntity.class);
 

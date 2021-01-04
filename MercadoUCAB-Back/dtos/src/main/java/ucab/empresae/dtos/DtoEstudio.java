@@ -1,6 +1,5 @@
 package ucab.empresae.dtos;
 
-import java.sql.Date;
 import java.util.List;
 
 public class DtoEstudio extends DtoBase {
@@ -11,12 +10,12 @@ public class DtoEstudio extends DtoBase {
     private String comentarioAnalista;
     private Integer edadMinima;
     private Integer edadMaxima;
-    private Date fechaInicio;
-    private Date fechaFin;
+    private String fechaInicio;
+    private String fechaFin;
 
     //Relaciones
     private DtoLugar lugar;
-    private DtoNivelSocioEconomico nivelsocioeco;
+    private DtoNivelSocioEconomico nivelSocioEconomico;
     private DtoSubcategoria subcategoria;
     private DtoUsuario analista;
     private List<DtoGenero> generos;
@@ -71,19 +70,19 @@ public class DtoEstudio extends DtoBase {
         this.edadMaxima = edadMaxima;
     }
 
-    public Date getFechaInicio() {
+    public String getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(String fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getFechaFin() {
+    public String getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(String fechaFin) {
         this.fechaFin = fechaFin;
     }
 
@@ -95,12 +94,12 @@ public class DtoEstudio extends DtoBase {
         this.lugar = lugar;
     }
 
-    public DtoNivelSocioEconomico getNivelsocioeco() {
-        return nivelsocioeco;
+    public DtoNivelSocioEconomico getNivelSocioEconomico() {
+        return nivelSocioEconomico;
     }
 
-    public void setNivelsocioeco(DtoNivelSocioEconomico nivelsocioeco) {
-        this.nivelsocioeco = nivelsocioeco;
+    public void setNivelSocioEconomico(DtoNivelSocioEconomico nivelSocioEconomico) {
+        this.nivelSocioEconomico = nivelSocioEconomico;
     }
 
     public DtoSubcategoria getSubcategoria() {

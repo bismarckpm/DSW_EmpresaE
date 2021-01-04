@@ -40,7 +40,7 @@
                         <div class="modal-content">
                           <div class="form-group">
                             <div class="row">
-                              <div class="col-md-6 mb-3">
+                              <div class="col-md-10 mb-3">
                                 <label for="user">Username</label>
                                 <input type="text" readonly="readonly" [(ngModel)]="usuarioData.username" class="form-control"  formControlName="usernameUsuario" name="username" id="user" placeholder="" >
                                 <div *ngIf="usernameUsuario.invalid && (usernameUsuario.dirty || usernameUsuario.touched)" class="alert alert-danger">
@@ -52,7 +52,7 @@
                             </div>
                           </div>
                           <div class="row">
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-6 mb-3">
                               <label for="estado"> Estado</label>
                               <select class="custom-select d-block w-100" [(ngModel)]= "usuarioData.estado" formControlName="estadoUsuario" id="estado" name="estado" >
                                 <option value="a">Activa</option>
@@ -64,7 +64,7 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-6 mb-3">
                               <label for="rol">Rol</label>
                               <select class="custom-select d-block w-100" [(ngModel)]="usuarioData.tipousuario.descripcion" formControlName="descripcionTipoUsuario" id="rol" name="descripcion">
                                 <option value="">Choose...</option>

@@ -9,10 +9,10 @@ export  class Usuario {
       correoElectronico: string;
       estado: string;
       tipoUsuario: TipoUsuario;
-      autenticacion:string;
-      rol :string;
-      respuesta:string;
-      nuevaClave:string;
+      autenticacion: string;
+      rol: string;
+      respuesta: string;
+      nuevaClave: string;
  }
 
 

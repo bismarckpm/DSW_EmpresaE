@@ -42,7 +42,7 @@ export class ListaEstudioClienteComponent implements OnInit {
    // Declaracion para validar
    formEstudio: FormGroup;
    patronEdadEstudio: any = /^(0?[0-9]{1,2}|1[0-7][0-9]|99)$/;
-   patronFechaEstudio: any = /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/;
+   patronFechaEstudio: any = /^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/;
    patronNombreEstudio: any = /^[A-Za-z\s]+$/;
 
 
@@ -62,6 +62,7 @@ export class ListaEstudioClienteComponent implements OnInit {
   }
 
   loadEstudios(): void {
+    localStorage.setItem("usuarioId", JSON.stringify("1"));
   let id = JSON.parse(localStorage.getItem("usuarioID"));
 
     this.estudioService.getEstudioCliente(id).subscribe(data => {
@@ -78,7 +79,7 @@ export class ListaEstudioClienteComponent implements OnInit {
 
   updateEstudio(){
     if (this.formEstudio.valid) {
-    this.estudioService.updateEstudio(this.estudioData._id, this.estudioData).subscribe(data => {
+    this.estudioService.updateEstudio(JSON.parse(localStorage.getItem("usuarioID")), this.estudioData).subscribe(data => {
      })
      this.loadEstudios();
     }
@@ -164,7 +165,6 @@ addNivelSocioEconomico(){
       edadMinimaEstudio: ['', [Validators.required, Validators.maxLength(2), Validators.pattern(this.patronEdadEstudio)]],
       edadMaximaEstudio: ['', [Validators.required, Validators.maxLength(2), Validators.pattern(this.patronEdadEstudio)]],
       comentarioAnalistaEstudio: ['', Validators.pattern(this.patronNombreEstudio)],
-      lugarEstudio: ['', [Validators.required]],
       subcategoriaEstudio: ['', [Validators.required]],
       nivelEstudio: ['', [Validators.required]],
 

@@ -1,5 +1,4 @@
 
-
 <div class="registro">
   <div class="container">
 
@@ -31,7 +30,7 @@
           <button type="button"  class=" btn btn-primary" data-toggle="modal"  data-target="#exampleModal" > Cambio de clave </button>
         </div>
         <div class="form-group col-md-2 my-auto">
-          <button type="button"  class="btn btn-success" data-toggle="modal"  data-target="#cambioAdmin" (click)=GuardarPerfil > Guardar cambios </button>
+          <button type="button"  class="btn btn-success" data-toggle="modal"  data-target="#cambioAdmin" (click)=editar() > Guardar cambios </button>
         </div>
       </div>
 
@@ -92,7 +91,7 @@
 
       <div class="form-row">
         <div class="form-group col-md-2">
-          <button type="button"  class="btn btn-success" data-toggle="modal"  data-target="#cambioCliente"(click)=GuardarPerfil > Guardar cambios </button>
+          <button type="button"  class="btn btn-success" data-toggle="modal"  data-target="#cambioCliente"(click)=editar() > Guardar cambios </button>
         </div>
       </div>
     </div>
@@ -132,7 +131,7 @@
       <div class="form-row">
         <div class="form-group col-md-3">
           <label for=""> Primer nombre </label>
-          <input type="text" class="form-control" [(ngModel)]="Encuestado.primerNombre" value="Encuestado.primerNombrereadonly="readonly">
+          <input type="text" class="form-control" [(ngModel)]="Encuestado.primerNombre" value="Encuestado.primerNombre" readonly="readonly">
         </div>
         <div class="form-group col-md-3">
           <label for="">Segundo Nombre </label>
@@ -192,7 +191,7 @@
           <input type="text" class="form-control" [(ngModel)]="Encuestado.nivelSocioEconomico.nombre" value="Encuestado.nivelSocioEconomico.nombre" readonly="readonly">
         </div>
         <div class="form-group col-md-2 my-auto">
-          <button type="button"  class="btn btn-success" data-toggle="modal"  data-target="#cambioEncuestado"(click)=GuardarPerfil > Guardar cambios </button>
+          <button type="button"  class="btn btn-success" data-toggle="modal"  data-target="#cambioEncuestado"(click)=editar() > Guardar cambios </button>
         </div>
 
       </div>
@@ -233,7 +232,7 @@
       </div>
 
       <div class="form-group col-md-2 my-auto">
-        <button type="button"  class="btn btn-success" data-toggle="modal"  data-target="#cambioAnalista"(click)=GuardarPerfil > Guardar cambios </button>
+        <button type="button"  class="btn btn-success" data-toggle="modal"  data-target="#cambioAnalista"(click)=editar() > Guardar cambios </button>
       </div>
 
     </div>
@@ -251,14 +250,14 @@
             </button>
           </div>
 
-          <div class="modal-body">
+          <div class="modal-body ">
             <form >
               <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content ">
                   <div class="form-group">
                     <div class="row">
                       <div class="col-md-6 mb-3">
-                        <label for="nombre">Clave Vieja</label>
+                        <label for="nombre">Ingrese su Clave Actual</label>
                         <input type="password" [(ngModel)]="usuario.clave" class="form-control"   name="nombre" id="nombre"  >
 
                       </div>
@@ -267,7 +266,7 @@
                   <div class="form-group">
                     <div class="row">
                       <div class="col-md-6 mb-3">
-                        <label for="nombre">Repetir la nueva contraseña </label>
+                        <label for="nombre">Ingrese la Nueva Clave</label>
                         <input type="password" [(ngModel)]="auxUsuario.nuevaClave" class="form-control"   name="nombre" id="nombre"  >
 
                       </div>
@@ -289,454 +288,11 @@
       </div>
     </div>
 
-
-    <!--///////////////////////////////////////////////////////////////////////////////Modal analista Editar perfil/////////////////////////////////////////////////////////////////////////////////////////////////-->
-    <div class="modal fade" id="cambioAnalista" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Cambio de clave </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-
-          <div class="modal-body">
-            <form [formGroup]="formAnalista" >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="form-row">
-
-                    <div class="form-group col-md-6">
-                      <label > Nombre del Analista</label>
-                      <input type="text" class="form-control" [(ngModel)]="Analista.username" formControlName="correoElectronicoAnalista" value="Analista.username" readonly="readonly">
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label>Correo</label>
-                      <input type="text" class="form-control" [(ngModel)]="AnalistaData.correoelectronico" value="AnalistaData.correoelectronico" >
-                      <div *ngIf="correoElectronicoAnalista.invalid && (correoElectronicoAnalista.dirty || correoElectronicoAnalista.touched)" class="alert alert-danger">
-                        <div *ngIf="correoElectronicoAnalista.errors.required">
-                          Este campo es obligatorio
-                        </div>
-                        <div *ngIf="correoElectronicoAnalista.errors.pattern">
-                          Introduzca una descripcion valida
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label > Rol en nuestro sistema </label>
-                    <input type="text"  class="form-control" [(ngModel)]="AnalistaData.tipoUsuario.descripcion"  formControlName="rol" value="AnalistaData.tipoUsuario.descripcion" >
-                    <div *ngIf="rol.invalid && (rol.dirty || rol.touched)" class="alert alert-danger">
-                      <div *ngIf="rol.errors.required">
-                        Este campo es obligatorio
-                      </div>
-                      <div *ngIf="descripcionPregunta.errors.pattern">
-                        Introduzca una descripcion valida
-                      </div>
-                    </div>
-                  </div>
-
-                  <br>
-
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-success" (click)="GuardarPerfil()" data-dismiss="modal">Actualizar</button>
-
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-
-
-
-    <!--///////////////////////////////////////////////////////////////////////////////Modal encuestado Editar perfil/////////////////////////////////////////////////////////////////////////////////////////////////-->
-    <div class="modal fade" id="cambioEncuestado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"> Modificacion </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-
-          <div class="modal-body">
-            <form [formGroup]="formEncuestado" >
-              <div class="modal-dialog">
-                <div class="modal-content">
-
-                  <div class="form-row">
-
-                    <div class="form-group col-md-4">
-                      <label for=""> Username </label>
-                      <input type="text" class="form-control" [(ngModel)]="Encuestado.usuario.username" value="Encuestado.usuario.username" readonly="readonly">
-                      <div *ngIf="usernameEncuestado.invalid && (usernameEncuestado.dirty || usernameEncuestado.touched)" class="alert alert-danger">
-                        <div *ngIf="usernameEncuestado.errors.required">
-                          Este campo es obligatorio
-                        </div>
-                        <div *ngIf="correoElectronicoEncuestado.errors.pattern">
-                          Introduzca un formato valido
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group col-md-4">
-                      <label > Correo </label>
-                      <input type="text" class="form-control" [(ngModel)]="EncuestadoData.usuario.correoelectronico" value="EncuestadoData.usuario.correoelectronico" >
-                      <div *ngIf="correoElectronicoEncuestado.invalid && (correoElectronicoEncuestado.dirty || correoElectronicoEncuestado.touched)" class="alert alert-danger">
-                        <div *ngIf="correoElectronicoEncuestado.errors.required">
-                          Este campo es obligatorio
-                        </div>
-                        <div *ngIf="correoElectronicoEncuestado.errors.pattern">
-                          Introduzca un formato valido
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group col-md-2 my-auto">
-                      <button type="button"  class="btn btn-primary" data-toggle="modal"  data-target="#exampleModal" > Cambio de clave </button>
-                    </div>
-                  </div>
-
-                  <hr>
-
-                  <div>
-                    <h4> <label > Informacion como Encuestado </label></h4>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="form-group col-md-3">
-                      <label for=""> Primer nombre </label>
-                      <input type="text" class="form-control" [(ngModel)]="EncuestadoData.primerNombre" value="EncuestadoData.primerNombre">
-                      <div *ngIf="primerNombreEncuestado.invalid && (primerNombreEncuestado.dirty || primerNombreEncuestado.touched)" class="alert alert-danger">
-                        <div *ngIf="primerNombreEncuestado.errors.required">
-                          Este campo es obligatorio
-                        </div>
-                        <div *ngIf="primerNombreEncuestado.errors.pattern">
-                          Introduzca un formato valido
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for="">Segundo Nombre </label>
-                      <input type="text" class="form-control" [(ngModel)]="EncuestadoData.segundoNombre" value="EncuestadoData.segundoNombre" >
-                      <div *ngIf="segundoNombreEncuestado.invalid && (segundoNombreEncuestado.dirty || segundoNombreEncuestado.touched)" class="alert alert-danger">
-                        <div *ngIf="segundoNombreEncuestado.errors.required">
-                          Este campo es obligatorio
-                        </div>
-                        <div *ngIf="segundoNombreEncuestado.errors.pattern">
-                          Introduzca un formato valido
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for=""> Primer Apellido </label>
-                      <input type="text" class="form-control" [(ngModel)]="EncuestadoData.primerApellido" value="EncuestadoData.primerApellido" >
-                      <div *ngIf="primerApellidoEncuestado.invalid && (primerApellidoEncuestado.dirty || primerApellidoEncuestado.touched)" class="alert alert-danger">
-                        <div *ngIf="primerApellidoEncuestado.errors.required">
-                          Este campo es obligatorio
-                        </div>
-                        <div *ngIf="primerApellidoEncuestado.errors.pattern">
-                          Introduzca un formato valido
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for="">Segundo Apellido </label>
-                      <input type="text" class="form-control" [(ngModel)]="EncuestadoData.segundoApellido" value="EncuestadoData.segundoApellido">
-                      <div *ngIf="segundoApellidoEncuestado.invalid && (segundoApellidoEncuestado.dirty || segundoApellidoEncuestado.touched)" class="alert alert-danger">
-                        <div *ngIf="segundoApellidoEncuestado.errors.required">
-                          Este campo es obligatorio
-                        </div>
-                        <div *ngIf="segundoApellidoEncuestado.errors.pattern">
-                          Introduzca un formato valido
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="form-group col-md-3">
-                      <label for=""> Fecha Nacimiento</label>
-                      <input type="text" class="form-control" [(ngModel)]="EncuestadoData.fechaNacimiento" value="EncuestadoData.fechaNacimiento" readonly="readonly">
-
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for=""> Estado civil </label>
-                      <select class="custom-select d-block w-100" [(ngModel)]= "EncuestadoData.estadoCivil.nombre" id="estadocivil" formControlName="estadoCivilEncuestado" name="estadoCivil" value="EncuestadoData.estadoCivil.nombre">
-                        <option value="">Choose...</option>
-                        <option  *ngFor="let estadoCivil of estadoCivil" [ngValue]= "estadoCivil._id"  >{{estadoCivil.nombre}}</option>
-                      </select>
-                      <div *ngIf="estadoCivilEncuestado.invalid && (estadoCivilEncuestado.dirty || estadoCivilEncuestado.touched)" class="alert alert-danger">
-                        <div *ngIf="estadoCivilEncuestado.errors.required">
-                          Este campo es obligatorio
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for=""> Nivel Academico </label>
-                      <select class="custom-select d-block w-100" [(ngModel)]= "EncuestadoData.nivelAcademico.nombre" id="nivelacademico" formControlName="nivelAcademicoEncuestado" name="nivelAcademico" value="EncuestadoData.nivelAcademico.nombre">
-                        <option value="">Choose...</option>
-                        <option  *ngFor="let nivelAcademico of nivelAcademico" [ngValue]= "nivelAcademico._id"  >{{nivelAcademico.nombre}}</option>
-                      </select>                      <div *ngIf="nivelAcademicoEncuestado.invalid && (nivelAcademicoEncuestado.dirty || nivelAcademicoEncuestado.touched)" class="alert alert-danger">
-                        <div *ngIf="nivelAcademicoEncuestado.errors.required">
-                          Este campo es obligatorio
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for=""> Medio de Conexion </label>
-                      <select class="custom-select d-block w-100" [(ngModel)]="EncuestadoData.medioConexion._id" id="medioconexion" formControlName="medioConexionEncuestado" name="medioConexion" value="EncuestadoData.medioConexion.nombre">
-                        <option value="">Choose...</option>
-                        <option  *ngFor="let medioConexion of medioConexion" [ngValue]= "medioConexion._id"  >{{medioConexion.nombre}}</option>
-                      </select>
-                      <div *ngIf="medioConexionEncuestado.invalid && (medioConexionEncuestado.dirty || medioConexionEncuestado.touched)" class="alert alert-danger">
-                        <div *ngIf="medioConexionEncuestado.errors.required">
-                          Este campo es obligatorio
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-row">
-                    <div class="form-group col-md-4">
-                      <label for="">  Estado </label>
-                      <select class="custom-select d-block w-100"  [(ngModel)]="EncuestadoData.lugar._id" (click)="busquedaMunicipio(EncuestadoData.lugar._id)" id="estado" formControlName="lugarEncuestado" value="EncuestadoData.lugar.nombre">
-                        <option selected>Choose...</option>
-                        <option  *ngFor="let estado of estados" [ngValue]= "estado._id"  >{{estado.nombre}}</option>
-                      </select>
-                      <div *ngIf="lugarEncuestado.invalid && (lugarEncuestado.dirty || lugarEncuestado.touched)" class="alert alert-danger">
-                        <div *ngIf="lugarEncuestado.errors.required">
-                          Este campo es obligatorio
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group col-md-4">
-                      <label for="">  Municipio </label>
-                      <select class="custom-select d-block w-100"  [(ngModel)]="EncuestadoData.lugar.lugar._id" (click)="busquedaParroquia(EncuestadoData.lugar.lugar._id)" id="municipio" formControlName="lugarEncuestado" value="EncuestadoData.lugar.lugar._id">
-                        <option selected>Choose...</option>
-                        <option  *ngFor="let municipio of municipios" [ngValue]= "municipio._id"  >{{municipio.nombre}}</option>
-                      </select>
-                      <div *ngIf="lugarEncuestado.invalid && (lugarEncuestado.dirty || lugarEncuestado.touched)" class="alert alert-danger">
-                        <div *ngIf="lugarEncuestado.errors.required">
-                          Este campo es obligatorio
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group col-md-4">
-                      <label for=""> Parroquia</label>
-                      <select class="custom-select d-block w-100"  [(ngModel)]="EncuestadoData.lugar.lugar.lugar._id" (click)="seleccionarParroquia(EncuestadoData.lugar.lugar.lugar._id)" id="parroquia" formControlName="lugarEncuestado" value="EncuestadoData.lugar.lugar.lugar._id">
-                        <option selected>Choose...</option>
-                        <option  *ngFor="let parroquia of parroquias" [ngValue]= "parroquia._id"  >{{parroquia.nombre}}</option>
-                      </select>
-                      <div *ngIf="lugarEncuestado.invalid && (lugarEncuestado.dirty || lugarEncuestado.touched)" class="alert alert-danger">
-                        <div *ngIf="lugarEncuestado.errors.required">
-                          Este campo es obligatorio
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-row">
-                    <div class="form-group col-md-4">
-                      <label for=""> Ocupacion</label>
-                      <select class="custom-select d-block w-100" [(ngModel)]="EncuestadoData.ocupacion._id" id="ocupacion" formControlName="ocupacionEncuestado" name="ocupacion" value="EncuestadoDAta.ocupacion.nombre">
-                        <option value="">Choose...</option>
-                        <option  *ngFor="let ocupacion of ocupacion" [ngValue]= "ocupacion._id"  >{{ocupacion.nombre}}</option>
-                      </select>
-                      <div *ngIf="ocupacionEncuestado.invalid && (ocupacionEncuestado.dirty || ocupacionEncuestado.touched)" class="alert alert-danger">
-                        <div *ngIf="ocupacionEncuestado.errors.required">
-                          Este campo es obligatorio
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group col-md-4">
-                      <label for=""> Nivel Socio Economico</label>
-                      <select class="custom-select d-block w-100" [(ngModel)]= "EncuestadoData.nivelSocioEconomico._id" id="nivelsocioeconomico" formControlName="nivelSocioEconomicoEncuestado" name="nivelSocioEconomico" value="EncuestadoData.nivelSocioEconomico.nombre">
-                        <option value="">Choose...</option>
-                        <option  *ngFor="let nivelSocioEconomico of nivelSocioEconomico" [ngValue]= "nivelSocioEconomico._id"  >{{nivelSocioEconomico.nombre}}</option>
-                      </select>
-                      <div *ngIf="nivelSocioEconomicoEncuestado.invalid && (nivelSocioEconomicoEncuestado.dirty || nivelSocioEconomicoEncuestado.touched)" class="alert alert-danger">
-                        <div *ngIf="nivelSocioEconomicoEncuestado.errors.required">
-                          Este campo es obligatorio
-                        </div>
-                      </div>
-                    </div>
-
-
-                  </div>
-
-                  <br>
-
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-success" (click)="GuardarPerfil()" data-dismiss="modal">Actualizar</button>
-
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!--///////////////////////////////////////////////////////////////////////////////Modal encuestado Editar perfil/////////////////////////////////////////////////////////////////////////////////////////////////-->
-
-
-    <!--///////////////////////////////////////////////////////////////////////////////Modal Cliente Editar perfil/////////////////////////////////////////////////////////////////////////////////////////////////-->
-    <div class="modal fade" id="cambioCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modificacion  </h5>
-
-          </div>
-
-          <div class="modal-body">
-            <form [formGroup]="formCliente" >
-              <div class="modal-dialog">
-                <div class="modal-content">
-
-                  <div class="form-row">
-                    <div class="form-group col-md-4">
-                      <label > Razon Social</label>
-                      <input type="text" class="form-control" [(ngModel)]="ClienteData.razonSocial" value="ClienteData.razonSocial" readonly="readonly">
-                    </div>
-                    <div class="form-group col-md-4">
-                      <label > RIF</label>
-                      <input type="text" class="form-control" [(ngModel)]="ClienteData.rif" value="ClienteData.rif" readonly="readonly">
-                    </div>
-                    <div class="form-group col-md-4">
-                      <label > Username </label>
-                      <input type="text" class="form-control" [(ngModel)]="ClienteData.usuario.username" value="ClienteData.usuario.username" readonly="readonly">
-                    </div>
-                  </div>
-                  <div class="form-row">
-                    <div class="form-group col-md-4">
-                      <label > Correo</label>
-                      <input type="text" class="form-control" [(ngModel)]="ClienteData.usuario.correoelectronico" value="ClienteData.usuario.correoelectronico"  >
-                    </div>
-                    <div class="form-group col-md-4">
-                      <label > Numero de Telefono</label>
-                      <input type="text" class="form-control" [(ngModel)]="ClienteData.telefono.numero" value="ClienteData.usuario.correoelectronico"  >
-                    </div>
-
-                  </div>
-
-                  <div class="form-row">
-                    <div class="form-group col-md-4">
-                      <label for=""> Estado</label>
-                      <input type="text" class="form-control" [(ngModel)]="ClienteData.lugar.nombre" value="ClienteData.lugar.nombre" >
-                    </div>
-
-                    <div class="form-group col-md-4">
-                      <label for=""> Municipio </label>
-                      <input type="text" class="form-control" [(ngModel)]="ClienteData.lugar.lugar.nombre" value="ClienteData.lugar.lugar.nombre" >
-                    </div>
-
-                    <div class="form-group col-md-4">
-                      <label for="inputZip">Parroquia </label>
-                      <input type="text" class="form-control" [(ngModel)]="ClienteData.lugar.lugar.lugar.nombre" value="ClienteData.lugar.lugar.nombre" >
-                    </div>
-                  </div>
-
-                  <br>
-
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-success" (click)="GuardarPerfil()" data-dismiss="modal">Actualizar</button>
-
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-
-
-
-    <!--///////////////////////////////////////////////////////////////////////////////Modal Admin Editar perfil/////////////////////////////////////////////////////////////////////////////////////////////////-->
-
-
-    <div class="modal fade" id="cambioAdmin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-
-          <div class="modal-header">
-            <h4>Modificacion</h4>
-          </div>
-
-          <div class="modal-body">
-            <form  [formGroup]="formAdmin" >
-              <div class="modal-dialog">
-                <div class="modal-content">
-
-
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <label > Nombre del Administrador</label>
-                      <input type="text" class="form-control" [(ngModel)]="AdministradorData.username" formControlName="correoElectronicoAdmin"value="AdministradorData.username" readonly="readonly">
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label > Correo</label>
-                      <input type="text" class="form-control" [(ngModel)]="AdministradorData.correoelectronico" value="AdministradorData.correoelectronico">
-                      <div *ngIf="correoElectronicoAdmin.invalid && (correoElectronicoAdmin.dirty || correoElectronicoAdmin.touched)" class="alert alert-danger">
-                        <div *ngIf="correoElectronicoAdmin.errors.required">
-                          Este campo es obligatorio
-                        </div>
-                        <div *ngIf="correoElectronicoAdmin.errors.pattern">
-                          Introduzca una descripcion valida
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <label > Rol en nuestro sistema </label>
-                      <input type="text" class="form-control"[(ngModel)]="AdministradorData.tipoUsuario.descripcion"  formControlName="rol"  value="AdministradorData.tipousuario.descripcion">
-                      <div *ngIf="rol.invalid && (correoElectronicoAdmin.dirty || rol.touched)" class="alert alert-danger">
-                        <div *ngIf="rol.errors.required">
-                          Este campo es obligatorio
-                        </div>
-                        <div *ngIf="correoElectronicoAdmin.errors.pattern">
-                          Introduzca una descripcion valida
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-
-                  <br>
-
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-success" (click)="GuardarPerfil()" data-dismiss="modal">Actualizar</button>
-
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
-    <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-
-
-    <br>
   </div>
 </div>
+    <!--///////////////////////////////////////////////////////////////////////////////Modal analista Editar perfil/////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+
+
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+

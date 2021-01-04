@@ -45,8 +45,10 @@ public class EncuestadoServicio {
         encuestadoEntity.setSegundoNombre(dtoEncuestado.getSegundoNombre());
         encuestadoEntity.setPrimerApellido(dtoEncuestado.getPrimerApellido());
         encuestadoEntity.setSegundoApellido(dtoEncuestado.getSegundoApellido());
-        SimpleDateFormat fecha = new SimpleDateFormat("dd/mm/yyyy");
-        Date fechaNacimiento = fecha.parse(dtoEncuestado.getFechaNacimiento());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date fechaNacimiento = sdf.parse(dtoEncuestado.getFechaNacimiento());
+
         encuestadoEntity.setFechaNacimiento(fechaNacimiento);
         encuestadoEntity.setEstado(dtoEncuestado.getEstado());
 
@@ -112,20 +114,26 @@ public class EncuestadoServicio {
     @GET
     @Produces(value=MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public Response getEncuestado(@PathParam("id") long id) throws PruebaExcepcion {
+    public Response getEncuestado(@PathParam("id") long id) throws PruebaExcepcion, ParseException {
         DaoEncuestado dao = new DaoEncuestado();
         EncuestadoEntity encuestadoEntity = dao.find(id, EncuestadoEntity.class);
 
         if(encuestadoEntity != null) {
 
             DtoEncuestado dtoEncuestado = new DtoEncuestado();
+            dtoEncuestado.set_id(encuestadoEntity.get_id());
             dtoEncuestado.setEstado(encuestadoEntity.getEstado());
             dtoEncuestado.setPrimerNombre(encuestadoEntity.getPrimerNombre());
             dtoEncuestado.setSegundoNombre(encuestadoEntity.getSegundoNombre());
             dtoEncuestado.setPrimerApellido(encuestadoEntity.getPrimerApellido());
             dtoEncuestado.setSegundoApellido(encuestadoEntity.getSegundoApellido());
-            DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
-            dtoEncuestado.setFechaNacimiento(dateFormat.format(encuestadoEntity.getFechaNacimiento()));
+
+            DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String fechaNacimiento = sdf.format(encuestadoEntity.getFechaNacimiento());
+
+            //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            //Date fechaNacimiento = sdf.parse(encuestadoEntity.getFechaNacimiento());
+            dtoEncuestado.setFechaNacimiento(fechaNacimiento);
 
             DtoEstadoCivil dtoEstadoCivil = new DtoEstadoCivil();
             dtoEstadoCivil.set_id(encuestadoEntity.getEstadoCivil().get_id());
@@ -242,6 +250,91 @@ public class EncuestadoServicio {
         }
 
         return Response.status(Response.Status.NOT_FOUND).build();
+    }
+
+
+    @PUT
+    @Consumes(value=MediaType.APPLICATION_JSON)
+    @Produces(value=MediaType.APPLICATION_JSON)
+    @Path("/updateEstado/{id}")
+    public Response updateEstadoEncuestado(@PathParam("id") long id, DtoEncuestado dtoEncuestado) {
+        DaoEncuestado daoEncuestado = new DaoEncuestado();
+        EncuestadoEntity encuestadoEntity = daoEncuestado.find(id, EncuestadoEntity.class);
+
+        if (encuestadoEntity != null){
+            encuestadoEntity.setEstado(dtoEncuestado.getEstado());
+            daoEncuestado.update(encuestadoEntity);
+            return Response.ok().entity(encuestadoEntity).build();
+        }
+        else{
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
+
+
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/{id}")
+    public Response updateEncuestado(DtoEncuestado dtoEncuestado) {
+
+        String rol = "Encuestado";
+
+        DaoEncuestado dao = new DaoEncuestado();
+        DaoEstadoCivil daoEstadoCivil = new DaoEstadoCivil();
+        DaoNivelAcademico daoNivelAcademico = new DaoNivelAcademico();
+        DaoMedioConexion daoMedioConexion = new DaoMedioConexion();
+        DaoGenero daoGenero = new DaoGenero();
+        DaoOcupacion daoOcupacion = new DaoOcupacion();
+        DaoNivelSocioeconomico daoNivelSocioeconomico = new DaoNivelSocioeconomico();
+        DaoLugar daoLugar = new DaoLugar();
+
+        EncuestadoEntity encuestadoEntity = new EncuestadoEntity();
+
+        encuestadoEntity.setPrimerNombre(dtoEncuestado.getPrimerNombre());
+        encuestadoEntity.setSegundoNombre(dtoEncuestado.getSegundoNombre());
+        encuestadoEntity.setPrimerApellido(dtoEncuestado.getPrimerApellido());
+        encuestadoEntity.setSegundoApellido(dtoEncuestado.getSegundoApellido());
+        //encuestadoEntity.setFechaNacimiento(dtoEncuestado.getFechaNacimiento());
+
+        EstadoCivilEntity estadoCivilEntity = daoEstadoCivil.find(dtoEncuestado.getEstadoCivil().get_id(), EstadoCivilEntity.class);
+        encuestadoEntity.setEdocivil(estadoCivilEntity);
+
+        NivelAcademicoEntity nivelAcademicoEntity = daoNivelAcademico.find(dtoEncuestado.getNivelAcademico().get_id(), NivelAcademicoEntity.class);
+        encuestadoEntity.setNivelacademico(nivelAcademicoEntity);
+
+        MedioConexionEntity medioConexionEntity = daoMedioConexion.find(dtoEncuestado.getMedioConexion().get_id(), MedioConexionEntity.class);
+        encuestadoEntity.setMedioconexion(medioConexionEntity);
+
+        GeneroEntity generoEntity = daoGenero.find(dtoEncuestado.getGenero().get_id(), GeneroEntity.class);
+        encuestadoEntity.setGenero(generoEntity);
+
+        OcupacionEntity ocupacionEntity = daoOcupacion.find(dtoEncuestado.getOcupacion().get_id(), OcupacionEntity.class);
+        encuestadoEntity.setOcupacion(ocupacionEntity);
+
+        NivelSocioeconomicoEntity nivelSocioeconomicoEntity = daoNivelSocioeconomico.find(dtoEncuestado.getNivelSocioEconomico().get_id(), NivelSocioeconomicoEntity.class);
+        encuestadoEntity.setNivelsocioeco(nivelSocioeconomicoEntity);
+
+        LugarEntity lugarEntity = daoLugar.find(dtoEncuestado.getLugar().get_id(), LugarEntity.class);
+        encuestadoEntity.setLugar(lugarEntity);
+
+        DaoTelefono daoTelefono = new DaoTelefono();
+        TelefonoEntity telefonoEntity = daoTelefono.getTelefonoByEncuestado(encuestadoEntity);
+        telefonoEntity.setNumero(dtoEncuestado.getTelefono().getNumero());
+        telefonoEntity.setEstado(dtoEncuestado.getEstado());
+        telefonoEntity.setEncuestado(encuestadoEntity);
+        TelefonoEntity resulTlf = daoTelefono.update(telefonoEntity);
+
+        DtoUsuario dtoUsuario = new DtoUsuario();
+        dtoUsuario.setEstado(dtoEncuestado.getEstado());
+        dtoUsuario.setUsername(dtoEncuestado.getUsuario().getUsername());
+        dtoUsuario.setCorreoelectronico(dtoEncuestado.getUsuario().getCorreoelectronico());
+        DirectorioActivo ldap = new DirectorioActivo();
+        ldap.updateEntry(dtoUsuario, rol);
+
+        EncuestadoEntity resul = dao.update(encuestadoEntity);
+
+        return Response.ok(encuestadoEntity).build();
     }
 
 }

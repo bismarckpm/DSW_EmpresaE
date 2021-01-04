@@ -108,8 +108,8 @@
                               </div>
                             </div>
                           </div>
-                          <div class="row">
-                            <div class="col-md-5 mb-3">
+                          <div class="form-row">
+                            <div class="col-md-6 mb-3">
                               <label for="estado">Estado del Estudio</label>
                               <select class="custom-select d-block w-100" [(ngModel)]="estudioData.estado" formControlName="estadoEstudio" value="estado">
                                 <option value="">Choose...</option>
@@ -126,10 +126,21 @@
                               </div>
                             </div>
 
-
+                            <div class="col-md-6 mb-3">
+                              <label for="" class="col-sm-6 col-form-label escrituerModal">Subcategoria </label>
+                              <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.subcategoria._id" formControlName="subcategoriaEstudio" value="estudioData.subcategoria._id">
+                                <option  value=""> Seleccione una ...</option>
+                                <option  *ngFor="let sub of subcategoria" [ngValue]= "sub._id"  >{{sub.nombre}}</option>
+                              </select>
+                              <div *ngIf="subcategoriaEstudio.invalid && (subcategoriaEstudio.dirty || subcategoriaEstudio.touched)" class="alert alert-danger">
+                                <div *ngIf="subcategoriaEstudio.errors.required">
+                                  Este campo es obligatorio
+                                </div>
+                              </div>
+                            </div>
                           </div>
 
-                          <div class="row">
+                          <!--<div class="row">
                             <div class="col-md-4 mb-3">
                               <label for="estado">Estado</label>
                               <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.lugar._id" (click)="busquedaMunicipio(estudioData.lugar._id)"formControlName="lugarEstudio"  value="estudio.lugar._id">
@@ -168,34 +179,31 @@
                                 Este campo es obligatorio
                               </div>
                             </div>
+                          </div>-->
+                        <div class="form-row">
+                          <div class="col-md-6 mb-3">
+                            <label for="" class="col-sm-6 col-form-label escrituerModal">Nivel Socio Economico  </label>
+                            <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.nivelSocioEconomico._id" formControlName="nivelEstudio" value="estudioData.nivelSocioEconomico._id" >
+                              <option  value=""> Seleccione un ...</option>
+                              <option  *ngFor="let nivel of nivelSocioEconomico" [ngValue]= "nivel._id"  >{{nivel.nombre}}</option>
+                            </select>
+                            <div *ngIf="nivelEstudio.invalid && (nivelEstudio.dirty || nivelEstudio.touched)" class="alert alert-danger">
+                              <div *ngIf="nivelEstudio.errors.required">
+                                Este campo es obligatorio
+                              </div>
+                            </div>
                           </div>
 
-
-                      <div class="col-md-5 mb-3">
-                        <label for="" class="col-sm-6 col-form-label escrituerModal">Subcategoria </label>
-                            <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.subcategoria._id" formControlName="subcategoriaEstudio" value="estudioData.subcategoria._id">
+                          <!-- <div class="col-md-6 mb-3">
+                            <label for="" class="col-sm-6 col-form-label escrituerModal">Seleccione un Analista  </label>
+                            <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.analista._id" >
                                 <option  value=""> Slecciones una ...</option>
-                                <option  *ngFor="let sub of subcategoria" [ngValue]= "sub._id"  >{{sub.nombre}}</option>
+                                <option  *ngFor="let analista of analistas" [ngValue]= "analista._id">{{analista.username}}</option>
                             </select>
-                            <div *ngIf="subcategoriaEstudio.invalid && (subcategoriaEstudio.dirty || subcategoriaEstudio.touched)" class="alert alert-danger">
-                                <div *ngIf="subcategoriaEstudio.errors.required">
-                                  Este campo es obligatorio
-                                </div>
-                              </div>
-                       </div>
+                          </div>-->
 
-                        <div class="col-md-5 mb-3">
-                          <label for="" class="col-sm-6 col-form-label escrituerModal">Nivel Socio Economico  </label>
-                              <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.nivelSocioEconomico._id" formControlName="nivelEstudio" value="estudioData.nivelSocioEconomico._id" >
-                                  <option  value=""> Slecciones una ...</option>
-                                  <option  *ngFor="let nivel of nivelSocioEconomico" [ngValue]= "nivel._id"  >{{nivel.nombre}}</option>
-                              </select>
-                              <div *ngIf="nivelEstudio.invalid && (nivelEstudio.dirty || nivelEstudio.touched)" class="alert alert-danger">
-                                  <div *ngIf="nivelEstudio.errors.required">
-                                    Este campo es obligatorio
-                                  </div>
-                                </div>
                         </div>
+
 
 
                       </form>

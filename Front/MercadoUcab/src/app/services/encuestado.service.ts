@@ -17,8 +17,8 @@ export class EncuestadoService {
 
   ];
 
-  //apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
-  apiurl = 'http://localhost:3000';
+  apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+  //apiurl = 'http://localhost:3000';
 
   constructor(private http:HttpClient) { }
 // Http Options
@@ -72,7 +72,7 @@ createEncuestado(Encuestado):Observable<Encuestado[]>{
   )
 }
 
-updateEncuestado(id,Encuestado):Observable<Encuestado[]>{
+updateEncuestadoPerfil(id,Encuestado):Observable<Encuestado[]>{
   return this.http.put<Encuestado[]>(this.apiurl+'/encuestado/'+id,JSON.stringify(Encuestado), this.httpOptions)
   .pipe(
     retry(1),

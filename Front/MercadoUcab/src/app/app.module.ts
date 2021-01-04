@@ -31,7 +31,6 @@ import {FormMarcaComponent} from './componentes/form-marca/form-marca.component'
 import {ListaMarcaComponent} from './componentes/lista-marca/lista-marca.component';
 import {ListaPreguntasComponent} from './componentes/lista-preguntas/lista-preguntas.component';
 import {MainAdminComponent} from './componentes/main-admin/main-admin.component';
-
 import {FormCategoriaComponent} from './componentes/form-categoria/form-categoria.component';
 import {ListaCategoriaComponent} from './componentes/lista-categoria/lista-categoria.component';
 import {FormEncuestadoComponent} from './componentes/form-encuestado/form-encuestado.component';
@@ -49,6 +48,10 @@ import { ListaEncuestaComponent } from './componentes/lista-encuesta/lista-encue
 // Modulo de Cliente !!!!!!!!!!!!!!!!!
 import {ListaEstudioClienteComponent} from './modulos/cliente/lista-estudio/lista-estudio.component';
 import { FormEstudioClienteComponent} from './modulos/cliente/form-estudio/form-estudio.component';
+import { FormAnalistaAdminComponent } from './componentes/form-analista-admin/form-analista-admin.component';
+import { ListaAnalistaAdminComponent } from './componentes/lista-analista-admin/lista-analista-admin.component';
+import { ListaEstudiosAnalistaComponent } from './modulos/analista/lista-estudios-analista/lista-estudios-analista.component';
+import { ListaEstudiosEncuestadoComponent } from './modulos/encuestado/lista-estudios-encuestado/lista-estudios-encuestado.component';
 
 // Services
 import { EncuestadoService } from './services/encuestado.service';
@@ -61,60 +64,63 @@ import { TipoService } from './services/tipo.service';
 import { TipoPreguntaService } from './services/tipo-pregunta.service';
 import { ClienteService } from './services/cliente.service';
 import { AnalistaService } from './services/analista.service';
-import { FormAnalistaAdminComponent } from './componentes/form-analista-admin/form-analista-admin.component';
-import { ListaAnalistaAdminComponent } from './componentes/lista-analista-admin/lista-analista-admin.component';
-import {ListaEstudiosAnalistaComponent} from './modulos/analista/lista-estudios-analista/lista-estudios-analista.component';
-import {ListaEstudiosEncuestadoComponent} from './modulos/encuestado/lista-estudios-encuestado/lista-estudios-encuestado.component';
+import { PreguntaService } from './services/pregunta.service';
+import { PresentacionService } from './services/presentacion.service';
 
+// Graficos
+import { HighchartsChartComponent } from 'highcharts-angular';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        LoginComponent,
-        NavbarComponent,
-        SidebarComponent,
-        RegistrarseComponent,
-        RecuperacionComponent,
-        ListaComponent,
-        AdminComponent,
-        ClienteComponent,
-        EncuestadoComponent,
-        AnalistaComponent,
-        FormClientesComponent,
-        FormMarcaComponent,
-        ListaMarcaComponent,
-        ListaPreguntasComponent,
-        MainAdminComponent,
-        ListaEstudiosComponent,
-        ListaCategoriaComponent,
-        FormCategoriaComponent,
-        FormEncuestadoComponent,
-        ListaSubcategoriaComponent,
-        FormSubcategoriaComponent,
-        FormTipoComponent,
-        ListaTipoComponent,
-        FormEstudioComponent,
-        ListaEstudiosComponent,
-        FormClientesComponent,
-        ListaClientesComponent,
-        FormPresentacionComponent,
-        ListaPresentacionComponent,
-        FormEncuestaComponent,
-        ListaEncuestaComponent,
-        CambiarClaveComponent,
-        EditClienteComponent,
-        EditUsuarioComponent,
-        FormPreguntaComponent,
-        PerfilComponent,
-        ListaEncuestadosComponent,
-        ListaEstudioClienteComponent,
-        FormEstudioClienteComponent,
-        ListaEncuestadosComponent,
-        FormAnalistaAdminComponent,
-        ListaAnalistaAdminComponent,
-        ListaEstudiosAnalistaComponent,
-        ListaEstudiosEncuestadoComponent
-    ],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    NavbarComponent,
+    SidebarComponent,
+    RegistrarseComponent,
+    RecuperacionComponent,
+    ListaComponent,
+    AdminComponent,
+    ClienteComponent,
+    EncuestadoComponent,
+    AnalistaComponent,
+    FormClientesComponent,
+    FormMarcaComponent,
+    ListaMarcaComponent,
+    ListaPreguntasComponent,
+    MainAdminComponent,
+    ListaEstudiosComponent,
+    ListaCategoriaComponent,
+    FormCategoriaComponent,
+    FormEncuestadoComponent,
+    ListaSubcategoriaComponent,
+    FormSubcategoriaComponent,
+    FormTipoComponent,
+    ListaTipoComponent,
+    FormEstudioComponent,
+    ListaEstudiosComponent,
+    FormClientesComponent,
+    ListaClientesComponent,
+    FormPresentacionComponent,
+    ListaPresentacionComponent,
+    FormEncuestaComponent,
+    ListaEncuestaComponent,
+    CambiarClaveComponent,
+    EditClienteComponent,
+    EditUsuarioComponent,
+    FormPreguntaComponent,
+    PerfilComponent,
+    ListaEncuestadosComponent,
+    ListaEstudioClienteComponent,
+    FormEstudioClienteComponent,
+    ListaEncuestadosComponent,
+    FormAnalistaAdminComponent,
+    ListaAnalistaAdminComponent,
+    ListaEstudiosAnalistaComponent,
+    ListaEstudiosEncuestadoComponent,
+
+    // Grafico
+    HighchartsChartComponent
+  ],
   imports: [
     BrowserModule,
     SidebarModule.forRoot(),
@@ -130,6 +136,8 @@ import {ListaEstudiosEncuestadoComponent} from './modulos/encuestado/lista-estud
     AdminService,
     ClienteService,
     MarcaService,
+    PreguntaService,
+    PresentacionService,
     SubcategoriaService,
     CategoriaService,
     EncuestaService,

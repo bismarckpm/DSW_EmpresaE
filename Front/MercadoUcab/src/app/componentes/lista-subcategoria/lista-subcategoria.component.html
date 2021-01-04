@@ -52,11 +52,8 @@
                                         </div>
                                       </div>
                                 </div>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-md-5 mb-3">
-                                <label for="">Estado</label>
+                                <div class="col-md-6 mb-3">
+                                  <label for="">Estado</label>
                                   <select class="custom-select d-block w-100" [(ngModel)]= "subcategoriaData.estado" formControlName="estadoSubcategoria" name="estado" >
                                     <option value="a">Activa</option>
                                     <option value="i">Inactiva</option>
@@ -66,13 +63,14 @@
                                       Este campo es obligatorio
                                     </div>
                                   </div>
+                                </div>
                               </div>
                             </div>
                             <br>
                             <div class="form-group row">
                               <br>
                               <label for="" class="col-sm-4 col-form-label escrituerModal">Seleccione una categoria</label>
-                              <div class="col-sm-8">
+                              <div class="col-sm-6">
                                 <select name="categoria._id" id="categoria._id" class="form-control escrituerModal " [(ngModel)]="subcategoriaData.categoria._id" formControlName="CATEGORIA" >
                                   <option value=""> Selecciones una ...</option>
                                   <option class="escrituraModal" *ngFor="let cat of categoria"   [ngValue]= "cat._id" >{{cat.nombre}}</option>

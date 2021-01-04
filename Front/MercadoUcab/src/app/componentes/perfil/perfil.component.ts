@@ -23,23 +23,24 @@ export class PerfilComponent implements OnInit {
   encue = false;
   cli = false;
 
-  @Input() usuario={ _id:0, nuevaClave:"",clave:'' };
-  @Input() auxUsuario={nuevaClave:''};
-  @Input() Cliente :any
-  @Input() Administrador :any
-  @Input() Analista :any
-  @Input() Encuestado :any
-  aux:any;
+  @Input() usuario = { _id: 0, nuevaClave: '', clave: '' };
+  @Input() auxUsuario = {nuevaClave: ''};
+  @Input() Cliente: any;
+  @Input() Administrador: any;
+  @Input() Analista: any;
+  @Input() Encuestado: any;
+  aux: any;
 
   ////////////////////////////Edicion de datos ///////////////////////
   @Input() ClienteData = {_id: 0, rif: '', razonSocial: '', estado: '',
     lugar:  {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: ''}}}},
-    usuario: {_id: 0, username: '', estado: '', clave: '', correoElectronico: ''},
+    usuario: {_id: 0, username: '', estado: '', clave: '', correoelectronico: ''},
     telefono: {_id: 0, numero: ''},
   };
 
 
-  @Input() AnalistaData = {_id: 0, rol: '', username: '', clave: '', correoElectronico: '', estado: '', tipoUsuario: {_id: 0, descripcion: ''}};
+  @Input() AnalistaData = {_id: 0, rol: '', username: '', clave: '', correoelectronico: '', estado: '', tipoUsuario: {_id: 0, descripcion: ''}};
+  @Input() AdministradorData = {_id: 0, rol: '', username: '', clave: '', correoelectronico: '', estado: '', tipoUsuario: {_id: 0, descripcion: ''}};
 
 
   @Input() EncuestadoData = {_id: 0, primerNombre: '', segundoNombre: '' , primerApellido: '', segundoApellido: 0, fechaNacimiento: '', estado: '',
@@ -52,7 +53,7 @@ export class PerfilComponent implements OnInit {
     telefono: {_id: 0, numero: ''},
     hijo: {_id: 0, fechaNacimientoHijo: '', generoHijo: ''},
     lugar:  {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: ''}}}},
-    usuario: {_id: 0, username: '', estado: '', clave: '', correoElectronico: ''},
+    usuario: {_id: 0, username: '', estado: '', clave: '', correoelectronico: ''},
   };
 
 
@@ -123,33 +124,33 @@ export class PerfilComponent implements OnInit {
 
     if ((JSON.parse(localStorage.getItem('rol') )) == 'Administrador'){
       this.administradroService.getAdministradorDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data => {
-        this.Administrador= data;
-      })
-      console.log("++++++++++++++++++++++++++++++++++ADmin")
-      this.admin=true;
-    }else if((JSON.parse(localStorage.getItem("rol") )) == "Cliente"){
-      this.clienteService.getClienteDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data=>{
-        this.Cliente=data;
-      })
-      console.log("++++++++++++++++++++++++++++++++++Cliente")
-      this.cli=true;
-    }else if((JSON.parse(localStorage.getItem("rol") )) == "Encuestado"){
-      console.log("ENTRO EN LA LLAMADA");
+        this.Administrador = data;
+      });
+      console.log('++++++++++++++++++++++++++++++++++ADmin');
+      this.admin = true;
+    }else if ((JSON.parse(localStorage.getItem('rol') )) == 'Cliente'){
+      this.clienteService.getClienteDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data => {
+        this.Cliente = data;
+      });
+      console.log('++++++++++++++++++++++++++++++++++Cliente');
+      this.cli = true;
+    }else if ((JSON.parse(localStorage.getItem('rol') )) == 'Encuestado'){
+      console.log('ENTRO EN LA LLAMADA');
       this.encuestadoservice.getEncuestadoDelUsuario( parseInt(localStorage.getItem('usuarioID'))).subscribe( data => {
         this.Encuestado = data;
         console.log('GUARDO LA INFORMACION');
         console.log(this.Encuestado);
       });
 
-      this.encue=true;
-    }if((JSON.parse(localStorage.getItem("rol") )) == "Analista"){
-      this.analistaService.getAnalistaDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data =>{
-        this.Analista =data
-      })
-      console.log("loqueseas")
-      this.analist=true;
+      this.encue = true;
+    }if ((JSON.parse(localStorage.getItem('rol') )) == 'Analista'){
+      this.analistaService.getAnalistaDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data => {
+        this.Analista = data;
+      });
+      console.log('loqueseas');
+      this.analist = true;
     }else{
-      console.log("NOOOOOOOOOOOOOOOOOOOOOOOOOOO ENTREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE MALDITA SEAAAAAAAAAAAAAAAAAAAA")
+      console.log('NOOOOOOOOOOOOOOOOOOOOOOOOOOO ENTREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE MALDITA SEAAAAAAAAAAAAAAAAAAAA');
     }
 
   }
@@ -167,7 +168,13 @@ export class PerfilComponent implements OnInit {
       }
     });
 
+  }
 
+  Editar(){
+    this.AdministradorData=this.Administrador;
+    this.AnalistaData=this.Analista;
+    this.ClienteData=this.Cliente;
+    this.EncuestadoData=this.Encuestado;
   }
 
 
@@ -181,23 +188,23 @@ export class PerfilComponent implements OnInit {
 
   GuardarPerfil(){
 
-    if(this.formAdmin.valid || this.formAnalista.valid|| this.formCliente.valid|| this.formEncuestado.valid ){
+    if (this.formAdmin.valid || this.formAnalista.valid || this.formCliente.valid || this.formEncuestado.valid ){
 
       if((JSON.parse(localStorage.getItem("rol") )) == "Administrador"){
-        this.administradroService.updateAdministrador(this.Administrador._id,this.Administrador)
+        this.usuarioService.updateUsuarioPerfil(this.Administrador._id,this.Administrador)
       }
 
       if((JSON.parse(localStorage.getItem("rol") )) == "Cliente"){
-        this.clienteService.updateCliente(this.Cliente._id,this.Cliente);
+        this.clienteService.updateClientePerfil(this.Cliente._id,this.Cliente);
       }
 
       if((JSON.parse(localStorage.getItem("rol") )) == "Encuestado"){
         console.log("ENTRO EN LA LLAMADA");
-        this.encuestadoservice.updateEncuestado(this.Encuestado._id,this.Encuestado)
+        this.encuestadoservice.updateEncuestadoPerfil(this.Encuestado._id,this.Encuestado)
       }
 
       if((JSON.parse(localStorage.getItem("rol") )) == "Analista"){
-        this.analistaService.updateAnalista(this.Analista._id,this.Analista)
+        this.usuarioService.updateUsuarioPerfil(this.Analista._id,this.Analista)
       }
 
     }
@@ -251,7 +258,8 @@ export class PerfilComponent implements OnInit {
 
 
 
-//Validaciones de encuestado
+// Validaciones de encuestado
+
   get primerNombreEncuestado(){return this.formEncuestado.get('primerNombreEncuestado'); }
   get segundoNombreEncuestado(){return this.formEncuestado.get('segundoNombreEncuestado'); }
   get primerApellidoEncuestado(){return this.formEncuestado.get('primerApellidoEncuestado'); }
@@ -329,9 +337,6 @@ export class PerfilComponent implements OnInit {
       correoElectronicoEncuestado: ['', [Validators.required, Validators.pattern(this.patronCorreo)]],
     });
   }
-
-
-
 
 
 

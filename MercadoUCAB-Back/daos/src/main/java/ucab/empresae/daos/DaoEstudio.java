@@ -1,9 +1,6 @@
 package ucab.empresae.daos;
 
-import ucab.empresae.entidades.ClienteEntity;
-import ucab.empresae.entidades.ClienteEstudioEntity;
-import ucab.empresae.entidades.EstudioEntity;
-import ucab.empresae.entidades.LugarEntity;
+import ucab.empresae.entidades.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -28,6 +25,35 @@ public class DaoEstudio extends Dao<EstudioEntity> {
             List<EstudioEntity> resultado = estudios.getResultList();
 
             return resultado;
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    public List<EstudioEntity> estudiosAnalista(long id) {
+        try{
+            TypedQuery<EstudioEntity> estudios = this._em
+                    .createNamedQuery("getEstudiosAnalista", EstudioEntity.class);
+            estudios.setParameter("id", id).getResultList();
+
+            List<EstudioEntity> resultado = estudios.getResultList();
+
+            return resultado;
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+
+    public List<EstudioEntity> getEstudios(LugarEntity lugar, NivelSocioeconomicoEntity nivelSocioeconomico){
+
+        try{
+            TypedQuery<EstudioEntity> estudios = this._em.createNamedQuery("getEstudiosEncuestado", EstudioEntity.class);
+            estudios.setParameter("lugar", lugar).setParameter("nivelSocioeconomico", nivelSocioeconomico).getResultList();
+
+            List<EstudioEntity> resultado = estudios.getResultList();
+            return resultado;
+
         }catch (Exception e){
             return null;
         }

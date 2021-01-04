@@ -12,7 +12,7 @@ export class EstudioService {
 
 
   apiurl = 'http://localhost:3000';
-  //apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+  // apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
 
   constructor(private http: HttpClient) { }
 
@@ -41,15 +41,25 @@ export class EstudioService {
   }
 
   getEstudioCliente(id): Observable<Estudio[]>{
-    return this.http.get<Estudio[]>(this.apiurl + '/estudio/' + id)
+    return this.http.get<Estudio[]>(this.apiurl + '/estudio/cliente/' + id)
     .pipe(
       retry(1),
       catchError(this.handleError)
     );
   }
 
+  // back
+  // getEstudioAnalista(user): Observable<Estudio[]>{
+  //   return this.http.get<Estudio[]>(this.apiurl + '/estudio/analista/' + user)
+  //   .pipe(
+  //     retry(1),
+  //     catchError(this.handleError)
+  //   );
+  // }
+
+  // front
   getEstudioAnalista(user): Observable<Estudio[]>{
-    return this.http.get<Estudio[]>(this.apiurl + '/estudio/' + user)
+    return this.http.get<Estudio[]>(this.apiurl + '/estudio')
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -57,15 +67,31 @@ export class EstudioService {
   }
 
   getDataMuestra(id): Observable<Encuestado[]>{
-    return this.http.get<Encuestado[]>(this.apiurl + '/estudio/' + id)
+    return this.http.get<Encuestado[]>(this.apiurl + '/estudio/dataMuestra/' + id)
       .pipe(
         retry(1),
         catchError(this.handleError)
       );
   }
 
+  getDataGraficos(idEstudio): Observable<any>{
+    return this.http.get(this.apiurl + '/graficos' /*+idEstudio*/)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
+  // getEstudioEncuestado(id): Observable<Estudio[]>{
+  //   return this.http.get<Estudio[]>(this.apiurl + '/estudio/encuestado/' + id)
+  //     .pipe(
+  //       retry(1),
+  //       catchError(this.handleError)
+  //     );
+  // }
+
   getEstudioEncuestado(id): Observable<Estudio[]>{
-    return this.http.get<Estudio[]>(this.apiurl + '/estudio/' + id)
+    return this.http.get<Estudio[]>(this.apiurl + '/estudio')
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -74,6 +100,14 @@ export class EstudioService {
 
   createEstudio(Estudio): Observable<Estudio[]>{
     return this.http.post<Estudio[]>(this.apiurl + '/estudio', JSON.stringify(Estudio), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
+  createEstudioCliente(id,Estudio): Observable<Estudio[]>{
+    return this.http.post<Estudio[]>(this.apiurl + '/estudio/cliente/' + id, JSON.stringify(Estudio), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)

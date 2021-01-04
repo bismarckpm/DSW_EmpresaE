@@ -4,7 +4,7 @@
       "_id": 50,
       "username": "Pedro",
       "clave ": "pedro",
-      "rol": "Administrador",
+      "rol": "Encuestado",
       "autenticacion": "valida"
     },
     {
@@ -20,7 +20,7 @@
     },
     {
       "_id": 52,
-      "username": "Victorr",
+      "username": "Victor",
       "clave": "victor",
       "correoElectronico": "victor@gmail.com",
       "estado": "a",
@@ -333,55 +333,86 @@
   ],
   "estudio": [
     {
-      "_id": 1,
-      "nombre": "Chucheria",
-      "estado": "procesado",
-      "comentarioAnalista": "",
-      "edadMinima": 18,
-      "edadMaxima": 19,
-      "fechaInicio": "19/8/20",
-      "fechaFin": "20/8/20",
-      "dtoLugar": [
-        {
-          "_id": 1,
-          "nombre": "Venezuela",
-          "tipo": "pais"
-        }
-      ],
-      "dtoNivelSocioEconomico": [
-        {
-          "_id": 1,
+      "_id": 8,
+      "nombre": "estudio prueba",
+      "comentarioAnalista": "el comentario",
+      "estado": "solicitado",
+      "fechaInicio": "2020-05-04",
+      "lugar": {
+        "_id": 18,
+        "estado": "a",
+        "lugar": {
+          "_id": 5,
           "estado": "a",
-          "nombre": "pobre",
-          "descripcion": "pobre nivel descomunal"
-        }
-      ]
+          "lugar": {
+            "_id": 1,
+            "estado": "a",
+            "nombre": "venezuela",
+            "tipo": "pais"
+          },
+          "nombre": "zulia",
+          "tipo": "estado"
+        },
+        "nombre": "pruebamunc3Zuli",
+        "tipo": "municipio"
+      },
+      "nivelsocioeco": {
+        "_id": 2,
+        "descripcion": "Nivel Alto",
+        "estado": "a",
+        "nombre": "Alto"
+      },
+      "subcategoria": {
+        "_id": 2,
+        "categoria": {
+          "_id": 1,
+          "estado": "i",
+          "nombre": "CategoriaPrueba"
+        },
+        "estado": "A",
+        "nombre": "SubcategoriaPrueba2"
+      }
     },
     {
-      "_id": 2,
-      "nombre": "asd",
+      "_id": 80,
+      "nombre": "estudio prueba2",
+      "comentarioAnalista": "el comentario",
       "estado": "solicitado",
-      "comentarioAnalista": "",
-      "edadMinima": "25",
-      "edadMaxima": "26",
-      "fechaInicio": "18/05/2020",
-      "fechaFin": "19/05/2020",
-      "dtoLugar": {
-        "_id": 0,
-        "estado": "",
-        "nombre": "",
-        "tipo": ""
+      "estadoEstudioEncuestado": "Finalizado",
+      "fechaInicio": "2019-10-20",
+      "lugar": {
+        "_id": 18,
+        "estado": "a",
+        "lugar": {
+          "_id": 5,
+          "estado": "a",
+          "lugar": {
+            "_id": 1,
+            "estado": "a",
+            "nombre": "venezuela",
+            "tipo": "pais"
+          },
+          "nombre": "zulia",
+          "tipo": "estado"
+        },
+        "nombre": "pruebamunc3Zuli",
+        "tipo": "municipio"
       },
-      "dtoNivelSocioEconomico": {
-        "_id": 0,
-        "nombre": "",
-        "estado": "",
-        "descripcion": ""
+      "nivelsocioeco": {
+        "_id": 2,
+        "descripcion": "Nivel Alto",
+        "estado": "a",
+        "nombre": "Alto"
       },
-      "dtoSubcategoria": {
-        "_id": 0,
-        "nombre": "",
-        "estado": ""
+      "subcategoria": {
+        "_id": 2,
+        "categoria": {
+          "_id": 1,
+          "estado": "i",
+          "nombre": "CategoriaPrueba"
+        },
+        "estado": "A",
+        "nombre": "SubcategoriaPrueba2"
       }
     }
   ],
@@ -530,20 +561,6 @@
       ]
     },
     {
-      "_id": 3,
-      "estado": "I",
-      "fechaInicio": "10/11/2020",
-      "fechaFin": "10/11/2021",
-      "estudio": {
-        "_id": 3
-      },
-      "pregunta": [
-        {
-          "descripcion": ""
-        }
-      ]
-    },
-    {
       "_id": 4,
       "estado": "A",
       "fechaInicio": "10/10/2000",
@@ -554,97 +571,6 @@
       "pregunta": [
         {
           "descripcion": ""
-        }
-      ]
-    },
-    {
-      "_id": 5,
-      "estado": "A",
-      "fechaInicio": "10/10/1010",
-      "fechaFin": "10/10/1012",
-      "estudio": {
-        "_id": 1
-      },
-      "pregunta": [
-        {
-          "_id": 1
-        },
-        {
-          "_id": 2
-        },
-        {
-          "_id": 2
-        },
-        {
-          "_id": 5
-        },
-        {
-          "_id": 1
-        },
-        {
-          "_id": 0
-        },
-        {
-          "_id": 3
-        },
-        {
-          "_id": 5
-        },
-        {
-          "_id": 4
-        },
-        {
-          "_id": 3
-        }
-      ]
-    },
-    {
-      "_id": 6,
-      "estado": "A",
-      "fechaInicio": "10/10/1010",
-      "fechaFin": "10/10/1018",
-      "estudio": {
-        "_id": 1
-      },
-      "pregunta": [
-        {
-          "_id": 1
-        },
-        {
-          "_id": 2
-        },
-        {
-          "_id": 2
-        },
-        {
-          "_id": 5
-        },
-        {
-          "_id": 1
-        },
-        {
-          "_id": 0
-        },
-        {
-          "_id": 3
-        },
-        {
-          "_id": 5
-        },
-        {
-          "_id": 4
-        },
-        {
-          "_id": 3
-        },
-        {
-          "_id": 1
-        },
-        {
-          "_id": 5
-        },
-        {
-          "_id": 9
         }
       ]
     }
@@ -937,96 +863,196 @@
       "estado": "a"
     }
   ],
-  "preguntassubcategoria": [
+  "preguntasresponder": [
     {
       "_id": 1,
-      "descripcion": "Preguntas subcate 1",
-      "estado": "a",
+      "descripcion": "PreguntaPostmanV/F",
+      "estado": "A",
       "tipo": {
-        "_id": 1,
-        "estado": "a",
-        "tipo": "verdadero y Falso"
+        "_id": 2
       },
       "subcategoria": {
-        "_id": 1,
-        "nombre": "subcategoria 1",
-        "estado": "i"
-      }
+        "_id": 1
+      },
+      "opciones": [
+        {
+          "_id": 1,
+          "descripcion": "Verdadero"
+        },
+        {
+          "_id": 2,
+          "descripcion": "Falso"
+        }
+      ]
     },
     {
       "_id": 2,
-      "descripcion": "Preguntas subcate 2",
-      "estado": "a",
+      "descripcion": "PreguntaPostmanSimple",
+      "estado": "A",
       "tipo": {
-        "_id": 1,
-        "estado": "i",
-        "tipo": "multiple"
+        "_id": 3
       },
       "subcategoria": {
-        "_id": 3,
-        "nombre": "subcategoria",
-        "estado": "i"
-      }
+        "_id": 1
+      },
+      "opciones": [
+        {
+          "_id": 19,
+          "descripcion": "opcion 1"
+        },
+        {
+          "_id": 29,
+          "descripcion": "opcion 2"
+        },
+        {
+          "_id": 39,
+          "descripcion": "opcion 3"
+        },
+        {
+          "_id": 49,
+          "descripcion": "opcion 4"
+        }
+      ]
     },
     {
       "_id": 3,
-      "descripcion": "SubcategoriaPruebaU",
-      "estado": "a",
-      "subcategoria": {
-        "_id": 1,
-        "categoria": {
-          "_id": 1,
-          "estado": "i",
-          "nombre": "CategoriaPrueba"
-        },
-        "estado": "a",
-        "nombre": "SubcategoriaPrueba"
-      },
+      "descripcion": "PreguntaPostmanRango",
+      "estado": "A",
       "tipo": {
-        "_id": 1,
-        "estado": "a",
-        "tipo": "Comp"
-      }
+        "_id": 3
+      },
+      "subcategoria": {
+        "_id": 1
+      },
+      "opciones": [
+        {
+          "_id": 100,
+          "descripcion": "1"
+        },
+        {
+          "_id": 200,
+          "descripcion": "2"
+        },
+        {
+          "_id": 300,
+          "descripcion": "3"
+        },
+        {
+          "_id": 400,
+          "descripcion": "4"
+        },
+        {
+          "_id": 500,
+          "descripcion": "5"
+        }
+      ]
     },
     {
       "_id": 4,
-      "descripcion": "SubcategoriaPrueba2",
-      "estado": "a",
-      "subcategoria": {
-        "_id": 1,
-        "categoria": {
-          "_id": 1,
-          "estado": "i",
-          "nombre": "CategoriaPrueba"
-        },
-        "estado": "a",
-        "nombre": "SubcategoriaPrueba"
-      },
+      "descripcion": "PreguntaPostmanAbierta",
+      "estado": "A",
       "tipo": {
-        "_id": 1,
-        "estado": "a",
-        "tipo": "Comp"
-      }
+        "_id": 1
+      },
+      "subcategoria": {
+        "_id": 1
+      },
+      "opciones": []
     },
     {
-      "_id": 9,
-      "descripcion": "PreguntaPostmanID",
-      "estado": "a",
-      "subcategoria": {
-        "_id": 1,
-        "categoria": {
-          "_id": 1,
-          "estado": "i",
-          "nombre": "CategoriaPrueba"
-        },
-        "estado": "a",
-        "nombre": "SubcategoriaPrueba"
-      },
+      "_id": 5,
+      "descripcion": "PreguntaPostmanMultiple",
+      "estado": "A",
       "tipo": {
-        "_id": 1,
-        "estado": "a",
-        "tipo": "Comp"
-      }
+        "_id": 4
+      },
+      "subcategoria": {
+        "_id": 1
+      },
+      "opciones": [
+        {
+          "_id": 190,
+          "descripcion": "opcionMulti 1"
+        },
+        {
+          "_id": 290,
+          "descripcion": "opcionMulti 2"
+        },
+        {
+          "_id": 390,
+          "descripcion": "opcionMulti 3"
+        },
+        {
+          "_id": 490,
+          "descripcion": "opcionMulti 4"
+        }
+      ]
+    }
+  ],
+  "respuestaEncuesta": [
+    {
+      "usuario": 50,
+      "estudio": 80,
+      "respuestas": [
+        {
+          "_id": 1,
+          "respuesta": {
+            "texto": "",
+            "opciones": [
+              {
+                "_id": 2
+              }
+            ]
+          }
+        },
+        {
+          "_id": 2,
+          "respuesta": {
+            "texto": "",
+            "opciones": [
+              {
+                "_id": 29
+              }
+            ]
+          }
+        },
+        {
+          "_id": 3,
+          "respuesta": {
+            "texto": "",
+            "opciones": [
+              {
+                "_id": 400
+              }
+            ]
+          }
+        },
+        {
+          "_id": 4,
+          "respuesta": {
+            "texto": "sadasda",
+            "opciones": []
+          }
+        },
+        {
+          "_id": 5,
+          "respuesta": {
+            "texto": "",
+            "opciones": [
+              {
+                "id": 190
+              },
+              {
+                "id": 290
+              },
+              {
+                "id": 390
+              }
+            ]
+          }
+        }
+      ],
+      "id,id": "AneYdRt"
     }
   ]
 }

@@ -14,8 +14,8 @@ export class UsuarioService {
 
     usuario: any;
 
-  apiurl = 'http://localhost:3000';
-  // apiurl = 'http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+  //apiurl = 'http://localhost:3000';
+   apiurl = 'http://localhost:8080/servicio-1.0-SNAPSHOT/api';
 
 
   constructor(private http: HttpClient,
@@ -29,21 +29,21 @@ export class UsuarioService {
 
   ///////// Metodos para ejecutar//////////////
   // Front
-  getUsuarios(): Observable<Usuario[]>{
+ /* getUsuarios(): Observable<Usuario[]>{
     return this.http.get<Usuario[]>(this.apiurl + '/usuario')
       .pipe(
         retry(1),
         catchError(this.handleError)
       );
-  }
-  // Back
-  //  getUsuarios(): Observable<Usuario[]>{
-  //    return this.http.get<Usuario[]>(this.apiurl + '/usuario/empleados')
-  //      .pipe(
-  //        retry(1),
-  //        catchError(this.handleError)
-  //      );
-  //  }
+  }*/
+  //Back
+   getUsuarios(): Observable<Usuario[]>{
+     return this.http.get<Usuario[]>(this.apiurl + '/usuario/empleados')
+       .pipe(
+         retry(1),
+         catchError(this.handleError)
+       );
+   }
 
   getAnalistas(): Observable<Usuario[]>{
     return this.http.get<Usuario[]>(this.apiurl+'/analista')

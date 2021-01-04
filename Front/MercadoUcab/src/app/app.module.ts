@@ -31,7 +31,6 @@ import {FormMarcaComponent} from './componentes/form-marca/form-marca.component'
 import {ListaMarcaComponent} from './componentes/lista-marca/lista-marca.component';
 import {ListaPreguntasComponent} from './componentes/lista-preguntas/lista-preguntas.component';
 import {MainAdminComponent} from './componentes/main-admin/main-admin.component';
-
 import {FormCategoriaComponent} from './componentes/form-categoria/form-categoria.component';
 import {ListaCategoriaComponent} from './componentes/lista-categoria/lista-categoria.component';
 import {FormEncuestadoComponent} from './componentes/form-encuestado/form-encuestado.component';
@@ -45,10 +44,15 @@ import { ListaEncuestadosComponent } from './componentes/lista-encuestados/lista
 import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
 import { FormEncuestaComponent } from './componentes/form-encuesta/form-encuesta.component';
 import { ListaEncuestaComponent } from './componentes/lista-encuesta/lista-encuesta.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 // Modulo de Cliente !!!!!!!!!!!!!!!!!
 import {ListaEstudioClienteComponent} from './modulos/cliente/lista-estudio/lista-estudio.component';
 import { FormEstudioClienteComponent} from './modulos/cliente/form-estudio/form-estudio.component';
+import { FormAnalistaAdminComponent } from './componentes/form-analista-admin/form-analista-admin.component';
+import { ListaAnalistaAdminComponent } from './componentes/lista-analista-admin/lista-analista-admin.component';
+import { ListaEstudiosAnalistaComponent } from './modulos/analista/lista-estudios-analista/lista-estudios-analista.component';
+import { ListaEstudiosEncuestadoComponent } from './modulos/encuestado/lista-estudios-encuestado/lista-estudios-encuestado.component';
 
 // Services
 import { EncuestadoService } from './services/encuestado.service';
@@ -61,12 +65,8 @@ import { TipoService } from './services/tipo.service';
 import { TipoPreguntaService } from './services/tipo-pregunta.service';
 import { ClienteService } from './services/cliente.service';
 import { AnalistaService } from './services/analista.service';
-import { FormAnalistaAdminComponent } from './componentes/form-analista-admin/form-analista-admin.component';
-import { ListaAnalistaAdminComponent } from './componentes/lista-analista-admin/lista-analista-admin.component';
 import { PreguntaService } from './services/pregunta.service';
 import { PresentacionService } from './services/presentacion.service';
-import {ListaEstudiosAnalistaComponent} from './modulos/analista/lista-estudios-analista/lista-estudios-analista.component';
-import {ListaEstudiosEncuestadoComponent} from './modulos/encuestado/lista-estudios-encuestado/lista-estudios-encuestado.component';
 
 
 @NgModule({
@@ -115,7 +115,11 @@ import {ListaEstudiosEncuestadoComponent} from './modulos/encuestado/lista-estud
     FormAnalistaAdminComponent,
     ListaAnalistaAdminComponent,
     ListaEstudiosAnalistaComponent,
-    ListaEstudiosEncuestadoComponent
+    ListaEstudiosEncuestadoComponent,
+
+
+
+
   ],
   imports: [
     BrowserModule,
@@ -125,6 +129,10 @@ import {ListaEstudiosEncuestadoComponent} from './modulos/encuestado/lista-estud
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    HighchartsChartModule
+
+
+
 ],
 
   providers: [

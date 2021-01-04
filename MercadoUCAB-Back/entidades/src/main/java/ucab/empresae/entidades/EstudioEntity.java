@@ -12,7 +12,8 @@ import java.util.List;
         @NamedQuery(name = "getEstudiosCliente", query = "SELECT e FROM EstudioEntity e where e in (select c.estudio from ClienteEstudioEntity c where c.cliente.usuario._id = :id)"),
         @NamedQuery(name = "getEstudiosAnalista", query = "SELECT e FROM EstudioEntity e where e.analista._id = :id"),
         @NamedQuery(name = "getEstudios", query = "select es from EstudioEntity es where es.lugar = :lugar and es.nivelSocioEconomico = :nivelSocioeconomico"),
-        @NamedQuery(name = "getEstudiosEncuestado", query = "select es from EstudioEntity es where es._id in (select estenc.estudio._id from EstudioEncuestadoEntity estenc where estenc.encuestado = :encuestado) and es.estado != 'Culminado'")
+        @NamedQuery(name = "getEstudiosEncuestado", query = "select es from EstudioEntity es where es._id in (select estenc.estudio._id from EstudioEncuestadoEntity estenc where estenc.encuestado = :encuestado) and es.estado != 'Culminado'"),
+        @NamedQuery(name = "getEstudiosSinEncuesta", query = "select es from EstudioEntity es where es._id not in (select enc.estudio._id from EncuestaEntity enc)")
 })
 public class EstudioEntity extends BaseEntity{
     //private List<ClienteEstudioEntity> clienteestudios;

@@ -18,9 +18,9 @@ public class TipoPreguntaServicio {
         try {
             DaoTipoPregunta dao = new DaoTipoPregunta();
             tipospreguntas = dao.findAll(TipoPreguntaEntity.class);
+            return Response.ok(tipospreguntas).build();
         } catch (Exception ex) {
-            String problema = ex.getMessage();
+            return Response.status(500).entity(ex.getMessage()).build();
         }
-        return Response.ok(tipospreguntas).build();
     }
 }

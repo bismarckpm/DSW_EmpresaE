@@ -183,16 +183,11 @@ public class UsuarioServicio {
     @Path("/updatePerfil/{id}")
     public Response updateUsuarioVistaPerfil(@PathParam("id") long id, DtoUsuario dtoUsuario) {
         DaoUsuario daoUsuario = new DaoUsuario();
-        DaoTipoUsuario daoTipoUsuario = new DaoTipoUsuario();
 
         try{
             UsuarioEntity usuarioEntity = daoUsuario.find(id, UsuarioEntity.class);
 
             if (usuarioEntity != null){
-                usuarioEntity.setEstado(dtoUsuario.getEstado());
-                usuarioEntity.setUsername(dtoUsuario.getUsername());
-                usuarioEntity.setTipousuario(daoTipoUsuario.getTipoUsuarioByDescripcion(dtoUsuario.getTipoUsuario().getDescripcion()));
-                UsuarioEntity resul = daoUsuario.update(usuarioEntity);
 
                 DirectorioActivo ldap = new DirectorioActivo();
                 ldap.updateEntry(dtoUsuario, usuarioEntity.getTipousuario().getDescripcion());

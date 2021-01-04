@@ -4,6 +4,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "respuesta", schema = "mercadeoucab")
+@NamedQueries({
+        @NamedQuery(name = "getCantidadRespuestas", query = "select count(re) from RespuestaEntity re where re.estudio._id = :id_estudio and re.preguntaOpcion._id in (select preopc._id from PreguntaOpcionEntity preopc where preopc.opcion = :opcion)")
+})
 public class RespuestaEntity extends BaseEntity{
     private String estado;
     private String texto;

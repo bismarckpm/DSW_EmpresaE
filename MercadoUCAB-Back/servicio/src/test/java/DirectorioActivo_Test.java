@@ -7,7 +7,7 @@ public class DirectorioActivo_Test {
 
     public String rol;
 
-    @Test
+  /*  @Test
     public void createUserLDAP() {
         DtoUsuario user = new DtoUsuario();
         rol = "Analista";
@@ -61,5 +61,5 @@ public class DirectorioActivo_Test {
         user.setClave( "123456Pruebish" );
         DirectorioActivo ldap = new DirectorioActivo();
         ldap.userAuthentication( user );
-    }
+    }*/
 }

@@ -4,6 +4,11 @@
       "_id": 50,
       "username": "Pedro",
       "clave ": "pedro",
+<<<<<<< HEAD
+      "rol": "Administrador",
+      "autenticacion": "valida",
+      "correoelectronico":"xxx_pornhub@gmail.com"
+=======
       "rol": "Encuestado",
       "autenticacion": "valida"
     },
@@ -40,6 +45,7 @@
         "_id": 0,
         "descripcion": "Administrador"
       }
+>>>>>>> 099e5d833dd89f85d13e7b881d05feff5ac36803
     }
   ],
   "categoria": [
@@ -339,38 +345,80 @@
       "estado": "solicitado",
       "fechaInicio": "2020-05-04",
       "lugar": {
-          "_id": 18,
+        "_id": 18,
+        "estado": "a",
+        "lugar": {
+          "_id": 5,
           "estado": "a",
           "lugar": {
-              "_id": 5,
-              "estado": "a",
-              "lugar": {
-                  "_id": 1,
-                  "estado": "a",
-                  "nombre": "venezuela",
-                  "tipo": "pais"
-              },
-              "nombre": "zulia",
-              "tipo": "estado"
+            "_id": 1,
+            "estado": "a",
+            "nombre": "venezuela",
+            "tipo": "pais"
           },
-          "nombre": "pruebamunc3Zuli",
-          "tipo": "municipio"
+          "nombre": "zulia",
+          "tipo": "estado"
+        },
+        "nombre": "pruebamunc3Zuli",
+        "tipo": "municipio"
       },
       "nivelsocioeco": {
-          "_id": 2,
-          "descripcion": "Nivel Alto",
-          "estado": "a",
-          "nombre": "Alto"
+        "_id": 2,
+        "descripcion": "Nivel Alto",
+        "estado": "a",
+        "nombre": "Alto"
       },
       "subcategoria": {
-          "_id": 2,
-          "categoria": {
-              "_id": 1,
-              "estado": "i",
-              "nombre": "CategoriaPrueba"
+        "_id": 2,
+        "categoria": {
+          "_id": 1,
+          "estado": "i",
+          "nombre": "CategoriaPrueba"
+        },
+        "estado": "A",
+        "nombre": "SubcategoriaPrueba2"
+      }
+    },
+    {
+      "_id": 80,
+      "nombre": "estudio prueba2",
+      "comentarioAnalista": "el comentario",
+      "estado": "solicitado",
+      "estadoEstudioEncuestado": "Finalizado",
+      "fechaInicio": "2019-10-20",
+      "lugar": {
+        "_id": 18,
+        "estado": "a",
+        "lugar": {
+          "_id": 5,
+          "estado": "a",
+          "lugar": {
+            "_id": 1,
+            "estado": "a",
+            "nombre": "venezuela",
+            "tipo": "pais"
           },
-          "estado": "A",
-          "nombre": "SubcategoriaPrueba2"
+          "nombre": "zulia",
+          "tipo": "estado"
+        },
+        "nombre": "pruebamunc3Zuli",
+        "tipo": "municipio"
+      },
+      "nivelsocioeco": {
+        "_id": 2,
+        "descripcion": "Nivel Alto",
+        "estado": "a",
+        "nombre": "Alto"
+      },
+      "subcategoria": {
+        "_id": 2,
+        "categoria": {
+          "_id": 1,
+          "estado": "i",
+          "nombre": "CategoriaPrueba"
+        },
+        "estado": "A",
+        "nombre": "SubcategoriaPrueba2"
       }
     }
   ],
@@ -823,23 +871,29 @@
   ],
   "preguntasresponder": [
     {
-      "descripcion": "PreguntaPostmanID",
+      "_id": 1,
+      "descripcion": "PreguntaPostmanV/F",
       "estado": "A",
       "tipo": {
-        "_id": 3
+        "_id": 2
       },
       "subcategoria": {
         "_id": 1
       },
       "opciones": [
-        {"descripcion": "opcion 1"},
-        {"descripcion": "opcion 2"},
-        {"descripcion": "opcion 3"},
-        {"descripcion": "opcion 4"}
+        {
+          "_id": 1,
+          "descripcion": "Verdadero"
+        },
+        {
+          "_id": 2,
+          "descripcion": "Falso"
+        }
       ]
     },
     {
-      "descripcion": "PreguntaPostmanID2",
+      "_id": 2,
+      "descripcion": "PreguntaPostmanSimple",
       "estado": "A",
       "tipo": {
         "_id": 3
@@ -848,14 +902,27 @@
         "_id": 1
       },
       "opciones": [
-        {"descripcion": "opcion 10"},
-        {"descripcion": "opcion 20"},
-        {"descripcion": "opcion 30"},
-        {"descripcion": "opcion 40"}
+        {
+          "_id": 19,
+          "descripcion": "opcion 1"
+        },
+        {
+          "_id": 29,
+          "descripcion": "opcion 2"
+        },
+        {
+          "_id": 39,
+          "descripcion": "opcion 3"
+        },
+        {
+          "_id": 49,
+          "descripcion": "opcion 4"
+        }
       ]
     },
     {
-      "descripcion": "PreguntaPostmanID3",
+      "_id": 3,
+      "descripcion": "PreguntaPostmanRango",
       "estado": "A",
       "tipo": {
         "_id": 3
@@ -864,11 +931,134 @@
         "_id": 1
       },
       "opciones": [
-        {"descripcion": "opcion 010"},
-        {"descripcion": "opcion 020"},
-        {"descripcion": "opcion 030"},
-        {"descripcion": "opcion 040"}
+        {
+          "_id": 100,
+          "descripcion": "1"
+        },
+        {
+          "_id": 200,
+          "descripcion": "2"
+        },
+        {
+          "_id": 300,
+          "descripcion": "3"
+        },
+        {
+          "_id": 400,
+          "descripcion": "4"
+        },
+        {
+          "_id": 500,
+          "descripcion": "5"
+        }
       ]
+    },
+    {
+      "_id": 4,
+      "descripcion": "PreguntaPostmanAbierta",
+      "estado": "A",
+      "tipo": {
+        "_id": 1
+      },
+      "subcategoria": {
+        "_id": 1
+      },
+      "opciones": []
+    },
+    {
+      "_id": 5,
+      "descripcion": "PreguntaPostmanMultiple",
+      "estado": "A",
+      "tipo": {
+        "_id": 4
+      },
+      "subcategoria": {
+        "_id": 1
+      },
+      "opciones": [
+        {
+          "_id": 190,
+          "descripcion": "opcionMulti 1"
+        },
+        {
+          "_id": 290,
+          "descripcion": "opcionMulti 2"
+        },
+        {
+          "_id": 390,
+          "descripcion": "opcionMulti 3"
+        },
+        {
+          "_id": 490,
+          "descripcion": "opcionMulti 4"
+        }
+      ]
+    }
+  ],
+  "respuestaEncuesta": [
+    {
+      "usuario": 50,
+      "estudio": 80,
+      "respuestas": [
+        {
+          "_id": 1,
+          "respuesta": {
+            "texto": "",
+            "opciones": [
+              {
+                "_id": 2
+              }
+            ]
+          }
+        },
+        {
+          "_id": 2,
+          "respuesta": {
+            "texto": "",
+            "opciones": [
+              {
+                "_id": 29
+              }
+            ]
+          }
+        },
+        {
+          "_id": 3,
+          "respuesta": {
+            "texto": "",
+            "opciones": [
+              {
+                "_id": 400
+              }
+            ]
+          }
+        },
+        {
+          "_id": 4,
+          "respuesta": {
+            "texto": "sadasda",
+            "opciones": []
+          }
+        },
+        {
+          "_id": 5,
+          "respuesta": {
+            "texto": "",
+            "opciones": [
+              {
+                "id": 190
+              },
+              {
+                "id": 290
+              },
+              {
+                "id": 390
+              }
+            ]
+          }
+        }
+      ],
+      "id,id": "AneYdRt"
     }
   ]
 }

@@ -2,7 +2,7 @@
 <div class="registro">
   <div class="container">
 
-
+    
     <div *ngIf="admin == true">
       <div class="form-row">
         <div class="form-group col-md-6">
@@ -30,11 +30,12 @@
           <button type="button"  class=" btn btn-primary" data-toggle="modal"  data-target="#exampleModal" > Cambio de clave </button>
         </div>
         <div class="form-group col-md-2 my-auto">
-          <button type="button"  class="btn btn-success" data-toggle="modal"  data-target="#cambioAdmin" (click)=editar() > Guardar cambios </button>
+          <button type="button"  class="btn btn-success" data-toggle="modal"  (click)="Editar()" data-target="#cambioAdmin"  > hacer cambios </button>
         </div>
       </div>
 
     </div> <!-- DIf del administradro-->
+
 
 
     <div  *ngIf="cli == true">
@@ -70,6 +71,7 @@
         <div class="form-group col-md-2 my-auto">
           <button type="button"  class="my-auto btn btn-primary" data-toggle="modal"  data-target="#exampleModal" > Cambio de clave </button>
         </div>
+
       </div>
 
       <div class="form-row">
@@ -91,7 +93,7 @@
 
       <div class="form-row">
         <div class="form-group col-md-2">
-          <button type="button"  class="btn btn-success" data-toggle="modal"  data-target="#cambioCliente"(click)=editar() > Guardar cambios </button>
+          <button type="button"  class="btn btn-success" data-toggle="modal"  data-target="#cambioCliente" (click)=Editar() >Hacer cambios </button>
         </div>
       </div>
     </div>
@@ -191,7 +193,7 @@
           <input type="text" class="form-control" [(ngModel)]="Encuestado.nivelSocioEconomico.nombre" value="Encuestado.nivelSocioEconomico.nombre" readonly="readonly">
         </div>
         <div class="form-group col-md-2 my-auto">
-          <button type="button"  class="btn btn-success" data-toggle="modal"  data-target="#cambioEncuestado"(click)=editar() > Guardar cambios </button>
+          <button type="button"  class="btn btn-success" data-toggle="modal"  data-target="#cambioEncuestado"(click)=Editar() >Hacer cambios </button>
         </div>
 
       </div>
@@ -232,7 +234,7 @@
       </div>
 
       <div class="form-group col-md-2 my-auto">
-        <button type="button"  class="btn btn-success" data-toggle="modal"  data-target="#cambioAnalista"(click)=editar() > Guardar cambios </button>
+        <button type="button"  class="btn btn-success" data-toggle="modal"  data-target="#cambioAdmin" (click)=Editar() >Hacer cambios </button>
       </div>
 
     </div>
@@ -288,11 +290,398 @@
       </div>
     </div>
 
+
+          <!--///////////////////////////////////////////////////////////////////////////////Modal admin/analista  Editar perfil/////////////////////////////////////////////////////////////////////////////////////////////////-->
+          <div class="modal fade" id="cambioAdmin" tabindex="-1" aria-labelledby="exampleModalLabelUsuario" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <!-- Cabezado Modal -->
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabelUsuario">Editar Perfil </h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <!-- Cuerpo completo del Modal -->
+                <div class="modal-body">
+                  <form [formGroup]="formUsuario">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="form-group">
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label > Nombre del usuario</label>
+                              <input type="text" class="form-control" [(ngModel)]="UsuarioData.username" value="UsuarioData.username"  formControlName="usernameUsuario" readonly="readonly">
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label > Correo</label>
+                              <input type="text" class="form-control" [(ngModel)]="UsuarioData.correoelectronico" value="UsuarioData.correoelectronico" formControlName="correoElectronicoUsuario">
+                              <div *ngIf="correoElectronicoUsuario.invalid && (correoElectronicoUsuario.dirty || correoElectronicoUsuario.touched)" class="alert alert-danger">
+                                <div *ngIf="correoElectronicoUsuario.errors.required">
+                                  Este campo es obligatorio
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label > Rol en nuestro sistema </label>
+                              <select class="custom-select d-block w-100" [(ngModel)]="UsuarioData.tipoUsuario.descripcion" value="UsuarioData.tipousuario.descripcion" formControlName="descripcionTipoUsuario"  >
+                                <option value="Administrador">Administrador</option>
+                                <option value="Analista">Analista</option>
+                              </select>
+                              <div *ngIf="descripcionTipoUsuario.invalid && (descripcionTipoUsuario.dirty || descripcionTipoUsuario.touched)" class="alert alert-danger">
+                                <div *ngIf="descripcionTipoUsuario.errors.required">
+                                  Este campo es obligatorio
+                                </div>
+                              </div>
+                            </div>
+      
+      
+                          </div>
+      
+                        </div>
+      
+                        <br>
+                        <!-- Parte inferior del modal -->
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                          <button type="submit" class="btn btn-success" (click)="GuardarPerfil()" data-dismiss="modal">Actualizar</button>
+      
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div><!-- cierre del cuerpo modal -->
+              </div>
+            </div>
+          </div> <!-- Finall Modal -->
+
+ <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+ 
+ <div class="modal fade" id="cambioCliente" tabindex="-1" aria-labelledby="exampleModalLabelClienteData" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Cabezado Modal -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabelClienteData">Editar Perfil </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- Cuerpo completo del Modal -->
+      <div class="modal-body">
+        <form [formGroup]="formCliente">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="form-group">
+
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label > Razon Social</label>
+                    <input type="text" class="form-control" [(ngModel)]="ClienteData.razonSocial" value="ClienteData.razonSocial"  formControlName="razonSocialCliente" readonly="readonly">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label > RIF</label>
+                    <input type="text" class="form-control" [(ngModel)]="ClienteData.rif" value="ClienteData.rif" formControlName="rifCliente"  readonly="readonly">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label > Username </label>
+                    <input type="text" class="form-control" [(ngModel)]="ClienteData.usuario.username" value="ClienteData.usuario.username" formControlName="usernameCliente" readonly="readonly">
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label > Correo</label>
+                    <input type="text" class="form-control" [(ngModel)]="ClienteData.usuario.correoelectronico" value="ClienteData.usuario.correoelectronico" formControlName="correoElectronicoCliente"  readonly="readonly">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label > Numero de Telefono</label>
+                    <input type="text" class="form-control" [(ngModel)]="ClienteData.telefono.numero" value="ClienteData.telefono.numero" formControlName="telefonoCliente" >
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for=""> Estado</label>
+                    <input type="text" class="form-control" [(ngModel)]="ClienteData.lugar.nombre" value="ClienteData.lugar.nombre" formControlName="lugarEstudio"  readonly="readonly">
+                  </div>
+          
+                  <div class="form-group col-md-4">
+                    <label for=""> Municipio </label>
+                    <input type="text" class="form-control" [(ngModel)]="ClienteData.lugar.lugar.nombre" value="ClienteData.lugar.lugar.nombre" formControlName="lugarmunicipio" readonly="readonly">
+                  </div>
+          
+                  <div class="form-group col-md-4">
+                    <label for="inputZip">Parroquia </label>
+                    <input type="text" class="form-control" [(ngModel)]="ClienteData.lugar.lugar.lugar.nombre" value="ClienteData.lugar.lugar.nombre" formControlName="lugarparroquia"  readonly="readonly">
+                  </div>
+
+                  <div class="col-md-4 mb-3">
+                    <button type="submit" class="btn btn-success"  (click)="Cambio()"> modificar </button>
+                  </div> 
+                </div>
+
+
+
+                <div *ngIf="cambio == true" >
+                  <div class="row">
+                    <div class="col-md-4 mb-3">
+                      <label for="estado">Estado</label>
+                      <select class="custom-select d-block w-100"  [(ngModel)]="estadoData._id"  (click)="busquedaMunicipio(estadoData._id)" formControlName="EstadoData"  value="estadoData._id">
+                        <option  *ngFor="let estado of estados" [ngValue]= "estado._id">{{estado.nombre}}</option>
+                      </select>
+                      <div *ngIf="EstadoData.invalid && (EstadoData.dirty || EstadoData.touched)" class="alert alert-danger">
+                        <div *ngIf="EstadoData.errors.required">
+                          Este campo es obligatorio
+                        </div>
+                      </div>
+                    </div>
+          
+                    <div class="col-md-4 mb-3">
+                      <label for="municipio">Municipio</label>
+                      <select class="custom-select d-block w-100"  [(ngModel)]="municipioData._id" (click)="busquedaParroquia(municipioData._id)" formControlName="MunicipioData"  value="municipioData._id">
+                        <option  *ngFor="let municipio of municipios" [ngValue]= "municipio._id"  >{{municipio.nombre}}</option>
+                      </select>
+                      <div *ngIf="MunicipioData.invalid && (MunicipioData.dirty || MunicipioData.touched)" class="alert alert-danger">
+                        <div *ngIf="MunicipioData.errors.required">
+                          Este campo es obligatorio
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+          
+                  <div class="col-md-4 mb-3">
+                    <label for="estado">Parroquia</label>
+                    <select class="custom-select d-block w-100"  [(ngModel)]="parroquiaData._id"  (click)="seleccionarParroquia(parroquiaData._id)" formControlName="ParroquiaData" value="parroquiaData._id">
+                      <option  *ngFor="let parroquia of parroquias" [ngValue]= "parroquia._id" >{{parroquia.nombre}}</option>
+                    </select>
+                    <div *ngIf="ParroquiaData.invalid && (ParroquiaData.dirty || ParroquiaData.touched)" class="alert alert-danger">
+                      <div *ngIf="ParroquiaData.errors.required">
+                        Este campo es obligatorio
+                      </div>
+                    </div>
+                  </div> 
+                </div> 
+
+              </div>
+
+              <br>
+              <!-- Parte inferior del modal -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-success" (click)="GuardarPerfil()" data-dismiss="modal">Actualizar</button>
+
+              </div>
+            </div>
+          </div>
+        </form>
+      </div><!-- cierre del cuerpo modal -->
+    </div>
   </div>
+</div> <!-- Finall Modal -->
+
+<!--//////////////////////////////////////////////////////////////////////Encuestado//////////////////////////////////////////////////-->
+
+<div  class="modal fade" id="cambioEncuestado" tabindex="-1" aria-labelledby="exampleModalLabelEncuestado" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Cabezado Modal -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabelEncuestado">Editar Perfil </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- Cuerpo completo del Modal -->
+      <div class="modal-body">
+        <form [formGroup]="formEncuestado">
+          <div class="modal-dialog">
+            <div class="modal-content">
+             
+
+              <div class="form-row">
+
+                <div class="form-group col-md-4">
+                  <label for=""> Username </label>
+                  <input type="text" class="form-control" [(ngModel)]="EncuestadoData.usuario.username" value="EncuestadoData.usuario.username"  formControlName="usuarioEncuestado" readonly="readonly">
+                </div>
+                <div class="form-group col-md-4">
+                  <label > Correo </label>
+                  <input type="text" class="form-control" [(ngModel)]="EncuestadoData.usuario.correoelectronico" value="EncuestadoData.usuario.correoelectronico" formControlName="correoElectronicoEncuestado" readonly="readonly" >
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for=""> Primer nombre </label>
+                  <input type="text" class="form-control" [(ngModel)]="EncuestadoData.primerNombre" value="EncuestadoData.primerNombre" formControlName="primerNombreEncuestado">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="">Segundo Nombre </label>
+                  <input type="text" class="form-control" [(ngModel)]="EncuestadoData.segundoNombre" value="EncuestadoData.segundoNombre"  formControlName="segundoNombreEncuestado" >
+                </div>
+
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for=""> Primer Apellido </label>
+                  <input type="text" class="form-control" [(ngModel)]="EncuestadoData.primerApellido" value="EncuestadoData.primerApellido" formControlName="primerApellidoEncuestado" >
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="">Segundo Apellido </label>
+                  <input type="text" class="form-control" [(ngModel)]="EncuestadoData.segundoApellido" value="EncuestadoData.segundoApellido" formControlName="segundoApellidoEncuestado" >
+                </div>
+              </div>
+
+              
+
+              <div class="form-row">
+                <div class="col-md-4">
+                  <label for="genero">Genero</label>
+                  <select class="custom-select d-block w-100" [(ngModel)]= "EncuestadoData.genero._id" value="EncuestadoData.genero._id" formControlName="generoEncuestado" >
+                    <option value="">Choose...</option>
+                    <option *ngFor="let gen of genero" [ngValue]= "gen._id"  >{{gen.nombre}}</option>
+                  </select>
+                  <div *ngIf="generoEncuestado.invalid && (generoEncuestado.dirty || generoEncuestado.touched)" class="alert alert-danger">
+                    <div *ngIf="generoEncuestado.errors.required">
+                      Este campo es obligatorio
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <label for="estadocivil">Estado Civil</label>
+                  <select class="custom-select d-block w-100" [(ngModel)]= "EncuestadoData.estadoCivil._id" value="EncuestadoData.estadoCivil._id" formControlName="estadoCivilEncuestado" >
+                    <option value="">Choose...</option>
+                    <option  *ngFor="let estadoCivil of estadoCivil" [ngValue]= "estadoCivil._id"  >{{estadoCivil.nombre}}</option>
+                  </select>
+                  <div *ngIf="estadoCivilEncuestado.invalid && (estadoCivilEncuestado.dirty || estadoCivilEncuestado.touched)" class="alert alert-danger">
+                    <div *ngIf="estadoCivilEncuestado.errors.required">
+                      Este campo es obligatorio
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+
+
+              <div class="form-row">
+                <div class="col-md-4">
+                  <label for="nivelsocioeconomico">Nivel Socioeconomico</label>
+                  <select class="custom-select d-block w-100" [(ngModel)]="EncuestadoData.nivelSocioEconomico._id" value="EncuestadoData.nivelSocioEconomico._id" formControlName="nivelSocioEconomicoEncuestado" >
+                    <option value="">Choose...</option>
+                    <option  *ngFor="let nivelSocioEconomico of nivelSocioEconomico" [ngValue]= "nivelSocioEconomico._id"  >{{nivelSocioEconomico.nombre}}</option>
+                  </select>
+                  <div *ngIf="nivelSocioEconomicoEncuestado.invalid && (nivelSocioEconomicoEncuestado.dirty || nivelSocioEconomicoEncuestado.touched)" class="alert alert-danger">
+                    <div *ngIf="nivelSocioEconomicoEncuestado.errors.required">
+                      Este campo es obligatorio
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <label for="nivelacademico">Nivel Academico</label>
+                  <select class="custom-select d-block w-100" [(ngModel)]= "EncuestadoData.nivelAcademico._id" value="EncuestadoData.nivelAcademico._id"  formControlName="nivelAcademicoEncuestado" >
+                    <option value="">Choose...</option>
+                    <option  *ngFor="let nivelAcademico of nivelAcademico" [ngValue]= "nivelAcademico._id"  >{{nivelAcademico.nombre}}</option>
+                  </select>
+                  <div *ngIf="nivelAcademicoEncuestado.invalid && (nivelAcademicoEncuestado.dirty || nivelAcademicoEncuestado.touched)" class="alert alert-danger">
+                    <div *ngIf="nivelAcademicoEncuestado.errors.required">
+                      Este campo es obligatorio
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="">  Estado </label>
+                  <input type="text" class="form-control" [(ngModel)]="EncuestadoData.lugar.nombre" value="EncuestadoData.lugar.nombre" formControlName="lugarEncuestado" readonly="readonly">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="">  Municipio </label>
+                  <input type="text" class="form-control" [(ngModel)]="EncuestadoData.lugar.lugar.nombre" value="EncuestadoData.lugar.lugar.nombre" formControlName="lugarmunicipioEncue" readonly="readonly">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for=""> Parroquia</label>
+                  <input type="text" class="form-control" [(ngModel)]="EncuestadoData.lugar.lugar.lugar.nombre" value="EncuestadoData.lugar.lugar.lugar.nombre" formControlName="lugarparroquiaEncue" readonly="readonly">
+                </div>
+              </div>
+
+              
+              <div class="col-md-4 mb-3">
+                <button type="submit" class="btn btn-success"  (click)="Cambio()"> modificar </button>
+            </div> 
+          
+
+
+
+            <div *ngIf="cambio == true" >
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <label for="estado">Estado</label>
+                  <select class="custom-select d-block w-100"  [(ngModel)]="estadoData._id"  (click)="busquedaMunicipio(estadoData._id)" formControlName="EstadoDataEncue"  value="estadoData._id">
+                    <option  *ngFor="let estado of estados" [ngValue]= "estado._id">{{estado.nombre}}</option>
+                  </select>
+                  <div *ngIf="EstadoDataEncue.invalid && (EstadoDataEncue.dirty || EstadoDataEncue.touched)" class="alert alert-danger">
+                    <div *ngIf="EstadoDataEncue.errors.required">
+                      Este campo es obligatorio
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="col-md-4 mb-3">
+                  <label for="municipio">Municipio</label>
+                  <select class="custom-select d-block w-100"  [(ngModel)]="municipioData._id" (click)="busquedaParroquia(municipioData._id)" formControlName="MunicipioDataEncue"  value="municipioData._id">
+                    <option  *ngFor="let municipio of municipios" [ngValue]= "municipio._id"  >{{municipio.nombre}}</option>
+                  </select>
+                  <div *ngIf="MunicipioDataEncue.invalid && (MunicipioDataEncue.dirty || MunicipioDataEncue.touched)" class="alert alert-danger">
+                    <div *ngIf="MunicipioDataEncue.errors.required">
+                      Este campo es obligatorio
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              <div class="col-md-4 mb-3">
+                <label for="estado">Parroquia</label>
+                <select class="custom-select d-block w-100"  [(ngModel)]="parroquiaData._id"  (click)="seleccionarParroquia(parroquiaData._id)" formControlName="ParroquiaDataEncue" value="parroquiaData._id">
+                  <option  *ngFor="let parroquia of parroquias" [ngValue]= "parroquia._id" >{{parroquia.nombre}}</option>
+                </select>
+                <div *ngIf="ParroquiaDataEncue.invalid && (ParroquiaDataEncue.dirty || ParroquiaDataEncue.touched)" class="alert alert-danger">
+                  <div *ngIf="ParroquiaDataEncue.errors.required">
+                    Este campo es obligatorio
+                  </div>
+                </div>
+              </div> 
+            </div> 
+
+
+              
+
+              <br>
+              <!-- Parte inferior del modal -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-success" (click)="GuardarPerfil()" data-dismiss="modal">Actualizar</button>
+
+              </div>
+            </div>
+          </div>
+        </form>
+      </div><!-- cierre del cuerpo modal -->
+    </div>
+  </div>
+</div> <!-- Finall Modal -->
+
 </div>
-    <!--///////////////////////////////////////////////////////////////////////////////Modal analista Editar perfil/////////////////////////////////////////////////////////////////////////////////////////////////-->
+</div>
 
 
 
-<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 

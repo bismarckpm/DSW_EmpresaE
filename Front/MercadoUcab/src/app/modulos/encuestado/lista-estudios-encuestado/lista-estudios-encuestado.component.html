@@ -26,7 +26,7 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLabel">Encuesta</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"  (click)="listaOpciones = tipos = []">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"  (click)="listaOpciones = []">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
@@ -51,17 +51,11 @@
                                 <div [ngSwitch]="pregunta.tipo._id">
                                   <div *ngSwitchCase="1">
                                     <div class="form-group">
-                                      <textarea class="form-control" id="campoRespuesta" rows="2" [(ngModel)]="respuestaAbierta" name="respuestaAbierta"></textarea>
+                                      <textarea class="form-control" id="campoRespuesta" rows="2" [(ngModel)]="respuestaAbierta" name="respuestaAbierta"
+                                      value="respuestas.textos"></textarea>
                                     </div>
                                   </div>
                                   <div *ngSwitchCase="4">
-                                    <!-- <div class="form-check" *ngFor="let opcion of pregunta.opciones">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
-                                      [(ngModel)]="respuestaMultiple" name="respuestaMultiple">
-                                      <label class="form-check-label" for="defaultCheck1">
-                                        {{ opcion.descripcion }}
-                                      </label>
-                                    </div> -->
                                     <select class="custom-select d-block w-100" name="miselect" [(ngModel)]="respuestaMultiple" multiple="multiple">
                                       <option [value]="opcion._id" *ngFor="let opcion of pregunta.opciones">{{opcion.descripcion}}</option>
                                     </select>
@@ -69,7 +63,6 @@
                                   <div *ngSwitchDefault>
                                     <select class="custom-select d-block w-100" id="pregunta" value="" id="pregunta" name="respuestaDOpcion._id"
                                       [(ngModel)]="respuestaDOpcion._id">
-                                      <option>Choose...</option>
                                       <option *ngFor="let opcion of pregunta.opciones" [ngValue]= "opcion._id"> {{ opcion.descripcion }}</option>
                                     </select>
                                   </div>
@@ -97,7 +90,7 @@
                     </div>
 
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="listaOpciones = tipos = []">Cancelar</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="listaOpciones = []">Cancelar</button>
                       <button type="submit" class="btn btn-success" data-dismiss="modal" (click)="addRespuestasEncuesta()">Enviar respuesta</button>
                     </div>
                   </div>

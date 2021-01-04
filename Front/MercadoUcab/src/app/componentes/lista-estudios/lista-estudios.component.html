@@ -23,6 +23,7 @@
           <td>{{ estudio.fechaInicio }}</td>
           <td>{{ estudio.fechaFin }}</td>
 
+
           <td>
             <div  class="d-flex justify-content-around">
               <button  type="button" class="btn btn-primary" data-toggle="modal" (click)="editar(estudio)" data-target="#exampleModal">
@@ -85,7 +86,7 @@
                           <div class="row">
                             <div class="col-md-6 mb-3">
                               <label for="fechaInicio">Fecha inicio</label>
-                              <input type="text" class="form-control" id="fechaInicio" placeholder="DD/MM/AAAA" [(ngModel)]="estudioData.fechaInicio" formControlName="fechaInicioEstudio" value="fechaInicio">
+                              <input type="text" class="form-control" id="fechaInicio" placeholder="AAAA/MM/DD" [(ngModel)]="estudioData.fechaInicio" formControlName="fechaInicioEstudio" value="estudioData.fechaInicio">
                               <div *ngIf="fechaInicioEstudio.invalid && (fechaInicioEstudio.dirty || fechaInicioEstudio.touched)" class="alert alert-danger">
                                 <div *ngIf="fechaInicioEstudio.errors.required">
                                   Este campo es obligatorio
@@ -97,7 +98,7 @@
                             </div>
                             <div class="col-md-6 mb-3">
                               <label for="fechaFin">Fecha fin</label>
-                              <input type="text" class="form-control" id="fechaFin" placeholder="DD/MM/AAAA" value=""[(ngModel)]="estudioData.fechaFin" value="fechaFin"formControlName="fechaFinEstudio">
+                              <input type="text" class="form-control" id="fechaFin" placeholder="AAAA/MM/DD" [(ngModel)]="estudioData.fechaFin" value="EstudioData.fechaFin" formControlName="fechaFinEstudio">
                               <div *ngIf="fechaFinEstudio.invalid && (fechaFinEstudio.dirty || fechaFinEstudio.touched)" class="alert alert-danger">
                                 <div *ngIf="fechaFinEstudio.errors.required">
                                   Este campo es obligatorio
@@ -111,11 +112,10 @@
                           <div class="form-row">
                             <div class="col-md-6 mb-3">
                               <label for="estado">Estado del Estudio</label>
-                              <select class="custom-select d-block w-100" [(ngModel)]="estudioData.estado" formControlName="estadoEstudio" value="estado">
-                                <option value="">Choose...</option>
+                              <select class="custom-select d-block w-100" [(ngModel)]="estudioData.estado" formControlName="estadoEstudio" value="estudioData.estado">
                                 <option value="Solicitado">Solicitado</option>
-                                <option value="Aprobado">Aprobado</option>
-                                <option value="En Proceso">En Proceso</option>
+                                <option value="Aprobado">Procesado</option>
+                                <option value="En Proceso">En ejecucion</option>
                                 <option value="Culminado">Culminado</option>
                                 <option value="Rechazado">Rechazado</option>
                               </select>
@@ -140,15 +140,39 @@
                             </div>
                           </div>
 
-                          <!--<div class="row">
+
+
+                              <div class="row">
+                                <div class="col-md-4 mb-3">
+                                  <label for="estado">Estado</label>
+                                  <input type="text" class="form-control" [(ngModel)]="estudioData.lugar.lugar.lugar.nombre" value="estudioData.lugar.lugar.lugar.nombre" formControlName="lugarEstudio"  readonly="readonly">
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                  <label for="municipio">Municipio</label>
+                                  <input type="text" class="form-control" [(ngModel)]="estudioData.lugar.lugar.nombre" value="estudioData.lugar.lugar.nombre" formControlName="lugarmunicipio"  readonly="readonly">
+                                </div>
+
+
+                              <div class="col-md-4 mb-3">
+                                <label for="estado">Parroquia</label>
+                                <input type="text" class="form-control" [(ngModel)]="estudioData.lugar.nombre" value="estudioData.lugar.nombre" formControlName="lugarparroquia"  readonly="readonly">
+                              </div>
+                                <div class="col-md-4 mb-3">
+                                <button type="submit" class="btn btn-success"  (click)="Cambio()"> modificar </button>
+                              </div>
+                            </div>
+
+
+                          <div *ngIf="cambio == true" >
+                          <div class="row">
                             <div class="col-md-4 mb-3">
                               <label for="estado">Estado</label>
-                              <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.lugar._id" (click)="busquedaMunicipio(estudioData.lugar._id)"formControlName="lugarEstudio"  value="estudio.lugar._id">
-                                <option value="0">Choose...</option>
+                              <select class="custom-select d-block w-100"  [(ngModel)]="estadoData._id"  (click)="busquedaMunicipio(estadoData._id)" formControlName="EstadoData"  value="estadoData._id">
                                 <option  *ngFor="let estado of estados" [ngValue]= "estado._id">{{estado.nombre}}</option>
                               </select>
-                              <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
-                                <div *ngIf="lugarEstudio.errors.required">
+                              <div *ngIf="EstadoData.invalid && (EstadoData.dirty || EstadoData.touched)" class="alert alert-danger">
+                                <div *ngIf="EstadoData.errors.required">
                                   Este campo es obligatorio
                                 </div>
                               </div>
@@ -156,12 +180,11 @@
 
                             <div class="col-md-4 mb-3">
                               <label for="municipio">Municipio</label>
-                              <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.lugar.lugar._id" (click)="busquedaParroquia(estudioData.lugar.lugar._id)"formControlName="lugarEstudio"  value="estudio.lugar._id">
-                                <option value="0">Choose...</option>
+                              <select class="custom-select d-block w-100"  [(ngModel)]="municipioData._id" (click)="busquedaParroquia(municipioData._id)" formControlName="MunicipioData"  value="municipioData._id">
                                 <option  *ngFor="let municipio of municipios" [ngValue]= "municipio._id"  >{{municipio.nombre}}</option>
                               </select>
-                              <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
-                                <div *ngIf="lugarEstudio.errors.required">
+                              <div *ngIf="MunicipioData.invalid && (MunicipioData.dirty || MunicipioData.touched)" class="alert alert-danger">
+                                <div *ngIf="MunicipioData.errors.required">
                                   Este campo es obligatorio
                                 </div>
                               </div>
@@ -170,20 +193,21 @@
 
                           <div class="col-md-4 mb-3">
                             <label for="estado">Parroquia</label>
-                            <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.lugar.lugar.lugar._id" formControlName="lugarEstudio" (click)="seleccionarParroquia(estudioData.lugar.lugar.lugar._id)" value="estudio.lugar._id">
-                              <option value="0">Choose...</option>
+                            <select class="custom-select d-block w-100"  [(ngModel)]="parroquiaData._id"  (click)="seleccionarParroquia(parroquiaData._id)" formControlName="ParroquiaData" value="parroquiaData._id">
                               <option  *ngFor="let parroquia of parroquias" [ngValue]= "parroquia._id" >{{parroquia.nombre}}</option>
                             </select>
-                            <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
-                              <div *ngIf="lugarEstudio.errors.required">
+                            <div *ngIf="ParroquiaData.invalid && (ParroquiaData.dirty || ParroquiaData.touched)" class="alert alert-danger">
+                              <div *ngIf="ParroquiaData.errors.required">
                                 Este campo es obligatorio
                               </div>
                             </div>
-                          </div>-->
+                          </div>
+                        </div>
+
                         <div class="form-row">
                           <div class="col-md-6 mb-3">
                             <label for="" class="col-sm-6 col-form-label escrituerModal">Nivel Socio Economico  </label>
-                            <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.nivelSocioEconomico._id" formControlName="nivelEstudio" value="estudioData.nivelSocioEconomico._id" >
+                            <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.nivelSocioEconomico._id"  formControlName="nivelEstudio" value="estudioData.nivelSocioEconomico._id" >
                               <option  value=""> Seleccione un ...</option>
                               <option  *ngFor="let nivel of nivelSocioEconomico" [ngValue]= "nivel._id"  >{{nivel.nombre}}</option>
                             </select>
@@ -194,13 +218,18 @@
                             </div>
                           </div>
 
-                          <!-- <div class="col-md-6 mb-3">
+                          <div class="col-md-6 mb-3">
                             <label for="" class="col-sm-6 col-form-label escrituerModal">Seleccione un Analista  </label>
-                            <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.analista._id" >
+                            <select   class="custom-select d-block w-100"  [(ngModel)]="estudioData.analista._id" formControlName="analistaEstudio" value="estudioData.analista._id" >
                                 <option  value=""> Slecciones una ...</option>
-                                <option  *ngFor="let analista of analistas" [ngValue]= "analista._id">{{analista.username}}</option>
+                                <option  *ngFor="let analis of analistas" [ngValue]= "analis._id">{{analis.username}}</option>
                             </select>
-                          </div>-->
+                            <div *ngIf="analistaEstudio.invalid && (analistaEstudio.dirty || analistaEstudio.touched)" class="alert alert-danger">
+                              <div *ngIf="analistaEstudio.errors.required">
+                                Este campo es obligatorio
+                              </div>
+                            </div>
+                          </div>
 
                         </div>
 

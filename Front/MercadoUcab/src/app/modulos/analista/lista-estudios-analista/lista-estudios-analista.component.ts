@@ -4,6 +4,7 @@ import {EstudioService} from '../../../services/estudio.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Encuestado} from '../../../models/encuestado';
+import * as Highcharts from 'highcharts';
 
 @Component({
   selector: 'app-lista-estudios-analista',
@@ -15,10 +16,13 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
   // Declaracion de variables
   estudios: Estudio[] = [];
   encuestados: Encuestado[] = [];
+  infoGraficos: any = [];
   _id = this.actRoute.snapshot.params._id;
   @Input() analistaData = {_id: 0, comentarioAnalista: '', estado: ''};
   formEstudioAnalista: FormGroup;
 
+  // Configuracion para grafico
+  highcharts = Highcharts;
 
   constructor(
     public estudioService: EstudioService,
@@ -32,7 +36,7 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
     this.loadEstudios();
   }
 
-  editar(estudio){
+  editar(estudio): void{
     this.analistaData = estudio;
   }
 
@@ -46,6 +50,13 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
   loadDataMuestra(id): void {
     this.estudioService.getDataMuestra(id).subscribe(data => {
       this.encuestados = data;
+    });
+  }
+
+  loadInfoGraficos(estudio): void {
+    this.estudioService.getDataGraficos(estudio).subscribe(data => {
+      this.infoGraficos = data;
+      console.log(this.infoGraficos);
     });
   }
 
@@ -64,4 +75,5 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
       estadoEstudioAnalista: ['', Validators.required],
     });
   }
+  
 }

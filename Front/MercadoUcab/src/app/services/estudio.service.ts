@@ -48,8 +48,18 @@ export class EstudioService {
     );
   }
 
+  // back
+  // getEstudioAnalista(user): Observable<Estudio[]>{
+  //   return this.http.get<Estudio[]>(this.apiurl + '/estudio/analista/' + user)
+  //   .pipe(
+  //     retry(1),
+  //     catchError(this.handleError)
+  //   );
+  // }
+
+  // front
   getEstudioAnalista(user): Observable<Estudio[]>{
-    return this.http.get<Estudio[]>(this.apiurl + '/estudio/analista/' + user)
+    return this.http.get<Estudio[]>(this.apiurl + '/estudio')
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -62,6 +72,14 @@ export class EstudioService {
         retry(1),
         catchError(this.handleError)
       );
+  }
+
+  getDataGraficos(idEstudio): Observable<any>{
+    return this.http.get(this.apiurl + '/graficos' /*+idEstudio*/)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
   }
 
   // getEstudioEncuestado(id): Observable<Estudio[]>{

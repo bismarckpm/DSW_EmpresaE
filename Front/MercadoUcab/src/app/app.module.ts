@@ -67,6 +67,8 @@ import { AnalistaService } from './services/analista.service';
 import { PreguntaService } from './services/pregunta.service';
 import { PresentacionService } from './services/presentacion.service';
 
+// Graficos
+import { HighchartsChartComponent } from 'highcharts-angular';
 
 @NgModule({
   declarations: [
@@ -114,7 +116,10 @@ import { PresentacionService } from './services/presentacion.service';
     FormAnalistaAdminComponent,
     ListaAnalistaAdminComponent,
     ListaEstudiosAnalistaComponent,
-    ListaEstudiosEncuestadoComponent
+    ListaEstudiosEncuestadoComponent,
+
+    // Grafico
+    HighchartsChartComponent
   ],
   imports: [
     BrowserModule,

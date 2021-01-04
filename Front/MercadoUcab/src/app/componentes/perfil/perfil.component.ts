@@ -31,6 +31,7 @@ export class PerfilComponent implements OnInit {
   cli = false;
   cambio= false;
 
+<<<<<<< HEAD
   @Input() usuario={ _id:0, nuevaClave:"",clave:'' };
   @Input() auxUsuario={nuevaClave:''};
   @Input() Cliente :any;
@@ -38,6 +39,15 @@ export class PerfilComponent implements OnInit {
   @Input() Analista :any ;
   @Input() Encuestado :any ;
   aux:any;
+=======
+  @Input() usuario = { _id: 0, nuevaClave: '', clave: '' };
+  @Input() auxUsuario = {nuevaClave: ''};
+  @Input() Cliente: any;
+  @Input() Administrador: any;
+  @Input() Analista: any;
+  @Input() Encuestado: any;
+  aux: any;
+>>>>>>> 099e5d833dd89f85d13e7b881d05feff5ac36803
 
   ////////////////////////////Edicion de datos ///////////////////////
   @Input() ClienteData = {_id: 0, rif: '', razonSocial: '', estado: '',
@@ -143,6 +153,7 @@ export class PerfilComponent implements OnInit {
 
     if ((JSON.parse(localStorage.getItem('rol') )) == 'Administrador'){
       this.administradroService.getAdministradorDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data => {
+<<<<<<< HEAD
         this.Administrador= data;
       })
       console.log("++++++++++++++++++++++++++++++++++ADmin")
@@ -156,9 +167,24 @@ export class PerfilComponent implements OnInit {
       this.cli=true;
 
     }else if((JSON.parse(localStorage.getItem("rol") )) == "Encuestado"){
+=======
+        this.Administrador = data;
+      });
+      console.log('++++++++++++++++++++++++++++++++++ADmin');
+      this.admin = true;
+    }else if ((JSON.parse(localStorage.getItem('rol') )) == 'Cliente'){
+      this.clienteService.getClienteDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data => {
+        this.Cliente = data;
+      });
+      console.log('++++++++++++++++++++++++++++++++++Cliente');
+      this.cli = true;
+    }else if ((JSON.parse(localStorage.getItem('rol') )) == 'Encuestado'){
+      console.log('ENTRO EN LA LLAMADA');
+>>>>>>> 099e5d833dd89f85d13e7b881d05feff5ac36803
       this.encuestadoservice.getEncuestadoDelUsuario( parseInt(localStorage.getItem('usuarioID'))).subscribe( data => {
         this.Encuestado = data; 
       });
+<<<<<<< HEAD
       this.encue=true;
 
     } else if((JSON.parse(localStorage.getItem("rol") )) == "Analista"){
@@ -167,8 +193,18 @@ export class PerfilComponent implements OnInit {
       })
       console.log("loqueseas")
       this.analist=true;
+=======
+
+      this.encue = true;
+    }if ((JSON.parse(localStorage.getItem('rol') )) == 'Analista'){
+      this.analistaService.getAnalistaDelUsuario(parseInt(localStorage.getItem('usuarioID'))).subscribe(data => {
+        this.Analista = data;
+      });
+      console.log('loqueseas');
+      this.analist = true;
+>>>>>>> 099e5d833dd89f85d13e7b881d05feff5ac36803
     }else{
-      console.log("NOOOOOOOOOOOOOOOOOOOOOOOOOOO ENTREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE MALDITA SEAAAAAAAAAAAAAAAAAAAA")
+      console.log('NOOOOOOOOOOOOOOOOOOOOOOOOOOO ENTREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE MALDITA SEAAAAAAAAAAAAAAAAAAAA');
     }
 
   }
@@ -229,7 +265,11 @@ export class PerfilComponent implements OnInit {
 
   GuardarPerfil(){
 
+<<<<<<< HEAD
     if(this.formUsuario.valid ||  this.formCliente.valid|| this.formEncuestado.valid ){
+=======
+    if (this.formAdmin.valid || this.formAnalista.valid || this.formCliente.valid || this.formEncuestado.valid ){
+>>>>>>> 099e5d833dd89f85d13e7b881d05feff5ac36803
 
       if((JSON.parse(localStorage.getItem("rol") )) == "Administrador"){
         this.usuarioService.updateUsuarioPerfil(this.UsuarioData._id,this.UsuarioData)
@@ -383,7 +423,8 @@ addNivelSocioEconomico(){
 
 
 
-//Validaciones de encuestado
+// Validaciones de encuestado
+
   get primerNombreEncuestado(){return this.formEncuestado.get('primerNombreEncuestado'); }
   get segundoNombreEncuestado(){return this.formEncuestado.get('segundoNombreEncuestado'); }
   get primerApellidoEncuestado(){return this.formEncuestado.get('primerApellidoEncuestado'); }

@@ -7,6 +7,7 @@ import {Analista} from './analista';
 export class Estudio {
     _id: number;
     estado: string;
+    estadoEstudioEncuestado: string;
     nombre: string;
     comentarioAnalista: string;
     edadMinima: number;

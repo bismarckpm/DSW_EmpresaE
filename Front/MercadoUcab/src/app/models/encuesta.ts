@@ -11,8 +11,4 @@ export class Encuesta {
 
     constructor(){}
 
-    agregarPregunta(): void {
-        // this.pregunta.push()
-    }
-
 }

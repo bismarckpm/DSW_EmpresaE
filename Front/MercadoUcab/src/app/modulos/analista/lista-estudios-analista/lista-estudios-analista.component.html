@@ -63,8 +63,10 @@
                             <div class="col-md-5 mb-3">
                               <label for="estado"> Estado</label>
                               <select class="custom-select d-block w-100" [(ngModel)]= "analistaData.estado" formControlName="estadoEstudioAnalista" id="estado" name="estado" >
-                                <option value="Aprobado">Aprobado</option>
-                                <option value="Rechazado">Rechazado</option>
+                                <option value="Solicitado">Solicitado</option>
+                                <option value="Procesado">Procesado</option>
+                                <option value="En Ejecucion">En Ejecucion</option>
+                                <option value="Culminado">Culminado</option>
                               </select>
                               <div *ngIf="estadoEstudioAnalista.invalid && (estadoEstudioAnalista.dirty || estadoEstudioAnalista.touched)" class="alert alert-danger">
                                 <div *ngIf="estadoEstudioAnalista.errors.required">
@@ -136,13 +138,16 @@
               </div>
             </div> <!-- Finall Modal -->
 
-            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" (click)="loadInfoGraficos(estudio._id)" data-target="#modalGrafico"> +
-              <!-- <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                <path fill-rule="evenodd" d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-              </svg> -->
-              graf
-            </button>
+            <div *ngIf=" estudio.estado === 'Culminado' ">
+              <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" (click)="loadInfoGraficos(estudio._id)" data-target="#modalGrafico" > +
+                <!-- <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                  <path fill-rule="evenodd" d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                </svg> -->
+                graf
+              </button>
+            </div>
+
             <div class="modal fade" id="modalGrafico" tabindex="-1" aria-labelledby="modalGraficoLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">

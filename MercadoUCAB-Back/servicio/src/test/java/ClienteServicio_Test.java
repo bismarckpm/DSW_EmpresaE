@@ -27,7 +27,7 @@ public class ClienteServicio_Test {
         dtoCliente.setLugar(dtoLugar);
 
         DtoUsuario dtoUsuario = new DtoUsuario();
-        dtoUsuario.setUsername("pruebaTest3223");
+        dtoUsuario.setUsername("pruebaTest3224");
         dtoUsuario.setCorreoelectronico("pruebaTest3223@gmail.com");
         dtoUsuario.setClave("123456");
         dtoUsuario.setEstado("A");
@@ -50,15 +50,7 @@ public class ClienteServicio_Test {
     //Prueba Unitaria consulta de Cliente
     public void getClienteTest(){
         ClienteServicio servicio = new ClienteServicio();
-        Response resultado = servicio.getCliente(5);
-        Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
-    }
-
-    @Test
-    //Prueba Unitaria para la eliminacion de un Cliente
-    public void deleteClienteTest(){
-        ClienteServicio servicio = new ClienteServicio();
-        Response resultado = servicio.deleteCliente(15);
+        Response resultado = servicio.getCliente(11);
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 
@@ -78,11 +70,11 @@ public class ClienteServicio_Test {
         dtoCliente.setLugar(dtoLugar);
 
         DtoUsuario dtoUsuario = new DtoUsuario();
-        dtoUsuario.setUsername("pruebaTest3223");
-        dtoUsuario.setCorreoelectronico("pruebaTest3224@gmail.com");
+        dtoUsuario.setUsername("pruebaTest3224");
+        dtoUsuario.setCorreoelectronico("pruebaTest322344@gmail.com");
         dtoCliente.setUsuario(dtoUsuario);
 
-        Response resultado = servicio.updateCliente(15, dtoCliente);
+        Response resultado = servicio.updateCliente(11, dtoCliente);
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 
@@ -93,8 +85,15 @@ public class ClienteServicio_Test {
         DtoCliente dtoCliente = new DtoCliente();
         dtoCliente.setEstado("I");
 
-        Response resultado = servicio.updateEstadoCliente(15, dtoCliente);
+        Response resultado = servicio.updateEstadoCliente(11, dtoCliente);
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 
+    @Test
+    //Prueba Unitaria para la eliminacion de un Cliente
+    public void deleteClienteTest(){
+        ClienteServicio servicio = new ClienteServicio();
+        Response resultado = servicio.deleteCliente(11);
+        Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
+    }
 }

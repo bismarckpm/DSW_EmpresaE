@@ -51,7 +51,7 @@ MeterOpciones(){
   for(i=0;  i < this.Opciones.length ; i++){
     console.log("ejecuto el for ");
      this.preguntaData.opciones[i]=this.Opciones[i]
-     console.log(this.preguntaData.opciones);
+     console.log(this.preguntaData);
  }
 }
 
@@ -93,15 +93,12 @@ ValidarTipopregunta(tipoid){
 
   updatePregunta(){
 
-    if(this.Opciones.length > 0){
-      console.log("if de opciones ")
-        this.MeterOpciones()
-    }
+    this.MeterOpciones()
 
-     this.preguntaService.updatePregunta(this.preguntaData._id, this.preguntaData).subscribe(data => {
+    console.log(this.preguntaData);
+
+    this.preguntaService.updatePregunta(this.preguntaData._id, this.preguntaData).subscribe(data => {
       })
-    console.log(this.preguntaData.opciones[1]);
-    location.reload();
 
   }
 
@@ -128,10 +125,10 @@ ValidarTipopregunta(tipoid){
   get estadoPregunta(){ return this.formPregunta.get('estadoPregunta');}
   get tipoPregunta(){return this.formPregunta.get('tipoPregunta');}
   get nombreSubcategoria(){return this.formPregunta.get('nombreSubcategoria');}
-  get opcionPregunta1(){return this.formPregunta.get('opciocPregunta1');}
-  get opcionPregunta2(){return this.formPregunta.get('opciocPregunta2');}
-  get opcionPregunta3(){return this.formPregunta.get('opciocPregunta3');}
-  get opcionPregunta4(){return this.formPregunta.get('opciocPregunta4');}
+  get opcionPregunta1(){return this.formPregunta.get('opcionPregunta1');}
+  get opcionPregunta2(){return this.formPregunta.get('opcionPregunta2');}
+  get opcionPregunta3(){return this.formPregunta.get('opcionPregunta3');}
+  get opcionPregunta4(){return this.formPregunta.get('opcionPregunta4');}
   get opciocPreguntaRango(){return this.formPregunta.get('opciocPreguntaRango');}
 
   createForm(){

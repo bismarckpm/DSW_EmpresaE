@@ -20,7 +20,7 @@ public class UsuarioServicio_Test {
 
         DtoUsuario dtoUsuario = new DtoUsuario();
         dtoUsuario.setEstado("a");
-        dtoUsuario.setUsername("pablitoprueba");
+        dtoUsuario.setUsername("pablitoprueba1");
         dtoUsuario.setCorreoelectronico("pablito@gmail.com");
         dtoUsuario.setClave("pablitoprueba");
         dtoUsuario.setTipoUsuario(dtoTipoUsuario);
@@ -33,7 +33,7 @@ public class UsuarioServicio_Test {
     //Prueba unitaria del getUsuario (Retorna todos los datos de un usuario sea cual sea su tipo de usuario)
     public void getUsuarioTest(){
         UsuarioServicio servicio = new UsuarioServicio();
-        Response resultado = servicio.getUsuario(66);
+        Response resultado = servicio.getUsuario(36);
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 
@@ -55,23 +55,19 @@ public class UsuarioServicio_Test {
 
         DtoUsuario dtoUsuario = new DtoUsuario();
         dtoUsuario.setEstado("a");
-        dtoUsuario.setUsername("pablitoprueba"); //No se modifica, solo se necesita para buscarlo en el ldap
+        dtoUsuario.setUsername("pablitoprueba1"); //No se modifica, solo se necesita para buscarlo en el ldap
         dtoUsuario.setTipoUsuario(dtoTipoUsuario);
 
-        Response resultado = servicio.updateUsuarioVistaAdmin(66, dtoUsuario);
+        Response resultado = servicio.updateUsuarioVistaAdmin(36, dtoUsuario);
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 
-    @Test
-    public void updateUsuarioVistaPerfilTest(){
-
-    }
 
     @Test
     //Prueba Unitaria de la eliminacion de usuarios
     public void deleteUsuarioTest(){
         UsuarioServicio servicio = new UsuarioServicio();
-        Response resultado = servicio.deleteUsuario(66);
+        Response resultado = servicio.deleteUsuario(36);
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 

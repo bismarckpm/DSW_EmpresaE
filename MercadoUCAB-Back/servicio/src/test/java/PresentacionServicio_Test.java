@@ -31,14 +31,14 @@ public class PresentacionServicio_Test {
         DtoPresentacion dtoPresentacion = new DtoPresentacion();
         dtoPresentacion.setDescripcion("EspumaUpdate");
         dtoPresentacion.setEstado("a");
-        Response resultado = servicio.updatePresentacion(22, dtoPresentacion);
+        Response resultado = servicio.updatePresentacion(3, dtoPresentacion);
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 
     @Test
     public void deletePresentacionTest() throws Exception{
         PresentacionServicio servicio = new PresentacionServicio();
-        Response resultado = servicio.deletePresentacion(22);
+        Response resultado = servicio.deletePresentacion(3);
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 }

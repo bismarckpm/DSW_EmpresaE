@@ -20,7 +20,7 @@ public class MarcaServicio_Test {
     //Prueba Unitaria consulta de Marca
     public void getMarcaTest(){
         MarcaServicio servicio = new MarcaServicio();
-        Response resultado = servicio.getMarca(1);
+        Response resultado = servicio.getMarca(2);
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 
@@ -29,7 +29,7 @@ public class MarcaServicio_Test {
     public void addMarcaTest(){
         MarcaServicio servicio = new MarcaServicio();
         DtoMarca dtoMarca = new DtoMarca();
-        dtoMarca.setNombre("Brisa");
+        dtoMarca.setNombre("Prueba");
         dtoMarca.setEstado("A");
         Response resultado = servicio.addMarca(dtoMarca);
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
@@ -42,7 +42,7 @@ public class MarcaServicio_Test {
         DtoMarca dtoMarca = new DtoMarca();
         dtoMarca.setNombre("Cola");
         dtoMarca.setEstado("A");
-        Response resultado = servicio.updateMarca(7, dtoMarca);
+        Response resultado = servicio.updateMarca(2, dtoMarca);
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 
@@ -50,7 +50,7 @@ public class MarcaServicio_Test {
     //Prueba Unitaria para la eliminacion de una Marca
     public void deleteMarcaTest(){
         MarcaServicio servicio = new MarcaServicio();
-        Response resultado = servicio.deleteMarca(7);
+        Response resultado = servicio.deleteMarca(2);
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 }

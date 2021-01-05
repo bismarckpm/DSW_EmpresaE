@@ -7,11 +7,11 @@ public class DirectorioActivo_Test {
 
     public String rol;
 
-  /*  @Test
+    @Test
     public void createUserLDAP() {
         DtoUsuario user = new DtoUsuario();
         rol = "Analista";
-        user.setUsername( "prueba5" );
+        user.setUsername( "prueba15" );
         user.setClave( "Prueba654321" );
         user.setCorreoelectronico("prueba@gmail.com");
         DirectorioActivo ldap = new DirectorioActivo();
@@ -19,17 +19,9 @@ public class DirectorioActivo_Test {
     }
 
     @Test
-    public void deleteUserLDAP() {
-        DtoUsuario user = new DtoUsuario();
-        user.setUsername( "prueba" );
-        DirectorioActivo ldap = new DirectorioActivo();
-        ldap.deleteEntry( user );
-    }
-
-    @Test
     public void getUserLDAP() {
         DtoUsuario user = new DtoUsuario();
-        user.setUsername( "prueba" );
+        user.setUsername( "prueba15" );
         DirectorioActivo ldap = new DirectorioActivo();
         ldap.getCorreo( user );
     }
@@ -37,8 +29,8 @@ public class DirectorioActivo_Test {
     @Test
     public void changePassword() {
         DtoUsuario user = new DtoUsuario();
-        user.setUsername( "prueba" );
-        user.setClave( "123456Pruebish" );
+        user.setUsername( "prueba15" );
+        user.setClave( "123456Prueba" );
         DirectorioActivo ldap = new DirectorioActivo();
         ldap.changePassword( user );
     }
@@ -47,7 +39,7 @@ public class DirectorioActivo_Test {
     public void updateUserLDAP(){
         DtoUsuario user = new DtoUsuario();
         rol = "Encuestado";
-        user.setUsername( "prueba2" );
+        user.setUsername( "prueba15" );
         user.setClave( "Prueba654321" );
         user.setCorreoelectronico("updatePrueba222@gmail.com");
         DirectorioActivo ldap = new DirectorioActivo();
@@ -57,9 +49,17 @@ public class DirectorioActivo_Test {
     @Test
     public void userAuthentication() {
         DtoUsuario user = new DtoUsuario();
-        user.setUsername( "prueba" );
-        user.setClave( "123456Pruebish" );
+        user.setUsername( "prueba15" );
+        user.setClave( "123456Prueba" );
         DirectorioActivo ldap = new DirectorioActivo();
         ldap.userAuthentication( user );
-    }*/
+    }
+
+    @Test
+    public void deleteUserLDAP() {
+        DtoUsuario user = new DtoUsuario();
+        user.setUsername( "prueba15" );
+        DirectorioActivo ldap = new DirectorioActivo();
+        ldap.deleteEntry( user );
+    }
 }

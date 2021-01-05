@@ -17,9 +17,8 @@ public class PresentacionServicio {
 
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/presentacion
-     * @apiNote Api de tipo get hecha para retornar todas las presentaciones guardadas en sistema.
+     * Api de tipo get hecha para retornar todas las presentaciones guardadas en sistema.
      * @return Lista de objetos de tipo PresentacionEntity
-     * @see PresentacionEntity Entidad persistente utilizada para retornar las presentaciones en sistema.
      */
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
@@ -36,11 +35,9 @@ public class PresentacionServicio {
 
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/presentacion
-     * @apiNote Api del tipo POST encargada de añadir una presentación nueva.
+     * Api del tipo POST encargada de añadir una presentación nueva.
      * @param dtoPresentacion Objeto de tipo DtoPresentacion
-     * @see DtoPresentacion Data transfer object utilizado para obtener los datos de la presentación a ingresar.
      * @return Objeto de tipo PresentacionEntity
-     * @see PresentacionEntity Entidad persistente utilizada para insertar la presentacion nueva.
      */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -64,7 +61,7 @@ public class PresentacionServicio {
 
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/presentacion
-     * @apiNote Api de tipo @DELETE encargada de eliminar una presentación de producto del sistema.
+     * Api de tipo @DELETE encargada de eliminar una presentación de producto del sistema.
      * @param id Objeto de tipo long que representa el id de la presentación a eliminar.
      * @return ok cuando el objeto fue eliminado con exito.
      */
@@ -88,7 +85,7 @@ public class PresentacionServicio {
 
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/presentacion
-     * @apiNote Api de tipo PUT hecho para actualizar los datos de la presentación.
+     * Api de tipo PUT hecho para actualizar los datos de la presentación.
      * @param id Objeto de tipo long que representa al id de la presentación a actualizar.
      * @param dtoPresentacion Objeto de tipo DtoPresentación utilizado para obtener los datos de la presentacion
      * @return Objeto de tipo PresentacionEntity

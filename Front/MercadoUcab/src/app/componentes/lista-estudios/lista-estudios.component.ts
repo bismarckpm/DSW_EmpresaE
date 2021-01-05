@@ -17,7 +17,7 @@ import { SubcategoriaService } from 'src/app/services/subcategoria.service';
   styleUrls: ['./lista-estudios.component.css']
 })
 export class ListaEstudiosComponent implements OnInit {
-
+  cambio = false;
 
   // Declaracion de variables
   estudios: Estudio[] = [];
@@ -28,6 +28,11 @@ export class ListaEstudiosComponent implements OnInit {
              subcategoria : {_id: 0, nombre: '', estado: ''},
              analista: {_id: 0}
             };
+
+   @Input() estadoData = {_id: 0, estado: '', nombre: '', tipo: ''}
+   @Input() municipioData = {_id: 0, estado: '', nombre: '', tipo: ''}
+   @Input() parroquiaData = {_id: 0, estado: '', nombre: '', tipo: ''}
+
   // Declaracion para los dropdown
   nivelSocioEconomico: any;
   subcategoria: any;
@@ -77,10 +82,33 @@ export class ListaEstudiosComponent implements OnInit {
   }
 
   updateEstudio(){
+    console.log("entro a update");
+
+
     if (this.formEstudio.valid) {
-    this.estudioService.updateEstudio(this.estudioData._id, this.estudioData).subscribe(data => {
-     });
-    this.loadEstudios();
+      console.log("la vaidaciones son correctas");
+
+          if(this.cambio == true){
+            console.log("estado actual del cambio :"+ this.cambio);
+            console.log("llamo validar los cambios del lugar");
+            this.validarCambiosLugar();
+            console.log("Hago la llamada de http con este estudio :");
+            console.log(this.estudioData);
+
+
+            this.estudioService.updateEstudioAdmin(this.estudioData._id, this.estudioData).subscribe(data => {
+             });
+             console.log("termine la llamada del http");
+            this.cambio= false;
+            location.reload();
+            console.log("estado actual del cambio :"+ this.cambio);
+          }else if(this.cambio == false){
+            console.log("estado actual del cambio :"+ this.cambio);
+            this.estudioService.updateEstudioAdmin(this.estudioData._id, this.estudioData).subscribe(data => {
+            });
+           this.loadEstudios();
+           location.reload();
+          }
     }
     else{
       alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
@@ -88,12 +116,29 @@ export class ListaEstudiosComponent implements OnInit {
  }
 
  editar(estudio): void{
+  console.log(" estado actual de la variable estudioData");
+  console.log(this.estudioData);
+
+
+
+  this.estudioData= estudio;
+
+  console.log(" estudio actual despues de asignar el estudio en estudio data");
+  console.log(this.estudioData);
+
   this.addSubcategoria();
-  this.addLugar();
   this.addNivelSocioEconomico();
   this.addAnalistas();
-  this.estudioData = estudio;
+  this.addLugar();
 }
+
+  Cambio(){
+      if(this.cambio == true){
+         this.cambio= false;
+      }else{
+        this.cambio= true;
+      }
+  }
 
 addAnalistas(){
   this.analistaService.getAnalistas().subscribe( data =>{
@@ -109,32 +154,61 @@ addLugar(){
   });
 }
 
+addMunicipios(id){
+  this.lugarService.getMunicipio(id).subscribe((data: {}) => {
+    this.municipios = data;
+  });
+}
+
+addParroquia(id){
+  this.lugarService.getParroquia(0,id).subscribe((data: {}) => {
+    this.parroquias = data;
+  });
+}
+
+/////////////// Llamadas a los drop al haber un cambio ////////////////////////////////////
 busquedaMunicipio(id){
-  // El ID es del estado
-  this.auxEstadoID = id;
   // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
   if (id > 0 ){
-    this.lugarService.getMunicipio(this.auxEstadoID).subscribe((data: {}) => {
-      this.municipios = data;
-    });
+      this.auxEstadoID=id         // El ID es del estado
+          this.addMunicipios(id)
   }
-
 }
 
 busquedaParroquia(id){
-  // El ID es del estado
-  this.auxMunicipioID = id;
   // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
-  if (id > 0 ) {
-    this.lugarService.getParroquia(this.auxMunicipioID, id).subscribe((data: {}) => {
-      this.parroquias = data;
-    });
+  if (id > 0 ){
+      this.auxMunicipioID= id;
+        this.addParroquia(id)
   }
 }
 
 seleccionarParroquia(id){
   this.auxParroquiaID = id;
 }
+
+  validarCambiosLugar(){
+
+
+
+    console.log("entro en la llamada de las validaciones de lugar");
+
+    if((this.estudioData.lugar._id != this.parroquiaData._id) && (this.parroquiaData._id == this.auxParroquiaID)){
+      console.log("la parroquia es diferente y hago el cambio");
+      console.log("id de la parroquia anterior :"+ this.estudioData.lugar._id);
+      this.estudioData.lugar._id =this.auxParroquiaID;
+      console.log("id de la parroquia Actual :"+ this.estudioData.lugar._id);
+    }
+
+    if((this.estudioData.lugar.lugar._id != this.municipioData._id) && (this.municipioData._id == this.auxMunicipioID)){
+      this.estudioData.lugar.lugar._id =this.auxMunicipioID;
+    }
+
+    if((this.estudioData.lugar.lugar.lugar._id != this.estadoData._id) && (this.estadoData._id == this.auxEstadoID)){
+      this.estudioData.lugar.lugar.lugar._id =this.auxEstadoID;
+    }
+
+  }
 
 
   /// Esto es para mostrar en los drops doww
@@ -162,8 +236,17 @@ seleccionarParroquia(id){
   get edadMaximaEstudio(){return this.formEstudio.get('edadMaximaEstudio'); }
   get estadoEstudio(){return this.formEstudio.get('estadoEstudio'); }
   get fechaInicioEstudio(){return this.formEstudio.get('fechaInicioEstudio'); }
-  get fechaFinEstudio(){return this.formEstudio.get('fechaFinEstudio'); }
+  get fechaFinEstudio(){return this.formEstudio.get('fechaFinEstudio');
+ }
   get lugarEstudio(){return this.formEstudio.get('lugarEstudio'); }
+  get lugarmunicipio(){return this.formEstudio.get('lugarmunicipio'); }
+  get lugarparroquia(){return this.formEstudio.get('lugarparroquia'); }
+
+  get EstadoData(){return this.formEstudio.get('EstadoData'); }
+  get MunicipioData(){return this.formEstudio.get('MunicipioData'); }
+  get ParroquiaData(){return this.formEstudio.get('ParroquiaData'); }
+
+  get analistaEstudio(){return this.formEstudio.get('analistaEstudio'); }
   get subcategoriaEstudio(){return this.formEstudio.get('subcategoriaEstudio'); }
   get nivelEstudio(){return this.formEstudio.get('nivelEstudio'); }
 
@@ -171,6 +254,16 @@ seleccionarParroquia(id){
     this.formEstudio = this.formBuilder.group({
       nombreEstudio: ['', [Validators.required, Validators.pattern(this.patronNombreEstudio)]],
       estadoEstudio: ['', Validators.required],
+      lugarEstudio: [''],
+      lugarmunicipio: [''],
+      lugarparroquia: [''],
+      analistaEstudio: ['', Validators.required],
+
+      EstadoData: ['' ],
+      MunicipioData: [''],
+      ParroquiaData: [''],
+
+
       fechaInicioEstudio: ['', [Validators.required, Validators.pattern(this.patronFechaEstudio)]],
       fechaFinEstudio: ['', [Validators.pattern(this.patronFechaEstudio)]],
       edadMinimaEstudio: ['', [Validators.required, Validators.maxLength(2), Validators.pattern(this.patronEdadEstudio)]],

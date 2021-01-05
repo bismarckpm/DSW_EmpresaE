@@ -64,6 +64,14 @@ export class EncuestaService {
     );
   }
 
+  createRespuestaEncuesta(respEncuesta): Observable<any>{
+    return this.http.post<any>(this.apiurl + '/encuesta/respuesta', JSON.stringify(respEncuesta), this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+
   updateEncuesta(id, Encuesta): Observable<Encuesta[]>{
     return this.http.put<Encuesta[]>(this.apiurl + '/encuesta/' + id, JSON.stringify(Encuesta), this.httpOptions)
     .pipe(

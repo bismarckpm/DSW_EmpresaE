@@ -1,5 +1,6 @@
 package ucab.empresae.entidades;
 
+import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.*;
 import java.util.Date;
 
@@ -77,6 +78,7 @@ public class EncuestadoEntity extends BaseEntity{
 
     @Basic
     @Column(name = "fecha_nacimiento")
+    @JsonbDateFormat(value = "yyyy-MM-dd")
     private Date fechaNacimiento;
     public Date getFechaNacimiento() {
         return fechaNacimiento;

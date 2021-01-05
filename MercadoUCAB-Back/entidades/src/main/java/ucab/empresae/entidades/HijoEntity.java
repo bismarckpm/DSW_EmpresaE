@@ -1,18 +1,16 @@
 package ucab.empresae.entidades;
 
+import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
 @Table(name = "hijo", schema = "mercadeoucab")
 public class HijoEntity extends BaseEntity{
-    private String estado;
-    private Date fechaNacimiento;
-    private EncuestadoEntity encuestado;
-    private GeneroEntity genero;
 
     @Basic
     @Column(name = "estado")
+    private String estado;
     public String getEstado() {
         return estado;
     }
@@ -23,6 +21,8 @@ public class HijoEntity extends BaseEntity{
 
     @Basic
     @Column(name = "fecha_nacimiento")
+    @JsonbDateFormat(value = "yyyy-MM-dd")
+    private Date fechaNacimiento;
     public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
@@ -33,6 +33,7 @@ public class HijoEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_encuestado", referencedColumnName = "id", nullable = false)
+    private EncuestadoEntity encuestado;
     public EncuestadoEntity getEncuestado() {
         return encuestado;
     }
@@ -43,6 +44,7 @@ public class HijoEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_genero", referencedColumnName = "id", nullable = false)
+    private GeneroEntity genero;
     public GeneroEntity getGenero() {
         return genero;
     }

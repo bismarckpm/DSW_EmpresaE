@@ -3,7 +3,7 @@
 
     <div class="text-center mb-4">
       <h1 class="h3 mb-3 font-weight-normal">MercadeoUcab </h1>
-      <p class="texto"> Participa en nuestro Sistema</p> 
+      <p class="texto"> Participa en nuestro Sistema</p>
     </div>
 <!-- arreglar lo rojo de los inputs -->
     <div class="form-label-group">
@@ -18,7 +18,7 @@
       </div>
       <label > Usuario</label>
     </div>
-  
+
     <div class="form-label-group">
       <input #password type="password" id="inputPassword" class="form-control" [(ngModel)]="usuario.clave"  formControlName="password" >
       <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
@@ -34,9 +34,9 @@
 
     <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="Loggearse()" >Sign in</button>
     <!-- centrar estas dos cosas -->
-    <center>
-      <a class="link text-center my-auto" [routerLink]="['/recuperacion']">Recuperar Cuenta </a>
-    </center>
+    <div class="row mx-auto mt-1">
+      <a class="link text-center mx-auto mt-1" [routerLink]="['/recuperacion']">Recuperar Cuenta </a>
+    </div>
     <p class="mt-5 mb-3 text-muted text-center">&copy; 2020</p>
   </form>
 </div>

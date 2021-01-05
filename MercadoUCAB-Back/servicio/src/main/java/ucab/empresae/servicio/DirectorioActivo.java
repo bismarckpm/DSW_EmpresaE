@@ -4,7 +4,6 @@ import ucab.empresae.dtos.DtoUsuario;
 
 import javax.naming.Context;
 import javax.naming.NamingEnumeration;
-import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.BasicAttribute;
@@ -28,10 +27,9 @@ public class DirectorioActivo {
     private String _user =  "admin";
     private String _password =  "secret";
 
-    /*
-    Method to connect with the ldap
-     */
+
     public DirectorioActivo() {}
+
 
     private void connectLDAP(String user, String password) {
         try {

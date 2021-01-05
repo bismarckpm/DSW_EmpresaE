@@ -3,9 +3,11 @@ import org.junit.Test;
 import ucab.empresae.dtos.DtoPregunta;
 import ucab.empresae.dtos.DtoSubcategoria;
 import ucab.empresae.dtos.DtoTipoPregunta;
+import ucab.empresae.entidades.PreguntaAux;
 import ucab.empresae.servicio.PreguntaServicio;
 
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 public class PreguntaServicio_Test {
 
@@ -38,7 +40,7 @@ public class PreguntaServicio_Test {
     public void deletePreguntaTest() throws Exception
     {
         PreguntaServicio servicio = new PreguntaServicio();
-        Response respuesta = servicio.deletePregunta(5);
+        Response respuesta = servicio.deletePregunta(43);
         Assert.assertEquals(respuesta.getStatus(), Response.Status.OK.getStatusCode());
     }
 
@@ -55,9 +57,23 @@ public class PreguntaServicio_Test {
         DtoSubcategoria subcategoria = new DtoSubcategoria(2);
         dtoPregunta.setSubcategoria(subcategoria);
 
-        Response respuesta = servicio.updatePregunta(3,dtoPregunta);
+        Response respuesta = servicio.updatePregunta(6,dtoPregunta);
         Assert.assertEquals(respuesta.getStatus(), Response.Status.OK.getStatusCode());
     }
 
+    @Test
+    public void getPreguntasbySubcategoriaTest() throws Exception
+    {
+        PreguntaServicio servicio = new PreguntaServicio();
+        Response respuesta = servicio.getPreguntasbySubcategoria(13);
+        Assert.assertEquals( respuesta.getStatus(), Response.Status.OK.getStatusCode());
+    }
 
+    @Test
+    public void getPreguntasyOpcionesTest() throws Exception
+    {
+        PreguntaServicio servicio = new PreguntaServicio();
+        List<PreguntaAux> respuesta = servicio.getPreguntasyOpciones(13);
+        Assert.assertFalse( respuesta.isEmpty());
+    }
 }

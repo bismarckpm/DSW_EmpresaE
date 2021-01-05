@@ -36,6 +36,7 @@ export class FormSubcategoriaComponent implements OnInit {
     if (this.formSubcategoria.valid) {
     this.subcategoriaService.createsubcategoria(this.subcategoria).subscribe((data: {}) => {
     });
+    location.reload();
   }
   else{
     alert(' LLenar todos los campos por favor');

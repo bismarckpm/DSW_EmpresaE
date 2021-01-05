@@ -48,7 +48,7 @@
                         <div class="modal-content">
                           <div class="form-group">
                             <div class="row">
-                              <div class="col-md-6 mb-3">
+                              <div class="col-md-12 mb-3">
                                 <label for="coment">Comentario</label>
                                 <input type="text" [(ngModel)]="analistaData.comentarioAnalista" class="form-control"  formControlName="comentarioAnalistaEstudio" name="comentarioAnalista" id="coment" placeholder="" >
                                 <div *ngIf="comentarioAnalistaEstudio.invalid && (comentarioAnalistaEstudio.dirty || comentarioAnalistaEstudio.touched)" class="alert alert-danger">
@@ -60,11 +60,14 @@
                             </div>
                           </div>
                           <div class="row">
-                            <div class="col-md-5 mb-3">
+                            <div class="col-md-6 mb-3">
                               <label for="estado"> Estado</label>
                               <select class="custom-select d-block w-100" [(ngModel)]= "analistaData.estado" formControlName="estadoEstudioAnalista" id="estado" name="estado" >
                                 <option value="Aprobado">Aprobado</option>
+                                <option value="Solicitado">Solicitado</option>
                                 <option value="Rechazado">Rechazado</option>
+                                <option value="En Proceso">En Proceso</option>
+                                <option value="Culminado">Culminado</option>
                               </select>
                               <div *ngIf="estadoEstudioAnalista.invalid && (estadoEstudioAnalista.dirty || estadoEstudioAnalista.touched)" class="alert alert-danger">
                                 <div *ngIf="estadoEstudioAnalista.errors.required">
@@ -72,6 +75,20 @@
                                 </div>
                               </div>
                             </div>
+
+                            <div *ngIf="analistaData.estado==='Culminado'" class="col-md-6 mb-3">
+                              <label for="fechaFin">Fecha fin</label>
+                              <input type="text" class="form-control"  placeholder="AAAA-MM-DD"  [(ngModel)]="analistaData.fechaFin" formControlName="fechaFinEstudio" value="analistaData.fechaFin">
+                              <div *ngIf="fechaFinEstudio.invalid && (fechaFinEstudio.dirty || fechaFinEstudio.touched)" class="alert alert-danger">
+                                <div *ngIf="fechaFinEstudio.errors.required">
+                                  Este campo es obligatorio
+                                </div>
+                                <div *ngIf="fechaFinEstudio.errors.pattern">
+                                  Introduzca un formato valido
+                                </div>
+                              </div>
+                            </div>
+
                           </div>
                           <br>
                           <!-- Parte inferior del modal -->
@@ -135,6 +152,41 @@
                 </div>
               </div>
             </div> <!-- Finall Modal -->
+
+            <div *ngIf=" estudio.estado === 'Culminado' ">
+              <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" (click)="loadInfoGraficos(estudio._id)" data-target="#modalGrafico" > +
+                <!-- <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                  <path fill-rule="evenodd" d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                </svg> -->
+                graf
+              </button>
+            </div>
+
+            <div class="modal fade" id="modalGrafico" tabindex="-1" aria-labelledby="modalGraficoLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <!-- Cabezado Modal -->
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="dataMuestraLabel">Gráfico del Estudio</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <!-- Cuerpo completo del Modal -->
+                  <div class="modal-body">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div *ngFor="let chartOptions of chartOptions">
+                          <highcharts-chart [Highcharts]="highcharts" [options]="chartOptions"style="width: 100%; height: 400px; display: block;">
+                          </highcharts-chart>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" (click)="loadDataMuestra(estudio._id)" data-target="#dataMuestra">
               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

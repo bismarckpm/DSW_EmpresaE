@@ -14,7 +14,7 @@ export class FormCategoriaComponent implements OnInit {
   formCategoria: FormGroup;
   namePattern: any = /^[A-Za-z0-9\s]+$/;
 
-  @Input() categoria ={ _id:0,nombre:'',estado:''};
+  @Input() categoria = { _id: 0, nombre: '', estado: ''};
 
   constructor(
     public categoriaService: CategoriaService,
@@ -34,8 +34,7 @@ export class FormCategoriaComponent implements OnInit {
     else{
       alert('FILL ALL FIELDS');
     }
-
-
+    location.reload();
   }
 
 

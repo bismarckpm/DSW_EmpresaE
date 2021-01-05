@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { EncuestadoService } from 'src/app/services/encuestado.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 
 @Component({
@@ -10,18 +12,34 @@ import { EncuestadoService } from 'src/app/services/encuestado.service';
 
 export class RecuperacionComponent implements OnInit {
 
+@Input() usuario={ username:'' };
+  formRecuperacion: FormGroup;
+ 
 
-
-  constructor(private encuestadoService:EncuestadoService) {
-
-  }
+  constructor(
+    private usuarioService:UsuarioService,
+    private formBuilder: FormBuilder
+    ) {this.createForm()}
 
   ngOnInit(): void {
   }
 
   confirmarCorreo(){
-    //Validar el correo que este en la base de datos
-    //luego redireccionar a otro componente de para que ingrese la clave
-    // guardar
+    if(this.formRecuperacion.valid){
+    this.usuarioService.recuperarclave(this.usuario).subscribe(data=>{
+        
+    })
+    }
+
+    console.log(this.usuario)
+  }
+
+
+  get userCorreo(){return this.formRecuperacion.get('userCorreo');}
+
+  createForm(){
+    this.formRecuperacion = this.formBuilder.group({
+      userCorreo: ['',Validators.required] 
+    });
   }
 }

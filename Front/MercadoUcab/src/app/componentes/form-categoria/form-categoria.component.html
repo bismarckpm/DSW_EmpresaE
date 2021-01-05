@@ -3,7 +3,7 @@
 
 
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Crear Marca</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Crear Categoria</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -11,9 +11,10 @@
 
          <div class="modal-body">  
            <form [formGroup]="formCategoria">
-                <div class="form-group">
+                <div class="form-group form-row">
+                  <div class="col-md-9">
                     <label > Nombre de la categoria </label>
-                    <input type="text" [(ngModel)]="categoria.nombre" class="form-control"  formControlName="nombreCategoria" name="nombre"  >
+                      <input type="text" [(ngModel)]="categoria.nombre" class="form-control"  formControlName="nombreCategoria" name="nombre"  >
                       <div *ngIf="nombreCategoria.invalid && (nombreCategoria.dirty || nombreCategoria.touched)" class="alert alert-danger">
                           <div *ngIf="nombreCategoria.errors.required">
                             Este campo es obligatorio
@@ -23,18 +24,20 @@
                           </div>
                       </div>
                   </div>
-        
-                  <label > estado de la Categoria</label> <br>
-                  <select class="mdb-select md-form" [(ngModel)]= "categoria.estado" formControlName="estadoCategoria"name="estado" >
-                        <option value="a">Activa</option>
-                        <option value="i">Inactiva</option>
-                  </select>
-
-                  <div *ngIf="estadoCategoria.invalid && (estadoCategoria.dirty || estadoCategoria.touched)" class="alert alert-danger">
+                  <div class="col-md-3">
+                    <label > Estado </label> <br>
+                    <select class="mdb-select md-form custom-select d-block w-100" [(ngModel)]= "categoria.estado" formControlName="estadoCategoria" name="estado" >
+                      <option value="a">Activa</option>
+                      <option value="i">Inactiva</option>
+                    </select>
+                    <div *ngIf="estadoCategoria.invalid && (estadoCategoria.dirty || estadoCategoria.touched)" class="alert alert-danger">
                       <div *ngIf="estadoCategoria.errors.required">
                         Este campo es obligatorio
                       </div>
+                    </div>
+
                   </div>
+                </div>
 
           </form>
       </div> <!-- Final del modal body-->

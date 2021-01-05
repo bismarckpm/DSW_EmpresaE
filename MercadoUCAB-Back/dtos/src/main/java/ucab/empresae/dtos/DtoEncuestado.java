@@ -10,17 +10,19 @@ public class DtoEncuestado extends DtoBase {
     private String segundoNombre;
     private String primerApellido;
     private String segundoApellido;
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
 
     //Relaciones
-    private DtoEstadoCivil dtoEstadoCivil;
-    private DtoNivelAcademico dtoNivelAcademico;
-    private DtoMedioConexion dtoMedioConexion;
-    private DtoGenero dtoGenero;
-    private DtoOcupacion dtoOcupacion;
-    private DtoNivelSocioEconomico dtoNivelSocioeconomico;
-    private DtoLugar dtoLugar;
-    private DtoUsuario dtoUsuario;
+    private DtoEstadoCivil estadoCivil;
+    private DtoNivelAcademico nivelAcademico;
+    private DtoMedioConexion medioConexion;
+    private DtoGenero genero;
+    private DtoOcupacion ocupacion;
+    private DtoNivelSocioEconomico nivelSocioEconomico;
+    private DtoLugar lugar;
+    private DtoUsuario usuario;
+    private DtoTelefono telefono;
+
 
     //Constructores
     public DtoEncuestado() {
@@ -72,76 +74,84 @@ public class DtoEncuestado extends DtoBase {
         this.segundoApellido = segundoApellido;
     }
 
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public DtoEstadoCivil getEestadoCivil() {
-        return dtoEstadoCivil;
+    public DtoEstadoCivil getEstadoCivil() {
+        return estadoCivil;
     }
 
-    public void setEstadocivil(DtoEstadoCivil edocivil) {
-        this.dtoEstadoCivil = edocivil;
+    public void setEstadoCivil(DtoEstadoCivil estadoCivil) {
+        this.estadoCivil = estadoCivil;
     }
 
     public DtoNivelAcademico getNivelAcademico() {
-        return dtoNivelAcademico;
+        return nivelAcademico;
     }
 
     public void setNivelAcademico(DtoNivelAcademico nivelacademico) {
-        this.dtoNivelAcademico = nivelacademico;
+        this.nivelAcademico = nivelacademico;
     }
 
     public DtoMedioConexion getMedioConexion() {
-        return dtoMedioConexion;
+        return medioConexion;
     }
 
     public void setMedioConexion(DtoMedioConexion medioconexion) {
-        this.dtoMedioConexion = medioconexion;
+        this.medioConexion = medioconexion;
     }
 
     public DtoGenero getGenero() {
-        return dtoGenero;
+        return genero;
     }
 
     public void setGenero(DtoGenero genero) {
-        this.dtoGenero = genero;
+        this.genero = genero;
     }
 
     public DtoOcupacion getOcupacion() {
-        return dtoOcupacion;
+        return ocupacion;
     }
 
     public void setOcupacion(DtoOcupacion ocupacion) {
-        this.dtoOcupacion = ocupacion;
+        this.ocupacion = ocupacion;
     }
 
-    public DtoNivelSocioEconomico getNivelSocioeco() {
-        return dtoNivelSocioeconomico;
+    public DtoNivelSocioEconomico getNivelSocioEconomico() {
+        return nivelSocioEconomico;
     }
 
-    public void setNivelSocioeco(DtoNivelSocioEconomico nivelsocioeco) {
-        this.dtoNivelSocioeconomico = nivelsocioeco;
+    public void setNivelSocioEconomico(DtoNivelSocioEconomico nivelSocioEconomico) {
+        this.nivelSocioEconomico = nivelSocioEconomico;
     }
 
     public DtoLugar getLugar() {
-        return dtoLugar;
+        return lugar;
     }
 
     public void setLugar(DtoLugar lugar) {
-        this.dtoLugar = lugar;
+        this.lugar = lugar;
     }
 
     public DtoUsuario getUsuario() {
-        return dtoUsuario;
+        return usuario;
     }
 
     public void setUsuario(DtoUsuario usuario) {
-        this.dtoUsuario = usuario;
+        this.usuario = usuario;
+    }
+
+    public DtoTelefono getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(DtoTelefono telefono) {
+        this.telefono = telefono;
     }
 
 }

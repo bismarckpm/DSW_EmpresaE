@@ -42,6 +42,7 @@ export class ListaCategoriaComponent implements OnInit {
         this.loadCategorias();
       });
     }
+    location.reload();
   }
 
   updateCategoria() {
@@ -52,6 +53,7 @@ export class ListaCategoriaComponent implements OnInit {
     else{
       alert('FILL ALL FIELDS');
     }
+    location.reload();
   }
   // Sustitucion de variables para el update
   editar(categoria){

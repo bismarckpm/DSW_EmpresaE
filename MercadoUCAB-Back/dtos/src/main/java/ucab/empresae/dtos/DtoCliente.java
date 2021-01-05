@@ -5,11 +5,13 @@ public class DtoCliente extends DtoBase{
     //Atributos
     private String estado;
     private String razonSocial;
-    private int rif;
+    private String rif;
 
     //Relaciones
-    private DtoLugar dtoLugar;
-    private DtoUsuario dtoUsuario;
+    private DtoLugar lugar;
+    private DtoUsuario usuario;
+    private DtoTelefono telefono;
+
 
     //Constructores
     public DtoCliente() {
@@ -37,28 +39,35 @@ public class DtoCliente extends DtoBase{
         this.razonSocial = razonSocial;
     }
 
-    public int getRif() {
+    public String getRif() {
         return rif;
     }
 
-    public void setRif(int rif) {
+    public void setRif(String rif) {
         this.rif = rif;
     }
 
     public DtoLugar getLugar() {
-        return dtoLugar;
+        return lugar;
     }
 
     public void setLugar(DtoLugar lugar) {
-        this.dtoLugar = lugar;
+        this.lugar = lugar;
     }
 
     public DtoUsuario getUsuario() {
-        return dtoUsuario;
+        return usuario;
     }
 
     public void setUsuario(DtoUsuario usuario) {
-        this.dtoUsuario = usuario;
+        this.usuario = usuario;
     }
 
+    public DtoTelefono getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(DtoTelefono telefono) {
+        this.telefono = telefono;
+    }
 }

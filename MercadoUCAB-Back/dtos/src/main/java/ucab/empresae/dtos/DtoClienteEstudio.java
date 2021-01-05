@@ -1,10 +1,5 @@
 package ucab.empresae.dtos;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
 public class DtoClienteEstudio extends DtoBase{
 
     //Atributos
@@ -12,8 +7,8 @@ public class DtoClienteEstudio extends DtoBase{
     private String comentarioCliente;
 
     //Relaciones
-    private DtoCliente dtoCliente;
-    private DtoEstudio dtoEstudio;
+    private DtoCliente cliente;
+    private DtoEstudio estudio;
 
     //Constructores
     public DtoClienteEstudio() {
@@ -42,19 +37,19 @@ public class DtoClienteEstudio extends DtoBase{
     }
 
     public DtoCliente getCliente() {
-        return dtoCliente;
+        return cliente;
     }
 
     public void setCliente(DtoCliente cliente) {
-        this.dtoCliente = cliente;
+        this.cliente = cliente;
     }
 
     public DtoEstudio getEstudio() {
-        return dtoEstudio;
+        return estudio;
     }
 
     public void setEstudio(DtoEstudio estudio) {
-        this.dtoEstudio = estudio;
+        this.estudio = estudio;
     }
 
 }

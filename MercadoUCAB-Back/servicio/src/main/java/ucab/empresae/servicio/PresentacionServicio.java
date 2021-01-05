@@ -1,15 +1,8 @@
 package ucab.empresae.servicio;
 
-
-import ucab.empresae.daos.DaoPregunta;
 import ucab.empresae.daos.DaoPresentacion;
-
-import ucab.empresae.dtos.DtoPregunta;
 import ucab.empresae.dtos.DtoPresentacion;
-import ucab.empresae.entidades.PreguntaEntity;
 import ucab.empresae.entidades.PresentacionEntity;
-import ucab.empresae.entidades.SubcategoriaEntity;
-import ucab.empresae.entidades.TipoPreguntaEntity;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -25,31 +18,30 @@ public class PresentacionServicio {
         try {
             DaoPresentacion dao = new DaoPresentacion();
             presentaciones = dao.findAll(PresentacionEntity.class);
+            return Response.ok(presentaciones).build();
         } catch (Exception ex) {
-            String problema = ex.getMessage();
+            return Response.status(500).entity(ex.getMessage()).build();
         }
-        return Response.ok(presentaciones).build();
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/addPresentacion")
     public Response addPresentacion(DtoPresentacion dtoPresentacion) {
 
         DaoPresentacion dao = new DaoPresentacion();
         PresentacionEntity presentacion = new PresentacionEntity();
 
-        if(presentacion != null) {
+        try{
             presentacion.setDescripcion(dtoPresentacion.getDescripcion());
             presentacion.setEstado(dtoPresentacion.getEstado());
 
             PresentacionEntity resul = dao.insert(presentacion);
             return Response.ok(presentacion).build();
+        } catch (Exception ex) {
+            return Response.status(500).entity(ex.getMessage()).build();
         }
-        else {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
-        }
+
     }
 
     @DELETE
@@ -58,30 +50,35 @@ public class PresentacionServicio {
     public Response deletePresentacion(@PathParam("id") long id) {
 
         DaoPresentacion dao = new DaoPresentacion();
-        PresentacionEntity presentacion = dao.find(id, PresentacionEntity.class);
-        if (presentacion != null) {
+        PresentacionEntity presentacion = null;
+
+        try{
+            presentacion = dao.find(id, PresentacionEntity.class);
             PresentacionEntity resul = dao.delete(presentacion);
             return Response.ok().build();
+        } catch (Exception ex) {
+            return Response.status(500).entity(ex.getMessage()).build();
         }
-        return Response.status(Response.Status.NOT_FOUND).build();
+
     }
 
     @PUT
-    @Path("/updatePresentacion/{id}")
+    @Path("/{id}")
     public Response updatePresentacion(@PathParam("id") long id, DtoPresentacion dtoPresentacion) {
 
         DaoPresentacion dao = new DaoPresentacion();
-        PresentacionEntity presentacion = dao.find(id, PresentacionEntity.class);
+        PresentacionEntity presentacion = null;
 
-        if(presentacion != null) {
+        try {
+            presentacion = dao.find(id, PresentacionEntity.class);
             presentacion.setEstado(dtoPresentacion.getEstado());
             presentacion.setDescripcion(dtoPresentacion.getDescripcion());
 
             PresentacionEntity resul = dao.update(presentacion);
             return Response.ok(presentacion).build();
-        }
-        else {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+
+        } catch (Exception ex) {
+            return Response.status(500).entity(ex.getMessage()).build();
         }
     }
 }

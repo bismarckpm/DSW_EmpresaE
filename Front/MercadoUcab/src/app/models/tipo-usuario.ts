@@ -1,4 +1,4 @@
-export interface TipoUsuario {
+export class TipoUsuario {
 
     id: number;
     descripcion: string;

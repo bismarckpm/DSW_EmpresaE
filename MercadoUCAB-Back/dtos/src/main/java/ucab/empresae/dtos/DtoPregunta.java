@@ -1,5 +1,7 @@
 package ucab.empresae.dtos;
 
+import java.util.List;
+
 public class DtoPregunta extends DtoBase {
 
     //Atributps
@@ -7,8 +9,12 @@ public class DtoPregunta extends DtoBase {
     private String descripcion;
 
     //Relaciones
-    private DtoTipoPregunta dtoTipoPregunta;
-    private DtoSubcategoria dtoSubcategoria;
+    private DtoTipoPregunta tipo;
+    private DtoSubcategoria subcategoria;
+
+    private String[] opciones;  //atributo que se utiliza para crear pregunta con opciones, esto porque jose manuel no pudo mandar arreglo de objetos...
+
+    private List<DtoOpcion> opcionesPregunta; //atributo para generar la encuesta, (preguntas con opciones)
 
     //Constructores
     public DtoPregunta() {
@@ -35,20 +41,28 @@ public class DtoPregunta extends DtoBase {
         this.descripcion = descripcion;
     }
 
-    public DtoTipoPregunta getDtoTipoPregunta() {
-        return dtoTipoPregunta;
+    public DtoTipoPregunta getTipo() {
+        return tipo;
     }
 
-    public void setDtoTipoPregunta(DtoTipoPregunta dtoTipoPregunta) {
-        this.dtoTipoPregunta = dtoTipoPregunta;
+    public void setTipo(DtoTipoPregunta tipo) {
+        this.tipo = tipo;
     }
 
-    public DtoSubcategoria getDtoSubcategoria() {
-        return dtoSubcategoria;
+    public DtoSubcategoria getSubcategoria() {
+        return subcategoria;
     }
 
-    public void setDtoSubcategoria(DtoSubcategoria dtoSubcategoria) {
-        this.dtoSubcategoria = dtoSubcategoria;
+    public void setSubcategoria(DtoSubcategoria subcategoria) {
+        this.subcategoria = subcategoria;
+    }
+
+    public String[] getOpciones() {
+        return opciones;
+    }
+
+    public void setOpciones(String[] opciones) {
+        this.opciones = opciones;
     }
 
 }

@@ -1,33 +1,29 @@
 package ucab.empresae.entidades;
 
+import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.*;
-import java.sql.Date;
-import java.util.List;
+import java.util.Date;
 
 @Entity
 @Table(name = "encuestado", schema = "mercadeoucab")
+@NamedQueries({
+        @NamedQuery(name = "getEncuestadoByUsuario", query = "select e from EncuestadoEntity e where e.usuario = :usuario"),
+        @NamedQuery(name = "getDataMuestraEstudio", query = "select enc from EncuestadoEntity enc where enc.lugar = :lugar and enc.nivelsocioeco = :nivelSocioeconomico")
+})
 public class EncuestadoEntity extends BaseEntity{
-    private String estado;
-    private String primerNombre;
-    private String segundoNombre;
-    private String primerApellido;
-    private String segundoApellido;
-    private Date fechaNacimiento;
-    private List<HijoEntity> hijos;
-    private EstadoCivilEntity edocivil;
-    private NivelAcademicoEntity nivelacademico;
-    private MedioConexionEntity medioconexion;
-    private GeneroEntity genero;
-    private OcupacionEntity ocupacion;
-    private NivelSocioeconomicoEntity nivelsocioeco;
-    private LugarEntity lugar;
-    private List<TelefonoEntity> telefonos;
-    private UsuarioEntity usuario;
-    private List<EstudioEncuestadoEntity> estudioencuestados;
-    private List<RespuestaEntity> respuestas;
+
+    //private List<HijoEntity> hijos;
+    //private List<TelefonoEntity> telefonos;
+    //private List<EstudioEncuestadoEntity> estudioencuestados;
+    // List<RespuestaEntity> respuestas;
+
+    public EncuestadoEntity(){}
+
+    public EncuestadoEntity(long id){super(id);}
 
     @Basic
     @Column(name = "estado")
+    private String estado;
     public String getEstado() {
         return estado;
     }
@@ -38,6 +34,7 @@ public class EncuestadoEntity extends BaseEntity{
 
     @Basic
     @Column(name = "primer_nombre")
+    private String primerNombre;
     public String getPrimerNombre() {
         return primerNombre;
     }
@@ -48,6 +45,7 @@ public class EncuestadoEntity extends BaseEntity{
 
     @Basic
     @Column(name = "segundo_nombre")
+    private String segundoNombre;
     public String getSegundoNombre() {
         return segundoNombre;
     }
@@ -58,6 +56,7 @@ public class EncuestadoEntity extends BaseEntity{
 
     @Basic
     @Column(name = "primer_apellido")
+    private String primerApellido;
     public String getPrimerApellido() {
         return primerApellido;
     }
@@ -68,6 +67,7 @@ public class EncuestadoEntity extends BaseEntity{
 
     @Basic
     @Column(name = "segundo_apellido")
+    private String segundoApellido;
     public String getSegundoApellido() {
         return segundoApellido;
     }
@@ -78,6 +78,8 @@ public class EncuestadoEntity extends BaseEntity{
 
     @Basic
     @Column(name = "fecha_nacimiento")
+    @JsonbDateFormat(value = "yyyy-MM-dd")
+    private Date fechaNacimiento;
     public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
@@ -87,27 +89,20 @@ public class EncuestadoEntity extends BaseEntity{
     }
 
 
-    @OneToMany(mappedBy = "encuestado")
-    public List<HijoEntity> getHijos() {
-        return hijos;
-    }
-
-    public void setHijos(List<HijoEntity> hijos) {
-        this.hijos = hijos;
-    }
-
     @ManyToOne
     @JoinColumn(name = "id_civil", referencedColumnName = "id", nullable = false)
-    public EstadoCivilEntity getEdocivil() {
-        return edocivil;
+    private EstadoCivilEntity estadoCivil;
+    public EstadoCivilEntity getEstadoCivil() {
+        return estadoCivil;
     }
 
-    public void setEdocivil(EstadoCivilEntity edocivil) {
-        this.edocivil = edocivil;
+    public void setEdocivil(EstadoCivilEntity estadoCivil) {
+        this.estadoCivil = estadoCivil;
     }
 
     @ManyToOne
     @JoinColumn(name = "id_nivel_academico", referencedColumnName = "id", nullable = false)
+    private NivelAcademicoEntity nivelacademico;
     public NivelAcademicoEntity getNivelacademico() {
         return nivelacademico;
     }
@@ -118,6 +113,7 @@ public class EncuestadoEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_conexion", referencedColumnName = "id", nullable = false)
+    private MedioConexionEntity medioconexion;
     public MedioConexionEntity getMedioconexion() {
         return medioconexion;
     }
@@ -128,6 +124,7 @@ public class EncuestadoEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_genero", referencedColumnName = "id", nullable = false)
+    private GeneroEntity genero;
     public GeneroEntity getGenero() {
         return genero;
     }
@@ -138,6 +135,7 @@ public class EncuestadoEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_ocupacion", referencedColumnName = "id", nullable = false)
+    private OcupacionEntity ocupacion;
     public OcupacionEntity getOcupacion() {
         return ocupacion;
     }
@@ -148,6 +146,7 @@ public class EncuestadoEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_nivel_socioeco", referencedColumnName = "id", nullable = false)
+    private NivelSocioeconomicoEntity nivelsocioeco;
     public NivelSocioeconomicoEntity getNivelsocioeco() {
         return nivelsocioeco;
     }
@@ -158,12 +157,35 @@ public class EncuestadoEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_lugar", referencedColumnName = "id", nullable = false)
+    private LugarEntity lugar;
     public LugarEntity getLugar() {
         return lugar;
     }
 
     public void setLugar(LugarEntity lugar) {
         this.lugar = lugar;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id", nullable = false)
+    private UsuarioEntity usuario;
+    public UsuarioEntity getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
+    }
+
+
+    /*
+    @OneToMany(mappedBy = "encuestado")
+    public List<HijoEntity> getHijos() {
+        return hijos;
+    }
+
+    public void setHijos(List<HijoEntity> hijos) {
+        this.hijos = hijos;
     }
 
     @OneToMany(mappedBy = "encuestado")
@@ -175,15 +197,6 @@ public class EncuestadoEntity extends BaseEntity{
         this.telefonos = telefonos;
     }
 
-    @OneToOne
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id", nullable = false)
-    public UsuarioEntity getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(UsuarioEntity usuario) {
-        this.usuario = usuario;
-    }
 
     @OneToMany(mappedBy = "encuestado")
     public List<EstudioEncuestadoEntity> getEstudioencuestados() {
@@ -202,4 +215,5 @@ public class EncuestadoEntity extends BaseEntity{
     public void setRespuestas(List<RespuestaEntity> respuestas) {
         this.respuestas = respuestas;
     }
+     */
 }

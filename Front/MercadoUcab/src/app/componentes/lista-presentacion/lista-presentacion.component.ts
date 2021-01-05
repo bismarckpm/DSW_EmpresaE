@@ -10,7 +10,7 @@ import {PresentacionService} from '../../services/presentacion.service';
   styleUrls: ['./lista-presentacion.component.css']
 })
 export class ListaPresentacionComponent implements OnInit {
- 
+
 
   presentaciones: Presentacion[] = [];
   _id=this.actRoute.snapshot.params['_id'];
@@ -20,7 +20,7 @@ export class ListaPresentacionComponent implements OnInit {
     //Declaracion para las Validaciones
     formPresentacion: FormGroup;
     namePattern: any = /^[A-Za-z0-9\s]+$/;
- 
+
   constructor(
     public presentacionService:PresentacionService,
     public actRoute: ActivatedRoute,

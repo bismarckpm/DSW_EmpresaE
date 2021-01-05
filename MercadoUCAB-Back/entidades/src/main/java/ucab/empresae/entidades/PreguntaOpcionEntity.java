@@ -5,11 +5,12 @@ import java.util.List;
 
 @Entity
 @Table(name = "pregunta_opcion", schema = "mercadeoucab")
+@NamedQueries({
+        @NamedQuery(name = "getPreguntaOpcion", query = "select pregopc from PreguntaOpcionEntity pregopc where pregopc.pregunta._id = :id_pregunta and pregopc.opcion._id = :id_opcion")
+})
 public class PreguntaOpcionEntity extends BaseEntity{
     private String estado;
-    private PreguntaEntity pregunta;
-    private OpcionEntity opcion;
-    private List<RespuestaEntity> respuestas;
+    //private List<RespuestaEntity> respuestas;
 
     @Basic
     @Column(name = "estado")
@@ -23,6 +24,7 @@ public class PreguntaOpcionEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_pregunta", referencedColumnName = "id", nullable = false)
+    private PreguntaEntity pregunta;
     public PreguntaEntity getPregunta() {
         return pregunta;
     }
@@ -33,6 +35,7 @@ public class PreguntaOpcionEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "id_opcion", referencedColumnName = "id", nullable = false)
+    private OpcionEntity opcion;
     public OpcionEntity getOpcion() {
         return opcion;
     }
@@ -41,6 +44,7 @@ public class PreguntaOpcionEntity extends BaseEntity{
         this.opcion = opcion;
     }
 
+    /*
     @OneToMany(mappedBy = "preguntaOpcion")
     public List<RespuestaEntity> getRespuestas() {
         return respuestas;
@@ -49,4 +53,6 @@ public class PreguntaOpcionEntity extends BaseEntity{
     public void setRespuestas(List<RespuestaEntity> respuestas) {
         this.respuestas = respuestas;
     }
+    */
+
 }

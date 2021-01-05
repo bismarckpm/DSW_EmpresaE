@@ -1,10 +1,10 @@
 import { Opcion } from './opcion';
 import { Pregunta } from './pregunta';
 
-export interface PreguntaOpcion {
+export class PreguntaOpcion {
     _id:number;
     estado:string;
-    dtoPregunta:Pregunta;
-    dtoOpcion:Opcion;   
+    pregunta:Pregunta;
+    opcion:Opcion;
 
 }

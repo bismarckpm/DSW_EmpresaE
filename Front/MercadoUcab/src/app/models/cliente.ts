@@ -1,13 +1,14 @@
 import { Lugar } from './Lugar';
 import { Usuario } from './usuario';
 
-export interface Cliente {
+export class Cliente {
     _id: number;
     estado: string;
     razonSocial: string;
     rif: number;
+    // telefono: Telefono;
 
-    dtoLugar:Lugar;
-    dtoUsuairo:Usuario;
+    lugar: Lugar;
+    usuario: Usuario;
 
 }

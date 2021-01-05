@@ -48,8 +48,6 @@
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <div class="row">
                           <div class="col-md-5 mb-3">
                             <label >Estado</label>
                             <select class="custom-select d-block w-100"  [(ngModel)]="presentacionData.estado" formControlName="estadopresentacion" name="estado">
@@ -62,13 +60,12 @@
                                 Este campo es obligatorio
                               </div>
                             </div>
-                    
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-success" (click)="updatePresentacion()" data-dismiss="modal">Guardar</button>
-                              </div>
                           </div>
                         </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                              <button type="submit" class="btn btn-success" (click)="updatePresentacion()" data-dismiss="modal">Guardar</button>
+                          </div>
                       </form>
                     </div><!-- cierre del cuerpo modal -->
                   </div>

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { parse } from 'path';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-cambiar-clave',
@@ -6,10 +9,33 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cambiar-clave.component.css']
 })
 export class CambiarClaveComponent implements OnInit {
+  
+  @Input() usuario={ claveNueva:"" };
+  @Input() auxUsuario={ claveNueva:"" };
 
-  constructor() { }
+  constructor(
+    public usuarioService: UsuarioService,
+    public router:Router
+
+  ) { }
 
   ngOnInit(): void {
   }
+  
+
+  CambioDeClave(){
+    
+    this.usuarioService.Logear(this.usuario).subscribe(data=>{
+        if(data[0].respuesta=="Cambio Satisfactorio"){
+          window.alert("Cambio Realizado");
+          this.router.navigate(['/Login']);
+        }else{
+          window.alert("Ups.. No te encontramos, Por favor rivisa tu correo o Registrate");
+        }
+    })
+
+  }
+
+
 
 }

@@ -9,8 +9,8 @@ import {MedioConexion} from '../models/medio-conexion';
   providedIn: 'root'
 })
 export class MedioConexionService {
-  apiurl = 'http://localhost:3000';
-
+  apiurl = 'http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+  //apiurl = 'http://localhost:3000';
   constructor(private http: HttpClient) { }
 // Http Options
   httpOptions = {
@@ -21,7 +21,7 @@ export class MedioConexionService {
 
 ///////// Metodos para ejecutar//////////////
   getMediosConexion(): Observable<MedioConexion[]>{
-    return this.http.get<MedioConexion[]>(this.apiurl + '/MedioConexion')
+    return this.http.get<MedioConexion[]>(this.apiurl + '/medioconexion')
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -29,7 +29,7 @@ export class MedioConexionService {
   }
 
   getMedioConexion(id): Observable<MedioConexion[]>{
-    return this.http.get<MedioConexion[]>(this.apiurl + '/MedioConexion/' + id)
+    return this.http.get<MedioConexion[]>(this.apiurl + '/medioconexion/' + id)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -37,7 +37,7 @@ export class MedioConexionService {
   }
 
   createMedioConexion(MedioConexion): Observable<MedioConexion[]>{
-    return this.http.post<MedioConexion[]>(this.apiurl + '/MedioConexion', JSON.stringify(MedioConexion), this.httpOptions)
+    return this.http.post<MedioConexion[]>(this.apiurl + '/medioconexion', JSON.stringify(MedioConexion), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -45,7 +45,7 @@ export class MedioConexionService {
   }
 
   updateMedioConexion(id, MedioConexion): Observable<MedioConexion[]>{
-    return this.http.put<MedioConexion[]>(this.apiurl + '/MedioConexion/' + id, JSON.stringify(MedioConexion), this.httpOptions)
+    return this.http.put<MedioConexion[]>(this.apiurl + '/medioconexion/' + id, JSON.stringify(MedioConexion), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -53,7 +53,7 @@ export class MedioConexionService {
   }
 
   deleteMedioConexion(id){
-    return this.http.delete<MedioConexion[]>(this.apiurl + '/MedioConexion/' + id, this.httpOptions)
+    return this.http.delete<MedioConexion[]>(this.apiurl + '/medioconexion/' + id, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)

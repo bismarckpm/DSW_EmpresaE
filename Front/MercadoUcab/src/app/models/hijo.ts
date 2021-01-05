@@ -1,10 +1,10 @@
 import { Encuestado } from './encuestado';
 import { Genero } from './genero';
 
-export interface Hijo {
+export class Hijo {
     _id:number;
     estado:string;
     fechaNacimiento:string;
-    dtoEncuestado:Encuestado;
-    dtoGenero:Genero;
+    encuestado:Encuestado;
+    genero:Genero;
 }

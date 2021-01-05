@@ -1,11 +1,11 @@
 import { Categoria } from './categoria';
 
 
-export interface Subcategoria {
+export class Subcategoria {
     _id: number;
     nombre:string;
     estado:string;
-    dtoCategoria: Categoria;
+    categoria: Categoria;
 
 }
 

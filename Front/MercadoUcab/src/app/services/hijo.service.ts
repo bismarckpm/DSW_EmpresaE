@@ -10,19 +10,20 @@ import { Hijo } from '../models/hijo';
 export class HijoService {
 
    //Definimos el url del api
-   apiurl='http://localhost:3000';
-   
+   //apiurl='http://localhost:3000';
+   apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+
   constructor(private http:HttpClient) { }
 // Http Options
   httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
   })
-} 
+}
 
 ///////// Metodos para ejecutar//////////////
 getHijos():Observable<Hijo[]>{
-  return this.http.get<Hijo[]>(this.apiurl+'/Hijo')
+  return this.http.get<Hijo[]>(this.apiurl+'/hijo')
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -30,7 +31,7 @@ getHijos():Observable<Hijo[]>{
 }
 
 getHijo(id):Observable<Hijo[]>{
-  return this.http.get<Hijo[]>(this.apiurl+'/Hijo/'+id)
+  return this.http.get<Hijo[]>(this.apiurl+'/hijo/'+id)
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -38,7 +39,7 @@ getHijo(id):Observable<Hijo[]>{
 }
 
 createHijo(Hijo):Observable<Hijo[]>{
-  return this.http.post<Hijo[]>(this.apiurl+'/Hijo',JSON.stringify(Hijo), this.httpOptions)
+  return this.http.post<Hijo[]>(this.apiurl+'/hijo',JSON.stringify(Hijo), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -46,7 +47,7 @@ createHijo(Hijo):Observable<Hijo[]>{
 }
 
 updateHijo(id,Hijo):Observable<Hijo[]>{
-  return this.http.put<Hijo[]>(this.apiurl+'/Hijo/'+id,JSON.stringify(Hijo), this.httpOptions)
+  return this.http.put<Hijo[]>(this.apiurl+'/hijo/'+id,JSON.stringify(Hijo), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -54,7 +55,7 @@ updateHijo(id,Hijo):Observable<Hijo[]>{
 }
 
 deleteHijo(id){
-  return this.http.delete<Hijo[]>(this.apiurl + '/Hijo/' + id, this.httpOptions)
+  return this.http.delete<Hijo[]>(this.apiurl + '/hijo/' + id, this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)

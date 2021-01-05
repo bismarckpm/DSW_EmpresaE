@@ -7,21 +7,24 @@ import { NivelSocioEconomico } from './nivel-socio-economico';
 import { Ocupacion } from './ocupacion';
 import { Usuario } from './usuario';
 
-export interface Encuestado {
+export class Encuestado {
    _id:number;
    primerNombre:string;
    segundoNombre:string;
-   primerApeliido:string;
-   segundoApeliido:string;
+   primerApellido:string;
+   segundoApellido:string;
    fechaNacimiento:string;
-   
-   dtoEstado:EstadoCivil;
-   dtoNivelAcademico:NivelAcademico;
-   dtoMedioConexion:MedioConexion;
-   dtoGenero:Genero;
-   dtoOcupacion:Ocupacion;
-   dtoNivelSocioeconomico:NivelSocioEconomico;
-   dtoLugar:Lugar;
-   dtoUsuario:Usuario;
+   telefono: string;
+   estado: string;
+
+   estadoCivil:EstadoCivil;
+   nivelacademico:NivelAcademico;
+   nivelAcademico:NivelAcademico;
+   medioConexion:MedioConexion;
+   genero:Genero;
+   ocupacion:Ocupacion;
+   nivelSocioEconomico:NivelSocioEconomico;
+   lugar:Lugar;
+   usuario:Usuario;
 
 }

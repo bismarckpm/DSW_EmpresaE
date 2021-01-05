@@ -1,7 +1,6 @@
 package ucab.empresae.entidades;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "categoria", schema = "mercadeoucab")
@@ -28,6 +27,14 @@ public class CategoriaEntity extends BaseEntity{
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public CategoriaEntity(long id) {
+        super(id);
+    }
+
+    public CategoriaEntity() {
+
     }
 
     /*@OneToMany(mappedBy = "categoria")

@@ -1,11 +1,11 @@
 import { Encuestado } from './encuestado';
 import { Estudio } from './estudio';
 
-export interface EstudioEncuestado {
+export class EstudioEncuestado {
     _id:number;
     estado:string;
     fechaRealizacion:string;
-    dtoEncuestado:Encuestado;
-    dtoEstudio:Estudio;
-    
+    encuestado:Encuestado;
+    estudio:Estudio;
+
 }

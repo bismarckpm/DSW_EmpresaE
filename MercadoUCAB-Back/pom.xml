@@ -22,7 +22,6 @@
         <module>daos</module>
         <module>servicio</module>
         <module>excepciones</module>
-        <module>directorioactivo</module>
     </modules>
 
     <dependencies>

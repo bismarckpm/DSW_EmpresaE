@@ -1,20 +1,57 @@
-<div class="olvido ">
-    <form class="container">
+<div class="container mt-4">
+  <form [formGroup]="formRecuperacion" class="form-signin">
+
+    <div class="text-center mb-4">
+      <h1 class="h3 mb-3 font-weight-normal">Recuperacion de Clave</h1>
+      <p>Para la recuperacion necesitamos que ingrese su Username para poder comprobar que esta registrado en el Sistema de MercadeoUCAB</p>
+    </div>
+    <!-- arreglar lo rojo de los inputs -->
+    <div class="form-label-group">
+      <input class="form-control" [(ngModel)]="usuario.username" formControlName="userCorreo">
+      <div *ngIf="userCorreo.invalid && (userCorreo.dirty || userCorreo.touched)" class="alert alert-danger">
+        <div *ngIf="userCorreo.errors.required">
+          Este campo es obligatorio
+        </div>
+        <div *ngIf="userCorreo.errors.pattern">
+          Introduzca un nombre valido
+        </div>
+      </div>
+      <label>Username</label>
+    </div>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="confirmarCorreo()"  [routerLink]="['/login']">Confirmar</button>
+    <!-- centrar estas dos cosas -->
+    <p class="mt-5 mb-3 text-muted text-center">&copy; 2020</p>
+  </form>
+</div>
+
+
+
+<!--<div class="olvido ">
+    <form [formGroup]="formRecuperacion" class="container">
+
 
       <div class="form-row">
         <div class="form-group col-md-6">
-          <p style="font-style: italic; font-size: medium; color: aliceblue;"> Para la recuperacion necesitamos que ingrese su correo para poder comprobar que estas registrado en el Sistema de MERCADOUCAB</p>
+          <p style="font-style: italic; font-size: medium; color: aliceblue;"> Para la recuperacion necesitamos que ingrese su Username para poder comprobar que esta registrado en el Sistema de MercadeoUCAB</p>
         </div>
       </div>
-  
-      <div class="form-row">
+
+      <div class="form-row ">
         <div class="form-group col-md-3">
-          <label for="inputEmail4" style="color: azure;">Email</label>
-          <input type="email" class="form-control"  name="email">
+          <label for="inputEmail4" style="color: azure;">Username</label>
+          <input type="email"  [(ngModel)]="usuario.username"  formControlName="userCorreo"class="form-control"  name="email">
+          <div *ngIf="userCorreo.invalid && (userCorreo.dirty || userCorreo.touched)" class="alert alert-danger">
+            <div *ngIf="userCorreo.errors.required">
+              Este campo es obligatorio
+            </div>
+            <div *ngIf="userCorreo.errors.pattern">
+              Introduzca un nombre valido
+            </div>
+          </div>
         </div>
-      </div>  
-  
-      <button (click)="confirmarCorreo()" type="submit" class="btn btn-light">confirmar</button>   
+      </div>
+      <button (click)="confirmarCorreo()" type="submit" class="btn btn-light" [routerLink]="['/login']">Confirmar</button>
+
     </form>
-  </div>
-  
+  </div> -->

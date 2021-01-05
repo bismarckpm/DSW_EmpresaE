@@ -10,19 +10,20 @@ import { Opcion } from '../models/opcion';
 export class OpcionService {
 
    //Definimos el url del api
-   apiurl='http://localhost:3000';
-   
+  //apiurl='http://localhost:3000';
+  apiurl = 'http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+
   constructor(private http:HttpClient) { }
 // Http Options
   httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
   })
-} 
+}
 
 ///////// Metodos para ejecutar//////////////
 getOpcions():Observable<Opcion[]>{
-  return this.http.get<Opcion[]>(this.apiurl+'/Opcion')
+  return this.http.get<Opcion[]>(this.apiurl+'/opcion')
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -30,7 +31,7 @@ getOpcions():Observable<Opcion[]>{
 }
 
 getOpcion(id):Observable<Opcion[]>{
-  return this.http.get<Opcion[]>(this.apiurl+'/Opcion/'+id)
+  return this.http.get<Opcion[]>(this.apiurl+'/opcion/'+id)
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -38,7 +39,7 @@ getOpcion(id):Observable<Opcion[]>{
 }
 
 createOpcion(Opcion):Observable<Opcion[]>{
-  return this.http.post<Opcion[]>(this.apiurl+'/Opcion',JSON.stringify(Opcion), this.httpOptions)
+  return this.http.post<Opcion[]>(this.apiurl+'/opcion',JSON.stringify(Opcion), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -46,7 +47,7 @@ createOpcion(Opcion):Observable<Opcion[]>{
 }
 
 updateOpcion(id,Opcion):Observable<Opcion[]>{
-  return this.http.put<Opcion[]>(this.apiurl+'/Opcion/'+id,JSON.stringify(Opcion), this.httpOptions)
+  return this.http.put<Opcion[]>(this.apiurl+'/opcion/'+id,JSON.stringify(Opcion), this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)
@@ -54,7 +55,7 @@ updateOpcion(id,Opcion):Observable<Opcion[]>{
 }
 
 deleteOpcion(id){
-  return this.http.delete<Opcion[]>(this.apiurl + '/Opcion/' + id, this.httpOptions)
+  return this.http.delete<Opcion[]>(this.apiurl + '/opcion/' + id, this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)

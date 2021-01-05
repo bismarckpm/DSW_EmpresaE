@@ -1,0 +1,84 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">Usuario</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <form [formGroup]="formUsuario">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="username">Username</label>
+            <input type="text" [(ngModel)]="usuario.username" class="form-control" id="username" placeholder="" formControlName="usernameUsuario" name="username" value="">
+            <div *ngIf="usernameUsuario.invalid && (usernameUsuario.dirty || usernameUsuario.touched)" class="alert alert-danger">
+              <div *ngIf="usernameUsuario.errors.required">
+                Este campo es obligatorio
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="clave">Clave</label>
+            <input type="password" [(ngModel)]="usuario.clave" class="form-control" id="clave" placeholder="" formControlName="claveUsuario" name="clave" value="">
+            <div *ngIf="claveUsuario.invalid && (claveUsuario.dirty || claveUsuario.touched)" class="alert alert-danger">
+              <div *ngIf="claveUsuario.errors.required">
+                Este campo es obligatorio
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 mb-3">
+            <label for="correo">Correo Electronico</label>
+            <input type="text" [(ngModel)]="usuario.correoElectronico" class="form-control" id="correo" placeholder="" formControlName="correoElectronicoUsuario" name="correoElectronico" value="">
+            <div *ngIf="correoElectronicoUsuario.invalid && (correoElectronicoUsuario.dirty || correoElectronicoUsuario.touched)" class="alert alert-danger">
+              <div *ngIf="correoElectronicoUsuario.errors.required">
+                Este campo es obligatorio
+              </div>
+              <div *ngIf="correoElectronicoUsuario.errors.pattern">
+                Introduzca un formato valido
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="estado">Estado</label>
+            <select class="custom-select d-block w-100" [(ngModel)]="usuario.estado" formControlName="estadoUsuario" id="estado" name="estado">
+              <option value="">Choose...</option>
+              <option value="a">Activo</option>
+              <option value="i">Inactivo</option>
+            </select>
+            <div *ngIf="estadoUsuario.invalid && (estadoUsuario.dirty || estadoUsuario.touched)" class="alert alert-danger">
+              <div *ngIf="estadoUsuario.errors.required">
+                Este campo es obligatorio
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="rol">Rol</label>
+            <select class="custom-select d-block w-100" [(ngModel)]="usuario.tipoUsuario.descripcion" formControlName="descripcionTipoUsuario" id="rol" name="descripcion">
+              <option value="">Choose...</option>
+              <option value="Administrador">Administrador</option>
+              <option value="Analista">Analista</option>
+            </select>
+            <div *ngIf="descripcionTipoUsuario.invalid && (descripcionTipoUsuario.dirty || descripcionTipoUsuario.touched)" class="alert alert-danger">
+              <div *ngIf="descripcionTipoUsuario.errors.required">
+                Este campo es obligatorio
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+      <button type="submit" class="btn btn-primary" (click)="addUsuario(usuario)" data-dismiss="modal">Guardar</button>
+
+    </div>
+  </div>
+</div>

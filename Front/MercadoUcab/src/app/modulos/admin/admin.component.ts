@@ -14,18 +14,17 @@ export class AdminComponent implements OnInit {
     nombre: ''
   };
 
-  accion = 1;
 
   constructor(
     private ruta: ActivatedRoute,
     private servicio: AdminService,
-    private rutaActtual: Router
+    private rutaActual: Router
   ) {
     this.ruta.params.subscribe(params => {
       console.log(params);
       this.seccion = this.servicio.getSeccion(params.id);
     });
-    console.log(this.rutaActtual.url);
+    console.log(this.rutaActual.url);
   }
 
   ngOnInit(): void {

@@ -16,20 +16,20 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class ListaSubcategoriaComponent implements OnInit {
 
-    //Declaracion de las varibales del componente que se usa
-  Subcategoria: Subcategoria[]=[];
-  _id = this.actRoute.snapshot.params['_id'];
-  @Input()subcategoriaData={ _id:0, nombre:'',estado:'', dtoCategoria:{_id:0}};
-  categoria:any;
+    // Declaracion de las varibales del componente que se usa
+  Subcategoria: Subcategoria[] = [];
+  _id = this.actRoute.snapshot.params._id;
+  @Input()subcategoriaData = { _id: 0, nombre: '', estado: '', categoria: {_id: 0}};
+  categoria: any;
 
-  //Declaracion para las Validaciones
+  // Declaracion para las Validaciones
   formSubcategoria: FormGroup;
   namePattern: any = /^[A-Za-z0-9\s]+$/;
 
 
   constructor(
     public subcategoriaService: SubcategoriaService,
-    public categoriaService :CategoriaService,
+    public categoriaService: CategoriaService,
     public actRoute: ActivatedRoute,
     public router: Router,
     private formBuilder: FormBuilder
@@ -40,36 +40,36 @@ export class ListaSubcategoriaComponent implements OnInit {
 
   }
 
-  loadSubcategoria():void {
+  loadSubcategoria(): void {
     this.subcategoriaService.getsubcategorias().subscribe(data => {
       this.Subcategoria = data;
-    })
+    });
   }
 
   deleteSubcategoria(id) {
 
       this.subcategoriaService.deletesubcategoria(id).subscribe(data => {
-        this.loadSubcategoria()
-      })
-
+        this.loadSubcategoria();
+      });
+      location.reload();
   }
 
   updateSubcategoria(){
      this.subcategoriaService.updatesubcategoria(this.subcategoriaData._id, this.subcategoriaData).subscribe(data => {
-      })
-
+      });
+     location.reload();
   }
 
   editar(subcategoria){
     this.addcategoria();
-    this.subcategoriaData= subcategoria;
+    this.subcategoriaData = subcategoria;
   }
 
-  ///Esto es para mostrar en los drops doww
+  /// Esto es para mostrar en los drops doww
   addcategoria(){
     this.categoriaService.getCategorias().subscribe((Categorias: {}) => {
-      this.categoria= Categorias;
-    })
+      this.categoria = Categorias;
+    });
   }
 
    /// Validacion de Datos

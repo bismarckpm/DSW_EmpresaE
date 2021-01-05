@@ -6,8 +6,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Encuestado} from '../../../models/encuestado';
 import * as Highcharts from 'highcharts';
 import highcharts3D from 'highcharts/highcharts-3d.src';
+// @ts-ignore
 highcharts3D( Highcharts );
-
 
 @Component({
   selector: 'app-lista-estudios-analista',
@@ -22,13 +22,15 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
   estudios: Estudio[] = [];
   encuestados: Encuestado[] = [];
   _id = this.actRoute.snapshot.params._id;
-  @Input() analistaData = {_id: 0, comentarioAnalista: '', estado: ''};
+  @Input() analistaData = {_id: 0, comentarioAnalista: '', estado: '', fechaFin: ''};
   formEstudioAnalista: FormGroup;
 
   infoGraficos: any = [];
   chartOptions: Highcharts.Options[] = [];
   highcharts = Highcharts;
 
+  patronFechaEstudio: any = /^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/
+  get fechaFinEstudio(){return this.formEstudioAnalista.get('fechaFinEstudio'); }
 
 
   constructor(
@@ -141,6 +143,7 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
     this.formEstudioAnalista = this.formBuilder.group({
       comentarioAnalistaEstudio: ['', [Validators.required, Validators.maxLength(100)]],
       estadoEstudioAnalista: ['', Validators.required],
+      fechaFinEstudio: ['', [ Validators.pattern(this.patronFechaEstudio)]],
     });
   }
 }

@@ -20,7 +20,7 @@ public class TipoServicio_Test {
     //Prueba Unitaria del consultar tipos
     public void getTipoTest(){
         TipoServicio servicio = new TipoServicio();
-        Response resultado = servicio.getTipo(1);
+        Response resultado = servicio.getTipo(9);
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 
@@ -44,7 +44,7 @@ public class TipoServicio_Test {
         dtoTipo.setNombre("pruebaUpdate");
         dtoTipo.setDescripcion("pruebaUpdate");
         dtoTipo.setEstado("A");
-        Response resultado = servicio.updateTipo(1, dtoTipo);
+        Response resultado = servicio.updateTipo(9, dtoTipo);
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 
@@ -52,7 +52,7 @@ public class TipoServicio_Test {
     //Prueba Unitaria eliminacion de tipos
     public void deleteTipoTest(){
         TipoServicio servicio = new TipoServicio();
-        Response resultado = servicio.deleteTipo(1);
+        Response resultado = servicio.deleteTipo(9);
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 }

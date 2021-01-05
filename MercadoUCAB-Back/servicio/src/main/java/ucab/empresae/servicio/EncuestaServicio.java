@@ -3,8 +3,12 @@ package ucab.empresae.servicio;
 import ucab.empresae.daos.*;
 import ucab.empresae.dtos.*;
 import ucab.empresae.entidades.*;
+import ucab.empresae.excepciones.EncuestaException;
 import ucab.empresae.excepciones.PruebaExcepcion;
 
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.websocket.EncodeException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -23,10 +27,14 @@ public class EncuestaServicio extends AplicacionBase{
      * Metodo que recibe un id de estudio para borrar las encuestas(n a n) asociadas a ese estudio
      * @param id identificador de estudio que se utiliza para obtener las encuestas asociadas a ese estudio
      */
-    public void borrarPreguntasEncuesta(long id) {
+    public void borrarPreguntasEncuesta(long id) throws EncuestaException {
         DaoEncuesta daoEncuesta = new DaoEncuesta();
 
         List<EncuestaEntity> preguntasEncuesta = daoEncuesta.getPreguntasEncuesta(id);
+
+        if (preguntasEncuesta == null){
+            throw new EncuestaException("El estudio seleccionado no tiene encuestas asociadas");
+        }
 
         for(EncuestaEntity relacionPreguntaEstudio : preguntasEncuesta){
             EncuestaEntity relacionEliminar = daoEncuesta.find(relacionPreguntaEstudio.get_id(), EncuestaEntity.class);
@@ -64,7 +72,7 @@ public class EncuestaServicio extends AplicacionBase{
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addEncuesta(DtoEncuesta dtoEncuesta) throws ParseException {
+    public Response addEncuesta(DtoEncuesta dtoEncuesta){
 
         DaoEncuesta dao = new DaoEncuesta();
         DaoEstudio daoEstudio = new DaoEstudio();
@@ -108,16 +116,16 @@ public class EncuestaServicio extends AplicacionBase{
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateEncuesta(DtoEncuesta dtoEncuesta) throws ParseException {
+    public Response updateEncuesta(DtoEncuesta dtoEncuesta){
 
         DaoEncuesta dao = new DaoEncuesta();
         DaoEstudio daoEstudio = new DaoEstudio();
         DaoPregunta daoPregunta = new DaoPregunta();
 
-        EstudioEntity estudio = daoEstudio.find(dtoEncuesta.getEstudio().get_id(),EstudioEntity.class);
-        this.borrarPreguntasEncuesta(estudio.get_id());
-
         try {
+            EstudioEntity estudio = daoEstudio.find(dtoEncuesta.getEstudio().get_id(),EstudioEntity.class);
+            this.borrarPreguntasEncuesta(estudio.get_id());
+
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             List<DtoPregunta> preguntas = dtoEncuesta.getPreguntas();
 
@@ -138,7 +146,12 @@ public class EncuestaServicio extends AplicacionBase{
             }
 
             return Response.ok().entity(preguntas).build();
-        } catch (Exception ex) {
+        }catch (EncuestaException ex) {
+            JsonObject excepcion = Json.createObjectBuilder()
+                    .add("mensaje", ex.getMessage()).build();
+            return  Response.status(500).entity(excepcion).build();
+        }
+        catch (Exception ex) {
             return Response.status(500).entity(ex.getMessage()).build();
         }
 
@@ -162,7 +175,12 @@ public class EncuestaServicio extends AplicacionBase{
             estudio = daoEstudio.find(id, EstudioEntity.class);
             this.borrarPreguntasEncuesta(id);
             return Response.ok().build();
-        } catch (Exception ex) {
+        }catch (EncuestaException ex) {
+            JsonObject excepcion = Json.createObjectBuilder()
+                    .add("mensaje", ex.getMessage()).build();
+            return  Response.status(500).entity(excepcion).build();
+        }
+        catch (Exception ex) {
             return Response.status(500).entity(ex.getMessage()).build();
         }
 
@@ -179,7 +197,7 @@ public class EncuestaServicio extends AplicacionBase{
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response respuestaEncuesta(DtoRespuestaAux dtoRespuestaAux) {
-                                      //DtoRespuestaAux posee un array de dtoRespuesta, un id usuario, y un id estudio
+        //DtoRespuestaAux posee un array de dtoRespuesta, un id usuario, y un id estudio
 
         try {
             //SE BUSCA AL ENCUESTADO MEDIANTE EL ID DE USUARIO SUMINISTRADO
@@ -236,20 +254,4 @@ public class EncuestaServicio extends AplicacionBase{
         }
     }
 
-    /* METODO PARA PROBAR SI SE OBTIENEN LAS PREGUNTAS CON SUS OPCIONES
-    @GET
-    @Path("/preguntaOpcion")
-    @Produces(value = MediaType.APPLICATION_JSON)
-    public Response getPreguntaOpcion() {
-        PreguntaOpcionEntity preguntaOpcion = null;
-        try {
-            DaoPreguntaOpcion daoPreguntaOpcion = new DaoPreguntaOpcion();
-            preguntaOpcion = daoPreguntaOpcion.getPreguntaOpcion(37,2);
-
-        } catch (Exception ex) {
-            String problema = ex.getMessage();
-        }
-        return Response.ok(preguntaOpcion).build();
-    }
-    */
 }

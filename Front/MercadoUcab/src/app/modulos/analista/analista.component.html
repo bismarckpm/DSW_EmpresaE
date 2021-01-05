@@ -16,6 +16,7 @@
         </div>
       </div>
       <div [ngSwitch]="seccion">
+        <div *ngSwitchCase="'Inicio'"><app-main-admin></app-main-admin></div>
         <div *ngSwitchCase="'Perfil'"><app-perfil></app-perfil></div>
         <div *ngSwitchCase="'Estudios'"><app-lista-estudios-analista></app-lista-estudios-analista></div>
       </div>

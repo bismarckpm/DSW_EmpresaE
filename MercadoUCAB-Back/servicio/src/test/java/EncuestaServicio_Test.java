@@ -23,18 +23,18 @@ public class EncuestaServicio_Test {
         DtoEncuesta dtoEncuesta = new DtoEncuesta();
         List<DtoPregunta> preguntas = new ArrayList<DtoPregunta>();
 
-        DtoPregunta pregunta = new DtoPregunta(25);
+        DtoPregunta pregunta = new DtoPregunta(27);
         preguntas.add(pregunta);
-        DtoPregunta pregunta2 = new DtoPregunta(26);
+        DtoPregunta pregunta2 = new DtoPregunta(28);
         preguntas.add(pregunta2);
-        DtoPregunta pregunta3 = new DtoPregunta(27);
+        DtoPregunta pregunta3 = new DtoPregunta(29);
         preguntas.add(pregunta3);
         dtoEncuesta.setPreguntas(preguntas);
 
         dtoEncuesta.setFechaInicio("2020-05-05");
         dtoEncuesta.setFechaFin("2020-05-08");
         dtoEncuesta.setEstado("a");
-        DtoEstudio dtoEstudio = new DtoEstudio(3);
+        DtoEstudio dtoEstudio = new DtoEstudio(14);
         dtoEncuesta.setEstudio(dtoEstudio);
 
         Response respuesta = servicio.addEncuesta(dtoEncuesta);
@@ -45,7 +45,7 @@ public class EncuestaServicio_Test {
     public void deleteEncuestaTest() throws Exception
     {
         EncuestaServicio servicio = new EncuestaServicio();
-        Response respuesta = servicio.deletePreguntasEncuesta(3);
+        Response respuesta = servicio.deletePreguntasEncuesta(14);
         Assert.assertEquals(respuesta.getStatus(), Response.Status.OK.getStatusCode());
     }
 }

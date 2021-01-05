@@ -2,7 +2,7 @@
     <div class="modal-content">
 
         <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">encuesta</h5>
+            <h5 class="modal-title" id="staticBackdropLabel">Encuesta</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="auxIterador = []">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -13,7 +13,7 @@
                 <div class="form-row">
                     <div class="col-md-4 col-sm-4 mb-3">
                         <label for="fechaInicio">Fecha Inicio</label>
-                        <input type="text" class="form-control" [(ngModel)]="encuesta.fechaInicio" id="fechaInicio" name="fechaInicio" placeholder="DD/MM/YYYY" value="fechaInicio" formControlName="fechaInicioEncuesta">
+                        <input type="text" class="form-control" [(ngModel)]="encuesta.fechaInicio" id="fechaInicio" name="fechaInicio" placeholder="YYYY-MM-DD" value="fechaInicio" formControlName="fechaInicioEncuesta">
                         <!-- <div *ngIf="fechaInicioEncuesta.invalid && (fechaInicioEncuesta.dirty || fechaInicioEncuesta.touched)" class="alert alert-danger">
                             <div *ngIf="fechaInicioEncuesta.errors.required">
                               Este campo es obligatorio
@@ -25,7 +25,7 @@
                     </div>
                     <div class="col-md-4 col-sm-4 mb-3">
                         <label for="fechaFin">Fecha Fin</label>
-                        <input type="text" class="form-control" [(ngModel)]="encuesta.fechaFin" id="fechaFin" name="fechaFin" placeholder="DD/MM/YYYY" value="fechaFin" formControlName="fechaFinEncuesta">
+                        <input type="text" class="form-control" [(ngModel)]="encuesta.fechaFin" id="fechaFin" name="fechaFin" placeholder="YYYY-MM-DD" value="fechaFin" formControlName="fechaFinEncuesta">
                         <!-- <div *ngIf="fechaFinEncuesta.invalid && (fechaFinEncuesta.dirty || fechaFinEncuesta.touched)" class="alert alert-danger">
                             <div *ngIf="fechaFinEncuesta.errors.required">
                               Este campo es obligatorio
@@ -102,7 +102,6 @@
             </form>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-success">Crear pregunta inexistente</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="auxIterador = []">Cancelar</button>
             <button type="submit" class="btn btn-primary" (click)="addEncuesta()"  data-dismiss="modal" >Guardar</button>
         </div>

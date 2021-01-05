@@ -5,8 +5,11 @@ import ucab.empresae.dtos.DtoCategoria;
 import ucab.empresae.dtos.DtoEstudio;
 import ucab.empresae.dtos.DtoSubcategoria;
 import ucab.empresae.entidades.*;
+import ucab.empresae.excepciones.EstudioException;
 import ucab.empresae.excepciones.PruebaExcepcion;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -203,6 +206,10 @@ public class EstudioServicio extends AplicacionBase {
             DaoUsuario daoUsuario = new DaoUsuario();
             this.estudio = this.dao.find(estudio.get_id(), EstudioEntity.class);
 
+            if(daoCliente.getClienteByUsuario(daoUsuario.find(id, UsuarioEntity.class)) == null){
+                throw new EstudioException("No existe ningun cliente registrado con ese Username");
+            }
+
             ClienteEntity clienteEntity = daoCliente.getClienteByUsuario(daoUsuario.find(id, UsuarioEntity.class));
 
             ClienteEstudioEntity clienteEstudioEntity = new ClienteEstudioEntity();
@@ -226,7 +233,12 @@ public class EstudioServicio extends AplicacionBase {
 
             return Response.ok().build();
 
-        } catch(Exception ex) {
+        }catch (EstudioException ex) {
+            JsonObject excepcion = Json.createObjectBuilder()
+                    .add("mensaje", ex.getMessage()).build();
+            return  Response.status(500).entity(excepcion).build();
+        }
+        catch(Exception ex) {
             return Response.status(Response.Status.NOT_ACCEPTABLE).entity(ex).build();
         }
     }
@@ -250,6 +262,15 @@ public class EstudioServicio extends AplicacionBase {
 
             estudio.setComentarioAnalista(dtoEstudio.getComentarioAnalista());
             estudio.setEstado(dtoEstudio.getEstado());
+
+            if(dtoEstudio.getFechaFin() != null){
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date fechaFin = dateFormat.parse(dtoEstudio.getFechaFin());
+                estudio.setFechaFin(fechaFin);
+            }else{
+                estudio.setFechaFin(null);
+            }
+
             daoEstudio.update(estudio);
 
             return Response.ok(estudio).build();
@@ -309,11 +330,57 @@ public class EstudioServicio extends AplicacionBase {
     }
 
     /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/updateCliente/{id}
+     * @apiNote Api del tipo PUT utilizada para actualizar los datos del estudio de un cliente.
+     * @param id Objeto de tipob long que representa el id del estudio a actualizar.
+     * @param dtoEstudio Objeto de tipo DtoEstudio con el cual se obtienen los datos del estudio.
+     * @return Objeto de tipo EstudioEntity
+     * @see EstudioEntity Entidad persistente utilizada para actulizar datos del estudio y retornar valores nuevos.
+     */
+    @PUT
+    @Path("/updateCliente/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateEstudioCliente(@PathParam("id") long id, DtoEstudio dtoEstudio) {
+        try {
+            DaoEstudio daoEstudio = new DaoEstudio();
+            EstudioEntity estudio = daoEstudio.find(id, EstudioEntity.class);
+
+            estudio.setEstado(dtoEstudio.getEstado());
+            estudio.setNombre(dtoEstudio.getNombre());
+            estudio.setEdadMinima(dtoEstudio.getEdadMinima());
+            estudio.setEdadMaxima(dtoEstudio.getEdadMaxima());
+
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date fechaInicio = dateFormat.parse(dtoEstudio.getFechaInicio());
+            estudio.setFechaInicio(fechaInicio);
+
+            DaoLugar daoLugar = new DaoLugar();
+            LugarEntity lugarEntity = daoLugar.find(dtoEstudio.getLugar().get_id(), LugarEntity.class);
+            estudio.setLugar(lugarEntity);
+
+            DaoNivelSocioeconomico daoNivelSocioeconomico = new DaoNivelSocioeconomico();
+            NivelSocioeconomicoEntity nivelSocioeconomicoEntity = daoNivelSocioeconomico.find(dtoEstudio.getNivelSocioEconomico().get_id(), NivelSocioeconomicoEntity.class);
+            estudio.setNivelSocioEconomico(nivelSocioeconomicoEntity);
+
+            DaoSubcategoria daoSubcategoria = new DaoSubcategoria();
+            SubcategoriaEntity subcategoriaEntity = daoSubcategoria.find(dtoEstudio.getSubcategoria().get_id(), SubcategoriaEntity.class);
+            estudio.setSubcategoria(subcategoriaEntity);
+
+            daoEstudio.update(estudio);
+
+            return Response.ok(estudio).build();
+        } catch (Exception ex) {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+        }
+    }
+
+    /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/{id}
-     * @apiNote Api encargada de eliminar un estudio especificado por el id.
-     * @param id Objeto de tipo long que representa el id a eliminar
-     * @return Objeto de tipo EstudioEntity con el estudio eliminado
-     * @see EstudioEntity Objeto utilizado para eliminar un estudio.
+     * @apiNote Api del tipo DELETE utilizada para borrar un estudio existente en base de datos.
+     * @param id Objeto de tipo long con el id del estudio a eliminar.
+     * @return Objeto de tipo EstudioEntity
+     * @see EstudioEntity Entidad pesistente utilizada para eliminar el estudio en cuestión.
      */
     @DELETE
     @Path("/{id}")
@@ -337,7 +404,7 @@ public class EstudioServicio extends AplicacionBase {
     @GET
     @Produces(value= MediaType.APPLICATION_JSON)
     @Path("/encuestado/{id}")                   //RECIBO EL ID DEL USUARIO
-    public Response getEstudiosbyEncuestado(@PathParam("id") long id) throws PruebaExcepcion {
+    public Response getEstudiosbyEncuestado(@PathParam("id") long id){
 
         /*PERMITE FILTRAR LOS ESTUDIOS QUE PUEDE VER EL ENCUESTADO
         SEGUN LAS CARACTERISTICAS DEL ESTUDIO
@@ -355,6 +422,10 @@ public class EstudioServicio extends AplicacionBase {
 
             DaoEstudio daoEstudio = new DaoEstudio();
             estudios = daoEstudio.getEstudiosEncuestado(encuestadoEntity);
+
+            if(estudios == null){
+                throw new EstudioException("No existen estudios relacionados con el Encuestado");
+            }
 
             //llenado del aux para que tenga el estado de la n a n
             for(EstudioEntity estudio : estudios){
@@ -378,8 +449,14 @@ public class EstudioServicio extends AplicacionBase {
                 estudioAuxList.add(estudioAux);
             }
 
-        } catch (Exception ex) {
+        }catch (EstudioException ex) {
+            JsonObject excepcion = Json.createObjectBuilder()
+                    .add("mensaje", ex.getMessage()).build();
+            return  Response.status(500).entity(excepcion).build();
+        }
+        catch (Exception ex) {
             String problema = ex.getMessage();
+            return  Response.status(Response.Status.NOT_ACCEPTABLE).entity(problema).build();
         }
         return Response.ok(estudioAuxList).build();
     }

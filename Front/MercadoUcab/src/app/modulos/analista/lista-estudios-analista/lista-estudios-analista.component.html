@@ -48,7 +48,7 @@
                         <div class="modal-content">
                           <div class="form-group">
                             <div class="row">
-                              <div class="col-md-6 mb-3">
+                              <div class="col-md-12 mb-3">
                                 <label for="coment">Comentario</label>
                                 <input type="text" [(ngModel)]="analistaData.comentarioAnalista" class="form-control"  formControlName="comentarioAnalistaEstudio" name="comentarioAnalista" id="coment" placeholder="" >
                                 <div *ngIf="comentarioAnalistaEstudio.invalid && (comentarioAnalistaEstudio.dirty || comentarioAnalistaEstudio.touched)" class="alert alert-danger">
@@ -60,12 +60,13 @@
                             </div>
                           </div>
                           <div class="row">
-                            <div class="col-md-5 mb-3">
+                            <div class="col-md-6 mb-3">
                               <label for="estado"> Estado</label>
                               <select class="custom-select d-block w-100" [(ngModel)]= "analistaData.estado" formControlName="estadoEstudioAnalista" id="estado" name="estado" >
+                                <option value="Aprobado">Aprobado</option>
                                 <option value="Solicitado">Solicitado</option>
-                                <option value="Procesado">Procesado</option>
-                                <option value="En Ejecucion">En Ejecucion</option>
+                                <option value="Rechazado">Rechazado</option>
+                                <option value="En Proceso">En Proceso</option>
                                 <option value="Culminado">Culminado</option>
                               </select>
                               <div *ngIf="estadoEstudioAnalista.invalid && (estadoEstudioAnalista.dirty || estadoEstudioAnalista.touched)" class="alert alert-danger">
@@ -74,6 +75,20 @@
                                 </div>
                               </div>
                             </div>
+
+                            <div *ngIf="analistaData.estado==='Culminado'" class="col-md-6 mb-3">
+                              <label for="fechaFin">Fecha fin</label>
+                              <input type="text" class="form-control"  placeholder="AAAA-MM-DD"  [(ngModel)]="analistaData.fechaFin" formControlName="fechaFinEstudio" value="analistaData.fechaFin">
+                              <div *ngIf="fechaFinEstudio.invalid && (fechaFinEstudio.dirty || fechaFinEstudio.touched)" class="alert alert-danger">
+                                <div *ngIf="fechaFinEstudio.errors.required">
+                                  Este campo es obligatorio
+                                </div>
+                                <div *ngIf="fechaFinEstudio.errors.pattern">
+                                  Introduzca un formato valido
+                                </div>
+                              </div>
+                            </div>
+
                           </div>
                           <br>
                           <!-- Parte inferior del modal -->

@@ -51,13 +51,13 @@ export class ListaSubcategoriaComponent implements OnInit {
       this.subcategoriaService.deletesubcategoria(id).subscribe(data => {
         this.loadSubcategoria();
       });
-
+      location.reload();
   }
 
   updateSubcategoria(){
      this.subcategoriaService.updatesubcategoria(this.subcategoriaData._id, this.subcategoriaData).subscribe(data => {
       });
-
+     location.reload();
   }
 
   editar(subcategoria){

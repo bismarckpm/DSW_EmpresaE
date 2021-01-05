@@ -61,6 +61,7 @@ export class FormClientesComponent implements OnInit {
     else{
       alert(' LLenar todos los campos por favor');
     }
+    location.reload();
   }
 
   addLugar(): void {

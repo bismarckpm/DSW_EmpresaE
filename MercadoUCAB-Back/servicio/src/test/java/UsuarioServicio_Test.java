@@ -2,10 +2,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import ucab.empresae.dtos.DtoTipoUsuario;
 import ucab.empresae.dtos.DtoUsuario;
-import ucab.empresae.excepciones.PruebaExcepcion;
+import ucab.empresae.excepciones.UsuarioException;
 import ucab.empresae.servicio.UsuarioServicio;
 import javax.ws.rs.core.Response;
-import java.text.ParseException;
 
 
 public class UsuarioServicio_Test {
@@ -32,7 +31,7 @@ public class UsuarioServicio_Test {
 
     @Test
     //Prueba unitaria del getUsuario (Retorna todos los datos de un usuario sea cual sea su tipo de usuario)
-    public void getUsuarioTest() throws ParseException, PruebaExcepcion {
+    public void getUsuarioTest(){
         UsuarioServicio servicio = new UsuarioServicio();
         Response resultado = servicio.getUsuario(66);
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());

@@ -3,6 +3,7 @@ package ucab.empresae.servicio;
 import ucab.empresae.daos.DaoUsuario;
 import ucab.empresae.dtos.DtoUsuario;
 import ucab.empresae.entidades.UsuarioEntity;
+import ucab.empresae.excepciones.UsuarioException;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -29,7 +30,7 @@ public class LoginServicio {
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/login
      * Metodo con anotacion POST que recibe un DtoUsuario y valida que el usuario se encuentre registrado en el sistema
      * @param dtoUsuario objeto que posee todos los atributos necesarios para validar las credenciales del usuario
-     * @return JsonObject con la respuesta a la autenticacion del usuario
+     * @return Response de status OK junto con la respuesta a la autenticacion del usuario
      */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -69,13 +70,13 @@ public class LoginServicio {
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/login/cambiarClave
      * Metodo con anotacion POST que recibe un DtoUsuario y cambia la clave del usuario
      * @param usuario objeto que posee todos los atributos necesarios para cambiar la clave de un usuario
-     * @return JsonObject con la respuesta al cambio de clave (Satisfactorio/Invalido)
+     * @return Response de status OK junto con la respuesta al cambio de clave (Satisfactorio/Invalido)
      */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/cambiarClave")
-    public JsonObject cambiarClave(DtoUsuario usuario){
+    public Response cambiarClave(DtoUsuario usuario){
 
         try{
             boolean registrado;
@@ -99,13 +100,11 @@ public class LoginServicio {
             }else{
                 respuesta = Json.createObjectBuilder().add("Respuesta", "Contraseña invalida").build();
             }
-            return respuesta;
+            return Response.ok().entity(respuesta).build();
 
         }catch (Exception ex) {
             String problema = ex.getMessage();
-            JsonObject excepcion;
-            excepcion = Json.createObjectBuilder().add("excepcion", problema).build();
-            return excepcion;
+            return  Response.status(Response.Status.NOT_ACCEPTABLE).entity(problema).build();
         }
     }
 
@@ -113,13 +112,13 @@ public class LoginServicio {
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/login/recuperarClave
      * Metodo con anotacion POST que recibe un DtoUsuario para recuperar la clave del usuario
      * @param dtoUsuario objeto que posee todos los atributos necesarios para la recuperacion de clave
-     * @return JsonObject con la respuesta a la recuperacion de la clave
+     * @return Response de status OK junto con la respuesta a la recuperacion de la clave
      */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/recuperarClave")
-    public JsonObject recuperarClave(DtoUsuario dtoUsuario){
+    public Response recuperarClave(DtoUsuario dtoUsuario){
 
         JsonObject respuesta;
         String contenido;
@@ -138,6 +137,11 @@ public class LoginServicio {
             }
 
             DaoUsuario daoUsuario = new DaoUsuario();
+
+            if(daoUsuario.getUsuarioByUsername(dtoUsuario.getUsername()) == null){
+                throw new UsuarioException("No existe un usuario con ese Username registrado");
+            }
+
             UsuarioEntity usuarioEntity = daoUsuario.getUsuarioByUsername(dtoUsuario.getUsername());
             usuarioEntity.setClave(nuevaClave);
             daoUsuario.update(usuarioEntity);
@@ -151,13 +155,17 @@ public class LoginServicio {
             enviarCorreo(correo, "Recuperacion de Clave MercadeoUCAB", contenido);
             respuesta = Json.createObjectBuilder().add("status","Correo Enviado Satisfactoriamente").build();
 
-        }catch (Exception ex) {
-            String problema = ex.getMessage();
-            JsonObject excepcion;
-            excepcion = Json.createObjectBuilder().add("excepcion", problema).build();
-            return excepcion;
+            return Response.ok().entity(respuesta).build();
+
+        }catch (UsuarioException ex) {
+            JsonObject excepcion = Json.createObjectBuilder()
+                    .add("mensaje", ex.getMessage()).build();
+            return Response.status(500).entity(excepcion).build();
         }
-        return respuesta;
+        catch (Exception ex) {
+            String problema = ex.getMessage();
+            return  Response.status(Response.Status.NOT_ACCEPTABLE).entity(problema).build();
+        }
     }
 
 

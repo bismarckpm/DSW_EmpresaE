@@ -79,6 +79,8 @@ export class ListaEstudioClienteComponent implements OnInit {
     this.estudioService.deleteEstudio(id).subscribe(data => {
       this.loadEstudios();
     });
+    location.reload();
+
   }
 
   Cambio(){
@@ -120,7 +122,8 @@ export class ListaEstudioClienteComponent implements OnInit {
     else{
       alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
     }
- }
+    location.reload();
+  }
 
  editar(estudio){
   this.addSubcategoria();

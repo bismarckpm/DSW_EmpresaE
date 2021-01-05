@@ -7,7 +7,10 @@ import ucab.empresae.entidades.ClienteEntity;
 import ucab.empresae.entidades.EncuestadoEntity;
 import ucab.empresae.entidades.TipoUsuarioEntity;
 import ucab.empresae.entidades.UsuarioEntity;
+import ucab.empresae.excepciones.UsuarioException;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -32,12 +35,16 @@ public class UsuarioServicio {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addUsuarioEmpleado(DtoUsuario dtoUsuario){
 
-        DaoUsuario daoUsuario = new DaoUsuario();
-        UsuarioEntity usuarioEntity = new UsuarioEntity();
-        DaoTipoUsuario daoTipoUsuario = new DaoTipoUsuario();
+            DaoUsuario daoUsuario = new DaoUsuario();
+            UsuarioEntity usuarioEntity = new UsuarioEntity();
+            DaoTipoUsuario daoTipoUsuario = new DaoTipoUsuario();
 
         try{
             TipoUsuarioEntity tipoUsuarioEntity = daoTipoUsuario.getTipoUsuarioByDescripcion(dtoUsuario.getTipoUsuario().getDescripcion());
+
+            if(daoUsuario.getUsuarioByUsername(dtoUsuario.getUsername()) != null){
+                throw new UsuarioException("Ya existe un usuario con ese Username");
+            }
 
             usuarioEntity.setEstado(dtoUsuario.getEstado());
             usuarioEntity.setUsername(dtoUsuario.getUsername());
@@ -48,7 +55,12 @@ public class UsuarioServicio {
             DirectorioActivo ldap = new DirectorioActivo();
             ldap.addEntryToLdap(dtoUsuario, tipoUsuarioEntity.getDescripcion());
 
-        }catch (Exception ex) {
+        }catch (UsuarioException ex) {
+            JsonObject excepcion = Json.createObjectBuilder()
+                    .add("mensaje", ex.getMessage()).build();
+            return  Response.status(500).entity(excepcion).build();
+        }
+        catch (Exception ex) {
             String problema = ex.getMessage();
             return  Response.status(Response.Status.NOT_ACCEPTABLE).entity(problema).build();
         }
@@ -122,11 +134,19 @@ public class UsuarioServicio {
     @Path("/empleados")
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getEmpleados() {
-        List<UsuarioEntity> empleados = null;
+        List<UsuarioEntity> empleados;
         try {
             DaoUsuario daoUsuario = new DaoUsuario();
             empleados = daoUsuario.getUsuariosEmpleados();
-        } catch (Exception ex) {
+
+            if(empleados == null){
+                throw new UsuarioException("Fallo obtener la lista de empleados");
+            }
+
+        }catch (UsuarioException ex){
+            return Response.status(500).entity(ex.getMessage()).build();
+        }
+        catch (Exception ex) {
             String problema = ex.getMessage();
             return  Response.status(Response.Status.NOT_ACCEPTABLE).entity(problema).build();
         }
@@ -160,7 +180,6 @@ public class UsuarioServicio {
 
                 DirectorioActivo ldap = new DirectorioActivo();
                 ldap.updateRol(dtoUsuario, usuarioEntity.getTipousuario().getDescripcion());
-
             }
         }catch (Exception e){
             String problema = e.getMessage();

@@ -89,30 +89,30 @@
 
                       <div class="form-group col-md-5" *ngIf="desplegar == true" >
                         <label >Opcion1</label>
-                        <input  [(ngModel)]="Opciones[0]"type="text" class="form-control" [ngModelOptions]="{standalone: true} "formControlName="opciocPregunta" value="descripcion">
-                        <div *ngIf="opciocPregunta.invalid && (opciocPregunta.dirty || opciocPregunta.touched)" class="alert alert-danger">
-                          <div *ngIf="opciocPregunta.errors.pattern">
+                        <input  [(ngModel)]="Opciones[0]"type="text" class="form-control" [ngModelOptions]="{standalone: true} "formControlName="opcionPregunta" value="">
+                        <div *ngIf="opcionPregunta1.invalid && (opcionPregunta1.dirty || opcionPregunta1.touched)" class="alert alert-danger">
+                          <div *ngIf="opcionPregunta1.errors.pattern">
                             Introduzca una descripcion valida
                           </div>
                         </div>
                         <label >Opcion2</label>
-                        <input [(ngModel)]="Opciones[1]"type="text" class="form-control" [ngModelOptions]="{standalone: true} "formControlName="opciocPregunta" value="descripcion">
-                        <div *ngIf="opciocPregunta.invalid && (opciocPregunta.dirty || opciocPregunta.touched)" class="alert alert-danger">
-                          <div *ngIf="opciocPregunta.errors.pattern">
+                        <input [(ngModel)]="Opciones[1]"type="text" class="form-control" [ngModelOptions]="{standalone: true} "formControlName="opcionPregunta2" value="">
+                        <div *ngIf="opcionPregunta2.invalid && (opcionPregunta2.dirty || opcionPregunta2.touched)" class="alert alert-danger">
+                          <div *ngIf="opcionPregunta2.errors.pattern">
                             Introduzca una descripcion valida
                           </div>
                         </div>
                         <label >Opcion3</label>
-                        <input [(ngModel)]="Opciones[2]"type="text" class="form-control"  [ngModelOptions]="{standalone: true}" formControlName="opciocPregunta" value="descripcion">
-                        <div *ngIf="opciocPregunta.invalid && (opciocPregunta.dirty || opciocPregunta.touched)" class="alert alert-danger">
-                          <div *ngIf="opciocPregunta.errors.pattern">
+                        <input [(ngModel)]="Opciones[2]"type="text" class="form-control"  [ngModelOptions]="{standalone: true}" formControlName="opcionPregunta3" value="">
+                        <div *ngIf="opcionPregunta3.invalid && (opcionPregunta3.dirty || opcionPregunta3.touched)" class="alert alert-danger">
+                          <div *ngIf="opcionPregunta3.errors.pattern">
                             Introduzca una descripcion valida
                           </div>
                         </div>
                         <label >Opcion4</label>
-                        <input [(ngModel)]="Opciones[3]"type="text" class="form-control" [ngModelOptions]="{standalone: true}" value="descripcion">
-                        <div *ngIf="opciocPregunta.invalid && (opciocPregunta.dirty || opciocPregunta.touched)" class="alert alert-danger">
-                          <div *ngIf="opciocPregunta.errors.pattern">
+                        <input [(ngModel)]="Opciones[3]"type="text" class="form-control" [ngModelOptions]="{standalone: true}" formControlName="opcionPregunta4" value="">
+                        <div *ngIf="opcionPregunta4.invalid && (opcionPregunta4.dirty || opcionPregunta4.touched)" class="alert alert-danger">
+                          <div *ngIf="opcionPregunta4.errors.pattern">
                             Introduzca una descripcion valida
                           </div>
                         </div>

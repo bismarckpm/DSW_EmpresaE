@@ -80,6 +80,7 @@ export class FormPreguntaComponent implements OnInit {
       else{
         alert(' LLenar todos los campos por favor');
       }
+      location.reload();
   }
 
 //////////////////////////// Metodo para las opciones //////////////////
@@ -150,7 +151,7 @@ ValidarTipopregunta(tipoid){
 
   createForm(){
     this.formPregunta = this.formBuilder.group({
-      descripcionPregunta: ['', [Validators.required, Validators.pattern(this.patronDescripcionPregunta)]],
+      descripcionPregunta: ['', Validators.required],
       estadoPregunta: ['', Validators.required],
       tipoPregunta: ['', Validators.required],
       nombreSubcategoria: ['', Validators.required],

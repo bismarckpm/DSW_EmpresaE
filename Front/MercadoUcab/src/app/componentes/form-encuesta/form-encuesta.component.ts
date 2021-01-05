@@ -63,11 +63,12 @@ export class FormEncuestaComponent implements OnInit {
         preguntas: []
       };
       this.auxIterador = [];
-      alert('Agregó la encuesta');
     }
     else{
       alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
     }
+
+    location.reload();
 
   }
 

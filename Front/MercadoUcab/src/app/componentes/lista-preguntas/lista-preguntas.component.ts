@@ -87,6 +87,7 @@ ValidarTipopregunta(tipoid){
       this.preguntaService.deletePregunta(id).subscribe(data => {
         this.loadpregunta()
       })
+    location.reload();
 
   }
 
@@ -97,10 +98,10 @@ ValidarTipopregunta(tipoid){
         this.MeterOpciones()
     }
 
-
      this.preguntaService.updatePregunta(this.preguntaData._id, this.preguntaData).subscribe(data => {
       })
-      this.loadpregunta();
+    console.log(this.preguntaData.opciones[1]);
+    location.reload();
 
   }
 
@@ -127,16 +128,22 @@ ValidarTipopregunta(tipoid){
   get estadoPregunta(){ return this.formPregunta.get('estadoPregunta');}
   get tipoPregunta(){return this.formPregunta.get('tipoPregunta');}
   get nombreSubcategoria(){return this.formPregunta.get('nombreSubcategoria');}
-  get opciocPregunta(){return this.formPregunta.get('opciocPregunta');}
+  get opcionPregunta1(){return this.formPregunta.get('opciocPregunta1');}
+  get opcionPregunta2(){return this.formPregunta.get('opciocPregunta2');}
+  get opcionPregunta3(){return this.formPregunta.get('opciocPregunta3');}
+  get opcionPregunta4(){return this.formPregunta.get('opciocPregunta4');}
   get opciocPreguntaRango(){return this.formPregunta.get('opciocPreguntaRango');}
 
   createForm(){
     this.formPregunta = this.formBuilder.group({
-      descripcionPregunta: ['', [Validators.required, Validators.pattern(this.namePattern)]],
+      descripcionPregunta: ['', Validators.required],
       estadoPregunta: ['', Validators.required],
       tipoPregunta: ['', Validators.required],
       nombreSubcategoria: ['', Validators.required],
-      opciocPregunta: ['', Validators.pattern(this.namePattern)],
+      opcionPregunta1: ['', Validators.pattern(this.namePattern)],
+      opcionPregunta2: ['', Validators.pattern(this.namePattern)],
+      opcionPregunta3: ['', Validators.pattern(this.namePattern)],
+      opcionPregunta4: ['', Validators.pattern(this.namePattern)],
       opciocPreguntaRango: ['', Validators.pattern(this.namePattern)],
     });
   }

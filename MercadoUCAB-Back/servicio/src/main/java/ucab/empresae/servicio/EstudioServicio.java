@@ -17,12 +17,21 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Api encargada de las transacciones que tienen que ver con estudios
+ * @author José Prieto
+ */
 @Path("/estudio")
 public class EstudioServicio extends AplicacionBase {
 
     private DaoEstudio dao = DaoFactory.DaoEstudioInstancia();
     private EstudioEntity estudio = EntidadesFactory.EstudioInstance();
 
+    /**
+     * Método encargado de armar el estudio en si.
+     * @param dtoEstudio Data transfer object utilizado para recibir los datos del estudio.
+     * @see DtoEstudio Objeto usado para recibir los datos.
+     */
     private void estudioAtributos(DtoEstudio dtoEstudio) {
 
         try {
@@ -62,6 +71,12 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio
+     * @apiNote Api del tipo get encargada retornar todos los estudios existentes en el sistema.
+     * @return Lista de objetos de tipo EstudioEntity
+     * @see EstudioEntity Entidad persistente utilizada para retornar los datos requeridos.
+     */
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getEstudios() {
@@ -72,6 +87,12 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/estudioSinEncuesta
+     * @apiNote Api del tipo get encargada de retornar Estudios que no están asociadas a encuestas.
+     * @return Lista de objetos de tipo EstudioEntity
+     * @see EstudioEntity Entidad persistente utilizada para retornar los datos requeridos.
+     */
     @GET
     @Path("/estudiosSinEncuesta")
     @Produces(value = MediaType.APPLICATION_JSON)
@@ -85,6 +106,13 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/{id}
+     * @apiNote Api del tipo get utilizada para retornar un estudio en específico.
+     * @param id Objeto de tipo long que representa el id del estudio a consultar
+     * @return Objeto de tipo EstudioEntity con el que se retornan los datos.
+     * @see EstudioEntity Entidad persistente utilizada para retornar los datos requeridos.
+     */
     @GET
     @Path("/{id}")
     @Produces(value = MediaType.APPLICATION_JSON)
@@ -96,6 +124,13 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/cliente/{id}
+     * @apiNote Api del tipo get utilizada para retornae todos los estudios hechos para un cliente.
+     * @param id objeto de tipo long que representa el id del cliente.
+     * @return Lista de objetos de tipo EstudioEntity encargado de retornar los estudios de un cliente en especifico.
+     * @see List<EstudioEntity> Lista de estudios usada para retornar los datos pedidos.
+     */
     @GET
     @Path("/cliente/{id}")
     @Produces(value = MediaType.APPLICATION_JSON)
@@ -107,6 +142,13 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/analista/{id}
+     * @apiNote Api del tipo get utilizada para retornar todos los estudios asignados a un analista
+     * @param id Objeto de tipo long que representa el id del analista.
+     * @return Lista de objetos de tipo Estudio que contiene los estudios del analista.
+     * @see List<EstudioEntity> Lista de estudios utilizada para retornar los datos requeridos.
+     */
     @GET
     @Path("/analista/{id}")
     @Produces(value = MediaType.APPLICATION_JSON)
@@ -118,6 +160,13 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio
+     * @apiNote Api del tipo post encargado de añadir un estudio nuevo al sistema.
+     * @param dtoEstudio Objeto de tipo DtoEstudio donde se reciben los datos a ingresar al sistema.
+     * @return retorna objeto de tipo EstudioEntity.
+     * @see EstudioEntity Entidad persistente utilizada para insertar los datos al sistema.
+     */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -130,6 +179,13 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/cliente/{id}
+     * @apiNote Api encargada de permitirle a un cliente solicitar un estudio.
+     * @param id Objeto de tipo long con el id del cliente
+     * @param dtoEstudio Objeto de tipo DtoEstudio utilizado para obtener los datos del estudio.
+     * @return Response del tipo ok en caso de quetodo se haya hecho de manera correcta.
+     */
     @POST
     @Path("/cliente/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -175,6 +231,14 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/{id}
+     * @apiNote Api encargada de modificar un estudio.
+     * @param id Objeto de tipo long que representa el id del estudio a modificar.
+     * @param dtoEstudio Objeto de tipo DtoEstudio utilizado para obtener los datos de la modificacion
+     * @return Objeto de tipo EntudioEntity
+     * @see EstudioEntity Entidad persistente utilizada para realizar el update del Estudio.
+     */
     @PUT
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -194,6 +258,13 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/updateAdmin/{id}
+     * @param id Objeto de tipo long que representa el id del estudio
+     * @param dtoEstudio Objeto de tipo Dto estudio que sirve para obtener los datos del Estudio.
+     * @return EstudioEntity
+     * @see EstudioEntity Entidad persistente utilizada para insertar los datos.
+     */
     @PUT
     @Path("/updateAdmin/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -237,6 +308,13 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/{id}
+     * @apiNote Api encargada de eliminar un estudio especificado por el id.
+     * @param id Objeto de tipo long que representa el id a eliminar
+     * @return Objeto de tipo EstudioEntity con el estudio eliminado
+     * @see EstudioEntity Objeto utilizado para eliminar un estudio.
+     */
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -250,6 +328,12 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/encuestado/{id}
+     * @apiNote Permite filtrar los estudios que puede ver el encuestado según las características del estudio.
+     * @param id Objeto de tipo long con el id del usuario encuestado.
+     * @return Lista de objetos de tipo EstudioAux
+     */
     @GET
     @Produces(value= MediaType.APPLICATION_JSON)
     @Path("/encuestado/{id}")                   //RECIBO EL ID DEL USUARIO
@@ -300,6 +384,12 @@ public class EstudioServicio extends AplicacionBase {
         return Response.ok(estudioAuxList).build();
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/dataMuestra/{id}
+     * @apiNote Api que permite retornar la data muestra del estudio en cuestión.
+     * @param id Objeto de tipo long con el id del estudio.
+     * @return Lista de objetos del tipo EscuestadoEntity
+     */
     @GET
     @Produces(value= MediaType.APPLICATION_JSON)
     @Path("/dataMuestra/{id}")                   //RECIBO EL ID DEL ESTUDIO

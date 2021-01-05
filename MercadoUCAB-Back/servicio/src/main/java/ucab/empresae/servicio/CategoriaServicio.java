@@ -13,6 +13,10 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/**
+ * Api service encargada de las transacciones que tiene que ver con categorias
+ * @author José Prieto
+ */
 @Path("/categoria")
 public class CategoriaServicio extends AplicacionBase {
 
@@ -113,8 +117,7 @@ public class CategoriaServicio extends AplicacionBase {
     public Response deleteCategoria(@PathParam("id") long id) {
         try {
             this.categoria = this.dao.find(id, CategoriaEntity.class);
-            this.dao.delete(this.categoria);
-            return Response.ok().build();
+            return Response.ok(this.dao.delete(this.categoria)).build();
         } catch(Exception ex){
             return Response.status(Response.Status.NOT_ACCEPTABLE).entity(ex).build();
         }

@@ -5,7 +5,6 @@ import {EstudioService} from '../../../services/estudio.service';
 import { PreguntaService } from 'src/app/services/pregunta.service';
 import { Estudio } from '../../../models/estudio';
 import { Pregunta } from '../../../models/pregunta';
-import { Opcion } from '../../../models/opcion';
 import { EncuestaService } from 'src/app/services/encuesta.service';
 
 class Multiple { constructor(public _id: number){} }

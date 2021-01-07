@@ -12,7 +12,9 @@ public class DtoPregunta extends DtoBase {
     private DtoTipoPregunta tipo;
     private DtoSubcategoria subcategoria;
 
-    private String[] opciones;
+    private String[] opciones;  //atributo que se utiliza para crear pregunta con opciones, esto porque jose manuel no pudo mandar arreglo de objetos...
+
+    private List<DtoOpcion> opcionesPregunta; //atributo para generar la encuesta, (preguntas con opciones)
 
     //Constructores
     public DtoPregunta() {

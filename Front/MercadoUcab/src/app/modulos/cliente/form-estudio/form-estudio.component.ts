@@ -66,6 +66,7 @@ export class FormEstudioClienteComponent implements OnInit {
     else{
       alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
     }
+    location.reload();
   }
 
 
@@ -132,9 +133,9 @@ seleccionarParroquia(id){
   createForm(): void {
     this.formEstudio = this.formBuilder.group({
       nombreEstudio: ['', [Validators.required, Validators.pattern(this.patronNombreEstudio)]],
-      estadoEstudio: ['', Validators.required],
+      estadoEstudio: '',
       fechaInicioEstudio: ['', [Validators.required, Validators.pattern(this.patronFechaEstudio)]],
-      fechaFinEstudio: ['', [ Validators.pattern(this.patronFechaEstudio)]],
+      fechaFinEstudio: '',
       edadMinimaEstudio: ['', [Validators.required, Validators.maxLength(2), Validators.pattern(this.patronEdadEstudio)]],
       edadMaximaEstudio: ['', [Validators.required, Validators.maxLength(2), Validators.pattern(this.patronEdadEstudio)]],
       lugarEstudio: ['', [Validators.required]],

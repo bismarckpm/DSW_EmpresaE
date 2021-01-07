@@ -339,80 +339,38 @@
       "estado": "solicitado",
       "fechaInicio": "2020-05-04",
       "lugar": {
-        "_id": 18,
-        "estado": "a",
-        "lugar": {
-          "_id": 5,
+          "_id": 18,
           "estado": "a",
           "lugar": {
-            "_id": 1,
-            "estado": "a",
-            "nombre": "venezuela",
-            "tipo": "pais"
+              "_id": 5,
+              "estado": "a",
+              "lugar": {
+                  "_id": 1,
+                  "estado": "a",
+                  "nombre": "venezuela",
+                  "tipo": "pais"
+              },
+              "nombre": "zulia",
+              "tipo": "estado"
           },
-          "nombre": "zulia",
-          "tipo": "estado"
-        },
-        "nombre": "pruebamunc3Zuli",
-        "tipo": "municipio"
+          "nombre": "pruebamunc3Zuli",
+          "tipo": "municipio"
       },
       "nivelsocioeco": {
-        "_id": 2,
-        "descripcion": "Nivel Alto",
-        "estado": "a",
-        "nombre": "Alto"
-      },
-      "subcategoria": {
-        "_id": 2,
-        "categoria": {
-          "_id": 1,
-          "estado": "i",
-          "nombre": "CategoriaPrueba"
-        },
-        "estado": "A",
-        "nombre": "SubcategoriaPrueba2"
-      }
-    },
-    {
-      "_id": 80,
-      "nombre": "estudio prueba2",
-      "comentarioAnalista": "el comentario",
-      "estado": "solicitado",
-      "estadoEstudioEncuestado": "Finalizado",
-      "fechaInicio": "2019-10-20",
-      "lugar": {
-        "_id": 18,
-        "estado": "a",
-        "lugar": {
-          "_id": 5,
+          "_id": 2,
+          "descripcion": "Nivel Alto",
           "estado": "a",
-          "lugar": {
-            "_id": 1,
-            "estado": "a",
-            "nombre": "venezuela",
-            "tipo": "pais"
-          },
-          "nombre": "zulia",
-          "tipo": "estado"
-        },
-        "nombre": "pruebamunc3Zuli",
-        "tipo": "municipio"
-      },
-      "nivelsocioeco": {
-        "_id": 2,
-        "descripcion": "Nivel Alto",
-        "estado": "a",
-        "nombre": "Alto"
+          "nombre": "Alto"
       },
       "subcategoria": {
-        "_id": 2,
-        "categoria": {
-          "_id": 1,
-          "estado": "i",
-          "nombre": "CategoriaPrueba"
-        },
-        "estado": "A",
-        "nombre": "SubcategoriaPrueba2"
+          "_id": 2,
+          "categoria": {
+              "_id": 1,
+              "estado": "i",
+              "nombre": "CategoriaPrueba"
+          },
+          "estado": "A",
+          "nombre": "SubcategoriaPrueba2"
       }
     }
   ],
@@ -865,29 +823,7 @@
   ],
   "preguntasresponder": [
     {
-      "_id": 1,
-      "descripcion": "PreguntaPostmanV/F",
-      "estado": "A",
-      "tipo": {
-        "_id": 2
-      },
-      "subcategoria": {
-        "_id": 1
-      },
-      "opciones": [
-        {
-          "_id": 1,
-          "descripcion": "Verdadero"
-        },
-        {
-          "_id": 2,
-          "descripcion": "Falso"
-        }
-      ]
-    },
-    {
-      "_id": 2,
-      "descripcion": "PreguntaPostmanSimple",
+      "descripcion": "PreguntaPostmanID",
       "estado": "A",
       "tipo": {
         "_id": 3
@@ -896,27 +832,14 @@
         "_id": 1
       },
       "opciones": [
-        {
-          "_id": 19,
-          "descripcion": "opcion 1"
-        },
-        {
-          "_id": 29,
-          "descripcion": "opcion 2"
-        },
-        {
-          "_id": 39,
-          "descripcion": "opcion 3"
-        },
-        {
-          "_id": 49,
-          "descripcion": "opcion 4"
-        }
+        {"descripcion": "opcion 1"},
+        {"descripcion": "opcion 2"},
+        {"descripcion": "opcion 3"},
+        {"descripcion": "opcion 4"}
       ]
     },
     {
-      "_id": 3,
-      "descripcion": "PreguntaPostmanRango",
+      "descripcion": "PreguntaPostmanID2",
       "estado": "A",
       "tipo": {
         "_id": 3
@@ -925,67 +848,26 @@
         "_id": 1
       },
       "opciones": [
-        {
-          "_id": 100,
-          "descripcion": "1"
-        },
-        {
-          "_id": 200,
-          "descripcion": "2"
-        },
-        {
-          "_id": 300,
-          "descripcion": "3"
-        },
-        {
-          "_id": 400,
-          "descripcion": "4"
-        },
-        {
-          "_id": 500,
-          "descripcion": "5"
-        }
+        {"descripcion": "opcion 10"},
+        {"descripcion": "opcion 20"},
+        {"descripcion": "opcion 30"},
+        {"descripcion": "opcion 40"}
       ]
     },
     {
-      "_id": 4,
-      "descripcion": "PreguntaPostmanAbierta",
+      "descripcion": "PreguntaPostmanID3",
       "estado": "A",
       "tipo": {
-        "_id": 1
-      },
-      "subcategoria": {
-        "_id": 1
-      },
-      "opciones": []
-    },
-    {
-      "_id": 5,
-      "descripcion": "PreguntaPostmanMultiple",
-      "estado": "A",
-      "tipo": {
-        "_id": 4
+        "_id": 3
       },
       "subcategoria": {
         "_id": 1
       },
       "opciones": [
-        {
-          "_id": 190,
-          "descripcion": "opcionMulti 1"
-        },
-        {
-          "_id": 290,
-          "descripcion": "opcionMulti 2"
-        },
-        {
-          "_id": 390,
-          "descripcion": "opcionMulti 3"
-        },
-        {
-          "_id": 490,
-          "descripcion": "opcionMulti 4"
-        }
+        {"descripcion": "opcion 010"},
+        {"descripcion": "opcion 020"},
+        {"descripcion": "opcion 030"},
+        {"descripcion": "opcion 040"}
       ]
     }
   ],

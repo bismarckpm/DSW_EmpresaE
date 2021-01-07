@@ -63,11 +63,12 @@ export class FormEncuestaComponent implements OnInit {
         preguntas: []
       };
       this.auxIterador = [];
-      alert('Agregó la encuesta');
     }
     else{
       alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
     }
+
+    location.reload();
 
   }
 
@@ -86,7 +87,7 @@ export class FormEncuestaComponent implements OnInit {
 
   ////// cargar de servicios
   cargarEstudios(): void {
-    this.servicioEstudio.getEstudios().subscribe((data: {}) => {
+    this.servicioEstudio.getEstudiosSinEncuesta().subscribe((data: {}) => {
       this.estudios = data;
     });
   }

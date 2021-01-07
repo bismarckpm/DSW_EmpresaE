@@ -1,7 +1,6 @@
 package ucab.empresae.servicio;
 
 import ucab.empresae.daos.*;
-import ucab.empresae.dtos.DtoOpcion;
 import ucab.empresae.dtos.DtoPregunta;
 import ucab.empresae.entidades.*;
 
@@ -11,9 +10,17 @@ import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * API service encargada de realizar transacciones sobre la entidad Pregunta
+ */
+
 @Path("/pregunta")
 public class PreguntaServicio {
 
+    /**
+     * Metodo que recibe un objeto pregunta para borrar las opciones asociadas a esa pregunta
+     * @param pregunta objeto pregunta que se utiliza para obtener las opciones asociadas
+     */
     public void borrarOpciones(PreguntaEntity pregunta) {
         DaoOpcion daoOpcion = new DaoOpcion();
 
@@ -23,9 +30,13 @@ public class PreguntaServicio {
             OpcionEntity opcionEliminar = daoOpcion.find(opcion.get_id(), OpcionEntity.class);
             daoOpcion.delete(opcionEliminar);
         }
-
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/pregunta
+     * Metodo con anotacion GET que devuelve todas las preguntas registradas en el sistema
+     * @return Response con status ok al encontrar la informacion solicitada y la lista de preguntas
+     */
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getPreguntas() {
@@ -33,12 +44,18 @@ public class PreguntaServicio {
         try {
             DaoPregunta dao = new DaoPregunta();
             preguntas = dao.findAll(PreguntaEntity.class);
+            return Response.ok(preguntas).build();
         } catch (Exception ex) {
-            String problema = ex.getMessage();
+            return Response.status(500).entity(ex.getMessage()).build();
         }
-        return Response.ok(preguntas).build();
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/pregunta
+     * Metodo con anotacion POST que recibe un DtoPregunta y crea el objeto pregunta con los atributos en el DTO
+     * @param dtoPregunta posee todos los atributos necesarios para crear la pregunta y sus opciones
+     * @return Response con status ok al crear la pregunta con la informacion suministrada
+     */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -52,7 +69,7 @@ public class PreguntaServicio {
 
         PreguntaEntity pregunta = new PreguntaEntity();
 
-        if (pregunta != null) {
+        try {
             pregunta.setDescripcion(dtoPregunta.getDescripcion());
             pregunta.setEstado(dtoPregunta.getEstado());
 
@@ -61,10 +78,9 @@ public class PreguntaServicio {
             TipoPreguntaEntity tipoPregunta = daoTipoPregunta.find(dtoPregunta.getTipo().get_id(), TipoPreguntaEntity.class);
             pregunta.setTipo(tipoPregunta);
 
-
             PreguntaEntity preguntaInsert = dao.insert(pregunta);
 
-            // Tipo de Pregunta de Seleccion
+            // Tipo de Pregunta de Seleccion Simple o Seleccion multiple
             if (dtoPregunta.getTipo().get_id() == 3 || dtoPregunta.getTipo().get_id() == 4) {
 
                 String[] opciones = dtoPregunta.getOpciones();
@@ -75,14 +91,13 @@ public class PreguntaServicio {
                     opcion_entidad.setEstado("a");
                     OpcionEntity resultadoOpcion = daoOpcion.insert(opcion_entidad);
 
-
                     PreguntaOpcionEntity pregunta_opcion_nn = new PreguntaOpcionEntity();
                     pregunta_opcion_nn.setEstado("a");
                     pregunta_opcion_nn.setOpcion(resultadoOpcion);
                     pregunta_opcion_nn.setPregunta(preguntaInsert);
                     daoPreguntaOpcion.insert(pregunta_opcion_nn);
 
-                    contador = contador + 1;
+                    contador++;
                 }
             }
 
@@ -103,6 +118,7 @@ public class PreguntaServicio {
                 }
             }
 
+            // Tipo de pregunta de Rango
             if (dtoPregunta.getTipo().get_id() == 5) {   //Asigna en la n a n EL rango
                 List<OpcionEntity> opciones = new ArrayList<>();
                 opciones.add(new OpcionEntity("1", "a"));
@@ -123,26 +139,42 @@ public class PreguntaServicio {
             }
 
             return Response.ok().entity(preguntaInsert).build();
-        } else {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+
+        } catch (Exception ex) {
+            return Response.status(500).entity(ex.getMessage()).build();
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/pregunta/id
+     * Metodo con anotacion DELETE que recibe un id y se encarga de eliminar de la base de datos a la entidad con ese id
+     * @param id identificador de la pregunta a ser eliminada
+     * @return Retorna un Response ok en caso de que la pregunta se haya eliminado de manera correcta
+     */
     @DELETE
     @Path("/{id}")
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response deletePregunta(@PathParam("id") long id) {
 
         DaoPregunta dao = new DaoPregunta();
-        PreguntaEntity pregunta = dao.find(id, PreguntaEntity.class);
-        if (pregunta != null) {
+        PreguntaEntity pregunta = null;
+        try {
+            pregunta = dao.find(id, PreguntaEntity.class);
             PreguntaEntity resul = dao.delete(pregunta);
             return Response.ok().build();
-        }
 
-        return Response.status(Response.Status.NOT_FOUND).build();
+        } catch (Exception ex) {
+            return Response.status(500).entity(ex.getMessage()).build();
+        }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/pregunta/id
+     * Metodo con anotacion PUT que se encarga de actualizar una Pregunta en particular
+     * @param id identificador de la pregunta a ser actualizada
+     * @param dtoPregunta objeto que contiene los atributos que seran actualizados
+     * @return retorna a la Pregunta actualizada en caso de que la transacción haya sido exitosa
+     */
     @PUT
     @Path("/{id}")
     public Response updatePregunta(@PathParam("id") long id, DtoPregunta dtoPregunta) {
@@ -152,7 +184,7 @@ public class PreguntaServicio {
         DaoPreguntaOpcion daoPreguntaOpcion = new DaoPreguntaOpcion();
         DaoOpcion daoOpcion = new DaoOpcion();
 
-        if (pregunta != null) {
+        try {
 
             // SI LA PREGUNTA EXISTENTE TIENE OPCIONES ASOCIADAS, SE ELIMINAN.
 
@@ -230,11 +262,18 @@ public class PreguntaServicio {
             }
 
             return Response.ok(pregunta).build();
-        } else {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+        } catch (Exception ex){
+            return Response.status(500).entity(ex.getMessage()).build();
         }
+
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/pregunta/preguntasSubcategoria/id
+     * Metodo con anotacion GET que devuelve todas las preguntas que pertenecen a la misma subcategoria de un estudio
+     * @param id identificador del estudio al que se le asignaran preguntas
+     * @return Response con status ok con la lista de Preguntas al encontrar la informacion solicitada.
+     */
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     @Path("/preguntasSubcategoria/{id}")
@@ -247,11 +286,74 @@ public class PreguntaServicio {
 
             //Busco el estudio con el id de la url, y a su vez hago la busqueda de las preguntas que tienen esa subcategoria
             preguntas = dao.getPreguntasbySubcategoria(daoEstudio.find(id, EstudioEntity.class).getSubcategoria().get_id());
+            return Response.ok(preguntas).build();
 
         } catch (Exception ex) {
+            return Response.status(500).entity(ex.getMessage()).build();
+        }
+    }
+
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/pregunta/preguntasEstudio/id
+     * Metodo con anotacion GET que devuelve todas las preguntas que fueron asignadas a un estudio
+     * @param id identificador del estudio al que se le asignaron preguntas
+     * @return Response con status ok con la lista de Preguntas asignadas a un estudio.
+     */
+    @GET
+    @Produces(value= MediaType.APPLICATION_JSON)
+    @Path("/preguntasEstudio/{id}")
+    public Response getPreguntasbyEstudio(@PathParam("id") long id){
+
+        List<PreguntaEntity> preguntas = null;
+        try {
+            DaoEstudio daoEstudio = new DaoEstudio();
+            DaoPregunta dao = new DaoPregunta();
+
+            //Busco el estudio con el id de la url, y a su vez hago la busqueda de las preguntas que tienen ese estudio
+            preguntas = dao.getPreguntasbyEstudio(id);
+            return Response.ok(preguntas).build();
+
+        } catch (Exception ex) {
+            return Response.status(500).entity(ex.getMessage()).build();
+        }
+    }
+
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/pregunta/encuestaEstudio/id
+     * Metodo con anotacion GET que permite obtener todas las preguntas con sus opciones (encuesta) de un estudio
+     * @param id identificador del estudio para obtener las preguntas con opciones (encuesta)
+     * @return Response con status ok con la lista de preguntas con opciones (encuesta) asignadas a un estudio.
+     */
+    @GET
+    @Produces(value = MediaType.APPLICATION_JSON)
+    @Path("/encuestaEstudio/{id}")
+    public List<PreguntaAux> getPreguntasyOpciones(@PathParam("id") long id) {
+
+        List<PreguntaEntity> preguntas = null;
+        List<PreguntaAux> preguntaAuxList = new ArrayList<PreguntaAux>();
+        DaoOpcion daoOpcion = new DaoOpcion();
+
+        try {
+            DaoPregunta dao = new DaoPregunta();
+            preguntas = dao.getPreguntasbyEstudio(id);
+
+            for(PreguntaEntity pregunta : preguntas){
+                PreguntaAux preguntaAux = new PreguntaAux(pregunta.get_id());
+                List<OpcionEntity> opciones = daoOpcion.getOpciones(pregunta);
+
+
+                preguntaAux.setDescripcion(pregunta.getDescripcion());
+                preguntaAux.setTipo(pregunta.getTipo());
+                preguntaAux.setOpciones(opciones);
+
+                preguntaAuxList.add(preguntaAux);
+            }
+            return preguntaAuxList;
+        } catch (Exception ex) {
+            ex.printStackTrace();
             String problema = ex.getMessage();
         }
-        return Response.ok(preguntas).build();
+        return null;
     }
 
 }

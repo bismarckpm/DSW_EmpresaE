@@ -1,5 +1,6 @@
 package ucab.empresae.entidades;
 
+import javax.json.bind.annotation.JsonbDateFormat;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.Date;
@@ -10,7 +11,9 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(name = "getEstudiosCliente", query = "SELECT e FROM EstudioEntity e where e in (select c.estudio from ClienteEstudioEntity c where c.cliente.usuario._id = :id)"),
         @NamedQuery(name = "getEstudiosAnalista", query = "SELECT e FROM EstudioEntity e where e.analista._id = :id"),
-        @NamedQuery(name = "getEstudiosEncuestado", query = "select es from EstudioEntity es where es.lugar = :lugar and es.nivelSocioEconomico = :nivelSocioeconomico")
+        @NamedQuery(name = "getEstudios", query = "select es from EstudioEntity es where es.lugar = :lugar and es.nivelSocioEconomico = :nivelSocioeconomico"),
+        @NamedQuery(name = "getEstudiosEncuestado", query = "select es from EstudioEntity es where es._id in (select estenc.estudio._id from EstudioEncuestadoEntity estenc where estenc.encuestado = :encuestado) and es.estado != 'Culminado'"),
+        @NamedQuery(name = "getEstudiosSinEncuesta", query = "select es from EstudioEntity es where es._id not in (select enc.estudio._id from EncuestaEntity enc)")
 })
 public class EstudioEntity extends BaseEntity{
     //private List<ClienteEstudioEntity> clienteestudios;
@@ -82,6 +85,7 @@ public class EstudioEntity extends BaseEntity{
 
     @Basic
     @Column(name = "fecha_inicio")
+    @JsonbDateFormat(value = "yyyy-MM-dd")
     private Date fechaInicio;
     public Date getFechaInicio() {
         return fechaInicio;
@@ -93,6 +97,7 @@ public class EstudioEntity extends BaseEntity{
 
     @Basic
     @Column(name = "fecha_fin")
+    @JsonbDateFormat(value = "yyyy-MM-dd")
     private Date fechaFin;
     public Date getFechaFin() {
         return fechaFin;

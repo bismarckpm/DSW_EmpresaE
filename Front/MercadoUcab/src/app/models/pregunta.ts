@@ -8,7 +8,7 @@ export class Pregunta {
     descripcion: string;
     tipo: TipoPregunta;
     subcategoria: Subcategoria;
-    opciones: Opcion;
+    opciones: Opcion[];
 
     constructor(id: number){
         this._id = id;

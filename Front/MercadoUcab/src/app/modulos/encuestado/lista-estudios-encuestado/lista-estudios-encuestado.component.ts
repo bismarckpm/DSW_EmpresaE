@@ -5,11 +5,10 @@ import {EstudioService} from '../../../services/estudio.service';
 import { PreguntaService } from 'src/app/services/pregunta.service';
 import { Estudio } from '../../../models/estudio';
 import { Pregunta } from '../../../models/pregunta';
-import { TipoPregunta } from '../../../models/tipo-pregunta';
 import { Opcion } from '../../../models/opcion';
 import { EncuestaService } from 'src/app/services/encuesta.service';
 
-class Multiple { constructor(public id: number){} }
+class Multiple { constructor(public _id: number){} }
 
 @Component({
   selector: 'app-lista-estudios-encuestado',
@@ -21,7 +20,9 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
 
   estudios: Estudio[] = [];
   preguntasEncuesta: Pregunta[] = [];
-  opciones: Opcion[] = [];
+  // opciones: Opcion[] = [];
+  descripPreguntas: string[] = [];
+  descripRespuestas: string[] = [];
   formEstudioEncuestado: FormGroup;
 
   // objeto individual, cada pregunta que sera agregada a la lista de respuesta
@@ -29,18 +30,8 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
   respuestaAPregunta: any = {
     // id de la pregunta a responder
     _id: 0,
-    respuesta: {
-      texto: '',
-      opciones: []
-    }
-  };
-
-  @Input() respuestas: any = {
-    opcionesVF: [],
-    opcionesRg: [],
-    opcionesMulti: [],
-    opcionesSimple: [],
-    textos: ['prueba1', 'prueba2']
+    texto: '',
+    opciones: []
   };
 
   // objeto para registrar la respuesta seleccionada segun el tipo de pregunta
@@ -102,7 +93,7 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
     this.listaOpciones.push(this.respuestaDOpcion);
     this.respuestaDOpcion = {_id: 0};
     this.respuestaAPregunta._id = idPregunta;
-    this.respuestaAPregunta.respuesta.opciones = this.listaOpciones;
+    this.respuestaAPregunta.opciones = this.listaOpciones;
     this.listaOpciones = [];
     console.log('objeto respuesta a pregunta');
     console.log(this.respuestaAPregunta);
@@ -111,15 +102,13 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
     console.log(this.listaRespuestas);
     this.respuestaAPregunta = {
       _id: 0,
-      respuesta: {
-        texto: '',
-        opciones: []
-      }
+      texto: '',
+      opciones: []
     };
   }
 
   addRespuestaAbierta(idPregunta): void {
-    this.respuestaAPregunta.respuesta.texto = this.respuestaAbierta;
+    this.respuestaAPregunta.texto = this.respuestaAbierta;
     this.respuestaAbierta = '';
     this.respuestaAPregunta._id = idPregunta;
     console.log('objeto respuesta a pregunta');
@@ -129,10 +118,8 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
     console.log(this.listaRespuestas);
     this.respuestaAPregunta = {
       _id: 0,
-      respuesta: {
-        texto: '',
-        opciones: []
-      }
+      texto: '',
+      opciones: []
     };
   }
 
@@ -142,7 +129,7 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
     }
     console.log(this.listaOpciones);
     this.respuestaAPregunta._id = idPregunta;
-    this.respuestaAPregunta.respuesta.opciones = this.listaOpciones;
+    this.respuestaAPregunta.opciones = this.listaOpciones;
     this.listaOpciones = [];
     console.log('objeto respuesta a pregunta');
     console.log(this.respuestaAPregunta);
@@ -151,10 +138,32 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
     console.log(this.listaRespuestas);
     this.respuestaAPregunta = {
       _id: 0,
-      respuesta: {
-        texto: '',
-        opciones: []
-      }
+      texto: '',
+      opciones: []
     };
+  }
+
+  buscarDescripPreguntas(): void {
+    for (const resp of this.listaRespuestas) {
+      for (const preg of this.preguntasEncuesta) {
+        if (resp._id === preg._id){
+          this.descripPreguntas.push(preg.descripcion);
+        }
+      }
+    }
+  }
+
+  buscarDescripRespuestas(): void {
+    for (const resp of this.listaRespuestas) {
+      for (const preg of this.preguntasEncuesta) {
+        for (const op of preg.opciones) {
+          if (resp.opciones._id === op._id){
+            this.descripRespuestas.push(op.descripcion);
+          }
+        }
+      }
+    }
+    console.log('lista opciones');
+    console.log(this.descripRespuestas);
   }
 }

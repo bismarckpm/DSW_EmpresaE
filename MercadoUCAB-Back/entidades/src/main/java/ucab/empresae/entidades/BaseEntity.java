@@ -11,24 +11,19 @@ public class BaseEntity implements Serializable {
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     private long _id;
 
-
-    //endregion
-
-    //region Method
-
-
-    public BaseEntity( long id )
-    {
+    public BaseEntity( long id ) {
         _id = id;
     }
 
-    public BaseEntity()
-    {
+    public BaseEntity() {
+
     }
 
-
-    public long get_id()
-    {
+    public long get_id() {
         return _id;
+    }
+
+    public void set_id( long id ) {
+        this._id = id;
     }
 }

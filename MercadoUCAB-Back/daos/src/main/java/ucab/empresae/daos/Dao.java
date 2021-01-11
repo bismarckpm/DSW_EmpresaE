@@ -36,6 +36,7 @@ public class Dao<T>
             _daoHandler.beginTransaction();
             _em.persist( entity );
             _em.flush();
+            _em.clear();
             _daoHandler.finishTransaction();
         }
         catch ( Exception e )
@@ -55,6 +56,7 @@ public class Dao<T>
             _daoHandler.beginTransaction();
             _em.merge( entity );
             _em.flush();
+            _em.clear();
             _daoHandler.finishTransaction();
 
         }
@@ -80,8 +82,12 @@ public class Dao<T>
         try
         {
             _daoHandler.beginTransaction();
+            if (!_em.contains(entity)) {
+                entity = _em.merge(entity);
+            }
             _em.remove( entity );
             _em.flush();
+            _em.clear();
             _daoHandler.finishTransaction();
 
         }
@@ -121,7 +127,7 @@ public class Dao<T>
         {
             throw e;
         }
-
+        _em.clear();
         return list;
     }
 
@@ -143,13 +149,18 @@ public class Dao<T>
         try
         {
             final BaseEntity base = ( BaseEntity ) _em.find( type, id );
-            base.get_id();
-            entity = ( T ) base;
+            if(base !=null) {
+                base.get_id();
+                entity = ( T ) base;
+            } else {
+                entity = null;
+            }
         }
         catch ( Exception e )
         {
             throw e;
         }
+        _em.clear();
         return entity;
     }
 

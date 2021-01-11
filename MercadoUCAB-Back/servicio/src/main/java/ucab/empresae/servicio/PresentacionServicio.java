@@ -9,8 +9,18 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
+/**
+ * Servicio de apis destinada a las transacciones correspondientes a las presentaciones de productos.
+ */
 @Path("/presentacion")
 public class PresentacionServicio {
+
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/presentacion
+     * @apiNote Api de tipo get hecha para retornar todas las presentaciones guardadas en sistema.
+     * @return Lista de objetos de tipo PresentacionEntity
+     * @see PresentacionEntity Entidad persistente utilizada para retornar las presentaciones en sistema.
+     */
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getPresentaciones() {
@@ -24,6 +34,14 @@ public class PresentacionServicio {
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/presentacion
+     * @apiNote Api del tipo POST encargada de añadir una presentación nueva.
+     * @param dtoPresentacion Objeto de tipo DtoPresentacion
+     * @see DtoPresentacion Data transfer object utilizado para obtener los datos de la presentación a ingresar.
+     * @return Objeto de tipo PresentacionEntity
+     * @see PresentacionEntity Entidad persistente utilizada para insertar la presentacion nueva.
+     */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -44,6 +62,12 @@ public class PresentacionServicio {
 
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/presentacion
+     * @apiNote Api de tipo @DELETE encargada de eliminar una presentación de producto del sistema.
+     * @param id Objeto de tipo long que representa el id de la presentación a eliminar.
+     * @return ok cuando el objeto fue eliminado con exito.
+     */
     @DELETE
     @Path("/{id}")
     @Produces(value = MediaType.APPLICATION_JSON)
@@ -62,6 +86,13 @@ public class PresentacionServicio {
 
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/presentacion
+     * @apiNote Api de tipo PUT hecho para actualizar los datos de la presentación.
+     * @param id Objeto de tipo long que representa al id de la presentación a actualizar.
+     * @param dtoPresentacion Objeto de tipo DtoPresentación utilizado para obtener los datos de la presentacion
+     * @return Objeto de tipo PresentacionEntity
+     */
     @PUT
     @Path("/{id}")
     public Response updatePresentacion(@PathParam("id") long id, DtoPresentacion dtoPresentacion) {

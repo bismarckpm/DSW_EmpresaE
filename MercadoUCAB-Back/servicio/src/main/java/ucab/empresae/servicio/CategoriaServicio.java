@@ -1,23 +1,29 @@
 package ucab.empresae.servicio;
-/**
- * Api Services necesarias para las categorias
- */
 
+import Comandos.ComandoBase;
+import Comandos.ComandoFactory;
 import ucab.empresae.daos.DaoCategoria;
 import ucab.empresae.daos.DaoFactory;
 import ucab.empresae.dtos.DtoCategoria;
 import ucab.empresae.entidades.CategoriaEntity;
 import ucab.empresae.entidades.EntidadesFactory;
+import ucab.empresae.excepciones.CategoriaException;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/**
+ * Api service encargada de las transacciones que tiene que ver con categorias
+ * @author José Prieto
+ */
 @Path("/categoria")
 public class CategoriaServicio extends AplicacionBase {
 
 
-
+    private ComandoBase comando;
     private DaoCategoria dao = DaoFactory.DaoCategoriaInstancia();
     private CategoriaEntity categoria = EntidadesFactory.CategoriaInstance();
 
@@ -33,15 +39,23 @@ public class CategoriaServicio extends AplicacionBase {
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/categoria
      * Api del tipo @GET para obtener todas las categorias existentes en la base de datos
-     * @return retorna una lista de Categorias del tipo CategoriaEntity
+     * @return retorna una lista de objetos del tipo DtoCategoria
      */
     @GET
-    @Produces(value = MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response getCategorias() {
         try {
-            return Response.ok(this.dao.findAll(CategoriaEntity.class)).build();
-        } catch (Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+            this.comando = ComandoFactory.comandoGetCategoriasInstancia();
+            return Response.ok(this.comando.getResult()).build();
+        } catch (CategoriaException e) {
+            JsonObject excepcion = Json.createObjectBuilder()
+                    .add("mensaje", e.getMessage()).build();
+            return  Response.status(500).entity(excepcion).build();
+        } catch (Exception e) {
+            JsonObject excepcion = Json.createObjectBuilder()
+                    .add("mensaje", e.getMessage()).build();
+            return  Response.status(500).entity(excepcion).build();
         }
     }
 
@@ -56,9 +70,12 @@ public class CategoriaServicio extends AplicacionBase {
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getCategoria(@PathParam("id") long id) {
         try {
-            return Response.ok(this.dao.find(id, CategoriaEntity.class)).build();
+            this.comando = ComandoFactory.comandoGetCategoriaInstancia(id);
+            return Response.ok(this.comando.getResult()).build();
         } catch (Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+            JsonObject excepcion = Json.createObjectBuilder()
+                    .add("mensaje", ex.getMessage()).build();
+            return  Response.status(500).entity(excepcion).build();
         }
     }
 
@@ -113,8 +130,7 @@ public class CategoriaServicio extends AplicacionBase {
     public Response deleteCategoria(@PathParam("id") long id) {
         try {
             this.categoria = this.dao.find(id, CategoriaEntity.class);
-            this.dao.delete(this.categoria);
-            return Response.ok().build();
+            return Response.ok(this.dao.delete(this.categoria)).build();
         } catch(Exception ex){
             return Response.status(Response.Status.NOT_ACCEPTABLE).entity(ex).build();
         }

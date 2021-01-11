@@ -2,12 +2,12 @@ package ucab.empresae.entidades;
 
 public class EntidadesFactory {
 
-    public static BaseEntity BaseEntityInstance() {
-        return new BaseEntity();
-    }
-
     public static CategoriaEntity CategoriaInstance() {
         return new CategoriaEntity();
+    }
+
+    public static CategoriaEntity CategoriaInstance(long id) {
+        return new CategoriaEntity(id);
     }
 
     public static ClienteEntity ClienteInstance() {
@@ -109,4 +109,5 @@ public class EntidadesFactory {
     public static UsuarioEntity UsuarioInstance() {
         return new UsuarioEntity();
     }
+
 }

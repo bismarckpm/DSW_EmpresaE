@@ -1,6 +1,7 @@
 package ucab.empresae.dtos;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,14 @@ public class DtoFactory {
 
     public static DtoCategoria DtoCategoriaInstance() {
         return new DtoCategoria();
+    }
+
+    public static DtoCategoria DtoCategoriaInstance(long id) throws Exception {
+        return new DtoCategoria(id);
+    }
+
+    public static ArrayList<DtoCategoria> DtoCategoriasInstancia() {
+        return new ArrayList<>();
     }
 
     public static DtoCliente DtoClienteInstance() {

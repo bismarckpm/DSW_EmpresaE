@@ -1,7 +1,7 @@
 package Comandos.Categoria;
 
 import Comandos.ComandoBase;
-import Mappers.Categoria.CategoriaMapper;
+import Mappers.GenericMapper;
 import Mappers.MapperFactory;
 import ucab.empresae.daos.Dao;
 import ucab.empresae.daos.DaoFactory;
@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Clase encargada de retornar la lista de todas las categorías registradas en el sistema.
  * @author José Prieto
  */
 public class ComandoGetCategorias extends ComandoBase<List<DtoCategoria>> {
@@ -38,7 +39,7 @@ public class ComandoGetCategorias extends ComandoBase<List<DtoCategoria>> {
         List<BaseEntity> categorias = daoCategoria.findAll(CategoriaEntity.class);
 
         if(!categorias.isEmpty()) {
-            CategoriaMapper categoriaMapper = MapperFactory.categoriaMapperInstancia();
+            GenericMapper categoriaMapper = MapperFactory.categoriaMapperInstancia();
             this.dtoCategorias = categoriaMapper.CreateDtoList(categorias);
         } else{
             throw new CategoriaException("categorias esta vacio.");

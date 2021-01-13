@@ -7,6 +7,7 @@ import ucab.empresae.dtos.DtoCategoria;
 import ucab.empresae.dtos.DtoFactory;
 import ucab.empresae.entidades.BaseEntity;
 import ucab.empresae.entidades.CategoriaEntity;
+import ucab.empresae.entidades.EntidadesFactory;
 import ucab.empresae.excepciones.CategoriaException;
 
 import java.util.ArrayList;
@@ -51,13 +52,13 @@ public class CategoriaMapper extends GenericMapper<DtoCategoria> {
      */
     @Override
     public BaseEntity CreateEntity(DtoCategoria dto) throws CategoriaException {
-        if(dto.get_id() <= 0) {
+        if(dto.get_id() < 0) {
             throw new CategoriaException("Id debe ser mayor a 0.");
         }else if(dto.getNombre() == null) {
             throw new CategoriaException("Nombre no debe ser null.");
         } else {
             DaoCategoria daoCategoria = DaoFactory.DaoCategoriaInstancia();
-            CategoriaEntity categoria = daoCategoria.find(dto.get_id(), CategoriaEntity.class);
+            CategoriaEntity categoria = EntidadesFactory.CategoriaInstance(dto.get_id());
             if(categoria == null) {
                 throw new CategoriaException("Entidad correspondiente al dto no encontrada.");
             } else {

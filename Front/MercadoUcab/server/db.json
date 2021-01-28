@@ -4,7 +4,7 @@
       "_id": 50,
       "username": "Pedro",
       "clave ": "pedro",
-      "rol": "Encuestado",
+      "rol": "Administrador",
       "autenticacion": "valida"
     },
     {
@@ -158,7 +158,7 @@
   "pregunta": [
     {
       "_id": 1,
-      "descripcion": "asdsad",
+      "descripcion": "Pregunta1",
       "estado": "a",
       "tipo": {
         "_id": 1,
@@ -188,7 +188,7 @@
     },
     {
       "_id": 3,
-      "descripcion": "asdasd",
+      "descripcion": "Pregunta3",
       "estado": "a",
       "tipo": {
         "_id": "4",

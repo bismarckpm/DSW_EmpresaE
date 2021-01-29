@@ -34,8 +34,7 @@ export class FormCategoriaComponent implements OnInit {
     else{
       alert('FILL ALL FIELDS');
     }
-
-
+    location.reload();
   }
 
 

@@ -67,8 +67,9 @@ import { AnalistaService } from './services/analista.service';
 import { PreguntaService } from './services/pregunta.service';
 import { PresentacionService } from './services/presentacion.service';
 
-// Graficos
-import { HighchartsChartComponent } from 'highcharts-angular';
+// Modulos
+import { ToastrModule } from 'ngx-toastr';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
   declarations: [
@@ -118,8 +119,6 @@ import { HighchartsChartComponent } from 'highcharts-angular';
     ListaEstudiosAnalistaComponent,
     ListaEstudiosEncuestadoComponent,
 
-    // Grafico
-    HighchartsChartComponent
   ],
   imports: [
     BrowserModule,
@@ -129,6 +128,13 @@ import { HighchartsChartComponent } from 'highcharts-angular';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    HighchartsChartModule,
+
+    // Toast
+    ToastrModule.forRoot({
+      timeOut: 4500,
+      positionClass: 'toast-bottom-right',
+    }),
 ],
 
   providers: [

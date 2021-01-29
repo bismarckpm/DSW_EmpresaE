@@ -69,7 +69,7 @@ export class ListaClientesComponent implements OnInit {
     this.clienteData.lugar._id = this.auxParroquiaID;
     this.clienteService.updateCliente(this.clienteData._id, this.clienteData).subscribe(data => {
     });
-    this.loadCliente();
+    location.reload();
   }
 
   editar(cliente){

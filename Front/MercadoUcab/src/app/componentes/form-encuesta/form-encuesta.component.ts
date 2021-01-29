@@ -4,6 +4,7 @@ import { EncuestaService } from 'src/app/services/encuesta.service';
 import { EstudioService } from '../../services/estudio.service';
 import { TipoPreguntaService } from '../../services/tipo-pregunta.service';
 import { PreguntaService } from '../../services/pregunta.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-form-encuesta',
@@ -14,20 +15,35 @@ export class FormEncuestaComponent implements OnInit {
 
   @Input() encuesta = {
     _id: 0,
-    estado: '',
+    estado: 'Activo',
     fechaInicio: '',
     fechaFin: '',
     estudio: {_id: 0},
     preguntas: []
   };
   @Input() preguntaEstudio = { };
-  @Input() preguntaInsertar = {_id: 0};
+  @Input() preguntaInsertar1 = {_id: 0};
+  @Input() preguntaInsertar2 = {_id: 0};
+  @Input() preguntaInsertar3 = {_id: 0};
+  @Input() preguntaInsertar4 = {_id: 0};
+  @Input() preguntaInsertar5 = {_id: 0};
+  @Input() preguntaInsertar6 = {_id: 0};
+  @Input() preguntaInsertar7 = {_id: 0};
+  @Input() preguntaInsertar8 = {_id: 0};
+  @Input() preguntaInsertar9 = {_id: 0};
+  @Input() preguntaInsertar10 = {_id: 0};
+  @Input() preguntaInsertar11 = {_id: 0};
+  @Input() preguntaInsertar12 = {_id: 0};
+  @Input() preguntaInsertar13 = {_id: 0};
+  @Input() preguntaInsertar14 = {_id: 0};
+  @Input() preguntaInsertar15 = {_id: 0};
+  cantPreguntas = 0;
   listaPreguntasInsertar = [];
   preguntasMostrar: any = [];
   estudios: any = [];
   tipoPreguntas: any = [];
   opcionesCantidad: number[] = [5, 10, 15];
-  auxIterador = [];
+  sugerenciasPreguntas: any = [];
 
   /// PAra validar
   formEncuesta: FormGroup;
@@ -38,6 +54,7 @@ export class FormEncuestaComponent implements OnInit {
     private servicioEstudio: EstudioService,
     private servicioTipoPregunta: TipoPreguntaService,
     private servicioPregunta: PreguntaService,
+    private toast: ToastService,
     private formBuilder: FormBuilder
   ) {
     this.createForm();
@@ -49,10 +66,14 @@ export class FormEncuestaComponent implements OnInit {
   }
 
   addEncuesta(): any{
-
+    console.log(this.encuesta);
     if (this.formEncuesta.valid) {
       this.encuesta.preguntas = this.listaPreguntasInsertar;
       this.servicio.createEncuesta(this.encuesta).subscribe((data: {}) => {
+        this.toast.showSuccess('La encuesta ha sido creada', 'Creada satisfactoriamente');
+      },
+      (error) => {
+        this.toast.showError('Error de conexión', 'Intentelo más tarde');
       });
       this.encuesta = {
         _id: 0,
@@ -62,31 +83,26 @@ export class FormEncuestaComponent implements OnInit {
         estudio: {_id: 0},
         preguntas: []
       };
-      this.auxIterador = [];
-      alert('Agregó la encuesta');
+      location.reload();
     }
     else{
-      alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
+      this.toast.showError('Campos Incompletos', 'ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
     }
-
   }
 
   // agregar pregunta a la lista de preguntas
-  addPreguntaEncuesta(): void {
-    this.listaPreguntasInsertar.push(this.preguntaInsertar);
-    console.log(this.listaPreguntasInsertar);
-    this.preguntaInsertar = {_id: 0};
-  }
-
-  asigCantPregunta(cant: number): void {
-    for (let i = 0; i < cant; i++) {
-      this.auxIterador.push(i);
+  addPreguntaEncuesta(preguntaInsertar): void {
+    if (preguntaInsertar._id !== 0){
+      this.listaPreguntasInsertar.push(preguntaInsertar);
+      console.log(this.listaPreguntasInsertar);
+    }else {
+      this.toast.showError('Seleccion incorrecta', 'Seleccione una pregunta válida');
     }
   }
 
   ////// cargar de servicios
   cargarEstudios(): void {
-    this.servicioEstudio.getEstudios().subscribe((data: {}) => {
+    this.servicioEstudio.getEstudiosSinEncuesta().subscribe((data: {}) => {
       this.estudios = data;
     });
   }
@@ -103,15 +119,35 @@ export class FormEncuestaComponent implements OnInit {
     this.servicioPregunta.getPreguntasXSubcategoria(this.encuesta.estudio._id).subscribe((data: {}) => {
       this.preguntasMostrar = data;
     });
-    this.auxIterador = [];
-    this.asigCantPregunta(i);
+    this.cantPreguntas = i;
+  }
+
+  sugerirPreguntas(): void{
+    this.servicioPregunta.sugerirPreguntas(this.encuesta.estudio._id).subscribe((data: {}) => {
+      this.sugerenciasPreguntas = data;
+    });
+  }
+
+  limpiar(): void{
+    this.preguntaInsertar1 = {_id: 0};
+    this.preguntaInsertar2 = {_id: 0};
+    this.preguntaInsertar3 = {_id: 0};
+    this.preguntaInsertar4 = {_id: 0};
+    this.preguntaInsertar5 = {_id: 0};
+    this.preguntaInsertar6 = {_id: 0};
+    this.preguntaInsertar7 = {_id: 0};
+    this.preguntaInsertar8 = {_id: 0};
+    this.preguntaInsertar9 = {_id: 0};
+    this.preguntaInsertar10 = {_id: 0};
+    this.preguntaInsertar11 = {_id: 0};
+    this.preguntaInsertar12 = {_id: 0};
+    this.preguntaInsertar13 = {_id: 0};
+    this.preguntaInsertar14 = {_id: 0};
+    this.preguntaInsertar15 = {_id: 0};
+    this.cantPreguntas = 0;
   }
 
   ///// Metodos para las validaciones
-  get estadoEncuesta(): AbstractControl{
-    return this.formEncuesta.get('estadoEncuesta');
-  }
-
   get fechaInicioEncuesta(): AbstractControl{
     return this.formEncuesta.get('fechaInicioEncuesta');
   }
@@ -130,7 +166,6 @@ export class FormEncuestaComponent implements OnInit {
 
   createForm(): void{
     this.formEncuesta = this.formBuilder.group({
-      estadoEncuesta: ['', Validators.required],
       fechaInicioEncuesta: ['', [Validators.required, Validators.pattern(this.patronFechaEstudio)]],
       fechaFinEncuesta: ['', [ Validators.pattern(this.patronFechaEstudio)]],
       estudio: ['', Validators.required],

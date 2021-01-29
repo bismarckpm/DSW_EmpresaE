@@ -12,6 +12,7 @@ export class Estudio {
     comentarioAnalista: string;
     edadMinima: number;
     edadMaxima: number;
+    genero: string;
     fechaInicio: string;
     fechaFin: string;
     lugar: Lugar;

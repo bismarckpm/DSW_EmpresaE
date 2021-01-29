@@ -22,7 +22,7 @@
           </div>
           <div class="col-md-6 mb-3">
             <label for="clave">Clave</label>
-            <input type="text" [(ngModel)]="usuario.clave" class="form-control" id="clave" placeholder="" formControlName="claveUsuario" name="clave" value="">
+            <input type="password" [(ngModel)]="usuario.clave" class="form-control" id="clave" placeholder="" formControlName="claveUsuario" name="clave" value="">
             <div *ngIf="claveUsuario.invalid && (claveUsuario.dirty || claveUsuario.touched)" class="alert alert-danger">
               <div *ngIf="claveUsuario.errors.required">
                 Este campo es obligatorio

@@ -18,8 +18,13 @@
           <td>{{ estudioEncuestado.subcategoria.nombre }}</td>
           <td>
             <div  class="d-flex justify-content-around">
-              <button  type="button" class="btn btn-success btn-sm" (click)="loadPreguntasResponder(estudioEncuestado._id)"
-              data-toggle="modal" data-target="#exampleModal">Responder</button>
+              <button  type="button" class="btn btn-primary btn-sm" (click)="loadPreguntasResponder(estudioEncuestado._id)"
+                       data-toggle="modal" data-target="#exampleModal" [ngClass]="{'d-none': estudioEncuestado.estadoEstudioEncuestado == 'Finalizado'}">
+                Responder
+              </button>
+              <label for="" class="text-success d-none" [ngClass]="{'d-block': estudioEncuestado.estadoEstudioEncuestado == 'Finalizado'}">
+                Completada
+              </label>
 
               <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -72,7 +77,7 @@
                                 </div>
                               </div>
                               <div class="col-md-2 col-sm-3 mb-2">
-                                <button type="button" class="btn btn-primary" (click)="addOpcionesRespuesta(pregunta._id)" 
+                                <button type="button" class="btn btn-primary" (click)="addOpcionesRespuesta(pregunta._id)"
                                 [ngClass]="{'d-none': pregunta.tipo._id == 1 || pregunta.tipo._id == 4}">
                                   Aceptar
                                 </button>

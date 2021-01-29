@@ -40,7 +40,7 @@ export class RegistrarseComponent implements OnInit {
   genero: any;
   ocupacion: any;
   nivelSocioEconomico: any;
-  hijo: any;
+ 
   lugar: any;
   usuario: any;
   username: any;

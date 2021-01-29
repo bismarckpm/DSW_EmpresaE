@@ -105,20 +105,6 @@
         </div>
         <div class="row">
           <div class="col-md-4 mb-3">
-            <label for="estado">Estado</label>
-            <select class="custom-select d-block w-100"  [(ngModel)]="estudio.lugar._id" (click)="busquedaMunicipio(estudio.lugar._id)"
-            formControlName="lugarEstudio"  value="estudio.lugar._id">
-              <option value="0">Choose...</option>
-              <option  *ngFor="let estado of estados" [ngValue]= "estado._id"  >{{estado.nombre}}</option>
-            </select>
-            <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
-              <div *ngIf="lugarEstudio.errors.required">
-                Este campo es obligatorio
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4 mb-3">
             <label for="municipio">Municipio</label>
             <select class="custom-select d-block w-100"  [(ngModel)]="estudio.lugar.lugar._id" (click)="busquedaParroquia(estudio.lugar.lugar._id)"formControlName="lugarEstudio"  value="estudio.lugar._id">
               <option value="0">Choose...</option>

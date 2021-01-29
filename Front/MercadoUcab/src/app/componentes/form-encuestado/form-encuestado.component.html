@@ -63,19 +63,6 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-5 mb-3">
-            <label for="estado">Estado</label>
-            <select class="custom-select d-block w-100" formControlName="estadoEncuestado" id="estado">
-              <option value="">Choose...</option>
-              <option>Activo</option>
-              <option>Inactivo</option>
-            </select>
-            <div *ngIf="estadoEncuestado.invalid && (estadoEncuestado.dirty || estadoEncuestado.touched)" class="alert alert-danger">
-              <div *ngIf="estadoEncuestado.errors.required">
-                Este campo es obligatorio
-              </div>
-            </div>
-          </div>
         </div>
       </form>
     </div>

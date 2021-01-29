@@ -48,19 +48,6 @@
                               </div>
                             </div>
                           </div>
-                          <div class="col-md-5 mb-3">
-                            <label >Estado</label>
-                            <select class="custom-select d-block w-100"  [(ngModel)]="presentacionData.estado" formControlName="estadopresentacion" name="estado">
-                              <option value="">Choose...</option>
-                              <option value="a">Activo</option>
-                              <option value="i">Inactivo</option>
-                            </select>
-                            <div *ngIf="estadopresentacion.invalid && (estadopresentacion.dirty || estadopresentacion.touched)" class="alert alert-danger">
-                              <div *ngIf="estadopresentacion.errors.required">
-                                Este campo es obligatorio
-                              </div>
-                            </div>
-                          </div>
                         </div>
                           <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

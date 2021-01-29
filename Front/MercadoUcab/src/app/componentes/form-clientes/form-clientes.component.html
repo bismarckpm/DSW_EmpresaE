@@ -49,18 +49,6 @@
               </div>
             <div class="form-row">
               <div class="form-group col-md-4">
-                <label for="estado">Estado</label>
-                <select class="custom-select d-block w-100"  [(ngModel)]="cliente.lugar._id" (click)="busquedaMunicipio(cliente.lugar._id)" id="estado" name="lugar" formControlName="lugarCliente" value="cliente.lugar._id">
-                  <option selected>Choose...</option>
-                  <option  *ngFor="let estado of estados" [ngValue]= "estado._id"  >{{estado.nombre}}</option>
-                </select>
-                <div *ngIf="lugarCliente.invalid && (lugarCliente.dirty || lugarCliente.touched)" class="alert alert-danger">
-                  <div *ngIf="lugarCliente.errors.required">
-                    Este campo es obligatorio
-                  </div>
-                </div>
-              </div>
-              <div class="form-group col-md-4">
                 <label for="municipio">Municipio</label>
                 <select class="custom-select d-block w-100"  [(ngModel)]="cliente.lugar.lugar._id" (click)="busquedaParroquia(cliente.lugar.lugar._id)" id="municipio" name="lugar" formControlName="lugarCliente" value="cliente.lugar.lugar._id">
                   <option selected>Choose...</option>
@@ -121,20 +109,6 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-3 mb-3">
-                <label for="estatus">Estado</label>
-                <select class="custom-select d-block w-100" [(ngModel)]="cliente.estado" id="estatus" name="estado" formControlName="estadoCliente">
-                  <option value="">Choose...</option>
-                  <option value="a">Activo</option>
-                  <option value="i">Inactivo</option>
-                </select>
-                <div *ngIf="estadoCliente.invalid && (estadoCliente.dirty || estadoCliente.touched)" class="alert alert-danger">
-                  <div *ngIf="estadoCliente.errors.required">
-                    Este campo es obligatorio
-                  </div>
-                </div>
-              </div>
-
             </div>
             <div class="row">
 

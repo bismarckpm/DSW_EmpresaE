@@ -20,7 +20,7 @@ public class DaoCliente extends Dao<ClienteEntity>{
     public ClienteEntity getClienteByUsuario(UsuarioEntity usuarioEntity){
 
         try{
-            TypedQuery<ClienteEntity> cliente = this._em.createNamedQuery("getClienteByUsuario", ClienteEntity.class);
+            TypedQuery<ClienteEntity> cliente = this._em.createQuery("select c from ClienteEntity c where c.usuario = :usuario", ClienteEntity.class);
             cliente.setParameter("usuario", usuarioEntity).getSingleResult();
 
             ClienteEntity resultado = cliente.getSingleResult();

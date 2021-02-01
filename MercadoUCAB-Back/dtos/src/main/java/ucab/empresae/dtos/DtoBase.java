@@ -1,12 +1,10 @@
 package ucab.empresae.dtos;
 
-import ucab.empresae.excepciones.PruebaExcepcion;
-
 public class DtoBase {
     private long _id;
 
 
-    public DtoBase( long id ) throws Exception
+    public DtoBase( long id )
     {
         set_id( id );
     }
@@ -20,15 +18,11 @@ public class DtoBase {
         return _id;
     }
 
-    public void set_id( long id ) throws PruebaExcepcion
+    public void set_id( long id )
     {
         if ( id >= 0 )
         {
             _id = id;
-        }
-        else
-        {
-            throw new PruebaExcepcion();
         }
     }
 }

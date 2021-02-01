@@ -6,10 +6,14 @@ import Mappers.MapperFactory;
 import ucab.empresae.daos.Dao;
 import ucab.empresae.daos.DaoFactory;
 import ucab.empresae.dtos.DtoCategoria;
+import ucab.empresae.dtos.DtoFactory;
+import ucab.empresae.dtos.DtoResponse;
 import ucab.empresae.entidades.BaseEntity;
 import ucab.empresae.entidades.CategoriaEntity;
 import ucab.empresae.excepciones.CategoriaException;
+import ucab.empresae.excepciones.CustomException;
 
+import javax.json.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +21,7 @@ import java.util.List;
  * Clase encargada de retornar la lista de todas las categorías registradas en el sistema.
  * @author José Prieto
  */
-public class ComandoGetCategorias extends ComandoBase<List<DtoCategoria>> {
+public class ComandoGetCategorias extends ComandoBase<DtoResponse> {
 
     private List<DtoCategoria> dtoCategorias = new ArrayList<>();
 
@@ -34,16 +38,13 @@ public class ComandoGetCategorias extends ComandoBase<List<DtoCategoria>> {
      * @throws Exception En caso de algún problema a la hora de mapear de la lista de entidades a lista de dto
      */
     @Override
-    public void execute() throws Exception {
+    public void execute() throws CustomException {
         Dao daoCategoria = DaoFactory.DaoCategoriaInstancia();
         List<BaseEntity> categorias = daoCategoria.findAll(CategoriaEntity.class);
 
-        if(!categorias.isEmpty()) {
-            GenericMapper categoriaMapper = MapperFactory.categoriaMapperInstancia();
-            this.dtoCategorias = categoriaMapper.CreateDtoList(categorias);
-        } else{
-            throw new CategoriaException("categorias esta vacio.");
-        }
+        GenericMapper categoriaMapper = MapperFactory.categoriaMapperInstancia();
+        this.dtoCategorias = categoriaMapper.CreateDtoList(categorias);
+
     }
 
     /**
@@ -53,8 +54,13 @@ public class ComandoGetCategorias extends ComandoBase<List<DtoCategoria>> {
      * @throws Exception En caso de haber algún problema en métodos llamados con anterioridad
      */
     @Override
-    public List<DtoCategoria> getResult() throws Exception {
+    public DtoResponse getResult() throws Exception {
         execute();
-        return this.dtoCategorias;
+        DtoResponse dtoResponse = DtoFactory.DtoResponseInstance();
+        dtoResponse.setEstado("Exitoso");
+        dtoResponse.setMensaje("Cargando Categorias");
+        dtoResponse.setObjeto(this.dtoCategorias);
+
+        return dtoResponse;
     }
 }

@@ -2,6 +2,7 @@ package Mappers;
 
 import ucab.empresae.entidades.BaseEntity;
 import ucab.empresae.excepciones.CategoriaException;
+import ucab.empresae.excepciones.CustomException;
 
 import java.util.List;
 
@@ -12,12 +13,12 @@ import java.util.List;
  */
 public abstract class GenericMapper <TDto> {
 
-    public abstract TDto CreateDto(BaseEntity entity) throws Exception;
+    public abstract TDto CreateDto(BaseEntity entity) throws CustomException;
 
-    public abstract BaseEntity CreateEntity(TDto dto) throws Exception;
+    public abstract BaseEntity CreateEntity(TDto dto) throws CustomException;
 
-    public abstract List<TDto> CreateDtoList(List<BaseEntity> entities) throws Exception;
+    public abstract List<TDto> CreateDtoList(List<BaseEntity> entities) throws CustomException;
 
-    public abstract List<BaseEntity> CreateEntityList(List<TDto> dtos) throws CategoriaException;
+    public abstract List<BaseEntity> CreateEntityList(List<TDto> dtos) throws CustomException;
 
 }

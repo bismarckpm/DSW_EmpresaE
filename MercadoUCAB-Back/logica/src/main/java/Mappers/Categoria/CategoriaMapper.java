@@ -9,6 +9,7 @@ import ucab.empresae.entidades.BaseEntity;
 import ucab.empresae.entidades.CategoriaEntity;
 import ucab.empresae.entidades.EntidadesFactory;
 import ucab.empresae.excepciones.CategoriaException;
+import ucab.empresae.excepciones.CustomException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,12 +30,12 @@ public class CategoriaMapper extends GenericMapper<DtoCategoria> {
      * @throws Exception En caso de que algún dato sea inválido
      */
     @Override
-    public DtoCategoria CreateDto(BaseEntity entity) throws Exception {
+    public DtoCategoria CreateDto(BaseEntity entity) throws CustomException {
         CategoriaEntity categoria = (CategoriaEntity) entity;
         if(entity.get_id() <= 0) {
-            throw new CategoriaException("Id debe ser mayor a 0.");
+            throw new CustomException("Id debe ser mayor a 0.");
         }else if(categoria.getNombre() == null) {
-            throw new CategoriaException("Nombre no debe ser null.");
+            throw new CustomException("Nombre no debe ser null.");
         }else {
             DtoCategoria dtoCategoria = DtoFactory.DtoCategoriaInstance(categoria.get_id());
             dtoCategoria.setNombre(categoria.getNombre());
@@ -51,16 +52,16 @@ public class CategoriaMapper extends GenericMapper<DtoCategoria> {
      * @throws CategoriaException En caso de que alguno de los datos no sea válido
      */
     @Override
-    public BaseEntity CreateEntity(DtoCategoria dto) throws CategoriaException {
+    public BaseEntity CreateEntity(DtoCategoria dto) throws CustomException {
         if(dto.get_id() < 0) {
-            throw new CategoriaException("Id debe ser mayor a 0.");
+            throw new CustomException("Id debe ser mayor a 0.");
         }else if(dto.getNombre() == null) {
-            throw new CategoriaException("Nombre no debe ser null.");
+            throw new CustomException("Nombre no debe ser null.");
         } else {
             DaoCategoria daoCategoria = DaoFactory.DaoCategoriaInstancia();
             CategoriaEntity categoria = EntidadesFactory.CategoriaInstance(dto.get_id());
             if(categoria == null) {
-                throw new CategoriaException("Entidad correspondiente al dto no encontrada.");
+                throw new CustomException("Entidad correspondiente al dto no encontrada.");
             } else {
                 categoria.setNombre(dto.getNombre());
                 categoria.setEstado("a");
@@ -77,7 +78,7 @@ public class CategoriaMapper extends GenericMapper<DtoCategoria> {
      * @throws Exception En caso de que falle a la hora de llamar a CreateDto
      */
     @Override
-    public List<DtoCategoria> CreateDtoList(List<BaseEntity> entities) throws Exception {
+    public List<DtoCategoria> CreateDtoList(List<BaseEntity> entities) throws CustomException {
         ArrayList<DtoCategoria> dtos = new ArrayList<>();
 
         for (BaseEntity obj : entities) {
@@ -94,7 +95,7 @@ public class CategoriaMapper extends GenericMapper<DtoCategoria> {
      * @throws CategoriaException En caso de que alguna de las llamadas a createEntity falle
      */
     @Override
-    public List<BaseEntity> CreateEntityList(List<DtoCategoria> dtos) throws CategoriaException {
+    public List<BaseEntity> CreateEntityList(List<DtoCategoria> dtos) throws CustomException {
         ArrayList<BaseEntity> categorias = new ArrayList<>();
 
         for (DtoCategoria obj : dtos) {

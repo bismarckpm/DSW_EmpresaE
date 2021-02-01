@@ -18,7 +18,7 @@ public class DaoOpcion extends Dao<OpcionEntity>{
 
     public List<OpcionEntity> getOpciones(PreguntaEntity pregunta){
         try {
-            TypedQuery<OpcionEntity> opciones = this._em.createNamedQuery("getOpciones", OpcionEntity.class);
+            TypedQuery<OpcionEntity> opciones = this._em.createQuery("SELECT op from OpcionEntity op INNER JOIN PreguntaOpcionEntity pregopc ON pregopc.opcion = op where pregopc.pregunta = :pregunta", OpcionEntity.class);
             opciones.setParameter("pregunta", pregunta).getResultList();
 
             List<OpcionEntity> resultado = opciones.getResultList();

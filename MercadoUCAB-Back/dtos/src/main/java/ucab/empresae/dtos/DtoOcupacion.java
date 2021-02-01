@@ -8,6 +8,7 @@ public class DtoOcupacion extends DtoBase {
 
     //Constructores
     public DtoOcupacion() {
+        super();
     }
 
     public DtoOcupacion(long id) throws Exception {

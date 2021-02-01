@@ -52,7 +52,6 @@ public class ComandoGetCategoria extends ComandoBase<DtoBase> {
 
     /**
      * Método encargado de retornar el resultado de la ejecución del código anterior en caso de que
-     * todo sea exitoso
      * @since 13/01/2021
      * @return Objeto de tipo DtoCategoria
      * @throws Exception Excepción lanzada por métodos anteriores.

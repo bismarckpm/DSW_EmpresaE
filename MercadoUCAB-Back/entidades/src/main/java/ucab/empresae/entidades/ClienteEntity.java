@@ -5,9 +5,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "cliente", schema = "mercadeoucab")
-@NamedQueries({
-        @NamedQuery(name = "getClienteByUsuario", query = "select c from ClienteEntity c where c.usuario = :usuario")
-})
 public class ClienteEntity extends BaseEntity{
 
 

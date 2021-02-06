@@ -11,7 +11,7 @@ public class DtoCategoria extends DtoBase{
         super();
     }
 
-    public DtoCategoria(long id) throws Exception {
+    public DtoCategoria(long id){
         super(id);
     }
 

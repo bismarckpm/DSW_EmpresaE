@@ -30,7 +30,7 @@ public class DaoPregunta extends Dao<PreguntaEntity>
     public List<PreguntaEntity> getPreguntasbySubcategoria(long id){
 
         try{
-            TypedQuery<PreguntaEntity> preguntas = this._em.createNamedQuery("getPreguntasbySubcategoria", PreguntaEntity.class);
+            TypedQuery<PreguntaEntity> preguntas = this._em.createQuery("select p from PreguntaEntity p WHERE p.subcategoria._id = :id", PreguntaEntity.class);
             preguntas.setParameter("id", id).getResultList();
 
             List<PreguntaEntity> resultado = preguntas.getResultList();
@@ -49,7 +49,7 @@ public class DaoPregunta extends Dao<PreguntaEntity>
     public List<PreguntaEntity> getPreguntasbyEstudio(long id){
 
         try{
-            TypedQuery<PreguntaEntity> preguntas = this._em.createNamedQuery("getPreguntasbyEstudio", PreguntaEntity.class);
+            TypedQuery<PreguntaEntity> preguntas = this._em.createQuery("select p from PreguntaEntity p where p._id in (select en.pregunta._id from EncuestaEntity en where en.estudio._id = :id) and p.tipo._id != 1", PreguntaEntity.class);
             preguntas.setParameter("id", id).getResultList();
 
             List<PreguntaEntity> resultado = preguntas.getResultList();

@@ -1,8 +1,13 @@
 package ucab.empresae.servicio;
 
+import Comandos.ComandoBase;
+import Comandos.ComandoFactory;
 import ucab.empresae.daos.*;
+import ucab.empresae.dtos.DtoFactory;
 import ucab.empresae.dtos.DtoPregunta;
+import ucab.empresae.dtos.DtoResponse;
 import ucab.empresae.entidades.*;
+import ucab.empresae.excepciones.CustomException;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -16,6 +21,8 @@ import java.util.List;
 
 @Path("/pregunta")
 public class PreguntaServicio {
+
+    private ComandoBase comando;
 
     /**
      * Metodo que recibe un objeto pregunta para borrar las opciones asociadas a esa pregunta
@@ -40,13 +47,21 @@ public class PreguntaServicio {
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getPreguntas() {
-        List<PreguntaEntity> preguntas = null;
+        DtoResponse response = DtoFactory.DtoResponseInstance();
         try {
-            DaoPregunta dao = new DaoPregunta();
-            preguntas = dao.findAll(PreguntaEntity.class);
-            return Response.ok(preguntas).build();
-        } catch (Exception ex) {
-            return Response.status(500).entity(ex.getMessage()).build();
+            this.comando = ComandoFactory.comandoGetPreguntasInstancia();
+            return Response.ok(this.comando.getResult()).build();
+        }catch (CustomException cex){
+            response.setEstado("ERROR");
+            response.setMensaje(cex.getMensaje());
+            response.setCodError(cex.getCodError());
+            return Response.status(500).entity(response).build();
+        }
+        catch (Exception ex) {
+            response.setEstado("ERROR");
+            response.setMensaje(ex.getMessage());
+            response.setCodError("SERPRE001");
+            return Response.status(500).entity(response).build();
         }
     }
 

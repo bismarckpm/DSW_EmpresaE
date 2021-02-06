@@ -4,9 +4,16 @@ import ucab.empresae.dtos.DtoTipo;
 import ucab.empresae.servicio.TipoServicio;
 import javax.ws.rs.core.Response;
 
-
+/**
+ * Pruebas unitarias encargadas de testear el funcionamiento del servicio TipoServicio
+ * @see TipoServicio Servicio a probar.
+ */
 public class TipoServicio_Test {
 
+    /**
+     * Prueba unitaria que testea el funcionamiento del método encargado de listar todos los tipos registrados
+     * en el sistema.
+     */
     @Test
     //Prueba Unitaria de la lista de tipos
     public void getTiposTest(){
@@ -16,6 +23,10 @@ public class TipoServicio_Test {
 
     }
 
+    /**
+     * Prueba unitaria que testea el funcionamiento del método encargado de retornar un tipo especificado por medio
+     * de su id.
+     */
     @Test
     //Prueba Unitaria del consultar tipos
     public void getTipoTest(){
@@ -24,6 +35,9 @@ public class TipoServicio_Test {
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 
+    /**
+     * Prueba unitaria que testea el funcionamiento del método encargado de añadir un tipó nuevo al sistema.
+     */
     @Test
     //Prueba Unitaria del registro de tipos
     public void addTipoTest(){
@@ -36,6 +50,10 @@ public class TipoServicio_Test {
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 
+    /**
+     * Prueba unitaria que testea el funcionamiento del método encargado de actualizar la información de un tipo
+     * especificado por medio de su id.
+     */
     @Test
     //Prueba Unitaria modificacion de tipos
     public void updateTipoTest(){
@@ -48,6 +66,10 @@ public class TipoServicio_Test {
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 
+    /**
+     * Prueba unitaria que testea el funcionamiento del método encargado de borrar un tipo especificado por medio de su
+     * id.
+     */
     @Test
     //Prueba Unitaria eliminacion de tipos
     public void deleteTipoTest(){

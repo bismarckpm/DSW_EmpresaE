@@ -55,14 +55,4 @@ public class GeneroEntity extends BaseEntity {
     public void setEncuestados(List<EncuestadoEntity> encuestados) {
         this.encuestados = encuestados;
     }*/
-
-    @ManyToMany(mappedBy = "generos")
-    private List<EstudioEntity> estudios;
-    public List<EstudioEntity> getEstudios() {
-        return estudios;
-    }
-
-    public void setEstudios(List<EstudioEntity> estudios) {
-        this.estudios = estudios;
-    }
 }

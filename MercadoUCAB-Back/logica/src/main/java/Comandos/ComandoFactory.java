@@ -1,6 +1,7 @@
 package Comandos;
 
 import Comandos.Categoria.*;
+import Comandos.Estudio.*;
 import Comandos.Presentacion.*;
 import Comandos.Pregunta.*;
 import ucab.empresae.dtos.DtoCategoria;
@@ -51,5 +52,27 @@ public class ComandoFactory {
 
     public static ComandoGetPreguntas comandoGetPreguntasInstancia() {
         return new ComandoGetPreguntas();
+    }
+
+    //Fábrica de los comandos para Estudio
+
+    public static ComandoGetEstudios comandoGetEstudiosInstancia() {
+        return new ComandoGetEstudios();
+    }
+
+    public static ComandoGetEstudio comandoGetEstudioInstancia(long id) {
+        return new ComandoGetEstudio(id);
+    }
+
+    public static ComandoGetEstudioSinEncuesta comandoGetEstudioSinEncuesta() {
+        return new ComandoGetEstudioSinEncuesta();
+    }
+
+    public static ComandoGetEstudiosCliente comandoGetEstudiosClienteInstancia(long id) {
+        return new ComandoGetEstudiosCliente(id);
+    }
+
+    public static ComandoGetEstudiosAnalista comandoGetEstudiosAnalistaInstancia(long id) {
+        return new ComandoGetEstudiosAnalista(id);
     }
 }

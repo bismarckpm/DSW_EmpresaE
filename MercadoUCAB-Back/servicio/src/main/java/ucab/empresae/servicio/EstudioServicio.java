@@ -1,10 +1,11 @@
 package ucab.empresae.servicio;
 
+import Comandos.ComandoBase;
+import Comandos.ComandoFactory;
 import ucab.empresae.daos.*;
-import ucab.empresae.dtos.DtoCategoria;
-import ucab.empresae.dtos.DtoEstudio;
-import ucab.empresae.dtos.DtoSubcategoria;
+import ucab.empresae.dtos.*;
 import ucab.empresae.entidades.*;
+import ucab.empresae.excepciones.CustomException;
 import ucab.empresae.excepciones.EstudioException;
 import ucab.empresae.excepciones.PruebaExcepcion;
 
@@ -27,6 +28,9 @@ import java.util.concurrent.ThreadLocalRandom;
 @Path("/estudio")
 public class EstudioServicio extends AplicacionBase {
 
+
+    private DtoResponse response = DtoFactory.DtoResponseInstance();
+    private ComandoBase comando;
     private DaoEstudio dao = DaoFactory.DaoEstudioInstancia();
     private EstudioEntity estudio = EntidadesFactory.EstudioInstance();
 
@@ -77,6 +81,7 @@ public class EstudioServicio extends AplicacionBase {
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio
      * @apiNote Api del tipo get encargada retornar todos los estudios existentes en el sistema.
+     * @since 06/02/2021
      * @return Lista de objetos de tipo EstudioEntity
      * @see EstudioEntity Entidad persistente utilizada para retornar los datos requeridos.
      */
@@ -84,14 +89,24 @@ public class EstudioServicio extends AplicacionBase {
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getEstudios() {
         try {
-            return Response.ok(this.dao.findAll(EstudioEntity.class)).build();
+            this.comando = ComandoFactory.comandoGetEstudiosInstancia();
+            return Response.ok(this.comando.getResult()).build();
+        } catch (CustomException cex){
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(cex.getMensaje());
+            this.response.setCodError(cex.getCodError());
+            return Response.status(500).entity(this.response).build();
         } catch (Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(ex.getMessage());
+            this.response.setCodError(ex.getClass().toString());
+            return Response.status(500).entity(this.response).build();
         }
+
     }
 
     /**
-     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/estudioSinEncuesta
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/estudiosSinEncuesta
      * @apiNote Api del tipo get encargada de retornar Estudios que no están asociadas a encuestas.
      * @return Lista de objetos de tipo EstudioEntity
      * @see EstudioEntity Entidad persistente utilizada para retornar los datos requeridos.
@@ -101,17 +116,25 @@ public class EstudioServicio extends AplicacionBase {
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getEstudiosSinEncuesta() {
         try {
-            DaoEstudio daoEstudio = new DaoEstudio();
-            List<EstudioEntity> estudios = daoEstudio.getEstudiosSinEncuesta();
-            return Response.ok(estudios).build();
+            this.comando = ComandoFactory.comandoGetEstudioSinEncuesta();
+            return Response.ok(this.comando.getResult()).build();
+        } catch (CustomException cex){
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(cex.getMensaje());
+            this.response.setCodError(cex.getCodError());
+            return Response.status(500).entity(this.response).build();
         } catch (Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(ex.getMessage());
+            this.response.setCodError("SEREST002");
+            return Response.status(500).entity(this.response).build();
         }
     }
 
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/{id}
      * @apiNote Api del tipo get utilizada para retornar un estudio en específico.
+     * @since 06/02/2021
      * @param id Objeto de tipo long que representa el id del estudio a consultar
      * @return Objeto de tipo EstudioEntity con el que se retornan los datos.
      * @see EstudioEntity Entidad persistente utilizada para retornar los datos requeridos.
@@ -119,17 +142,27 @@ public class EstudioServicio extends AplicacionBase {
     @GET
     @Path("/{id}")
     @Produces(value = MediaType.APPLICATION_JSON)
-    public Response getEstudios(@PathParam("id") long id) {
+    public Response getEstudio(@PathParam("id") long id) {
         try {
-            return Response.ok(this.dao.find(id, EstudioEntity.class)).build();
+            this.comando = ComandoFactory.comandoGetEstudioInstancia(id);
+            return Response.ok(this.comando.getResult()).build();
+        } catch (CustomException cex){
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(cex.getMensaje());
+            this.response.setCodError(cex.getCodError());
+            return Response.status(500).entity(this.response).build();
         } catch (Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(ex.getMessage());
+            this.response.setCodError("SERPRE003");
+            return Response.status(500).entity(this.response).build();
         }
     }
 
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/cliente/{id}
      * @apiNote Api del tipo get utilizada para retornae todos los estudios hechos para un cliente.
+     * @since 07/02/2021
      * @param id objeto de tipo long que representa el id del cliente.
      * @return Lista de objetos de tipo EstudioEntity encargado de retornar los estudios de un cliente en especifico.
      * @see List<EstudioEntity> Lista de estudios usada para retornar los datos pedidos.
@@ -139,15 +172,25 @@ public class EstudioServicio extends AplicacionBase {
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getEstudiosCliente(@PathParam("id") long id) {
         try {
-            return Response.ok(this.dao.estudiosCliente(id)).build();
+            this.comando = ComandoFactory.comandoGetEstudiosClienteInstancia(id);
+            return Response.ok(this.comando.getResult()).build();
+        } catch (CustomException cex){
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(cex.getMensaje());
+            this.response.setCodError(cex.getCodError());
+            return Response.status(500).entity(this.response).build();
         } catch (Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(ex.getMessage());
+            this.response.setCodError("SERPRE004");
+            return Response.status(500).entity(this.response).build();
         }
     }
 
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/analista/{id}
      * @apiNote Api del tipo get utilizada para retornar todos los estudios asignados a un analista
+     * @since 07/02/2021
      * @param id Objeto de tipo long que representa el id del analista.
      * @return Lista de objetos de tipo Estudio que contiene los estudios del analista.
      * @see List<EstudioEntity> Lista de estudios utilizada para retornar los datos requeridos.
@@ -157,15 +200,25 @@ public class EstudioServicio extends AplicacionBase {
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getEstudiosAnalista(@PathParam("id") long id) {
         try {
-            return Response.ok(this.dao.estudiosAnalista(id)).build();
+            this.comando = ComandoFactory.comandoGetEstudiosAnalistaInstancia(id);
+            return Response.ok(this.comando.getResult()).build();
+        } catch (CustomException cex){
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(cex.getMensaje());
+            this.response.setCodError(cex.getCodError());
+            return Response.status(500).entity(this.response).build();
         } catch (Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(ex.getMessage());
+            this.response.setCodError("SERPRE005");
+            return Response.status(500).entity(this.response).build();
         }
     }
 
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio
      * @apiNote Api del tipo post encargado de añadir un estudio nuevo al sistema.
+     * @since 07/02/2021
      * @param dtoEstudio Objeto de tipo DtoEstudio donde se reciben los datos a ingresar al sistema.
      * @return retorna objeto de tipo EstudioEntity.
      * @see EstudioEntity Entidad persistente utilizada para insertar los datos al sistema.

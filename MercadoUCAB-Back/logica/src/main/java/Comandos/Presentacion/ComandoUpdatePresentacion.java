@@ -14,6 +14,8 @@ import ucab.empresae.entidades.PresentacionEntity;
 import ucab.empresae.excepciones.CategoriaException;
 import ucab.empresae.excepciones.CustomException;
 
+import java.text.ParseException;
+
 public class ComandoUpdatePresentacion extends ComandoBase<DtoResponse> {
     private DtoBase dtoPresentacion;
 
@@ -31,7 +33,7 @@ public class ComandoUpdatePresentacion extends ComandoBase<DtoResponse> {
      * @throws CustomException En caso de que la presentacion no se haya actualizado de manera correcta.
      */
     @Override
-    public void execute() throws CustomException {
+    public void execute() throws CustomException, ParseException {
         Dao daoPresentacion = DaoFactory.DaoPresentacionInstancia();
         GenericMapper presentacionMapper = MapperFactory.presentacionMapperInstancia();
         BaseEntity presentacion = presentacionMapper.CreateEntity(this.dtoPresentacion);
@@ -50,7 +52,7 @@ public class ComandoUpdatePresentacion extends ComandoBase<DtoResponse> {
      * @throws CustomException Errores arrastrados del método execute().
      */
     @Override
-    public DtoResponse getResult() throws CustomException {
+    public DtoResponse getResult() throws CustomException, ParseException {
         execute();
         DtoResponse dtoResponse = DtoFactory.DtoResponseInstance();
         dtoResponse.setEstado("Exitoso");

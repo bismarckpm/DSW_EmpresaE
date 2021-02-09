@@ -4,6 +4,7 @@ import ucab.empresae.entidades.BaseEntity;
 import ucab.empresae.excepciones.CategoriaException;
 import ucab.empresae.excepciones.CustomException;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -15,10 +16,10 @@ public abstract class GenericMapper <TDto> {
 
     public abstract TDto CreateDto(BaseEntity entity) throws CustomException;
 
-    public abstract BaseEntity CreateEntity(TDto dto) throws CustomException;
+    public abstract BaseEntity CreateEntity(TDto dto) throws CustomException, ParseException;
 
     public abstract List<TDto> CreateDtoList(List<BaseEntity> entities) throws CustomException;
 
-    public abstract List<BaseEntity> CreateEntityList(List<TDto> dtos) throws CustomException;
+    public abstract List<BaseEntity> CreateEntityList(List<TDto> dtos) throws CustomException, ParseException;
 
 }

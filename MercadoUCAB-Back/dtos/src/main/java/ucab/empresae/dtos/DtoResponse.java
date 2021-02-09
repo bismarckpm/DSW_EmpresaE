@@ -1,6 +1,6 @@
 package ucab.empresae.dtos;
 
-public class DtoResponse extends DtoBase{
+public class DtoResponse{
 
     public String mensaje;
     public String mensaje_soporte;

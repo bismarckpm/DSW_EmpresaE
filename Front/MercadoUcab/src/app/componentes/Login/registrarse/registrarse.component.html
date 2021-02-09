@@ -236,6 +236,54 @@
             </div>
           </div>
         </div>
+
+        <div class="form-row">
+          <div class="col-md-2 col-sm-6 mb-3">
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" (click)="tieneHijos = !tieneHijos; auxIterador = []">
+              <label class="form-check-label" for="exampleCheck1">Posee hijos</label>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6 mb-3">
+            <div class="btn-group d-none" role="group" aria-label="Basic example" [ngClass]="{'d-block': tieneHijos == true}">
+              <label class="form-check-label" for="exampleCheck1">Cantidad de hijos que posee</label>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6 mb-3">
+            <div class="btn-group d-none" role="group" aria-label="Basic example" [ngClass]="{'d-block': tieneHijos == true}">
+              <button type="button" class="btn btn-light" *ngFor="let num of cantHijos" (click)="cargarCamposHijos(num)">
+                {{ num }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row" *ngFor="let item of auxIterador">
+          <div class="col-md-2">
+            <label for="">Hijo N° {{ item }}</label>
+          </div>
+          <div class="col-md-4">
+            <label for="fechanacimiento">Fecha de Nacimiento</label>
+            <input type="text" class="form-control" id="fechanacimiento" name="fechaNacimiento"  placeholder="AAAA-MM-DD">
+            <div *ngIf="fechaNacimientoEncuestado.invalid && (fechaNacimientoEncuestado.dirty || fechaNacimientoEncuestado.touched)" class="alert alert-danger">
+              <div *ngIf="fechaNacimientoEncuestado.errors.required">
+                Este campo es obligatorio
+              </div>
+              <div *ngIf="fechaNacimientoEncuestado.errors.pattern">
+                Introduzca un formato valido
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="genero">Genero</label>
+            <select class="custom-select d-block w-100" id="generoHijo" name="">
+              <option value="">Choose...</option>
+              <option *ngFor="let gen of genero" [ngValue]= "gen._id">{{gen.nombre}}</option>
+            </select>
+          </div>
+          
+        </div>
+
     <button (click)="addEncuestado(encuestado)" [routerLink]="['/login']"  type="submit" class="btn btn-primary">Registrar</button>
   </form>
 </div>

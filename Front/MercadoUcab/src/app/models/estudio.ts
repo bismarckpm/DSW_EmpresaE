@@ -3,6 +3,7 @@ import { Lugar } from './Lugar';
 import { NivelSocioEconomico } from './nivel-socio-economico';
 import { Subcategoria } from './subcategoria';
 import {Analista} from './analista';
+import { Genero } from './genero';
 
 export class Estudio {
     _id: number;
@@ -12,7 +13,7 @@ export class Estudio {
     comentarioAnalista: string;
     edadMinima: number;
     edadMaxima: number;
-    genero: string;
+    genero: Genero;
     fechaInicio: string;
     fechaFin: string;
     lugar: Lugar;

@@ -7,9 +7,11 @@ import { NivelSocioEconomico } from 'src/app/models/nivel-socio-economico';
 import { Subcategoria } from 'src/app/models/subcategoria';
 import { AnalistaService } from 'src/app/services/analista.service';
 import { EstudioService } from 'src/app/services/estudio.service';
+import { GeneroService } from 'src/app/services/genero.service';
 import { LugarService } from 'src/app/services/lugar.service';
 import { NivelSocioEconomicoService } from 'src/app/services/nivel-socio-economico.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-lista-estudios',
@@ -22,15 +24,15 @@ export class ListaEstudiosComponent implements OnInit {
   // Declaracion de variables
   estudios: Estudio[] = [];
   _id = this.actRoute.snapshot.params._id;
-  @Input() estudioData = {_id: 0,
+  @Input() estudioData = { _id: 0,
     nombre: '',
-    estado: 'Solicitado',
+    estado: 'solicitado',
     comentarioAnalista : '',
     edadMinima: 0,
     edadMaxima: 0 ,
     fechaInicio: '',
     fechaFin: '',
-    genero: '',
+    genero: {_id: 0},
     lugar : {
       _id: 0,
       estado: '',
@@ -61,6 +63,7 @@ export class ListaEstudiosComponent implements OnInit {
   nivelSocioEconomico: any;
   subcategoria: any;
   analistas: any;
+  genero:any
 
   ///// Atributos para la busqueda de acuerdo a lo seleccionado
   lugar: any;
@@ -70,6 +73,7 @@ export class ListaEstudiosComponent implements OnInit {
   auxEstadoID: number;
   auxMunicipioID: number;
   auxParroquiaID: number;
+  aux:any;
 
   // Declaracion para validar
   formEstudio: FormGroup;
@@ -84,9 +88,11 @@ export class ListaEstudiosComponent implements OnInit {
     public lugarService: LugarService,
     public nivelsocioeconomicoService: NivelSocioEconomicoService,
     public analistaService: AnalistaService,
+    public generoService:GeneroService,
     public actRoute: ActivatedRoute,
     public router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toast:ToastService
     ) {this.createForm(); }
 
   ngOnInit(): void {
@@ -95,13 +101,18 @@ export class ListaEstudiosComponent implements OnInit {
 
   loadEstudios(): void {
     this.estudioService.getEstudios().subscribe(data => {
-      this.estudios = data;
+      this.aux = data;
+     
+      console.log(this.aux);
+      
+      this.HandleErrorGet();
     });
   }
 
   deleteEstudio(id) {
     this.estudioService.deleteEstudio(id).subscribe(data => {
-      this.loadEstudios();
+      this.aux=data;
+      this.HandleErrorPostPut();
     });
   }
 
@@ -120,6 +131,8 @@ export class ListaEstudiosComponent implements OnInit {
 
 
         this.estudioService.updateEstudioAdmin(this.estudioData._id, this.estudioData).subscribe(data => {
+          this.aux=data;
+          this.HandleErrorPostPut();
         });
         console.log('termine la llamada del http');
         this.cambio = false;
@@ -128,6 +141,8 @@ export class ListaEstudiosComponent implements OnInit {
       }else if (this.cambio === false){
         console.log('estado actual del cambio :' + this.cambio);
         this.estudioService.updateEstudioAdmin(this.estudioData._id, this.estudioData).subscribe(data => {
+          this.aux=data;
+          this.HandleErrorPostPut();
         });
         this.loadEstudios();
         location.reload();
@@ -149,6 +164,7 @@ export class ListaEstudiosComponent implements OnInit {
 
     this.addSubcategoria();
     this.addNivelSocioEconomico();
+    this.addGenero();
     this.addAnalistas();
     this.addLugar();
   }
@@ -159,6 +175,12 @@ export class ListaEstudiosComponent implements OnInit {
     }else{
       this.cambio = true;
     }
+  }
+
+  addGenero(){
+    this.generoService.getGeneros().subscribe(data =>{
+      this.genero = data;
+    });
   }
 
   addAnalistas(): void{
@@ -266,6 +288,9 @@ export class ListaEstudiosComponent implements OnInit {
   get subcategoriaEstudio(){return this.formEstudio.get('subcategoriaEstudio'); }
   get nivelEstudio(){return this.formEstudio.get('nivelEstudio'); }
 
+  get Genero(){return this.formEstudio.get('Genero'); }
+
+
   createForm(): void {
     this.formEstudio = this.formBuilder.group({
       nombreEstudio: ['', [Validators.required, Validators.pattern(this.patronNombreEstudio)]],
@@ -288,6 +313,27 @@ export class ListaEstudiosComponent implements OnInit {
       subcategoriaEstudio: ['', [Validators.required]],
       nivelEstudio: '',
 
+      Genero:''
+
     });
   }
+
+  HandleErrorGet(){
+    if(this.aux.estado == "Exitoso"){
+      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+      this.estudios = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado,this.aux.mensaje)
+    } 
+  }
+  
+  HandleErrorPostPut(){
+    if(this.aux.estado == "Exitoso"){
+      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+     }else{
+     this.toast.showError(this.aux.estado,this.aux.mensaje)
+     }
+  }
+
+
 }

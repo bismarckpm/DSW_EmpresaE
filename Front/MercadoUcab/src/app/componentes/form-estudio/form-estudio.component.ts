@@ -2,6 +2,7 @@ import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AttachSession } from 'protractor/built/driverProviders';
+import { NivelSocioEconomico } from 'src/app/models/nivel-socio-economico';
 import { AnalistaService } from 'src/app/services/analista.service';
 
 import { EstudioService } from 'src/app/services/estudio.service';
@@ -44,7 +45,7 @@ export class FormEstudioComponent implements OnInit {
         }
       }
     },
-    nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
+    nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''} ,
     subcategoria : {_id: 0, nombre: '', estado: ''},
     analista:{_id:0}
   };
@@ -52,6 +53,8 @@ export class FormEstudioComponent implements OnInit {
   nivelSocioEconomico: any;
   subcategoria: any;
   analistas:any;
+
+
 
   ///// Atributos para la busqueda de acuerdo a lo seleccionado
   lugar: any;

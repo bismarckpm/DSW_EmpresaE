@@ -115,11 +115,9 @@
                         <div class="form-row">
                           <div class="col-md-6 mb-3">
                             <label for="" >Género</label>
-                            <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.genero" formControlName="genero">
+                            <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.genero._id" formControlName="Genero">
                               <option value="0">Choose...</option>
-                              <option value="Masculino">Masculino</option>
-                              <option value="Femenino">Femenino</option>
-                              <option value="Ambos">Ambos</option>
+                              <option *ngFor="let gen of genero" [ngValue]= "gen._id"  >{{gen.nombre}}</option>
                             </select>
                             <!-- <div *ngIf="genero.invalid && (genero.dirty || genero.touched)" class="alert alert-danger">
                               <div *ngIf="genero.errors.required">

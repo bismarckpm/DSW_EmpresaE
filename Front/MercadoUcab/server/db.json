@@ -44,14 +44,22 @@
   ],
   "categoria": [
     {
-      "_id": 5,
-      "nombre": "pedro gutierres",
-      "estado": "i"
-    },
-    {
-      "_id": 8,
-      "nombre": "asd",
-      "estado": "a"
+      "estado":"ERROR",
+      "mensaje":"Cargando Categorias",
+      "objeto":[
+        
+          {
+            "_id": 5,
+            "nombre": "pedro gutierres",
+            "estado": "i"
+          },
+          {
+            "_id": 8,
+            "nombre": "asd",
+            "estado": "a"
+          }
+        
+      ]
     }
   ],
   "subcategoria": [

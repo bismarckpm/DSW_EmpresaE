@@ -3,23 +3,19 @@ package ucab.empresae.servicio;
 import Comandos.ComandoBase;
 import Comandos.ComandoFactory;
 import ucab.empresae.daos.*;
-import ucab.empresae.dtos.*;
+import ucab.empresae.dtos.DtoEstudio;
+import ucab.empresae.dtos.DtoFactory;
+import ucab.empresae.dtos.DtoResponse;
 import ucab.empresae.entidades.*;
 import ucab.empresae.excepciones.CustomException;
-import ucab.empresae.excepciones.EstudioException;
-import ucab.empresae.excepciones.PruebaExcepcion;
 
-import javax.json.Json;
-import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Api encargada de las transacciones que tienen que ver con estudios
@@ -228,10 +224,18 @@ public class EstudioServicio extends AplicacionBase {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addEstudio(DtoEstudio dtoEstudio) {
         try {
-            estudioAtributos(dtoEstudio);
-            return Response.ok(this.dao.insert(this.estudio)).build();
-        } catch(Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).entity(ex).build();
+            this.comando = ComandoFactory.comandoAddEstudioInstancia(dtoEstudio);
+            return Response.ok(this.comando.getResult()).build();
+        } catch (CustomException cex){
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(cex.getMensaje());
+            this.response.setCodError(cex.getCodError());
+            return Response.status(500).entity(this.response).build();
+        } catch (Exception ex) {
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(ex.getMessage());
+            this.response.setCodError("SERPRE005");
+            return Response.status(500).entity(this.response).build();
         }
     }
 
@@ -247,52 +251,18 @@ public class EstudioServicio extends AplicacionBase {
     @Produces(MediaType.APPLICATION_JSON)
     public Response solicitarEstudio(@PathParam("id") long id, DtoEstudio dtoEstudio) {
         try {
-            estudioAtributos(dtoEstudio);
-            DaoUsuario daoUsuario1 = new DaoUsuario();
-            List<UsuarioEntity> listaAnalista = daoUsuario1.getAnalistas();
-            int analistaAleatorio =  ThreadLocalRandom.current().nextInt(0, listaAnalista.size()-1);
-            this.estudio.setAnalista(listaAnalista.get(analistaAleatorio));
-            this.estudio = this.dao.insert(this.estudio);
-
-            DaoClienteEstudio daoClienteEstudio = new DaoClienteEstudio();
-            DaoCliente daoCliente = new DaoCliente();
-            DaoUsuario daoUsuario = new DaoUsuario();
-            this.estudio = this.dao.find(estudio.get_id(), EstudioEntity.class);
-
-            if(daoCliente.getClienteByUsuario(daoUsuario.find(id, UsuarioEntity.class)) == null){
-                throw new EstudioException("No existe ningun cliente registrado con ese Username");
-            }
-
-            ClienteEntity clienteEntity = daoCliente.getClienteByUsuario(daoUsuario.find(id, UsuarioEntity.class));
-
-            ClienteEstudioEntity clienteEstudioEntity = new ClienteEstudioEntity();
-            clienteEstudioEntity.setEstudio(this.estudio);
-            clienteEstudioEntity.setCliente(clienteEntity);
-            clienteEstudioEntity.setEstado("a");
-            daoClienteEstudio.insert(clienteEstudioEntity);
-
-            DaoEncuestado daoEncuestado = new DaoEncuestado();
-            List<EncuestadoEntity> dataMuestraEncuestados = null;
-            dataMuestraEncuestados = daoEncuestado.getDataMuestraEstudio(estudio.getLugar(), estudio.getNivelSocioEconomico());
-            DaoEstudioEncuestado daoEstudioEncuestado = new DaoEstudioEncuestado();
-            for(EncuestadoEntity encuestado : dataMuestraEncuestados){
-                EstudioEncuestadoEntity estudioEncuestadoEntity = new EstudioEncuestadoEntity();
-                estudioEncuestadoEntity.setEstado("Pendiente");
-                estudioEncuestadoEntity.setEstudio(this.estudio);
-                estudioEncuestadoEntity.setEncuestado(encuestado);
-
-                daoEstudioEncuestado.insert(estudioEncuestadoEntity);
-            }
-
-            return Response.ok().build();
-
-        }catch (EstudioException ex) {
-            JsonObject excepcion = Json.createObjectBuilder()
-                    .add("mensaje", ex.getMessage()).build();
-            return  Response.status(500).entity(excepcion).build();
-        }
-        catch(Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).entity(ex).build();
+            this.comando = ComandoFactory.comandoSolicitarEstudioInstancia(id,dtoEstudio);
+            return Response.ok(this.comando.getResult()).build();
+        } catch (CustomException cex){
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(cex.getMensaje());
+            this.response.setCodError(cex.getCodError());
+            return Response.status(500).entity(this.response).build();
+        } catch (Exception ex) {
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(ex.getMessage());
+            this.response.setCodError("SERPRE004");
+            return Response.status(500).entity(this.response).build();
         }
     }
 
@@ -304,7 +274,7 @@ public class EstudioServicio extends AplicacionBase {
      * @return Objeto de tipo EntudioEntity
      * @see EstudioEntity Entidad persistente utilizada para realizar el update del Estudio.
      */
-    @PUT
+    /*@PUT
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -330,7 +300,7 @@ public class EstudioServicio extends AplicacionBase {
         } catch (Exception ex) {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
-    }
+    }*/
 
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/updateAdmin/{id}
@@ -339,7 +309,7 @@ public class EstudioServicio extends AplicacionBase {
      * @return EstudioEntity
      * @see EstudioEntity Entidad persistente utilizada para insertar los datos.
      */
-    @PUT
+    /*@PUT
     @Path("/updateAdmin/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -380,7 +350,7 @@ public class EstudioServicio extends AplicacionBase {
         } catch (Exception ex) {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
-    }
+    }*/
 
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/updateCliente/{id}
@@ -390,7 +360,7 @@ public class EstudioServicio extends AplicacionBase {
      * @return Objeto de tipo EstudioEntity
      * @see EstudioEntity Entidad persistente utilizada para actulizar datos del estudio y retornar valores nuevos.
      */
-    @PUT
+    /*@PUT
     @Path("/updateCliente/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -426,7 +396,7 @@ public class EstudioServicio extends AplicacionBase {
         } catch (Exception ex) {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
-    }
+    }*/
 
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/{id}
@@ -435,7 +405,7 @@ public class EstudioServicio extends AplicacionBase {
      * @return Objeto de tipo EstudioEntity
      * @see EstudioEntity Entidad pesistente utilizada para eliminar el estudio en cuestión.
      */
-    @DELETE
+    /*@DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -446,7 +416,7 @@ public class EstudioServicio extends AplicacionBase {
         } catch(Exception ex){
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
-    }
+    }*/
 
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/encuestado/{id}
@@ -454,14 +424,10 @@ public class EstudioServicio extends AplicacionBase {
      * @param id Objeto de tipo long con el id del usuario encuestado.
      * @return Lista de objetos de tipo EstudioAux
      */
-    @GET
+    /*@GET
     @Produces(value= MediaType.APPLICATION_JSON)
     @Path("/encuestado/{id}")                   //RECIBO EL ID DEL USUARIO
     public Response getEstudiosbyEncuestado(@PathParam("id") long id){
-
-        /*PERMITE FILTRAR LOS ESTUDIOS QUE PUEDE VER EL ENCUESTADO
-        SEGUN LAS CARACTERISTICAS DEL ESTUDIO
-         */
 
         List<EstudioEntity> estudios = null;
         List<EstudioAux> estudioAuxList = new ArrayList<EstudioAux>(); //entidad que incluye el estado de la n-n estudioEncuestado
@@ -512,7 +478,7 @@ public class EstudioServicio extends AplicacionBase {
             return  Response.status(Response.Status.NOT_ACCEPTABLE).entity(problema).build();
         }
         return Response.ok(estudioAuxList).build();
-    }
+    }*/
 
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/dataMuestra/{id}
@@ -520,13 +486,10 @@ public class EstudioServicio extends AplicacionBase {
      * @param id Objeto de tipo long con el id del estudio.
      * @return Lista de objetos del tipo EscuestadoEntity
      */
-    @GET
+    /*@GET
     @Produces(value= MediaType.APPLICATION_JSON)
     @Path("/dataMuestra/{id}")                   //RECIBO EL ID DEL ESTUDIO
     public Response getDataMuestraEstudio(@PathParam("id") long id) throws PruebaExcepcion {
-
-        /*PERMITE DEVOLVER LA DATA MUESTRA ESTUDIO
-         */
 
         List<EncuestadoEntity> dataMuestraEncuestados = null;
         try {
@@ -542,7 +505,7 @@ public class EstudioServicio extends AplicacionBase {
             String problema = ex.getMessage();
         }
         return Response.ok(dataMuestraEncuestados).build();
-    }
+    }*/
 
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/resultadoEstudio/id
@@ -550,7 +513,7 @@ public class EstudioServicio extends AplicacionBase {
      * @param id identificador del estudio para obtener las preguntas con opciones (encuesta)
      * @return Response con status ok con la lista de preguntas con opciones (encuesta) asignadas a un estudio.
      */
-    @GET
+    /*@GET
     @Produces(value = MediaType.APPLICATION_JSON)
     @Path("/resultadoEstudio/{id}")
     public List<PreguntaAux> getResultadoEstudio(@PathParam("id") long id) {
@@ -592,6 +555,6 @@ public class EstudioServicio extends AplicacionBase {
             String problema = ex.getMessage();
         }
         return null;
-    }
+    }*/
 
 }

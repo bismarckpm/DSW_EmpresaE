@@ -1,40 +1,25 @@
 package ucab.empresae.servicio;
-/**
- * Api encargada de las transacciones con respecto a las subcategorias de la base de datos
- */
 
-import ucab.empresae.daos.DaoCategoria;
-import ucab.empresae.daos.DaoFactory;
-import ucab.empresae.daos.DaoSubcategoria;
+import Comandos.ComandoBase;
+import Comandos.ComandoFactory;
+import ucab.empresae.dtos.DtoFactory;
+import ucab.empresae.dtos.DtoResponse;
 import ucab.empresae.dtos.DtoSubcategoria;
-import ucab.empresae.entidades.CategoriaEntity;
-import ucab.empresae.entidades.EntidadesFactory;
-import ucab.empresae.entidades.SubcategoriaEntity;
+import ucab.empresae.excepciones.CustomException;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/**
+ * @author José Prieto
+ * Api encargada de las transacciones con respecto a las subcategorias de la base de datos
+ */
 @Path("/subcategoria")
 public class SubcategoriaServicio extends AplicacionBase {
 
-    private DaoSubcategoria dao = DaoFactory.DaoSubcategoriaInstancia();
-    private SubcategoriaEntity subcategoria = EntidadesFactory.SubcategoriaInstance();
-
-    /**
-     * Metodo con la funcion de convertir los atributos del objeto DtoSubcategoria recibido a los atributos de la
-     * entidad persistente SubcategoriaEntity
-     * @param dtoSubcategoria recibe un objeto del tipo DtoSubcategoria
-     */
-    private void subcategoriaAtributos(DtoSubcategoria dtoSubcategoria) {
-        this.subcategoria.setNombre(dtoSubcategoria.getNombre());
-        this.subcategoria.setEstado(dtoSubcategoria.getEstado());
-
-        if(dtoSubcategoria.getCategoria() != null) {
-            DaoCategoria daoCategoria = DaoFactory.DaoCategoriaInstancia();
-            this.subcategoria.setCategoria(daoCategoria.find(dtoSubcategoria.getCategoria().get_id(), CategoriaEntity.class));
-        }
-    }
+    private ComandoBase comando;
+    private final DtoResponse response = DtoFactory.DtoResponseInstance();
 
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/subcategoria
@@ -45,9 +30,18 @@ public class SubcategoriaServicio extends AplicacionBase {
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getSubCategorias() {
         try {
-            return Response.ok(this.dao.findAll(SubcategoriaEntity.class)).build();
+            this.comando = ComandoFactory.comandoGetSubcategoriasInstancia();
+            return Response.ok(this.comando.getResult()).build();
+        } catch (CustomException cex){
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(cex.getMensaje());
+            this.response.setCodError(cex.getCodError());
+            return Response.status(500).entity(this.response).build();
         } catch (Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(ex.getMessage());
+            this.response.setCodError(ex.getClass().toString());
+            return Response.status(500).entity(this.response).build();
         }
     }
 
@@ -62,9 +56,18 @@ public class SubcategoriaServicio extends AplicacionBase {
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getSubCategoria(@PathParam("id") long id) {
         try {
-            return Response.ok(this.dao.find(id, SubcategoriaEntity.class)).build();
+            this.comando = ComandoFactory.comandoGetSubcategoriaInstancia(id);
+            return Response.ok(this.comando.getResult()).build();
+        } catch (CustomException cex){
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(cex.getMensaje());
+            this.response.setCodError(cex.getCodError());
+            return Response.status(500).entity(this.response).build();
         } catch (Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(ex.getMessage());
+            this.response.setCodError(ex.getClass().toString());
+            return Response.status(500).entity(this.response).build();
         }
     }
 
@@ -80,10 +83,18 @@ public class SubcategoriaServicio extends AplicacionBase {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addSubcategoria(DtoSubcategoria dtoSubcategoria) {
         try {
-            subcategoriaAtributos(dtoSubcategoria);
-            return Response.ok(this.dao.insert(subcategoria)).build();
-        } catch(Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+            this.comando = ComandoFactory.comandoAddSubcategoriaInstancia(dtoSubcategoria);
+            return Response.ok(this.comando.getResult()).build();
+        } catch (CustomException cex){
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(cex.getMensaje());
+            this.response.setCodError(cex.getCodError());
+            return Response.status(500).entity(this.response).build();
+        } catch (Exception ex) {
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(ex.getMessage());
+            this.response.setCodError(ex.getClass().toString());
+            return Response.status(500).entity(this.response).build();
         }
     }
 
@@ -99,11 +110,18 @@ public class SubcategoriaServicio extends AplicacionBase {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateSubcategoria(DtoSubcategoria dtoSubcategoria) {
         try {
-            this.subcategoria = this.dao.find(dtoSubcategoria.get_id(), SubcategoriaEntity.class);
-            subcategoriaAtributos(dtoSubcategoria);
-            return Response.ok(this.dao.update(this.subcategoria)).build();
-        } catch(Exception ex){
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+            this.comando = ComandoFactory.comandoUpdateSubcategoria(dtoSubcategoria);
+            return Response.ok(this.comando.getResult()).build();
+        } catch (CustomException cex){
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(cex.getMensaje());
+            this.response.setCodError(cex.getCodError());
+            return Response.status(500).entity(this.response).build();
+        } catch (Exception ex) {
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(ex.getMessage());
+            this.response.setCodError(ex.getClass().toString());
+            return Response.status(500).entity(this.response).build();
         }
     }
 
@@ -119,10 +137,18 @@ public class SubcategoriaServicio extends AplicacionBase {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response deleteSubcategoria(@PathParam("id") long id) {
         try {
-            this.subcategoria = this.dao.find(id, SubcategoriaEntity.class);
-            return Response.ok(this.dao.delete(this.subcategoria)).build();
-        } catch(Exception ex){
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+            this.comando = ComandoFactory.comandoDeleteSubcategoriaInstancia(id);
+            return Response.ok(this.comando.getResult()).build();
+        } catch (CustomException cex){
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(cex.getMensaje());
+            this.response.setCodError(cex.getCodError());
+            return Response.status(500).entity(this.response).build();
+        } catch (Exception ex) {
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(ex.getMessage());
+            this.response.setCodError(ex.getClass().toString());
+            return Response.status(500).entity(this.response).build();
         }
     }
 

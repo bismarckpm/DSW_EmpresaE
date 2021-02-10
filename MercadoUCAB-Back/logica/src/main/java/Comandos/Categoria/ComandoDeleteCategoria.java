@@ -3,6 +3,8 @@ package Comandos.Categoria;
 import Comandos.ComandoBase;
 import ucab.empresae.daos.Dao;
 import ucab.empresae.daos.DaoFactory;
+import ucab.empresae.dtos.DtoFactory;
+import ucab.empresae.dtos.DtoResponse;
 import ucab.empresae.entidades.BaseEntity;
 import ucab.empresae.entidades.CategoriaEntity;
 import ucab.empresae.excepciones.CategoriaException;
@@ -11,7 +13,7 @@ import ucab.empresae.excepciones.CategoriaException;
  * Clase encargada de eliminar una categoría del sistema
  * @author José Prieto
  */
-public class ComandoDeleteCategoria extends ComandoBase<String> {
+public class ComandoDeleteCategoria extends ComandoBase<DtoResponse> {
 
     private final long id;
 
@@ -47,8 +49,12 @@ public class ComandoDeleteCategoria extends ComandoBase<String> {
      * @throws CategoriaException arrastrada del método execute.
      */
     @Override
-    public String getResult() throws CategoriaException {
+    public DtoResponse getResult() throws CategoriaException {
         execute();
-        return "Categoría eliminada de manera exitosa";
+        DtoResponse dtoResponse = DtoFactory.DtoResponseInstance();
+        dtoResponse.setEstado("Exitoso");
+        dtoResponse.setMensaje("Categoria eliminada");
+
+        return dtoResponse;
     }
 }

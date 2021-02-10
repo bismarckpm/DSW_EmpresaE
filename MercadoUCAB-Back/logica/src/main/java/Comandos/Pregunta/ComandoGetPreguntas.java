@@ -7,11 +7,9 @@ import ucab.empresae.daos.Dao;
 import ucab.empresae.daos.DaoFactory;
 import ucab.empresae.dtos.DtoFactory;
 import ucab.empresae.dtos.DtoPregunta;
-import ucab.empresae.dtos.DtoPresentacion;
 import ucab.empresae.dtos.DtoResponse;
 import ucab.empresae.entidades.BaseEntity;
 import ucab.empresae.entidades.PreguntaEntity;
-import ucab.empresae.entidades.PresentacionEntity;
 import ucab.empresae.excepciones.CustomException;
 
 import java.text.ParseException;

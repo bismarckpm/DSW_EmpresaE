@@ -6,6 +6,8 @@ import Mappers.MapperFactory;
 import ucab.empresae.daos.Dao;
 import ucab.empresae.daos.DaoFactory;
 import ucab.empresae.dtos.DtoBase;
+import ucab.empresae.dtos.DtoFactory;
+import ucab.empresae.dtos.DtoResponse;
 import ucab.empresae.entidades.BaseEntity;
 import ucab.empresae.entidades.CategoriaEntity;
 import ucab.empresae.excepciones.CategoriaException;
@@ -14,7 +16,7 @@ import ucab.empresae.excepciones.CategoriaException;
  * Clase encargada de registrar una nueva categoria.
  * @author José Prieto
  */
-public class ComandoPostCategoria extends ComandoBase<DtoBase> {
+public class ComandoPostCategoria extends ComandoBase<DtoResponse> {
 
     private DtoBase dtoCategoria;
 
@@ -53,9 +55,14 @@ public class ComandoPostCategoria extends ComandoBase<DtoBase> {
      * @throws Exception Posibles errores arrastrados del método execute().
      */
     @Override
-    public DtoBase getResult() throws Exception {
+    public DtoResponse getResult() throws Exception {
         execute();
-        return this.dtoCategoria;
+        DtoResponse dtoResponse = DtoFactory.DtoResponseInstance();
+        dtoResponse.setEstado("Exitoso");
+        dtoResponse.setMensaje("Categoria insertada");
+        dtoResponse.setObjeto(this.dtoCategoria);
+
+        return dtoResponse;
     }
 
 }

@@ -3,6 +3,8 @@ package Mappers.Subcategoria;
 import Mappers.Categoria.CategoriaMapper;
 import Mappers.GenericMapper;
 import Mappers.MapperFactory;
+import ucab.empresae.daos.DaoCategoria;
+import ucab.empresae.daos.DaoFactory;
 import ucab.empresae.dtos.DtoCategoria;
 import ucab.empresae.dtos.DtoFactory;
 import ucab.empresae.dtos.DtoSubcategoria;
@@ -58,10 +60,9 @@ public class SubcategoriaMapper extends GenericMapper<DtoSubcategoria> {
                 subcategoria.setNombre(dto.getNombre());
                 subcategoria.setEstado(dto.getEstado());
 
-                CategoriaMapper categoriaMapper = MapperFactory.categoriaMapperInstancia();
-                CategoriaEntity categoria = (CategoriaEntity) categoriaMapper.CreateEntity(dto.getCategoria());
+                DaoCategoria daoCategoria = DaoFactory.DaoCategoriaInstancia();
+                subcategoria.setCategoria(daoCategoria.find(dto.getCategoria().get_id(), CategoriaEntity.class));
 
-                subcategoria.setCategoria(categoria);
                 return subcategoria;
             }
         }

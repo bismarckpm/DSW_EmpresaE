@@ -1,11 +1,9 @@
 package ucab.empresae.daos;
 
-import ucab.empresae.entidades.PreguntaEntity;
 import ucab.empresae.entidades.PreguntaOpcionEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import java.util.List;
 
 public class DaoPreguntaOpcion extends Dao<PreguntaOpcionEntity>{
     private EntityManager _em;

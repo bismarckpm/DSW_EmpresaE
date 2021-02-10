@@ -1,7 +1,6 @@
 package ucab.empresae.entidades;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "usuario", schema = "mercadeoucab")

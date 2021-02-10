@@ -2,8 +2,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import ucab.empresae.dtos.DtoTipoUsuario;
 import ucab.empresae.dtos.DtoUsuario;
-import ucab.empresae.excepciones.UsuarioException;
 import ucab.empresae.servicio.UsuarioServicio;
+
 import javax.ws.rs.core.Response;
 
 /**

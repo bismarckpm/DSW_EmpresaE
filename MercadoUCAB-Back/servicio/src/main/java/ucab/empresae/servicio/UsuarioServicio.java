@@ -1,6 +1,9 @@
 package ucab.empresae.servicio;
 
-import ucab.empresae.daos.*;
+import ucab.empresae.daos.DaoCliente;
+import ucab.empresae.daos.DaoEncuestado;
+import ucab.empresae.daos.DaoTipoUsuario;
+import ucab.empresae.daos.DaoUsuario;
 import ucab.empresae.dtos.DtoTipoUsuario;
 import ucab.empresae.dtos.DtoUsuario;
 import ucab.empresae.entidades.ClienteEntity;

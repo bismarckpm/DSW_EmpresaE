@@ -7,6 +7,7 @@ import ucab.empresae.daos.Dao;
 import ucab.empresae.daos.DaoFactory;
 import ucab.empresae.dtos.DtoBase;
 import ucab.empresae.dtos.DtoFactory;
+import ucab.empresae.dtos.DtoResponse;
 import ucab.empresae.entidades.BaseEntity;
 import ucab.empresae.entidades.CategoriaEntity;
 import ucab.empresae.excepciones.CategoriaException;
@@ -15,7 +16,7 @@ import ucab.empresae.excepciones.CategoriaException;
  * Clase que se encarga de retornar una categoría especificada por su id
  * @author José Prieto
  */
-public class ComandoGetCategoria extends ComandoBase<DtoBase> {
+public class ComandoGetCategoria extends ComandoBase<DtoResponse> {
 
     private final long id;
     private DtoBase dtoCategoria = DtoFactory.DtoCategoriaInstance();
@@ -57,13 +58,14 @@ public class ComandoGetCategoria extends ComandoBase<DtoBase> {
      * @throws Exception Excepción lanzada por métodos anteriores.
      */
     @Override
-    public DtoBase getResult() throws Exception {
+    public DtoResponse getResult() throws Exception {
         execute();
-        if(this.dtoCategoria.get_id() == 0) {
-            return null;
-        } else {
-            return this.dtoCategoria;
-        }
+        DtoResponse dtoResponse = DtoFactory.DtoResponseInstance();
+        dtoResponse.setEstado("Exitoso");
+        dtoResponse.setMensaje("Cargando Categoria");
+        dtoResponse.setObjeto(this.dtoCategoria);
+
+        return dtoResponse;
     }
 
 }

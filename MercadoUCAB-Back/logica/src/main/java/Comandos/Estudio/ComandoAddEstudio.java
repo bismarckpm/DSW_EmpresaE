@@ -3,15 +3,15 @@ package Comandos.Estudio;
 import Comandos.ComandoBase;
 import Mappers.GenericMapper;
 import Mappers.MapperFactory;
-import ucab.empresae.daos.Dao;
+import ucab.empresae.daos.DaoEstudio;
 import ucab.empresae.daos.DaoFactory;
-import ucab.empresae.dtos.DtoBase;
 import ucab.empresae.dtos.DtoEstudio;
 import ucab.empresae.dtos.DtoFactory;
 import ucab.empresae.dtos.DtoResponse;
-import ucab.empresae.entidades.BaseEntity;
 import ucab.empresae.entidades.EstudioEntity;
 import ucab.empresae.excepciones.CustomException;
+
+import java.util.Date;
 
 public class ComandoAddEstudio extends ComandoBase<DtoResponse> {
 
@@ -26,10 +26,13 @@ public class ComandoAddEstudio extends ComandoBase<DtoResponse> {
     @Override
     public void execute() throws Exception {
 
-        Dao daoEstudio = DaoFactory.DaoEstudioInstancia();
+        DaoEstudio daoEstudio = DaoFactory.DaoEstudioInstancia();
         GenericMapper estudioMapper = MapperFactory.estudioMapperInstancia();
-        BaseEntity estudio = estudioMapper.CreateEntity(this.dtoEstudio);
-        estudio = (EstudioEntity) daoEstudio.insert(estudio);
+        this.dtoEstudio.setEstado("solicitado");
+        this.dtoEstudio.setFechaInicio(new Date().toString());
+        EstudioEntity estudio = (EstudioEntity) estudioMapper.CreateEntity(this.dtoEstudio);
+
+        estudio = daoEstudio.insert(estudio);
 
         if(estudio.get_id() == 0) {
             throw new CustomException("COMEST001","El estudio no se agregó de manera correcta.");

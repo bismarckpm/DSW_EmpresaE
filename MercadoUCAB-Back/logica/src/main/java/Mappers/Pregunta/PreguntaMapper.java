@@ -1,13 +1,14 @@
 package Mappers.Pregunta;
 
-import Mappers.Categoria.CategoriaMapper;
 import Mappers.GenericMapper;
 import Mappers.MapperFactory;
 import Mappers.Subcategoria.SubcategoriaMapper;
 import Mappers.TipoPregunta.TipoPreguntaMapper;
-import ucab.empresae.dtos.*;
+import ucab.empresae.dtos.DtoFactory;
+import ucab.empresae.dtos.DtoPregunta;
+import ucab.empresae.dtos.DtoSubcategoria;
+import ucab.empresae.dtos.DtoTipoPregunta;
 import ucab.empresae.entidades.*;
-import ucab.empresae.excepciones.CategoriaException;
 import ucab.empresae.excepciones.CustomException;
 
 import java.util.ArrayList;

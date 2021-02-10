@@ -2,13 +2,40 @@ package Comandos;
 
 import Comandos.Categoria.*;
 import Comandos.Estudio.*;
-import Comandos.Presentacion.*;
-import Comandos.Pregunta.*;
+import Comandos.Pregunta.ComandoGetPreguntas;
+import Comandos.Presentacion.ComandoDeletePresentacion;
+import Comandos.Presentacion.ComandoGetPresentaciones;
+import Comandos.Presentacion.ComandoPostPresentacion;
+import Comandos.Presentacion.ComandoUpdatePresentacion;
+import Comandos.Subcategoria.*;
 import ucab.empresae.dtos.DtoCategoria;
+import ucab.empresae.dtos.DtoEstudio;
 import ucab.empresae.dtos.DtoPresentacion;
+import ucab.empresae.dtos.DtoSubcategoria;
 import ucab.empresae.excepciones.CategoriaException;
 
 public class ComandoFactory {
+
+    //Fabrica de subcategorias
+    public static ComandoGetSubcategorias comandoGetSubcategoriasInstancia() {
+        return new ComandoGetSubcategorias();
+    }
+
+    public static ComandoGetSubcategoria comandoGetSubcategoriaInstancia(long id) {
+        return new ComandoGetSubcategoria(id);
+    }
+
+    public static ComandoAddSubcategoria comandoAddSubcategoriaInstancia(DtoSubcategoria dtoSubcategoria) {
+        return new ComandoAddSubcategoria(dtoSubcategoria);
+    }
+
+    public static ComandoUpdateSubcategoria comandoUpdateSubcategoria(DtoSubcategoria dtoSubcategoria) {
+        return new ComandoUpdateSubcategoria(dtoSubcategoria);
+    }
+
+    public static ComandoDeleteSubcategoria comandoDeleteSubcategoriaInstancia(long id) {
+        return new ComandoDeleteSubcategoria(id);
+    }
 
     //Fábricas de los comandos para categoria
     public static ComandoGetCategoria comandoGetCategoriaInstancia(long id) throws CategoriaException {
@@ -74,5 +101,13 @@ public class ComandoFactory {
 
     public static ComandoGetEstudiosAnalista comandoGetEstudiosAnalistaInstancia(long id) {
         return new ComandoGetEstudiosAnalista(id);
+    }
+
+    public static ComandoAddEstudio comandoAddEstudioInstancia(DtoEstudio dtoEstudio) {
+        return new ComandoAddEstudio(dtoEstudio);
+    }
+
+    public static ComandoSolicitarEstudio comandoSolicitarEstudioInstancia(long id, DtoEstudio dtoEstudio) {
+        return new ComandoSolicitarEstudio(id, dtoEstudio);
     }
 }

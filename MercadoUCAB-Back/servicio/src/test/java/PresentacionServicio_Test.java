@@ -1,8 +1,6 @@
 import org.junit.Assert;
 import org.junit.Test;
-import ucab.empresae.dtos.DtoMarca;
 import ucab.empresae.dtos.DtoPresentacion;
-import ucab.empresae.servicio.MarcaServicio;
 import ucab.empresae.servicio.PresentacionServicio;
 
 import javax.ws.rs.core.Response;

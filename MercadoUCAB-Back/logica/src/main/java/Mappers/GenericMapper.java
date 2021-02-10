@@ -1,7 +1,6 @@
 package Mappers;
 
 import ucab.empresae.entidades.BaseEntity;
-import ucab.empresae.excepciones.CategoriaException;
 import ucab.empresae.excepciones.CustomException;
 
 import java.text.ParseException;

@@ -3,6 +3,9 @@ package Mappers.Lugar;
 import Mappers.GenericMapper;
 import Mappers.MapperFactory;
 import Mappers.NivelSocioeconomico.NivelSocioeconomicoMapper;
+import ucab.empresae.daos.DaoFactory;
+import ucab.empresae.daos.DaoLugar;
+import ucab.empresae.daos.DaoNivelSocioeconomico;
 import ucab.empresae.dtos.DtoFactory;
 import ucab.empresae.dtos.DtoLugar;
 import ucab.empresae.entidades.BaseEntity;
@@ -39,7 +42,7 @@ public class LugarMapper extends GenericMapper<DtoLugar> {
                 NivelSocioeconomicoMapper nivelSocioeconomicoMapper = MapperFactory.nivelSocioeconomicoMapperInstancia();
                 dtoLugar.setNivelSocioEconomico(nivelSocioeconomicoMapper.CreateDto(lugar.getNivelsocioeco()));
             }
-            if(!lugar.getTipo().equals("pais")) {
+            if(lugar.getLugar() != null) {
                 dtoLugar.setLugar(CreateDto(lugar.getLugar()));
             }
             return dtoLugar;
@@ -60,19 +63,22 @@ public class LugarMapper extends GenericMapper<DtoLugar> {
             throw new CustomException("MAPPAI002","El tipo debe ser pais.");
         } else{
             LugarEntity lugar = EntidadesFactory.LugarInstance();
-            if(dtoLugar.getNivelSocioEconomico() != null) {
-                NivelSocioeconomicoMapper nivelSocioeconomicoMapper = MapperFactory.nivelSocioeconomicoMapperInstancia();
-                lugar.setNivelsocioeco((NivelSocioeconomicoEntity) nivelSocioeconomicoMapper.CreateEntity(dtoLugar.getNivelSocioEconomico()));
-            }
             lugar.setEstado(dtoLugar.getEstado());
             lugar.setNombre(dtoLugar.getNombre());
             lugar.setTipo(dtoLugar.getTipo());
+
+            DaoLugar daoLugar = DaoFactory.DaoLugarInstancia();
+            lugar.setLugar(daoLugar.find(dtoLugar.getLugar().get_id(), LugarEntity.class));
+
+            if(dtoLugar.getNivelSocioEconomico() != null) {
+                DaoNivelSocioeconomico daoNivelSocioeconomico = DaoFactory.DaoNivelSocioeconomicoInstancia();
+                lugar.setNivelsocioeco(daoNivelSocioeconomico.find(dtoLugar.getNivelSocioEconomico().get_id(), NivelSocioeconomicoEntity.class));
+            }
+
             if(dtoLugar.get_id() != 0) {
                 lugar.set_id(dtoLugar.get_id());
             }
-            if(dtoLugar.getLugar() != null) {
-                CreateEntity(dtoLugar.getLugar());
-            }
+
             return lugar;
         }
     }

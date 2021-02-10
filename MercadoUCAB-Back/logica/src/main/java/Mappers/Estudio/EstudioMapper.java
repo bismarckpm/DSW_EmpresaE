@@ -7,17 +7,18 @@ import Mappers.MapperFactory;
 import Mappers.NivelSocioeconomico.NivelSocioeconomicoMapper;
 import Mappers.Subcategoria.SubcategoriaMapper;
 import Mappers.Usuario.UsuarioMapper;
+import ucab.empresae.daos.*;
 import ucab.empresae.dtos.DtoCategoria;
 import ucab.empresae.dtos.DtoEstudio;
 import ucab.empresae.dtos.DtoFactory;
 import ucab.empresae.entidades.*;
 import ucab.empresae.excepciones.CustomException;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class EstudioMapper extends GenericMapper<DtoEstudio> {
 
@@ -120,43 +121,48 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
             estudio.setNombre(dtoEstudio.getNombre());
             estudio.setVia(dtoEstudio.getVia());
 
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            estudio.setFechaInicio(dateFormat.parse(dtoEstudio.getFechaInicio()));
+            SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
+            estudio.setFechaInicio(dateFormat.parse(dtoEstudio.getFechaInicio().replace(" IST ", " GMT+0530 ")));
 
-            SubcategoriaMapper subcategoriaMapper = MapperFactory.subcategoriaMapperInstancia();
-            estudio.setSubcategoria((SubcategoriaEntity) subcategoriaMapper.CreateEntity(dtoEstudio.getSubcategoria()));
+            //SubcategoriaMapper subcategoriaMapper = MapperFactory.subcategoriaMapperInstancia();
+            DaoSubcategoria daoSubcategoria = DaoFactory.DaoSubcategoriaInstancia();
+            estudio.setSubcategoria(daoSubcategoria.find(dtoEstudio.getSubcategoria().get_id(), SubcategoriaEntity.class));
 
-            NivelSocioeconomicoMapper nivelSocioeconomicoMapper = MapperFactory.nivelSocioeconomicoMapperInstancia();
-            estudio.setNivelSocioEconomico((NivelSocioeconomicoEntity) nivelSocioeconomicoMapper.CreateEntity(dtoEstudio.getNivelSocioEconomico()));
+            //NivelSocioeconomicoMapper nivelSocioeconomicoMapper = MapperFactory.nivelSocioeconomicoMapperInstancia();
+            DaoNivelSocioeconomico daoNivelSocioeconomico = DaoFactory.DaoNivelSocioeconomicoInstancia();
+            estudio.setNivelSocioEconomico(daoNivelSocioeconomico.find(dtoEstudio.getNivelSocioEconomico().get_id(), NivelSocioeconomicoEntity.class));
 
-            LugarMapper lugarMapper = MapperFactory.lugarMapperInstancia();
-            estudio.setLugar((LugarEntity) lugarMapper.CreateEntity(dtoEstudio.getLugar()));
+            //LugarMapper lugarMapper = MapperFactory.lugarMapperInstancia();
+            DaoLugar daoLugar = DaoFactory.DaoLugarInstancia();
+            estudio.setLugar(daoLugar.find(dtoEstudio.getLugar().get_id(), LugarEntity.class));
 
             if(dtoEstudio.get_id() != 0) {
                 estudio.set_id(dtoEstudio.get_id());
             }
 
             if(dtoEstudio.getAnalista() != null) {
-                UsuarioMapper usuarioMapper = MapperFactory.usuarioMapperInstancia();
-                estudio.setAnalista((UsuarioEntity) usuarioMapper.CreateEntity(dtoEstudio.getAnalista()));
+                //UsuarioMapper usuarioMapper = MapperFactory.usuarioMapperInstancia();
+                DaoUsuario daoUsuario = DaoFactory.DaoUsuarioInstancia();
+                estudio.setAnalista(daoUsuario.find(dtoEstudio.getAnalista().get_id(), UsuarioEntity.class));
             }
 
             if(dtoEstudio.getGenero() != null) {
-                GeneroMapper generoMapper = MapperFactory.generoMapperInstancia();
-                estudio.setGenero((GeneroEntity) generoMapper.CreateEntity(dtoEstudio.getGenero()));
+                //GeneroMapper generoMapper = MapperFactory.generoMapperInstancia();
+                DaoGenero daoGenero = DaoFactory.DaoGeneroInstancia();
+                estudio.setGenero(daoGenero.find(dtoEstudio.getGenero().get_id(), GeneroEntity.class));
             }
 
             if(dtoEstudio.getComentarioAnalista() != null) {
                 estudio.setComentarioAnalista(dtoEstudio.getComentarioAnalista());
             }
-            if(dtoEstudio.getEdadMinima() !=0) {
+            if(dtoEstudio.getEdadMinima() != null) {
                 estudio.setEdadMinima(dtoEstudio.getEdadMinima());
             }
-            if(dtoEstudio.getEdadMaxima() != 0) {
+            if(dtoEstudio.getEdadMaxima() != null) {
                 estudio.setEdadMaxima(dtoEstudio.getEdadMaxima());
             }
             if(dtoEstudio.getFechaFin() != null) {
-                estudio.setFechaFin(dateFormat.parse(dtoEstudio.getFechaFin()));
+                estudio.setFechaInicio(dateFormat.parse(dtoEstudio.getFechaFin().replace(" IST ", " GMT+0530 ")));
             }
 
             return estudio;

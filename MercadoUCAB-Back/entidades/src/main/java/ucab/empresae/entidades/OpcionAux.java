@@ -1,8 +1,5 @@
 package ucab.empresae.entidades;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-
 public class OpcionAux extends BaseEntity{
     private String estado;
     private String descripcion;

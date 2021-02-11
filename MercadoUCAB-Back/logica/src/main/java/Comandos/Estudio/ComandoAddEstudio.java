@@ -13,7 +13,7 @@ import ucab.empresae.excepciones.CustomException;
 
 import java.util.Date;
 
-public class ComandoAddEstudio extends ComandoBase<DtoResponse> {
+public class ComandoAddEstudio extends ComandoBase<DtoEstudio> {
 
     private DtoEstudio dtoEstudio;
 
@@ -28,8 +28,6 @@ public class ComandoAddEstudio extends ComandoBase<DtoResponse> {
 
         DaoEstudio daoEstudio = DaoFactory.DaoEstudioInstancia();
         GenericMapper estudioMapper = MapperFactory.estudioMapperInstancia();
-        this.dtoEstudio.setEstado("solicitado");
-        this.dtoEstudio.setFechaInicio(new Date().toString());
         EstudioEntity estudio = (EstudioEntity) estudioMapper.CreateEntity(this.dtoEstudio);
 
         estudio = daoEstudio.insert(estudio);
@@ -43,15 +41,10 @@ public class ComandoAddEstudio extends ComandoBase<DtoResponse> {
     }
 
     @Override
-    public DtoResponse getResult() throws Exception {
+    public DtoEstudio getResult() throws Exception {
 
         execute();
-        DtoResponse dtoResponse = DtoFactory.DtoResponseInstance();
-        dtoResponse.setEstado("Exitoso");
-        dtoResponse.setMensaje("Estudio insertado");
-        dtoResponse.setObjeto(this.dtoEstudio);
-
-        return dtoResponse;
+        return this.dtoEstudio;
 
     }
 

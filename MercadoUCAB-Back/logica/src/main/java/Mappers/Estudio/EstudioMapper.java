@@ -17,6 +17,7 @@ import ucab.empresae.excepciones.CustomException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -103,14 +104,13 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
      */
     @Override
     public BaseEntity CreateEntity(DtoEstudio dtoEstudio) throws CustomException, ParseException {
-       if(dtoEstudio.getEstado() == null) {
-            throw new CustomException("MAPEST002","El estudio debe tener un estado asignado.");
-        }else if(!dtoEstudio.getEstado().equals("solicitado") && !dtoEstudio.getEstado().equals("procesado") && !dtoEstudio.getEstado().equals("en ejecucion") && !dtoEstudio.getEstado().equals("culminado")) {
+        if(dtoEstudio.getEstado() == null) {
+            dtoEstudio.setEstado("solicitado");
+        }
+        if(!dtoEstudio.getEstado().equals("solicitado") && !dtoEstudio.getEstado().equals("procesado") && !dtoEstudio.getEstado().equals("en ejecucion") && !dtoEstudio.getEstado().equals("culminado")) {
             throw new CustomException("MAPEST002","El estado del estudio no es válido");
         }else if(dtoEstudio.getNombre() == null) {
             throw new CustomException("MAPEST002","El estudio debe tener un nombre asignado.");
-        }else if(dtoEstudio.getFechaInicio() == null) {
-            throw new CustomException("MAPEST002","El estudio debe tener una fecha de inicio.");
         }else if(dtoEstudio.getVia() == null) {
             throw new CustomException("MAPEST002","El estudio debe tener una vía de respuesta.");
         }else if(!dtoEstudio.getVia().equals("telefono") && !dtoEstudio.getVia().equals("plataforma")) {
@@ -122,7 +122,12 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
             estudio.setVia(dtoEstudio.getVia());
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
-            estudio.setFechaInicio(dateFormat.parse(dtoEstudio.getFechaInicio().replace(" IST ", " GMT+0530 ")));
+
+            if(dtoEstudio.getFechaInicio() == null) {
+                estudio.setFechaInicio(new Date());
+            }else {
+                estudio.setFechaInicio(dateFormat.parse(dtoEstudio.getFechaInicio().replace(" IST ", " GMT+0530 ")));
+            }
 
             //SubcategoriaMapper subcategoriaMapper = MapperFactory.subcategoriaMapperInstancia();
             DaoSubcategoria daoSubcategoria = DaoFactory.DaoSubcategoriaInstancia();

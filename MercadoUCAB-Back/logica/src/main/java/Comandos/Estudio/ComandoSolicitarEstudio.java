@@ -1,6 +1,9 @@
 package Comandos.Estudio;
 
 import Comandos.ComandoBase;
+import Comandos.ComandoFactory;
+import Mappers.GenericMapper;
+import Mappers.MapperFactory;
 import ucab.empresae.daos.*;
 import ucab.empresae.dtos.DtoEstudio;
 import ucab.empresae.dtos.DtoFactory;
@@ -14,7 +17,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class ComandoSolicitarEstudio extends ComandoBase<DtoResponse> {
 
     private final long id;
-    private final DtoEstudio dtoEstudio;
+    private DtoEstudio dtoEstudio;
     private EstudioEntity estudio = EntidadesFactory.EstudioInstance();
     private DaoEstudio dao = DaoFactory.DaoEstudioInstancia();
 
@@ -28,17 +31,15 @@ public class ComandoSolicitarEstudio extends ComandoBase<DtoResponse> {
     @Override
     public void execute() throws Exception {
 
-        DaoUsuario daoUsuario1 = DaoFactory.DaoUsuarioInstancia();
-        List<UsuarioEntity> listaAnalista = daoUsuario1.getAnalistas();
-        int analistaAleatorio =  ThreadLocalRandom.current().nextInt(0, listaAnalista.size()-1);
-        this.estudio.setAnalista(listaAnalista.get(analistaAleatorio));
-        this.estudio = this.dao.insert(this.estudio);
+        ComandoRandomAnalista comandoRandomAnalista = ComandoFactory.comandoRandomAnalistaInstancia();
+        this.dtoEstudio.setAnalista(comandoRandomAnalista.getResult());
 
-        DaoClienteEstudio daoClienteEstudio = new DaoClienteEstudio();
+        ComandoAddEstudio comandoAddEstudio = ComandoFactory.comandoAddEstudioInstancia(this.dtoEstudio);
+        this.dtoEstudio = comandoAddEstudio.getResult();
+        this.estudio = this.dao.find(this.dtoEstudio.get_id(), EstudioEntity.class);
+
         DaoCliente daoCliente = new DaoCliente();
         DaoUsuario daoUsuario = new DaoUsuario();
-        this.estudio = this.dao.find(this.estudio.get_id(), EstudioEntity.class);
-
         if(daoCliente.getClienteByUsuario(daoUsuario.find(this.id, UsuarioEntity.class)) == null){
             throw new CustomException("COMSOLEST001","No existe ningun cliente registrado con ese Username");
         }
@@ -49,6 +50,8 @@ public class ComandoSolicitarEstudio extends ComandoBase<DtoResponse> {
         clienteEstudioEntity.setEstudio(this.estudio);
         clienteEstudioEntity.setCliente(clienteEntity);
         clienteEstudioEntity.setEstado("a");
+
+        DaoClienteEstudio daoClienteEstudio = new DaoClienteEstudio();
         daoClienteEstudio.insert(clienteEstudioEntity);
 
         DaoEncuestado daoEncuestado = new DaoEncuestado();

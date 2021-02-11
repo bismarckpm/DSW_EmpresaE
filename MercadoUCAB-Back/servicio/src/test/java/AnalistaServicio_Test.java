@@ -21,15 +21,4 @@ public class AnalistaServicio_Test {
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 
-    /**
-     * Prueba unitaria que prueba que se puede obtener un analita por medio de su id.
-     */
-    @Test
-    //Prueba Unitaria de la lista de Estudios de un Analista
-    public void getAnalistaTest(){
-        AnalistaServicio servicio = new AnalistaServicio();
-        Response resultado = servicio.getAnalista(3);
-        Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
-    }
-
 }

@@ -24,7 +24,6 @@ import java.util.List;
 @Path("/estudio")
 public class EstudioServicio extends AplicacionBase {
 
-
     private DtoResponse response = DtoFactory.DtoResponseInstance();
     private ComandoBase comando;
     private DaoEstudio dao = DaoFactory.DaoEstudioInstancia();
@@ -219,7 +218,7 @@ public class EstudioServicio extends AplicacionBase {
      * @return retorna objeto de tipo EstudioEntity.
      * @see EstudioEntity Entidad persistente utilizada para insertar los datos al sistema.
      */
-    @POST
+    /*@POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addEstudio(DtoEstudio dtoEstudio) {
@@ -237,7 +236,7 @@ public class EstudioServicio extends AplicacionBase {
             this.response.setCodError("SERPRE005");
             return Response.status(500).entity(this.response).build();
         }
-    }
+    }*/
 
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/cliente/{id}
@@ -274,33 +273,26 @@ public class EstudioServicio extends AplicacionBase {
      * @return Objeto de tipo EntudioEntity
      * @see EstudioEntity Entidad persistente utilizada para realizar el update del Estudio.
      */
-    /*@PUT
+    @PUT
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateEstudio(@PathParam("id") long id, DtoEstudio dtoEstudio) {
         try {
-            DaoEstudio daoEstudio = new DaoEstudio();
-            EstudioEntity estudio = daoEstudio.find(id, EstudioEntity.class);
-
-            estudio.setComentarioAnalista(dtoEstudio.getComentarioAnalista());
-            estudio.setEstado(dtoEstudio.getEstado());
-
-            if(dtoEstudio.getFechaFin() != null){
-                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                Date fechaFin = dateFormat.parse(dtoEstudio.getFechaFin());
-                estudio.setFechaFin(fechaFin);
-            }else{
-                estudio.setFechaFin(null);
-            }
-
-            daoEstudio.update(estudio);
-
-            return Response.ok(estudio).build();
+            this.comando = ComandoFactory.comandoUpdateEstudioInstancia(dtoEstudio);
+            return Response.ok(this.comando.getResult()).build();
+        } catch (CustomException cex){
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(cex.getMensaje());
+            this.response.setCodError(cex.getCodError());
+            return Response.status(500).entity(this.response).build();
         } catch (Exception ex) {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(ex.getMessage());
+            this.response.setCodError("SERPRE004");
+            return Response.status(500).entity(this.response).build();
         }
-    }*/
+    }
 
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/updateAdmin/{id}

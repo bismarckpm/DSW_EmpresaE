@@ -1,5 +1,6 @@
 package Comandos;
 
+import Comandos.Analista.ComandoGetAnalistas;
 import Comandos.Categoria.*;
 import Comandos.Estudio.*;
 import Comandos.Pregunta.ComandoGetPreguntas;
@@ -8,10 +9,7 @@ import Comandos.Presentacion.ComandoGetPresentaciones;
 import Comandos.Presentacion.ComandoPostPresentacion;
 import Comandos.Presentacion.ComandoUpdatePresentacion;
 import Comandos.Subcategoria.*;
-import ucab.empresae.dtos.DtoCategoria;
-import ucab.empresae.dtos.DtoEstudio;
-import ucab.empresae.dtos.DtoPresentacion;
-import ucab.empresae.dtos.DtoSubcategoria;
+import ucab.empresae.dtos.*;
 import ucab.empresae.excepciones.CategoriaException;
 
 public class ComandoFactory {
@@ -109,5 +107,18 @@ public class ComandoFactory {
 
     public static ComandoSolicitarEstudio comandoSolicitarEstudioInstancia(long id, DtoEstudio dtoEstudio) {
         return new ComandoSolicitarEstudio(id, dtoEstudio);
+    }
+
+    public static ComandoUpdateEstudio comandoUpdateEstudioInstancia(DtoEstudio dtoEstudio) {
+        return new ComandoUpdateEstudio(dtoEstudio);
+    }
+
+    public static ComandoRandomAnalista comandoRandomAnalistaInstancia() {
+        return new ComandoRandomAnalista();
+    }
+
+    //analistas
+    public static ComandoGetAnalistas comandoGetAnalistas() {
+        return new ComandoGetAnalistas();
     }
 }

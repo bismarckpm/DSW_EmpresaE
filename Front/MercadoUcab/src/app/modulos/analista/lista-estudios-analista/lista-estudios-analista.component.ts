@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Estudio} from '../../../models/estudio';
 import {EstudioService} from '../../../services/estudio.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Encuestado} from '../../../models/encuestado';
 import * as Highcharts from 'highcharts';
 import highcharts3D from 'highcharts/highcharts-3d.src';
@@ -29,8 +29,8 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
   chartOptions: Highcharts.Options[] = [];
   highcharts = Highcharts;
 
-  patronFechaEstudio: any = /^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/
-  get fechaFinEstudio(){return this.formEstudioAnalista.get('fechaFinEstudio'); }
+  patronFechaEstudio: any = /^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/;
+  get fechaFinEstudio(): AbstractControl {return this.formEstudioAnalista.get('fechaFinEstudio'); }
 
 
   constructor(
@@ -47,7 +47,7 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
     this.loadEstudios();
   }
 
-  editar(estudio){
+  editar(estudio): void{
     this.analistaData = estudio;
   }
 
@@ -64,12 +64,6 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
     });
   }
 
-  updateEstudio(){
-    this.estudioService.updateEstudio(this.analistaData._id, this.analistaData).subscribe(data => {
-    });
-    this.loadEstudios();
-  }
-
   loadInfoGraficos(estudio): void {
     this.infoGraficos = [];
     this.chartOptions = [];
@@ -80,7 +74,13 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
     });
   }
 
-  agregarDatos() {
+  updateEstudio(): any {
+    this.estudioService.updateEstudio(this.analistaData._id, this.analistaData).subscribe(data => {
+    });
+    this.loadEstudios();
+  }
+
+  agregarDatos(): any {
     this.infoGraficos.forEach(element => {
       const valor = element.opcionesResultado.map((x: any) => {
         return { name: x.descripcion, y: x.valor };
@@ -92,9 +92,9 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
   }
 
   chart(enunciado: any, valor: any): Highcharts.Options {
-    let chartOptions: Highcharts.Options = {
+    const chartOptions: Highcharts.Options = {
       chart: {
-        type: "pie",
+        type: 'pie',
         plotShadow: false,
         options3d: {
           enabled: true,
@@ -106,20 +106,20 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
         text: enunciado
       },
       tooltip: {
-        headerFormat: "",
+        headerFormat: '',
         pointFormat:
-          "<span style='color:{point.color}'>\u25CF</span> {point.name}: <b>{point.y}</b>",
+          '<span style=\'color:{point.color}\'>\u25CF</span> {point.name}: <b>{point.y}</b>',
         style: {
-          fontSize: "10px"
+          fontSize: '10px'
         }
       },
       plotOptions: {
         pie: {
           allowPointSelect: true,
-          cursor: "pointer",
+          cursor: 'pointer',
           depth: 35,
           shadow: true,
-          innerSize: "20%",
+          innerSize: '20%',
           dataLabels: {
             enabled: false
           },
@@ -128,7 +128,7 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
       },
       series: [
         {
-          type: "pie",
+          type: 'pie',
           data: valor
         }
       ]
@@ -136,14 +136,15 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
     return chartOptions;
   }
 
-  get comentarioAnalistaEstudio(){ return this.formEstudioAnalista.get('comentarioAnalistaEstudio'); }
-  get estadoEstudioAnalista(){ return this.formEstudioAnalista.get('estadoEstudioAnalista'); }
+  get comentarioAnalistaEstudio(): AbstractControl{ return this.formEstudioAnalista.get('comentarioAnalistaEstudio'); }
+  get estadoEstudioAnalista(): AbstractControl{ return this.formEstudioAnalista.get('estadoEstudioAnalista'); }
 
-  createForm() {
+  createForm(): void {
     this.formEstudioAnalista = this.formBuilder.group({
       comentarioAnalistaEstudio: ['', [Validators.required, Validators.maxLength(100)]],
       estadoEstudioAnalista: ['', Validators.required],
       fechaFinEstudio: ['', [ Validators.pattern(this.patronFechaEstudio)]],
     });
   }
+
 }

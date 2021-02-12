@@ -3,6 +3,7 @@ package ucab.empresae.servicio;
 import Comandos.ComandoBase;
 import Comandos.ComandoFactory;
 import ucab.empresae.daos.*;
+import ucab.empresae.dtos.DtoEstudioEncuestado;
 import ucab.empresae.dtos.DtoFactory;
 import ucab.empresae.dtos.DtoPregunta;
 import ucab.empresae.dtos.DtoResponse;
@@ -24,20 +25,6 @@ public class PreguntaServicio {
 
     private ComandoBase comando;
 
-    /**
-     * Metodo que recibe un objeto pregunta para borrar las opciones asociadas a esa pregunta
-     * @param pregunta objeto pregunta que se utiliza para obtener las opciones asociadas
-     */
-    public void borrarOpciones(PreguntaEntity pregunta) {
-        DaoOpcion daoOpcion = new DaoOpcion();
-
-        List<OpcionEntity> opciones = daoOpcion.getOpciones(pregunta);
-
-        for (OpcionEntity opcion : opciones) {
-            OpcionEntity opcionEliminar = daoOpcion.find(opcion.get_id(), OpcionEntity.class);
-            daoOpcion.delete(opcionEliminar);
-        }
-    }
 
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/pregunta
@@ -60,7 +47,7 @@ public class PreguntaServicio {
         catch (Exception ex) {
             response.setEstado("ERROR");
             response.setMensaje(ex.getMessage());
-            response.setCodError("SERPRE001");
+            response.setCodError("SERPREG001");
             return Response.status(500).entity(response).build();
         }
     }
@@ -75,6 +62,24 @@ public class PreguntaServicio {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addPregunta(DtoPregunta dtoPregunta) {
+        DtoResponse response = DtoFactory.DtoResponseInstance();
+        try{
+            this.comando = ComandoFactory.comandoPostPreguntaInstancia(dtoPregunta);
+            return Response.ok(this.comando.getResult()).build();
+        }catch (CustomException cex){
+            response.setEstado("000");
+            response.setMensaje(cex.getMensaje());
+            response.setCodError(cex.getCodError());
+            return Response.status(500).entity(response).build();
+        }
+        catch (Exception ex) {
+            response.setEstado("000");
+            response.setMensaje(ex.getMessage());
+            response.setCodError("SERPREG002");
+            return Response.status(500).entity(response).build();
+        }
+
+        /*
 
         DaoPregunta dao = new DaoPregunta();
         DaoTipoPregunta daoTipoPregunta = new DaoTipoPregunta();
@@ -86,13 +91,14 @@ public class PreguntaServicio {
 
         try {
             pregunta.setDescripcion(dtoPregunta.getDescripcion());
-            pregunta.setEstado(dtoPregunta.getEstado());
+            pregunta.setEstado(dtoPregunta.getEstado()); ---------------------ya esto lo hace el create entity
 
             SubcategoriaEntity subcategoria = daoSubcategoria.find(dtoPregunta.getSubcategoria().get_id(), SubcategoriaEntity.class);
             pregunta.setSubcategoria(subcategoria);
             TipoPreguntaEntity tipoPregunta = daoTipoPregunta.find(dtoPregunta.getTipo().get_id(), TipoPreguntaEntity.class);
             pregunta.setTipo(tipoPregunta);
-
+                                                                                    -----------------Ojo porque creo que tengo
+                                                                                    que hacer un mapper nuevo para hacer el find
             PreguntaEntity preguntaInsert = dao.insert(pregunta);
 
             // Tipo de Pregunta de Seleccion Simple o Seleccion multiple
@@ -151,13 +157,15 @@ public class PreguntaServicio {
                     pregunta_opcion_nn.setPregunta(preguntaInsert);
                     daoPreguntaOpcion.insert(pregunta_opcion_nn);
                 }
-            }
+            }---------------------------------------------------------------------
 
             return Response.ok().entity(preguntaInsert).build();
 
         } catch (Exception ex) {
             return Response.status(500).entity(ex.getMessage()).build();
         }
+
+         */
     }
 
     /**
@@ -170,7 +178,7 @@ public class PreguntaServicio {
     @Path("/{id}")
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response deletePregunta(@PathParam("id") long id) {
-
+        /*
         DaoPregunta dao = new DaoPregunta();
         PreguntaEntity pregunta = null;
         try {
@@ -180,6 +188,23 @@ public class PreguntaServicio {
 
         } catch (Exception ex) {
             return Response.status(500).entity(ex.getMessage()).build();
+        }*/
+
+        DtoResponse response = DtoFactory.DtoResponseInstance();
+        try {
+            this.comando = ComandoFactory.comandoDeletePreguntaInstancia(id);
+            return Response.ok(this.comando.getResult()).build();
+        } catch (CustomException cex){
+            response.setEstado("000");
+            response.setMensaje(cex.getMensaje());
+            response.setCodError(cex.getCodError());
+            return Response.status(500).entity(response).build();
+        }
+        catch (Exception ex) {
+            response.setEstado("000");
+            response.setMensaje(ex.getMessage());
+            response.setCodError("SERPRE003");
+            return Response.status(500).entity(response).build();
         }
     }
 
@@ -193,6 +218,25 @@ public class PreguntaServicio {
     @PUT
     @Path("/{id}")
     public Response updatePregunta(@PathParam("id") long id, DtoPregunta dtoPregunta) {
+        DtoResponse response = DtoFactory.DtoResponseInstance();
+        try{
+            this.comando = ComandoFactory.comandoUpdatePreguntaInstancia(id, dtoPregunta);
+            return Response.ok(this.comando.getResult()).build();
+        }catch (CustomException cex){
+            response.setEstado("000");
+            response.setMensaje(cex.getMensaje());
+            response.setCodError(cex.getCodError());
+            return Response.status(500).entity(response).build();
+        }
+        catch (Exception ex) {
+            response.setEstado("000");
+            response.setMensaje(ex.getMessage());
+            response.setCodError("SERPREG004");
+            return Response.status(500).entity(response).build();
+        }
+
+
+        /*
 
         DaoPregunta dao = new DaoPregunta();
         PreguntaEntity pregunta = dao.find(id, PreguntaEntity.class);
@@ -207,6 +251,13 @@ public class PreguntaServicio {
                 this.borrarOpciones(pregunta);
             }
 
+            PreguntaMapper preguntaMapper = MapperFactory.preguntaMapperInstancia();
+
+        SubcategoriaEntity subcategoria = daoSubcategoria.find(dtoPregunta.getSubcategoria().get_id(), SubcategoriaEntity.class);
+        TipoPreguntaEntity tipoPregunta = daoTipoPregunta.find(dtoPregunta.getTipo().get_id(), TipoPreguntaEntity.class);
+
+        PreguntaEntity pregunta = preguntaMapper.CreateEntity(this.dtoPregunta);
+        pregunta = daoPregunta.insert(pregunta);
 
             pregunta.setEstado(dtoPregunta.getEstado());
             pregunta.setDescripcion(dtoPregunta.getDescripcion());
@@ -279,7 +330,7 @@ public class PreguntaServicio {
             return Response.ok(pregunta).build();
         } catch (Exception ex){
             return Response.status(500).entity(ex.getMessage()).build();
-        }
+        }*/
 
     }
 
@@ -351,6 +402,50 @@ public class PreguntaServicio {
         try {
             DaoPregunta dao = new DaoPregunta();
             preguntas = dao.getPreguntasbyEstudio(id);
+
+            for(PreguntaEntity pregunta : preguntas){
+                PreguntaAux preguntaAux = new PreguntaAux(pregunta.get_id());
+                List<OpcionEntity> opciones = daoOpcion.getOpciones(pregunta);
+
+
+                preguntaAux.setDescripcion(pregunta.getDescripcion());
+                preguntaAux.setTipo(pregunta.getTipo());
+                preguntaAux.setOpciones(opciones);
+
+                preguntaAuxList.add(preguntaAux);
+            }
+            return preguntaAuxList;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            String problema = ex.getMessage();
+        }
+        return null;
+    }
+
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/pregunta/encuestaEstudioEncuestado/id
+     * Metodo con anotacion GET que permite obtener todas las preguntas con sus opciones (encuesta) de un estudio respecto a un encuestado
+     * @return Response con status ok con la lista de preguntas con opciones (encuesta) asignadas a un estudio.
+     */
+    @GET
+    @Produces(value = MediaType.APPLICATION_JSON)
+    @Consumes(value = MediaType.APPLICATION_JSON)
+    @Path("/encuestaEstudioEncuestado/{id_estudio}/{id_encuestado}")
+    public List<PreguntaAux> getPreguntasyOpcionesxEncuestado(@PathParam("id_estudio") long id_estudio, @PathParam("id_encuestado") long id_encuestado) {
+
+
+        DaoUsuario daoUsuario = new DaoUsuario();
+        DaoEncuestado daoEncuestado = new DaoEncuestado();
+        UsuarioEntity usuarioEntity = daoUsuario.find(id_encuestado, UsuarioEntity.class);
+        EncuestadoEntity encuestadoEntity = daoEncuestado.getEncuestadoByUsuario(usuarioEntity);
+
+        List<PreguntaEntity> preguntas = null;
+        List<PreguntaAux> preguntaAuxList = new ArrayList<PreguntaAux>();
+        DaoOpcion daoOpcion = new DaoOpcion();
+
+        try {
+            DaoPregunta dao = new DaoPregunta();
+            preguntas = dao.getPreguntasbyEstudioEncuestado(id_estudio, encuestadoEntity.get_id());
 
             for(PreguntaEntity pregunta : preguntas){
                 PreguntaAux preguntaAux = new PreguntaAux(pregunta.get_id());

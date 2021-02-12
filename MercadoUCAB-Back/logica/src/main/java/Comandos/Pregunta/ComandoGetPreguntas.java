@@ -3,6 +3,7 @@ package Comandos.Pregunta;
 import Comandos.ComandoBase;
 import Mappers.GenericMapper;
 import Mappers.MapperFactory;
+import Mappers.Pregunta.PreguntaMapper;
 import ucab.empresae.daos.Dao;
 import ucab.empresae.daos.DaoFactory;
 import ucab.empresae.dtos.DtoFactory;
@@ -35,7 +36,7 @@ public class ComandoGetPreguntas extends ComandoBase<DtoResponse> {
         Dao daoPregunta = DaoFactory.DaoPreguntaInstancia();
         List<BaseEntity> preguntas = daoPregunta.findAll(PreguntaEntity.class);
 
-        GenericMapper preguntaMapper = MapperFactory.preguntaMapperInstancia();
+        PreguntaMapper preguntaMapper = MapperFactory.preguntaMapperInstancia();
         this.dtoPreguntas = preguntaMapper.CreateDtoList(preguntas);
     }
 

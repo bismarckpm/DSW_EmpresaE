@@ -4,6 +4,7 @@ import Comandos.Categoria.*;
 import Comandos.Presentacion.*;
 import Comandos.Pregunta.*;
 import ucab.empresae.dtos.DtoCategoria;
+import ucab.empresae.dtos.DtoPregunta;
 import ucab.empresae.dtos.DtoPresentacion;
 import ucab.empresae.excepciones.CategoriaException;
 
@@ -52,4 +53,18 @@ public class ComandoFactory {
     public static ComandoGetPreguntas comandoGetPreguntasInstancia() {
         return new ComandoGetPreguntas();
     }
+
+    public static ComandoPostPregunta comandoPostPreguntaInstancia(DtoPregunta dtoPregunta) {
+        return new ComandoPostPregunta(dtoPregunta);
+    }
+
+    public static ComandoDeletePregunta comandoDeletePreguntaInstancia(long id) {
+        return new ComandoDeletePregunta(id);
+    }
+
+    public static ComandoUpdatePregunta comandoUpdatePreguntaInstancia(long id, DtoPregunta dtoPregunta) {
+        return new ComandoUpdatePregunta(id, dtoPregunta);
+    }
+
+
 }

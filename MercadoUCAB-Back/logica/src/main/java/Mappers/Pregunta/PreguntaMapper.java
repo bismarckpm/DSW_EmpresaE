@@ -5,6 +5,10 @@ import Mappers.GenericMapper;
 import Mappers.MapperFactory;
 import Mappers.Subcategoria.SubcategoriaMapper;
 import Mappers.TipoPregunta.TipoPreguntaMapper;
+import ucab.empresae.daos.DaoFactory;
+import ucab.empresae.daos.DaoPregunta;
+import ucab.empresae.daos.DaoSubcategoria;
+import ucab.empresae.daos.DaoTipoPregunta;
 import ucab.empresae.dtos.*;
 import ucab.empresae.entidades.*;
 import ucab.empresae.excepciones.CategoriaException;
@@ -17,14 +21,13 @@ import java.util.List;
 /**
  * Clase utilizada para mapear la clase persistente categoríaEntity con DtoCategoria y viceversa.
  */
-public class PreguntaMapper extends GenericMapper<DtoPregunta> {
+public class PreguntaMapper {
     /**
      * Método encargado de convertir una entidad a un DtoPregunta
      * @param entity entidad base posteriormente convertida a PreguntaEntity
      * @return Objeto de tipo DtoPregunta
      * @throws CustomException En caso de que algún dato sea inválido
      */
-    @Override
     public DtoPregunta CreateDto(BaseEntity entity) throws CustomException {
         PreguntaEntity pregunta = (PreguntaEntity) entity;
         if(pregunta.getDescripcion() == null) {
@@ -52,9 +55,8 @@ public class PreguntaMapper extends GenericMapper<DtoPregunta> {
      * @return Objeto de tipo PreguntaEntity
      * @throws CustomException En caso de que alguno de los datos no sea válido
      */
-    @Override
-    public BaseEntity CreateEntity(DtoPregunta dto) throws CustomException {
-        if(dto.getTipo() == null) {
+    public PreguntaEntity CreateEntity(DtoPregunta dto) throws CustomException {
+        if(dto.getDescripcion() == null) {
             throw new CustomException("Nombre no debe ser null.");
         } else {
             PreguntaEntity pregunta = EntidadesFactory.PreguntaInstance(dto.get_id());
@@ -64,12 +66,46 @@ public class PreguntaMapper extends GenericMapper<DtoPregunta> {
                 pregunta.setDescripcion(dto.getDescripcion());
                 pregunta.setEstado(dto.getEstado());
 
-                SubcategoriaMapper subcategoriaMapper = MapperFactory.subcategoriaMapperInstancia();
-                SubcategoriaEntity subcategoria = (SubcategoriaEntity) subcategoriaMapper.CreateEntity(dto.getSubcategoria());
-                pregunta.setSubcategoria(subcategoria);
+                DaoTipoPregunta daoTipoPregunta = DaoFactory.DaoTipoPreguntaInstancia();
+                DaoSubcategoria daoSubcategoria = DaoFactory.DaoSubcategoriaInstancia();
 
-                TipoPreguntaMapper tipoPreguntaMapper = MapperFactory.tipoPreguntaMapperInstancia();
-                TipoPreguntaEntity tipoPregunta =  (TipoPreguntaEntity) tipoPreguntaMapper.CreateEntity(dto.getTipo());
+                SubcategoriaEntity subcategoria = daoSubcategoria.find(dto.getSubcategoria().get_id(), SubcategoriaEntity.class);
+                TipoPreguntaEntity tipoPregunta = daoTipoPregunta.find(dto.getTipo().get_id(), TipoPreguntaEntity.class);
+                
+                pregunta.setSubcategoria(subcategoria);
+                pregunta.setTipo(tipoPregunta);
+
+                return pregunta;
+            }
+        }
+    }
+
+
+    /**
+     * Método encargado de convertir un DtoPregunta en Entidad persistente
+     * @param dto Objeto de tipo DtoPregunta
+     * @return Objeto de tipo PreguntaEntity
+     * @throws CustomException En caso de que alguno de los datos no sea válido
+     */
+    public PreguntaEntity CreateEntityUpdate(long id, DtoPregunta dto) throws CustomException {
+        if(dto.getDescripcion() == null) {
+            throw new CustomException("Nombre no debe ser null.");
+        } else {
+            DaoPregunta daoPregunta = DaoFactory.DaoPreguntaInstancia();
+            PreguntaEntity pregunta = daoPregunta.find(id, PreguntaEntity.class);
+            if(pregunta == null) {
+                throw new CustomException("Entidad correspondiente al dto no encontrada.");
+            } else {
+                pregunta.setDescripcion(dto.getDescripcion());
+                pregunta.setEstado(dto.getEstado());
+
+                DaoTipoPregunta daoTipoPregunta = DaoFactory.DaoTipoPreguntaInstancia();
+                DaoSubcategoria daoSubcategoria = DaoFactory.DaoSubcategoriaInstancia();
+
+                SubcategoriaEntity subcategoria = daoSubcategoria.find(dto.getSubcategoria().get_id(), SubcategoriaEntity.class);
+                TipoPreguntaEntity tipoPregunta = daoTipoPregunta.find(dto.getTipo().get_id(), TipoPreguntaEntity.class);
+
+                pregunta.setSubcategoria(subcategoria);
                 pregunta.setTipo(tipoPregunta);
 
                 return pregunta;
@@ -83,7 +119,6 @@ public class PreguntaMapper extends GenericMapper<DtoPregunta> {
      * @return Lista de objetos de tipo DtoPregunta
      * @throws CustomException En caso de que falle a la hora de llamar a CreateDto
      */
-    @Override
     public List<DtoPregunta> CreateDtoList(List<BaseEntity> entities) throws CustomException {
         ArrayList<DtoPregunta> dtos = new ArrayList<>();
 
@@ -99,9 +134,8 @@ public class PreguntaMapper extends GenericMapper<DtoPregunta> {
      * @return Lista de objetos de tipo PreguntaEntity
      * @throws CustomException En caso de que alguna de las llamadas a createEntity falle
      */
-    @Override
-    public List<BaseEntity> CreateEntityList(List<DtoPregunta> dtos) throws CustomException {
-        ArrayList<BaseEntity> preguntas = new ArrayList<>();
+    public List<PreguntaEntity> CreateEntityList(List<DtoPregunta> dtos) throws CustomException {
+        ArrayList<PreguntaEntity> preguntas = new ArrayList<>();
 
         for (DtoPregunta obj : dtos) {
             preguntas.add ( CreateEntity ( obj ) );

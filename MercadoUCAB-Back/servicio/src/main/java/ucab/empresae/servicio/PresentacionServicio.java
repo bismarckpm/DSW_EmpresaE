@@ -33,13 +33,13 @@ public class PresentacionServicio {
             this.comando = ComandoFactory.comandoGetPresentacionesInstancia();
             return Response.ok(this.comando.getResult()).build();
         }catch (CustomException cex){
-            response.setEstado("ERROR");
+            response.setEstado("000");
             response.setMensaje(cex.getMensaje());
             response.setCodError(cex.getCodError());
             return Response.status(500).entity(response).build();
         }
         catch (Exception ex) {
-            response.setEstado("ERROR");
+            response.setEstado("000");
             response.setMensaje(ex.getMessage());
             response.setCodError("SERPRE001");
             return Response.status(500).entity(response).build();
@@ -63,13 +63,13 @@ public class PresentacionServicio {
             this.comando = ComandoFactory.comandoPostPresentacionInstancia(dtoPresentacion);
             return Response.ok(this.comando.getResult()).build();
         } catch (CustomException cex){
-            response.setEstado("ERROR");
+            response.setEstado("000");
             response.setMensaje(cex.getMensaje());
             response.setCodError(cex.getCodError());
             return Response.status(500).entity(response).build();
         }
         catch (Exception ex) {
-            response.setEstado("ERROR");
+            response.setEstado("000");
             response.setMensaje(ex.getMessage());
             response.setCodError("SERPRE002");
             return Response.status(500).entity(response).build();
@@ -91,13 +91,13 @@ public class PresentacionServicio {
             this.comando = ComandoFactory.comandoDeletePresentacionInstancia(id);
             return Response.ok(this.comando.getResult()).build();
         } catch (CustomException cex){
-            response.setEstado("ERROR");
+            response.setEstado("000");
             response.setMensaje(cex.getMensaje());
             response.setCodError(cex.getCodError());
             return Response.status(500).entity(response).build();
         }
         catch (Exception ex) {
-            response.setEstado("ERROR");
+            response.setEstado("000");
             response.setMensaje(ex.getMessage());
             response.setCodError("SERPRE002");
             return Response.status(500).entity(response).build();
@@ -120,13 +120,13 @@ public class PresentacionServicio {
             this.comando = ComandoFactory.comandoUpdatePresentacionInstancia(dtoPresentacion);
             return Response.ok(this.comando.getResult()).build();
         } catch (CustomException cex){
-            response.setEstado("ERROR");
+            response.setEstado("000");
             response.setMensaje(cex.getMensaje());
             response.setCodError(cex.getCodError());
             return Response.status(500).entity(response).build();
         }
         catch (Exception ex) {
-            response.setEstado("ERROR");
+            response.setEstado("000");
             response.setMensaje(ex.getMessage());
             response.setCodError("SERPRE003");
             return Response.status(500).entity(response).build();

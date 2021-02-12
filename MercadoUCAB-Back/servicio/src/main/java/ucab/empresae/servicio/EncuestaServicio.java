@@ -228,6 +228,7 @@ public class EncuestaServicio extends AplicacionBase{
                         respuestaEntity.setPreguntaOpcion(preguntaOpcion);
                         respuestaEntity.setEncuestado(encuestadoEntity);
                         respuestaEntity.setEstudio(estudioEntity);
+                        respuestaEntity.setId_pregunta(respuesta.get_id());
                         daoRespuesta.insert(respuestaEntity);
                     }
 
@@ -239,13 +240,27 @@ public class EncuestaServicio extends AplicacionBase{
                     respuestaEntity.setEncuestado(encuestadoEntity);
                     respuestaEntity.setEstudio(estudioEntity);
                     respuestaEntity.setTexto(respuesta.getTexto());
+                    respuestaEntity.setId_pregunta(respuesta.get_id());
                     daoRespuesta.insert(respuestaEntity);
                 }
             }
 
-            EstudioEncuestadoEntity estudioEncuestadoEntity = daoEstudioEncuestado.getEstudioEncuestado(encuestadoEntity, estudioEntity);
-            estudioEncuestadoEntity.setEstado("Finalizado");
-            daoEstudioEncuestado.update(estudioEncuestadoEntity);
+            DaoRespuesta daoRespuestaPrueba = new DaoRespuesta();
+            DaoPregunta daoPregunta = new DaoPregunta();
+
+            long preguntasRespondidas = daoRespuestaPrueba.getCantidadPreguntasRespondidas(estudioEntity.get_id(), encuestadoEntity);
+            long preguntasxResponder = daoPregunta.getPreguntasbyEstudioConPregAb(estudioEntity.get_id()).size();
+
+            if (preguntasRespondidas == preguntasxResponder) {
+                EstudioEncuestadoEntity estudioEncuestadoEntity = daoEstudioEncuestado.getEstudioEncuestado(encuestadoEntity, estudioEntity);
+                estudioEncuestadoEntity.setEstado("Finalizado");
+                daoEstudioEncuestado.update(estudioEncuestadoEntity);
+            }
+            else {
+                EstudioEncuestadoEntity estudioEncuestadoEntity = daoEstudioEncuestado.getEstudioEncuestado(encuestadoEntity, estudioEntity);
+                estudioEncuestadoEntity.setEstado("En Proceso");
+                daoEstudioEncuestado.update(estudioEncuestadoEntity);
+            }
 
             return Response.ok().build();
 

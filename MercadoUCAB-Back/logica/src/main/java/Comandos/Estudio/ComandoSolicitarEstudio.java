@@ -31,35 +31,37 @@ public class ComandoSolicitarEstudio extends ComandoBase<DtoResponse> {
     @Override
     public void execute() throws Exception {
 
+        //Asignar analista de manera random al estudio solicitado
         ComandoRandomAnalista comandoRandomAnalista = ComandoFactory.comandoRandomAnalistaInstancia();
         this.dtoEstudio.setAnalista(comandoRandomAnalista.getResult());
 
+        //Crear estudio dentro de la base de datos
         ComandoAddEstudio comandoAddEstudio = ComandoFactory.comandoAddEstudioInstancia(this.dtoEstudio);
         this.dtoEstudio = comandoAddEstudio.getResult();
         this.estudio = this.dao.find(this.dtoEstudio.get_id(), EstudioEntity.class);
 
-        DaoCliente daoCliente = new DaoCliente();
-        DaoUsuario daoUsuario = new DaoUsuario();
-        if(daoCliente.getClienteByUsuario(daoUsuario.find(this.id, UsuarioEntity.class)) == null){
+        //Obtener el cliente por el id de su usuario
+        DaoCliente daoCliente = DaoFactory.DaoClienteInstancia();
+        DaoUsuario daoUsuario = DaoFactory.DaoUsuarioInstancia();
+        ClienteEntity clienteEntity = daoCliente.getClienteByUsuario(daoUsuario.find(this.id, UsuarioEntity.class));
+        if(clienteEntity == null){
             throw new CustomException("COMSOLEST001","No existe ningun cliente registrado con ese Username");
         }
 
-        ClienteEntity clienteEntity = daoCliente.getClienteByUsuario(daoUsuario.find(this.id, UsuarioEntity.class));
-
-        ClienteEstudioEntity clienteEstudioEntity = new ClienteEstudioEntity();
+        ClienteEstudioEntity clienteEstudioEntity = EntidadesFactory.ClienteEstudiosInstance();
         clienteEstudioEntity.setEstudio(this.estudio);
         clienteEstudioEntity.setCliente(clienteEntity);
         clienteEstudioEntity.setEstado("a");
 
-        DaoClienteEstudio daoClienteEstudio = new DaoClienteEstudio();
+        DaoClienteEstudio daoClienteEstudio = DaoFactory.DaoClienteEstudioInstancia();
         daoClienteEstudio.insert(clienteEstudioEntity);
 
-        DaoEncuestado daoEncuestado = new DaoEncuestado();
+        DaoEncuestado daoEncuestado = DaoFactory.DaoEncuestadoInstancia();
         List<EncuestadoEntity> dataMuestraEncuestados = daoEncuestado.getDataMuestraEstudio(this.estudio.getLugar(), this.estudio.getNivelSocioEconomico());
 
-        DaoEstudioEncuestado daoEstudioEncuestado = new DaoEstudioEncuestado();
+        DaoEstudioEncuestado daoEstudioEncuestado = DaoFactory.DaoEstudioEncuestadoInstancia();
         for(EncuestadoEntity encuestado : dataMuestraEncuestados){
-            EstudioEncuestadoEntity estudioEncuestadoEntity = new EstudioEncuestadoEntity();
+            EstudioEncuestadoEntity estudioEncuestadoEntity = EntidadesFactory.EstudioEncuestadoInstance();
             estudioEncuestadoEntity.setEstado("Pendiente");
             estudioEncuestadoEntity.setEstudio(this.estudio);
             estudioEncuestadoEntity.setEncuestado(encuestado);

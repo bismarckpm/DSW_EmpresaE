@@ -2,6 +2,7 @@ package ucab.empresae.servicio;
 
 import Comandos.ComandoBase;
 import Comandos.ComandoFactory;
+import Comandos.JWT.ComandoJWT;
 import ucab.empresae.dtos.DtoCategoria;
 import ucab.empresae.dtos.DtoFactory;
 import ucab.empresae.dtos.DtoResponse;
@@ -22,6 +23,7 @@ public class CategoriaServicio extends AplicacionBase {
 
     private final DtoResponse response = DtoFactory.DtoResponseInstance();
     private ComandoBase comando;
+    private ComandoJWT comandoJWT;
 
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/categoria

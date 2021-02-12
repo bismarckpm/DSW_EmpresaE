@@ -3,6 +3,7 @@ package Comandos;
 import Comandos.Analista.ComandoGetAnalistas;
 import Comandos.Categoria.*;
 import Comandos.Estudio.*;
+import Comandos.JWT.ComandoJWT;
 import Comandos.Pregunta.ComandoGetPreguntas;
 import Comandos.Presentacion.ComandoDeletePresentacion;
 import Comandos.Presentacion.ComandoGetPresentaciones;
@@ -117,8 +118,29 @@ public class ComandoFactory {
         return new ComandoRandomAnalista();
     }
 
+    public static ComandoDeleteEstudio comandoDeleteEstudioInstancia(long id) {
+        return new ComandoDeleteEstudio(id);
+    }
+
+    public static ComandoGetEstudiosByEncuestado comandoGetEstudiosByEncuestadoInstancia(long id) {
+        return new ComandoGetEstudiosByEncuestado(id);
+    }
+
+    public static ComandoGetDataMuestraEstudio comandoGetDataMuestraEstudioInstancia(long id) {
+        return new ComandoGetDataMuestraEstudio(id);
+    }
+
+    public static ComandoGetResultadoEstudio comandoGetResultadoEstudioInstancia(long id) {
+        return new ComandoGetResultadoEstudio(id);
+    }
+
     //analistas
     public static ComandoGetAnalistas comandoGetAnalistas() {
         return new ComandoGetAnalistas();
+    }
+
+    //JWT
+    public static ComandoJWT comandoJWT(DtoResponse dtoResponse) {
+        return new ComandoJWT(dtoResponse);
     }
 }

@@ -56,7 +56,10 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
             dtoEstudio.set_id(estudio.get_id());
             dtoEstudio.setEstado(estudio.getEstado());
             dtoEstudio.setNombre(estudio.getNombre());
-            dtoEstudio.setFechaInicio(estudio.getFechaInicio().toString());
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            dtoEstudio.setFechaInicio(dateFormat.format(estudio.getFechaInicio()));
+
             dtoEstudio.setVia(estudio.getVia());
 
             SubcategoriaMapper subcategoriaMapper = MapperFactory.subcategoriaMapperInstancia();
@@ -88,7 +91,7 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
                 dtoEstudio.setEdadMaxima(estudio.getEdadMaxima());
             }
             if(estudio.getFechaFin() != null) {
-                dtoEstudio.setFechaFin(estudio.getFechaFin().toString());
+                dtoEstudio.setFechaFin(dateFormat.format(estudio.getFechaFin()));
             }
 
             return dtoEstudio;
@@ -121,12 +124,12 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
             estudio.setNombre(dtoEstudio.getNombre());
             estudio.setVia(dtoEstudio.getVia());
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd");
 
             if(dtoEstudio.getFechaInicio() == null) {
                 estudio.setFechaInicio(new Date());
             }else {
-                estudio.setFechaInicio(dateFormat.parse(dtoEstudio.getFechaInicio().replace(" IST ", " GMT+0530 ")));
+                estudio.setFechaInicio(dateFormat.parse(dtoEstudio.getFechaInicio()));
             }
 
             //SubcategoriaMapper subcategoriaMapper = MapperFactory.subcategoriaMapperInstancia();
@@ -167,7 +170,7 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
                 estudio.setEdadMaxima(dtoEstudio.getEdadMaxima());
             }
             if(dtoEstudio.getFechaFin() != null) {
-                estudio.setFechaInicio(dateFormat.parse(dtoEstudio.getFechaFin().replace(" IST ", " GMT+0530 ")));
+                estudio.setFechaInicio(dateFormat.parse(dtoEstudio.getFechaFin()));
             }
 
             return estudio;

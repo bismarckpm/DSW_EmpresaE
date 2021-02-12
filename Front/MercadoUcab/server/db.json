@@ -4,7 +4,7 @@
       "_id": 50,
       "username": "Pedro",
       "clave ": "pedro",
-      "rol": "Encuestado",
+      "rol": "Analista",
       "autenticacion": "valida"
     },
     {
@@ -15,7 +15,7 @@
       "estado": "a",
       "tipoUsuario": {
         "_id": 0,
-        "descripcion": "Administrador"
+        "descripcion": "Cliente"
       }
     },
     {
@@ -32,7 +32,7 @@
     {
       "_id": 53,
       "rol": "",
-      "username": "Victor",
+      "username": "Victorr",
       "clave": "victor",
       "correoElectronico": "victor@gmail.com",
       "estado": "a",
@@ -158,7 +158,7 @@
   "pregunta": [
     {
       "_id": 1,
-      "descripcion": "asdsad",
+      "descripcion": "Pregunta1",
       "estado": "a",
       "tipo": {
         "_id": 1,
@@ -188,7 +188,7 @@
     },
     {
       "_id": 3,
-      "descripcion": "asdasd",
+      "descripcion": "Pregunta3",
       "estado": "a",
       "tipo": {
         "_id": "4",
@@ -334,6 +334,7 @@
   "estudio": [
     {
       "_id": 8,
+      "analista":{_id: 50},
       "nombre": "estudio prueba",
       "comentarioAnalista": "el comentario",
       "estado": "solicitado",

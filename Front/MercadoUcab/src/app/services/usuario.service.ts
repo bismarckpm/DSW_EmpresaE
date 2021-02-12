@@ -5,46 +5,44 @@ import { retry, catchError } from 'rxjs/operators';
 import {Usuario} from '../models/usuario';
 import {Analista} from "../models/analista";
 
-
-
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
 
-    usuario: any;
+  usuario: any;
 
-  //apiurl = 'http://localhost:3000';
-   apiurl = 'http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+   apiurl = 'http://localhost:3000';
+ //  apiurl = 'http://localhost:8080/servicio-1.0-SNAPSHOT/api';
 
 
-  constructor(private http: HttpClient,
-    ) { }
-// Http Options
+  constructor(private http: HttpClient) { }
+  // Http Options
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
   };
 
-///////// Metodos para ejecutar//////////////
- /* getUsuarios(): Observable<Usuario[]>{
-    return this.http.get<Usuario[]>(this.apiurl + '/usuario')
+  ///////// Metodos para ejecutar//////////////
+   getUsuarios(): Observable<Usuario[]>{
+     return this.http.get<Usuario[]>(this.apiurl + '/usuario')
+       .pipe(
+         retry(1),
+         catchError(this.handleError)
+       );
+   }
+
+  /*getUsuarios(): Observable<Usuario[]>{
+    return this.http.get<Usuario[]>(this.apiurl + '/usuario/empleados')
       .pipe(
         retry(1),
         catchError(this.handleError)
       );
   }*/
-    getUsuarios(): Observable<Usuario[]>{
-      return this.http.get<Usuario[]>(this.apiurl + '/usuario/empleados')
-        .pipe(
-          retry(1),
-          catchError(this.handleError)
-        );
-    }
 
   getAnalistas(): Observable<Usuario[]>{
-    return this.http.get<Usuario[]>(this.apiurl+'/analista')
+    return this.http.get<Usuario[]>(this.apiurl + '/analista')
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -118,23 +116,18 @@ export class UsuarioService {
       );
   }
 
-
-
-
-
-
-///////////////////// Error HandleError
-handleError(error) {
-  let errorMessage = '';
-  if (error.error instanceof ErrorEvent) {
-    // Get client-side error
-    errorMessage = error.error.message;
-  } else {
-    // Get server-side error
-    errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+  ///////////////////// Error HandleError
+  handleError(error) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // Get client-side error
+      errorMessage = error.error.message;
+    } else {
+      // Get server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    window.alert(errorMessage);
+    return throwError(errorMessage);
   }
-  window.alert(errorMessage);
-  return throwError(errorMessage);
-}
 
 }

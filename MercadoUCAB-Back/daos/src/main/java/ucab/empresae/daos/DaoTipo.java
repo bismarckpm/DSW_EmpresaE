@@ -1,6 +1,7 @@
 package ucab.empresae.daos;
 
 import ucab.empresae.entidades.TipoEntity;
+
 import javax.persistence.EntityManager;
 
 public class DaoTipo extends Dao<TipoEntity>{

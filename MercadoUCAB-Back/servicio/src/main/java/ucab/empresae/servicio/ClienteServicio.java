@@ -1,9 +1,11 @@
 package ucab.empresae.servicio;
 
 import ucab.empresae.daos.*;
-import ucab.empresae.dtos.*;
+import ucab.empresae.dtos.DtoCliente;
+import ucab.empresae.dtos.DtoLugar;
+import ucab.empresae.dtos.DtoTelefono;
+import ucab.empresae.dtos.DtoUsuario;
 import ucab.empresae.entidades.*;
-import ucab.empresae.excepciones.PruebaExcepcion;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

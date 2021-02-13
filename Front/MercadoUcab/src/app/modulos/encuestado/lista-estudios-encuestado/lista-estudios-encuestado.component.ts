@@ -5,8 +5,6 @@ import {EstudioService} from '../../../services/estudio.service';
 import { PreguntaService } from 'src/app/services/pregunta.service';
 import { Estudio } from '../../../models/estudio';
 import { Pregunta } from '../../../models/pregunta';
-import { TipoPregunta } from '../../../models/tipo-pregunta';
-import { Opcion } from '../../../models/opcion';
 import { EncuestaService } from 'src/app/services/encuesta.service';
 
 class Multiple { constructor(public _id: number){} }
@@ -21,7 +19,9 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
 
   estudios: Estudio[] = [];
   preguntasEncuesta: Pregunta[] = [];
-  opciones: Opcion[] = [];
+  // opciones: Opcion[] = [];
+  descripPreguntas: string[] = [];
+  descripRespuestas: string[] = [];
   formEstudioEncuestado: FormGroup;
 
   // objeto individual, cada pregunta que sera agregada a la lista de respuesta
@@ -31,14 +31,6 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
     _id: 0,
     texto: '',
     opciones: []
-  };
-
-  @Input() respuestas: any = {
-    opcionesVF: [],
-    opcionesRg: [],
-    opcionesMulti: [],
-    opcionesSimple: [],
-    textos: ['prueba1', 'prueba2']
   };
 
   // objeto para registrar la respuesta seleccionada segun el tipo de pregunta
@@ -149,5 +141,29 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
       texto: '',
       opciones: []
     };
+  }
+
+  buscarDescripPreguntas(): void {
+    for (const resp of this.listaRespuestas) {
+      for (const preg of this.preguntasEncuesta) {
+        if (resp._id === preg._id){
+          this.descripPreguntas.push(preg.descripcion);
+        }
+      }
+    }
+  }
+
+  buscarDescripRespuestas(): void {
+    for (const resp of this.listaRespuestas) {
+      for (const preg of this.preguntasEncuesta) {
+        for (const op of preg.opciones) {
+          if (resp.opciones._id === op._id){
+            this.descripRespuestas.push(op.descripcion);
+          }
+        }
+      }
+    }
+    console.log('lista opciones');
+    console.log(this.descripRespuestas);
   }
 }

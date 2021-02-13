@@ -1,12 +1,11 @@
 package Mappers.Presentacion;
 
 import Mappers.GenericMapper;
-import ucab.empresae.daos.DaoCategoria;
-import ucab.empresae.daos.DaoFactory;
-import ucab.empresae.daos.DaoPresentacion;
 import ucab.empresae.dtos.DtoFactory;
 import ucab.empresae.dtos.DtoPresentacion;
-import ucab.empresae.entidades.*;
+import ucab.empresae.entidades.BaseEntity;
+import ucab.empresae.entidades.EntidadesFactory;
+import ucab.empresae.entidades.PresentacionEntity;
 import ucab.empresae.excepciones.CategoriaException;
 import ucab.empresae.excepciones.CustomException;
 

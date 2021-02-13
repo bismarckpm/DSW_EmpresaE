@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Estudio } from '../models/estudio';
-import {Encuestado} from '../models/encuestado';
+import {Encuestado} from "../models/encuestado";
 
 @Injectable({
   providedIn: 'root'
@@ -56,8 +56,18 @@ export class EstudioService {
     );
   }
 
+  // back
+  // getEstudioAnalista(user): Observable<Estudio[]>{
+  //   return this.http.get<Estudio[]>(this.apiurl + '/estudio/analista/' + user)
+  //   .pipe(
+  //     retry(1),
+  //     catchError(this.handleError)
+  //   );
+  // }
+
+  // front
   getEstudioAnalista(user): Observable<Estudio[]>{
-    return this.http.get<Estudio[]>(this.apiurl + '/estudio/analista/' + user)
+    return this.http.get<Estudio[]>(this.apiurl + '/estudio')
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -71,6 +81,31 @@ export class EstudioService {
         catchError(this.handleError)
       );
   }
+
+  // Front
+  // getDataGraficos(idEstudio): Observable<any>{
+  //   return this.http.get(this.apiurl + '/graficos')
+  //   .pipe(
+  //     retry(1),
+  //     catchError(this.handleError)
+  //   );
+  // }
+
+  getDataGraficos(idEstudio): Observable<any>{
+    return this.http.get(this.apiurl + '/estudio/resultadoEstudio/' + idEstudio, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
+  // getEstudioEncuestado(id): Observable<Estudio[]>{
+  //   return this.http.get<Estudio[]>(this.apiurl + '/estudio/encuestado/' + id)
+  //     .pipe(
+  //       retry(1),
+  //       catchError(this.handleError)
+  //     );
+  // }
 
   getEstudioEncuestado(id): Observable<Estudio[]>{
      return this.http.get<Estudio[]>(this.apiurl + '/estudio/encuestado/' + id)
@@ -130,14 +165,6 @@ export class EstudioService {
 
   deleteEstudio(id){
     return this.http.delete<Estudio[]>(this.apiurl + '/estudio/' + id, this.httpOptions)
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-    );
-  }
-
-  getDataGraficos(idEstudio): Observable<any>{
-    return this.http.get(this.apiurl + '/estudio/resultadoEstudio/' + idEstudio, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)

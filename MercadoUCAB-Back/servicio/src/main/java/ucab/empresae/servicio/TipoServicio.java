@@ -3,6 +3,7 @@ package ucab.empresae.servicio;
 import ucab.empresae.daos.DaoTipo;
 import ucab.empresae.dtos.DtoTipo;
 import ucab.empresae.entidades.TipoEntity;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;

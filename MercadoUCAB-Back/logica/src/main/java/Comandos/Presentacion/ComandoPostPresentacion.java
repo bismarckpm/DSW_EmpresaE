@@ -12,6 +12,8 @@ import ucab.empresae.entidades.BaseEntity;
 import ucab.empresae.entidades.PresentacionEntity;
 import ucab.empresae.excepciones.CustomException;
 
+import java.text.ParseException;
+
 /**
  * Clase encargada de registrar una nueva presentacion.
  */
@@ -31,7 +33,7 @@ public class ComandoPostPresentacion extends ComandoBase<DtoResponse> {
      * @throws CustomException En caso de que al categoria no se haya insertado de manera correcta.
      */
     @Override
-    public void execute() throws CustomException {
+    public void execute() throws CustomException, ParseException {
             Dao daoPresentacion = DaoFactory.DaoPresentacionInstancia();
             GenericMapper presentacionMapper = MapperFactory.presentacionMapperInstancia();
             BaseEntity presentacion = presentacionMapper.CreateEntity(this.dtoPresentacion);
@@ -51,7 +53,7 @@ public class ComandoPostPresentacion extends ComandoBase<DtoResponse> {
      * @throws CustomException Posibles errores arrastrados del método execute().
      */
     @Override
-    public DtoResponse getResult() throws CustomException {
+    public DtoResponse getResult() throws CustomException, ParseException {
         execute();
         DtoResponse dtoResponse = DtoFactory.DtoResponseInstance();
         dtoResponse.setEstado("Exitoso");

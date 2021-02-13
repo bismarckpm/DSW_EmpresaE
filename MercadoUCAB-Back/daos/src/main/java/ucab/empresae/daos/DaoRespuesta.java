@@ -2,12 +2,10 @@ package ucab.empresae.daos;
 
 import ucab.empresae.entidades.EncuestadoEntity;
 import ucab.empresae.entidades.OpcionEntity;
-import ucab.empresae.entidades.PreguntaOpcionEntity;
 import ucab.empresae.entidades.RespuestaEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import java.util.List;
 
 public class DaoRespuesta extends Dao<RespuestaEntity>{
     private EntityManager _em;

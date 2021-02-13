@@ -1,6 +1,9 @@
 package ucab.empresae.daos;
 
-import ucab.empresae.entidades.*;
+import ucab.empresae.entidades.EncuestadoEntity;
+import ucab.empresae.entidades.EstudioEntity;
+import ucab.empresae.entidades.LugarEntity;
+import ucab.empresae.entidades.NivelSocioeconomicoEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;

@@ -1,6 +1,5 @@
 package ucab.empresae.dtos;
 
-import java.util.List;
 
 public class DtoEstudio extends DtoBase {
 
@@ -12,13 +11,14 @@ public class DtoEstudio extends DtoBase {
     private Integer edadMaxima;
     private String fechaInicio;
     private String fechaFin;
+    private String via;
 
     //Relaciones
     private DtoLugar lugar;
     private DtoNivelSocioEconomico nivelSocioEconomico;
     private DtoSubcategoria subcategoria;
     private DtoUsuario analista;
-    private List<DtoGenero> generos;
+    private DtoGenero genero;
 
     //Constructores
     public DtoEstudio() {
@@ -118,11 +118,19 @@ public class DtoEstudio extends DtoBase {
         this.analista = analista;
     }
 
-    public List<DtoGenero> getGeneros() {
-        return generos;
+    public DtoGenero getGenero() {
+        return genero;
     }
 
-    public void setGeneros(List<DtoGenero> generos) {
-        this.generos = generos;
+    public void setGenero(DtoGenero genero) {
+        this.genero = genero;
+    }
+
+    public String getVia() {
+        return via;
+    }
+
+    public void setVia(String via) {
+        this.via = via;
     }
 }

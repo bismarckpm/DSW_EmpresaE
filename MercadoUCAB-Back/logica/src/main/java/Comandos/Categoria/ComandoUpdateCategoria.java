@@ -6,6 +6,8 @@ import Mappers.MapperFactory;
 import ucab.empresae.daos.Dao;
 import ucab.empresae.daos.DaoFactory;
 import ucab.empresae.dtos.DtoBase;
+import ucab.empresae.dtos.DtoFactory;
+import ucab.empresae.dtos.DtoResponse;
 import ucab.empresae.entidades.BaseEntity;
 import ucab.empresae.entidades.CategoriaEntity;
 import ucab.empresae.excepciones.CategoriaException;
@@ -14,7 +16,7 @@ import ucab.empresae.excepciones.CategoriaException;
  * Método encargado de hacer la actualización de la información de una categoría en específico.
  * @author José Prieto
  */
-public class ComandoUpdateCategoria extends ComandoBase<DtoBase> {
+public class ComandoUpdateCategoria extends ComandoBase<DtoResponse> {
 
     private DtoBase dtoCategoria;
 
@@ -53,9 +55,14 @@ public class ComandoUpdateCategoria extends ComandoBase<DtoBase> {
      * @throws Exception Errores arrastrados del método execute().
      */
     @Override
-    public DtoBase getResult() throws Exception {
+    public DtoResponse getResult() throws Exception {
         execute();
-        return this.dtoCategoria;
+        DtoResponse dtoResponse = DtoFactory.DtoResponseInstance();
+        dtoResponse.setEstado("Exitoso");
+        dtoResponse.setMensaje("Categoria actualizada");
+        dtoResponse.setObjeto(this.dtoCategoria);
+
+        return dtoResponse;
     }
 
 }

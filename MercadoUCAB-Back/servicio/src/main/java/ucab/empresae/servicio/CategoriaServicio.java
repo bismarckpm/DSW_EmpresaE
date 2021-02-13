@@ -2,11 +2,12 @@ package ucab.empresae.servicio;
 
 import Comandos.ComandoBase;
 import Comandos.ComandoFactory;
+import Comandos.JWT.ComandoJWT;
 import ucab.empresae.dtos.DtoCategoria;
-import ucab.empresae.excepciones.CategoriaException;
+import ucab.empresae.dtos.DtoFactory;
+import ucab.empresae.dtos.DtoResponse;
+import ucab.empresae.excepciones.CustomException;
 
-import javax.json.Json;
-import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -20,7 +21,9 @@ import javax.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON)
 public class CategoriaServicio extends AplicacionBase {
 
+    private final DtoResponse response = DtoFactory.DtoResponseInstance();
     private ComandoBase comando;
+    private ComandoJWT comandoJWT;
 
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/categoria
@@ -33,10 +36,16 @@ public class CategoriaServicio extends AplicacionBase {
         try {
             this.comando = ComandoFactory.comandoGetCategoriasInstancia();
             return Response.ok(this.comando.getResult()).build();
-        } catch (Exception e) {
-            JsonObject excepcion = Json.createObjectBuilder()
-                    .add("mensaje", e.getMessage()).build();
-            return  Response.status(500).entity(excepcion).build();
+        } catch (CustomException cex){
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(cex.getMensaje());
+            this.response.setCodError(cex.getCodError());
+            return Response.status(500).entity(this.response).build();
+        } catch (Exception ex) {
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(ex.getMessage());
+            this.response.setCodError(ex.getClass().toString());
+            return Response.status(500).entity(this.response).build();
         }
     }
 
@@ -53,10 +62,16 @@ public class CategoriaServicio extends AplicacionBase {
         try {
             this.comando = ComandoFactory.comandoGetCategoriaInstancia(id);
             return Response.ok(this.comando.getResult()).build();
+        } catch (CustomException cex){
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(cex.getMensaje());
+            this.response.setCodError(cex.getCodError());
+            return Response.status(500).entity(this.response).build();
         } catch (Exception ex) {
-            JsonObject excepcion = Json.createObjectBuilder()
-                    .add("mensaje", ex.getMessage()).build();
-            return  Response.status(500).entity(excepcion).build();
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(ex.getMessage());
+            this.response.setCodError(ex.getClass().toString());
+            return Response.status(500).entity(this.response).build();
         }
     }
 
@@ -72,10 +87,16 @@ public class CategoriaServicio extends AplicacionBase {
         try {
             this.comando = ComandoFactory.comandoPostCategoriaInstancia(dtoCategoria);
             return Response.ok(this.comando.getResult()).build();
-        } catch (Exception e) {
-            JsonObject excepcion = Json.createObjectBuilder()
-                    .add("mensaje", e.getMessage()).build();
-            return  Response.status(500).entity(excepcion).build();
+        } catch (CustomException cex){
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(cex.getMensaje());
+            this.response.setCodError(cex.getCodError());
+            return Response.status(500).entity(this.response).build();
+        } catch (Exception ex) {
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(ex.getMessage());
+            this.response.setCodError(ex.getClass().toString());
+            return Response.status(500).entity(this.response).build();
         }
     }
 
@@ -93,10 +114,16 @@ public class CategoriaServicio extends AplicacionBase {
         try {
             this.comando = ComandoFactory.comandoUpdateCategoriaInctancia(dtoCategoria);
             return Response.ok(this.comando.getResult()).build();
-        } catch (Exception e) {
-            JsonObject excepcion = Json.createObjectBuilder()
-                    .add("mensaje", e.getMessage()).build();
-            return  Response.status(500).entity(excepcion).build();
+        } catch (CustomException cex){
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(cex.getMensaje());
+            this.response.setCodError(cex.getCodError());
+            return Response.status(500).entity(this.response).build();
+        } catch (Exception ex) {
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(ex.getMessage());
+            this.response.setCodError(ex.getClass().toString());
+            return Response.status(500).entity(this.response).build();
         }
     }
 
@@ -114,10 +141,16 @@ public class CategoriaServicio extends AplicacionBase {
         try {
             this.comando = ComandoFactory.comandoDeleteCategoriaInstancia(id);
             return Response.ok(this.comando.getResult()).build();
-        } catch (Exception e) {
-            JsonObject excepcion = Json.createObjectBuilder()
-                    .add("mensaje", e.getMessage()).build();
-            return  Response.status(500).entity(excepcion).build();
+        } catch (CustomException cex){
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(cex.getMensaje());
+            this.response.setCodError(cex.getCodError());
+            return Response.status(500).entity(this.response).build();
+        } catch (Exception ex) {
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(ex.getMessage());
+            this.response.setCodError(ex.getClass().toString());
+            return Response.status(500).entity(this.response).build();
         }
     }
 

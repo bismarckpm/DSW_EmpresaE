@@ -1,8 +1,9 @@
 import org.junit.Assert;
 import org.junit.Test;
 import ucab.empresae.dtos.DtoMarca;
-import javax.ws.rs.core.Response;
 import ucab.empresae.servicio.MarcaServicio;
+
+import javax.ws.rs.core.Response;
 
 /**
  * Pruebas unitarias utilizadad para testear el funcionamineto de MarcaServicio

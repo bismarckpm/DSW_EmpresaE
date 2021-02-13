@@ -1,7 +1,9 @@
 package ucab.empresae.entidades;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "genero", schema = "mercadeoucab")
@@ -55,14 +57,4 @@ public class GeneroEntity extends BaseEntity {
     public void setEncuestados(List<EncuestadoEntity> encuestados) {
         this.encuestados = encuestados;
     }*/
-
-    @ManyToMany(mappedBy = "generos")
-    private List<EstudioEntity> estudios;
-    public List<EstudioEntity> getEstudios() {
-        return estudios;
-    }
-
-    public void setEstudios(List<EstudioEntity> estudios) {
-        this.estudios = estudios;
-    }
 }

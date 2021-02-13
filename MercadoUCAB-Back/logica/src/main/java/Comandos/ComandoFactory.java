@@ -1,14 +1,40 @@
 package Comandos;
 
+import Comandos.Analista.ComandoGetAnalistas;
 import Comandos.Categoria.*;
-import Comandos.Presentacion.*;
-import Comandos.Pregunta.*;
-import ucab.empresae.dtos.DtoCategoria;
-import ucab.empresae.dtos.DtoPregunta;
-import ucab.empresae.dtos.DtoPresentacion;
+import Comandos.Estudio.*;
+import Comandos.JWT.ComandoJWT;
+import Comandos.Pregunta.ComandoGetPreguntas;
+import Comandos.Presentacion.ComandoDeletePresentacion;
+import Comandos.Presentacion.ComandoGetPresentaciones;
+import Comandos.Presentacion.ComandoPostPresentacion;
+import Comandos.Presentacion.ComandoUpdatePresentacion;
+import Comandos.Subcategoria.*;
+import ucab.empresae.dtos.*;
 import ucab.empresae.excepciones.CategoriaException;
 
 public class ComandoFactory {
+
+    //Fabrica de subcategorias
+    public static ComandoGetSubcategorias comandoGetSubcategoriasInstancia() {
+        return new ComandoGetSubcategorias();
+    }
+
+    public static ComandoGetSubcategoria comandoGetSubcategoriaInstancia(long id) {
+        return new ComandoGetSubcategoria(id);
+    }
+
+    public static ComandoAddSubcategoria comandoAddSubcategoriaInstancia(DtoSubcategoria dtoSubcategoria) {
+        return new ComandoAddSubcategoria(dtoSubcategoria);
+    }
+
+    public static ComandoUpdateSubcategoria comandoUpdateSubcategoria(DtoSubcategoria dtoSubcategoria) {
+        return new ComandoUpdateSubcategoria(dtoSubcategoria);
+    }
+
+    public static ComandoDeleteSubcategoria comandoDeleteSubcategoriaInstancia(long id) {
+        return new ComandoDeleteSubcategoria(id);
+    }
 
     //Fábricas de los comandos para categoria
     public static ComandoGetCategoria comandoGetCategoriaInstancia(long id) throws CategoriaException {
@@ -54,29 +80,67 @@ public class ComandoFactory {
         return new ComandoGetPreguntas();
     }
 
-    public static ComandoPostPregunta comandoPostPreguntaInstancia(DtoPregunta dtoPregunta) {
-        return new ComandoPostPregunta(dtoPregunta);
+    //Fábrica de los comandos para Estudio
+
+    public static ComandoGetEstudios comandoGetEstudiosInstancia() {
+        return new ComandoGetEstudios();
     }
 
-    public static ComandoDeletePregunta comandoDeletePreguntaInstancia(long id) {
-        return new ComandoDeletePregunta(id);
+    public static ComandoGetEstudio comandoGetEstudioInstancia(long id) {
+        return new ComandoGetEstudio(id);
     }
 
-    public static ComandoUpdatePregunta comandoUpdatePreguntaInstancia(long id, DtoPregunta dtoPregunta) {
-        return new ComandoUpdatePregunta(id, dtoPregunta);
+    public static ComandoGetEstudioSinEncuesta comandoGetEstudioSinEncuesta() {
+        return new ComandoGetEstudioSinEncuesta();
     }
 
-    public static ComandoGetPreguntasBySubcategoria comandoGetPreguntasBySubcategoriaInstancia(long id) {
-        return new ComandoGetPreguntasBySubcategoria(id);
+    public static ComandoGetEstudiosCliente comandoGetEstudiosClienteInstancia(long id) {
+        return new ComandoGetEstudiosCliente(id);
     }
 
-    public static ComandoGetEncuesta comandoGetEncuestaInstancia(long id_estudio, long id_encuestado) {
-        return new ComandoGetEncuesta(id_estudio, id_encuestado);//este id encuestado es el id del usuario que se debe buscar
+    public static ComandoGetEstudiosAnalista comandoGetEstudiosAnalistaInstancia(long id) {
+        return new ComandoGetEstudiosAnalista(id);
     }
 
-    public static ComandoGetEncuestaAnalista comandoGetEncuestaAnalistaInstancia(long id_estudio, long id_encuestado) {
-        return new ComandoGetEncuestaAnalista(id_estudio, id_encuestado);
+    public static ComandoAddEstudio comandoAddEstudioInstancia(DtoEstudio dtoEstudio) {
+        return new ComandoAddEstudio(dtoEstudio);
     }
 
+    public static ComandoSolicitarEstudio comandoSolicitarEstudioInstancia(long id, DtoEstudio dtoEstudio) {
+        return new ComandoSolicitarEstudio(id, dtoEstudio);
+    }
 
+    public static ComandoUpdateEstudio comandoUpdateEstudioInstancia(DtoEstudio dtoEstudio) {
+        return new ComandoUpdateEstudio(dtoEstudio);
+    }
+
+    public static ComandoRandomAnalista comandoRandomAnalistaInstancia() {
+        return new ComandoRandomAnalista();
+    }
+
+    public static ComandoDeleteEstudio comandoDeleteEstudioInstancia(long id) {
+        return new ComandoDeleteEstudio(id);
+    }
+
+    public static ComandoGetEstudiosByEncuestado comandoGetEstudiosByEncuestadoInstancia(long id) {
+        return new ComandoGetEstudiosByEncuestado(id);
+    }
+
+    public static ComandoGetDataMuestraEstudio comandoGetDataMuestraEstudioInstancia(long id) {
+        return new ComandoGetDataMuestraEstudio(id);
+    }
+
+    public static ComandoGetResultadoEstudio comandoGetResultadoEstudioInstancia(long id) {
+        return new ComandoGetResultadoEstudio(id);
+    }
+
+    //analistas
+    public static ComandoGetAnalistas comandoGetAnalistas() {
+        return new ComandoGetAnalistas();
+    }
+
+    //JWT
+    public static ComandoJWT comandoJWT(DtoResponse dtoResponse) {
+        return new ComandoJWT(dtoResponse);
+    }
 }

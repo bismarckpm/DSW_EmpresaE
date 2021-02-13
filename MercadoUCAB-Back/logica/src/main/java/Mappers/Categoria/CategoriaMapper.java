@@ -1,14 +1,11 @@
 package Mappers.Categoria;
 
 import Mappers.GenericMapper;
-import ucab.empresae.daos.DaoCategoria;
-import ucab.empresae.daos.DaoFactory;
 import ucab.empresae.dtos.DtoCategoria;
 import ucab.empresae.dtos.DtoFactory;
 import ucab.empresae.entidades.BaseEntity;
 import ucab.empresae.entidades.CategoriaEntity;
 import ucab.empresae.entidades.EntidadesFactory;
-import ucab.empresae.excepciones.CategoriaException;
 import ucab.empresae.excepciones.CustomException;
 
 import java.util.ArrayList;
@@ -27,7 +24,7 @@ public class CategoriaMapper extends GenericMapper<DtoCategoria> {
      * @see CategoriaEntity Entidad a convertir
      * @return Objeto de tipo DtoCategoria
      * @see DtoCategoria Clase destino de conversión
-     * @throws Exception En caso de que algún dato sea inválido
+     * @throws CustomException En caso de que algún dato sea inválido
      */
     @Override
     public DtoCategoria CreateDto(BaseEntity entity) throws CustomException {
@@ -49,7 +46,7 @@ public class CategoriaMapper extends GenericMapper<DtoCategoria> {
      * @since 11/01/2021
      * @param dto Objeto de tipo DtoCategoria
      * @return Objeto de tipo CategoríaEntity
-     * @throws CategoriaException En caso de que alguno de los datos no sea válido
+     * @throws CustomException En caso de que alguno de los datos no sea válido
      */
     @Override
     public BaseEntity CreateEntity(DtoCategoria dto) throws CustomException {
@@ -58,15 +55,11 @@ public class CategoriaMapper extends GenericMapper<DtoCategoria> {
         }else if(dto.getNombre() == null) {
             throw new CustomException("Nombre no debe ser null.");
         } else {
-            DaoCategoria daoCategoria = DaoFactory.DaoCategoriaInstancia();
             CategoriaEntity categoria = EntidadesFactory.CategoriaInstance(dto.get_id());
-            if(categoria == null) {
-                throw new CustomException("Entidad correspondiente al dto no encontrada.");
-            } else {
-                categoria.setNombre(dto.getNombre());
-                categoria.setEstado("a");
-                return categoria;
-            }
+
+            categoria.setNombre(dto.getNombre());
+            categoria.setEstado("a");
+            return categoria;
         }
     }
 
@@ -75,7 +68,7 @@ public class CategoriaMapper extends GenericMapper<DtoCategoria> {
      * @since 11/01/2021
      * @param entities Lista de bjetos de tipo CategoriaEntity
      * @return Lista de objetos de tipo DtoCategoria
-     * @throws Exception En caso de que falle a la hora de llamar a CreateDto
+     * @throws CustomException En caso de que falle a la hora de llamar a CreateDto
      */
     @Override
     public List<DtoCategoria> CreateDtoList(List<BaseEntity> entities) throws CustomException {
@@ -92,7 +85,7 @@ public class CategoriaMapper extends GenericMapper<DtoCategoria> {
      * @since 11/01/2021
      * @param dtos Lista de objetos de tipo DtoCategoria
      * @return Lista de objetos de tipo CategoriaEntity
-     * @throws CategoriaException En caso de que alguna de las llamadas a createEntity falle
+     * @throws CustomException En caso de que alguna de las llamadas a createEntity falle
      */
     @Override
     public List<BaseEntity> CreateEntityList(List<DtoCategoria> dtos) throws CustomException {

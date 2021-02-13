@@ -10,7 +10,6 @@
         <module name="dtos" />
         <module name="servicio" />
         <module name="excepciones" />
-        <module name="logica" />
         <module name="daos" />
       </profile>
     </annotationProcessing>
@@ -19,7 +18,6 @@
       <module name="dtos" target="1.8" />
       <module name="entidades" target="1.8" />
       <module name="excepciones" target="1.8" />
-      <module name="logica" target="8" />
       <module name="MercadoUCAB-Back" target="1.8" />
       <module name="servicio" target="1.8" />
     </bytecodeTargetLevel>

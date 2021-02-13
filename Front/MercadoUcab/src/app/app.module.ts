@@ -44,6 +44,7 @@ import { ListaEncuestadosComponent } from './componentes/lista-encuestados/lista
 import { ListaEstudiosComponent } from './componentes/lista-estudios/lista-estudios.component';
 import { FormEncuestaComponent } from './componentes/form-encuesta/form-encuesta.component';
 import { ListaEncuestaComponent } from './componentes/lista-encuesta/lista-encuesta.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 // Modulo de Cliente !!!!!!!!!!!!!!!!!
 import {ListaEstudioClienteComponent} from './modulos/cliente/lista-estudio/lista-estudio.component';
@@ -67,9 +68,8 @@ import { AnalistaService } from './services/analista.service';
 import { PreguntaService } from './services/pregunta.service';
 import { PresentacionService } from './services/presentacion.service';
 
-// Modulos
-import { ToastrModule } from 'ngx-toastr';
-import { HighchartsChartModule } from 'highcharts-angular';
+// Graficos
+import { HighchartsChartComponent } from 'highcharts-angular';
 
 @NgModule({
   declarations: [
@@ -119,6 +119,8 @@ import { HighchartsChartModule } from 'highcharts-angular';
     ListaEstudiosAnalistaComponent,
     ListaEstudiosEncuestadoComponent,
 
+    // Grafico
+    HighchartsChartComponent
   ],
   imports: [
     BrowserModule,
@@ -128,15 +130,8 @@ import { HighchartsChartModule } from 'highcharts-angular';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    HighchartsChartModule,
-
-    // Toast
-    ToastrModule.forRoot({
-      timeOut: 4500,
-      positionClass: 'toast-bottom-right',
-    }),
+    HighchartsChartModule
 ],
-
   providers: [
     EncuestadoService,
     AdminService,

@@ -96,7 +96,12 @@ export class ListaEstudiosComponent implements OnInit {
   tipoPreguntas: any = [];
   opcionesCantidad = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   sugerenciasPreguntas: any = [];
+  listaMuestraInsertar = [];
 
+  @Input() dataMuestra = {_id : 0};
+
+  estudioCambio =true;
+  encuestaCambio= false;
 
   constructor(
     public estudioService: EstudioService,
@@ -133,6 +138,14 @@ export class ListaEstudiosComponent implements OnInit {
       this.loadEstudios();
     });
   }
+
+  Aprobar(){
+    this.estudioCambio =false;
+  this.encuestaCambio= true;
+  }
+
+
+
 
   updateEstudio(){
     console.log("entro a update");
@@ -367,6 +380,14 @@ seleccionarParroquia(id){
   get GeneroEstudio(){return this.formEstudio.get('GeneroEstudio'); }
   get CategoriaEstudio(){return this.formEstudio.get('CategoriaEstudio'); }
 
+    //////////////////////////////////////////////////// Metodos Para la parte de encuesta
+
+    ///// Metodos para las validaciones
+    get fechaInicioEncuesta(){ return this.formEncuesta.get('fechaInicioEncuesta'); }
+    get fechaFinEncuesta(){return this.formEncuesta.get('fechaFinEncuesta');}
+    get estudio(){return this.formEncuesta.get('estudio');}
+    get pregunta(){ return this.formEncuesta.get('pregunta');}
+
   createForm(): void {
     this.formEstudio = this.formBuilder.group({
       nombreEstudio: ['', [Validators.required, Validators.pattern(this.patronNombreEstudio)]],
@@ -393,7 +414,7 @@ seleccionarParroquia(id){
 
     });
 
-    this.formEncuesta = this.formBuilder.group({
+   this.formEncuesta = this.formBuilder.group({
       fechaInicioEncuesta: ['', [Validators.required, Validators.pattern(this.patronFechaEstudio)]],
       fechaFinEncuesta: ['', [ Validators.pattern(this.patronFechaEstudio)]],
       estudio: ['', Validators.required],
@@ -401,57 +422,50 @@ seleccionarParroquia(id){
     });
   }
 
-  //////////////////////////////////////////////////// Metodos Para la parte de encuesta
 
-    ///// Metodos para las validaciones
-    get fechaInicioEncuesta(): AbstractControl{ return this.formEncuesta.get('fechaInicioEncuesta'); }
-    get fechaFinEncuesta(): AbstractControl{return this.formEncuesta.get('fechaFinEncuesta');}
-    get estudio(): AbstractControl{return this.formEncuesta.get('estudio');}
-    get pregunta(): AbstractControl{ return this.formEncuesta.get('pregunta');
-    }
   
   // Metodo para la creacion de la encuesta del estudio
-  // addEncuesta(): any{
-  //   console.log(this.encuesta);
-  //   if (this.formEncuesta.valid) {
-  //     this.encuesta.preguntas = this.listaPreguntasInsertar;
-  //     this.servicio.createEncuesta(this.encuesta).subscribe((data: {}) => {
-  //       this.toast.showSuccess('La encuesta ha sido creada', 'Creada satisfactoriamente');
-  //     },
-  //     (error) => {
-  //       this.toast.showError('Error de conexión', 'Intentelo más tarde');
-  //     });
-  //     this.encuesta = {
-  //       _id: 0,
-  //       estado: '',
-  //       fechaInicio: '',
-  //       fechaFin: '',
-  //       estudio: {_id: 0},
-  //       preguntas: []
-  //     };
-  //     location.reload();
-  //   }
-  //   else{
-  //     this.toast.showError('Campos Incompletos', 'ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
-  //   }
-  // }
+   addEncuesta(): any{
+     console.log(this.encuesta);
+     if (this.formEncuesta.valid) {
+       this.encuesta.preguntas = this.listaPreguntasInsertar;
+       this.servicio.createEncuesta(this.encuesta).subscribe((data: {}) => {
+         this.toast.showSuccess('La encuesta ha sido creada', 'Creada satisfactoriamente');
+       },
+       (error) => {
+         this.toast.showError('Error de conexión', 'Intentelo más tarde');
+       });
+       this.encuesta = {
+         _id: 0,
+         estado: '',
+         fechaInicio: '',
+         fechaFin: '',
+         estudio: {_id: 0},
+         preguntas: []
+       };
+       location.reload();
+     }
+     else{
+       this.toast.showError('Campos Incompletos', 'ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
+     }
+   }
 
 
     // // aqui yo mando el id del estudio para que me devuelva una lista de preguntas
   // // asociadas a la subcategoria del estudio
-  // cargarPreguntas(i: number): void {
-  //   this.servicioPregunta.getPreguntasXSubcategoria(this.aux).subscribe((data: {}) => {
-  //     this.preguntasMostrar = data;
-  //   });
-  //   this.cantPreguntas = i;
-  // }
+   cargarPreguntas(i: number): void {
+     this.servicioPregunta.getPreguntasXSubcategoria(this.encuesta.estudio._id).subscribe((data: {}) => {
+       this.preguntasMostrar = data;
+     });
+     this.cantPreguntas = i;
+   }
 
-//  sugerirPreguntas(): void{
-//    // aqui le mandas el id del estudio
-//    this.servicioPregunta.sugerirPreguntas(this.aux).subscribe((data: {}) => {
-//      this.sugerenciasPreguntas = data;
-//    });
-//  }
+  sugerirPreguntas(): void{
+    // aqui le mandas el id del estudio
+    this.servicioPregunta.sugerirPreguntas(this.aux).subscribe((data: {}) => {
+      this.sugerenciasPreguntas = data;
+    });
+  }
 
   limpiar(): void{
     this.preguntaInsertar1 = {_id: 0};

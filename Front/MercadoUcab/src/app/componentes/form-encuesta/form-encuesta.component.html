@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-md-8 col-sm-6 mb-3">
                         <select class="custom-select d-block w-100" [(ngModel)]="encuesta.estudio._id" id="estudio"
-                        value="estudio._id" name="estudio._id" formControlName="estudio">
+                        value="estudio._id" name="estudio._id" formControlName="estudio"  (click)="cargarDataMuestra()">
                             <option *ngFor="let est of estudios" [ngValue]= "est._id">{{ est.nombre }}</option>
                         </select>
                         <div class="invalid-feedback">
@@ -64,6 +64,27 @@
                                 <p *ngFor="let pregunta of sugerenciasPreguntas">{{ pregunta.descripcion }}</p>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-9 mb-3">
+                        <label for="pregunta">Seleccione muestra de estudio</label>
+                        <select class="custom-select d-block w-100" [(ngModel)]="dataMuestra._id" id="dataMuestra" value="dataMuestra._id"
+                        name="dataMuestra._id" formControlName="muestra">
+                            <option>Choose...</option>
+                            <option *ngFor="let muestra of dataMuestraMostrar" [ngValue]= "muestra._id">{{ muestra.primerNombre }} {{ muestra.primerApellido }}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 mb-3 pt-1">
+                        <br>
+                        <button type="button" class="btn btn-primary" (click)="addDataMuestra()">Agregar</button>
+                    </div>
+                </div>
+
+                <div class="form-row d-none" [ngClass]="{'d-block': listaMuestraSeleccionada.length >= 1}">
+                    <div class="card card-body">
+                        <p *ngFor="let persona of listaMuestraSeleccionada">{{ persona }}</p>
                     </div>
                 </div>
 

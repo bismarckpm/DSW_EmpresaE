@@ -10,6 +10,7 @@ import { EstudioService } from 'src/app/services/estudio.service';
 import { LugarService } from 'src/app/services/lugar.service';
 import { NivelSocioEconomicoService } from 'src/app/services/nivel-socio-economico.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-lista-estudios',
@@ -49,7 +50,7 @@ export class ListaEstudiosComponent implements OnInit {
         }
       }
     },
-    nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
+    nivelSocioEconomico: {_id: 0},
     subcategoria : {_id: 0, nombre: '', estado: ''},
   };
 
@@ -86,8 +87,9 @@ export class ListaEstudiosComponent implements OnInit {
     public analistaService: AnalistaService,
     public actRoute: ActivatedRoute,
     public router: Router,
-    private formBuilder: FormBuilder
-    ) {this.createForm(); }
+    private formBuilder: FormBuilder,
+    private toast: ToastService
+  ) {this.createForm(); }
 
   ngOnInit(): void {
    this.loadEstudios();
@@ -99,7 +101,7 @@ export class ListaEstudiosComponent implements OnInit {
     });
   }
 
-  deleteEstudio(id) {
+  deleteEstudio(id): void {
     this.estudioService.deleteEstudio(id).subscribe(data => {
       this.loadEstudios();
     });
@@ -134,7 +136,7 @@ export class ListaEstudiosComponent implements OnInit {
       }
     }
     else{
-      alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
+      this.toast.showError('Es necesario llenar los todos los campos', 'Campos incompletos');
     }
   }
 
@@ -166,6 +168,14 @@ export class ListaEstudiosComponent implements OnInit {
       this.analistas = data;
       console.log(this.analistas);
     });
+  }
+
+  aprobarEstudio(): void {
+    console.log('estudio aprobado');
+  }
+
+  rechazarEstudio(): void {
+    console.log('estudio rechazado');
   }
 
   /// Busqueda para los drop de lugar por pais seleccionado previamente
@@ -212,18 +222,18 @@ export class ListaEstudiosComponent implements OnInit {
 
     console.log('entro en la llamada de las validaciones de lugar');
 
-    if ((this.estudioData.lugar._id != this.parroquiaData._id) && (this.parroquiaData._id === this.auxParroquiaID)){
+    if ((this.estudioData.lugar._id !== this.parroquiaData._id) && (this.parroquiaData._id === this.auxParroquiaID)){
       console.log('la parroquia es diferente y hago el cambio');
       console.log('id de la parroquia anterior :' + this.estudioData.lugar._id);
       this.estudioData.lugar._id = this.auxParroquiaID;
       console.log('id de la parroquia Actual :' + this.estudioData.lugar._id);
     }
 
-    if ((this.estudioData.lugar.lugar._id != this.municipioData._id) && (this.municipioData._id === this.auxMunicipioID)){
+    if ((this.estudioData.lugar.lugar._id !== this.municipioData._id) && (this.municipioData._id === this.auxMunicipioID)){
       this.estudioData.lugar.lugar._id = this.auxMunicipioID;
     }
 
-    if ((this.estudioData.lugar.lugar.lugar._id != this.estadoData._id) && (this.estadoData._id === this.auxEstadoID)){
+    if ((this.estudioData.lugar.lugar.lugar._id !== this.estadoData._id) && (this.estadoData._id === this.auxEstadoID)){
       this.estudioData.lugar.lugar.lugar._id = this.auxEstadoID;
     }
 
@@ -247,10 +257,10 @@ export class ListaEstudiosComponent implements OnInit {
 
   // Validaciones de Pregunta
   get nombreEstudio(){return this.formEstudio.get('nombreEstudio'); }
-  get comentarioAnalistaEstudio(){return this.formEstudio.get('comentarioAnalistaEstudio'); }
+  // get comentarioAnalistaEstudio(){return this.formEstudio.get('comentarioAnalistaEstudio'); }
   get edadMinimaEstudio(){return this.formEstudio.get('edadMinimaEstudio'); }
   get edadMaximaEstudio(){return this.formEstudio.get('edadMaximaEstudio'); }
-  get estadoEstudio(){return this.formEstudio.get('estadoEstudio'); }
+  // get estadoEstudio(){return this.formEstudio.get('estadoEstudio'); }
   get fechaInicioEstudio(){return this.formEstudio.get('fechaInicioEstudio'); }
   get fechaFinEstudio(){return this.formEstudio.get('fechaFinEstudio');
  }
@@ -263,13 +273,14 @@ export class ListaEstudiosComponent implements OnInit {
   get ParroquiaData(){return this.formEstudio.get('ParroquiaData'); }
 
   get analistaEstudio(){return this.formEstudio.get('analistaEstudio'); }
+  get categoriaEstudio(){return this.formEstudio.get('categoriaEstudio'); }
   get subcategoriaEstudio(){return this.formEstudio.get('subcategoriaEstudio'); }
   get nivelEstudio(){return this.formEstudio.get('nivelEstudio'); }
 
   createForm(): void {
     this.formEstudio = this.formBuilder.group({
       nombreEstudio: ['', [Validators.required, Validators.pattern(this.patronNombreEstudio)]],
-      estadoEstudio: ['', Validators.required],
+      // estadoEstudio: ['', Validators.required],
       lugarEstudio: [''],
       lugarmunicipio: [''],
       lugarparroquia: [''],
@@ -280,11 +291,11 @@ export class ListaEstudiosComponent implements OnInit {
       ParroquiaData: [''],
 
 
-      fechaInicioEstudio: ['', [Validators.required, Validators.pattern(this.patronFechaEstudio)]],
       fechaFinEstudio: ['', [Validators.pattern(this.patronFechaEstudio)]],
       edadMinimaEstudio: ['', [Validators.required, Validators.maxLength(2), Validators.pattern(this.patronEdadEstudio)]],
       edadMaximaEstudio: ['', [Validators.required, Validators.maxLength(2), Validators.pattern(this.patronEdadEstudio)]],
-      comentarioAnalistaEstudio: ['', Validators.pattern(this.patronNombreEstudio)],
+      // comentarioAnalistaEstudio: ['', Validators.pattern(this.patronNombreEstudio)],
+      categoriaEstudio: ['', [Validators.required]],
       subcategoriaEstudio: ['', [Validators.required]],
       nivelEstudio: '',
 

@@ -11,8 +11,8 @@ import {Encuestado} from "../models/encuestado";
 export class EstudioService {
 
 
-  //apiurl = 'http://localhost:3000';
-   apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+  apiurl = 'http://localhost:3000';
+  //  apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
 
   constructor(private http: HttpClient) { }
 
@@ -33,7 +33,8 @@ export class EstudioService {
   }
 
   getEstudiosSinEncuesta(): Observable<Estudio[]>{
-    return this.http.get<Estudio[]>(this.apiurl + '/estudio/estudiosSinEncuesta')
+    // return this.http.get<Estudio[]>(this.apiurl + '/estudio/estudiosSinEncuesta')
+    return this.http.get<Estudio[]>(this.apiurl + '/estudio')
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -65,7 +66,8 @@ export class EstudioService {
   }
 
   getDataMuestra(id): Observable<Encuestado[]>{
-    return this.http.get<Encuestado[]>(this.apiurl + '/estudio/dataMuestra/' + id)
+    // return this.http.get<Encuestado[]>(this.apiurl + '/estudio/dataMuestra/' + id)
+    return this.http.get<Encuestado[]>(this.apiurl + '/encuestado')
       .pipe(
         retry(1),
         catchError(this.handleError)

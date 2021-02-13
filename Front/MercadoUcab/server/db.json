@@ -245,6 +245,36 @@
       }
     },
     {
+      "_id": 40,
+      "primerNombre": "Camilo",
+      "segundoNombre": "eduardo",
+      "primerApellido": "escobar",
+      "segundoApellido": "alfaro",
+      "fechaNacimiento": "10/11/1998",
+      "estado": "a",
+      "usuario": {
+        "_id": 1,
+        "username": "juanee",
+        "clave": "12345",
+        "correoElectronico": "juan@gmail.com"
+      }
+    },
+    {
+      "_id": 41,
+      "primerNombre": "Alfonso",
+      "segundoNombre": "eduardo",
+      "primerApellido": "escobar",
+      "segundoApellido": "alfaro",
+      "fechaNacimiento": "10/11/1998",
+      "estado": "a",
+      "usuario": {
+        "_id": 1,
+        "username": "juanee",
+        "clave": "12345",
+        "correoElectronico": "juan@gmail.com"
+      }
+    },
+    {
       "_id": 2,
       "primerNombre": "qqq",
       "segundoNombre": "qqq",
@@ -339,38 +369,38 @@
       "estado": "solicitado",
       "fechaInicio": "2020-05-04",
       "lugar": {
-          "_id": 18,
+        "_id": 18,
+        "estado": "a",
+        "lugar": {
+          "_id": 5,
           "estado": "a",
           "lugar": {
-              "_id": 5,
-              "estado": "a",
-              "lugar": {
-                  "_id": 1,
-                  "estado": "a",
-                  "nombre": "venezuela",
-                  "tipo": "pais"
-              },
-              "nombre": "zulia",
-              "tipo": "estado"
+            "_id": 1,
+            "estado": "a",
+            "nombre": "venezuela",
+            "tipo": "pais"
           },
-          "nombre": "pruebamunc3Zuli",
-          "tipo": "municipio"
+          "nombre": "zulia",
+          "tipo": "estado"
+        },
+        "nombre": "pruebamunc3Zuli",
+        "tipo": "municipio"
       },
       "nivelsocioeco": {
-          "_id": 2,
-          "descripcion": "Nivel Alto",
-          "estado": "a",
-          "nombre": "Alto"
+        "_id": 2,
+        "descripcion": "Nivel Alto",
+        "estado": "a",
+        "nombre": "Alto"
       },
       "subcategoria": {
-          "_id": 2,
-          "categoria": {
-              "_id": 1,
-              "estado": "i",
-              "nombre": "CategoriaPrueba"
-          },
-          "estado": "A",
-          "nombre": "SubcategoriaPrueba2"
+        "_id": 2,
+        "categoria": {
+          "_id": 1,
+          "estado": "i",
+          "nombre": "CategoriaPrueba"
+        },
+        "estado": "A",
+        "nombre": "SubcategoriaPrueba2"
       }
     }
   ],
@@ -529,6 +559,40 @@
       "pregunta": [
         {
           "descripcion": ""
+        }
+      ]
+    },
+    {
+      "_id": 5,
+      "estado": "Activo",
+      "fechaInicio": "2020-10-10",
+      "fechaFin": "2020-10-11",
+      "estudio": {
+        "_id": 8
+      },
+      "preguntas": [
+        {
+          "_id": 2
+        },
+        {
+          "_id": 3
+        },
+        {
+          "_id": 1
+        },
+        {
+          "_id": 3
+        },
+        {
+          "_id": 1
+        }
+      ],
+      "datamuestra": [
+        {
+          "_id": 41
+        },
+        {
+          "_id": 2
         }
       ]
     }
@@ -832,10 +896,18 @@
         "_id": 1
       },
       "opciones": [
-        {"descripcion": "opcion 1"},
-        {"descripcion": "opcion 2"},
-        {"descripcion": "opcion 3"},
-        {"descripcion": "opcion 4"}
+        {
+          "descripcion": "opcion 1"
+        },
+        {
+          "descripcion": "opcion 2"
+        },
+        {
+          "descripcion": "opcion 3"
+        },
+        {
+          "descripcion": "opcion 4"
+        }
       ]
     },
     {
@@ -848,10 +920,18 @@
         "_id": 1
       },
       "opciones": [
-        {"descripcion": "opcion 10"},
-        {"descripcion": "opcion 20"},
-        {"descripcion": "opcion 30"},
-        {"descripcion": "opcion 40"}
+        {
+          "descripcion": "opcion 10"
+        },
+        {
+          "descripcion": "opcion 20"
+        },
+        {
+          "descripcion": "opcion 30"
+        },
+        {
+          "descripcion": "opcion 40"
+        }
       ]
     },
     {
@@ -864,10 +944,18 @@
         "_id": 1
       },
       "opciones": [
-        {"descripcion": "opcion 010"},
-        {"descripcion": "opcion 020"},
-        {"descripcion": "opcion 030"},
-        {"descripcion": "opcion 040"}
+        {
+          "descripcion": "opcion 010"
+        },
+        {
+          "descripcion": "opcion 020"
+        },
+        {
+          "descripcion": "opcion 030"
+        },
+        {
+          "descripcion": "opcion 040"
+        }
       ]
     }
   ]

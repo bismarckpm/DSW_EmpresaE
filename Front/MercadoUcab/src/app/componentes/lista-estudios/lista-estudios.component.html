@@ -45,9 +45,7 @@
                     </div>
                     <!-- Cuerpo completo del Modal -->
                     <div class="modal-body">
-                     
-                      <div *ngIf="estudioCambio==true">
-                      <form [formGroup]="formEstudio" >
+                      <form [formGroup]="formEstudio">
                         <div class="row">
                           <div class="col-md-12">
                               <label for="nombre">Nombre</label>
@@ -185,6 +183,8 @@
                               </div>
                             </div>
                           </div>
+
+
                         </div>
 
 
@@ -214,103 +214,64 @@
                             </div>
                           </div>
                         </div>
-                      </form>
 
-                    </div>
-                    
-
-                  <div *ngIf="encuestaCambio==true">
+                       <!--   <div class="form-row">
+                          <div class="col-md-12 col-sm-6 mb-3 float-right">
+                              <label for="sugerencia de preguntas" class="text-success font-weight-bolder d-flex justify-content-end" type="button" data-toggle="collapse" 
+                              aria-expanded="false" aria-controls="collapseExample" data-target="#collapseExample"
+                              (click)="sugerirPreguntas()">
+                                  Sugerencia de preguntas
+                              </label>
+                              <div class="collapse" id="collapseExample">
+                                  <div class="card card-body">
+                                      <p *ngFor="let pregunta of sugerenciasPreguntas">{{ pregunta.descripcion }}</p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
 
                       <div class="form-row">
-                      <div class="col-md-9 mb-3">
-                        <label for="pregunta">Seleccione muestra de estudio</label>
-                        <select class="custom-select d-block w-100" [(ngModel)]="dataMuestra._id" id="dataMuestra" value="dataMuestra._id"
-                        name="dataMuestra._id" formControlName="muestra">
-                            <option>Choose...</option>
-                            <option *ngFor="let muestra of dataMuestraMostrar" [ngValue]= "muestra._id">{{ muestra.primerNombre }} {{ muestra.primerApellido }}</option>
-                        </select>
+                        <div class="col-md-5 col-sm-6 mb-3">
+                            <label for="cantidadPreguntas">Cantidad de preguntas</label>
+                        </div>
+                        <div class="col-md-7 col-sm-6 mb-3">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-light btn-sm" *ngFor="let opcion of opcionesCantidad" (click)="cargarPreguntas(opcion)">
+                            {{ opcion }}
+                            </button>
+                        </div>
+                        </div>
                     </div>
-                    <div class="col-md-3 mb-3 pt-1">
-                        <br>
-                        <button type="button" class="btn btn-primary" (click)="addDataMuestra()">Agregar</button>
-                    </div>
-                  </div>
 
-               <!--<div class="form-row d-none" [ngClass]="{'d-block': listaMuestraSeleccionada.length >= 1}">
-                      <div class="card card-body">
-                          <p *ngFor="let persona of listaMuestraSeleccionada">{{ persona }}</p>
+                    <div class="form-row" [ngClass]="{'d-block': (cantPreguntas === 5 || cantPreguntas === 10 || cantPreguntas === 15)}">
+                      <div class="col-md-3 col-sm-2 mb-3">
+                          <label for="pregunta">Pregunta 1</label>
+                      </div>
+                      <div class="col-md-7 col-sm-8 mb-3">
+                          <select class="custom-select d-block w-100" [(ngModel)]="preguntaInsertar1._id" id="pregunta" value="preguntaInsertar._id"
+                          name="preguntaInsertar1._id" formControlName="pregunta">
+                              <option>Choose...</option>
+                              <option *ngFor="let pregunta of preguntasMostrar" [ngValue]= "pregunta._id">{{ pregunta.descripcion }}</option>
+                          </select>
+                          <div class="invalid-feedback">
+                              Please select a valid option.
+                          </div>
+                      </div>
+                      <div class="col-md-2 col-sm-2 mb-2">
+                          <button type="button" class="btn btn-primary" (click)="addPreguntaEncuesta(preguntaInsertar1)"> + </button>
                       </div>
                   </div>-->
 
-                    
-                    <div class="form-row">
-                      <div class="col-md-5 col-sm-6 mb-3">
-                          <label for="cantidadPreguntas">Cantidad de preguntas</label>
-                      </div>
-                      <div class="col-md-7 col-sm-6 mb-3">
-                      <div class="btn-group" role="group" aria-label="Basic example">
-                          <button type="button" class="btn btn-light btn-sm" *ngFor="let opcion of opcionesCantidad" (click)="cargarPreguntas(opcion)">
-                          {{ opcion }}
-                          </button>
-                      </div>
-                      </div>
-                  </div>
 
-                     
 
-                        <form [formGroup]="formEncuesta">
-                        
-                          <div class="form-row">
-                            <div class="col-md-12 col-sm-6 mb-3 float-right">
-                                <label for="sugerencia de preguntas" class="text-success font-weight-bolder d-flex justify-content-end" type="button" data-toggle="collapse" 
-                                aria-expanded="false" aria-controls="collapseExample" data-target="#collapseExample"
-                                (click)="sugerirPreguntas()">
-                                    Sugerencia de preguntas
-                                </label>
-                                <div class="collapse" id="collapseExample">
-                                    <div class="card card-body">
-                                        <p *ngFor="let pregunta of sugerenciasPreguntas">{{ pregunta.descripcion }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-  
-  
-                      <div class="form-row" [ngClass]="{'d-block': (cantPreguntas === 5 || cantPreguntas === 10 || cantPreguntas === 15)}">
-                        <div class="col-md-3 col-sm-2 mb-3">
-                            <label for="pregunta">Pregunta 1</label>
-                        </div>
-                        <div class="col-md-7 col-sm-8 mb-3">
-                            <select class="custom-select d-block w-100" [(ngModel)]="preguntaInsertar1._id" id="pregunta" value="preguntaInsertar._id" name="preguntaInsertar1._id" formControlName="pregunta">
-                                <option>Choose...</option>
-                                <option *ngFor="let pregunta of preguntasMostrar" [ngValue]= "pregunta._id">{{ pregunta.descripcion }}</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Please select a valid option.
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 mb-2">
-                            <button type="button" class="btn btn-primary" (click)="addPreguntaEncuesta(preguntaInsertar1)"> + </button>
-                        </div>
-                    </div>
 
-                        </form>
-
-                      </div>
-
+                      </form>
                     </div><!-- cierre del cuerpo modal -->
                     <div class="modal-footer">
-                      <div *ngIf="estudioCambio==true">
-                        <button type="submit" class="btn btn-info" (click)="updateEstudio()">Actualizar Datos</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Rechazar</button>
-                        <button type="button" class="btn btn-success"  (click)="Aprobar()" >Aprobar</button>
-                      </div>
-
-                      <div *ngIf="encuestaCambio==true">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">cancelar</button>
-                        <button type="button" class="btn btn-success"  (click)="Aprobar()" >guardar</button>
-                      </div>
-
+                      
+                      <button type="submit" class="btn btn-info" (click)="updateEstudio()">Actualizar Datos</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Rechazar</button>
+                      <button type="button" class="btn btn-success" data-dismiss="modal">Aprobar</button>
                     </div>
                   </div>
                 </div>

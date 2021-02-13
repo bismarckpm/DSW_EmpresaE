@@ -8,8 +8,9 @@ import { retry, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PreguntaService {
+
   apiurl = 'http://localhost:8080/servicio-1.0-SNAPSHOT/api';
-  // apiurl = 'http://localhost:3000';
+  //apiurl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
   // Http Options
@@ -49,24 +50,6 @@ export class PreguntaService {
   // de preguntas activas asociada a la subcategoria del estudio
   getPreguntasXSubcategoria(idEstudio): Observable<Pregunta[]>{
     return this.http.get<Pregunta[]>(this.apiurl + '/pregunta/preguntasSubcategoria/' + idEstudio)
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-    );
-  }
-
-  // FRONT
-  // getPreguntasXSubcategoria(idEstudio): Observable<Pregunta[]>{
-  //   return this.http.get<Pregunta[]>(this.apiurl + '/pregunta')
-  //   .pipe(
-  //     retry(1),
-  //     catchError(this.handleError)
-  //   );
-  // }
-
-  sugerirPreguntas(idEstudio): Observable<Pregunta[]>{
-    // return this.http.get<Pregunta[]>(this.apiurl + '/pregunta/sugerirPreguntas/' + idEstudio)
-    return this.http.get<Pregunta[]>(this.apiurl + '/pregunta')
     .pipe(
       retry(1),
       catchError(this.handleError)

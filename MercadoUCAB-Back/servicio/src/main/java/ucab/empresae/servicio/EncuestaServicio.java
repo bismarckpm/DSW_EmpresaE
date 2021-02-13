@@ -269,4 +269,84 @@ public class EncuestaServicio extends AplicacionBase{
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/encuesta/respuestaxAnalista
+     * Metodo con anotacion POST que recibe una lista DtoRespuesta e inserta en la n a n la respuesta a cada pregunta por parte del analista
+     * @param dtoRespuestaAux lista de respuestas a cada pregunta, el encuestado que la responde, y el estudio correspondiente
+     * @return Response con status ok al crear las respuestas con la informacion suministrada
+     */
+    @POST
+    @Path("/respuestaxAnalista")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response respuestaEncuestaxAnalista(DtoRespuestaAux dtoRespuestaAux) {
+        //DtoRespuestaAux posee un array de dtoRespuesta, un id usuario, y un id estudio
+
+        try {
+
+            DaoEncuestado daoEncuestado = new DaoEncuestado();
+            DaoEstudioEncuestado daoEstudioEncuestado = new DaoEstudioEncuestado();           //este dao cambia el edo de la n a n
+            EncuestadoEntity encuestadoEntity = daoEncuestado.find(dtoRespuestaAux.getUsuario(), EncuestadoEntity.class);
+
+            //SE BUSCA AL ESTUDIO MEDIANTE EL ID DE ESTUDIO SUMINISTRADO
+            DaoEstudio daoEstudio = new DaoEstudio();
+            EstudioEntity estudioEntity = daoEstudio.find(dtoRespuestaAux.getEstudio(), EstudioEntity.class);
+
+            DaoRespuesta daoRespuesta = new DaoRespuesta();
+            DaoPreguntaOpcion daoPreguntaOpcion = new DaoPreguntaOpcion();
+
+            //Por cada respuesta en la lista suministrada
+            for (DtoRespuesta respuesta: dtoRespuestaAux.getRespuestas()) {
+
+                //si la respuesta tiene opciones
+                if(respuesta.getOpciones() != null) {
+                    //RESPUESTA.GETID SEGUN EL FORMATO DEL JSON CORRESPONDE AL ID DE LA PREGUNTA
+                    for (DtoOpcion opcion : respuesta.getOpciones()){
+                        PreguntaOpcionEntity preguntaOpcion = daoPreguntaOpcion.getPreguntaOpcion(respuesta.get_id(), opcion.get_id());
+                        RespuestaEntity respuestaEntity = new RespuestaEntity();
+
+                        respuestaEntity.setEstado("a");
+                        respuestaEntity.setPreguntaOpcion(preguntaOpcion);
+                        respuestaEntity.setEncuestado(encuestadoEntity);
+                        respuestaEntity.setEstudio(estudioEntity);
+                        respuestaEntity.setId_pregunta(respuesta.get_id());
+                        daoRespuesta.insert(respuestaEntity);
+                    }
+
+                }
+                //si la respuesta no tiene opciones
+                if (respuesta.getOpciones().size() == 0){
+                    RespuestaEntity respuestaEntity = new RespuestaEntity();
+                    respuestaEntity.setEstado("a");
+                    respuestaEntity.setEncuestado(encuestadoEntity);
+                    respuestaEntity.setEstudio(estudioEntity);
+                    respuestaEntity.setTexto(respuesta.getTexto());
+                    respuestaEntity.setId_pregunta(respuesta.get_id());
+                    daoRespuesta.insert(respuestaEntity);
+                }
+            }
+
+            DaoRespuesta daoRespuestaPrueba = new DaoRespuesta();
+            DaoPregunta daoPregunta = new DaoPregunta();
+
+            long preguntasRespondidas = daoRespuestaPrueba.getCantidadPreguntasRespondidas(estudioEntity.get_id(), encuestadoEntity);
+            long preguntasxResponder = daoPregunta.getPreguntasbyEstudioConPregAb(estudioEntity.get_id()).size();
+
+            if (preguntasRespondidas == preguntasxResponder) {
+                EstudioEncuestadoEntity estudioEncuestadoEntity = daoEstudioEncuestado.getEstudioEncuestado(encuestadoEntity, estudioEntity);
+                estudioEncuestadoEntity.setEstado("Finalizado");
+                daoEstudioEncuestado.update(estudioEncuestadoEntity);
+            }
+            else {
+                EstudioEncuestadoEntity estudioEncuestadoEntity = daoEstudioEncuestado.getEstudioEncuestado(encuestadoEntity, estudioEntity);
+                estudioEncuestadoEntity.setEstado("En Proceso");
+                daoEstudioEncuestado.update(estudioEncuestadoEntity);
+            }
+
+            return Response.ok().build();
+
+        } catch (Exception ex) {
+            return Response.status(500).entity(ex.getMessage()).build();
+        }
+    }
 }

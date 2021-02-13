@@ -34,7 +34,7 @@ public class ComandoGetPreguntas extends ComandoBase<DtoResponse> {
     @Override
     public void execute() throws CustomException {
         Dao daoPregunta = DaoFactory.DaoPreguntaInstancia();
-        List<BaseEntity> preguntas = daoPregunta.findAll(PreguntaEntity.class);
+        List<PreguntaEntity> preguntas = daoPregunta.findAll(PreguntaEntity.class);
 
         PreguntaMapper preguntaMapper = MapperFactory.preguntaMapperInstancia();
         this.dtoPreguntas = preguntaMapper.CreateDtoList(preguntas);

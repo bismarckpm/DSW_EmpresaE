@@ -87,7 +87,8 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
 
   loadPreguntasResponder(idEstudio: number): void{
     // aqui esta el get en preguntas pasandole el id del estudio
-    this.preguntaService.getPreguntasResponder(idEstudio)
+    const idUsuario = JSON.parse(localStorage.getItem('usuarioID'));
+    this.preguntaService.getPreguntasResponder(idEstudio, idUsuario)
         .subscribe((data) => {
           this.preguntasEncuesta = data;
         });

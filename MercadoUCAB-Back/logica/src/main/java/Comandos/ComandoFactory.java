@@ -66,5 +66,17 @@ public class ComandoFactory {
         return new ComandoUpdatePregunta(id, dtoPregunta);
     }
 
+    public static ComandoGetPreguntasBySubcategoria comandoGetPreguntasBySubcategoriaInstancia(long id) {
+        return new ComandoGetPreguntasBySubcategoria(id);
+    }
+
+    public static ComandoGetEncuesta comandoGetEncuestaInstancia(long id_estudio, long id_encuestado) {
+        return new ComandoGetEncuesta(id_estudio, id_encuestado);//este id encuestado es el id del usuario que se debe buscar
+    }
+
+    public static ComandoGetEncuestaAnalista comandoGetEncuestaAnalistaInstancia(long id_estudio, long id_encuestado) {
+        return new ComandoGetEncuestaAnalista(id_estudio, id_encuestado);
+    }
+
 
 }

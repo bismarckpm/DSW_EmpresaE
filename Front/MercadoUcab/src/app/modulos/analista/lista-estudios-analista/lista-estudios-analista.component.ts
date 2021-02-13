@@ -25,6 +25,8 @@ class Multiple { constructor(public _id: number){} }
 export class ListaEstudiosAnalistaComponent implements OnInit {
 
   // Declaracion de variables
+  prueba: number;
+  prueba2: number;
   estudios: Estudio[] = [];
   preguntasEncuesta: Pregunta[] = [];
   opciones: Opcion[] = [];
@@ -92,19 +94,39 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
 
   addRespuestasEncuesta(): void{
     this.respuestaEncuesta.respuestas = this.listaRespuestas;
-    this.respuestaEncuesta.usuario = JSON.parse(localStorage.getItem('usuarioID'));
+    this.respuestaEncuesta.usuario = 32 ;     //JSON.parse(localStorage.getItem('usuarioID'))
     console.log('JSON a enviar....');
     console.log(this.respuestaEncuesta);
     this.encuestaService.createRespuestaEncuesta(this.respuestaEncuesta).subscribe((data) => {});
   }
 
-  loadPreguntasResponder(idEstudio: number): void{
+  addRespuestasEncuestaxAnalista(): void{
+    this.respuestaEncuesta.respuestas = this.listaRespuestas;
+    this.respuestaEncuesta.usuario = this.prueba2 ;     //JSON.parse(localStorage.getItem('usuarioID'))
+    console.log('JSON a enviar....');
+    console.log(this.respuestaEncuesta);
+    this.encuestaService.createRespuestaEncuestaxAnalista(this.respuestaEncuesta).subscribe((data) => {});
+  }
+
+  loadPreguntasResponder(idEstudio: number): void{                      //DEBE SER DIFERENTE EL NOMBRE, Y QUE SEA EL ID DEL ENCUESTADO NO DEL USUARIO
     // aqui esta el get en preguntas pasandole el id del estudio
-    this.preguntaService.getPreguntasResponder(idEstudio)
+    const idUsuario = JSON.parse(localStorage.getItem('usuarioID')); //OJOOOOOOOOOOOOOOOOOOO ESE ID NO ESSSSSSSSSS
+
+    this.preguntaService.getPreguntasResponder(idEstudio, idUsuario)
       .subscribe((data) => {
         this.preguntasEncuesta = data;
       });
     this.respuestaEncuesta.estudio = idEstudio;
+  }
+
+  loadPreguntasResponderxAnalista(idEncuestado: number): void{                      //DEBE SER DIFERENTE EL NOMBRE, Y QUE SEA EL ID DEL ENCUESTADO NO DEL USUARIO
+    // aqui esta el get en preguntas pasandole el id del estudio
+    this.prueba2 = idEncuestado;                  //este es el id del encuestado
+    this.preguntaService.getPreguntasResponderxAnalista(this.prueba, idEncuestado) //this.prueba es el id del estudio
+      .subscribe((data) => {
+        this.preguntasEncuesta = data;
+      });
+    this.respuestaEncuesta.estudio = this.prueba; //aqui estaba un "idestudio" que elimine
   }
 
   addOpcionesRespuesta(idPregunta): void {
@@ -169,6 +191,7 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
   }
 
   loadDataMuestra(id): void {
+    this.prueba = id; //este es el id del estudio que se selecciona para que quede almacenado para el segundo ngfor
     this.estudioService.getDataMuestra(id).subscribe(data => {
       this.encuestados = data;
     });

@@ -19,7 +19,7 @@ public class PreguntaAux extends BaseEntity{
         public PreguntaAux() {
         }
 
-        public PreguntaAux(long id) throws Exception {
+        public PreguntaAux(long id){
             super(id);
         }
 

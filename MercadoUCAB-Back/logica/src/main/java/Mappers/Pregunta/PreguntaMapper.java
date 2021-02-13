@@ -119,7 +119,7 @@ public class PreguntaMapper {
      * @return Lista de objetos de tipo DtoPregunta
      * @throws CustomException En caso de que falle a la hora de llamar a CreateDto
      */
-    public List<DtoPregunta> CreateDtoList(List<BaseEntity> entities) throws CustomException {
+    public List<DtoPregunta> CreateDtoList(List<PreguntaEntity> entities) throws CustomException {
         ArrayList<DtoPregunta> dtos = new ArrayList<>();
 
         for (BaseEntity obj : entities) {

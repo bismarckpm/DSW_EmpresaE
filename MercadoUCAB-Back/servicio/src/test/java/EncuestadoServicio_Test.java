@@ -1,12 +1,20 @@
 import org.junit.Assert;
 import org.junit.Test;
 import ucab.empresae.dtos.*;
-import javax.ws.rs.core.Response;
 import ucab.empresae.servicio.EncuestadoServicio;
 
+import javax.ws.rs.core.Response;
 
+/**
+ * Pruebas unitarias utilizadas para pribar el servicio de encuestado.
+ * @see EncuestadoServicio Servicio a probar.
+ */
 public class EncuestadoServicio_Test {
 
+    /**
+     * Prueba unitaria utilizada para agregar un encuestado nuevo a la base de datos.
+     * @throws Exception En caso de encontrar algún constraint a nivel de base de datos que impida agregar al encuestado.
+     */
     @Test
     //Prueba Unitaria registro de Encuestados
     public void addEncuestadoTest() throws Exception{
@@ -56,6 +64,10 @@ public class EncuestadoServicio_Test {
         Assert.assertEquals(respuesta.getStatus(), Response.Status.OK.getStatusCode());
     }
 
+    /**
+     * Prueba unitaria que prueba obtener un encuestado por medio de su id
+     * @throws Exception En caso de encontrar algún constraint a nivel de base de datos.
+     */
     @Test
     //Prueba Unitaria consulta de encuestados
     public void getEncuestadoTest() throws Exception{
@@ -64,7 +76,9 @@ public class EncuestadoServicio_Test {
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 
-
+    /**
+     * Prueba unitaria que prueba que se puedan listar todos los encuestados registrados en el sistema.
+     */
     @Test
     //Prueba Unitaria lista de encuestados
     public void getEncuestadosTest(){
@@ -74,7 +88,9 @@ public class EncuestadoServicio_Test {
 
     }
 
-
+    /**
+     * Prueba unitaria que prueba que se pueda eliminar algún encuestado especificado mediante su id.
+     */
     @Test
     //Prueba Unitaria de la eliminacion de encuestados
     public void deleteEncuestadoTest(){

@@ -1,14 +1,24 @@
 import org.junit.Assert;
 import org.junit.Test;
-import ucab.empresae.dtos.*;
+import ucab.empresae.dtos.DtoEncuesta;
+import ucab.empresae.dtos.DtoEstudio;
+import ucab.empresae.dtos.DtoPregunta;
 import ucab.empresae.servicio.EncuestaServicio;
-import ucab.empresae.servicio.PreguntaServicio;
 
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Pruebas unitarias del EncuestaServicio
+ * @see EncuestaServicio Servicio a probar.
+ */
 public class EncuestaServicio_Test {
+
+    /**
+     * Prueba unitaria que testea que se puedan listar todas las preguntas registradas en el sistema.
+     * @throws Exception En caso de encontrar alguna restricción a nivel de la base de datos.
+     */
     @Test
     public void getPreguntasTest() throws Exception
     {
@@ -17,6 +27,10 @@ public class EncuestaServicio_Test {
         Assert.assertEquals( respuesta.getStatus(), Response.Status.OK.getStatusCode());
     }
 
+    /**
+     * Prueba unitaria que testea que se pueda agregar una encuesta nueva al sistema.
+     * @throws Exception En caso de encontrar alguna restriccion a nivel de base de datos.
+     */
     @Test
     public void addEncuestaTest() throws Exception {
         EncuestaServicio servicio = new EncuestaServicio();
@@ -41,6 +55,10 @@ public class EncuestaServicio_Test {
         Assert.assertEquals(respuesta.getStatus(), Response.Status.OK.getStatusCode());
     }
 
+    /**
+     * Prueba unitaria que testea que se pueda eliminar una encuesta del sistema.
+     * @throws Exception en caso de encontrarse con alguna retricción a nivel de la base de datos.
+     */
     @Test
     public void deleteEncuestaTest() throws Exception
     {

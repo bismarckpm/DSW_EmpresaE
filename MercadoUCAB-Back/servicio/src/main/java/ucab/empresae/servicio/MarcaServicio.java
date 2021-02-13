@@ -3,6 +3,7 @@ package ucab.empresae.servicio;
 import ucab.empresae.daos.DaoMarca;
 import ucab.empresae.dtos.DtoMarca;
 import ucab.empresae.entidades.MarcaEntity;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;

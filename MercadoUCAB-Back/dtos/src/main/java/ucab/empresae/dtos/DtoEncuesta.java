@@ -1,6 +1,5 @@
 package ucab.empresae.dtos;
 
-import java.util.Date;
 import java.util.List;
 
 public class DtoEncuesta extends DtoBase {

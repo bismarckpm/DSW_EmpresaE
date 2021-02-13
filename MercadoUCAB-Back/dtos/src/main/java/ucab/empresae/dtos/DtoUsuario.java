@@ -16,6 +16,7 @@ public class DtoUsuario extends DtoBase {
 
     //Constructores
     public DtoUsuario() {
+        super();
     }
 
     public DtoUsuario(long id) throws Exception {

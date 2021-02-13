@@ -1,6 +1,7 @@
 package ucab.empresae.daos;
 
 import ucab.empresae.entidades.EstadoCivilEntity;
+
 import javax.persistence.EntityManager;
 
 public class DaoEstadoCivil extends Dao<EstadoCivilEntity> {

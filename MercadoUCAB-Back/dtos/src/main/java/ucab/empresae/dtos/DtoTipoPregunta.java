@@ -7,11 +7,12 @@ public class DtoTipoPregunta extends DtoBase {
     private String tipo;
 
     //Constructores
-    public DtoTipoPregunta(long id) throws Exception {
+    public DtoTipoPregunta(long id){
         super(id);
     }
 
     public DtoTipoPregunta() {
+        super();
     }
 
     //Getters y Setters

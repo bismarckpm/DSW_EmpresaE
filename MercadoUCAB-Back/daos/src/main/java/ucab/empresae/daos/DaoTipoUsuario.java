@@ -1,6 +1,7 @@
 package ucab.empresae.daos;
 
 import ucab.empresae.entidades.TipoUsuarioEntity;
+
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
@@ -18,7 +19,7 @@ public class DaoTipoUsuario extends Dao<TipoUsuarioEntity>{
     public TipoUsuarioEntity getTipoUsuarioByDescripcion(String descripcion){
 
         try{
-            TypedQuery<TipoUsuarioEntity> tipoUsuario = this._em.createNamedQuery("getTipoUsuarioByDescripcion", TipoUsuarioEntity.class);
+            TypedQuery<TipoUsuarioEntity> tipoUsuario = this._em.createQuery("select t from TipoUsuarioEntity t where t.descripcion = :descripcion", TipoUsuarioEntity.class);
             tipoUsuario.setParameter("descripcion", descripcion).getSingleResult();
 
             TipoUsuarioEntity resultado = tipoUsuario.getSingleResult();

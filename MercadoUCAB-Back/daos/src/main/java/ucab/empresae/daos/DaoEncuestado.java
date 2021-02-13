@@ -1,6 +1,9 @@
 package ucab.empresae.daos;
 
-import ucab.empresae.entidades.*;
+import ucab.empresae.entidades.EncuestadoEntity;
+import ucab.empresae.entidades.LugarEntity;
+import ucab.empresae.entidades.NivelSocioeconomicoEntity;
+import ucab.empresae.entidades.UsuarioEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -20,7 +23,7 @@ public class DaoEncuestado extends Dao<EncuestadoEntity>{
     public EncuestadoEntity getEncuestadoByUsuario(UsuarioEntity usuarioEntity){
 
         try{
-            TypedQuery<EncuestadoEntity> encuestado = this._em.createNamedQuery("getEncuestadoByUsuario", EncuestadoEntity.class);
+            TypedQuery<EncuestadoEntity> encuestado = this._em.createQuery("select e from EncuestadoEntity e where e.usuario = :usuario", EncuestadoEntity.class);
             encuestado.setParameter("usuario", usuarioEntity).getSingleResult();
 
             EncuestadoEntity resultado = encuestado.getSingleResult();
@@ -33,7 +36,7 @@ public class DaoEncuestado extends Dao<EncuestadoEntity>{
     public List<EncuestadoEntity> getDataMuestraEstudio(LugarEntity lugar, NivelSocioeconomicoEntity nivelSocioeconomico){
 
         try{
-            TypedQuery<EncuestadoEntity> encuestados = this._em.createNamedQuery("getDataMuestraEstudio", EncuestadoEntity.class);
+            TypedQuery<EncuestadoEntity> encuestados = this._em.createQuery("select enc from EncuestadoEntity enc where enc.lugar = :lugar and enc.nivelsocioeco = :nivelSocioeconomico", EncuestadoEntity.class);
             encuestados.setParameter("lugar", lugar).setParameter("nivelSocioeconomico", nivelSocioeconomico).getResultList();
 
             List<EncuestadoEntity> resultado = encuestados.getResultList();

@@ -8,6 +8,7 @@ public class DtoTipoUsuario extends DtoBase {
 
     //Constructores
     public DtoTipoUsuario() {
+        super();
     }
 
     public DtoTipoUsuario(long id) throws Exception {

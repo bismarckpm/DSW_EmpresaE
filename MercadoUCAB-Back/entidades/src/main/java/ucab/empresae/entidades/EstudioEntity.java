@@ -1,20 +1,11 @@
 package ucab.empresae.entidades;
 
 import javax.json.bind.annotation.JsonbDateFormat;
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "estudio", schema = "mercadeoucab")
-@NamedQueries({
-        @NamedQuery(name = "getEstudiosCliente", query = "SELECT e FROM EstudioEntity e where e in (select c.estudio from ClienteEstudioEntity c where c.cliente.usuario._id = :id)"),
-        @NamedQuery(name = "getEstudiosAnalista", query = "SELECT e FROM EstudioEntity e where e.analista._id = :id"),
-        @NamedQuery(name = "getEstudios", query = "select es from EstudioEntity es where es.lugar = :lugar and es.nivelSocioEconomico = :nivelSocioeconomico"),
-        @NamedQuery(name = "getEstudiosEncuestado", query = "select es from EstudioEntity es where es._id in (select estenc.estudio._id from EstudioEncuestadoEntity estenc where estenc.encuestado = :encuestado) and es.estado != 'Culminado'"),
-        @NamedQuery(name = "getEstudiosSinEncuesta", query = "select es from EstudioEntity es where es._id not in (select enc.estudio._id from EncuestaEntity enc)")
-})
 public class EstudioEntity extends BaseEntity{
     //private List<ClienteEstudioEntity> clienteestudios;
     //private List<EstudioEncuestadoEntity> estudioencuestados;
@@ -48,6 +39,17 @@ public class EstudioEntity extends BaseEntity{
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    @Basic
+    @Column(name = "via")
+    private String via;
+    public String getVia() {
+        return via;
+    }
+
+    public void setVia(String via) {
+        this.via = via;
     }
 
     @Basic
@@ -148,17 +150,12 @@ public class EstudioEntity extends BaseEntity{
 
     public void setAnalista(UsuarioEntity analista) { this.analista = analista; }
 
-    @ManyToMany
-    @JsonbTransient
-    @JoinTable(name = "estudio_genero", schema = "mercadeoucab", joinColumns = @JoinColumn(name = "id_estudio", referencedColumnName = "id", nullable = false), inverseJoinColumns = @JoinColumn(name = "id_genero", referencedColumnName = "id", nullable = false))
-    private List<GeneroEntity> generos;
-    public List<GeneroEntity> getGeneros() {
-        return generos;
-    }
+    @ManyToOne
+    @JoinColumn(name = "id_genero", referencedColumnName = "id")
+    private GeneroEntity genero;
+    public GeneroEntity getGenero() { return genero; }
 
-    public void setGeneros(List<GeneroEntity> generos) {
-        this.generos = generos;
-    }
+    public void setGenero(GeneroEntity genero) { this.genero = genero; }
 
     /*@OneToMany(mappedBy = "estudio")
     public List<ClienteEstudioEntity> getClienteestudios() {

@@ -1,7 +1,6 @@
 package ucab.empresae.daos;
 
 import ucab.empresae.entidades.EncuestaEntity;
-import ucab.empresae.entidades.PreguntaEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -27,7 +26,7 @@ public class DaoEncuesta extends Dao<EncuestaEntity>{
     public List<EncuestaEntity> getEncuestas(){
 
         try{
-            TypedQuery<EncuestaEntity> encuestas = this._em.createNamedQuery("getEncuestas", EncuestaEntity.class);
+            TypedQuery<EncuestaEntity> encuestas = this._em.createQuery("SELECT en from EncuestaEntity en where en.pregunta._id = (select MAX(en2.pregunta._id) from EncuestaEntity en2 where en2.estudio._id = en.estudio._id)", EncuestaEntity.class);
             encuestas.getResultList();
 
             List<EncuestaEntity> resultado = encuestas.getResultList();
@@ -46,7 +45,7 @@ public class DaoEncuesta extends Dao<EncuestaEntity>{
     public List<EncuestaEntity> getPreguntasEncuesta(long id){
 
         try{
-            TypedQuery<EncuestaEntity> encuestas = this._em.createNamedQuery("getPreguntasEncuesta", EncuestaEntity.class);
+            TypedQuery<EncuestaEntity> encuestas = this._em.createQuery("select en from EncuestaEntity en where en.estudio._id = :id", EncuestaEntity.class);
             encuestas.setParameter("id", id).getResultList();
 
             List<EncuestaEntity> resultado = encuestas.getResultList();

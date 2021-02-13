@@ -1,13 +1,12 @@
 package ucab.empresae.entidades;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "opcion", schema = "mercadeoucab")
-@NamedQueries({
-        @NamedQuery(name = "getOpciones", query = "SELECT op from OpcionEntity op INNER JOIN PreguntaOpcionEntity pregopc ON pregopc.opcion = op where pregopc.pregunta = :pregunta")
-})
 public class OpcionEntity extends BaseEntity{
     private String estado;
     private String descripcion;

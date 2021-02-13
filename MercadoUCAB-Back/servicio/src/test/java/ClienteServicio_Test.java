@@ -5,10 +5,19 @@ import ucab.empresae.dtos.DtoLugar;
 import ucab.empresae.dtos.DtoTelefono;
 import ucab.empresae.dtos.DtoUsuario;
 import ucab.empresae.servicio.ClienteServicio;
+
 import javax.ws.rs.core.Response;
 
+/**
+ * Pruebas unitarias para probar las apis del servicio de cliente.
+ * @see ClienteServicio Servicio a probar.
+ */
 public class ClienteServicio_Test {
 
+    /**
+     * Prueba unitaria que prueba la inserción de un cliente nuevo.
+     * @throws Exception En caso de algun constraint encontrado a nivel de base de datos.
+     */
     @Test
     //Prueba Unitaria registro de Clientes
     public void addClienteTest() throws Exception {
@@ -37,6 +46,9 @@ public class ClienteServicio_Test {
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 
+    /**
+     * Prueba unitaria utilizada para probar que se listen todos los clientes registrados en la base de datos.
+     */
     @Test
     //Prueba Unitaria de la lista de Clientes
     public void getClientesTest(){
@@ -46,6 +58,9 @@ public class ClienteServicio_Test {
 
     }
 
+    /**
+     * Prueba unitaria utilizada para probar que se logra obtener un cliente por medio de su id.
+     */
     @Test
     //Prueba Unitaria consulta de Cliente
     public void getClienteTest(){
@@ -54,6 +69,10 @@ public class ClienteServicio_Test {
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 
+    /**
+     * Prueba unitaria utilizada para actualizar un cliente registrado en la base de datos.
+     * @throws Exception En caso de encontrar un constraint a nivel de la base de datos.
+     */
     @Test
     //Prueba Unitaria update de Clientes
     public void updateClienteTest() throws Exception {
@@ -78,6 +97,9 @@ public class ClienteServicio_Test {
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 
+    /**
+     * Pruebna unitaria utilizada para actualizar el estado de un cliente.
+     */
     @Test
     //Prueba Unitaria update del estado del Cliente
     public void updateEstadoClienteTest(){
@@ -89,6 +111,9 @@ public class ClienteServicio_Test {
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 
+    /**
+     * Prueba unitaria utilizada para borrar un cliente de la base de datos.
+     */
     @Test
     //Prueba Unitaria para la eliminacion de un Cliente
     public void deleteClienteTest(){

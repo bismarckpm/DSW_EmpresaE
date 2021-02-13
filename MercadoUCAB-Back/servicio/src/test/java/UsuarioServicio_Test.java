@@ -2,15 +2,20 @@ import org.junit.Assert;
 import org.junit.Test;
 import ucab.empresae.dtos.DtoTipoUsuario;
 import ucab.empresae.dtos.DtoUsuario;
-import ucab.empresae.excepciones.UsuarioException;
 import ucab.empresae.servicio.UsuarioServicio;
+
 import javax.ws.rs.core.Response;
 
-
+/**
+ * Pruebas unitarias encargadas de probar el funcionamiento de los métodos del servicio UsuarioServicio
+ * @see UsuarioServicio Servicio a probar
+ */
 public class UsuarioServicio_Test {
 
+    /**
+     * Prueba unitaria encargada de probar el funcionamiento del método encargado de añadir un empleado nuevo al sistema.
+     */
     @Test
-    //Prueba Unitaria del registro de empleados
     public void addUsuarioEmpleadoTest(){
         UsuarioServicio servicio = new UsuarioServicio();
 
@@ -29,14 +34,20 @@ public class UsuarioServicio_Test {
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 
+    /**
+     * Prueba unitaria del getUsuario (Retorna todos los datos de un usuario sea cual sea su tipo de usuario)
+     */
     @Test
-    //Prueba unitaria del getUsuario (Retorna todos los datos de un usuario sea cual sea su tipo de usuario)
     public void getUsuarioTest(){
         UsuarioServicio servicio = new UsuarioServicio();
         Response resultado = servicio.getUsuario(36);
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 
+    /**
+     * Prueba unitaria que testea el funcionamiento del método encargado de listar todos los empleado resgistrados en el
+     * sistema.
+     */
     @Test
     //Prueba unitaria de la lista de empleados registrados
     public void getEmpleadosTest(){
@@ -45,8 +56,11 @@ public class UsuarioServicio_Test {
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 
+    /**
+     * Prueba unitaria que testea el funcionamiento del método encargado de actualizar los datos de un usuario desde la
+     * vista de un administrador especificando el id y el username del usuario.
+     */
     @Test
-    //Prueba Unitaria de la modificacion de usuarios, se necesita pasar el id y el username
     public void updateUsuarioVistaAdminTest(){
         UsuarioServicio servicio = new UsuarioServicio();
 
@@ -62,9 +76,11 @@ public class UsuarioServicio_Test {
         Assert.assertEquals(resultado.getStatus(), Response.Status.OK.getStatusCode());
     }
 
-
+    /**
+     * Prueba unitaria que testea el funcionamiento del método encargado de la eliminación de un usuario especificado
+     * por medio de su id.
+     */
     @Test
-    //Prueba Unitaria de la eliminacion de usuarios
     public void deleteUsuarioTest(){
         UsuarioServicio servicio = new UsuarioServicio();
         Response resultado = servicio.deleteUsuario(36);

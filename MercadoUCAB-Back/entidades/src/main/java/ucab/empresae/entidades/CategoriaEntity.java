@@ -1,13 +1,15 @@
 package ucab.empresae.entidades;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "categoria", schema = "mercadeoucab")
 public class CategoriaEntity extends BaseEntity{
     private String estado;
     private String nombre;
-    //private List<SubcategoriaEntity> subcategorias;
 
     @Basic
     @Column(name = "estado")
@@ -36,14 +38,4 @@ public class CategoriaEntity extends BaseEntity{
     public CategoriaEntity() {
 
     }
-
-    /*@OneToMany(mappedBy = "categoria")
-    public List<SubcategoriaEntity> getSubcategorias() {
-        return subcategorias;
-    }
-
-    public void setSubcategorias(List<SubcategoriaEntity> subcategorias) {
-        this.subcategorias = subcategorias;
-    }
-     */
 }

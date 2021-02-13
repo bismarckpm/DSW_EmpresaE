@@ -1,6 +1,7 @@
 package ucab.empresae.daos;
 
 import ucab.empresae.entidades.LugarEntity;
+
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
@@ -19,7 +20,7 @@ public class DaoLugar extends Dao<LugarEntity> {
     public List<LugarEntity> getLugaresById(LugarEntity lugarEntity){
 
         try{
-            TypedQuery<LugarEntity> lugares = this._em.createNamedQuery("getLugaresById", LugarEntity.class);
+            TypedQuery<LugarEntity> lugares = this._em.createQuery("select l from LugarEntity l where l.lugar = :lugar", LugarEntity.class);
             lugares.setParameter("lugar", lugarEntity).getResultList();
 
             List<LugarEntity> resultado = lugares.getResultList();
@@ -32,7 +33,7 @@ public class DaoLugar extends Dao<LugarEntity> {
     public List<LugarEntity> getLugaresByTipo(String tipo){
 
         try{
-            TypedQuery<LugarEntity> lugares = this._em.createNamedQuery("getLugaresByTipo", LugarEntity.class);
+            TypedQuery<LugarEntity> lugares = this._em.createQuery("select l from LugarEntity  l where l.tipo = :tipo", LugarEntity.class);
             lugares.setParameter("tipo", tipo).getResultList();
 
             List<LugarEntity> resultado = lugares.getResultList();

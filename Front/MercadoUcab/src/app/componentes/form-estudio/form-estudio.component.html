@@ -101,7 +101,7 @@
         <div class="col-md-4">
           <label for="" class="col-sm-6 col-form-label escrituerModal"> Subcategoria </label>
           <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudio.subcategoria._id" formControlName="subcategoriaEstudio" >
-              <option  value=""> Slecciones una ...</option>
+             
               <option  *ngFor="let sub of subcategoria" [ngValue]= "sub._id"  >{{sub.nombre}}</option>
           </select>
           <div *ngIf="subcategoriaEstudio.invalid && (subcategoriaEstudio.dirty || subcategoriaEstudio.touched)" class="alert alert-danger">
@@ -113,23 +113,21 @@
 
         <div class="col-md-4">
           <label for="" class="col-sm-6 col-form-label escrituerModal">Selecciones un Analista  </label>
-          <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudio.analista._id" formControlName="nivelEstudio" >
-              <option  value=""> Slecciones una ...</option>
+          <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudio.analista._id" formControlName="AnalistaEstudio" >
               <option  *ngFor="let analista of analistas" [ngValue]= "analista._id">{{analista.username}}</option>
           </select>
-          <div *ngIf="nivelEstudio.invalid && (nivelEstudio.dirty || nivelEstudio.touched)" class="alert alert-danger">
-            <div *ngIf="nivelEstudio.errors.required">
+         <!-- <div *ngIf="AnalistaEstudio.invalid && (AnalistaEstudio.dirty || AnalistaEstudio.touched)" class="alert alert-danger">
+            <div *ngIf="AnalistaEstudio.errors.required">
               Este campo es obligatorio
             </div>
-          </div>
+          </div>-->
         </div>
 
         </div>
 
-        <div class="col-md-5 mb-3">
+       <!-- <div class="col-md-5 mb-3">
           <label for="" class="col-sm-6 col-form-label escrituerModal">Nivel Socio Economico  </label>
           <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudio.nivelSocioEconomico._id" formControlName="nivelEstudio" >
-              <option  value=""> Slecciones una ...</option>
               <option  *ngFor="let nivel of nivelSocioEconomico" [ngValue]= "nivel._id"  >{{nivel.nombre}}</option>
           </select>
           <div *ngIf="nivelEstudio.invalid && (nivelEstudio.dirty || nivelEstudio.touched)" class="alert alert-danger">
@@ -137,7 +135,7 @@
               Este campo es obligatorio
             </div>
           </div>
-        </div>
+        </div>-->
 
 
         <div class="row">
@@ -145,7 +143,7 @@
             <label for="estado">Estado</label>
             <select class="custom-select d-block w-100"  [(ngModel)]="estudio.lugar._id" (click)="busquedaMunicipio(estudio.lugar._id)"formControlName="lugarEstudio"  value="estudio.lugar._id">
               <option value="0">Choose...</option>
-              <option  *ngFor="let estado of estados" [ngValue]= "estado._id"  >{{estado.nombre}}</option>
+              <option  *ngFor="let estado of estados" [ngValue]= "estado._id">{{estado.nombre}}</option>
             </select>
             <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
               <div *ngIf="lugarEstudio.errors.required">
@@ -158,7 +156,7 @@
             <label for="municipio">Municipio</label>
             <select class="custom-select d-block w-100"  [(ngModel)]="estudio.lugar.lugar._id" (click)="busquedaParroquia(estudio.lugar.lugar._id)"formControlName="lugarEstudio"  value="estudio.lugar._id">
               <option value="0">Choose...</option>
-              <option  *ngFor="let municipio of municipios" [ngValue]= "municipio._id"  >{{municipio.nombre}}</option>
+              <option  *ngFor="let municipio of municipios" [ngValue]= "municipio._id" >{{municipio.nombre}}</option>
             </select>
             <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
               <div *ngIf="lugarEstudio.errors.required">

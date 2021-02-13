@@ -3,7 +3,6 @@ package ucab.empresae.daos;
 import ucab.empresae.entidades.EncuestadoEntity;
 import ucab.empresae.entidades.EstudioEncuestadoEntity;
 import ucab.empresae.entidades.EstudioEntity;
-import ucab.empresae.entidades.PreguntaOpcionEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -21,7 +20,7 @@ public class DaoEstudioEncuestado extends Dao<EstudioEncuestadoEntity>{
     public EstudioEncuestadoEntity getEstudioEncuestado(EncuestadoEntity encuestado, EstudioEntity estudio){
 
         try{
-            TypedQuery<EstudioEncuestadoEntity> estudioEncuestado = this._em.createNamedQuery("getEstudioEncuestado", EstudioEncuestadoEntity.class);
+            TypedQuery<EstudioEncuestadoEntity> estudioEncuestado = this._em.createQuery("select estenc from EstudioEncuestadoEntity estenc where estenc.encuestado = :encuestado and estenc.estudio = :estudio", EstudioEncuestadoEntity.class);
             estudioEncuestado.setParameter("encuestado", encuestado).setParameter("estudio", estudio).getSingleResult();
 
             EstudioEncuestadoEntity resultado = estudioEncuestado.getSingleResult();

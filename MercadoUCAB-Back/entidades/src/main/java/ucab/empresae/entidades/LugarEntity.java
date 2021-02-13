@@ -4,10 +4,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "lugar", schema = "mercadeoucab")
-@NamedQueries({
-        @NamedQuery(name = "getLugaresById", query = "select l from LugarEntity l where l.lugar = :lugar"),
-        @NamedQuery(name = "getLugaresByTipo", query = "select l from LugarEntity  l where l.tipo = :tipo")
-})
 public class LugarEntity extends BaseEntity{
     private String estado;
     private String nombre;
@@ -58,7 +54,7 @@ public class LugarEntity extends BaseEntity{
         this.lugar = lugar;
     }
 
-    /*@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "id_nivelsocioeco", referencedColumnName = "id")
     private NivelSocioeconomicoEntity nivelsocioeco;
     public NivelSocioeconomicoEntity getNivelsocioeco() {
@@ -67,7 +63,7 @@ public class LugarEntity extends BaseEntity{
 
     public void setNivelsocioeco(NivelSocioeconomicoEntity nivelsocioeco) {
         this.nivelsocioeco = nivelsocioeco;
-    }*/
+    }
 
     public LugarEntity(long id) {
         super(id);

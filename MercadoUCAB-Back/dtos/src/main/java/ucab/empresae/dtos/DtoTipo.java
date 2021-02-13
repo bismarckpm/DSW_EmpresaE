@@ -9,6 +9,7 @@ public class DtoTipo extends DtoBase {
 
     //Constructores
     public DtoTipo() {
+        super();
     }
 
     public DtoTipo(long id) throws Exception {

@@ -50,7 +50,9 @@ export class FormEstudioComponent implements OnInit {
 
   nivelSocioEconomico: any;
   subcategoria: any;
-  analistas: any;
+  analistas:any;
+  aux:any=[];
+
 
   ///// Atributos para la busqueda de acuerdo a lo seleccionado
   lugar: any;
@@ -71,9 +73,9 @@ export class FormEstudioComponent implements OnInit {
     public estudioService: EstudioService,
     public lugarService: LugarService,
     public subcategoriaService: SubcategoriaService,
-    public analistaService: AnalistaService,
-    public nivelsocioeconomicoService: NivelSocioEconomicoService,
-    private toast: ToastService
+    public analistaService:AnalistaService,
+    public toast:ToastService,
+    public nivelsocioeconomicoService: NivelSocioEconomicoService
     ) {
     this.createForm();
   }
@@ -106,10 +108,17 @@ export class FormEstudioComponent implements OnInit {
     }
   }
 
+
   /// Busqueda para los drop de lugar por pais seleccionado previamente
   addLugar(): void {
     this.lugarService.getLugars().subscribe((Lugares: {}) => {
-      this.estados = Lugares;
+      this.aux = Lugares;
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+        this.estados = this.aux.objeto;
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      }
     });
   }
 
@@ -119,10 +128,15 @@ export class FormEstudioComponent implements OnInit {
     // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
     if (id > 0 ){
       this.lugarService.getMunicipio(this.auxEstadoID).subscribe((data: {}) => {
-        this.municipios = data;
+        this.aux = data;
+        if(this.aux.estado == "Exitoso"){
+          this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+          this.municipios = this.aux.objeto;
+        }else{
+          this.toast.showError(this.aux.estado,this.aux.mensaje)
+        }
       });
     }
-
   }
 
   busquedaParroquia(id): void {
@@ -131,7 +145,13 @@ export class FormEstudioComponent implements OnInit {
     // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
     if (id > 0 ) {
       this.lugarService.getParroquia(this.auxMunicipioID, id).subscribe((data: {}) => {
-        this.parroquias = data;
+        this.aux = data;
+        if(this.aux.estado == "Exitoso"){
+          this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+          this.parroquias = this.aux.objeto;
+        }else{
+          this.toast.showError(this.aux.estado,this.aux.mensaje)
+        }
       });
     }
   }
@@ -143,13 +163,25 @@ export class FormEstudioComponent implements OnInit {
   /////////////// Dropdowns ///////////////////////
   addSubcategoria(): void {
     this.subcategoriaService.getsubcategorias().subscribe((data: {}) => {
-      this.subcategoria = data;
+      this.aux = data;
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+        this.subcategoria = this.aux.objeto;
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      }
     });
   }
 
   addNivelSocioEconomico(): void {
     this.nivelsocioeconomicoService.getNivelesSocioEconomicos().subscribe((data: {}) => {
-      this.nivelSocioEconomico = data;
+      this.aux = data;
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+        this.nivelSocioEconomico = this.aux.objeto;
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      }
     });
   }
 
@@ -165,6 +197,7 @@ export class FormEstudioComponent implements OnInit {
   get lugarEstudio(){return this.formEstudio.get('lugarEstudio'); }
   get subcategoriaEstudio(){return this.formEstudio.get('subcategoriaEstudio'); }
   get nivelEstudio(){return this.formEstudio.get('nivelEstudio'); }
+  get AnalistaEstudio(){return this.formEstudio.get('AnalistaEstudio'); }
 
   createForm(): void {
     this.formEstudio = this.formBuilder.group({
@@ -177,6 +210,7 @@ export class FormEstudioComponent implements OnInit {
       lugarEstudio: ['', [Validators.required]],
       subcategoriaEstudio: ['', [Validators.required]],
       nivelEstudio: ['', [Validators.required]],
+      AnalistaEstudio: ['', [Validators.required]],
     });
   }
 

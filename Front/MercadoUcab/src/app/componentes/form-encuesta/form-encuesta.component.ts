@@ -52,7 +52,6 @@ export class FormEncuestaComponent implements OnInit {
   listaMuestraInsertar = [];
   dataMuestraMostrar: Encuestado[] = [];
   listaMuestraSeleccionada = [];
-  auxIterador=[];
 
   /// PAra validar
   formEncuesta: FormGroup;

@@ -4,7 +4,7 @@
       "_id": 50,
       "username": "Pedro",
       "clave ": "pedro",
-      "rol": "Analista",
+      "rol": "Administrador",
       "autenticacion": "valida"
     },
     {
@@ -15,7 +15,7 @@
       "estado": "a",
       "tipoUsuario": {
         "_id": 0,
-        "descripcion": "Cliente"
+        "descripcion": "Administrador"
       }
     },
     {
@@ -32,7 +32,7 @@
     {
       "_id": 53,
       "rol": "",
-      "username": "Victorr",
+      "username": "Victor",
       "clave": "victor",
       "correoElectronico": "victor@gmail.com",
       "estado": "a",
@@ -155,59 +155,63 @@
       "tipo": "abiertas"
     }
   ],
-  "pregunta": [
-    {
-      "_id": 1,
-      "descripcion": "Pregunta1",
-      "estado": "a",
-      "tipo": {
+  "pregunta": {
+    "estado": "Exitoso",
+    "mensaje": "cargando preguntas",
+    "objeto": [
+      {
         "_id": 1,
+        "descripcion": "Pregunta1",
         "estado": "a",
-        "tipo": "verdadero y Falso"
+        "tipo": {
+          "_id": 1,
+          "estado": "a",
+          "tipo": "verdadero y Falso"
+        },
+        "subcategoria": {
+          "_id": 1,
+          "nombre": "pedro gutierres",
+          "estado": "i"
+        }
       },
-      "subcategoria": {
-        "_id": 1,
-        "nombre": "pedro gutierres",
-        "estado": "i"
-      }
-    },
-    {
-      "_id": 2,
-      "descripcion": "Prueba exitosa Editar",
-      "estado": "a",
-      "tipo": {
-        "_id": 1,
-        "estado": "i",
-        "tipo": "multiple"
+      {
+        "_id": 2,
+        "descripcion": "Prueba exitosa Editar",
+        "estado": "a",
+        "tipo": {
+          "_id": 1,
+          "estado": "i",
+          "tipo": "multiple"
+        },
+        "subcategoria": {
+          "_id": 3,
+          "nombre": "pedro gutierres",
+          "estado": "i"
+        }
       },
-      "subcategoria": {
+      {
         "_id": 3,
-        "nombre": "pedro gutierres",
-        "estado": "i"
+        "descripcion": "Pregunta3",
+        "estado": "a",
+        "tipo": {
+          "_id": "4",
+          "estado": "",
+          "tipo": ""
+        },
+        "subcategoria": {
+          "_id": 5,
+          "nombre": "",
+          "estado": ""
+        },
+        "opciones": [
+          "asdas",
+          "asdsad",
+          "asdsad",
+          "asdasds"
+        ]
       }
-    },
-    {
-      "_id": 3,
-      "descripcion": "Pregunta3",
-      "estado": "a",
-      "tipo": {
-        "_id": "4",
-        "estado": "",
-        "tipo": ""
-      },
-      "subcategoria": {
-        "_id": 5,
-        "nombre": "",
-        "estado": ""
-      },
-      "opciones": [
-        "asdas",
-        "asdsad",
-        "asdsad",
-        "asdasds"
-      ]
-    }
-  ],
+    ]
+  },
   "tipo": [
     {
       "_id": 1,
@@ -228,76 +232,104 @@
       "descripcion": "eeeeee"
     }
   ],
-  "encuestado": [
-    {
-      "_id": 1,
-      "primerNombre": "juan",
-      "segundoNombre": "eduardo",
-      "primerApellido": "escobar",
-      "segundoApellido": "alfaro",
-      "fechaNacimiento": "10/11/1998",
-      "estado": "a",
-      "usuario": {
+  "encuestado": {
+    "estado": "Exitoso",
+    "mensaje": "cargando encuestados",
+    "objeto": [
+      {
         "_id": 1,
-        "username": "juanee",
-        "clave": "12345",
-        "correoElectronico": "juan@gmail.com"
-      }
-    },
-    {
-      "_id": 2,
-      "primerNombre": "qqq",
-      "segundoNombre": "qqq",
-      "primerApellido": "qqq",
-      "segundoApellido": "qqq",
-      "fechaNacimiento": "10/11/1998",
-      "estado": "a",
-      "estadoCivil": {
-        "_id": 0,
-        "nombre": "",
-        "estado": ""
+        "primerNombre": "juan",
+        "segundoNombre": "eduardo",
+        "primerApellido": "escobar",
+        "segundoApellido": "alfaro",
+        "fechaNacimiento": "10/11/1998",
+        "estado": "a",
+        "usuario": {
+          "_id": 1,
+          "username": "juanee",
+          "clave": "12345",
+          "correoElectronico": "juan@gmail.com"
+        }
       },
-      "nivelAcademico": {
-        "_id": 0,
-        "nombre": "",
-        "estado": ""
+      {
+        "_id": 40,
+        "primerNombre": "Camilo",
+        "segundoNombre": "eduardo",
+        "primerApellido": "escobar",
+        "segundoApellido": "alfaro",
+        "fechaNacimiento": "10/11/1998",
+        "estado": "a",
+        "usuario": {
+          "_id": 1,
+          "username": "juanee",
+          "clave": "12345",
+          "correoElectronico": "juan@gmail.com"
+        }
       },
-      "medioConexion": {
-        "_id": 0,
-        "nombre": "",
-        "estado": ""
+      {
+        "_id": 41,
+        "primerNombre": "Alfonso",
+        "segundoNombre": "eduardo",
+        "primerApellido": "escobar",
+        "segundoApellido": "alfaro",
+        "fechaNacimiento": "10/11/1998",
+        "estado": "a",
+        "usuario": {
+          "_id": 1,
+          "username": "juanee",
+          "clave": "12345",
+          "correoElectronico": "juan@gmail.com"
+        }
       },
-      "genero": {
-        "_id": 0,
-        "nombre": "",
-        "estado": ""
-      },
-      "ocupacion": {
-        "_id": 0,
-        "nombre": "",
-        "estado": ""
-      },
-      "nivelSocioEconomico": {
-        "_id": 0,
-        "nombre": "",
-        "estado": "",
-        "descripcion": ""
-      },
-      "telefono": {
-        "_id": 0,
-        "numero": "04241896545"
-      },
-      "hijo": {
-        "_id": 0,
-        "fechaNacimientoHijo": "10/11/1998",
-        "generoHijo": ""
-      },
-      "lugar": {
-        "estado": "",
-        "nombre": "",
-        "tipo": "",
-        "lugar": {
+      {
+        "_id": 2,
+        "primerNombre": "qqq",
+        "segundoNombre": "qqq",
+        "primerApellido": "qqq",
+        "segundoApellido": "qqq",
+        "fechaNacimiento": "10/11/1998",
+        "estado": "a",
+        "estadoCivil": {
           "_id": 0,
+          "nombre": "",
+          "estado": ""
+        },
+        "nivelAcademico": {
+          "_id": 0,
+          "nombre": "",
+          "estado": ""
+        },
+        "medioConexion": {
+          "_id": 0,
+          "nombre": "",
+          "estado": ""
+        },
+        "genero": {
+          "_id": 0,
+          "nombre": "",
+          "estado": ""
+        },
+        "ocupacion": {
+          "_id": 0,
+          "nombre": "",
+          "estado": ""
+        },
+        "nivelSocioEconomico": {
+          "_id": 0,
+          "nombre": "",
+          "estado": "",
+          "descripcion": ""
+        },
+        "telefono": {
+          "_id": 0,
+          "numero": "04241896545"
+        },
+        "hijo": {
+          "_id": 0,
+          "fechaNacimientoHijo": "10/11/1998",
+          "generoHijo": ""
+        },
+        "lugar": {
           "estado": "",
           "nombre": "",
           "tipo": "",
@@ -310,20 +342,26 @@
               "_id": 0,
               "estado": "",
               "nombre": "",
-              "tipo": ""
+              "tipo": "",
+              "lugar": {
+                "_id": 0,
+                "estado": "",
+                "nombre": "",
+                "tipo": ""
+              }
             }
           }
+        },
+        "usuario": {
+          "_id": 0,
+          "username": "",
+          "estado": "",
+          "clave": "",
+          "correoElectronico": ""
         }
-      },
-      "usuario": {
-        "_id": 0,
-        "username": "",
-        "estado": "",
-        "clave": "",
-        "correoElectronico": ""
       }
-    }
-  ],
+    ]
+  },
   "tipoUsuario": [
     {
       "_id": 1,
@@ -331,50 +369,59 @@
       "descripcion": "rol encuestado"
     }
   ],
-  "estudio": [
-    {
-      "_id": 8,
-      "analista":{_id: 50},
-      "nombre": "estudio prueba",
-      "comentarioAnalista": "el comentario",
-      "estado": "solicitado",
-      "fechaInicio": "2020-05-04",
-      "lugar": {
+  "estudio": {
+    "estado": "Exitoso",
+    "mensaje": "cargando estudios",
+    "objeto": [
+      {
+        "_id": 8,
+        "nombre": "estudio prueba",
+        "comentarioAnalista": "el comentario",
+        "estado": "Aprobado",
+        "genero": {
+          "nombre": "Hombre"
+        },
+        "fechaInicio": "2020-05-04",
+        "lugar": {
           "_id": 18,
           "estado": "a",
           "lugar": {
-              "_id": 5,
+            "_id": 5,
+            "estado": "a",
+            "lugar": {
+              "_id": 1,
               "estado": "a",
-              "lugar": {
-                  "_id": 1,
-                  "estado": "a",
-                  "nombre": "venezuela",
-                  "tipo": "pais"
-              },
-              "nombre": "zulia",
-              "tipo": "estado"
+              "nombre": "venezuela",
+              "tipo": "pais"
+            },
+            "nombre": "zulia",
+            "tipo": "estado"
           },
           "nombre": "pruebamunc3Zuli",
           "tipo": "municipio"
-      },
-      "nivelsocioeco": {
+        },
+        "nivelSocioEconomico": {
           "_id": 2,
           "descripcion": "Nivel Alto",
           "estado": "a",
           "nombre": "Alto"
-      },
-      "subcategoria": {
+        },
+        "subcategoria": {
           "_id": 2,
           "categoria": {
-              "_id": 1,
-              "estado": "i",
-              "nombre": "CategoriaPrueba"
+            "_id": 1,
+            "estado": "i",
+            "nombre": "CategoriaPrueba"
           },
           "estado": "A",
           "nombre": "SubcategoriaPrueba2"
+        },
+        "analista": {
+          "_id": 0
+        }
       }
-    }
-  ],
+    ]
+  },
   "encuesta": [
     {
       "_id": 1,
@@ -530,6 +577,185 @@
       "pregunta": [
         {
           "descripcion": ""
+        }
+      ]
+    },
+    {
+      "_id": 5,
+      "estado": "Activo",
+      "fechaInicio": "2020-10-10",
+      "fechaFin": "2020-10-11",
+      "estudio": {
+        "_id": 8
+      },
+      "preguntas": [
+        {
+          "_id": 2
+        },
+        {
+          "_id": 3
+        },
+        {
+          "_id": 1
+        },
+        {
+          "_id": 3
+        },
+        {
+          "_id": 1
+        }
+      ],
+      "datamuestra": [
+        {
+          "_id": 41
+        },
+        {
+          "_id": 2
+        }
+      ]
+    },
+    {
+      "_id": 6,
+      "estado": "Activo",
+      "fechaInicio": "",
+      "fechaFin": "",
+      "estudio": {
+        "_id": 8
+      },
+      "preguntas": [
+        {
+          "_id": 2
+        }
+      ]
+    },
+    {
+      "_id": 7,
+      "estado": "Activo",
+      "fechaInicio": "",
+      "fechaFin": "",
+      "estudio": {
+        "_id": 8
+      },
+      "preguntas": []
+    },
+    {
+      "_id": 8,
+      "estado": "Activo",
+      "fechaInicio": "",
+      "fechaFin": "",
+      "estudio": {
+        "_id": 8
+      },
+      "preguntas": []
+    },
+    {
+      "_id": 9,
+      "estado": "Activo",
+      "fechaInicio": "",
+      "fechaFin": "",
+      "estudio": {
+        "_id": 8
+      },
+      "preguntas": [
+        {
+          "_id": 1
+        },
+        {
+          "_id": 2
+        },
+        {
+          "_id": 2
+        },
+        {
+          "_id": 2
+        }
+      ]
+    },
+    {
+      "_id": 10,
+      "estado": "Activo",
+      "fechaInicio": "",
+      "fechaFin": "",
+      "estudio": {
+        "_id": 8
+      },
+      "preguntas": [
+        {
+          "_id": 1
+        },
+        {
+          "_id": 2
+        },
+        {
+          "_id": 3
+        }
+      ]
+    },
+    {
+      "_id": 11,
+      "estado": "Activo",
+      "fechaInicio": "",
+      "fechaFin": "",
+      "estudio": {
+        "_id": 8
+      },
+      "preguntas": [
+        {
+          "_id": 1
+        }
+      ]
+    },
+    {
+      "_id": 12,
+      "estado": "Activo",
+      "fechaInicio": "",
+      "fechaFin": "",
+      "estudio": {
+        "_id": 8
+      },
+      "preguntas": [
+        {
+          "_id": 1
+        },
+        {
+          "_id": 3
+        }
+      ]
+    },
+    {
+      "_id": 13,
+      "estado": "Activo",
+      "fechaInicio": "",
+      "fechaFin": "",
+      "estudio": {
+        "_id": 8
+      },
+      "preguntas": [
+        {
+          "_id": 1
+        },
+        {
+          "_id": 2
+        }
+      ]
+    },
+    {
+      "_id": 14,
+      "estado": "Activo",
+      "fechaInicio": "",
+      "fechaFin": "",
+      "estudio": {
+        "_id": 8
+      },
+      "preguntas": [
+        {
+          "_id": 2
+        },
+        {
+          "_id": 1
+        },
+        {
+          "_id": 3
         }
       ]
     }
@@ -833,10 +1059,18 @@
         "_id": 1
       },
       "opciones": [
-        {"descripcion": "opcion 1"},
-        {"descripcion": "opcion 2"},
-        {"descripcion": "opcion 3"},
-        {"descripcion": "opcion 4"}
+        {
+          "descripcion": "opcion 1"
+        },
+        {
+          "descripcion": "opcion 2"
+        },
+        {
+          "descripcion": "opcion 3"
+        },
+        {
+          "descripcion": "opcion 4"
+        }
       ]
     },
     {
@@ -849,10 +1083,18 @@
         "_id": 1
       },
       "opciones": [
-        {"descripcion": "opcion 10"},
-        {"descripcion": "opcion 20"},
-        {"descripcion": "opcion 30"},
-        {"descripcion": "opcion 40"}
+        {
+          "descripcion": "opcion 10"
+        },
+        {
+          "descripcion": "opcion 20"
+        },
+        {
+          "descripcion": "opcion 30"
+        },
+        {
+          "descripcion": "opcion 40"
+        }
       ]
     },
     {
@@ -865,10 +1107,18 @@
         "_id": 1
       },
       "opciones": [
-        {"descripcion": "opcion 010"},
-        {"descripcion": "opcion 020"},
-        {"descripcion": "opcion 030"},
-        {"descripcion": "opcion 040"}
+        {
+          "descripcion": "opcion 010"
+        },
+        {
+          "descripcion": "opcion 020"
+        },
+        {
+          "descripcion": "opcion 030"
+        },
+        {
+          "descripcion": "opcion 040"
+        }
       ]
     }
   ],
@@ -952,130 +1202,130 @@
   ],
   "graficos": [
     {
-        "_id": 58,
-        "descripcion": "PregAbInt",
-        "opcionesResultado": [],
-        "tipo": {
-            "_id": 1,
-            "estado": "a",
-            "tipo": "Comp"
-        }
+      "_id": 58,
+      "descripcion": "PregAbInt",
+      "opcionesResultado": [],
+      "tipo": {
+        "_id": 1,
+        "estado": "a",
+        "tipo": "Comp"
+      }
     },
     {
-        "_id": 59,
-        "descripcion": "PregVFInt",
-        "opcionesResultado": [
-            {
-                "_id": 76,
-                "descripcion": "Verdadero",
-                "estado": "a",
-                "valor": 2
-            },
-            {
-                "_id": 77,
-                "descripcion": "Falso",
-                "estado": "a",
-                "valor": 0
-            }
-        ],
-        "tipo": {
-            "_id": 2,
-            "estado": "a",
-            "tipo": "VyF"
+      "_id": 59,
+      "descripcion": "PregVFInt",
+      "opcionesResultado": [
+        {
+          "_id": 76,
+          "descripcion": "Verdadero",
+          "estado": "a",
+          "valor": 2
+        },
+        {
+          "_id": 77,
+          "descripcion": "Falso",
+          "estado": "a",
+          "valor": 0
         }
+      ],
+      "tipo": {
+        "_id": 2,
+        "estado": "a",
+        "tipo": "VyF"
+      }
     },
     {
-        "_id": 60,
-        "descripcion": "PregSSInt",
-        "opcionesResultado": [
-            {
-                "_id": 78,
-                "descripcion": "p1",
-                "estado": "a",
-                "valor": 0
-            },
-            {
-                "_id": 79,
-                "descripcion": "p2",
-                "estado": "a",
-                "valor": 1
-            },
-            {
-                "_id": 80,
-                "descripcion": "p3",
-                "estado": "a",
-                "valor": 1
-            },
-            {
-                "_id": 81,
-                "descripcion": "p4",
-                "estado": "a",
-                "valor": 0
-            }
-        ],
-        "tipo": {
-            "_id": 3,
-            "estado": "a",
-            "tipo": "SS"
+      "_id": 60,
+      "descripcion": "PregSSInt",
+      "opcionesResultado": [
+        {
+          "_id": 78,
+          "descripcion": "p1",
+          "estado": "a",
+          "valor": 0
+        },
+        {
+          "_id": 79,
+          "descripcion": "p2",
+          "estado": "a",
+          "valor": 1
+        },
+        {
+          "_id": 80,
+          "descripcion": "p3",
+          "estado": "a",
+          "valor": 1
+        },
+        {
+          "_id": 81,
+          "descripcion": "p4",
+          "estado": "a",
+          "valor": 0
         }
+      ],
+      "tipo": {
+        "_id": 3,
+        "estado": "a",
+        "tipo": "SS"
+      }
     },
     {
-        "_id": 61,
-        "descripcion": "PregSMInt",
-        "opcionesResultado": [
-            {
-                "_id": 82,
-                "descripcion": "op1",
-                "estado": "a",
-                "valor": 1
-            },
-            {
-                "_id": 83,
-                "descripcion": "op2",
-                "estado": "a",
-                "valor": 0
-            },
-            {
-                "_id": 84,
-                "descripcion": "op3",
-                "estado": "a",
-                "valor": 2
-            },
-            {
-                "_id": 85,
-                "descripcion": "op4",
-                "estado": "a",
-                "valor": 1
-            }
-        ],
-        "tipo": {
-            "_id": 4,
-            "estado": "a",
-            "tipo": "SM"
+      "_id": 61,
+      "descripcion": "PregSMInt",
+      "opcionesResultado": [
+        {
+          "_id": 82,
+          "descripcion": "op1",
+          "estado": "a",
+          "valor": 1
+        },
+        {
+          "_id": 83,
+          "descripcion": "op2",
+          "estado": "a",
+          "valor": 0
+        },
+        {
+          "_id": 84,
+          "descripcion": "op3",
+          "estado": "a",
+          "valor": 2
+        },
+        {
+          "_id": 85,
+          "descripcion": "op4",
+          "estado": "a",
+          "valor": 1
         }
+      ],
+      "tipo": {
+        "_id": 4,
+        "estado": "a",
+        "tipo": "SM"
+      }
     },
     {
-        "_id": 62,
-        "descripcion": "PregVFDos",
-        "opcionesResultado": [
-            {
-                "_id": 86,
-                "descripcion": "Verdadero",
-                "estado": "a",
-                "valor": 1
-            },
-            {
-                "_id": 87,
-                "descripcion": "Falso",
-                "estado": "a",
-                "valor": 1
-            }
-        ],
-        "tipo": {
-            "_id": 2,
-            "estado": "a",
-            "tipo": "VyF"
+      "_id": 62,
+      "descripcion": "PregVFDos",
+      "opcionesResultado": [
+        {
+          "_id": 86,
+          "descripcion": "Verdadero",
+          "estado": "a",
+          "valor": 1
+        },
+        {
+          "_id": 87,
+          "descripcion": "Falso",
+          "estado": "a",
+          "valor": 1
         }
+      ],
+      "tipo": {
+        "_id": 2,
+        "estado": "a",
+        "tipo": "VyF"
+      }
     }
   ]
 }

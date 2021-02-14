@@ -5,6 +5,7 @@ import { Estudio } from 'src/app/models/estudio';
 import { Lugar } from 'src/app/models/Lugar';
 import { NivelSocioEconomico } from 'src/app/models/nivel-socio-economico';
 import { Subcategoria } from 'src/app/models/subcategoria';
+import { Encuestado } from 'src/app/models/encuestado';
 import { AnalistaService } from 'src/app/services/analista.service';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { EncuestaService } from 'src/app/services/encuesta.service';
@@ -15,6 +16,8 @@ import { NivelSocioEconomicoService } from 'src/app/services/nivel-socio-economi
 import { PreguntaService } from 'src/app/services/pregunta.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 import { ToastService } from 'src/app/services/toast.service';
+
+class DataMuestra { constructor(public _id: number){} }
 
 @Component({
   selector: 'app-lista-estudios',
@@ -27,25 +30,37 @@ export class ListaEstudiosComponent implements OnInit {
   // Declaracion de variables
   estudios: Estudio[] = [];
   _id = this.actRoute.snapshot.params._id;
-  @Input() estudioData = {_id: 0, nombre: '', estado: '', comentarioAnalista : '', edadMinima: 0, edadMaxima: 0 , fechaInicio: '', fechaFin: '',
-             lugar : {_id: 0, estado: '', nombre: '', tipo: '', lugar : {_id: 0, estado: '', nombre: '', tipo: '', lugar : {_id: 0, estado: '', nombre: '', tipo: ''}}},
-             nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
-             subcategoria : {_id: 0, nombre: '', estado: '',categoria:{_id:0}},
-             analista: {_id: 0},
-             genero:{_id:0},
+  @Input() estudioData = {
+    _id: 0,
+    nombre: '',
+    estado: '',
+    comentarioAnalista : '',
+    edadMinima: 0,
+    edadMaxima: 0 ,
+    fechaInicio: '',
+    fechaFin: '',
+    lugar : {
+      _id: 0,
+      estado: '',
+      nombre: '',
+      tipo: '',
+      lugar : {_id: 0, estado: '', nombre: '', tipo: '', lugar : {_id: 0, estado: '', nombre: '', tipo: ''}}},
+    nivelSocioEconomico: {_id: 0},
+    subcategoria : {_id: 0, nombre: '', estado: '', categoria: {_id: 0}},
+    analista: {_id: 0},
+    genero: {_id: 0},
+  };
 
-            };
-
-   @Input() estadoData = {_id: 0, estado: '', nombre: '', tipo: ''}
-   @Input() municipioData = {_id: 0, estado: '', nombre: '', tipo: ''}
-   @Input() parroquiaData = {_id: 0, estado: '', nombre: '', tipo: ''}
+   @Input() estadoData = {_id: 0, estado: '', nombre: '', tipo: ''};
+   @Input() municipioData = {_id: 0, estado: '', nombre: '', tipo: ''};
+   @Input() parroquiaData = {_id: 0, estado: '', nombre: '', tipo: ''};
 
   // Declaracion para los dropdown
   nivelSocioEconomico: any;
   subcategoria: any;
   analistas: any;
-  genero:any;
-  categorias:any;
+  genero: any;
+  categorias: any;
 
   ///// Atributos para la busqueda de acuerdo a lo seleccionado
   lugar: any;
@@ -55,7 +70,7 @@ export class ListaEstudiosComponent implements OnInit {
   auxEstadoID: number;
   auxMunicipioID: number;
   auxParroquiaID: number;
-  aux:any=[];
+  aux: any = [];
   // Declaracion para validar
   formEstudio: FormGroup;
   patronEdadEstudio: any = /^(0?[0-9]{1,2}|1[0-7][0-9]|99)$/;
@@ -85,11 +100,7 @@ export class ListaEstudiosComponent implements OnInit {
   @Input() preguntaInsertar8 = {_id: 0};
   @Input() preguntaInsertar9 = {_id: 0};
   @Input() preguntaInsertar10 = {_id: 0};
-  @Input() preguntaInsertar11 = {_id: 0};
-  @Input() preguntaInsertar12 = {_id: 0};
-  @Input() preguntaInsertar13 = {_id: 0};
-  @Input() preguntaInsertar14 = {_id: 0};
-  @Input() preguntaInsertar15 = {_id: 0};
+  @Input() dataMuestra = {_id : 0};
   cantPreguntas = 0;
   listaPreguntasInsertar = [];
   preguntasMostrar: any = [];
@@ -97,11 +108,11 @@ export class ListaEstudiosComponent implements OnInit {
   opcionesCantidad = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   sugerenciasPreguntas: any = [];
   listaMuestraInsertar = [];
+  dataMuestraMostrar: Encuestado[] = [];
+  listaMuestraSeleccionada = [];
 
-  @Input() dataMuestra = {_id : 0};
-
-  estudioCambio =true;
-  encuestaCambio= false;
+  estudioCambio = true;
+  encuestaCambio = false;
 
   constructor(
     public estudioService: EstudioService,
@@ -109,18 +120,17 @@ export class ListaEstudiosComponent implements OnInit {
     public lugarService: LugarService,
     public nivelsocioeconomicoService: NivelSocioEconomicoService,
     public analistaService: AnalistaService,
-    public generoSerive:GeneroService,
-    public categoriService:CategoriaService,
+    public generoSerive: GeneroService,
+    public categoriService: CategoriaService,
     /// Servicios de encuesta
     private servicio: EncuestaService,
     private servicioPregunta: PreguntaService,
 
-
     public actRoute: ActivatedRoute,
     public router: Router,
     private formBuilder: FormBuilder,
-    private toast:ToastService
-    ) {this.createForm(); }
+    private toast: ToastService
+  ) {this.createForm(); }
 
   ngOnInit(): void {
    this.loadEstudios();
@@ -133,236 +143,234 @@ export class ListaEstudiosComponent implements OnInit {
     });
   }
 
-  deleteEstudio(id) {
+  deleteEstudio(id): void {
     this.estudioService.deleteEstudio(id).subscribe(data => {
       this.loadEstudios();
     });
   }
 
-  Aprobar(){
-    this.estudioCambio =false;
-  this.encuestaCambio= true;
+  aprobar(): void{
+    this.estudioCambio = false;
+    this.encuestaCambio = true;
+    this.encuesta.estudio._id = this.estudioData._id;
+    this.estudioService.aprobarEstudio(this.estudioData._id).subscribe(data => {});
+    this.cargarDataMuestra();
   }
 
+  rechazar(): void {
+    console.log('estudio rechado');
+    console.log(this.estudioData._id);
+    this.estudioService.rechazarEstudio(this.estudioData._id).subscribe(data => {});
+  }
 
-
-
-  updateEstudio(){
-    console.log("entro a update");
-
+  updateEstudio(): void{
+    console.log('entro a update');
 
     if (this.formEstudio.valid) {
-      console.log("la vaidaciones son correctas");
+      console.log('la vaidaciones son correctas');
 
-          if(this.cambio == true){
-            console.log("estado actual del cambio :"+ this.cambio);
-            console.log("llamo validar los cambios del lugar");
-            this.validarCambiosLugar();
-            console.log("Hago la llamada de http con este estudio :");
-            console.log(this.estudioData);
+      if (this.cambio === true){
+        console.log('estado actual del cambio :' + this.cambio);
+        console.log('llamo validar los cambios del lugar');
+        this.validarCambiosLugar();
+        console.log('Hago la llamada de http con este estudio :');
+        console.log(this.estudioData);
 
 
-            this.estudioService.updateEstudioAdmin(this.estudioData._id, this.estudioData).subscribe(data => {
-             });
-             console.log("termine la llamada del http");
-            this.cambio= false;
-            location.reload();
-            console.log("estado actual del cambio :"+ this.cambio);
-          }else if(this.cambio == false){
-            console.log("estado actual del cambio :"+ this.cambio);
-            this.estudioService.updateEstudioAdmin(this.estudioData._id, this.estudioData).subscribe(data => {
-            });
-           this.loadEstudios();
-           location.reload();
-          }
+        this.estudioService.updateEstudioAdmin(this.estudioData._id, this.estudioData).subscribe(data => {
+        });
+        console.log('termine la llamada del http');
+        this.cambio = false;
+        location.reload();
+        console.log('estado actual del cambio :' + this.cambio);
+      }else if (this.cambio === false){
+        console.log('estado actual del cambio :' + this.cambio);
+        this.estudioService.updateEstudioAdmin(this.estudioData._id, this.estudioData).subscribe(data => {
+        });
+        this.loadEstudios();
+        location.reload();
+      }
     }
     else{
-      alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
+      this.toast.showError('Es necesario llenar los todos los campos', 'Campos incompletos');
     }
- }
+  }
 
- editar(estudio): void{
-  console.log(" estado actual de la variable estudioData");
-  console.log(this.estudioData);
+  editar(estudio): void{
+    console.log(' estado actual de la variable estudioData');
+    console.log(this.estudioData);
 
+    this.estudioData = estudio;
 
+    console.log(' estudio actual despues de asignar el estudio en estudio data');
+    console.log(this.estudioData);
 
-  this.estudioData= estudio;
+    this.addSubcategoria();
+    this.addNivelSocioEconomico();
+    this.addAnalistas();
+    this.addLugar();
+    this.addGenero();
+    this.addCategoria();
+  }
 
-  console.log(" estudio actual despues de asignar el estudio en estudio data");
-  console.log(this.estudioData);
+  Cambio(): void {
+    if (this.cambio === true){
+        this.cambio = false;
+    }else{
+      this.cambio = true;
+    }
+  }
 
-  this.addSubcategoria();
-  this.addNivelSocioEconomico();
-  this.addAnalistas();
-  this.addLugar();
-  this.addGenero();
-  this.addCategoria();
-}
-
-  Cambio(){
-      if(this.cambio == true){
-         this.cambio= false;
+  // Metodo para cargar dropdown de género
+  addGenero(): void {
+    this.generoSerive.getGeneros().subscribe(data => {
+      this.aux = data;
+      if (this.aux.estado === 'Exitoso'){
+        this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+        this.genero = this.aux.objeto;
       }else{
-        this.cambio= true;
+        this.toast.showError(this.aux.estado, this.aux.mensaje);
       }
+    });
   }
 
-
-  addGenero(){
-    this.generoSerive.getGeneros().subscribe(data=>{
+  // Metodo para cargar dropdown de categoría
+  addCategoria(): void {
+    this.categoriService.getCategorias().subscribe(data => {
       this.aux = data;
-    if(this.aux.estado == "Exitoso"){
-      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
-     this.genero = this.aux.objeto;
-    }else{
-      this.toast.showError(this.aux.estado,this.aux.mensaje)
-    }
-    })
-
+      if (this.aux.estado === 'Exitoso'){
+        this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+        this.categorias = this.aux.objeto;
+      }else{
+        this.toast.showError(this.aux.estado, this.aux.mensaje);
+      }
+    });
   }
 
-  addCategoria(){
-    this.categoriService.getCategorias().subscribe(data=>{
+  // Metodo para cargar dropdown de analista
+  addAnalistas(): void {
+    this.analistaService.getAnalistas().subscribe( data => {
       this.aux = data;
-    if(this.aux.estado == "Exitoso"){
-      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
-     this.categorias = this.aux.objeto;
-    }else{
-      this.toast.showError(this.aux.estado,this.aux.mensaje)
-    }
-    })
-
+      if (this.aux.estado === 'Exitoso'){
+        this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+        this.analistas = this.aux.objeto;
+      }else{
+        this.toast.showError(this.aux.estado, this.aux.mensaje);
+      }
+    });
   }
 
-addAnalistas(){
-  this.analistaService.getAnalistas().subscribe( data =>{
-    this.aux = data;
-    if(this.aux.estado == "Exitoso"){
-      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
-     this.analistas = this.aux.objeto;
-    }else{
-      this.toast.showError(this.aux.estado,this.aux.mensaje)
-    }
-  })
-}
-
-/// Busqueda para los drop de lugar por pais seleccionado previamente
-addLugar(){
-  this.lugarService.getLugars().subscribe((Lugares: {}) => {
-    this.aux = Lugares;
-    if(this.aux.estado == "Exitoso"){
-      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
-     this.estados = this.aux.objeto;
-    }else{
-      this.toast.showError(this.aux.estado,this.aux.mensaje)
-    }
-  });
-}
-
-addMunicipios(id){
-  this.lugarService.getMunicipio(id).subscribe((data: {}) => {
-    this.aux = data;
-    if(this.aux.estado == "Exitoso"){
-      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
-     this.municipios = this.aux.objeto;
-    }else{
-      this.toast.showError(this.aux.estado,this.aux.mensaje)
-    }
-  });
-}
-
-addParroquia(id){
-  this.lugarService.getParroquia(0,id).subscribe((data: {}) => {
-    this.aux = data;
-    if(this.aux.estado == "Exitoso"){
-      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
-     this.parroquias = this.aux.objeto;
-    }else{
-      this.toast.showError(this.aux.estado,this.aux.mensaje)
-    }
-  });
-}
-
-/////////////// Llamadas a los drop al haber un cambio ////////////////////////////////////
-busquedaMunicipio(id){
-  // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
-  if (id > 0 ){
-      this.auxEstadoID=id         // El ID es del estado
-          this.addMunicipios(id)
-  }
-}
-
-busquedaParroquia(id){
-  // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
-  if (id > 0 ){
-      this.auxMunicipioID= id;
-        this.addParroquia(id)
-  }
-}
-
-seleccionarParroquia(id){
-  this.auxParroquiaID = id;
-}
-
-  validarCambiosLugar(){
-
-
-
-    console.log("entro en la llamada de las validaciones de lugar");
-
-    if((this.estudioData.lugar._id != this.parroquiaData._id) && (this.parroquiaData._id == this.auxParroquiaID)){
-      console.log("la parroquia es diferente y hago el cambio");
-      console.log("id de la parroquia anterior :"+ this.estudioData.lugar._id);
-      this.estudioData.lugar._id =this.auxParroquiaID;
-      console.log("id de la parroquia Actual :"+ this.estudioData.lugar._id);
-    }
-
-    if((this.estudioData.lugar.lugar._id != this.municipioData._id) && (this.municipioData._id == this.auxMunicipioID)){
-      this.estudioData.lugar.lugar._id =this.auxMunicipioID;
-    }
-
-    if((this.estudioData.lugar.lugar.lugar._id != this.estadoData._id) && (this.estadoData._id == this.auxEstadoID)){
-      this.estudioData.lugar.lugar.lugar._id =this.auxEstadoID;
-    }
-
+  /// Busqueda para los drop de lugar por pais seleccionado previamente
+  addLugar(): void{
+    this.lugarService.getLugars().subscribe((Lugares: {}) => {
+      this.aux = Lugares;
+      if (this.aux.estado === 'Exitoso'){
+        this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+        this.estados = this.aux.objeto;
+      }else{
+        this.toast.showError(this.aux.estado, this.aux.mensaje);
+      }
+    });
   }
 
+  // Metodo para cargar dropdown de municipios
+  addMunicipios(id): void{
+    this.lugarService.getMunicipio(id).subscribe((data: {}) => {
+      this.aux = data;
+      if (this.aux.estado === 'Exitoso'){
+        this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+        this.municipios = this.aux.objeto;
+      }else{
+        this.toast.showError(this.aux.estado, this.aux.mensaje);
+      }
+    });
+  }
+
+  addParroquia(id): void {
+    this.lugarService.getParroquia(0, id).subscribe((data: {}) => {
+      this.aux = data;
+      if (this.aux.estado === 'Exitoso'){
+        this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+        this.parroquias = this.aux.objeto;
+      }else{
+        this.toast.showError(this.aux.estado, this.aux.mensaje);
+      }
+    });
+  }
 
   /// Esto es para mostrar en los drops doww
-  addSubcategoria(){
+  addSubcategoria(): void{
     this.subcategoriaService.getsubcategorias().subscribe((data: {}) => {
       this.aux = data;
-      if(this.aux.estado == "Exitoso"){
-        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
-       this.subcategoria = this.aux.objeto;
+      if (this.aux.estado === 'Exitoso'){
+        this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+        this.subcategoria = this.aux.objeto;
       }else{
-        this.toast.showError(this.aux.estado,this.aux.mensaje)
+        this.toast.showError(this.aux.estado, this.aux.mensaje);
       }
     });
   }
 
-  addNivelSocioEconomico(){
+  addNivelSocioEconomico(): void{
     this.nivelsocioeconomicoService.getNivelesSocioEconomicos().subscribe((data: {}) => {
       this.aux = data;
-      if(this.aux.estado == "Exitoso"){
-        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
-       this.nivelSocioEconomico = this.aux.objeto;
+      if (this.aux.estado === 'Exitoso'){
+        this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+        this.nivelSocioEconomico = this.aux.objeto;
       }else{
-        this.toast.showError(this.aux.estado,this.aux.mensaje)
+        this.toast.showError(this.aux.estado, this.aux.mensaje);
       }
     });
   }
 
+  /////////////// Llamadas a los drop al haber un cambio ////////////////////////////////////
+  busquedaMunicipio(id): void{
+    // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
+    if (id > 0 ){
+      this.auxEstadoID = id;         // El ID es del estado
+      this.addMunicipios(id);
+    }
+  }
 
+  busquedaParroquia(id): void{
+    // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
+    if (id > 0 ){
+      this.auxMunicipioID = id;
+      this.addParroquia(id);
+    }
+  }
 
+  seleccionarParroquia(id): void{
+    this.auxParroquiaID = id;
+  }
+
+  validarCambiosLugar(): void{
+
+    console.log('entro en la llamada de las validaciones de lugar');
+
+    if ((this.estudioData.lugar._id !== this.parroquiaData._id) && (this.parroquiaData._id === this.auxParroquiaID)){
+      console.log('la parroquia es diferente y hago el cambio');
+      console.log('id de la parroquia anterior :' + this.estudioData.lugar._id);
+      this.estudioData.lugar._id = this.auxParroquiaID;
+      console.log('id de la parroquia Actual :' + this.estudioData.lugar._id);
+    }
+
+    if ((this.estudioData.lugar.lugar._id !== this.municipioData._id) && (this.municipioData._id === this.auxMunicipioID)){
+      this.estudioData.lugar.lugar._id = this.auxMunicipioID;
+    }
+
+    if ((this.estudioData.lugar.lugar.lugar._id !== this.estadoData._id) && (this.estadoData._id === this.auxEstadoID)){
+      this.estudioData.lugar.lugar.lugar._id = this.auxEstadoID;
+    }
+
+  }
 
   // Validaciones de Pregunta
   get nombreEstudio(){return this.formEstudio.get('nombreEstudio'); }
-  get comentarioAnalistaEstudio(){return this.formEstudio.get('comentarioAnalistaEstudio'); }
+  // get comentarioAnalistaEstudio(){return this.formEstudio.get('comentarioAnalistaEstudio'); }
   get edadMinimaEstudio(){return this.formEstudio.get('edadMinimaEstudio'); }
   get edadMaximaEstudio(){return this.formEstudio.get('edadMaximaEstudio'); }
-  get estadoEstudio(){return this.formEstudio.get('estadoEstudio'); }
+  // get estadoEstudio(){return this.formEstudio.get('estadoEstudio'); }
   get fechaInicioEstudio(){return this.formEstudio.get('fechaInicioEstudio'); }
   get fechaFinEstudio(){return this.formEstudio.get('fechaFinEstudio');
  }
@@ -375,23 +383,21 @@ seleccionarParroquia(id){
   get ParroquiaData(){return this.formEstudio.get('ParroquiaData'); }
 
   get analistaEstudio(){return this.formEstudio.get('analistaEstudio'); }
+  get categoriaEstudio(){return this.formEstudio.get('categoriaEstudio'); }
   get subcategoriaEstudio(){return this.formEstudio.get('subcategoriaEstudio'); }
   get nivelEstudio(){return this.formEstudio.get('nivelEstudio'); }
   get GeneroEstudio(){return this.formEstudio.get('GeneroEstudio'); }
   get CategoriaEstudio(){return this.formEstudio.get('CategoriaEstudio'); }
 
-    //////////////////////////////////////////////////// Metodos Para la parte de encuesta
+  //////////////////////////////////////////////////// Metodos Para la parte de encuesta
 
-    ///// Metodos para las validaciones
-    get fechaInicioEncuesta(){ return this.formEncuesta.get('fechaInicioEncuesta'); }
-    get fechaFinEncuesta(){return this.formEncuesta.get('fechaFinEncuesta');}
-    get estudio(){return this.formEncuesta.get('estudio');}
-    get pregunta(){ return this.formEncuesta.get('pregunta');}
+  ///// Metodos para las validaciones
+  get pregunta(){ return this.formEncuesta.get('pregunta'); }
 
   createForm(): void {
     this.formEstudio = this.formBuilder.group({
       nombreEstudio: ['', [Validators.required, Validators.pattern(this.patronNombreEstudio)]],
-      estadoEstudio: ['', Validators.required],
+      // estadoEstudio: ['', Validators.required],
       lugarEstudio: [''],
       lugarmunicipio: [''],
       lugarparroquia: [''],
@@ -402,68 +408,110 @@ seleccionarParroquia(id){
       ParroquiaData: [''],
 
 
-      //fechaInicioEstudio: ['', [Validators.required, Validators.pattern(this.patronFechaEstudio)]],
-      //fechaFinEstudio: ['', [Validators.pattern(this.patronFechaEstudio)]],
       edadMinimaEstudio: ['', [Validators.required, Validators.maxLength(2), Validators.pattern(this.patronEdadEstudio)]],
       edadMaximaEstudio: ['', [Validators.required, Validators.maxLength(2), Validators.pattern(this.patronEdadEstudio)]],
-      comentarioAnalistaEstudio: ['', Validators.pattern(this.patronNombreEstudio)],
+      categoriaEstudio: ['', [Validators.required]],
       subcategoriaEstudio: ['', [Validators.required]],
       nivelEstudio: '',
-      GeneroEstudio:'',
-      CategoriaEstudio:'',
+      GeneroEstudio: '',
+      CategoriaEstudio: '',
 
     });
 
-   this.formEncuesta = this.formBuilder.group({
-      fechaInicioEncuesta: ['', [Validators.required, Validators.pattern(this.patronFechaEstudio)]],
-      fechaFinEncuesta: ['', [ Validators.pattern(this.patronFechaEstudio)]],
-      estudio: ['', Validators.required],
+    this.formEncuesta = this.formBuilder.group({
       pregunta: ['', Validators.required],
     });
   }
 
 
-
   // Metodo para la creacion de la encuesta del estudio
-   addEncuesta(): any{
-     console.log(this.encuesta);
-     if (this.formEncuesta.valid) {
-       this.encuesta.preguntas = this.listaPreguntasInsertar;
-       this.servicio.createEncuesta(this.encuesta).subscribe((data: {}) => {
-         this.toast.showSuccess('La encuesta ha sido creada', 'Creada satisfactoriamente');
-       },
-       (error) => {
-         this.toast.showError('Error de conexión', 'Intentelo más tarde');
-       });
-       this.encuesta = {
-         _id: 0,
-         estado: '',
-         fechaInicio: '',
-         fechaFin: '',
-         estudio: {_id: 0},
-         preguntas: []
-       };
-       location.reload();
-     }
-     else{
-       this.toast.showError('Campos Incompletos', 'ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
-     }
-   }
+  addEncuesta(): any{
+    this.encuesta.estudio._id = this.estudioData._id;
+    console.log(this.encuesta);
+    if (this.formEncuesta.valid && this.listaPreguntasInsertar.length === this.cantPreguntas) {
+      this.encuesta.preguntas = this.listaPreguntasInsertar;
+      this.servicio.createEncuesta(this.encuesta).subscribe((data: {}) => {
+        this.toast.showSuccess('La encuesta ha sido creada', 'Creada satisfactoriamente');
+        setTimeout(() => {}, 4500);
+        this.encuesta = {
+          _id: 0,
+          estado: '',
+          fechaInicio: '',
+          fechaFin: '',
+          estudio: {_id: 0},
+          preguntas: []
+        };
+        location.reload();
+        this.limpiar();
+      },
+      (error) => {
+        this.toast.showError('Error de conexión', 'Intentelo más tarde');
+      });
+    }
+    else{
+       this.toast.showError('Campos Incompletos', 'Es necesario llenar los todos los campos');
+    }
+  }
 
+  // agregar encuestados de la datamuestra a la lista a enviar
+  addDataMuestra(): void {
+    this.listaMuestraInsertar.push(new DataMuestra(this.dataMuestra._id));
+    // aqui tengo que hacer pop de la lista datamuestraMostrar
+    this.listaMuestraInsertar.forEach(muestra => {
+      this.dataMuestraMostrar.forEach(data => {
+        if (data._id === muestra._id) {
+          const persona = data.primerNombre + ' ' + data.primerApellido;
+          this.listaMuestraSeleccionada.push(persona);
+          this.listaMuestraSeleccionada = this.listaMuestraSeleccionada.filter( (value, index, self) => {
+            return self.indexOf(value) === index;
+          });
+        }
+      });
+    });
+    this.dataMuestra._id = 0;
+  }
 
-    // // aqui yo mando el id del estudio para que me devuelva una lista de preguntas
+  // agregar pregunta a la lista de preguntas
+  addPreguntaEncuesta(preguntaInsertar): void {
+    if (preguntaInsertar._id !== 0){
+      this.listaPreguntasInsertar.push(preguntaInsertar);
+      console.log(this.listaPreguntasInsertar);
+    }else {
+      this.toast.showError('Seleccion incorrecta', 'Seleccione una pregunta válida');
+    }
+  }
+
+  // // aqui yo mando el id del estudio para que me devuelva una lista de preguntas
   // // asociadas a la subcategoria del estudio
-   cargarPreguntas(i: number): void {
-     this.servicioPregunta.getPreguntasXSubcategoria(this.encuesta.estudio._id).subscribe((data: {}) => {
-       this.preguntasMostrar = data;
-     });
-     this.cantPreguntas = i;
-   }
+  cargarPreguntas(i: number): void {
+    console.log('estudio');
+    console.log(this.estudioData._id);
+    this.servicioPregunta.getPreguntasXSubcategoria(this.encuesta.estudio._id).subscribe((data: {}) => {
+      this.aux = data;
+      this.HandleErrorGetPreguntas();
+      console.log('preguntas');
+      console.log(this.preguntasMostrar);
+    });
+    this.cantPreguntas = i;
+  }
 
   sugerirPreguntas(): void{
     // aqui le mandas el id del estudio
-    this.servicioPregunta.sugerirPreguntas(this.aux).subscribe((data: {}) => {
-      this.sugerenciasPreguntas = data;
+    console.log('estudio', this.estudioData._id);
+    this.servicioPregunta.sugerirPreguntas(this.estudioData._id).subscribe((data: {}) => {
+      this.aux = data;
+      this.HandleErrorGetSugerencias();
+      console.log('sugerencaias');
+      console.log(this.sugerenciasPreguntas);
+    });
+  }
+
+  cargarDataMuestra(): void {
+    this.estudioService.getDataMuestra(this.encuesta.estudio._id).subscribe(data => {
+      this.aux = data;
+      this.HandleErrorGetPoblacion();
+      console.log('datamuestra');
+      console.log(this.dataMuestraMostrar);
     });
   }
 
@@ -478,29 +526,54 @@ seleccionarParroquia(id){
     this.preguntaInsertar8 = {_id: 0};
     this.preguntaInsertar9 = {_id: 0};
     this.preguntaInsertar10 = {_id: 0};
-    this.preguntaInsertar11 = {_id: 0};
-    this.preguntaInsertar12 = {_id: 0};
-    this.preguntaInsertar13 = {_id: 0};
-    this.preguntaInsertar14 = {_id: 0};
-    this.preguntaInsertar15 = {_id: 0};
     this.cantPreguntas = 0;
   }
 
-
-  HandleErrorGet(){
-    if(this.aux.estado == "Exitoso"){
-      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
-     this.estudios = this.aux.objeto;
+  // Estudio
+  HandleErrorGet(): void {
+    if (this.aux.estado === 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+      this.estudios = this.aux.objeto;
     }else{
-      this.toast.showError(this.aux.estado,this.aux.mensaje)
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
     }
   }
 
-  HandleErrorPostPut(){
-    if(this.aux.estado == "Exitoso"){
-      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+  // Preguntas
+  HandleErrorGetPreguntas(): void {
+    if (this.aux.estado === 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+      this.preguntasMostrar = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
+  }
+
+  // Poblacion
+  HandleErrorGetPoblacion(): void {
+    if (this.aux.estado === 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+      this.dataMuestraMostrar = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
+  }
+
+  // Sugerencias
+  HandleErrorGetSugerencias(): void {
+    if (this.aux.estado === 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+      this.sugerenciasPreguntas = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
+  }
+
+  HandleErrorPostPut(): void {
+    if (this.aux.estado === 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
      }else{
-     this.toast.showError(this.aux.estado,this.aux.mensaje)
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
      }
   }
 }

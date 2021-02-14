@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~10.2.0",
+    "@angular/animations": "^10.2.4",
     "@angular/cdk": "^10.2.7",
     "@angular/common": "~10.2.0",
     "@angular/compiler": "~10.2.0",
@@ -24,7 +24,7 @@
     "@popperjs/core": "^2.5.4",
     "bootstrap": "^4.5.3",
     "highcharts": "^8.2.2",
-    "highcharts-angular": "^2.8.2",
+    "highcharts-angular": "^2.9.0",
     "jquery": "^3.5.1",
     "ng-sidebar": "^9.4.2",
     "ngx-cookie-service": "^11.0.2",

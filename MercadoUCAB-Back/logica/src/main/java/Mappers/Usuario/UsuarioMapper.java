@@ -43,6 +43,8 @@ public class UsuarioMapper extends GenericMapper<DtoUsuario> {
             dtoUsuario.set_id(usuario.get_id());
             dtoUsuario.setClave(usuario.getClave());
 
+            dtoUsuario.setUsername(usuario.getUsername());
+
             return dtoUsuario;
         }
     }

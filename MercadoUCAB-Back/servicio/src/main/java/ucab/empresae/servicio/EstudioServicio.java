@@ -447,4 +447,30 @@ public class EstudioServicio extends AplicacionBase {
         }
     }
 
+    /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/estudio/dataMuestraxAnalista/{id}
+     * @apiNote Api que permite retornar la data muestra del estudio en cuestión.
+     * @param id Objeto de tipo long con el id del estudio.
+     * @return Lista de objetos del tipo EscuestadoEntity
+     */
+    @GET
+    @Produces(value= MediaType.APPLICATION_JSON)
+    @Path("/dataMuestraxAnalista/{id}")                   //RECIBO EL ID DEL ESTUDIO
+    public Response getDataMuestraEstudioxAnalista(@PathParam("id") long id) {
+        try {
+            this.comando = ComandoFactory.comandoGetDataMuestraEstudioxAnalistaInstancia(id);
+            return Response.ok(this.comando.getResult()).build();
+        } catch (CustomException cex){
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(cex.getMensaje());
+            this.response.setCodError(cex.getCodError());
+            return Response.status(500).entity(this.response).build();
+        } catch (Exception ex) {
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(ex.getMessage());
+            this.response.setCodError("SERPRE004");
+            return Response.status(500).entity(this.response).build();
+        }
+    }
+
 }

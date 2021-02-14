@@ -162,15 +162,13 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
 
             if(dtoEstudio.getComentarioAnalista() != null) {
                 estudio.setComentarioAnalista(dtoEstudio.getComentarioAnalista());
+                estudio.setFechaFin(dateFormat.parse(dtoEstudio.getFechaFin()));
             }
             if(dtoEstudio.getEdadMinima() != null) {
                 estudio.setEdadMinima(dtoEstudio.getEdadMinima());
             }
             if(dtoEstudio.getEdadMaxima() != null) {
                 estudio.setEdadMaxima(dtoEstudio.getEdadMaxima());
-            }
-            if(dtoEstudio.getFechaFin() != null) {
-                estudio.setFechaFin(dateFormat.parse(dtoEstudio.getFechaFin()));
             }
 
             return estudio;

@@ -39,7 +39,7 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
             throw new CustomException("MAPEST001","El id debe ser mayor a 0.");
         }else if(estudio.getEstado() == null) {
             throw new CustomException("MAPEST001","El estudio debe tener un estado asignado.");
-        }else if(!estudio.getEstado().equals("solicitado") && !estudio.getEstado().equals("procesado") && !estudio.getEstado().equals("en ejecucion") && !estudio.getEstado().equals("culminado")) {
+        }else if(!estudio.getEstado().equals("solicitado") && !estudio.getEstado().equals("procesado") && !estudio.getEstado().equals("en ejecucion") && !estudio.getEstado().equals("culminado") && !estudio.getEstado().equals("rechazado")) {
             throw new CustomException("MAPEST001","El estado del estudio no es válido");
         }else if(estudio.getNombre() == null) {
             throw new CustomException("MAPEST001","El estudio debe tener un nombre asignado.");
@@ -48,7 +48,6 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
         }else if(estudio.getVia() == null) {
             throw new CustomException("MAPEST001","El estudio debe tener una vía de respuesta.");
         }else if(!estudio.getVia().equals("telefono") && !estudio.getVia().equals("plataforma")) {
-
             throw new CustomException("MAPEST001","La vía de respuestas del estudio no es válida.");
         }else {
 
@@ -160,10 +159,9 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
                     estudio.setEstado("culminado");
                     estudio.setFechaFin(new Date());
                 }
-            }
-            if(dtoEstudio.getEstado() == null && estudio.getEstado() == null) {
+            }else if(estudio.getEstado() == null) {
                 estudio.setEstado("solicitado");
-            }else if (dtoEstudio.getEstado() != null && estudio.getEstado() == null){
+            }else {
                 estudio.setEstado(dtoEstudio.getEstado());
             }
 

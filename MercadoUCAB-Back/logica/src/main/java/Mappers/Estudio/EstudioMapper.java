@@ -160,7 +160,8 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
                 }
             }else if(dtoEstudio.getEstado() == null && estudio.getEstado() == null) {
                 estudio.setEstado("solicitado");
-            }else {
+            }
+            if(dtoEstudio.getEstado() != null){
                 estudio.setEstado(dtoEstudio.getEstado());
             }
 

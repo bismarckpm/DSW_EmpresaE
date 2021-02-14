@@ -30,30 +30,18 @@ export class ListaEstudiosComponent implements OnInit {
   // Declaracion de variables
   estudios: Estudio[] = [];
   _id = this.actRoute.snapshot.params._id;
-  @Input() estudioData = {
-    _id: 0,
-    nombre: '',
-    estado: '',
-    comentarioAnalista : '',
-    edadMinima: 0,
-    edadMaxima: 0 ,
-    fechaInicio: '',
-    fechaFin: '',
-    lugar : {
-      _id: 0,
-      estado: '',
-      nombre: '',
-      tipo: '',
-      lugar : {_id: 0, estado: '', nombre: '', tipo: '', lugar : {_id: 0, estado: '', nombre: '', tipo: ''}}},
-    nivelSocioEconomico: {_id: 0},
-    subcategoria : {_id: 0, nombre: '', estado: '', categoria: {_id: 0}},
-    analista: {_id: 0},
-    genero: {_id: 0},
-  };
+  @Input() estudioData = {_id: 0, nombre: '', estado:'', comentarioAnalista : '', edadMinima: 0, edadMaxima: 0 , fechaInicio: '', fechaFin: '',
+             lugar : {_id: 0, estado: '', nombre: '', tipo: '', lugar : {_id: 0, estado: '', nombre: '', tipo: '', lugar : {_id: 0, estado: '', nombre: '', tipo: ''}}},
+             nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
+             subcategoria : {_id: 0, nombre: '', estado: '',categoria:{_id:0}},
+             analista: {_id: 0},
+             genero:{_id:0},
+             
+            };
 
-   @Input() estadoData = {_id: 0, estado: '', nombre: '', tipo: ''};
-   @Input() municipioData = {_id: 0, estado: '', nombre: '', tipo: ''};
-   @Input() parroquiaData = {_id: 0, estado: '', nombre: '', tipo: ''};
+   @Input() estadoData = {_id: 0, estado: '', nombre: '', tipo: ''}
+   @Input() municipioData = {_id: 0, estado: '', nombre: '', tipo: ''}
+   @Input() parroquiaData = {_id: 0, estado: '', nombre: '', tipo: ''}
 
   // Declaracion para los dropdown
   nivelSocioEconomico: any;
@@ -139,7 +127,12 @@ export class ListaEstudiosComponent implements OnInit {
   loadEstudios(): void {
     this.estudioService.getEstudios().subscribe(data => {
       this.aux = data;
-      this.HandleErrorGet();
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+       this.estudios = this.aux.objeto;
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      } 
     });
   }
 
@@ -149,47 +142,112 @@ export class ListaEstudiosComponent implements OnInit {
     });
   }
 
-  aprobar(): void{
-    this.estudioCambio = false;
-    this.encuestaCambio = true;
-    this.encuesta.estudio._id = this.estudioData._id;
-    this.estudioService.aprobarEstudio(this.estudioData._id).subscribe(data => {});
-    this.cargarDataMuestra();
-  }
+  
 
-  rechazar(): void {
-    console.log('estudio rechado');
-    console.log(this.estudioData._id);
+  Rechazar(){
+    this.estudioData.estado="rechazado" ;
+    this.estudioService.updateEstudioAdmin(this.estudioData._id, this.estudioData).subscribe(data => {
+      this.aux=data;
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+        this.estudioCambio =false;
+        this.encuestaCambio= true;
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      } 
+    });
+    
     this.estudioService.rechazarEstudio(this.estudioData._id).subscribe(data => {});
+
   }
 
-  updateEstudio(): void{
-    console.log('entro a update');
+  Aprobar(){
+    if(this.estudioData.estado != "rechazado"){
+    console.log("entro a update");
+    if (this.formEstudio.valid) {
+      console.log("la vaidaciones son correctas");
+
+          if(this.cambio == true){
+            console.log("estado actual del cambio :"+ this.cambio);
+            console.log("llamo validar los cambios del lugar");
+            this.validarCambiosLugar();
+            console.log("Hago la llamada de http con este estudio :");
+            console.log(this.estudioData);
+            this.estudioData.estado="procesado";
+
+            this.estudioService.updateEstudioAdmin(this.estudioData._id, this.estudioData).subscribe(data => {
+              this.aux=data;
+              if(this.aux.estado == "Exitoso"){
+                this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+                this.estudioCambio =false;
+                this.encuestaCambio= true;
+              }else{
+                this.toast.showError(this.aux.estado,this.aux.mensaje)
+              } 
+            });
+             console.log("termine la llamada del http");
+            this.cambio= false;
+            location.reload();
+            console.log("estado actual del cambio :"+ this.cambio);
+          }else if(this.cambio == false){
+            console.log("estado actual del cambio :"+ this.cambio);
+            this.estudioData.estado="procesado";
+            this.estudioService.updateEstudioAdmin(this.estudioData._id, this.estudioData).subscribe(data => {
+              this.aux=data;
+              if(this.aux.estado == "Exitoso"){
+                this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+                this.estudioCambio =false;
+                this.encuestaCambio= true;
+              }else{
+                this.toast.showError(this.aux.estado,this.aux.mensaje)
+              } 
+            });
+           //this.loadEstudios();
+           //location.reload();
+          }
+    }
+    else{
+      alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
+    }
+  }else{
+    this.toast.showError("error"," no se puede procesar")
+  }
+
+  this.encuesta.estudio._id = this.estudioData._id;
+  this.estudioService.aprobarEstudio(this.estudioData._id).subscribe(data => {});
+  this.cargarDataMuestra();
+    
+  }
+
+
+
+
+  updateEstudio(){
+    console.log("entro a update");
 
     if (this.formEstudio.valid) {
-      console.log('la vaidaciones son correctas');
+      console.log("la vaidaciones son correctas");
 
-      if (this.cambio === true){
-        console.log('estado actual del cambio :' + this.cambio);
-        console.log('llamo validar los cambios del lugar');
-        this.validarCambiosLugar();
-        console.log('Hago la llamada de http con este estudio :');
-        console.log(this.estudioData);
+          if(this.cambio == true){
+            console.log("estado actual del cambio :"+ this.cambio);
+            console.log("llamo validar los cambios del lugar");
+            this.validarCambiosLugar();
+            console.log("Hago la llamada de http con este estudio :");
+            console.log(this.estudioData);
 
-
-        this.estudioService.updateEstudioAdmin(this.estudioData._id, this.estudioData).subscribe(data => {
-        });
-        console.log('termine la llamada del http');
-        this.cambio = false;
-        location.reload();
-        console.log('estado actual del cambio :' + this.cambio);
-      }else if (this.cambio === false){
-        console.log('estado actual del cambio :' + this.cambio);
-        this.estudioService.updateEstudioAdmin(this.estudioData._id, this.estudioData).subscribe(data => {
-        });
-        this.loadEstudios();
-        location.reload();
-      }
+            this.estudioService.updateEstudioAdmin(this.estudioData._id, this.estudioData).subscribe(data => {
+             });
+             console.log("termine la llamada del http");
+            this.cambio= false;
+            location.reload();
+            console.log("estado actual del cambio :"+ this.cambio);
+          }else if(this.cambio == false){
+            console.log("estado actual del cambio :"+ this.cambio);
+            this.estudioService.updateEstudioAdmin(this.estudioData._id, this.estudioData).subscribe(data => {
+            });
+           this.loadEstudios();
+           location.reload();
+          }
     }
     else{
       this.toast.showError('Es necesario llenar los todos los campos', 'Campos incompletos');
@@ -389,15 +447,17 @@ export class ListaEstudiosComponent implements OnInit {
   get GeneroEstudio(){return this.formEstudio.get('GeneroEstudio'); }
   get CategoriaEstudio(){return this.formEstudio.get('CategoriaEstudio'); }
 
-  //////////////////////////////////////////////////// Metodos Para la parte de encuesta
+    //////////////////////////////////////////////////// Metodos Para la parte de encuesta
 
-  ///// Metodos para las validaciones
-  get pregunta(){ return this.formEncuesta.get('pregunta'); }
+    ///// Metodos para las validaciones
+    get fechaInicioEncuesta(){ return this.formEncuesta.get('fechaInicioEncuesta'); }
+    get fechaFinEncuesta(){return this.formEncuesta.get('fechaFinEncuesta');}
+    get estudio(){return this.formEncuesta.get('estudio');}
+    get pregunta(){ return this.formEncuesta.get('pregunta');}
 
   createForm(): void {
     this.formEstudio = this.formBuilder.group({
       nombreEstudio: ['', [Validators.required, Validators.pattern(this.patronNombreEstudio)]],
-      // estadoEstudio: ['', Validators.required],
       lugarEstudio: [''],
       lugarmunicipio: [''],
       lugarparroquia: [''],
@@ -410,15 +470,18 @@ export class ListaEstudiosComponent implements OnInit {
 
       edadMinimaEstudio: ['', [Validators.required, Validators.maxLength(2), Validators.pattern(this.patronEdadEstudio)]],
       edadMaximaEstudio: ['', [Validators.required, Validators.maxLength(2), Validators.pattern(this.patronEdadEstudio)]],
-      categoriaEstudio: ['', [Validators.required]],
+      //categoriaEstudio: ['', [Validators.required]],
       subcategoriaEstudio: ['', [Validators.required]],
-      nivelEstudio: '',
-      GeneroEstudio: '',
-      CategoriaEstudio: '',
+      nivelEstudio: [''],
+      GeneroEstudio:[''],
+      CategoriaEstudio:[''],
 
     });
 
-    this.formEncuesta = this.formBuilder.group({
+   this.formEncuesta = this.formBuilder.group({
+      fechaInicioEncuesta: ['', [Validators.required, Validators.pattern(this.patronFechaEstudio)]],
+      fechaFinEncuesta: ['', [ Validators.pattern(this.patronFechaEstudio)]],
+      estudio: ['', Validators.required],
       pregunta: ['', Validators.required],
     });
   }

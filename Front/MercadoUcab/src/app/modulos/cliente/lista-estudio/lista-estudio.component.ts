@@ -38,7 +38,7 @@ export class ListaEstudioClienteComponent implements OnInit {
    subcategoria: any;
     aux:any=[];
     genero:any;
-
+ 
    ///// Atributos para la busqueda de acuerdo a lo seleccionado
    lugar: any;
    parroquias: any;
@@ -47,8 +47,8 @@ export class ListaEstudioClienteComponent implements OnInit {
    auxEstadoID: number;
    auxMunicipioID: number;
    auxParroquiaID: number;
-
-
+   
+ 
    // Declaracion para validar
    formEstudio: FormGroup;
    patronEdadEstudio: any = /^(0?[0-9]{1,2}|1[0-7][0-9]|99)$/;
@@ -84,7 +84,7 @@ export class ListaEstudioClienteComponent implements OnInit {
      this.estudios = this.aux.objeto;
     }else{
       this.toast.showError(this.aux.estado,this.aux.mensaje)
-    }
+    } 
     });
   }
 
@@ -104,9 +104,9 @@ export class ListaEstudioClienteComponent implements OnInit {
      this.genero = this.aux.objeto;
     }else{
       this.toast.showError(this.aux.estado,this.aux.mensaje)
-    }
+    } 
     })
-
+  
   }
 
   Cambio(){
@@ -121,10 +121,10 @@ export class ListaEstudioClienteComponent implements OnInit {
   updateEstudio(){
     console.log("entro a update");
 
-
+    
     if (this.formEstudio.valid) {
       console.log("la vaidaciones son correctas");
-
+      
           if(this.cambio == true){
             console.log("estado actual del cambio :"+ this.cambio);
             console.log("llamo validar los cambios del lugar");
@@ -132,16 +132,16 @@ export class ListaEstudioClienteComponent implements OnInit {
             console.log("Hago la llamada de http con este estudio :");
             console.log(this.estudioData);
             this.estudioData.estado="solicitado";
-
-
-
+            
+            
+            
             this.estudioService.updateEstudioCliente(this.estudioData._id, this.estudioData).subscribe(data => {
               this.aux=data;
               if(this.aux.estado == "Exitoso"){
                 this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
               }else{
                 this.toast.showError(this.aux.estado,this.aux.mensaje)
-              }
+              } 
              });
              console.log("termine la llamada del http");
             this.cambio= false;
@@ -155,7 +155,7 @@ export class ListaEstudioClienteComponent implements OnInit {
                 this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
               }else{
                 this.toast.showError(this.aux.estado,this.aux.mensaje)
-              }
+              } 
             });
            this.loadEstudios();
           }
@@ -183,7 +183,7 @@ addLugar(){
      this.estados = this.aux.objeto;
     }else{
       this.toast.showError(this.aux.estado,this.aux.mensaje)
-    }
+    } 
   });
 }
 
@@ -195,7 +195,7 @@ addMunicipios(id){
      this.municipios = this.aux.objeto;
     }else{
       this.toast.showError(this.aux.estado,this.aux.mensaje)
-    }
+    } 
   });
 }
 
@@ -207,7 +207,7 @@ addParroquia(id){
      this.parroquias = this.aux.objeto;
     }else{
       this.toast.showError(this.aux.estado,this.aux.mensaje)
-    }
+    } 
   });
 }
 
@@ -222,7 +222,7 @@ busquedaMunicipio(id){
 
 busquedaParroquia(id){
   // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
-  if (id > 0 ){
+  if (id > 0 ){     
       this.auxMunicipioID= id;
         this.addParroquia(id)
   }
@@ -242,7 +242,7 @@ addSubcategoria(){
      this.subcategoria = this.aux.objeto;
     }else{
       this.toast.showError(this.aux.estado,this.aux.mensaje)
-    }
+    } 
   });
 }
 
@@ -254,16 +254,16 @@ addNivelSocioEconomico(){
      this.nivelSocioEconomico = this.aux.objeto;
     }else{
       this.toast.showError(this.aux.estado,this.aux.mensaje)
-    }
+    } 
   });
 }
 
 validarCambiosLugar(){
 
-
-
+    
+    
   console.log("entro en la llamada de las validaciones de lugar");
-
+  
   if((this.estudioData.lugar._id != this.parroquiaData._id) && (this.parroquiaData._id == this.auxParroquiaID)){
     console.log("la parroquia es diferente y hago el cambio");
     console.log("id de la parroquia anterior :"+ this.estudioData.lugar._id);

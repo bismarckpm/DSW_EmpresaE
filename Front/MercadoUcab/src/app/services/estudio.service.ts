@@ -11,8 +11,9 @@ import {Encuestado} from "../models/encuestado";
 export class EstudioService {
 
 
-  // apiurl = 'http://localhost:3000';
-  apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+  //apiurl = 'http://localhost:3000';
+   apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+ 
 
   constructor(private http: HttpClient) { }
 
@@ -142,7 +143,7 @@ export class EstudioService {
   }
 
   updateEstudioAdmin(id, Estudio): Observable<Estudio[]>{
-    return this.http.put<Estudio[]>(this.apiurl + '/estudio/updateAdmin/' + id, JSON.stringify(Estudio), this.httpOptions)
+    return this.http.put<Estudio[]>(this.apiurl + '/estudio/' + id, JSON.stringify(Estudio), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -150,7 +151,7 @@ export class EstudioService {
   }
 
   updateEstudioCliente(id, Estudio): Observable<Estudio[]>{
-    return this.http.put<Estudio[]>(this.apiurl + '/estudio/updateCliente/' + id, JSON.stringify(Estudio), this.httpOptions)
+    return this.http.put<Estudio[]>(this.apiurl + '/estudio/' + id, JSON.stringify(Estudio), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -158,7 +159,7 @@ export class EstudioService {
   }
 
   updateEstudioAnalsita(id, Estudio): Observable<Estudio[]>{
-    return this.http.put<Estudio[]>(this.apiurl + '/estudio/updateAnalsita/' + id, JSON.stringify(Estudio), this.httpOptions)
+    return this.http.put<Estudio[]>(this.apiurl + '/estudio/' + id, JSON.stringify(Estudio), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)

@@ -3,7 +3,6 @@ package Comandos;
 import Comandos.Analista.ComandoGetAnalistas;
 import Comandos.Categoria.*;
 import Comandos.Estudio.*;
-import Comandos.JWT.ComandoJWT;
 import Comandos.Pregunta.ComandoGetPreguntas;
 import Comandos.Presentacion.ComandoDeletePresentacion;
 import Comandos.Presentacion.ComandoGetPresentaciones;
@@ -34,6 +33,10 @@ public class ComandoFactory {
 
     public static ComandoDeleteSubcategoria comandoDeleteSubcategoriaInstancia(long id) {
         return new ComandoDeleteSubcategoria(id);
+    }
+
+    public static ComandoGetSubcategoriasByCategoria comandoGetSubcategoriasByCategoriaInstancia(long id) {
+        return new ComandoGetSubcategoriasByCategoria(id);
     }
 
     //Fábricas de los comandos para categoria
@@ -139,8 +142,4 @@ public class ComandoFactory {
         return new ComandoGetAnalistas();
     }
 
-    //JWT
-    public static ComandoJWT comandoJWT(DtoResponse dtoResponse) {
-        return new ComandoJWT(dtoResponse);
-    }
 }

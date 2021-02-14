@@ -72,6 +72,32 @@ public class SubcategoriaServicio extends AplicacionBase {
     }
 
     /**
+     * http://localhost:8080/servicio-1.0-SNAPSHOT/api/subcategoria/subcategorias/id
+     * Api del tipo @GET que se encarga de retornar una lista de subcategorias con una categoria padre
+     * @param id recibe el id de la categoria padre
+     * @return retorna un Response .json con un objeto del tipo SubcategoriaEntity
+     */
+    @GET
+    @Path("/subcategorias/{id}")
+    @Produces(value = MediaType.APPLICATION_JSON)
+    public Response getSubCategoriasByCategoria(@PathParam("id") long id) {
+        try {
+            this.comando = ComandoFactory.comandoGetSubcategoriasByCategoriaInstancia(id);
+            return Response.ok(this.comando.getResult()).build();
+        } catch (CustomException cex){
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(cex.getMensaje());
+            this.response.setCodError(cex.getCodError());
+            return Response.status(500).entity(this.response).build();
+        } catch (Exception ex) {
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(ex.getMessage());
+            this.response.setCodError(ex.getClass().toString());
+            return Response.status(500).entity(this.response).build();
+        }
+    }
+
+    /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/subcategoria
      * Api del tipo @POST que se encarga de guardar en la base de datos una Subcategoria nueva
      * @param dtoSubcategoria recube un objeto del tipo DtoSubcategoria

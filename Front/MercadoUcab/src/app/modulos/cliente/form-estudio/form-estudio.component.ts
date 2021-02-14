@@ -13,11 +13,11 @@ import { ToastService } from 'src/app/services/toast.service';
   styleUrls: ['./form-estudio.component.css']
 })
 export class FormEstudioClienteComponent implements OnInit {
-  @Input() estudio = {_id: 0, nombre: '' , edadMinima: 0, edadMaxima: 0 ,via:'',
+  @Input() estudio = {_id: 0, estado:'',nombre: '' , edadMinima: 0, edadMaxima: 0 ,via:'',
   genero:{_id:0},
   lugar : {_id: 0, estado: '', nombre: '', tipo: '',lugar : {_id: 0, estado: '', nombre: '', tipo: '',lugar : {_id: 0, estado: '', nombre: '', tipo: '',lugar : {_id: 0, estado: '', nombre: '', tipo: ''}}}},
-  nivelSocioEconomico: {_id: 0, },
-  subcategoria : {_id: 0, }
+  nivelSocioEconomico: {_id: 0 },
+  subcategoria : {_id: 0 }
  };
 
   nivelSocioEconomico: any;
@@ -68,6 +68,7 @@ export class FormEstudioClienteComponent implements OnInit {
   addEstudio() {
     if (this.formEstudio.valid) {
       this.estudio.lugar._id = this.auxParroquiaID;
+      this.estudio.estado="solicitado";
       console.log(this.estudio);
       
       this.estudioService.createEstudioCliente(JSON.parse(localStorage.getItem("usuarioID")),this.estudio).subscribe((data: {}) => {

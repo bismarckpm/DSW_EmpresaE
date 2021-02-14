@@ -6,6 +6,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import {Encuestado} from '../../../models/encuestado';
 import * as Highcharts from 'highcharts';
 import highcharts3D from 'highcharts/highcharts-3d.src';
+import { ToastService } from 'src/app/services/toast.service';
 // @ts-ignore
 highcharts3D( Highcharts );
 
@@ -22,21 +23,26 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
   estudios: Estudio[] = [];
   encuestados: Encuestado[] = [];
   _id = this.actRoute.snapshot.params._id;
-  @Input() analistaData = {_id: 0, comentarioAnalista: '', estado: '', fechaFin: ''};
+  @Input() analistaData = {_id: 0, comentarioAnalista: '', estado: ''};
   formEstudioAnalista: FormGroup;
 
   infoGraficos: any = [];
   chartOptions: Highcharts.Options[] = [];
   highcharts = Highcharts;
+  aux:any=[];
+
+
 
   patronFechaEstudio: any = /^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/;
   get fechaFinEstudio(): AbstractControl {return this.formEstudioAnalista.get('fechaFinEstudio'); }
+  
 
 
   constructor(
     public estudioService: EstudioService,
     private formBuilder: FormBuilder,
     public actRoute: ActivatedRoute,
+    public toast:ToastService,
     public router: Router
 
   ) { this.createForm(); }
@@ -48,19 +54,63 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
   }
 
   editar(estudio): void{
+    
     this.analistaData = estudio;
   }
+
+  Comenzar(){
+    this.analistaData.estado='en ejecucion';
+    console.log(this.analistaData);
+    
+    this.estudioService.updateEstudio(this.analistaData._id, this.analistaData).subscribe(data => {
+      this.aux=data;
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      } 
+    });
+    
+
+  }
+
+  Terminar(){
+    this.analistaData.estado='culminado';
+    console.log(this.analistaData);
+    this.estudioService.updateEstudio(this.analistaData._id, this.analistaData).subscribe(data => {
+      this.aux=data;
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      }
+    });
+    
+  }
+
 
   loadEstudios(): void {
     const user = JSON.parse(localStorage.getItem('usuarioID'));
     this.estudioService.getEstudioAnalista(user).subscribe(data => {
-      this.estudios = data;
+      this.aux=data;
+    if(this.aux.estado == "Exitoso"){
+      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+     this.estudios = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado,this.aux.mensaje)
+    } 
     });
   }
 
   loadDataMuestra(id): void {
     this.estudioService.getDataMuestra(id).subscribe(data => {
-      this.encuestados = data;
+      this.aux=data;
+    if(this.aux.estado == "Exitoso"){
+      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+     this.encuestados = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado,this.aux.mensaje)
+    } 
     });
   }
 
@@ -68,8 +118,15 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
     this.infoGraficos = [];
     this.chartOptions = [];
     this.estudioService.getDataGraficos(estudio).subscribe(data => {
-      this.infoGraficos = data;
-      this.agregarDatos();
+      this.aux=data;
+    if(this.aux.estado == "Exitoso"){
+      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+     this.infoGraficos = this.aux.objeto;
+     this.agregarDatos();
+    }else{
+      this.toast.showError(this.aux.estado,this.aux.mensaje)
+    } 
+      
       console.log(this.infoGraficos);
     });
   }
@@ -142,8 +199,7 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
   createForm(): void {
     this.formEstudioAnalista = this.formBuilder.group({
       comentarioAnalistaEstudio: ['', [Validators.required, Validators.maxLength(100)]],
-      estadoEstudioAnalista: ['', Validators.required],
-      fechaFinEstudio: ['', [ Validators.pattern(this.patronFechaEstudio)]],
+      
     });
   }
 

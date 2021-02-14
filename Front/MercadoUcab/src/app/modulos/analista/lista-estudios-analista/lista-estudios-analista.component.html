@@ -24,7 +24,7 @@
         <td>{{ estudio.fechaFin }}</td>
 
         <td>
-          <div class="d-flex justify-content-around">
+          <div  *ngIf="estudio.estado ==='culminado' || estudio.estado ==='en ejecucion' || estudio.estado ==='procesado' " class="d-flex justify-content-around">
             <button type="button" class="btn btn-primary" data-toggle="modal" (click)="editar(estudio)" data-target="#exampleModal">
               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
@@ -60,21 +60,6 @@
                             </div>
                           </div>
                           <div class="row">
-                            <div class="col-md-6 mb-3">
-                              <label for="estado"> Estado</label>
-                              <select class="custom-select d-block w-100" [(ngModel)]= "analistaData.estado" formControlName="estadoEstudioAnalista" id="estado" name="estado" >
-                                <option value="Aprobado">Aprobado</option>
-                                <option value="Solicitado">Solicitado</option>
-                                <option value="Rechazado">Rechazado</option>
-                                <option value="En Proceso">En Proceso</option>
-                                <option value="Culminado">Culminado</option>
-                              </select>
-                              <div *ngIf="estadoEstudioAnalista.invalid && (estadoEstudioAnalista.dirty || estadoEstudioAnalista.touched)" class="alert alert-danger">
-                                <div *ngIf="estadoEstudioAnalista.errors.required">
-                                  Este campo es obligatorio
-                                </div>
-                              </div>
-                            </div>
 
                             <div *ngIf="analistaData.estado==='Culminado'" class="col-md-6 mb-3">
                               <label for="fechaFin">Fecha fin</label>
@@ -93,8 +78,20 @@
                           <br>
                           <!-- Parte inferior del modal -->
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-success" (click)="updateEstudio()" data-dismiss="modal">Enviar</button>
+                            <div>
+                              <div class="row">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                              <button type="submit" class="btn btn-success" (click)="updateEstudio()" data-dismiss="modal">Actualizar</button>
+                              <br>
+                              
+                                <div *ngIf="analistaData.estado ==='procesado'">
+                                  <button type="submit" class="btn btn-info" (click)="Comenzar()" data-dismiss="modal">Comenzar</button>
+                                </div>
+                                <div *ngIf="analistaData.estado ==='en ejecucion'">
+                                <button type="submit" class="btn btn-info" (click)="Terminar()" data-dismiss="modal">Terminal</button>
+                                </div>
+                              </div>
+                          </div>
 
                           </div>
                         </div>

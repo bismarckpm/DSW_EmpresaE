@@ -27,7 +27,7 @@ export class ListaEstudiosComponent implements OnInit {
   // Declaracion de variables
   estudios: Estudio[] = [];
   _id = this.actRoute.snapshot.params._id;
-  @Input() estudioData = {_id: 0, nombre: '', estado: '', comentarioAnalista : '', edadMinima: 0, edadMaxima: 0 , fechaInicio: '', fechaFin: '',
+  @Input() estudioData = {_id: 0, nombre: '', estado:'', comentarioAnalista : '', edadMinima: 0, edadMaxima: 0 , fechaInicio: '', fechaFin: '',
              lugar : {_id: 0, estado: '', nombre: '', tipo: '', lugar : {_id: 0, estado: '', nombre: '', tipo: '', lugar : {_id: 0, estado: '', nombre: '', tipo: ''}}},
              nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
              subcategoria : {_id: 0, nombre: '', estado: '',categoria:{_id:0}},
@@ -129,7 +129,12 @@ export class ListaEstudiosComponent implements OnInit {
   loadEstudios(): void {
     this.estudioService.getEstudios().subscribe(data => {
       this.aux = data;
-      this.HandleErrorGet();
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+       this.estudios = this.aux.objeto;
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      } 
     });
   }
 
@@ -139,9 +144,75 @@ export class ListaEstudiosComponent implements OnInit {
     });
   }
 
+  
+
+  Rechazar(){
+    this.estudioData.estado="rechazado" ;
+    this.estudioService.updateEstudioAdmin(this.estudioData._id, this.estudioData).subscribe(data => {
+      this.aux=data;
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+        this.estudioCambio =false;
+        this.encuestaCambio= true;
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      } 
+    });
+
+  }
+
   Aprobar(){
-    this.estudioCambio =false;
-  this.encuestaCambio= true;
+    if(this.estudioData.estado != "rechazado"){
+    console.log("entro a update");
+    if (this.formEstudio.valid) {
+      console.log("la vaidaciones son correctas");
+
+          if(this.cambio == true){
+            console.log("estado actual del cambio :"+ this.cambio);
+            console.log("llamo validar los cambios del lugar");
+            this.validarCambiosLugar();
+            console.log("Hago la llamada de http con este estudio :");
+            console.log(this.estudioData);
+            this.estudioData.estado="procesado";
+
+            this.estudioService.updateEstudioAdmin(this.estudioData._id, this.estudioData).subscribe(data => {
+              this.aux=data;
+              if(this.aux.estado == "Exitoso"){
+                this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+                this.estudioCambio =false;
+                this.encuestaCambio= true;
+              }else{
+                this.toast.showError(this.aux.estado,this.aux.mensaje)
+              } 
+            });
+             console.log("termine la llamada del http");
+            this.cambio= false;
+            location.reload();
+            console.log("estado actual del cambio :"+ this.cambio);
+          }else if(this.cambio == false){
+            console.log("estado actual del cambio :"+ this.cambio);
+            this.estudioData.estado="procesado";
+            this.estudioService.updateEstudioAdmin(this.estudioData._id, this.estudioData).subscribe(data => {
+              this.aux=data;
+              if(this.aux.estado == "Exitoso"){
+                this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+                this.estudioCambio =false;
+                this.encuestaCambio= true;
+              }else{
+                this.toast.showError(this.aux.estado,this.aux.mensaje)
+              } 
+            });
+           this.loadEstudios();
+           location.reload();
+          }
+    }
+    else{
+      alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
+    }
+  }else{
+    this.toast.showError("error"," no se puede procesar")
+  }
+    
   }
 
 
@@ -149,7 +220,6 @@ export class ListaEstudiosComponent implements OnInit {
 
   updateEstudio(){
     console.log("entro a update");
-
 
     if (this.formEstudio.valid) {
       console.log("la vaidaciones son correctas");
@@ -160,7 +230,6 @@ export class ListaEstudiosComponent implements OnInit {
             this.validarCambiosLugar();
             console.log("Hago la llamada de http con este estudio :");
             console.log(this.estudioData);
-
 
             this.estudioService.updateEstudioAdmin(this.estudioData._id, this.estudioData).subscribe(data => {
              });
@@ -486,14 +555,7 @@ seleccionarParroquia(id){
   }
 
   
-  HandleErrorGet(){
-    if(this.aux.estado == "Exitoso"){
-      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
-     this.estudios = this.aux.objeto;
-    }else{
-      this.toast.showError(this.aux.estado,this.aux.mensaje)
-    } 
-  }
+ 
   
   HandleErrorPostPut(){
     if(this.aux.estado == "Exitoso"){

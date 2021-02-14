@@ -302,7 +302,7 @@
                     <div class="modal-footer">
                       <div *ngIf="estudioCambio==true">
                         <button type="submit" class="btn btn-info" (click)="updateEstudio()">Actualizar Datos</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Rechazar</button>
+                        <button type="button" class="btn btn-danger" (click)="Rechazar()">Rechazar</button>
                         <button type="button" class="btn btn-success"  (click)="Aprobar()" >Aprobar</button>
                       </div>
 

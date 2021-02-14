@@ -159,7 +159,7 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
                     estudio.setEstado("culminado");
                     estudio.setFechaFin(new Date());
                 }
-            }else if(estudio.getEstado() == null) {
+            }else if(dtoEstudio.getEstado() == null && estudio.getEstado() == null) {
                 estudio.setEstado("solicitado");
             }else {
                 estudio.setEstado(dtoEstudio.getEstado());

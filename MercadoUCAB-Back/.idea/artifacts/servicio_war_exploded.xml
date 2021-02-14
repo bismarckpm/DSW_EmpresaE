@@ -76,6 +76,8 @@
           </element>
           <element id="library" level="project" name="Maven: javax:javaee-web-api:8.0.1" />
           <element id="library" level="project" name="Maven: ucab.empresae:logica:1.0-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.15" />
+          <element id="library" level="project" name="Maven: io.jsonwebtoken:jjwt:0.9.1" />
           <element id="library" level="project" name="Maven: com.airhacks:jaxrs-cors:0.0.2" />
           <element id="library" level="project" name="Maven: com.sun.mail:jakarta.mail:1.6.4" />
           <element id="library" level="project" name="Maven: com.sun.activation:jakarta.activation:1.2.1" />

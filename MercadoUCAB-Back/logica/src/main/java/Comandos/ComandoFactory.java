@@ -3,7 +3,10 @@ package Comandos;
 import Comandos.Analista.ComandoGetAnalistas;
 import Comandos.Categoria.*;
 import Comandos.Estudio.*;
-import Comandos.JWT.ComandoJWT;
+import Comandos.Genero.ComandoGetGeneros;
+import Comandos.Lugar.ComandoGetLugar;
+import Comandos.Lugar.ComandoGetLugares;
+import Comandos.NivelSocioeconomico.ComandoGetNivelesSocioeconomico;
 import Comandos.Pregunta.ComandoGetPreguntas;
 import Comandos.Presentacion.ComandoDeletePresentacion;
 import Comandos.Presentacion.ComandoGetPresentaciones;
@@ -11,6 +14,7 @@ import Comandos.Presentacion.ComandoPostPresentacion;
 import Comandos.Presentacion.ComandoUpdatePresentacion;
 import Comandos.Subcategoria.*;
 import ucab.empresae.dtos.*;
+import ucab.empresae.entidades.NivelSocioeconomicoEntity;
 import ucab.empresae.excepciones.CategoriaException;
 
 public class ComandoFactory {
@@ -34,6 +38,10 @@ public class ComandoFactory {
 
     public static ComandoDeleteSubcategoria comandoDeleteSubcategoriaInstancia(long id) {
         return new ComandoDeleteSubcategoria(id);
+    }
+
+    public static ComandoGetSubcategoriasByCategoria comandoGetSubcategoriasByCategoriaInstancia(long id) {
+        return new ComandoGetSubcategoriasByCategoria(id);
     }
 
     //Fábricas de los comandos para categoria
@@ -139,8 +147,22 @@ public class ComandoFactory {
         return new ComandoGetAnalistas();
     }
 
-    //JWT
-    public static ComandoJWT comandoJWT(DtoResponse dtoResponse) {
-        return new ComandoJWT(dtoResponse);
+    //Niveles socioeconomicos
+    public static ComandoGetNivelesSocioeconomico comandoGetNivelesSocioeconomicoInstancia() {
+        return new ComandoGetNivelesSocioeconomico();
+    }
+
+    //generos
+    public static ComandoGetGeneros comandoGetGenerosInstancia() {
+        return new ComandoGetGeneros();
+    }
+
+    //lugares
+    public static ComandoGetLugares comandoGetLugaresInstancia() {
+        return new ComandoGetLugares();
+    }
+
+    public static ComandoGetLugar comandoGetLugarInstancia(long id) {
+        return new ComandoGetLugar(id);
     }
 }

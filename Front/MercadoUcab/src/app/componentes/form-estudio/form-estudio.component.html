@@ -86,7 +86,7 @@
         <div class="col-md-4">
           <label for="" class="col-sm-6 col-form-label escrituerModal"> Subcategoria </label>
           <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudio.subcategoria._id" formControlName="subcategoriaEstudio" >
-             
+
               <option  *ngFor="let sub of subcategoria" [ngValue]= "sub._id"  >{{sub.nombre}}</option>
           </select>
           <div *ngIf="subcategoriaEstudio.invalid && (subcategoriaEstudio.dirty || subcategoriaEstudio.touched)" class="alert alert-danger">

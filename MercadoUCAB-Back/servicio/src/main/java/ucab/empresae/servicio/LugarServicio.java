@@ -1,7 +1,11 @@
 package ucab.empresae.servicio;
 
+import Comandos.ComandoBase;
+import Comandos.ComandoFactory;
 import ucab.empresae.daos.DaoLugar;
+import ucab.empresae.dtos.DtoResponse;
 import ucab.empresae.entidades.LugarEntity;
+import ucab.empresae.excepciones.CustomException;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -18,6 +22,9 @@ import java.util.List;
 @Path("/lugar")
 public class LugarServicio {
 
+    private ComandoBase comando;
+    private DtoResponse response;
+
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/lugar
      * Metodo con anotacion GET que devuelve todos los lugares de tipo Estado registrados
@@ -26,16 +33,20 @@ public class LugarServicio {
     @GET
     @Produces(value= MediaType.APPLICATION_JSON)
     public Response getLugares(){
-
-        List<LugarEntity> lugares;
         try {
-            DaoLugar dao = new DaoLugar();
-            lugares = dao.getLugaresByTipo("estado");
-        }catch (Exception ex) {
-            String problema = ex.getMessage();
-            return  Response.status(Response.Status.NOT_ACCEPTABLE).entity(problema).build();
+            this.comando = ComandoFactory.comandoGetLugaresInstancia();
+            return Response.ok(this.comando.getResult()).build();
+        } catch (CustomException cex){
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(cex.getMensaje());
+            this.response.setCodError(cex.getCodError());
+            return Response.status(500).entity(this.response).build();
+        } catch (Exception ex) {
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(ex.getMessage());
+            this.response.setCodError(ex.getClass().toString());
+            return Response.status(500).entity(this.response).build();
         }
-        return Response.ok(lugares).build();
     }
 
     /**
@@ -48,21 +59,19 @@ public class LugarServicio {
     @Produces(value= MediaType.APPLICATION_JSON)
     @Path("/{id}")
     public Response getLugar(@PathParam("id") long id) {
-
-        List<LugarEntity> resultado;
-        DaoLugar dao = new DaoLugar();
-
-        try{
-            LugarEntity lugar = dao.find(id, LugarEntity.class);
-            if(lugar != null) {
-                resultado = dao.getLugaresById(lugar);
-                return Response.ok(resultado).build();
-            }else{
-                return Response.status(Response.Status.NOT_FOUND).build();
-            }
-        }catch (Exception ex) {
-            String problema = ex.getMessage();
-            return  Response.status(Response.Status.NOT_ACCEPTABLE).entity(problema).build();
+        try {
+            this.comando = ComandoFactory.comandoGetLugarInstancia(id);
+            return Response.ok(this.comando.getResult()).build();
+        } catch (CustomException cex){
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(cex.getMensaje());
+            this.response.setCodError(cex.getCodError());
+            return Response.status(500).entity(this.response).build();
+        } catch (Exception ex) {
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(ex.getMessage());
+            this.response.setCodError(ex.getClass().toString());
+            return Response.status(500).entity(this.response).build();
         }
     }
 

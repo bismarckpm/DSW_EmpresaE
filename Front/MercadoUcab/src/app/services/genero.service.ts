@@ -10,6 +10,7 @@ import { Genero } from '../models/genero';
 export class GeneroService {
 
      //Definimos el url del api
+
      apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
      //apiurl = 'http://localhost:3000';
      constructor(private http:HttpClient) { }

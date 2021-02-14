@@ -51,18 +51,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4 mb-3">
-            <label for="fechaInicio">Fecha Inicio</label>
-            <input type="text" class="form-control"  placeholder="AAAA-MM-DD"  [(ngModel)]="estudio.fechaInicio" formControlName="fechaInicioEstudio" value="fechaInicio">
-            <div *ngIf="fechaInicioEstudio.invalid && (fechaInicioEstudio.dirty || fechaInicioEstudio.touched)" class="alert alert-danger">
-              <div *ngIf="fechaInicioEstudio.errors.required">
-                Este campo es obligatorio
-              </div>
-              <div *ngIf="fechaInicioEstudio.errors.pattern">
-                Introduzca un formato valido
-              </div>
-            </div>
-          </div>
+
         </div>
 
         <div class="row">
@@ -130,6 +119,33 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <label for="">Via del Estudio</label>
+          <select class="custom-select d-block w-100"  [(ngModel)]="estudio.via" formControlName="viaEstudio"  value="estudio.via">
+            <option value="telefono">telefono</option>
+            <option value="plataforma">plataforma</option>
+           
+          </select>
+          <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
+            <div *ngIf="lugarEstudio.errors.required">
+              Este campo es obligatorio
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="" >Género</label>
+          <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudio.genero._id" formControlName="GeneroEstudio">
+            <option value="0">Choose...</option>
+            <option *ngFor="let gen of genero" [ngValue]= "gen._id"  >{{gen.nombre}}</option>
+          </select>
+          <div *ngIf="GeneroEstudio.invalid && (GeneroEstudio.dirty || GeneroEstudio.touched)" class="alert alert-danger">
+            <div *ngIf="GeneroEstudio.errors.required">
+              Este campo es obligatorio
+            </div>
+          </div> 
         </div>
 
 

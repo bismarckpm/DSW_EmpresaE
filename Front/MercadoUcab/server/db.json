@@ -155,59 +155,63 @@
       "tipo": "abiertas"
     }
   ],
-  "pregunta": [
-    {
-      "_id": 1,
-      "descripcion": "Pregunta1",
-      "estado": "a",
-      "tipo": {
+  "pregunta": {
+    "estado": "Exitoso",
+    "mensaje": "cargando preguntas",
+    "objeto": [
+      {
         "_id": 1,
+        "descripcion": "Pregunta1",
         "estado": "a",
-        "tipo": "verdadero y Falso"
+        "tipo": {
+          "_id": 1,
+          "estado": "a",
+          "tipo": "verdadero y Falso"
+        },
+        "subcategoria": {
+          "_id": 1,
+          "nombre": "pedro gutierres",
+          "estado": "i"
+        }
       },
-      "subcategoria": {
-        "_id": 1,
-        "nombre": "pedro gutierres",
-        "estado": "i"
-      }
-    },
-    {
-      "_id": 2,
-      "descripcion": "Prueba exitosa Editar",
-      "estado": "a",
-      "tipo": {
-        "_id": 1,
-        "estado": "i",
-        "tipo": "multiple"
+      {
+        "_id": 2,
+        "descripcion": "Prueba exitosa Editar",
+        "estado": "a",
+        "tipo": {
+          "_id": 1,
+          "estado": "i",
+          "tipo": "multiple"
+        },
+        "subcategoria": {
+          "_id": 3,
+          "nombre": "pedro gutierres",
+          "estado": "i"
+        }
       },
-      "subcategoria": {
+      {
         "_id": 3,
-        "nombre": "pedro gutierres",
-        "estado": "i"
+        "descripcion": "Pregunta3",
+        "estado": "a",
+        "tipo": {
+          "_id": "4",
+          "estado": "",
+          "tipo": ""
+        },
+        "subcategoria": {
+          "_id": 5,
+          "nombre": "",
+          "estado": ""
+        },
+        "opciones": [
+          "asdas",
+          "asdsad",
+          "asdsad",
+          "asdasds"
+        ]
       }
-    },
-    {
-      "_id": 3,
-      "descripcion": "Pregunta3",
-      "estado": "a",
-      "tipo": {
-        "_id": "4",
-        "estado": "",
-        "tipo": ""
-      },
-      "subcategoria": {
-        "_id": 5,
-        "nombre": "",
-        "estado": ""
-      },
-      "opciones": [
-        "asdas",
-        "asdsad",
-        "asdsad",
-        "asdasds"
-      ]
-    }
-  ],
+    ]
+  },
   "tipo": [
     {
       "_id": 1,
@@ -228,106 +232,104 @@
       "descripcion": "eeeeee"
     }
   ],
-  "encuestado": [
-    {
-      "_id": 1,
-      "primerNombre": "juan",
-      "segundoNombre": "eduardo",
-      "primerApellido": "escobar",
-      "segundoApellido": "alfaro",
-      "fechaNacimiento": "10/11/1998",
-      "estado": "a",
-      "usuario": {
+  "encuestado": {
+    "estado": "Exitoso",
+    "mensaje": "cargando encuestados",
+    "objeto": [
+      {
         "_id": 1,
-        "username": "juanee",
-        "clave": "12345",
-        "correoElectronico": "juan@gmail.com"
-      }
-    },
-    {
-      "_id": 40,
-      "primerNombre": "Camilo",
-      "segundoNombre": "eduardo",
-      "primerApellido": "escobar",
-      "segundoApellido": "alfaro",
-      "fechaNacimiento": "10/11/1998",
-      "estado": "a",
-      "usuario": {
-        "_id": 1,
-        "username": "juanee",
-        "clave": "12345",
-        "correoElectronico": "juan@gmail.com"
-      }
-    },
-    {
-      "_id": 41,
-      "primerNombre": "Alfonso",
-      "segundoNombre": "eduardo",
-      "primerApellido": "escobar",
-      "segundoApellido": "alfaro",
-      "fechaNacimiento": "10/11/1998",
-      "estado": "a",
-      "usuario": {
-        "_id": 1,
-        "username": "juanee",
-        "clave": "12345",
-        "correoElectronico": "juan@gmail.com"
-      }
-    },
-    {
-      "_id": 2,
-      "primerNombre": "qqq",
-      "segundoNombre": "qqq",
-      "primerApellido": "qqq",
-      "segundoApellido": "qqq",
-      "fechaNacimiento": "10/11/1998",
-      "estado": "a",
-      "estadoCivil": {
-        "_id": 0,
-        "nombre": "",
-        "estado": ""
+        "primerNombre": "juan",
+        "segundoNombre": "eduardo",
+        "primerApellido": "escobar",
+        "segundoApellido": "alfaro",
+        "fechaNacimiento": "10/11/1998",
+        "estado": "a",
+        "usuario": {
+          "_id": 1,
+          "username": "juanee",
+          "clave": "12345",
+          "correoElectronico": "juan@gmail.com"
+        }
       },
-      "nivelAcademico": {
-        "_id": 0,
-        "nombre": "",
-        "estado": ""
+      {
+        "_id": 40,
+        "primerNombre": "Camilo",
+        "segundoNombre": "eduardo",
+        "primerApellido": "escobar",
+        "segundoApellido": "alfaro",
+        "fechaNacimiento": "10/11/1998",
+        "estado": "a",
+        "usuario": {
+          "_id": 1,
+          "username": "juanee",
+          "clave": "12345",
+          "correoElectronico": "juan@gmail.com"
+        }
       },
-      "medioConexion": {
-        "_id": 0,
-        "nombre": "",
-        "estado": ""
+      {
+        "_id": 41,
+        "primerNombre": "Alfonso",
+        "segundoNombre": "eduardo",
+        "primerApellido": "escobar",
+        "segundoApellido": "alfaro",
+        "fechaNacimiento": "10/11/1998",
+        "estado": "a",
+        "usuario": {
+          "_id": 1,
+          "username": "juanee",
+          "clave": "12345",
+          "correoElectronico": "juan@gmail.com"
+        }
       },
-      "genero": {
-        "_id": 0,
-        "nombre": "",
-        "estado": ""
-      },
-      "ocupacion": {
-        "_id": 0,
-        "nombre": "",
-        "estado": ""
-      },
-      "nivelSocioEconomico": {
-        "_id": 0,
-        "nombre": "",
-        "estado": "",
-        "descripcion": ""
-      },
-      "telefono": {
-        "_id": 0,
-        "numero": "04241896545"
-      },
-      "hijo": {
-        "_id": 0,
-        "fechaNacimientoHijo": "10/11/1998",
-        "generoHijo": ""
-      },
-      "lugar": {
-        "estado": "",
-        "nombre": "",
-        "tipo": "",
-        "lugar": {
+      {
+        "_id": 2,
+        "primerNombre": "qqq",
+        "segundoNombre": "qqq",
+        "primerApellido": "qqq",
+        "segundoApellido": "qqq",
+        "fechaNacimiento": "10/11/1998",
+        "estado": "a",
+        "estadoCivil": {
           "_id": 0,
+          "nombre": "",
+          "estado": ""
+        },
+        "nivelAcademico": {
+          "_id": 0,
+          "nombre": "",
+          "estado": ""
+        },
+        "medioConexion": {
+          "_id": 0,
+          "nombre": "",
+          "estado": ""
+        },
+        "genero": {
+          "_id": 0,
+          "nombre": "",
+          "estado": ""
+        },
+        "ocupacion": {
+          "_id": 0,
+          "nombre": "",
+          "estado": ""
+        },
+        "nivelSocioEconomico": {
+          "_id": 0,
+          "nombre": "",
+          "estado": "",
+          "descripcion": ""
+        },
+        "telefono": {
+          "_id": 0,
+          "numero": "04241896545"
+        },
+        "hijo": {
+          "_id": 0,
+          "fechaNacimientoHijo": "10/11/1998",
+          "generoHijo": ""
+        },
+        "lugar": {
           "estado": "",
           "nombre": "",
           "tipo": "",
@@ -340,20 +342,26 @@
               "_id": 0,
               "estado": "",
               "nombre": "",
-              "tipo": ""
+              "tipo": "",
+              "lugar": {
+                "_id": 0,
+                "estado": "",
+                "nombre": "",
+                "tipo": ""
+              }
             }
           }
+        },
+        "usuario": {
+          "_id": 0,
+          "username": "",
+          "estado": "",
+          "clave": "",
+          "correoElectronico": ""
         }
-      },
-      "usuario": {
-        "_id": 0,
-        "username": "",
-        "estado": "",
-        "clave": "",
-        "correoElectronico": ""
       }
-    }
-  ],
+    ]
+  },
   "tipoUsuario": [
     {
       "_id": 1,
@@ -728,6 +736,26 @@
         },
         {
           "_id": 2
+        }
+      ]
+    },
+    {
+      "_id": 14,
+      "estado": "Activo",
+      "fechaInicio": "",
+      "fechaFin": "",
+      "estudio": {
+        "_id": 8
+      },
+      "preguntas": [
+        {
+          "_id": 2
+        },
+        {
+          "_id": 1
+        },
+        {
+          "_id": 3
         }
       ]
     }

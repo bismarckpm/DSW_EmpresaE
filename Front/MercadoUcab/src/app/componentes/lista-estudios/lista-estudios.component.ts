@@ -487,9 +487,8 @@ export class ListaEstudiosComponent implements OnInit {
     console.log('estudio');
     console.log(this.estudioData._id);
     this.servicioPregunta.getPreguntasXSubcategoria(this.encuesta.estudio._id).subscribe((data: {}) => {
-      this.preguntasMostrar = data;
-      // this.aux = data;
-      // this.HandleErrorGet();
+      this.aux = data;
+      this.HandleErrorGetPreguntas();
       console.log('preguntas');
       console.log(this.preguntasMostrar);
     });
@@ -499,11 +498,9 @@ export class ListaEstudiosComponent implements OnInit {
   sugerirPreguntas(): void{
     // aqui le mandas el id del estudio
     console.log('estudio', this.estudioData._id);
-    console.log(this.estudioData._id);
     this.servicioPregunta.sugerirPreguntas(this.estudioData._id).subscribe((data: {}) => {
-      this.sugerenciasPreguntas = data;
-      // this.aux = data;
-      // this.HandleErrorGet();
+      this.aux = data;
+      this.HandleErrorGetSugerencias();
       console.log('sugerencaias');
       console.log(this.sugerenciasPreguntas);
     });
@@ -511,9 +508,8 @@ export class ListaEstudiosComponent implements OnInit {
 
   cargarDataMuestra(): void {
     this.estudioService.getDataMuestra(this.encuesta.estudio._id).subscribe(data => {
-      this.dataMuestraMostrar = data;
-      // this.aux = data;
-      // this.HandleErrorGet();
+      this.aux = data;
+      this.HandleErrorGetPoblacion();
       console.log('datamuestra');
       console.log(this.dataMuestraMostrar);
     });

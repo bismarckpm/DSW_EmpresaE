@@ -170,7 +170,7 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
                 estudio.setEdadMaxima(dtoEstudio.getEdadMaxima());
             }
             if(dtoEstudio.getFechaFin() != null) {
-                estudio.setFechaInicio(dateFormat.parse(dtoEstudio.getFechaFin()));
+                estudio.setFechaFin(dateFormat.parse(dtoEstudio.getFechaFin()));
             }
 
             return estudio;

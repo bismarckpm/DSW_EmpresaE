@@ -107,12 +107,7 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
      */
     @Override
     public BaseEntity CreateEntity(DtoEstudio dtoEstudio) throws CustomException, ParseException {
-        if(dtoEstudio.getEstado() == null) {
-            dtoEstudio.setEstado("solicitado");
-        }
-        if(!dtoEstudio.getEstado().equals("solicitado") && !dtoEstudio.getEstado().equals("procesado") && !dtoEstudio.getEstado().equals("en ejecucion") && !dtoEstudio.getEstado().equals("culminado")) {
-            throw new CustomException("MAPEST002","El estado del estudio no es válido");
-        }else if(dtoEstudio.getNombre() == null) {
+        if(dtoEstudio.getNombre() == null) {
             throw new CustomException("MAPEST002","El estudio debe tener un nombre asignado.");
         }else if(dtoEstudio.getVia() == null) {
             throw new CustomException("MAPEST002","El estudio debe tener una vía de respuesta.");
@@ -120,7 +115,6 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
             throw new CustomException("MAPEST002","La vía de respuestas del estudio no es válida.");
         }else {
             EstudioEntity estudio = EntidadesFactory.EstudioInstance();
-            estudio.setEstado(dtoEstudio.getEstado());
             estudio.setNombre(dtoEstudio.getNombre());
             estudio.setVia(dtoEstudio.getVia());
 
@@ -162,9 +156,17 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
 
             if(dtoEstudio.getComentarioAnalista() != null) {
                 estudio.setComentarioAnalista(dtoEstudio.getComentarioAnalista());
-                estudio.setFechaFin(dateFormat.parse(dtoEstudio.getFechaFin()));
-                estudio.setEstado("culminado");
+                if(dtoEstudio.getEstado() == null) {
+                    estudio.setEstado("culminado");
+                    estudio.setFechaFin(new Date());
+                }
             }
+            if(dtoEstudio.getEstado() == null) {
+                estudio.setEstado("solicitado");
+            }
+
+            estudio.setEstado(dtoEstudio.getEstado());
+
             if(dtoEstudio.getEdadMinima() != null) {
                 estudio.setEdadMinima(dtoEstudio.getEdadMinima());
             }

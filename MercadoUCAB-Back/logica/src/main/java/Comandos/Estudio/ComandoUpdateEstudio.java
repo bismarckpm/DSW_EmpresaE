@@ -10,6 +10,8 @@ import ucab.empresae.dtos.DtoFactory;
 import ucab.empresae.dtos.DtoResponse;
 import ucab.empresae.entidades.EstudioEntity;
 
+import java.util.Date;
+
 public class ComandoUpdateEstudio extends ComandoBase<DtoResponse> {
 
     private DtoEstudio dtoEstudio;

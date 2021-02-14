@@ -19,7 +19,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class EstudioMapper extends GenericMapper<DtoEstudio> {
 
@@ -117,7 +116,7 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
             estudio.setNombre(dtoEstudio.getNombre());
             estudio.setVia(dtoEstudio.getVia());
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
             if(dtoEstudio.getFechaInicio() == null) {
                 estudio.setFechaInicio(new Date());

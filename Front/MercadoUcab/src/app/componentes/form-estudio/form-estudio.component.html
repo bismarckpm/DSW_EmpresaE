@@ -79,23 +79,6 @@
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-md-5 mb-3">
-            <label for="estado">Estado del Estudio </label>
-            <select class="custom-select d-block w-100"  [(ngModel)]="estudio.estado" formControlName="estadoEstudio"  value="estado">
-              <option value="">Choose...</option>
-              <option value="solicitado">Solicitado</option>
-              <option value="procesado">Procesado</option>
-              <option value="en ejecucion">En ejecucion</option>
-              <option value="culminado">Culminado</option>
-            </select>
-            <div *ngIf="estadoEstudio.invalid && (estadoEstudio.dirty || estadoEstudio.touched)" class="alert alert-danger">
-              <div *ngIf="estadoEstudio.errors.required">
-                Este campo es obligatorio
-              </div>
-            </div>
-          </div>
-        </div>
 
         <div class="row">
         <div class="col-md-4">

@@ -8,6 +8,7 @@ import { EstudioService } from 'src/app/services/estudio.service';
 import { LugarService } from 'src/app/services/lugar.service';
 import { NivelSocioEconomicoService } from 'src/app/services/nivel-socio-economico.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-lista-estudio-cliente',
@@ -33,7 +34,7 @@ export class ListaEstudioClienteComponent implements OnInit {
    // Declaracion para los dropdown
    nivelSocioEconomico: any;
    subcategoria: any;
-
+    aux:any=[];
  
    ///// Atributos para la busqueda de acuerdo a lo seleccionado
    lugar: any;
@@ -58,6 +59,7 @@ export class ListaEstudioClienteComponent implements OnInit {
     public lugarService: LugarService,
     public nivelsocioeconomicoService: NivelSocioEconomicoService,
     public actRoute: ActivatedRoute,
+    public toast:ToastService,
     public router: Router,
     private formBuilder: FormBuilder
     ) {this.createForm();}
@@ -71,7 +73,13 @@ export class ListaEstudioClienteComponent implements OnInit {
   let id = JSON.parse(localStorage.getItem("usuarioID"));
 
     this.estudioService.getEstudioCliente(id).subscribe(data => {
-      this.estudios = data;
+      this.aux=data;
+    if(this.aux.estado == "Exitoso"){
+      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+     this.estudios = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado,this.aux.mensaje)
+    } 
     });
   }
 
@@ -135,19 +143,37 @@ export class ListaEstudioClienteComponent implements OnInit {
 /// Busqueda para los drop de lugar por pais seleccionado previamente
 addLugar(){
   this.lugarService.getLugars().subscribe((Lugares: {}) => {
-    this.estados = Lugares;
+    this.aux=Lugares;
+    if(this.aux.estado == "Exitoso"){
+      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+     this.estados = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado,this.aux.mensaje)
+    } 
   });
 }
 
 addMunicipios(id){
   this.lugarService.getMunicipio(id).subscribe((data: {}) => {
-    this.municipios = data;
+    this.aux=data;
+    if(this.aux.estado == "Exitoso"){
+      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+     this.municipios = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado,this.aux.mensaje)
+    } 
   });
 }
 
 addParroquia(id){
   this.lugarService.getParroquia(0,id).subscribe((data: {}) => {
-    this.parroquias = data;
+    this.aux=data;
+    if(this.aux.estado == "Exitoso"){
+      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+     this.parroquias = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado,this.aux.mensaje)
+    } 
   });
 }
 
@@ -176,13 +202,25 @@ seleccionarParroquia(id){
 /// Esto es para mostrar en los drops doww
 addSubcategoria(){
   this.subcategoriaService.getsubcategorias().subscribe((data: {}) => {
-    this.subcategoria = data;
+    this.aux=data;
+    if(this.aux.estado == "Exitoso"){
+      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+     this.subcategoria = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado,this.aux.mensaje)
+    } 
   });
 }
 
 addNivelSocioEconomico(){
   this.nivelsocioeconomicoService.getNivelesSocioEconomicos().subscribe((data: {}) => {
-    this.nivelSocioEconomico = data;
+    this.aux=data;
+    if(this.aux.estado == "Exitoso"){
+      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+     this.nivelSocioEconomico = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado,this.aux.mensaje)
+    } 
   });
 }
 

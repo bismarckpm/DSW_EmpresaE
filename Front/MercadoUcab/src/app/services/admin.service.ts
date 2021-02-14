@@ -9,6 +9,10 @@ import { Administrador } from '../models/Administrador';
 })
 export class AdminService {
 
+  
+
+  
+
   secciones: string[] = [
     'Inicio',
     'Perfil',
@@ -27,6 +31,7 @@ export class AdminService {
   
   //apiurl='http://localhost:3000';
   apiurl = 'http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+
 
   constructor(
     private http: HttpClient

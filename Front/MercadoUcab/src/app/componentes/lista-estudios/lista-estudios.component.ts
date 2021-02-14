@@ -391,7 +391,6 @@ seleccionarParroquia(id){
   createForm(): void {
     this.formEstudio = this.formBuilder.group({
       nombreEstudio: ['', [Validators.required, Validators.pattern(this.patronNombreEstudio)]],
-      estadoEstudio: ['', Validators.required],
       lugarEstudio: [''],
       lugarmunicipio: [''],
       lugarparroquia: [''],
@@ -408,9 +407,9 @@ seleccionarParroquia(id){
       edadMaximaEstudio: ['', [Validators.required, Validators.maxLength(2), Validators.pattern(this.patronEdadEstudio)]],
       comentarioAnalistaEstudio: ['', Validators.pattern(this.patronNombreEstudio)],
       subcategoriaEstudio: ['', [Validators.required]],
-      nivelEstudio: '',
-      GeneroEstudio:'',
-      CategoriaEstudio:'',
+      nivelEstudio: [''],
+      GeneroEstudio:[''],
+      CategoriaEstudio:[''],
 
     });
 

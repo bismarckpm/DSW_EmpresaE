@@ -8,6 +8,7 @@ import { EstudioService } from 'src/app/services/estudio.service';
 import { LugarService } from 'src/app/services/lugar.service';
 import { NivelSocioEconomicoService } from 'src/app/services/nivel-socio-economico.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-form-estudio',
@@ -43,12 +44,15 @@ export class FormEstudioComponent implements OnInit {
   patronFechaEstudio: any = /^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/
   patronNombreEstudio: any = /^[A-Za-z\s]+$/;
 
+  aux:any=[];
+
   constructor(
     private formBuilder: FormBuilder,
     public estudioService: EstudioService,
     public lugarService: LugarService,
     public subcategoriaService: SubcategoriaService,
     public analistaService:AnalistaService,
+    public toast:ToastService,
     public nivelsocioeconomicoService: NivelSocioEconomicoService
     ) {
     this.createForm();
@@ -63,7 +67,13 @@ export class FormEstudioComponent implements OnInit {
 
   addAnalistas(){
       this.analistaService.getAnalistas().subscribe( data =>{
-        this.analistas=data;
+        this.aux = data;
+        if(this.aux.estado == "Exitoso"){
+          this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+         this.analistas = this.aux.objeto;
+        }else{
+          this.toast.showError(this.aux.estado,this.aux.mensaje)
+        } 
       })
   }
 
@@ -85,7 +95,13 @@ export class FormEstudioComponent implements OnInit {
 /// Busqueda para los drop de lugar por pais seleccionado previamente
 addLugar(){
   this.lugarService.getLugars().subscribe((Lugares: {}) => {
-    this.estados = Lugares;
+    this.aux = Lugares;
+    if(this.aux.estado == "Exitoso"){
+      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+     this.estados = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado,this.aux.mensaje)
+    } 
   });
 }
 
@@ -95,7 +111,13 @@ busquedaMunicipio(id){
   // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
   if (id > 0 ){
     this.lugarService.getMunicipio(this.auxEstadoID).subscribe((data: {}) => {
-      this.municipios = data;
+      this.aux = data;
+    if(this.aux.estado == "Exitoso"){
+      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+     this.municipios = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado,this.aux.mensaje)
+    } 
     });
   }
 
@@ -107,7 +129,13 @@ busquedaParroquia(id){
   // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
   if (id > 0 ) {
     this.lugarService.getParroquia(this.auxMunicipioID, id).subscribe((data: {}) => {
-      this.parroquias = data;
+      this.aux = data;
+    if(this.aux.estado == "Exitoso"){
+      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+     this.parroquias = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado,this.aux.mensaje)
+    } 
     });
   }
 }
@@ -119,13 +147,25 @@ seleccionarParroquia(id){
   /////////////// Dropdowns ///////////////////////
   addSubcategoria(){
     this.subcategoriaService.getsubcategorias().subscribe((data: {}) => {
-      this.subcategoria = data;
+      this.aux = data;
+    if(this.aux.estado == "Exitoso"){
+      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+     this.subcategoria = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado,this.aux.mensaje)
+    } 
     });
   }
 
   addNivelSocioEconomico(){
     this.nivelsocioeconomicoService.getNivelesSocioEconomicos().subscribe((data: {}) => {
-      this.nivelSocioEconomico = data;
+      this.aux = data;
+    if(this.aux.estado == "Exitoso"){
+      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+     this.nivelSocioEconomico = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado,this.aux.mensaje)
+    } 
     });
   }
 
@@ -145,7 +185,6 @@ seleccionarParroquia(id){
   createForm(): void {
     this.formEstudio = this.formBuilder.group({
       nombreEstudio: ['', [Validators.required, Validators.pattern(this.patronNombreEstudio)]],
-      estadoEstudio: ['', Validators.required],
       fechaInicioEstudio: ['', [Validators.required, Validators.pattern(this.patronFechaEstudio)]],
       fechaFinEstudio: ['', [ Validators.pattern(this.patronFechaEstudio)]],
       edadMinimaEstudio: ['', [Validators.required, Validators.maxLength(2), Validators.pattern(this.patronEdadEstudio)]],

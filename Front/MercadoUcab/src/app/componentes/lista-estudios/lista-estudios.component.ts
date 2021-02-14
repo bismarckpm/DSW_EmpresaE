@@ -5,6 +5,7 @@ import { Estudio } from 'src/app/models/estudio';
 import { Lugar } from 'src/app/models/Lugar';
 import { NivelSocioEconomico } from 'src/app/models/nivel-socio-economico';
 import { Subcategoria } from 'src/app/models/subcategoria';
+import { Encuestado } from 'src/app/models/encuestado';
 import { AnalistaService } from 'src/app/services/analista.service';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { EncuestaService } from 'src/app/services/encuesta.service';
@@ -15,6 +16,8 @@ import { NivelSocioEconomicoService } from 'src/app/services/nivel-socio-economi
 import { PreguntaService } from 'src/app/services/pregunta.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 import { ToastService } from 'src/app/services/toast.service';
+
+class DataMuestra { constructor(public _id: number){} }
 
 @Component({
   selector: 'app-lista-estudios',
@@ -42,7 +45,7 @@ export class ListaEstudiosComponent implements OnInit {
       nombre: '',
       tipo: '',
       lugar : {_id: 0, estado: '', nombre: '', tipo: '', lugar : {_id: 0, estado: '', nombre: '', tipo: ''}}},
-    nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
+    nivelSocioEconomico: {_id: 0},
     subcategoria : {_id: 0, nombre: '', estado: '', categoria: {_id: 0}},
     analista: {_id: 0},
     genero: {_id: 0},
@@ -97,11 +100,7 @@ export class ListaEstudiosComponent implements OnInit {
   @Input() preguntaInsertar8 = {_id: 0};
   @Input() preguntaInsertar9 = {_id: 0};
   @Input() preguntaInsertar10 = {_id: 0};
-  @Input() preguntaInsertar11 = {_id: 0};
-  @Input() preguntaInsertar12 = {_id: 0};
-  @Input() preguntaInsertar13 = {_id: 0};
-  @Input() preguntaInsertar14 = {_id: 0};
-  @Input() preguntaInsertar15 = {_id: 0};
+  @Input() dataMuestra = {_id : 0};
   cantPreguntas = 0;
   listaPreguntasInsertar = [];
   preguntasMostrar: any = [];
@@ -109,8 +108,8 @@ export class ListaEstudiosComponent implements OnInit {
   opcionesCantidad = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   sugerenciasPreguntas: any = [];
   listaMuestraInsertar = [];
-
-  @Input() dataMuestra = {_id : 0};
+  dataMuestraMostrar: Encuestado[] = [];
+  listaMuestraSeleccionada = [];
 
   estudioCambio = true;
   encuestaCambio = false;
@@ -150,9 +149,18 @@ export class ListaEstudiosComponent implements OnInit {
     });
   }
 
-  Aprobar(): void{
+  aprobar(): void{
     this.estudioCambio = false;
     this.encuestaCambio = true;
+    this.encuesta.estudio._id = this.estudioData._id;
+    this.estudioService.aprobarEstudio(this.estudioData._id).subscribe(data => {});
+    this.cargarDataMuestra();
+  }
+
+  rechazar(): void {
+    console.log('estudio rechado');
+    console.log(this.estudioData._id);
+    this.estudioService.rechazarEstudio(this.estudioData._id).subscribe(data => {});
   }
 
   updateEstudio(): void{
@@ -213,7 +221,7 @@ export class ListaEstudiosComponent implements OnInit {
     }
   }
 
-
+  // Metodo para cargar dropdown de género
   addGenero(): void {
     this.generoSerive.getGeneros().subscribe(data => {
       this.aux = data;
@@ -226,6 +234,7 @@ export class ListaEstudiosComponent implements OnInit {
     });
   }
 
+  // Metodo para cargar dropdown de categoría
   addCategoria(): void {
     this.categoriService.getCategorias().subscribe(data => {
       this.aux = data;
@@ -238,6 +247,7 @@ export class ListaEstudiosComponent implements OnInit {
     });
   }
 
+  // Metodo para cargar dropdown de analista
   addAnalistas(): void {
     this.analistaService.getAnalistas().subscribe( data => {
       this.aux = data;
@@ -263,6 +273,7 @@ export class ListaEstudiosComponent implements OnInit {
     });
   }
 
+  // Metodo para cargar dropdown de municipios
   addMunicipios(id): void{
     this.lugarService.getMunicipio(id).subscribe((data: {}) => {
       this.aux = data;
@@ -281,6 +292,31 @@ export class ListaEstudiosComponent implements OnInit {
       if (this.aux.estado === 'Exitoso'){
         this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
         this.parroquias = this.aux.objeto;
+      }else{
+        this.toast.showError(this.aux.estado, this.aux.mensaje);
+      }
+    });
+  }
+
+  /// Esto es para mostrar en los drops doww
+  addSubcategoria(): void{
+    this.subcategoriaService.getsubcategorias().subscribe((data: {}) => {
+      this.aux = data;
+      if (this.aux.estado === 'Exitoso'){
+        this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+        this.subcategoria = this.aux.objeto;
+      }else{
+        this.toast.showError(this.aux.estado, this.aux.mensaje);
+      }
+    });
+  }
+
+  addNivelSocioEconomico(): void{
+    this.nivelsocioeconomicoService.getNivelesSocioEconomicos().subscribe((data: {}) => {
+      this.aux = data;
+      if (this.aux.estado === 'Exitoso'){
+        this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+        this.nivelSocioEconomico = this.aux.objeto;
       }else{
         this.toast.showError(this.aux.estado, this.aux.mensaje);
       }
@@ -329,32 +365,6 @@ export class ListaEstudiosComponent implements OnInit {
 
   }
 
-
-  /// Esto es para mostrar en los drops doww
-  addSubcategoria(): void{
-    this.subcategoriaService.getsubcategorias().subscribe((data: {}) => {
-      this.aux = data;
-      if (this.aux.estado === 'Exitoso'){
-        this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
-        this.subcategoria = this.aux.objeto;
-      }else{
-        this.toast.showError(this.aux.estado, this.aux.mensaje);
-      }
-    });
-  }
-
-  addNivelSocioEconomico(): void{
-    this.nivelsocioeconomicoService.getNivelesSocioEconomicos().subscribe((data: {}) => {
-      this.aux = data;
-      if (this.aux.estado === 'Exitoso'){
-        this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
-        this.nivelSocioEconomico = this.aux.objeto;
-      }else{
-        this.toast.showError(this.aux.estado, this.aux.mensaje);
-      }
-    });
-  }
-
   // Validaciones de Pregunta
   get nombreEstudio(){return this.formEstudio.get('nombreEstudio'); }
   // get comentarioAnalistaEstudio(){return this.formEstudio.get('comentarioAnalistaEstudio'); }
@@ -379,13 +389,10 @@ export class ListaEstudiosComponent implements OnInit {
   get GeneroEstudio(){return this.formEstudio.get('GeneroEstudio'); }
   get CategoriaEstudio(){return this.formEstudio.get('CategoriaEstudio'); }
 
-    //////////////////////////////////////////////////// Metodos Para la parte de encuesta
+  //////////////////////////////////////////////////// Metodos Para la parte de encuesta
 
-    ///// Metodos para las validaciones
-    get fechaInicioEncuesta(){ return this.formEncuesta.get('fechaInicioEncuesta'); }
-    get fechaFinEncuesta(){return this.formEncuesta.get('fechaFinEncuesta'); }
-    get estudio(){return this.formEncuesta.get('estudio'); }
-    get pregunta(){ return this.formEncuesta.get('pregunta'); }
+  ///// Metodos para las validaciones
+  get pregunta(){ return this.formEncuesta.get('pregunta'); }
 
   createForm(): void {
     this.formEstudio = this.formBuilder.group({
@@ -412,55 +419,103 @@ export class ListaEstudiosComponent implements OnInit {
     });
 
     this.formEncuesta = this.formBuilder.group({
-      fechaInicioEncuesta: ['', [Validators.required, Validators.pattern(this.patronFechaEstudio)]],
-      fechaFinEncuesta: ['', [ Validators.pattern(this.patronFechaEstudio)]],
-      estudio: ['', Validators.required],
       pregunta: ['', Validators.required],
     });
   }
 
 
-
   // Metodo para la creacion de la encuesta del estudio
-   addEncuesta(): any{
-     console.log(this.encuesta);
-     if (this.formEncuesta.valid) {
-       this.encuesta.preguntas = this.listaPreguntasInsertar;
-       this.servicio.createEncuesta(this.encuesta).subscribe((data: {}) => {
-         this.toast.showSuccess('La encuesta ha sido creada', 'Creada satisfactoriamente');
-       },
-       (error) => {
-         this.toast.showError('Error de conexión', 'Intentelo más tarde');
-       });
-       this.encuesta = {
-         _id: 0,
-         estado: '',
-         fechaInicio: '',
-         fechaFin: '',
-         estudio: {_id: 0},
-         preguntas: []
-       };
-       location.reload();
-     }
-     else{
-       this.toast.showError('Campos Incompletos', 'ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
-     }
-   }
+  addEncuesta(): any{
+    this.encuesta.estudio._id = this.estudioData._id;
+    console.log(this.encuesta);
+    if (this.formEncuesta.valid && this.listaPreguntasInsertar.length === this.cantPreguntas) {
+      this.encuesta.preguntas = this.listaPreguntasInsertar;
+      this.servicio.createEncuesta(this.encuesta).subscribe((data: {}) => {
+        this.toast.showSuccess('La encuesta ha sido creada', 'Creada satisfactoriamente');
+        setTimeout(() => {}, 4500);
+        this.encuesta = {
+          _id: 0,
+          estado: '',
+          fechaInicio: '',
+          fechaFin: '',
+          estudio: {_id: 0},
+          preguntas: []
+        };
+        location.reload();
+        this.limpiar();
+      },
+      (error) => {
+        this.toast.showError('Error de conexión', 'Intentelo más tarde');
+      });
+    }
+    else{
+       this.toast.showError('Campos Incompletos', 'Es necesario llenar los todos los campos');
+    }
+  }
 
+  // agregar encuestados de la datamuestra a la lista a enviar
+  addDataMuestra(): void {
+    this.listaMuestraInsertar.push(new DataMuestra(this.dataMuestra._id));
+    // aqui tengo que hacer pop de la lista datamuestraMostrar
+    this.listaMuestraInsertar.forEach(muestra => {
+      this.dataMuestraMostrar.forEach(data => {
+        if (data._id === muestra._id) {
+          const persona = data.primerNombre + ' ' + data.primerApellido;
+          this.listaMuestraSeleccionada.push(persona);
+          this.listaMuestraSeleccionada = this.listaMuestraSeleccionada.filter( (value, index, self) => {
+            return self.indexOf(value) === index;
+          });
+        }
+      });
+    });
+    this.dataMuestra._id = 0;
+  }
 
-    // // aqui yo mando el id del estudio para que me devuelva una lista de preguntas
+  // agregar pregunta a la lista de preguntas
+  addPreguntaEncuesta(preguntaInsertar): void {
+    if (preguntaInsertar._id !== 0){
+      this.listaPreguntasInsertar.push(preguntaInsertar);
+      console.log(this.listaPreguntasInsertar);
+    }else {
+      this.toast.showError('Seleccion incorrecta', 'Seleccione una pregunta válida');
+    }
+  }
+
+  // // aqui yo mando el id del estudio para que me devuelva una lista de preguntas
   // // asociadas a la subcategoria del estudio
-   cargarPreguntas(i: number): void {
-     this.servicioPregunta.getPreguntasXSubcategoria(this.encuesta.estudio._id).subscribe((data: {}) => {
-       this.preguntasMostrar = data;
-     });
-     this.cantPreguntas = i;
-   }
+  cargarPreguntas(i: number): void {
+    console.log('estudio');
+    console.log(this.estudioData._id);
+    this.servicioPregunta.getPreguntasXSubcategoria(this.encuesta.estudio._id).subscribe((data: {}) => {
+      this.preguntasMostrar = data;
+      // this.aux = data;
+      // this.HandleErrorGet();
+      console.log('preguntas');
+      console.log(this.preguntasMostrar);
+    });
+    this.cantPreguntas = i;
+  }
 
   sugerirPreguntas(): void{
     // aqui le mandas el id del estudio
-    this.servicioPregunta.sugerirPreguntas(this.aux).subscribe((data: {}) => {
+    console.log('estudio', this.estudioData._id);
+    console.log(this.estudioData._id);
+    this.servicioPregunta.sugerirPreguntas(this.estudioData._id).subscribe((data: {}) => {
       this.sugerenciasPreguntas = data;
+      // this.aux = data;
+      // this.HandleErrorGet();
+      console.log('sugerencaias');
+      console.log(this.sugerenciasPreguntas);
+    });
+  }
+
+  cargarDataMuestra(): void {
+    this.estudioService.getDataMuestra(this.encuesta.estudio._id).subscribe(data => {
+      this.dataMuestraMostrar = data;
+      // this.aux = data;
+      // this.HandleErrorGet();
+      console.log('datamuestra');
+      console.log(this.dataMuestraMostrar);
     });
   }
 
@@ -475,18 +530,44 @@ export class ListaEstudiosComponent implements OnInit {
     this.preguntaInsertar8 = {_id: 0};
     this.preguntaInsertar9 = {_id: 0};
     this.preguntaInsertar10 = {_id: 0};
-    this.preguntaInsertar11 = {_id: 0};
-    this.preguntaInsertar12 = {_id: 0};
-    this.preguntaInsertar13 = {_id: 0};
-    this.preguntaInsertar14 = {_id: 0};
-    this.preguntaInsertar15 = {_id: 0};
     this.cantPreguntas = 0;
   }
 
+  // Estudio
   HandleErrorGet(): void {
     if (this.aux.estado === 'Exitoso'){
       this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
       this.estudios = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
+  }
+
+  // Preguntas
+  HandleErrorGetPreguntas(): void {
+    if (this.aux.estado === 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+      this.preguntasMostrar = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
+  }
+
+  // Poblacion
+  HandleErrorGetPoblacion(): void {
+    if (this.aux.estado === 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+      this.dataMuestraMostrar = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
+  }
+
+  // Sugerencias
+  HandleErrorGetSugerencias(): void {
+    if (this.aux.estado === 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+      this.sugerenciasPreguntas = this.aux.objeto;
     }else{
       this.toast.showError(this.aux.estado, this.aux.mensaje);
     }

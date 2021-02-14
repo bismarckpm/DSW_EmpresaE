@@ -173,6 +173,24 @@ export class EstudioService {
     );
   }
 
+  aprobarEstudio(idEstudio) {
+    console.log('aprobado desde servicio', idEstudio);
+    return this.http.post<Estudio[]>(this.apiurl + '/estudio/aprobar/' + idEstudio, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
+  rechazarEstudio(idEstudio) {
+    console.log('rechazado desde servicio', idEstudio);
+    return this.http.post<Estudio[]>(this.apiurl + '/estudio/rechazar/' + idEstudio, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
   ///////////////////// Error HandleError
   handleError(error) {
     let errorMessage = '';

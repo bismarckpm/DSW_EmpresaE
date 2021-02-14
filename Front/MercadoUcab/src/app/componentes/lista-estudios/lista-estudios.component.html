@@ -24,10 +24,10 @@
           <td>{{ estudio.genero.nombre }}</td>
           <td>{{ estudio.fechaInicio }}</td>
           <td>{{ estudio.fechaFin }}</td>
-
           <td>
             <div  class="d-flex justify-content-around">
-              <button  type="button" class="btn btn-primary" data-toggle="modal" (click)="editar(estudio)" data-target="#exampleModal">
+              <button  type="button" class="btn btn-primary" data-toggle="modal" (click)="editar(estudio)" data-target="#exampleModal"
+              [ngClass]="{'d-none': estudio.estado == 'Rechazado'}">
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
                 </svg>
@@ -38,272 +38,444 @@
                   <div class="modal-content">
                     <!-- Cabezado Modal -->
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Editar Estudio Admin</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <div *ngIf="estudioCambio === true">
+                        <h5 class="modal-title" id="exampleModalLabel">Editar Estudio</h5>
+                      </div>
+                      <div *ngIf="encuestaCambio === true">
+                        <h5 class="modal-title" id="exampleModalLabel">Configurar encuesta</h5>
+                      </div>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="limpiar()">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <!-- Cuerpo completo del Modal -->
                     <div class="modal-body">
-                     
-                      <div *ngIf="estudioCambio==true">
-                      <form [formGroup]="formEstudio" >
-                        <div class="row">
-                          <div class="col-md-12">
-                              <label for="nombre">Nombre</label>
-                              <input type="text" class="form-control" id="nombre" [(ngModel)]="estudioData.nombre" formControlName="nombreEstudio" value="nombre">
-                              <div *ngIf="nombreEstudio.invalid && (nombreEstudio.dirty || nombreEstudio.touched)" class="alert alert-danger">
-                                <div *ngIf="nombreEstudio.errors.required">
+                      <div *ngIf="estudioCambio === true">
+                        <form [formGroup]="formEstudio">
+                          <div class="row">
+                            <div class="col-md-12">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" [(ngModel)]="estudioData.nombre" formControlName="nombreEstudio" value="nombre">
+                                <div *ngIf="nombreEstudio.invalid && (nombreEstudio.dirty || nombreEstudio.touched)" class="alert alert-danger">
+                                  <div *ngIf="nombreEstudio.errors.required">
+                                    Este campo es obligatorio
+                                  </div>
+                                  <div *ngIf="nombreEstudio.errors.pattern">
+                                    Introduzca un formato valido
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-4 mb-3">
+                              <label for="edadMinima">Edad Minima</label>
+                              <input type="text" class="form-control" placeholder="Ej. 23"[(ngModel)]="estudioData.edadMinima" formControlName="edadMinimaEstudio">
+                              <div *ngIf="edadMinimaEstudio.invalid && (edadMinimaEstudio.dirty || edadMinimaEstudio.touched)" class="alert alert-danger">
+                                <div *ngIf="edadMinimaEstudio.errors.required">
                                   Este campo es obligatorio
                                 </div>
-                                <div *ngIf="nombreEstudio.errors.pattern">
-                                  Introduzca un formato valido
+                                <div *ngIf="edadMinimaEstudio.errors.pattern">
+                                  Introduzca una edad valida
                                 </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-6 mb-3">
-                            <label for="edadMinima">Edad Minima</label>
-                            <input type="text" class="form-control" placeholder=" "[(ngModel)]="estudioData.edadMinima" formControlName="edadMinimaEstudio" value="edadMinima">
-                            <div *ngIf="edadMinimaEstudio.invalid && (edadMinimaEstudio.dirty || edadMinimaEstudio.touched)" class="alert alert-danger">
-                              <div *ngIf="edadMinimaEstudio.errors.required">
-                                Este campo es obligatorio
-                              </div>
-                              <div *ngIf="edadMinimaEstudio.errors.pattern">
-                                Introduzca una edad valida
                               </div>
                             </div>
-                          </div>
-                          <div class="col-md-6 mb-3">
-                            <label for="edadMaxima">Edad Maxima</label>
-                            <input type="text" class="form-control" id="edadMaxima" placeholder=" "[(ngModel)]="estudioData.edadMaxima" formControlName="edadMaximaEstudio">
-                            <div *ngIf="edadMaximaEstudio.invalid && (edadMaximaEstudio.dirty || edadMaximaEstudio.touched)" class="alert alert-danger">
-                              <div *ngIf="edadMaximaEstudio.errors.required">
-                                Este campo es obligatorio
+                            <div class="col-md-4 mb-3">
+                              <label for="edadMaxima">Edad Maxima</label>
+                              <input type="text" class="form-control" id="edadMaxima" placeholder="Ej. 25"[(ngModel)]="estudioData.edadMaxima" formControlName="edadMaximaEstudio">
+                              <div *ngIf="edadMaximaEstudio.invalid && (edadMaximaEstudio.dirty || edadMaximaEstudio.touched)" class="alert alert-danger">
+                                <div *ngIf="edadMaximaEstudio.errors.required">
+                                  Este campo es obligatorio
+                                </div>
+                                <div *ngIf="edadMaximaEstudio.errors.pattern">
+                                  Introduzca una edad valida
+                                </div>
                               </div>
-                              <div *ngIf="edadMaximaEstudio.errors.pattern">
-                                Introduzca una edad valida
+                            </div>
+                            <div class="col-md-4 mb-3">
+                              <label for="" >Género</label>
+                              <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.genero._id" formControlName="GeneroEstudio">
+                                <option value="0">Choose...</option>
+                                <option *ngFor="let gen of genero" [ngValue]= "gen._id"  >{{gen.nombre}}</option>
+                              </select>
+                              <div *ngIf="GeneroEstudio.invalid && (GeneroEstudio.dirty || GeneroEstudio.touched)" class="alert alert-danger">
+                                <div *ngIf="GeneroEstudio.errors.required">
+                                  Este campo es obligatorio
+                                </div>
+                              </div> 
+                            </div>
+                          </div>
+                          <div class="form-row">
+                            <!-- <div class="col-md-6 mb-3">
+                              <label for="" >Género</label>
+                              <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.genero._id" formControlName="GeneroEstudio">
+                                <option value="0">Choose...</option>
+                                <option *ngFor="let gen of genero" [ngValue]= "gen._id"  >{{gen.nombre}}</option>
+                              </select>
+                              <div *ngIf="GeneroEstudio.invalid && (GeneroEstudio.dirty || GeneroEstudio.touched)" class="alert alert-danger">
+                                <div *ngIf="GeneroEstudio.errors.required">
+                                  Este campo es obligatorio
+                                </div>
+                              </div> 
+                            </div> -->
+                            <div class="col-md-6 mb-3">
+                              <label for="" >Categoria</label>
+                              <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.subcategoria.categoria._id" formControlName="CategoriaEstudio">
+                                <option value="0">Choose...</option>
+                                <option *ngFor="let cate of categorias" [ngValue]= "cate._id" categorias >{{cate.nombre}}</option>
+                              </select>
+                              <div *ngIf="CategoriaEstudio.invalid && (CategoriaEstudio.dirty || CategoriaEstudio.touched)" class="alert alert-danger">
+                                <div *ngIf="CategoriaEstudio.errors.required">
+                                  Este campo es obligatorio
+                                </div>
+                              </div> 
+                            </div>
+                            <div class="col-md-6 mb-3">
+                              <label for="">Subcategoria </label>
+                              <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.subcategoria._id" formControlName="subcategoriaEstudio" 
+                              value="estudioData.subcategoria._id">
+                                <option  value=""> Seleccione una ...</option>
+                                <option  *ngFor="let sub of subcategoria" [ngValue]= "sub._id"  >{{sub.nombre}}</option>
+                              </select>
+                              <div *ngIf="subcategoriaEstudio.invalid && (subcategoriaEstudio.dirty || subcategoriaEstudio.touched)" class="alert alert-danger">
+                                <div *ngIf="subcategoriaEstudio.errors.required">
+                                  Este campo es obligatorio
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <div class="form-row">
-                          <div class="col-md-6 mb-3">
-                            <label for="" >Género</label>
-                            <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.genero._id" formControlName="GeneroEstudio">
-                              <option value="0">Choose...</option>
-                              <option *ngFor="let gen of genero" [ngValue]= "gen._id"  >{{gen.nombre}}</option>
-                            </select>
-                            <div *ngIf="GeneroEstudio.invalid && (GeneroEstudio.dirty || GeneroEstudio.touched)" class="alert alert-danger">
-                              <div *ngIf="GeneroEstudio.errors.required">
-                                Este campo es obligatorio
-                              </div>
-                            </div> 
-                          </div>
-                          <div class="col-md-6 mb-3">
-                            <label for="" >Categoria</label>
-                            <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.subcategoria.categoria._id" formControlName="CategoriaEstudio">
-                              <option value="0">Choose...</option>
-                              <option *ngFor="let cate of categorias" [ngValue]= "cate._id" categorias >{{cate.nombre}}</option>
-                            </select>
-                            <div *ngIf="CategoriaEstudio.invalid && (CategoriaEstudio.dirty || CategoriaEstudio.touched)" class="alert alert-danger">
-                              <div *ngIf="CategoriaEstudio.errors.required">
-                                Este campo es obligatorio
-                              </div>
-                            </div> 
-                          </div>
-                          <div class="col-md-6 mb-3">
-                            <label for="">Subcategoria </label>
-                            <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.subcategoria._id" formControlName="subcategoriaEstudio" 
-                            value="estudioData.subcategoria._id">
-                              <option  value=""> Seleccione una ...</option>
-                              <option  *ngFor="let sub of subcategoria" [ngValue]= "sub._id"  >{{sub.nombre}}</option>
-                            </select>
-                            <div *ngIf="subcategoriaEstudio.invalid && (subcategoriaEstudio.dirty || subcategoriaEstudio.touched)" class="alert alert-danger">
-                              <div *ngIf="subcategoriaEstudio.errors.required">
-                                Este campo es obligatorio
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-4 mb-3">
-                            <label for="estado">Estado</label>
-                            <input type="text" class="form-control" [(ngModel)]="estudioData.lugar.lugar.lugar.nombre" value="estudioData.lugar.lugar.lugar.nombre" formControlName="lugarEstudio"  readonly="readonly">
-                          </div>
-                          <div class="col-md-4 mb-3">
-                            <label for="municipio">Municipio</label>
-                            <input type="text" class="form-control" [(ngModel)]="estudioData.lugar.lugar.nombre" value="estudioData.lugar.lugar.nombre" formControlName="lugarmunicipio"  readonly="readonly">
-                          </div>
-                          <div class="col-md-4 mb-3">
-                            <label for="estado">Parroquia</label>
-                            <input type="text" class="form-control" [(ngModel)]="estudioData.lugar.nombre" value="estudioData.lugar.nombre" formControlName="lugarparroquia"  readonly="readonly">
-                          </div>
-                          <div class="col-md-4 mb-3">
-                            <button type="submit" class="btn btn-success"  (click)="Cambio()"> Modificar </button>
-                          </div>
-                        </div>
-                        <div *ngIf="cambio == true" >
                           <div class="row">
                             <div class="col-md-4 mb-3">
                               <label for="estado">Estado</label>
-                              <select class="custom-select d-block w-100"  [(ngModel)]="estadoData._id"  (click)="busquedaMunicipio(estadoData._id)" formControlName="EstadoData"  value="estadoData._id">
-                                <option  *ngFor="let estado of estados" [ngValue]= "estado._id">{{estado.nombre}}</option>
-                              </select>
-                              <div *ngIf="EstadoData.invalid && (EstadoData.dirty || EstadoData.touched)" class="alert alert-danger">
-                                <div *ngIf="EstadoData.errors.required">
-                                  Este campo es obligatorio
-                                </div>
-                              </div>
+                              <input type="text" class="form-control" [(ngModel)]="estudioData.lugar.lugar.lugar.nombre" value="estudioData.lugar.lugar.lugar.nombre" formControlName="lugarEstudio"  readonly="readonly">
                             </div>
-
                             <div class="col-md-4 mb-3">
                               <label for="municipio">Municipio</label>
-                              <select class="custom-select d-block w-100"  [(ngModel)]="municipioData._id" (click)="busquedaParroquia(municipioData._id)" formControlName="MunicipioData"  value="municipioData._id">
-                                <option  *ngFor="let municipio of municipios" [ngValue]= "municipio._id"  >{{municipio.nombre}}</option>
-                              </select>
-                              <div *ngIf="MunicipioData.invalid && (MunicipioData.dirty || MunicipioData.touched)" class="alert alert-danger">
-                                <div *ngIf="MunicipioData.errors.required">
-                                  Este campo es obligatorio
-                                </div>
-                              </div>
+                              <input type="text" class="form-control" [(ngModel)]="estudioData.lugar.lugar.nombre" value="estudioData.lugar.lugar.nombre" formControlName="lugarmunicipio"  readonly="readonly">
                             </div>
                             <div class="col-md-4 mb-3">
                               <label for="estado">Parroquia</label>
-                              <select class="custom-select d-block w-100"  [(ngModel)]="parroquiaData._id"  (click)="seleccionarParroquia(parroquiaData._id)" formControlName="ParroquiaData" value="parroquiaData._id">
-                                <option  *ngFor="let parroquia of parroquias" [ngValue]= "parroquia._id" >{{parroquia.nombre}}</option>
+                              <input type="text" class="form-control" [(ngModel)]="estudioData.lugar.nombre" value="estudioData.lugar.nombre" formControlName="lugarparroquia"  readonly="readonly">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                              <button type="submit" class="btn btn-success"  (click)="Cambio()"> Modificar </button>
+                            </div>
+                          </div>
+                          <div *ngIf="cambio == true" >
+                            <div class="row">
+                              <div class="col-md-4 mb-3">
+                                <label for="estado">Estado</label>
+                                <select class="custom-select d-block w-100"  [(ngModel)]="estadoData._id"  (click)="busquedaMunicipio(estadoData._id)" formControlName="EstadoData"  value="estadoData._id">
+                                  <option  *ngFor="let estado of estados" [ngValue]= "estado._id">{{estado.nombre}}</option>
+                                </select>
+                                <div *ngIf="EstadoData.invalid && (EstadoData.dirty || EstadoData.touched)" class="alert alert-danger">
+                                  <div *ngIf="EstadoData.errors.required">
+                                    Este campo es obligatorio
+                                  </div>
+                                </div>
+                              </div>
+  
+                              <div class="col-md-4 mb-3">
+                                <label for="municipio">Municipio</label>
+                                <select class="custom-select d-block w-100"  [(ngModel)]="municipioData._id" (click)="busquedaParroquia(municipioData._id)" formControlName="MunicipioData"  value="municipioData._id">
+                                  <option  *ngFor="let municipio of municipios" [ngValue]= "municipio._id"  >{{municipio.nombre}}</option>
+                                </select>
+                                <div *ngIf="MunicipioData.invalid && (MunicipioData.dirty || MunicipioData.touched)" class="alert alert-danger">
+                                  <div *ngIf="MunicipioData.errors.required">
+                                    Este campo es obligatorio
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-4 mb-3">
+                                <label for="estado">Parroquia</label>
+                                <select class="custom-select d-block w-100"  [(ngModel)]="parroquiaData._id"  (click)="seleccionarParroquia(parroquiaData._id)" formControlName="ParroquiaData" value="parroquiaData._id">
+                                  <option  *ngFor="let parroquia of parroquias" [ngValue]= "parroquia._id" >{{parroquia.nombre}}</option>
+                                </select>
+                                <div *ngIf="ParroquiaData.invalid && (ParroquiaData.dirty || ParroquiaData.touched)" class="alert alert-danger">
+                                  <div *ngIf="ParroquiaData.errors.required">
+                                    Este campo es obligatorio
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                              <label for="" class="col-sm-6 col-form-label escrituerModal">Nivel Socio Economico</label>
+                              <select name="estudioData.nivelSocioEconomico"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.nivelSocioEconomico._id"  formControlName="nivelEstudio" value="estudioData.nivelSocioEconomico._id" >
+                                <option  value=""> Seleccione un ...</option>
+                                <option  *ngFor="let nivel of nivelSocioEconomico" [ngValue]= "nivel._id"  >{{nivel.nombre}}</option>
                               </select>
-                              <div *ngIf="ParroquiaData.invalid && (ParroquiaData.dirty || ParroquiaData.touched)" class="alert alert-danger">
-                                <div *ngIf="ParroquiaData.errors.required">
+                              <div *ngIf="nivelEstudio.invalid && (nivelEstudio.dirty || nivelEstudio.touched)" class="alert alert-danger">
+                                <div *ngIf="nivelEstudio.errors.required">
                                   Este campo es obligatorio
                                 </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                              <label for="" class="col-sm-6 col-form-label escrituerModal mb-4">Analista</label>
+                              <select   class="custom-select d-block w-100"  [(ngModel)]="estudioData.analista._id" formControlName="analistaEstudio" value="estudioData.analista._id" >
+                                  <option  *ngFor="let analis of analistas" [ngValue]= "analis._id">{{analis.username}}</option>
+                              </select>
+                              <div *ngIf="analistaEstudio.invalid && (analistaEstudio.dirty || analistaEstudio.touched)" class="alert alert-danger">
+                                <div *ngIf="analistaEstudio.errors.required">
+                                  Este campo es obligatorio
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+
+                      <div *ngIf="encuestaCambio === true">
+                        <div class="form-row">
+                          <div class="col-md-9 mb-3">
+                            <label for="pregunta">Seleccione muestra de estudio</label>
+                            <select class="custom-select d-block w-100" [(ngModel)]="dataMuestra._id" id="dataMuestra" value="dataMuestra._id"
+                            name="dataMuestra._id">
+                                <option>Choose...</option>
+                                <option *ngFor="let muestra of dataMuestraMostrar" [ngValue]= "muestra._id">{{ muestra.primerNombre }} {{ muestra.primerApellido }}</option>
+                            </select>
+                          </div>
+                          <div class="col-md-3 mb-3 pt-1">
+                            <br>
+                            <button type="button" class="btn btn-primary" (click)="addDataMuestra()">Agregar</button>
+                          </div>
+                        </div>
+                        <div class="form-row d-none" [ngClass]="{'d-block': listaMuestraSeleccionada.length >= 1}">
+                          <div class="card card-body">
+                            <p *ngFor="let persona of listaMuestraSeleccionada">{{ persona }}</p>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="col-md-12 col-sm-6 mb-3 float-right">
+                            <label for="sugerencia de preguntas" class="text-success font-weight-bolder d-flex justify-content-end" type="button" data-toggle="collapse" 
+                            aria-expanded="false" aria-controls="collapseExample" data-target="#collapseExample"
+                            (click)="sugerirPreguntas()">
+                              Sugerencia de preguntas
+                            </label>
+                            <div class="collapse" id="collapseExample">
+                              <div class="card card-body">
+                                <p *ngFor="let pregunta of sugerenciasPreguntas">{{pregunta.descripcion}}</p>
                               </div>
                             </div>
                           </div>
                         </div>
                         <div class="form-row">
-                          <div class="col-md-6 mb-3">
-                            <label for="" class="col-sm-6 col-form-label escrituerModal">Nivel Socio Economico</label>
-                            <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.nivelSocioEconomico._id"  formControlName="nivelEstudio" value="estudioData.nivelSocioEconomico._id" >
-                              <option  value=""> Seleccione un ...</option>
-                              <option  *ngFor="let nivel of nivelSocioEconomico" [ngValue]= "nivel._id"  >{{nivel.nombre}}</option>
-                            </select>
-                            <div *ngIf="nivelEstudio.invalid && (nivelEstudio.dirty || nivelEstudio.touched)" class="alert alert-danger">
-                              <div *ngIf="nivelEstudio.errors.required">
-                                Este campo es obligatorio
-                              </div>
-                            </div>
+                          <div class="col-md-5 col-sm-6 mb-3">
+                              <label for="cantidadPreguntas">Cantidad de preguntas</label>
                           </div>
-                          <div class="col-md-6 mb-3">
-                            <label for="" class="col-sm-6 col-form-label escrituerModal">Analista</label>
-                            <select   class="custom-select d-block w-100"  [(ngModel)]="estudioData.analista._id" formControlName="analistaEstudio" value="estudioData.analista._id" >
-                                <option  *ngFor="let analis of analistas" [ngValue]= "analis._id">{{analis.username}}</option>
-                            </select>
-                            <div *ngIf="analistaEstudio.invalid && (analistaEstudio.dirty || analistaEstudio.touched)" class="alert alert-danger">
-                              <div *ngIf="analistaEstudio.errors.required">
-                                Este campo es obligatorio
-                              </div>
+                          <div class="col-md-7 col-sm-6 mb-3">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                              <button type="button" class="btn btn-light btn-sm" *ngFor="let opcion of opcionesCantidad" (click)="cargarPreguntas(opcion)">
+                              {{ opcion }}
+                              </button>
                             </div>
                           </div>
                         </div>
-                      </form>
-
-                    </div>
-                    
-
-                  <div *ngIf="encuestaCambio==true">
-
-                      <div class="form-row">
-                      <div class="col-md-9 mb-3">
-                        <label for="pregunta">Seleccione muestra de estudio</label>
-                        <select class="custom-select d-block w-100" [(ngModel)]="dataMuestra._id" id="dataMuestra" value="dataMuestra._id"
-                        name="dataMuestra._id" formControlName="muestra">
-                            <option>Choose...</option>
-                            <option *ngFor="let muestra of dataMuestraMostrar" [ngValue]= "muestra._id">{{ muestra.primerNombre }} {{ muestra.primerApellido }}</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3 mb-3 pt-1">
-                        <br>
-                        <button type="button" class="btn btn-primary" (click)="addDataMuestra()">Agregar</button>
-                    </div>
-                  </div>
-
-               <!--<div class="form-row d-none" [ngClass]="{'d-block': listaMuestraSeleccionada.length >= 1}">
-                      <div class="card card-body">
-                          <p *ngFor="let persona of listaMuestraSeleccionada">{{ persona }}</p>
-                      </div>
-                  </div>-->
-
-                    
-                    <div class="form-row">
-                      <div class="col-md-5 col-sm-6 mb-3">
-                          <label for="cantidadPreguntas">Cantidad de preguntas</label>
-                      </div>
-                      <div class="col-md-7 col-sm-6 mb-3">
-                      <div class="btn-group" role="group" aria-label="Basic example">
-                          <button type="button" class="btn btn-light btn-sm" *ngFor="let opcion of opcionesCantidad" (click)="cargarPreguntas(opcion)">
-                          {{ opcion }}
-                          </button>
-                      </div>
-                      </div>
-                  </div>
-
-                     
-
                         <form [formGroup]="formEncuesta">
-                        
-                          <div class="form-row">
-                            <div class="col-md-12 col-sm-6 mb-3 float-right">
-                                <label for="sugerencia de preguntas" class="text-success font-weight-bolder d-flex justify-content-end" type="button" data-toggle="collapse" 
-                                aria-expanded="false" aria-controls="collapseExample" data-target="#collapseExample"
-                                (click)="sugerirPreguntas()">
-                                    Sugerencia de preguntas
-                                </label>
-                                <div class="collapse" id="collapseExample">
-                                    <div class="card card-body">
-                                        <p *ngFor="let pregunta of sugerenciasPreguntas">{{ pregunta.descripcion }}</p>
-                                    </div>
+                          <div class="form-row d-none" [ngClass]="{'d-block': cantPreguntas >= 1}">
+                            <div class="d-flex justify-content-end">
+                              <div class="col-md-3 col-sm-2 mb-3">
+                                <label for="pregunta">Pregunta 1</label>
+                              </div>
+                              <div class="col-md-7 col-sm-8 mb-3">
+                                <select class="custom-select d-block w-100" [(ngModel)]="preguntaInsertar1._id" id="pregunta" value="preguntaInsertar._id" name="preguntaInsertar1._id" formControlName="pregunta">
+                                  <option>Choose...</option>
+                                  <option *ngFor="let pregunta of preguntasMostrar" [ngValue]= "pregunta._id">{{ pregunta.descripcion }}</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                  Please select a valid option.
                                 </div>
+                              </div>
+                              <div class="col-md-2 col-sm-2 mb-2">
+                                <button type="button" class="btn btn-primary" (click)="addPreguntaEncuesta(preguntaInsertar1)"> + </button>
+                              </div>
                             </div>
-                        </div>
-  
-  
-                      <div class="form-row" [ngClass]="{'d-block': (cantPreguntas === 5 || cantPreguntas === 10 || cantPreguntas === 15)}">
-                        <div class="col-md-3 col-sm-2 mb-3">
-                            <label for="pregunta">Pregunta 1</label>
-                        </div>
-                        <div class="col-md-7 col-sm-8 mb-3">
-                            <select class="custom-select d-block w-100" [(ngModel)]="preguntaInsertar1._id" id="pregunta" value="preguntaInsertar._id" name="preguntaInsertar1._id" formControlName="pregunta">
-                                <option>Choose...</option>
-                                <option *ngFor="let pregunta of preguntasMostrar" [ngValue]= "pregunta._id">{{ pregunta.descripcion }}</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Please select a valid option.
+                          </div>
+                          <div class="form-row d-none" [ngClass]="{'d-block': cantPreguntas >= 2}">
+                            <div class="d-flex justify-content-end">
+                              <div class="col-md-3 col-sm-2 mb-3">
+                                <label for="pregunta">Pregunta 2</label>
+                              </div>
+                              <div class="col-md-7 col-sm-8 mb-3">
+                                <select class="custom-select d-block w-100" [(ngModel)]="preguntaInsertar2._id" id="pregunta" value="preguntaInsertar._id" name="preguntaInsertar2._id" formControlName="pregunta">
+                                  <option>Choose...</option>
+                                  <option *ngFor="let pregunta of preguntasMostrar" [ngValue]= "pregunta._id">{{ pregunta.descripcion }}</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                  Please select a valid option.
+                                </div>
+                              </div>
+                              <div class="col-md-2 col-sm-2 mb-2">
+                                <button type="button" class="btn btn-primary" (click)="addPreguntaEncuesta(preguntaInsertar2)"> + </button>
+                              </div>
                             </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 mb-2">
-                            <button type="button" class="btn btn-primary" (click)="addPreguntaEncuesta(preguntaInsertar1)"> + </button>
-                        </div>
-                    </div>
-
+                          </div>
+                          <div class="form-row d-none" [ngClass]="{'d-block': cantPreguntas >= 3}">
+                            <div class="d-flex justify-content-end">
+                              <div class="col-md-3 col-sm-2 mb-3">
+                                <label for="pregunta">Pregunta 3</label>
+                              </div>
+                              <div class="col-md-7 col-sm-8 mb-3">
+                                <select class="custom-select d-block w-100" [(ngModel)]="preguntaInsertar3._id" id="pregunta" value="preguntaInsertar._id" name="preguntaInsertar3._id" formControlName="pregunta">
+                                  <option>Choose...</option>
+                                  <option *ngFor="let pregunta of preguntasMostrar" [ngValue]= "pregunta._id">{{ pregunta.descripcion }}</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                  Please select a valid option.
+                                </div>
+                              </div>
+                              <div class="col-md-2 col-sm-2 mb-2">
+                                <button type="button" class="btn btn-primary" (click)="addPreguntaEncuesta(preguntaInsertar3)"> + </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-row d-none" [ngClass]="{'d-block': cantPreguntas >= 4}">
+                            <div class="d-flex justify-content-end">
+                              <div class="col-md-3 col-sm-2 mb-3">
+                                <label for="pregunta">Pregunta 4</label>
+                              </div>
+                              <div class="col-md-7 col-sm-8 mb-3">
+                                <select class="custom-select d-block w-100" [(ngModel)]="preguntaInsertar4._id" id="pregunta" value="preguntaInsertar._id" name="preguntaInsertar4._id" formControlName="pregunta">
+                                  <option>Choose...</option>
+                                  <option *ngFor="let pregunta of preguntasMostrar" [ngValue]= "pregunta._id">{{ pregunta.descripcion }}</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                  Please select a valid option.
+                                </div>
+                              </div>
+                              <div class="col-md-2 col-sm-2 mb-2">
+                                <button type="button" class="btn btn-primary" (click)="addPreguntaEncuesta(preguntaInsertar4)"> + </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-row d-none" [ngClass]="{'d-block': cantPreguntas >= 5}">
+                            <div class="d-flex justify-content-end">
+                              <div class="col-md-3 col-sm-2 mb-3">
+                                <label for="pregunta">Pregunta 5</label>
+                              </div>
+                              <div class="col-md-7 col-sm-8 mb-3">
+                                <select class="custom-select d-block w-100" [(ngModel)]="preguntaInsertar5._id" id="pregunta" value="preguntaInsertar._id" name="preguntaInsertar5._id" formControlName="pregunta">
+                                  <option>Choose...</option>
+                                  <option *ngFor="let pregunta of preguntasMostrar" [ngValue]= "pregunta._id">{{ pregunta.descripcion }}</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                  Please select a valid option.
+                                </div>
+                              </div>
+                              <div class="col-md-2 col-sm-2 mb-2">
+                                <button type="button" class="btn btn-primary" (click)="addPreguntaEncuesta(preguntaInsertar5)"> + </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-row d-none" [ngClass]="{'d-block': cantPreguntas >= 6}">
+                            <div class="d-flex justify-content-end">
+                              <div class="col-md-3 col-sm-2 mb-3">
+                                <label for="pregunta">Pregunta 6</label>
+                              </div>
+                              <div class="col-md-7 col-sm-8 mb-3">
+                                <select class="custom-select d-block w-100" [(ngModel)]="preguntaInsertar6._id" id="pregunta" value="preguntaInsertar._id" name="preguntaInsertar6._id" formControlName="pregunta">
+                                  <option>Choose...</option>
+                                  <option *ngFor="let pregunta of preguntasMostrar" [ngValue]= "pregunta._id">{{ pregunta.descripcion }}</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                  Please select a valid option.
+                                </div>
+                              </div>
+                              <div class="col-md-2 col-sm-2 mb-2">
+                                <button type="button" class="btn btn-primary" (click)="addPreguntaEncuesta(preguntaInsertar6)"> + </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-row d-none" [ngClass]="{'d-block': cantPreguntas >= 7}">
+                            <div class="d-flex justify-content-end">
+                              <div class="col-md-3 col-sm-2 mb-3">
+                                <label for="pregunta">Pregunta 7</label>
+                              </div>
+                              <div class="col-md-7 col-sm-8 mb-3">
+                                <select class="custom-select d-block w-100" [(ngModel)]="preguntaInsertar7._id" id="pregunta" value="preguntaInsertar._id" name="preguntaInsertar7._id" formControlName="pregunta">
+                                  <option>Choose...</option>
+                                  <option *ngFor="let pregunta of preguntasMostrar" [ngValue]= "pregunta._id">{{ pregunta.descripcion }}</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                  Please select a valid option.
+                                </div>
+                              </div>
+                              <div class="col-md-2 col-sm-2 mb-2">
+                                <button type="button" class="btn btn-primary" (click)="addPreguntaEncuesta(preguntaInsertar7)"> + </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-row d-none" [ngClass]="{'d-block': cantPreguntas >= 8}">
+                            <div class="d-flex justify-content-end">
+                              <div class="col-md-3 col-sm-2 mb-3">
+                                <label for="pregunta">Pregunta 8</label>
+                              </div>
+                              <div class="col-md-7 col-sm-8 mb-3">
+                                <select class="custom-select d-block w-100" [(ngModel)]="preguntaInsertar8._id" id="pregunta" value="preguntaInsertar._id" name="preguntaInsertar8._id" formControlName="pregunta">
+                                  <option>Choose...</option>
+                                  <option *ngFor="let pregunta of preguntasMostrar" [ngValue]= "pregunta._id">{{ pregunta.descripcion }}</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                  Please select a valid option.
+                                </div>
+                              </div>
+                              <div class="col-md-2 col-sm-2 mb-2">
+                                <button type="button" class="btn btn-primary" (click)="addPreguntaEncuesta(preguntaInsertar8)"> + </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-row d-none" [ngClass]="{'d-block': cantPreguntas >= 9}">
+                            <div class="d-flex justify-content-end">
+                              <div class="col-md-3 col-sm-2 mb-3">
+                                <label for="pregunta">Pregunta 9</label>
+                              </div>
+                              <div class="col-md-7 col-sm-8 mb-3">
+                                <select class="custom-select d-block w-100" [(ngModel)]="preguntaInsertar9._id" id="pregunta" value="preguntaInsertar._id" name="preguntaInsertar9._id" formControlName="pregunta">
+                                  <option>Choose...</option>
+                                  <option *ngFor="let pregunta of preguntasMostrar" [ngValue]= "pregunta._id">{{ pregunta.descripcion }}</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                  Please select a valid option.
+                                </div>
+                              </div>
+                              <div class="col-md-2 col-sm-2 mb-2">
+                                <button type="button" class="btn btn-primary" (click)="addPreguntaEncuesta(preguntaInsertar9)"> + </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-row d-none" [ngClass]="{'d-block': cantPreguntas >= 10}">
+                            <div class="d-flex justify-content-end">
+                              <div class="col-md-3 col-sm-2 mb-3">
+                                <label for="pregunta">Pregunta 10</label>
+                              </div>
+                              <div class="col-md-7 col-sm-8 mb-3">
+                                <select class="custom-select d-block w-100" [(ngModel)]="preguntaInsertar10._id" id="pregunta" value="preguntaInsertar._id" name="preguntaInsertar10._id" formControlName="pregunta">
+                                  <option>Choose...</option>
+                                  <option *ngFor="let pregunta of preguntasMostrar" [ngValue]= "pregunta._id">{{ pregunta.descripcion }}</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                  Please select a valid option.
+                                </div>
+                              </div>
+                              <div class="col-md-2 col-sm-2 mb-2">
+                                <button type="button" class="btn btn-primary" (click)="addPreguntaEncuesta(preguntaInsertar10)"> + </button>
+                              </div>
+                            </div>
+                          </div>
                         </form>
-
                       </div>
 
                     </div><!-- cierre del cuerpo modal -->
                     <div class="modal-footer">
-                      <div *ngIf="estudioCambio==true">
-                        <button type="submit" class="btn btn-info" (click)="updateEstudio()">Actualizar Datos</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Rechazar</button>
-                        <button type="button" class="btn btn-success"  (click)="Aprobar()" >Aprobar</button>
+                      <div *ngIf="estudioCambio === true">
+                        <button type="submit" class="btn btn-info ml-2" (click)="updateEstudio()">Actualizar Datos</button>
+                        <button type="button" class="btn btn-danger ml-2" data-dismiss="modal" (click)="rechazar()">Rechazar</button>
+                        <button type="button" class="btn btn-success ml-2"  (click)="aprobar()" >Aprobar</button>
                       </div>
-
-                      <div *ngIf="encuestaCambio==true">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">cancelar</button>
-                        <button type="button" class="btn btn-success"  (click)="Aprobar()" >guardar</button>
+                      <div *ngIf="encuestaCambio === true">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addEncuesta()">Guardar encuesta</button>
                       </div>
-
                     </div>
                   </div>
                 </div>

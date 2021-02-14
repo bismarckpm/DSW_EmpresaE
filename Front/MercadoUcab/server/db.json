@@ -361,49 +361,59 @@
       "descripcion": "rol encuestado"
     }
   ],
-  "estudio": [
-    {
-      "_id": 8,
-      "nombre": "estudio prueba",
-      "comentarioAnalista": "el comentario",
-      "estado": "solicitado",
-      "fechaInicio": "2020-05-04",
-      "lugar": {
-        "_id": 18,
-        "estado": "a",
+  "estudio": {
+    "estado": "Exitoso",
+    "mensaje": "cargando estudios",
+    "objeto": [
+      {
+        "_id": 8,
+        "nombre": "estudio prueba",
+        "comentarioAnalista": "el comentario",
+        "estado": "Aprobado",
+        "genero": {
+          "nombre": "Hombre"
+        },
+        "fechaInicio": "2020-05-04",
         "lugar": {
-          "_id": 5,
+          "_id": 18,
           "estado": "a",
           "lugar": {
-            "_id": 1,
+            "_id": 5,
             "estado": "a",
-            "nombre": "venezuela",
-            "tipo": "pais"
+            "lugar": {
+              "_id": 1,
+              "estado": "a",
+              "nombre": "venezuela",
+              "tipo": "pais"
+            },
+            "nombre": "zulia",
+            "tipo": "estado"
           },
-          "nombre": "zulia",
-          "tipo": "estado"
+          "nombre": "pruebamunc3Zuli",
+          "tipo": "municipio"
         },
-        "nombre": "pruebamunc3Zuli",
-        "tipo": "municipio"
-      },
-      "nivelsocioeco": {
-        "_id": 2,
-        "descripcion": "Nivel Alto",
-        "estado": "a",
-        "nombre": "Alto"
-      },
-      "subcategoria": {
-        "_id": 2,
-        "categoria": {
-          "_id": 1,
-          "estado": "i",
-          "nombre": "CategoriaPrueba"
+        "nivelSocioEconomico": {
+          "_id": 2,
+          "descripcion": "Nivel Alto",
+          "estado": "a",
+          "nombre": "Alto"
         },
-        "estado": "A",
-        "nombre": "SubcategoriaPrueba2"
+        "subcategoria": {
+          "_id": 2,
+          "categoria": {
+            "_id": 1,
+            "estado": "i",
+            "nombre": "CategoriaPrueba"
+          },
+          "estado": "A",
+          "nombre": "SubcategoriaPrueba2"
+        },
+        "analista": {
+          "_id": 0
+        }
       }
-    }
-  ],
+    ]
+  },
   "encuesta": [
     {
       "_id": 1,
@@ -590,6 +600,131 @@
       "datamuestra": [
         {
           "_id": 41
+        },
+        {
+          "_id": 2
+        }
+      ]
+    },
+    {
+      "_id": 6,
+      "estado": "Activo",
+      "fechaInicio": "",
+      "fechaFin": "",
+      "estudio": {
+        "_id": 8
+      },
+      "preguntas": [
+        {
+          "_id": 2
+        }
+      ]
+    },
+    {
+      "_id": 7,
+      "estado": "Activo",
+      "fechaInicio": "",
+      "fechaFin": "",
+      "estudio": {
+        "_id": 8
+      },
+      "preguntas": []
+    },
+    {
+      "_id": 8,
+      "estado": "Activo",
+      "fechaInicio": "",
+      "fechaFin": "",
+      "estudio": {
+        "_id": 8
+      },
+      "preguntas": []
+    },
+    {
+      "_id": 9,
+      "estado": "Activo",
+      "fechaInicio": "",
+      "fechaFin": "",
+      "estudio": {
+        "_id": 8
+      },
+      "preguntas": [
+        {
+          "_id": 1
+        },
+        {
+          "_id": 2
+        },
+        {
+          "_id": 2
+        },
+        {
+          "_id": 2
+        }
+      ]
+    },
+    {
+      "_id": 10,
+      "estado": "Activo",
+      "fechaInicio": "",
+      "fechaFin": "",
+      "estudio": {
+        "_id": 8
+      },
+      "preguntas": [
+        {
+          "_id": 1
+        },
+        {
+          "_id": 2
+        },
+        {
+          "_id": 3
+        }
+      ]
+    },
+    {
+      "_id": 11,
+      "estado": "Activo",
+      "fechaInicio": "",
+      "fechaFin": "",
+      "estudio": {
+        "_id": 8
+      },
+      "preguntas": [
+        {
+          "_id": 1
+        }
+      ]
+    },
+    {
+      "_id": 12,
+      "estado": "Activo",
+      "fechaInicio": "",
+      "fechaFin": "",
+      "estudio": {
+        "_id": 8
+      },
+      "preguntas": [
+        {
+          "_id": 1
+        },
+        {
+          "_id": 3
+        }
+      ]
+    },
+    {
+      "_id": 13,
+      "estado": "Activo",
+      "fechaInicio": "",
+      "fechaFin": "",
+      "estudio": {
+        "_id": 8
+      },
+      "preguntas": [
+        {
+          "_id": 1
         },
         {
           "_id": 2
@@ -1039,130 +1174,130 @@
   ],
   "graficos": [
     {
-        "_id": 58,
-        "descripcion": "PregAbInt",
-        "opcionesResultado": [],
-        "tipo": {
-            "_id": 1,
-            "estado": "a",
-            "tipo": "Comp"
-        }
+      "_id": 58,
+      "descripcion": "PregAbInt",
+      "opcionesResultado": [],
+      "tipo": {
+        "_id": 1,
+        "estado": "a",
+        "tipo": "Comp"
+      }
     },
     {
-        "_id": 59,
-        "descripcion": "PregVFInt",
-        "opcionesResultado": [
-            {
-                "_id": 76,
-                "descripcion": "Verdadero",
-                "estado": "a",
-                "valor": 2
-            },
-            {
-                "_id": 77,
-                "descripcion": "Falso",
-                "estado": "a",
-                "valor": 0
-            }
-        ],
-        "tipo": {
-            "_id": 2,
-            "estado": "a",
-            "tipo": "VyF"
+      "_id": 59,
+      "descripcion": "PregVFInt",
+      "opcionesResultado": [
+        {
+          "_id": 76,
+          "descripcion": "Verdadero",
+          "estado": "a",
+          "valor": 2
+        },
+        {
+          "_id": 77,
+          "descripcion": "Falso",
+          "estado": "a",
+          "valor": 0
         }
+      ],
+      "tipo": {
+        "_id": 2,
+        "estado": "a",
+        "tipo": "VyF"
+      }
     },
     {
-        "_id": 60,
-        "descripcion": "PregSSInt",
-        "opcionesResultado": [
-            {
-                "_id": 78,
-                "descripcion": "p1",
-                "estado": "a",
-                "valor": 0
-            },
-            {
-                "_id": 79,
-                "descripcion": "p2",
-                "estado": "a",
-                "valor": 1
-            },
-            {
-                "_id": 80,
-                "descripcion": "p3",
-                "estado": "a",
-                "valor": 1
-            },
-            {
-                "_id": 81,
-                "descripcion": "p4",
-                "estado": "a",
-                "valor": 0
-            }
-        ],
-        "tipo": {
-            "_id": 3,
-            "estado": "a",
-            "tipo": "SS"
+      "_id": 60,
+      "descripcion": "PregSSInt",
+      "opcionesResultado": [
+        {
+          "_id": 78,
+          "descripcion": "p1",
+          "estado": "a",
+          "valor": 0
+        },
+        {
+          "_id": 79,
+          "descripcion": "p2",
+          "estado": "a",
+          "valor": 1
+        },
+        {
+          "_id": 80,
+          "descripcion": "p3",
+          "estado": "a",
+          "valor": 1
+        },
+        {
+          "_id": 81,
+          "descripcion": "p4",
+          "estado": "a",
+          "valor": 0
         }
+      ],
+      "tipo": {
+        "_id": 3,
+        "estado": "a",
+        "tipo": "SS"
+      }
     },
     {
-        "_id": 61,
-        "descripcion": "PregSMInt",
-        "opcionesResultado": [
-            {
-                "_id": 82,
-                "descripcion": "op1",
-                "estado": "a",
-                "valor": 1
-            },
-            {
-                "_id": 83,
-                "descripcion": "op2",
-                "estado": "a",
-                "valor": 0
-            },
-            {
-                "_id": 84,
-                "descripcion": "op3",
-                "estado": "a",
-                "valor": 2
-            },
-            {
-                "_id": 85,
-                "descripcion": "op4",
-                "estado": "a",
-                "valor": 1
-            }
-        ],
-        "tipo": {
-            "_id": 4,
-            "estado": "a",
-            "tipo": "SM"
+      "_id": 61,
+      "descripcion": "PregSMInt",
+      "opcionesResultado": [
+        {
+          "_id": 82,
+          "descripcion": "op1",
+          "estado": "a",
+          "valor": 1
+        },
+        {
+          "_id": 83,
+          "descripcion": "op2",
+          "estado": "a",
+          "valor": 0
+        },
+        {
+          "_id": 84,
+          "descripcion": "op3",
+          "estado": "a",
+          "valor": 2
+        },
+        {
+          "_id": 85,
+          "descripcion": "op4",
+          "estado": "a",
+          "valor": 1
         }
+      ],
+      "tipo": {
+        "_id": 4,
+        "estado": "a",
+        "tipo": "SM"
+      }
     },
     {
-        "_id": 62,
-        "descripcion": "PregVFDos",
-        "opcionesResultado": [
-            {
-                "_id": 86,
-                "descripcion": "Verdadero",
-                "estado": "a",
-                "valor": 1
-            },
-            {
-                "_id": 87,
-                "descripcion": "Falso",
-                "estado": "a",
-                "valor": 1
-            }
-        ],
-        "tipo": {
-            "_id": 2,
-            "estado": "a",
-            "tipo": "VyF"
+      "_id": 62,
+      "descripcion": "PregVFDos",
+      "opcionesResultado": [
+        {
+          "_id": 86,
+          "descripcion": "Verdadero",
+          "estado": "a",
+          "valor": 1
+        },
+        {
+          "_id": 87,
+          "descripcion": "Falso",
+          "estado": "a",
+          "valor": 1
         }
+      ],
+      "tipo": {
+        "_id": 2,
+        "estado": "a",
+        "tipo": "VyF"
+      }
     }
   ]
 }

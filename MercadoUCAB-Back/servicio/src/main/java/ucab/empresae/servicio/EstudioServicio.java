@@ -239,7 +239,7 @@ public class EstudioServicio extends AplicacionBase {
         } catch (Exception ex) {
             this.response.setEstado("ERROR");
             this.response.setMensaje(ex.getMessage());
-            this.response.setCodError("SERPRE004");
+            this.response.setCodError("SEREST004");
             return Response.status(500).entity(this.response).build();
         }
     }

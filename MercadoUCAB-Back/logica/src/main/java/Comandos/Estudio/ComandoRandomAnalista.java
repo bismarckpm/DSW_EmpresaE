@@ -32,6 +32,7 @@ public class ComandoRandomAnalista extends ComandoBase<DtoUsuario> {
 
     @Override
     public DtoUsuario getResult() throws Exception {
+        execute();
         return this.dtoAnalista;
     }
 }

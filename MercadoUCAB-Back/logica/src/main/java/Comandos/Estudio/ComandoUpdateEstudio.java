@@ -8,7 +8,10 @@ import ucab.empresae.daos.DaoFactory;
 import ucab.empresae.dtos.DtoEstudio;
 import ucab.empresae.dtos.DtoFactory;
 import ucab.empresae.dtos.DtoResponse;
+import ucab.empresae.entidades.EntidadesFactory;
 import ucab.empresae.entidades.EstudioEntity;
+
+import java.util.Date;
 
 public class ComandoUpdateEstudio extends ComandoBase<DtoResponse> {
 
@@ -26,7 +29,8 @@ public class ComandoUpdateEstudio extends ComandoBase<DtoResponse> {
         GenericMapper estudioMapper = MapperFactory.estudioMapperInstancia();
         DaoEstudio daoEstudio = DaoFactory.DaoEstudioInstancia();
 
-        this.dtoEstudio = (DtoEstudio) estudioMapper.CreateDto(daoEstudio.update((EstudioEntity) estudioMapper.CreateEntity(this.dtoEstudio)));
+        EstudioEntity estudio = daoEstudio.update((EstudioEntity) estudioMapper.CreateEntity(this.dtoEstudio));
+        this.dtoEstudio = (DtoEstudio) estudioMapper.CreateDto(estudio);
 
     }
 

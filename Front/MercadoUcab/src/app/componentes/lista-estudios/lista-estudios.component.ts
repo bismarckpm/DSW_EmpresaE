@@ -28,7 +28,7 @@ export class ListaEstudiosComponent implements OnInit {
   estudios: Estudio[] = [];
   _id = this.actRoute.snapshot.params._id;
   @Input() estudioData = {
-    _id: 0, 
+    _id: 0,
     nombre: '',
     estado: '',
     comentarioAnalista : '',
@@ -43,9 +43,9 @@ export class ListaEstudiosComponent implements OnInit {
       tipo: '',
       lugar : {_id: 0, estado: '', nombre: '', tipo: '', lugar : {_id: 0, estado: '', nombre: '', tipo: ''}}},
     nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
-    subcategoria : {_id: 0, nombre: '', estado: '',categoria:{_id:0}},
+    subcategoria : {_id: 0, nombre: '', estado: '', categoria: {_id: 0}},
     analista: {_id: 0},
-    genero:{_id:0},
+    genero: {_id: 0},
   };
 
    @Input() estadoData = {_id: 0, estado: '', nombre: '', tipo: ''};
@@ -56,8 +56,8 @@ export class ListaEstudiosComponent implements OnInit {
   nivelSocioEconomico: any;
   subcategoria: any;
   analistas: any;
-  genero:any;
-  categorias:any;
+  genero: any;
+  categorias: any;
 
   ///// Atributos para la busqueda de acuerdo a lo seleccionado
   lugar: any;
@@ -67,14 +67,14 @@ export class ListaEstudiosComponent implements OnInit {
   auxEstadoID: number;
   auxMunicipioID: number;
   auxParroquiaID: number;
-  aux:any=[];
+  aux: any = [];
   // Declaracion para validar
   formEstudio: FormGroup;
   patronEdadEstudio: any = /^(0?[0-9]{1,2}|1[0-7][0-9]|99)$/;
   patronFechaEstudio: any = /^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/;
   patronNombreEstudio: any = /^[A-Za-z\s]+$/;
 
-  ////// Para encuesta 
+  ////// Para encuesta
   /// PAra validar ENCUESTA
   formEncuesta: FormGroup;
 
@@ -108,7 +108,12 @@ export class ListaEstudiosComponent implements OnInit {
   tipoPreguntas: any = [];
   opcionesCantidad = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   sugerenciasPreguntas: any = [];
+  listaMuestraInsertar = [];
 
+  @Input() dataMuestra = {_id : 0};
+
+  estudioCambio = true;
+  encuestaCambio = false;
 
   constructor(
     public estudioService: EstudioService,
@@ -116,8 +121,8 @@ export class ListaEstudiosComponent implements OnInit {
     public lugarService: LugarService,
     public nivelsocioeconomicoService: NivelSocioEconomicoService,
     public analistaService: AnalistaService,
-    public generoSerive:GeneroService,
-    public categoriService:CategoriaService,
+    public generoSerive: GeneroService,
+    public categoriService: CategoriaService,
     /// Servicios de encuesta
     private servicio: EncuestaService,
     private servicioPregunta: PreguntaService,
@@ -145,7 +150,12 @@ export class ListaEstudiosComponent implements OnInit {
     });
   }
 
-  updateEstudio(): void {
+  Aprobar(): void{
+    this.estudioCambio = false;
+    this.encuestaCambio = true;
+  }
+
+  updateEstudio(): void{
     console.log('entro a update');
 
     if (this.formEstudio.valid) {
@@ -205,50 +215,50 @@ export class ListaEstudiosComponent implements OnInit {
 
 
   addGenero(): void {
-    this.generoSerive.getGeneros().subscribe(data=>{
+    this.generoSerive.getGeneros().subscribe(data => {
       this.aux = data;
-      if(this.aux.estado == "Exitoso"){
-        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+      if (this.aux.estado === 'Exitoso'){
+        this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
         this.genero = this.aux.objeto;
       }else{
-        this.toast.showError(this.aux.estado,this.aux.mensaje)
+        this.toast.showError(this.aux.estado, this.aux.mensaje);
       }
     });
   }
 
   addCategoria(): void {
-    this.categoriService.getCategorias().subscribe(data=>{
+    this.categoriService.getCategorias().subscribe(data => {
       this.aux = data;
-      if(this.aux.estado == "Exitoso"){
-        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+      if (this.aux.estado === 'Exitoso'){
+        this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
         this.categorias = this.aux.objeto;
       }else{
-        this.toast.showError(this.aux.estado,this.aux.mensaje)
-      } 
+        this.toast.showError(this.aux.estado, this.aux.mensaje);
+      }
     });
   }
 
   addAnalistas(): void {
-    this.analistaService.getAnalistas().subscribe( data =>{
+    this.analistaService.getAnalistas().subscribe( data => {
       this.aux = data;
-      if(this.aux.estado == "Exitoso"){
-        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
-      this.analistas = this.aux.objeto;
+      if (this.aux.estado === 'Exitoso'){
+        this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+        this.analistas = this.aux.objeto;
       }else{
-        this.toast.showError(this.aux.estado,this.aux.mensaje)
-      } 
-    })
+        this.toast.showError(this.aux.estado, this.aux.mensaje);
+      }
+    });
   }
 
   /// Busqueda para los drop de lugar por pais seleccionado previamente
   addLugar(): void{
     this.lugarService.getLugars().subscribe((Lugares: {}) => {
       this.aux = Lugares;
-      if(this.aux.estado == "Exitoso"){
-        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+      if (this.aux.estado === 'Exitoso'){
+        this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
         this.estados = this.aux.objeto;
       }else{
-        this.toast.showError(this.aux.estado,this.aux.mensaje)
+        this.toast.showError(this.aux.estado, this.aux.mensaje);
       }
     });
   }
@@ -256,23 +266,23 @@ export class ListaEstudiosComponent implements OnInit {
   addMunicipios(id): void{
     this.lugarService.getMunicipio(id).subscribe((data: {}) => {
       this.aux = data;
-      if(this.aux.estado == "Exitoso"){
-        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+      if (this.aux.estado === 'Exitoso'){
+        this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
         this.municipios = this.aux.objeto;
       }else{
-        this.toast.showError(this.aux.estado,this.aux.mensaje)
+        this.toast.showError(this.aux.estado, this.aux.mensaje);
       }
     });
   }
 
   addParroquia(id): void {
-    this.lugarService.getParroquia(0,id).subscribe((data: {}) => {
+    this.lugarService.getParroquia(0, id).subscribe((data: {}) => {
       this.aux = data;
-      if(this.aux.estado == "Exitoso"){
-        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+      if (this.aux.estado === 'Exitoso'){
+        this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
         this.parroquias = this.aux.objeto;
       }else{
-        this.toast.showError(this.aux.estado,this.aux.mensaje)
+        this.toast.showError(this.aux.estado, this.aux.mensaje);
       }
     });
   }
@@ -324,11 +334,11 @@ export class ListaEstudiosComponent implements OnInit {
   addSubcategoria(): void{
     this.subcategoriaService.getsubcategorias().subscribe((data: {}) => {
       this.aux = data;
-      if(this.aux.estado == "Exitoso"){
-        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+      if (this.aux.estado === 'Exitoso'){
+        this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
         this.subcategoria = this.aux.objeto;
       }else{
-        this.toast.showError(this.aux.estado,this.aux.mensaje)
+        this.toast.showError(this.aux.estado, this.aux.mensaje);
       }
     });
   }
@@ -336,11 +346,11 @@ export class ListaEstudiosComponent implements OnInit {
   addNivelSocioEconomico(): void{
     this.nivelsocioeconomicoService.getNivelesSocioEconomicos().subscribe((data: {}) => {
       this.aux = data;
-      if(this.aux.estado == "Exitoso"){
-        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+      if (this.aux.estado === 'Exitoso'){
+        this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
         this.nivelSocioEconomico = this.aux.objeto;
       }else{
-        this.toast.showError(this.aux.estado,this.aux.mensaje)
+        this.toast.showError(this.aux.estado, this.aux.mensaje);
       }
     });
   }
@@ -369,6 +379,14 @@ export class ListaEstudiosComponent implements OnInit {
   get GeneroEstudio(){return this.formEstudio.get('GeneroEstudio'); }
   get CategoriaEstudio(){return this.formEstudio.get('CategoriaEstudio'); }
 
+    //////////////////////////////////////////////////// Metodos Para la parte de encuesta
+
+    ///// Metodos para las validaciones
+    get fechaInicioEncuesta(){ return this.formEncuesta.get('fechaInicioEncuesta'); }
+    get fechaFinEncuesta(){return this.formEncuesta.get('fechaFinEncuesta'); }
+    get estudio(){return this.formEncuesta.get('estudio'); }
+    get pregunta(){ return this.formEncuesta.get('pregunta'); }
+
   createForm(): void {
     this.formEstudio = this.formBuilder.group({
       nombreEstudio: ['', [Validators.required, Validators.pattern(this.patronNombreEstudio)]],
@@ -388,8 +406,8 @@ export class ListaEstudiosComponent implements OnInit {
       categoriaEstudio: ['', [Validators.required]],
       subcategoriaEstudio: ['', [Validators.required]],
       nivelEstudio: '',
-      GeneroEstudio:'',
-      CategoriaEstudio:'',
+      GeneroEstudio: '',
+      CategoriaEstudio: '',
 
     });
 
@@ -401,56 +419,50 @@ export class ListaEstudiosComponent implements OnInit {
     });
   }
 
-  //////////////////////////////////////////////////// Metodos Para la parte de encuesta
 
-    ///// Metodos para las validaciones
-    get fechaInicioEncuesta(): AbstractControl{ return this.formEncuesta.get('fechaInicioEncuesta'); }
-    get fechaFinEncuesta(): AbstractControl{return this.formEncuesta.get('fechaFinEncuesta');}
-    get estudio(): AbstractControl{return this.formEncuesta.get('estudio');}
-    get pregunta(): AbstractControl{ return this.formEncuesta.get('pregunta');}
 
   // Metodo para la creacion de la encuesta del estudio
-  // addEncuesta(): any{
-  //   console.log(this.encuesta);
-  //   if (this.formEncuesta.valid) {
-  //     this.encuesta.preguntas = this.listaPreguntasInsertar;
-  //     this.servicio.createEncuesta(this.encuesta).subscribe((data: {}) => {
-  //       this.toast.showSuccess('La encuesta ha sido creada', 'Creada satisfactoriamente');
-  //     },
-  //     (error) => {
-  //       this.toast.showError('Error de conexión', 'Intentelo más tarde');
-  //     });
-  //     this.encuesta = {
-  //       _id: 0,
-  //       estado: '',
-  //       fechaInicio: '',
-  //       fechaFin: '',
-  //       estudio: {_id: 0},
-  //       preguntas: []
-  //     };
-  //     location.reload();
-  //   }
-  //   else{
-  //     this.toast.showError('Campos Incompletos', 'ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
-  //   }
-  // }
+   addEncuesta(): any{
+     console.log(this.encuesta);
+     if (this.formEncuesta.valid) {
+       this.encuesta.preguntas = this.listaPreguntasInsertar;
+       this.servicio.createEncuesta(this.encuesta).subscribe((data: {}) => {
+         this.toast.showSuccess('La encuesta ha sido creada', 'Creada satisfactoriamente');
+       },
+       (error) => {
+         this.toast.showError('Error de conexión', 'Intentelo más tarde');
+       });
+       this.encuesta = {
+         _id: 0,
+         estado: '',
+         fechaInicio: '',
+         fechaFin: '',
+         estudio: {_id: 0},
+         preguntas: []
+       };
+       location.reload();
+     }
+     else{
+       this.toast.showError('Campos Incompletos', 'ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
+     }
+   }
 
 
     // // aqui yo mando el id del estudio para que me devuelva una lista de preguntas
   // // asociadas a la subcategoria del estudio
-  // cargarPreguntas(i: number): void {
-  //   this.servicioPregunta.getPreguntasXSubcategoria(this.aux).subscribe((data: {}) => {
-  //     this.preguntasMostrar = data;
-  //   });
-  //   this.cantPreguntas = i;
-  // }
+   cargarPreguntas(i: number): void {
+     this.servicioPregunta.getPreguntasXSubcategoria(this.encuesta.estudio._id).subscribe((data: {}) => {
+       this.preguntasMostrar = data;
+     });
+     this.cantPreguntas = i;
+   }
 
-//  sugerirPreguntas(): void{
-//    // aqui le mandas el id del estudio
-//    this.servicioPregunta.sugerirPreguntas(this.aux).subscribe((data: {}) => {
-//      this.sugerenciasPreguntas = data;
-//    });
-//  }
+  sugerirPreguntas(): void{
+    // aqui le mandas el id del estudio
+    this.servicioPregunta.sugerirPreguntas(this.aux).subscribe((data: {}) => {
+      this.sugerenciasPreguntas = data;
+    });
+  }
 
   limpiar(): void{
     this.preguntaInsertar1 = {_id: 0};
@@ -472,19 +484,19 @@ export class ListaEstudiosComponent implements OnInit {
   }
 
   HandleErrorGet(): void {
-    if(this.aux.estado == "Exitoso"){
-      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+    if (this.aux.estado === 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
       this.estudios = this.aux.objeto;
     }else{
-      this.toast.showError(this.aux.estado,this.aux.mensaje)
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
     }
   }
 
   HandleErrorPostPut(): void {
-    if(this.aux.estado == "Exitoso"){
-      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+    if (this.aux.estado === 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
      }else{
-      this.toast.showError(this.aux.estado,this.aux.mensaje)
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
      }
   }
 }

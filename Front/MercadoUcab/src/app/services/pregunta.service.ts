@@ -65,6 +65,15 @@ export class PreguntaService {
     );
   }
 
+  // FRONT
+  // getPreguntasXSubcategoria(idEstudio): Observable<Pregunta[]>{
+  //   return this.http.get<Pregunta[]>(this.apiurl + '/pregunta')
+  //   .pipe(
+  //     retry(1),
+  //     catchError(this.handleError)
+  //   );
+  // }
+
   sugerirPreguntas(idEstudio): Observable<Pregunta[]>{
     // return this.http.get<Pregunta[]>(this.apiurl + '/pregunta/sugerirPreguntas/' + idEstudio)
     return this.http.get<Pregunta[]>(this.apiurl + '/pregunta')

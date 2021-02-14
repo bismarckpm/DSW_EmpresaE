@@ -4,6 +4,8 @@ import Comandos.Analista.ComandoGetAnalistas;
 import Comandos.Categoria.*;
 import Comandos.Estudio.*;
 import Comandos.Genero.ComandoGetGeneros;
+import Comandos.Lugar.ComandoGetLugar;
+import Comandos.Lugar.ComandoGetLugares;
 import Comandos.NivelSocioeconomico.ComandoGetNivelesSocioeconomico;
 import Comandos.Pregunta.ComandoGetPreguntas;
 import Comandos.Presentacion.ComandoDeletePresentacion;
@@ -153,5 +155,14 @@ public class ComandoFactory {
     //generos
     public static ComandoGetGeneros comandoGetGenerosInstancia() {
         return new ComandoGetGeneros();
+    }
+
+    //lugares
+    public static ComandoGetLugares comandoGetLugaresInstancia() {
+        return new ComandoGetLugares();
+    }
+
+    public static ComandoGetLugar comandoGetLugarInstancia(long id) {
+        return new ComandoGetLugar(id);
     }
 }

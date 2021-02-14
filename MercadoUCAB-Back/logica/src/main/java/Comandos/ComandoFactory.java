@@ -3,6 +3,8 @@ package Comandos;
 import Comandos.Analista.ComandoGetAnalistas;
 import Comandos.Categoria.*;
 import Comandos.Estudio.*;
+import Comandos.Genero.ComandoGetGeneros;
+import Comandos.NivelSocioeconomico.ComandoGetNivelesSocioeconomico;
 import Comandos.Pregunta.ComandoGetPreguntas;
 import Comandos.Presentacion.ComandoDeletePresentacion;
 import Comandos.Presentacion.ComandoGetPresentaciones;
@@ -10,6 +12,7 @@ import Comandos.Presentacion.ComandoPostPresentacion;
 import Comandos.Presentacion.ComandoUpdatePresentacion;
 import Comandos.Subcategoria.*;
 import ucab.empresae.dtos.*;
+import ucab.empresae.entidades.NivelSocioeconomicoEntity;
 import ucab.empresae.excepciones.CategoriaException;
 
 public class ComandoFactory {
@@ -142,4 +145,13 @@ public class ComandoFactory {
         return new ComandoGetAnalistas();
     }
 
+    //Niveles socioeconomicos
+    public static ComandoGetNivelesSocioeconomico comandoGetNivelesSocioeconomicoInstancia() {
+        return new ComandoGetNivelesSocioeconomico();
+    }
+
+    //generos
+    public static ComandoGetGeneros comandoGetGenerosInstancia() {
+        return new ComandoGetGeneros();
+    }
 }

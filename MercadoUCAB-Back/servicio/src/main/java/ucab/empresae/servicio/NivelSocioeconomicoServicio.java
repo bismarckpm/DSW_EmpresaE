@@ -1,7 +1,11 @@
 package ucab.empresae.servicio;
 
+import Comandos.ComandoBase;
+import Comandos.ComandoFactory;
 import ucab.empresae.daos.DaoNivelSocioeconomico;
+import ucab.empresae.dtos.DtoResponse;
 import ucab.empresae.entidades.NivelSocioeconomicoEntity;
+import ucab.empresae.excepciones.CustomException;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -17,6 +21,9 @@ import java.util.List;
 @Path("/nivelsocioeconomico")
 public class NivelSocioeconomicoServicio {
 
+    private ComandoBase comando;
+    private DtoResponse response;
+
     /**
      * http://localhost:8080/servicio-1.0-SNAPSHOT/api/nivelsocioeconomico
      * Metodo con anotacion GET que devuelve todos los Niveles Socioeconomicos registrados
@@ -25,15 +32,20 @@ public class NivelSocioeconomicoServicio {
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getNivelesSocioeconomicos() {
-        List<NivelSocioeconomicoEntity> niveles;
         try {
-            DaoNivelSocioeconomico dao = new DaoNivelSocioeconomico();
-            niveles = dao.findAll(NivelSocioeconomicoEntity.class);
-        }catch (Exception ex) {
-            String problema = ex.getMessage();
-            return  Response.status(Response.Status.NOT_ACCEPTABLE).entity(problema).build();
+            this.comando = ComandoFactory.comandoGetNivelesSocioeconomicoInstancia();
+            return Response.ok(this.comando.getResult()).build();
+        } catch (CustomException cex){
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(cex.getMensaje());
+            this.response.setCodError(cex.getCodError());
+            return Response.status(500).entity(this.response).build();
+        } catch (Exception ex) {
+            this.response.setEstado("ERROR");
+            this.response.setMensaje(ex.getMessage());
+            this.response.setCodError(ex.getClass().toString());
+            return Response.status(500).entity(this.response).build();
         }
-        return Response.ok(niveles).build();
     }
 }
 

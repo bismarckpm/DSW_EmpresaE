@@ -161,11 +161,11 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
                     estudio.setFechaFin(new Date());
                 }
             }
-            if(dtoEstudio.getEstado() == null) {
+            if(dtoEstudio.getEstado() == null && estudio.getEstado() == null) {
                 estudio.setEstado("solicitado");
+            }else if (dtoEstudio.getEstado() != null && estudio.getEstado() == null){
+                estudio.setEstado(dtoEstudio.getEstado());
             }
-
-            estudio.setEstado(dtoEstudio.getEstado());
 
             if(dtoEstudio.getEdadMinima() != null) {
                 estudio.setEdadMinima(dtoEstudio.getEdadMinima());

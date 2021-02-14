@@ -1,9 +1,7 @@
 import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { AttachSession } from 'protractor/built/driverProviders';
 import { AnalistaService } from 'src/app/services/analista.service';
-
 import { EstudioService } from 'src/app/services/estudio.service';
 import { LugarService } from 'src/app/services/lugar.service';
 import { NivelSocioEconomicoService } from 'src/app/services/nivel-socio-economico.service';
@@ -17,12 +15,38 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class FormEstudioComponent implements OnInit {
 
-  @Input() estudio = {_id: 0, nombre: '', estado: '' , comentarioAnalista: '', edadMinima: 0, edadMaxima: 0 , fechaInicio: '', fechaFin: '',
-  lugar : {_id: 0, estado: '', nombre: '', tipo: '',lugar : {_id: 0, estado: '', nombre: '', tipo: '',lugar : {_id: 0, estado: '', nombre: '', tipo: '',lugar : {_id: 0, estado: '', nombre: '', tipo: ''}}}},
-  nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
-  subcategoria : {_id: 0, nombre: '', estado: ''},
-  analista:{_id:0}
- };
+  @Input() estudio = {
+    _id: 0,
+    nombre: '',
+    estado: '' ,
+    comentarioAnalista: '',
+    edadMinima: 0,
+    edadMaxima: 0 ,
+    fechaInicio: '',
+    fechaFin: '',
+    lugar: {
+      _id: 0,
+      estado: '',
+      nombre: '',
+      tipo: '',
+      lugar: {
+        _id: 0,
+        estado: '',
+        nombre: '',
+        tipo: '',
+        lugar: {
+          _id: 0,
+          estado: '',
+          nombre: '',
+          tipo: '',
+          lugar : {_id: 0, estado: '', nombre: '', tipo: ''}
+        }
+      }
+    },
+    nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
+    subcategoria : {_id: 0, nombre: '', estado: ''},
+    analista: {_id: 0}
+  };
 
   nivelSocioEconomico: any;
   subcategoria: any;
@@ -30,10 +54,10 @@ export class FormEstudioComponent implements OnInit {
 
 
 
-   ///// Atributos para la busqueda de acuerdo a lo seleccionado
+  ///// Atributos para la busqueda de acuerdo a lo seleccionado
   lugar: any;
   parroquias: any;
-  estados:any;
+  estados: any;
   municipios: any;
   auxEstadoID: number;
   auxMunicipioID: number;
@@ -41,7 +65,7 @@ export class FormEstudioComponent implements OnInit {
 
   formEstudio: FormGroup;
   patronEdadEstudio: any = /^(0?[0-9]{1,2}|1[0-7][0-9]|99)$/;
-  patronFechaEstudio: any = /^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/
+  patronFechaEstudio: any = /^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/;
   patronNombreEstudio: any = /^[A-Za-z\s]+$/;
 
   aux:any=[];
@@ -81,13 +105,14 @@ export class FormEstudioComponent implements OnInit {
     console.log('agregó estudio');
   }
 
-  addEstudio() {
+  addEstudio(): void {
     if (this.formEstudio.valid) {
       this.estudioService.createEstudio(this.estudio).subscribe((data: {}) => {
       });
+      this.toast.showSuccess('El estudio fue creado existosamente', 'Creado exitosamente');
     }
     else{
-      alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
+      this.toast.showError('Es necesario llenar los todos los campos', 'Campos incompletos');
     }
   }
 
@@ -123,29 +148,31 @@ busquedaMunicipio(id){
 
 }
 
-busquedaParroquia(id){
-  // El ID es del estado
-  this.auxMunicipioID = id;
-  // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
-  if (id > 0 ) {
-    this.lugarService.getParroquia(this.auxMunicipioID, id).subscribe((data: {}) => {
-      this.aux = data;
-    if(this.aux.estado == "Exitoso"){
-      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
-     this.parroquias = this.aux.objeto;
-    }else{
-      this.toast.showError(this.aux.estado,this.aux.mensaje)
-    } 
-    });
-  }
-}
+  
 
-seleccionarParroquia(id){
-  this.auxParroquiaID = id;
-}
+  busquedaParroquia(id): void {
+    // El ID es del estado
+    this.auxMunicipioID = id;
+    // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
+    if (id > 0 ) {
+      this.lugarService.getParroquia(this.auxMunicipioID, id).subscribe((data: {}) => {
+        this.aux = data;
+        if(this.aux.estado == "Exitoso"){
+          this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+          this.parroquias = this.aux.objeto;
+        }else{
+          this.toast.showError(this.aux.estado,this.aux.mensaje)
+        }
+      });
+    }
+  }
+
+  seleccionarParroquia(id): void {
+    this.auxParroquiaID = id;
+  }
 
   /////////////// Dropdowns ///////////////////////
-  addSubcategoria(){
+  addSubcategoria(): void {
     this.subcategoriaService.getsubcategorias().subscribe((data: {}) => {
       this.aux = data;
     if(this.aux.estado == "Exitoso"){
@@ -157,7 +184,7 @@ seleccionarParroquia(id){
     });
   }
 
-  addNivelSocioEconomico(){
+  addNivelSocioEconomico(): void {
     this.nivelsocioeconomicoService.getNivelesSocioEconomicos().subscribe((data: {}) => {
       this.aux = data;
     if(this.aux.estado == "Exitoso"){

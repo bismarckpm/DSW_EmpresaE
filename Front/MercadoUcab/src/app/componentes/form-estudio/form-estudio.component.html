@@ -96,17 +96,7 @@
           </div>
         </div>
 
-        <div class="col-md-4">
-          <label for="" class="col-sm-6 col-form-label escrituerModal">Selecciones un Analista  </label>
-          <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudio.analista._id" formControlName="AnalistaEstudio" >
-              <option  *ngFor="let analista of analistas" [ngValue]= "analista._id">{{analista.username}}</option>
-          </select>
-         <!-- <div *ngIf="AnalistaEstudio.invalid && (AnalistaEstudio.dirty || AnalistaEstudio.touched)" class="alert alert-danger">
-            <div *ngIf="AnalistaEstudio.errors.required">
-              Este campo es obligatorio
-            </div>
-          </div>-->
-        </div>
+
 
         </div>
 

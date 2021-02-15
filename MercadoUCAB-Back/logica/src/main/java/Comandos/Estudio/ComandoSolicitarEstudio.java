@@ -56,19 +56,6 @@ public class ComandoSolicitarEstudio extends ComandoBase<DtoResponse> {
         DaoClienteEstudio daoClienteEstudio = DaoFactory.DaoClienteEstudioInstancia();
         daoClienteEstudio.insert(clienteEstudioEntity);
 
-        DaoEncuestado daoEncuestado = DaoFactory.DaoEncuestadoInstancia();
-        List<EncuestadoEntity> dataMuestraEncuestados = daoEncuestado.getDataMuestraEstudio(this.estudio.getLugar(), this.estudio.getNivelSocioEconomico());
-
-        DaoEstudioEncuestado daoEstudioEncuestado = DaoFactory.DaoEstudioEncuestadoInstancia();
-        for(EncuestadoEntity encuestado : dataMuestraEncuestados){
-            EstudioEncuestadoEntity estudioEncuestadoEntity = EntidadesFactory.EstudioEncuestadoInstance();
-            estudioEncuestadoEntity.setEstado("Pendiente");
-            estudioEncuestadoEntity.setEstudio(this.estudio);
-            estudioEncuestadoEntity.setEncuestado(encuestado);
-
-            daoEstudioEncuestado.insert(estudioEncuestadoEntity);
-        }
-
     }
 
     @Override

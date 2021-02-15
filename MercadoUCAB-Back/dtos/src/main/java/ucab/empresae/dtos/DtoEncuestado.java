@@ -21,7 +21,6 @@ public class DtoEncuestado extends DtoBase {
     private DtoUsuario usuario;
     private DtoTelefono telefono;
 
-
     //Constructores
     public DtoEncuestado() {
         super();

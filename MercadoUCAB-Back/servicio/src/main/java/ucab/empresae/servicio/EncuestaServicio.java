@@ -85,10 +85,7 @@ public class EncuestaServicio extends AplicacionBase{
                 //Se inserta en la n a n tantas veces como preguntas relacionadas al estudio
                 EncuestaEntity encuesta = new EncuestaEntity();
                 encuesta.setEstado("a");
-                Date fechaInicio = sdf.parse(dtoEncuesta.getFechaInicio());
-                Date fechaFin = sdf.parse(dtoEncuesta.getFechaFin());
-                encuesta.setFechaInicio(fechaInicio);
-                encuesta.setFechaFin(fechaFin);
+                encuesta.setFechaInicio(new Date());
 
                 encuesta.setEstudio(estudio);
 
@@ -96,6 +93,23 @@ public class EncuestaServicio extends AplicacionBase{
                 encuesta.setPregunta(pregunta);
                 dao.insert(encuesta);
             }
+
+
+            List<DtoEncuestado> encuestados = dtoEncuesta.getEncuestados();
+
+            DaoEstudioEncuestado daoEstudioEncuestado = DaoFactory.DaoEstudioEncuestadoInstancia();
+            DaoEncuestado daoEncuestado = DaoFactory.DaoEncuestadoInstancia();
+            for(DtoEncuestado encuestadoCiclo: encuestados){
+                EncuestadoEntity encuestado = daoEncuestado.find(encuestadoCiclo.get_id(), EncuestadoEntity.class);
+
+                EstudioEncuestadoEntity estudioEncuestadoEntity = EntidadesFactory.EstudioEncuestadoInstance();
+                estudioEncuestadoEntity.setEstado("Pendiente");
+                estudioEncuestadoEntity.setEstudio(estudio);
+                estudioEncuestadoEntity.setEncuestado(encuestado);
+
+                daoEstudioEncuestado.insert(estudioEncuestadoEntity);
+            }
+
 
             return Response.ok().entity(preguntas).build();
         } catch (Exception ex) {

@@ -13,6 +13,7 @@ import Comandos.Presentacion.ComandoGetPresentaciones;
 import Comandos.Presentacion.ComandoPostPresentacion;
 import Comandos.Presentacion.ComandoUpdatePresentacion;
 import Comandos.Subcategoria.*;
+import Comandos.Pregunta.*;
 import ucab.empresae.dtos.*;
 import ucab.empresae.entidades.NivelSocioeconomicoEntity;
 import ucab.empresae.excepciones.CategoriaException;
@@ -80,12 +81,6 @@ public class ComandoFactory {
 
     public static ComandoDeletePresentacion comandoDeletePresentacionInstancia(long id) {
         return new ComandoDeletePresentacion(id);
-    }
-
-    ////Fábricas de los comandos para Pregunta
-
-    public static ComandoGetPreguntas comandoGetPreguntasInstancia() {
-        return new ComandoGetPreguntas();
     }
 
     //Fábrica de los comandos para Estudio
@@ -164,5 +159,40 @@ public class ComandoFactory {
 
     public static ComandoGetLugar comandoGetLugarInstancia(long id) {
         return new ComandoGetLugar(id);
+    }
+
+
+    ////Fábricas de los comandos para Pregunta
+
+    public static ComandoGetPreguntas comandoGetPreguntasInstancia() {
+        return new ComandoGetPreguntas();
+    }
+
+    public static ComandoPostPregunta comandoPostPreguntaInstancia(DtoPregunta dtoPregunta) {
+        return new ComandoPostPregunta(dtoPregunta);
+    }
+
+    public static ComandoDeletePregunta comandoDeletePreguntaInstancia(long id) {
+        return new ComandoDeletePregunta(id);
+    }
+
+    public static ComandoUpdatePregunta comandoUpdatePreguntaInstancia(long id, DtoPregunta dtoPregunta) {
+        return new ComandoUpdatePregunta(id, dtoPregunta);
+    }
+
+    public static ComandoGetPreguntasBySubcategoria comandoGetPreguntasBySubcategoriaInstancia(long id) {
+        return new ComandoGetPreguntasBySubcategoria(id);
+    }
+
+    public static ComandoGetEncuesta comandoGetEncuestaInstancia(long id_estudio, long id_encuestado) {
+        return new ComandoGetEncuesta(id_estudio, id_encuestado);//este id encuestado es el id del usuario que se debe buscar
+    }
+
+    public static ComandoGetEncuestaAnalista comandoGetEncuestaAnalistaInstancia(long id_estudio, long id_encuestado) {
+        return new ComandoGetEncuestaAnalista(id_estudio, id_encuestado);
+    }
+
+    public static ComandoGetDataMuestraEstudioxAnalista comandoGetDataMuestraEstudioxAnalistaInstancia(long id) {
+        return new ComandoGetDataMuestraEstudioxAnalista(id);
     }
 }

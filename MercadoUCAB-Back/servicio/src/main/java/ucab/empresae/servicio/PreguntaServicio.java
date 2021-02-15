@@ -164,9 +164,9 @@ public class PreguntaServicio {
     public Response getPreguntasbySubcategoria(@PathParam("id") long id) {
         DtoResponse response = DtoFactory.DtoResponseInstance();
         try {
-            //this.comando = ComandoFactory.comandoGetPreguntasBySubcategoriaInstancia(id);
-            ComandoGetPreguntasBySubcategoria comandoP = new ComandoGetPreguntasBySubcategoria(id);
-            return Response.ok(comandoP.getResult()).build();
+            this.comando = ComandoFactory.comandoGetPreguntasBySubcategoriaInstancia(id);
+            //ComandoGetPreguntasBySubcategoria comandoP = new ComandoGetPreguntasBySubcategoria(id);
+            return Response.ok(this.comando.getResult()).build();
         }catch (CustomException cex){
             response.setEstado("ERROR");
             response.setMensaje(cex.getMensaje());

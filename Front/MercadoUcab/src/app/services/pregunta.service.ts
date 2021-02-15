@@ -76,8 +76,7 @@ export class PreguntaService {
   // }
 
   sugerirPreguntas(idEstudio): Observable<Pregunta[]>{
-    // return this.http.get<Pregunta[]>(this.apiurl + '/pregunta/sugerirPreguntas/' + idEstudio)
-    return this.http.get<Pregunta[]>(this.apiurl + '/pregunta')
+    return this.http.get<Pregunta[]>(this.apiurl + '/pregunta/preguntasSubcategoria/' + idEstudio)
     .pipe(
       retry(1),
       catchError(this.handleError)

@@ -8,9 +8,10 @@ public class DtoPresentacion extends DtoBase {
 
     //Constructores
     public DtoPresentacion() {
+        super();
     }
 
-    public DtoPresentacion(long id) throws Exception {
+    public DtoPresentacion(long id)  {
         super(id);
     }
 

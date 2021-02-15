@@ -5,13 +5,19 @@ import java.util.List;
 
 @Entity
 @Table(name = "pregunta", schema = "mercadeoucab")
-@NamedQueries({
-        @NamedQuery(name = "getPreguntasbySubcategoria", query = "select p from PreguntaEntity p WHERE p.subcategoria._id = :id"),
-        @NamedQuery(name = "getPreguntasbyEstudio", query = "select p from PreguntaEntity p where p._id in (select en.pregunta._id from EncuestaEntity en where en.estudio._id = :id) and p.tipo._id != 1")
-})
 public class PreguntaEntity extends BaseEntity{
     private String estado;
     private String descripcion;
+
+    public PreguntaEntity( long id )
+    {
+        super( id );
+    }
+
+    public PreguntaEntity( )
+    {
+
+    }
 
     @Basic
     @Column(name = "estado")

@@ -158,7 +158,7 @@ export class FormEstudioComponent implements OnInit {
   get nombreEstudio(){return this.formEstudio.get('nombreEstudio'); }
   get edadMinimaEstudio(){return this.formEstudio.get('edadMinimaEstudio'); }
   get edadMaximaEstudio(){return this.formEstudio.get('edadMaximaEstudio'); }
-  get estadoEstudio(){return this.formEstudio.get('estadoEstudio'); }
+  //get estadoEstudio(){return this.formEstudio.get('estadoEstudio'); }
   get fechaInicioEstudio(){return this.formEstudio.get('fechaInicioEstudio'); }
   get fechaFinEstudio(){return this.formEstudio.get('fechaFinEstudio'); }
   get lugarEstudio(){return this.formEstudio.get('lugarEstudio'); }
@@ -168,7 +168,7 @@ export class FormEstudioComponent implements OnInit {
   createForm(): void {
     this.formEstudio = this.formBuilder.group({
       nombreEstudio: ['', [Validators.required, Validators.pattern(this.patronNombreEstudio)]],
-      estadoEstudio: ['', Validators.required],
+      //estadoEstudio: ['', Validators.required],
       fechaInicioEstudio: ['', [Validators.required, Validators.pattern(this.patronFechaEstudio)]],
       fechaFinEstudio: ['', [ Validators.pattern(this.patronFechaEstudio)]],
       edadMinimaEstudio: ['', [Validators.required, Validators.maxLength(2), Validators.pattern(this.patronEdadEstudio)]],

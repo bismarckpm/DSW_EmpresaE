@@ -19,7 +19,7 @@ public class DaoUsuario extends Dao<UsuarioEntity>{
 
     public List<UsuarioEntity> getAnalistas() {
         try{
-            TypedQuery<UsuarioEntity> analistas = this._em.createNamedQuery("getAnalistas", UsuarioEntity.class);
+            TypedQuery<UsuarioEntity> analistas = this._em.createQuery("select a from UsuarioEntity a where a.tipousuario.descripcion = 'Analista'", UsuarioEntity.class);
             List<UsuarioEntity> resultado = analistas.getResultList();
             return resultado;
         }catch (Exception ex) {
@@ -30,7 +30,7 @@ public class DaoUsuario extends Dao<UsuarioEntity>{
     public UsuarioEntity getUsuarioByUsername(String username){
 
         try{
-            TypedQuery<UsuarioEntity> usuario = this._em.createNamedQuery("getUsuarioByUsername", UsuarioEntity.class);
+            TypedQuery<UsuarioEntity> usuario = this._em.createQuery("select u from UsuarioEntity u where u.username = :username", UsuarioEntity.class);
             usuario.setParameter("username", username).getSingleResult();
 
             UsuarioEntity resultado = usuario.getSingleResult();
@@ -43,7 +43,7 @@ public class DaoUsuario extends Dao<UsuarioEntity>{
     public List<UsuarioEntity> getUsuariosEmpleados(){
 
         try{
-            TypedQuery<UsuarioEntity> empleados = this._em.createNamedQuery("getUsuariosEmpleados", UsuarioEntity.class);
+            TypedQuery<UsuarioEntity> empleados = this._em.createQuery("select a from UsuarioEntity a where a.tipousuario.descripcion = 'Analista' or a.tipousuario.descripcion = 'Administrador'", UsuarioEntity.class);
             List<UsuarioEntity> resultado = empleados.getResultList();
             return resultado;
         }catch (Exception e){

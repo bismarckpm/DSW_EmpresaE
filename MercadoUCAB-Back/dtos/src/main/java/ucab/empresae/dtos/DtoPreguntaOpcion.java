@@ -11,6 +11,7 @@ public class DtoPreguntaOpcion extends DtoBase {
 
     //Constructores
     public DtoPreguntaOpcion() {
+        super();
     }
 
     public DtoPreguntaOpcion(long id) throws Exception {

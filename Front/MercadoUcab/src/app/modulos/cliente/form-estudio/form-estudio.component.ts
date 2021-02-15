@@ -4,7 +4,6 @@ import { EstudioService } from 'src/app/services/estudio.service';
 import { LugarService } from 'src/app/services/lugar.service';
 import { NivelSocioEconomicoService } from 'src/app/services/nivel-socio-economico.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
-import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-form-estudio-cliente',
@@ -12,37 +11,22 @@ import { ToastService } from 'src/app/services/toast.service';
   styleUrls: ['./form-estudio.component.css']
 })
 export class FormEstudioClienteComponent implements OnInit {
-
-  @Input() estudio = {
-  _id: 0,
-  nombre: '',
-  edadMinima: 0,
-  edadMaxima: 0 ,
-  fechaInicio: '',
-  fechaFin: '',
-  genero: '',
-  lugar: {
-    _id: 0,
-    lugar: {
-      _id: 0,
-      lugar: {
-        _id: 0,
-        lugar : {_id: 0}
-      }
-    }
-  },
-  nivelSocioEconomico: {_id: 0},
-  subcategoria : {_id: 0},
-};
+  @Input() estudio = {_id: 0, nombre: '', estado: '' , comentarioAnalista: '', edadMinima: 0, edadMaxima: 0 , fechaInicio: '', fechaFin: '',
+    lugar : {_id: 0, estado: '', nombre: '', tipo: '',lugar : {_id: 0, estado: '', nombre: '', tipo: '',lugar : {_id: 0, estado: '', nombre: '', tipo: '',lugar : {_id: 0, estado: '', nombre: '', tipo: ''}}}},
+    nivelSocioEconomico: {_id: 0, nombre: '', estado: '', descripcion: ''},
+    subcategoria : {_id: 0, nombre: '', estado: ''},
+  };
 
   nivelSocioEconomico: any;
   subcategoria: any;
-  analistas: any;
+  analistas:any;
+
+
 
   ///// Atributos para la busqueda de acuerdo a lo seleccionado
   lugar: any;
   parroquias: any;
-  estados: any;
+  estados:any;
   municipios: any;
   auxEstadoID: number;
   auxMunicipioID: number;
@@ -58,8 +42,7 @@ export class FormEstudioClienteComponent implements OnInit {
     public estudioService: EstudioService,
     public lugarService: LugarService,
     public subcategoriaService: SubcategoriaService,
-    public nivelsocioeconomicoService: NivelSocioEconomicoService,
-    private toast: ToastService
+    public nivelsocioeconomicoService: NivelSocioEconomicoService
   ) {
     this.createForm();
   }
@@ -70,33 +53,31 @@ export class FormEstudioClienteComponent implements OnInit {
     this.addSubcategoria();
   }
 
-  addEstudio(): void {
-    console.log(this.estudio.genero);
-    if (this.formEstudio.valid) {
-      this.estudio.lugar._id = this.auxParroquiaID;
-      this.estudioService.createEstudioCliente(JSON.parse(localStorage.getItem('usuarioID')), this.estudio).subscribe((data: {}) => {
-      },
-      (error) => {
-        console.log(error);
-        this.toast.showError('Intentelo más tarde', 'Comunicación no disponible');
-      }
-      );
-      this.toast.showSuccess('Su estudio ha sido solicitado con éxito', 'Estudio solicitado');
-      location.reload();
-    }
-    else{
-      this.toast.showError('Es necesario llenar los todos los campos', 'Campos incompletos');
-    }
+  agregarEstudio(): void {
+    console.log('agregó estudio');
   }
 
-  /// Busqueda para los drop de lugar por pais seleccionado previamente
-  addLugar(): void{
+  addEstudio() {
+    if (this.formEstudio.valid) {
+      this.estudio.lugar._id = this.auxParroquiaID;
+      this.estudioService.createEstudioCliente(JSON.parse(localStorage.getItem("usuarioID")),this.estudio).subscribe((data: {}) => {
+      });
+    }
+    else{
+      alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
+    }
+    location.reload();
+  }
+
+
+/// Busqueda para los drop de lugar por pais seleccionado previamente
+  addLugar(){
     this.lugarService.getLugars().subscribe((Lugares: {}) => {
       this.estados = Lugares;
     });
   }
 
-  busquedaMunicipio(id): void{
+  busquedaMunicipio(id){
     // El ID es del estado
     this.auxEstadoID = id;
     // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
@@ -108,7 +89,7 @@ export class FormEstudioClienteComponent implements OnInit {
 
   }
 
-  busquedaParroquia(id): void{
+  busquedaParroquia(id){
     // El ID es del estado
     this.auxMunicipioID = id;
     // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
@@ -119,22 +100,24 @@ export class FormEstudioClienteComponent implements OnInit {
     }
   }
 
-  seleccionarParroquia(id): void{
+  seleccionarParroquia(id){
     this.auxParroquiaID = id;
   }
 
   /////////////// Dropdowns ///////////////////////
-  addSubcategoria(): void{
+  addSubcategoria(){
     this.subcategoriaService.getsubcategorias().subscribe((data: {}) => {
       this.subcategoria = data;
     });
   }
 
-  addNivelSocioEconomico(): void{
+  addNivelSocioEconomico(){
     this.nivelsocioeconomicoService.getNivelesSocioEconomicos().subscribe((data: {}) => {
       this.nivelSocioEconomico = data;
     });
   }
+
+
 
   //// Validaciones
   get nombreEstudio(){return this.formEstudio.get('nombreEstudio'); }
@@ -146,7 +129,6 @@ export class FormEstudioClienteComponent implements OnInit {
   get lugarEstudio(){return this.formEstudio.get('lugarEstudio'); }
   get subcategoriaEstudio(){return this.formEstudio.get('subcategoriaEstudio'); }
   get nivelEstudio(){return this.formEstudio.get('nivelEstudio'); }
-  get genero(){return this.formEstudio.get('genero'); }
 
   createForm(): void {
     this.formEstudio = this.formBuilder.group({

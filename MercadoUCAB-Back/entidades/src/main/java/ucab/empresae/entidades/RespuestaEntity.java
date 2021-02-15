@@ -4,12 +4,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "respuesta", schema = "mercadeoucab")
-@NamedQueries({
-        @NamedQuery(name = "getCantidadRespuestas", query = "select count(re) from RespuestaEntity re where re.estudio._id = :id_estudio and re.preguntaOpcion._id in (select preopc._id from PreguntaOpcionEntity preopc where preopc.opcion = :opcion)")
-})
 public class RespuestaEntity extends BaseEntity{
     private String estado;
     private String texto;
+    private long id_pregunta;
 
     @Basic
     @Column(name = "estado")
@@ -29,6 +27,16 @@ public class RespuestaEntity extends BaseEntity{
 
     public void setTexto(String texto) {
         this.texto = texto;
+    }
+
+    @Basic
+    @Column(name = "id_pregunta")
+    public long getId_pregunta() {
+        return id_pregunta;
+    }
+
+    public void setId_pregunta(long id_pregunta) {
+        this.id_pregunta = id_pregunta;
     }
 
     @ManyToOne

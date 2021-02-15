@@ -38,12 +38,21 @@ export class PreguntaService {
   }
 
   // concatenar el ID del estudio que pide el endpoint
-  getPreguntasResponder(idEstudio): Observable<Pregunta[]>{
-    return this.http.get<Pregunta[]>(this.apiurl + '/pregunta/encuestaEstudio/' + idEstudio)
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-    );
+  getPreguntasResponder(idEstudio, idUsuario): Observable<Pregunta[]>{
+    return this.http.get<Pregunta[]>(this.apiurl + '/pregunta/encuestaEstudioEncuestado/' + idEstudio + '/' + idUsuario)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+
+  // concatenar el ID del estudio que pide el endpoint
+  getPreguntasResponderxAnalista(idEstudio, idEncuestado): Observable<Pregunta[]>{
+    return this.http.get<Pregunta[]>(this.apiurl + '/pregunta/encuestaEstudioAnalistaEncuestado/' + idEstudio + '/' + idEncuestado)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
   }
 
   // recibo el idEstudio y lo concateno al path de la peticion que devuelve una lista

@@ -1,3 +1,4 @@
+
 <div class="modal-dialog">
   <div class="modal-content">
 
@@ -63,26 +64,13 @@
             </div>
           </div>
         </div>
+
         <div class="row">
           <div class="col-md-4 mb-3">
-            <label for="" class="col-md-4 col-form-label escrituerModal">Género</label>
-            <select name="id_categoria"  class="custom-select d-block w-100 mt-4"  [(ngModel)]="estudio.genero" formControlName="genero" >
-              <option value="0">Choose...</option>
-              <option value="Masculino">Masc</option>
-              <option value="Femenino">Feme</option>
-              <option value="Ambos">Ambos</option>
-            </select>
-            <!-- <div *ngIf="genero.invalid && (genero.dirty || genero.touched)" class="alert alert-danger">
-              <div *ngIf="genero.errors.required">
-                Este campo es obligatorio
-              </div>
-            </div> -->
-          </div>
-          <div class="col-md-4 mb-3">
-            <label for="" class="col-sm-4 col-form-label escrituerModal">Subcategoria</label>
-            <select name="id_categoria"  class="custom-select d-block w-100 mt-4"  [(ngModel)]="estudio.subcategoria._id" formControlName="subcategoriaEstudio" >
-                <option  value="0"> Choose...</option>
-                <option  *ngFor="let sub of subcategoria" [ngValue]= "sub._id"  >{{sub.nombre}}</option>
+            <label for="" class="col-sm-4 col-form-label escrituerModal"> Subcategoria</label>
+            <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudio.subcategoria._id" formControlName="subcategoriaEstudio" >
+              <option  value=""> Seleccione una ...</option>
+              <option  *ngFor="let sub of subcategoria" [ngValue]= "sub._id"  >{{sub.nombre}}</option>
             </select>
             <div *ngIf="subcategoriaEstudio.invalid && (subcategoriaEstudio.dirty || subcategoriaEstudio.touched)" class="alert alert-danger">
               <div *ngIf="subcategoriaEstudio.errors.required">
@@ -90,10 +78,10 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4 mb-3">
+          <div class="col-md-8 mb-3">
             <label for="" class="col-md-8 col-form-label escrituerModal">Nivel SocioEconomico</label>
             <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudio.nivelSocioEconomico._id" formControlName="nivelEstudio" >
-              <option  value="0">Choose...</option>
+              <option  value=""> Seleccione uno ...</option>
               <option  *ngFor="let nivel of nivelSocioEconomico" [ngValue]= "nivel._id"  >{{nivel.nombre}}</option>
             </select>
             <div *ngIf="nivelEstudio.invalid && (nivelEstudio.dirty || nivelEstudio.touched)" class="alert alert-danger">
@@ -103,7 +91,21 @@
             </div>
           </div>
         </div>
+
         <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="estado">Estado</label>
+            <select class="custom-select d-block w-100"  [(ngModel)]="estudio.lugar._id" (click)="busquedaMunicipio(estudio.lugar._id)"formControlName="lugarEstudio"  value="estudio.lugar._id">
+              <option value="0">Choose...</option>
+              <option  *ngFor="let estado of estados" [ngValue]= "estado._id"  >{{estado.nombre}}</option>
+            </select>
+            <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
+              <div *ngIf="lugarEstudio.errors.required">
+                Este campo es obligatorio
+              </div>
+            </div>
+          </div>
+
           <div class="col-md-4 mb-3">
             <label for="municipio">Municipio</label>
             <select class="custom-select d-block w-100"  [(ngModel)]="estudio.lugar.lugar._id" (click)="busquedaParroquia(estudio.lugar.lugar._id)"formControlName="lugarEstudio"  value="estudio.lugar._id">
@@ -129,11 +131,13 @@
             </div>
           </div>
         </div>
+
+
       </form>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-      <button type="submit" class="btn btn-primary" (click)="addEstudio()">Guardar</button>
+      <button type="submit" class="btn btn-primary" (click)="addEstudio()" data-dismiss="modal">Guardar</button>
     </div>
   </div>
 </div>

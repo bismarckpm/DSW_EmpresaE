@@ -1,6 +1,7 @@
 package ucab.empresae.dtos;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,14 @@ public class DtoFactory {
 
     public static DtoCategoria DtoCategoriaInstance() {
         return new DtoCategoria();
+    }
+
+    public static DtoCategoria DtoCategoriaInstance(long id){
+        return new DtoCategoria(id);
+    }
+
+    public static ArrayList<DtoCategoria> DtoCategoriasInstancia() {
+        return new ArrayList<>();
     }
 
     public static DtoCliente DtoClienteInstance() {
@@ -77,6 +86,9 @@ public class DtoFactory {
     public static DtoPregunta DtoPreguntaInstance() {
         return new DtoPregunta();
     }
+    public static DtoPregunta DtoPreguntaInstance(long id) {
+        return new DtoPregunta(id);
+    }
 
     public static DtoPreguntaOpcion DtoPreguntaOpcionInstance() {
         return new DtoPreguntaOpcion();
@@ -85,13 +97,23 @@ public class DtoFactory {
     public static DtoPresentacion DtoPresentacionInstance() {
         return new DtoPresentacion();
     }
+    public static DtoPresentacion DtoPresentacionInstance(long id){
+        return new DtoPresentacion(id);
+    }
 
     public static DtoRespuesta DtoRespuestaInstance() {
         return new DtoRespuesta();
     }
 
+    public static DtoResponse DtoResponseInstance() {
+        return new DtoResponse();
+    }
+
     public static DtoSubcategoria DtoSubcategoriaInstance() {
         return new DtoSubcategoria();
+    }
+    public static DtoSubcategoria DtoSubcategoriaInstance(long id) {
+        return new DtoSubcategoria(id);
     }
 
     public static DtoTipo DtoTipoInstance() {
@@ -100,6 +122,9 @@ public class DtoFactory {
 
     public static DtoTipoPregunta DtoTipoPreguntaInstance() {
         return new DtoTipoPregunta();
+    }
+    public static DtoTipoPregunta DtoTipoPreguntaInstance(long id) {
+        return new DtoTipoPregunta(id);
     }
 
     public static DtoTipoUsuario DtoTipoUsuarioInstance() {

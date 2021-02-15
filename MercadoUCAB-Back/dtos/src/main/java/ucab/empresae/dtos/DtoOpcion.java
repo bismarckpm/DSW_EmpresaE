@@ -8,6 +8,7 @@ public class DtoOpcion extends DtoBase {
 
     //Constructores
     public DtoOpcion() {
+        super();
     }
 
     public DtoOpcion(long id) throws Exception {

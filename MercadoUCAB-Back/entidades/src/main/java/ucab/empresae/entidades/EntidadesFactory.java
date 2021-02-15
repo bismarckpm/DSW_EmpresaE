@@ -2,12 +2,12 @@ package ucab.empresae.entidades;
 
 public class EntidadesFactory {
 
-    public static BaseEntity BaseEntityInstance() {
-        return new BaseEntity();
-    }
-
     public static CategoriaEntity CategoriaInstance() {
         return new CategoriaEntity();
+    }
+
+    public static CategoriaEntity CategoriaInstance(long id) {
+        return new CategoriaEntity(id);
     }
 
     public static ClienteEntity ClienteInstance() {
@@ -77,6 +77,9 @@ public class EntidadesFactory {
     public static PreguntaEntity PreguntaInstance() {
         return new PreguntaEntity();
     }
+    public static PreguntaEntity PreguntaInstance(long id) {
+        return new PreguntaEntity(id);
+    }
 
     public static PreguntaOpcionEntity PreguntaOpcionInstance() {
         return new PreguntaOpcionEntity();
@@ -86,12 +89,19 @@ public class EntidadesFactory {
         return new PresentacionEntity();
     }
 
+    public static PresentacionEntity PresentacionInstance(long id) {
+        return new PresentacionEntity(id);
+    }
+
     public static RespuestaEntity RespuestaInstance() {
         return new RespuestaEntity();
     }
 
     public static SubcategoriaEntity SubcategoriaInstance() {
         return new SubcategoriaEntity();
+    }
+    public static SubcategoriaEntity SubcategoriaInstance(long id) {
+        return new SubcategoriaEntity(id);
     }
 
     public static TelefonoEntity TelefonoInstance() {
@@ -102,6 +112,14 @@ public class EntidadesFactory {
         return new TipoEntity();
     }
 
+    public static TipoPreguntaEntity TipoPreguntaInstance() {
+        return new TipoPreguntaEntity();
+    }
+    public static TipoPreguntaEntity TipoPreguntaInstance(long id) {
+        return new TipoPreguntaEntity(id);
+    }
+
+
     public static TipoUsuarioEntity TipoUsuarioInstance() {
         return new TipoUsuarioEntity();
     }
@@ -109,4 +127,5 @@ public class EntidadesFactory {
     public static UsuarioEntity UsuarioInstance() {
         return new UsuarioEntity();
     }
+
 }

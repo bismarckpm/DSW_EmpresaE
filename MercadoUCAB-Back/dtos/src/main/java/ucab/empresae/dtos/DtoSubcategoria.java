@@ -14,11 +14,12 @@ public class DtoSubcategoria extends DtoBase {
     }
 
     //Constructores
-    public DtoSubcategoria(long id) throws Exception {
+    public DtoSubcategoria(long id){
         super(id);
     }
 
     public DtoSubcategoria() {
+        super();
     }
 
     //Getters y Setters

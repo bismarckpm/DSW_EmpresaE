@@ -212,7 +212,7 @@
           </div>
           <div class="form-group col-md-6">
             <label for="correo">Correo electronico</label>
-            <input type="text" class="form-control" [(ngModel)]="encuestado.usuario.correoElectronico" id="correo" formControlName="correoElectronicoEncuestado" value="">
+            <input type="text" class="form-control" [(ngModel)]="encuestado.usuario.correoelectronico" id="correo" formControlName="correoElectronicoEncuestado" value="">
             <div *ngIf="correoElectronicoEncuestado.invalid && (correoElectronicoEncuestado.dirty || correoElectronicoEncuestado.touched)" class="alert alert-danger">
               <div *ngIf="correoElectronicoEncuestado.errors.required">
                 Este campo es obligatorio

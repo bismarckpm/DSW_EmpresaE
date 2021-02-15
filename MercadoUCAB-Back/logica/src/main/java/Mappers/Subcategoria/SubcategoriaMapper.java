@@ -58,7 +58,7 @@ public class SubcategoriaMapper extends GenericMapper<DtoSubcategoria> {
                 throw new CustomException("Entidad correspondiente al dto no encontrada.");
             } else {
                 subcategoria.setNombre(dto.getNombre());
-                subcategoria.setEstado(dto.getEstado());
+                subcategoria.setEstado("a");
 
                 DaoCategoria daoCategoria = DaoFactory.DaoCategoriaInstancia();
                 subcategoria.setCategoria(daoCategoria.find(dto.getCategoria().get_id(), CategoriaEntity.class));

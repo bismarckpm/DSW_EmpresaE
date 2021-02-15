@@ -52,7 +52,7 @@ public class PresentacionMapper extends GenericMapper<DtoPresentacion> {
                 throw new CustomException("Entidad correspondiente al dto no encontrada.");
             } else {
                 presentacion.setDescripcion(dto.getDescripcion());
-                presentacion.setEstado(dto.getEstado());
+                presentacion.setEstado("a");
 
                 return presentacion;
             }

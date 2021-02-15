@@ -33,7 +33,7 @@ public class MarcaServicio {
         try{
             if(dtoMarca != null) {
                 marca.setNombre(dtoMarca.getNombre());
-                marca.setEstado(dtoMarca.getEstado());
+                marca.setEstado("a");
                 MarcaEntity resul = dao.insert(marca);
                 return Response.ok(marca).build();
             }
@@ -106,7 +106,6 @@ public class MarcaServicio {
             MarcaEntity marca = dao.find(id, MarcaEntity.class);
             if (marca != null){
                 marca.setNombre(dtoMarca.getNombre());
-                marca.setEstado(dtoMarca.getEstado());
                 MarcaEntity resul = dao.update(marca);
                 return Response.ok().entity(marca).build();
             }else{

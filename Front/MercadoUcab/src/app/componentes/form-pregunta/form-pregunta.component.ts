@@ -12,6 +12,7 @@ import { PreguntaService } from 'src/app/services/pregunta.service';
 
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 import { TipoPreguntaService } from 'src/app/services/tipo-pregunta.service';
+import {ToastService} from "../../services/toast.service";
 
 @Component({
   selector: 'app-form-pregunta',
@@ -45,6 +46,7 @@ export class FormPreguntaComponent implements OnInit {
      ////variables para los drops
     tipopregunta:any;
     subcategoria:any;
+    aux: any;
 
   //Validaciones de  datos
   formPregunta: FormGroup;
@@ -55,6 +57,7 @@ export class FormPreguntaComponent implements OnInit {
     public subcategoriaService: SubcategoriaService,
     public tipopreguntaService:TipoPreguntaService,
     public router:Router,
+    private toast: ToastService,
     private formBuilder: FormBuilder
     ) {this.createForm();}
 
@@ -103,7 +106,7 @@ ValidarTipopregunta(tipoid){
 
 
   console.log("entre en validar ")
-  if(tipoid>0){ 
+  if(tipoid>0){
       if( tipoid == 3|| tipoid==4){
         this.desplegar= true;
         this.desplegarRango= false;
@@ -116,10 +119,9 @@ ValidarTipopregunta(tipoid){
         this.desplegarRango= false;
         this.desplegar= false;
         this.Opciones.length=0;
-      }  
-  } 
+      }
+  }
 }
-
 
 
 
@@ -129,13 +131,15 @@ ValidarTipopregunta(tipoid){
   /////Para los dropdown////////////////////////////////////////////
   addsubcategoria(){
     this.subcategoriaService.getsubcategorias().subscribe((Subcategoria: {}) => {
-      this.subcategoria= Subcategoria;
+      this.aux= Subcategoria;
+      this.HandleErrorGetSubcategorias();
     })
 
   }
   addtipopregunta(){
     this.tipopreguntaService.getTipoPreguntas().subscribe((TipoPregunta: {}) => {
-      this.tipopregunta= TipoPregunta;
+      this.aux= TipoPregunta;
+      this.HandleErrorGetTipoPregunta()
     })
 
   }
@@ -152,12 +156,30 @@ ValidarTipopregunta(tipoid){
   createForm(){
     this.formPregunta = this.formBuilder.group({
       descripcionPregunta: ['', Validators.required],
-      estadoPregunta: ['', Validators.required],
+      //estadoPregunta: ['', Validators.required],
       tipoPregunta: ['', Validators.required],
       nombreSubcategoria: ['', Validators.required],
       opciocPregunta: ['', Validators.pattern(this.patronDescripcionPregunta)],
       opciocPreguntaRango: ['', Validators.pattern(this.patronDescripcionPregunta)],
     });
+  }
+
+  HandleErrorGetSubcategorias(): void {
+    if (this.aux.estado === 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+      this.subcategoria = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
+  }
+
+  HandleErrorGetTipoPregunta(): void {
+    if (this.aux.estado === 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+      this.tipopregunta = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
   }
 
 }

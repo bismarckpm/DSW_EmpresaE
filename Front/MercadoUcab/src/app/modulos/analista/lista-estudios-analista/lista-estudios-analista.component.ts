@@ -40,6 +40,7 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
   chartOptions: Highcharts.Options[] = [];
   highcharts = Highcharts;
   aux:any=[];
+  via: string;
 
   patronFechaEstudio: any = /^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/;
   get fechaFinEstudio(){return this.formEstudioAnalista.get('fechaFinEstudio'); }
@@ -122,21 +123,13 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
     });
   }
 
-
-  addRespuestasEncuesta(): void{
-    this.respuestaEncuesta.respuestas = this.listaRespuestas;
-    this.respuestaEncuesta.usuario = 32 ;     //JSON.parse(localStorage.getItem('usuarioID'))
-    console.log('JSON a enviar....');
-    console.log(this.respuestaEncuesta);
-    this.encuestaService.createRespuestaEncuesta(this.respuestaEncuesta).subscribe((data) => {});
-  }
-
   addRespuestasEncuestaxAnalista(): void{
     this.respuestaEncuesta.respuestas = this.listaRespuestas;
     this.respuestaEncuesta.usuario = this.prueba2 ;     //JSON.parse(localStorage.getItem('usuarioID'))
     console.log('JSON a enviar....');
     console.log(this.respuestaEncuesta);
     this.encuestaService.createRespuestaEncuestaxAnalista(this.respuestaEncuesta).subscribe((data) => {});
+    this.listaRespuestas = [];
   }
 
   loadPreguntasResponder(idEstudio: number): void{                      //DEBE SER DIFERENTE EL NOMBRE, Y QUE SEA EL ID DEL ENCUESTADO NO DEL USUARIO
@@ -150,9 +143,11 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
     this.respuestaEncuesta.estudio = idEstudio;
   }
 
-  loadPreguntasResponderxAnalista(idEncuestado: number): void{                      //DEBE SER DIFERENTE EL NOMBRE, Y QUE SEA EL ID DEL ENCUESTADO NO DEL USUARIO
+  loadPreguntasResponderxAnalista(idEncuestado: number): void{
     // aqui esta el get en preguntas pasandole el id del estudio
     this.prueba2 = idEncuestado;                  //este es el id del encuestado
+    console.log(this.prueba2);
+    console.log(this.prueba);
     this.preguntaService.getPreguntasResponderxAnalista(this.prueba, idEncuestado) //this.prueba es el id del estudio
       .subscribe((data) => {
         this.preguntasEncuesta = data;
@@ -227,9 +222,10 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
     });
   }
 
-  loadDataMuestra(id): void {
-    this.prueba = id;
-    this.estudioService.getDataMuestraxAnalista(id).subscribe(data => {
+  loadDataMuestra(estudio): void {
+    this.via = estudio.via;
+    this.prueba = estudio._id;
+    this.estudioService.getDataMuestraxAnalista(estudio._id).subscribe(data => {
       this.aux=data;
       if(this.aux.estado == "Exitoso"){
         this.toast.showSuccess(this.aux.estado,this.aux.mensaje)

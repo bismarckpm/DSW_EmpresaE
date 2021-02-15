@@ -6,6 +6,7 @@ import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 import { TipoPreguntaService } from 'src/app/services/tipo-pregunta.service';
 import { Pregunta } from '../../models/pregunta';
 import { PreguntaService } from '../../services/pregunta.service';
+import {ToastService} from "../../services/toast.service";
 
 @Component({
   selector: 'app-lista-preguntas',
@@ -22,6 +23,7 @@ export class ListaPreguntasComponent implements OnInit {
   @Input() preguntaData ={ _id:0, descripcion:'',estado:'',tipo:{_id:0,estado:'',tipo:''} ,subcategoria:{_id:0, nombre:'',estado:'',}, opciones:[] };
    subcategoria:any;
    tipopregunta:any;
+   aux: any = [];
 
    formPregunta: FormGroup;
    namePattern: any = /^[A-Za-z0-9\s]+$/;
@@ -32,6 +34,7 @@ export class ListaPreguntasComponent implements OnInit {
     public tipopreguntaService:TipoPreguntaService,
     public actRoute: ActivatedRoute,
     public router: Router,
+    private toast: ToastService,
     private formBuilder: FormBuilder
 
   ) { this.createForm();}
@@ -78,7 +81,8 @@ ValidarTipopregunta(tipoid){
 
   loadpregunta():void {
     this.preguntaService.getPreguntas().subscribe(data => {
-      this.preguntas = data;
+      this.aux = data;
+      this.HandleErrorGet();
     })
   }
 
@@ -145,6 +149,13 @@ ValidarTipopregunta(tipoid){
     });
   }
 
-
+  HandleErrorGet(): void {
+    if (this.aux.estado === 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+      this.preguntas = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
+  }
 
 }

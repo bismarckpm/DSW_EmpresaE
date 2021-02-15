@@ -28,11 +28,11 @@ public class EncuestadoServicio {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addEncuestado(DtoEncuestado dtoEncuestado){
+    public Response addEncuestado(DtoEncuestado dtoEncuestado) throws Exception{
         String rol = "Encuestado";
         long tipoUsuario = 1;
 
-        try{
+
             DaoEncuestado dao = new DaoEncuestado();
             DaoEstadoCivil daoEstadoCivil = new DaoEstadoCivil();
             DaoNivelAcademico daoNivelAcademico = new DaoNivelAcademico();
@@ -57,7 +57,7 @@ public class EncuestadoServicio {
             Date fechaNacimiento = sdf.parse(dtoEncuestado.getFechaNacimiento());
 
             encuestadoEntity.setFechaNacimiento(fechaNacimiento);
-            encuestadoEntity.setEstado(dtoEncuestado.getEstado());
+            encuestadoEntity.setEstado("a");
 
             EstadoCivilEntity estadoCivilEntity = daoEstadoCivil.find(dtoEncuestado.getEstadoCivil().get_id(), EstadoCivilEntity.class);
             encuestadoEntity.setEdocivil(estadoCivilEntity);
@@ -82,7 +82,7 @@ public class EncuestadoServicio {
 
             usuarioEntity.setUsername(dtoEncuestado.getUsuario().getUsername());
             usuarioEntity.setClave(dtoEncuestado.getUsuario().getClave());
-            usuarioEntity.setEstado(dtoEncuestado.getEstado());
+            usuarioEntity.setEstado("a");
             usuarioEntity.setTipousuario(daoTipoUsuario.find(tipoUsuario, TipoUsuarioEntity.class));
             daoUsuario.insert(usuarioEntity);
 
@@ -114,11 +114,11 @@ public class EncuestadoServicio {
                 daoEstudioEncuestado.insert(estudioEncuestadoEntity);
             }
             return Response.ok(encuestadoEntity).build();
-
+/*
         }catch (Exception ex) {
             String problema = ex.getMessage();
             return  Response.status(Response.Status.NOT_ACCEPTABLE).entity(problema).build();
-        }
+        }*/
     }
 
     /**

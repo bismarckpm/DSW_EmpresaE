@@ -36,7 +36,7 @@ public class ClienteServicio {
         DaoCliente daoCliente = new DaoCliente();
         ClienteEntity clienteEntity = new ClienteEntity();
         try{
-            clienteEntity.setEstado(dtoCliente.getEstado());
+            clienteEntity.setEstado("a");
             clienteEntity.setRazonSocial(dtoCliente.getRazonSocial());
             clienteEntity.setRif(dtoCliente.getRif());
 
@@ -49,7 +49,7 @@ public class ClienteServicio {
             UsuarioEntity usuarioEntity = new UsuarioEntity();
             usuarioEntity.setUsername(dtoCliente.getUsuario().getUsername());
             usuarioEntity.setClave(dtoCliente.getUsuario().getClave());
-            usuarioEntity.setEstado(dtoCliente.getEstado());
+            usuarioEntity.setEstado("a");
             usuarioEntity.setTipousuario(daoTipoUsuario.find(tipoUsuario, TipoUsuarioEntity.class));
             daoUsuario.insert(usuarioEntity);
 
@@ -59,7 +59,7 @@ public class ClienteServicio {
             DaoTelefono daoTelefono = new DaoTelefono();
             TelefonoEntity telefonoEntity = new TelefonoEntity();
             telefonoEntity.setNumero(dtoCliente.getTelefono().getNumero());
-            telefonoEntity.setEstado(dtoCliente.getEstado());
+            telefonoEntity.setEstado("a");
             telefonoEntity.setCliente(clienteEntity);
             daoTelefono.insert(telefonoEntity);
 
@@ -225,7 +225,7 @@ public class ClienteServicio {
 
             if (clienteEntity != null){
 
-                clienteEntity.setEstado(dtoCliente.getEstado());
+                clienteEntity.setEstado("a");
                 clienteEntity.setRazonSocial(dtoCliente.getRazonSocial());
 
                 DaoLugar daoLugar = new DaoLugar();
@@ -235,12 +235,12 @@ public class ClienteServicio {
                 DaoTelefono daoTelefono = new DaoTelefono();
                 TelefonoEntity telefonoEntity = daoTelefono.getTelefonoByCliente(clienteEntity);
                 telefonoEntity.setNumero(dtoCliente.getTelefono().getNumero());
-                telefonoEntity.setEstado(dtoCliente.getEstado());
+                telefonoEntity.setEstado("a");
                 telefonoEntity.setCliente(clienteEntity);
                 TelefonoEntity resulTlf = daoTelefono.update(telefonoEntity);
 
                 DtoUsuario dtoUsuario = new DtoUsuario();
-                dtoUsuario.setEstado(dtoCliente.getEstado());
+                dtoUsuario.setEstado("a");
                 dtoUsuario.setUsername(dtoCliente.getUsuario().getUsername());
                 dtoUsuario.setCorreoelectronico(dtoCliente.getUsuario().getCorreoelectronico());
                 DirectorioActivo ldap = new DirectorioActivo();

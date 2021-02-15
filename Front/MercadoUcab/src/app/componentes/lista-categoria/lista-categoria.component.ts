@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-lista-categoria',
@@ -15,6 +16,7 @@ export class ListaCategoriaComponent implements OnInit {
    namePattern: any = /^[A-Za-z0-9\s]+$/;
 
   Categoria: any=[];
+  aux: any = [];
   _id = this.actRoute.snapshot.params['_id'];
 
   @Input() categoriaData: any = {};
@@ -22,6 +24,7 @@ export class ListaCategoriaComponent implements OnInit {
     public categoriaService: CategoriaService,
     public actRoute: ActivatedRoute,
     public router: Router,
+    private toast: ToastService,
     private formBuilder: FormBuilder
     ) {this.createForm(); }
 
@@ -31,7 +34,8 @@ export class ListaCategoriaComponent implements OnInit {
 
   loadCategorias(){
     return this.categoriaService.getCategorias().subscribe((data: {}) => {
-      this.Categoria = data;
+      this.aux = data;
+      this.HandleErrorGet();
     });
   }
 
@@ -75,5 +79,15 @@ export class ListaCategoriaComponent implements OnInit {
       estadoCategoria: ['', Validators.required],
     });
   }
+
+  HandleErrorGet(): void {
+    if (this.aux.estado === 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+      this.Categoria = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
+  }
+
 
 }

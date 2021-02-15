@@ -6,6 +6,7 @@ import {Lugar} from '../../models/lugar';
 import {LugarService} from '../../services/lugar.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UsuarioService} from '../../services/usuario.service';
+import {ToastService} from "../../services/toast.service";
 
 @Component({
   selector: 'app-lista-clientes',
@@ -14,6 +15,7 @@ import {UsuarioService} from '../../services/usuario.service';
 })
 export class ListaClientesComponent implements OnInit {
 
+  aux: any;
   Cliente: Cliente[] = [];
   _id = this.actRoute.snapshot.params._id;
   @Input() clienteData = {_id: 0, rif: '', razonSocial: '', estado: '',
@@ -45,6 +47,7 @@ export class ListaClientesComponent implements OnInit {
               public lugarService: LugarService,
               public actRoute: ActivatedRoute,
               public router: Router,
+              private toast: ToastService,
               public usuarioService: UsuarioService) {this.createForm(); }
 
   ngOnInit(): void {
@@ -107,6 +110,23 @@ export class ListaClientesComponent implements OnInit {
 
   seleccionarParroquia(id){
     this.auxParroquiaID = id;
+  }
+
+  HandleErrorGet(){
+    if(this.aux.estado == 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado,this.aux.mensaje);
+      this.Cliente = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado,this.aux.mensaje);
+    }
+  }
+
+  HandleErrorPostPut(){
+    if (this.aux.estado == 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado,this.aux.mensaje);
+    }else{
+      this.toast.showError(this.aux.estado,this.aux.mensaje);
+    }
   }
 
   get rifCliente() {return this.formCliente.get('rifCliente'); }

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {Presentacion} from '../../models/presentacion';
 import {PresentacionService} from '../../services/presentacion.service';
+import {ToastService} from "../../services/toast.service";
 
 @Component({
   selector: 'app-lista-presentacion',
@@ -11,7 +12,7 @@ import {PresentacionService} from '../../services/presentacion.service';
 })
 export class ListaPresentacionComponent implements OnInit {
 
-
+  aux: any;
   presentaciones: Presentacion[] = [];
   _id=this.actRoute.snapshot.params['_id'];
   @Input() presentacionData={_id:0,  descripcion:'',estado:''};
@@ -25,6 +26,7 @@ export class ListaPresentacionComponent implements OnInit {
     public presentacionService:PresentacionService,
     public actRoute: ActivatedRoute,
     public router: Router,
+    private toast: ToastService,
     private formBuilder: FormBuilder
   ) { this.createForm();}
 
@@ -55,6 +57,23 @@ export class ListaPresentacionComponent implements OnInit {
 
   editar(presentacion){
     this.presentacionData= presentacion;
+  }
+
+  HandleErrorGet(){
+    if (this.aux.estado == 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+      this.presentaciones = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
+  }
+
+  HandleErrorPostPut(){
+    if (this.aux.estado == 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
   }
 
 

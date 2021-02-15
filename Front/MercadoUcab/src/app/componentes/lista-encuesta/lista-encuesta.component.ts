@@ -5,6 +5,7 @@ import { Encuesta } from 'src/app/models/encuesta';
 import { EstudioService } from 'src/app/services/estudio.service';
 import { TipoPreguntaService } from 'src/app/services/tipo-pregunta.service';
 import { EncuestaService } from '../../services/encuesta.service';
+import {ToastService} from "../../services/toast.service";
 
 @Component({
   selector: 'app-lista-encuesta',
@@ -23,6 +24,7 @@ export class ListaEncuestaComponent implements OnInit {
       {descripcion: ''}
     ]
   };
+  aux: any;
   encuestas: Encuesta[] = [];
   _id = this.actRoute.snapshot.params._id;
   cantPreguntas = [];
@@ -39,6 +41,7 @@ export class ListaEncuestaComponent implements OnInit {
     private servicioTipoPregunta: TipoPreguntaService,
     private formBuilder: FormBuilder,
     public actRoute: ActivatedRoute,
+    private toast: ToastService
   ) {
     this.createForm();
   }
@@ -97,6 +100,23 @@ export class ListaEncuestaComponent implements OnInit {
   asigCantPregunta(cant: number): void {
     for (let i = 0; i < cant; i++) {
       this.cantPreguntas.push(i);
+    }
+  }
+
+  HandleErrorGet(){
+    if(this.aux.estado == 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado,this.aux.mensaje);
+      this.encuestas = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado,this.aux.mensaje);
+    }
+  }
+
+  HandleErrorPostPut(){
+    if (this.aux.estado == 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado,this.aux.mensaje);
+    }else{
+      this.toast.showError(this.aux.estado,this.aux.mensaje);
     }
   }
 

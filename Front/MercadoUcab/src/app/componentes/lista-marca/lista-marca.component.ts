@@ -3,6 +3,7 @@ import {Marca} from '../../models/marca';
 import {MarcaService} from '../../services/marca.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ToastService} from "../../services/toast.service";
 
 @Component({
   selector: 'app-lista-marca',
@@ -11,6 +12,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class ListaMarcaComponent implements OnInit {
 
+  aux: any;
   Marca: Marca[] = [];
   _id = this.actRoute.snapshot.params['_id'];
   @Input() marcaData = {_id: 0, nombre: '', estado: ''};
@@ -24,6 +26,7 @@ export class ListaMarcaComponent implements OnInit {
     public marcaService: MarcaService,
     public actRoute: ActivatedRoute,
     public router: Router,
+    private toast: ToastService,
     private formBuilder: FormBuilder
   ) {
     this.createForm();
@@ -53,6 +56,23 @@ export class ListaMarcaComponent implements OnInit {
 
   editar(marca){
     this.marcaData = marca;
+  }
+
+  HandleErrorGet(){
+    if (this.aux.estado == 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+      this.Marca = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
+  }
+
+  HandleErrorPostPut(){
+    if (this.aux.estado == 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
   }
 
   /// Validacion de Datos

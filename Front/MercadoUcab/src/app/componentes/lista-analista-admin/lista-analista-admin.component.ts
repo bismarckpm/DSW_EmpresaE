@@ -4,6 +4,7 @@ import {TipoUsuarioService} from '../../services/tipo-usuario.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Usuario} from '../../models/usuario';
 import {UsuarioService} from '../../services/usuario.service';
+import {ToastService} from "../../services/toast.service";
 
 @Component({
   selector: 'app-lista-analista-admin',
@@ -12,6 +13,7 @@ import {UsuarioService} from '../../services/usuario.service';
 })
 export class ListaAnalistaAdminComponent implements OnInit {
 
+  aux: any;
   Usuario: Usuario[] = [];
   _id = this.actRoute.snapshot.params._id;
   @Input() usuarioData = {_id: 0, username: '', estado: '', tipousuario: {_id: 0, descripcion: ''}};
@@ -25,6 +27,7 @@ export class ListaAnalistaAdminComponent implements OnInit {
     public usuarioService: UsuarioService,
     public actRoute: ActivatedRoute,
     public router: Router,
+    private toast: ToastService,
     private formBuilder: FormBuilder
   ) {
     this.createForm();
@@ -58,6 +61,23 @@ export class ListaAnalistaAdminComponent implements OnInit {
 
   editar(usuario){
     this.usuarioData = usuario;
+  }
+
+  HandleErrorGet(){
+    if(this.aux.estado == 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado,this.aux.mensaje);
+      this.Usuario = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado,this.aux.mensaje);
+    }
+  }
+
+  HandleErrorPostPut(){
+    if (this.aux.estado == 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado,this.aux.mensaje);
+    }else{
+      this.toast.showError(this.aux.estado,this.aux.mensaje);
+    }
   }
 
   get usernameUsuario(){

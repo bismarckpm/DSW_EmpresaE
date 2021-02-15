@@ -5,6 +5,7 @@ import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { Subcategoria } from 'src/app/models/subcategoria';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {ToastService} from "../../services/toast.service";
 
 
 
@@ -17,6 +18,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class ListaSubcategoriaComponent implements OnInit {
 
     // Declaracion de las varibales del componente que se usa
+  aux: any;
   Subcategoria: Subcategoria[] = [];
   _id = this.actRoute.snapshot.params._id;
   @Input()subcategoriaData = { _id: 0, nombre: '', estado: '', categoria: {_id: 0}};
@@ -32,6 +34,7 @@ export class ListaSubcategoriaComponent implements OnInit {
     public categoriaService: CategoriaService,
     public actRoute: ActivatedRoute,
     public router: Router,
+    private toast: ToastService,
     private formBuilder: FormBuilder
   ) {  this.createForm(); }
 
@@ -70,6 +73,23 @@ export class ListaSubcategoriaComponent implements OnInit {
     this.categoriaService.getCategorias().subscribe((Categorias: {}) => {
       this.categoria = Categorias;
     });
+  }
+
+  HandleErrorGet(){
+    if (this.aux.estado == 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+      this.Subcategoria = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
+  }
+
+  HandleErrorPostPut(){
+    if (this.aux.estado == 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
   }
 
    /// Validacion de Datos

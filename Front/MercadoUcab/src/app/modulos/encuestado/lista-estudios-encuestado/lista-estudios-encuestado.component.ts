@@ -8,6 +8,8 @@ import { Pregunta } from '../../../models/pregunta';
 import { TipoPregunta } from '../../../models/tipo-pregunta';
 import { Opcion } from '../../../models/opcion';
 import { EncuestaService } from 'src/app/services/encuesta.service';
+import {CssUnknownTokenListAst} from "codelyzer/angular/styles/cssAst";
+import {ToastService} from "../../../services/toast.service";
 
 class Multiple { constructor(public _id: number){} }
 
@@ -19,6 +21,7 @@ class Multiple { constructor(public _id: number){} }
 
 export class ListaEstudiosEncuestadoComponent implements OnInit {
 
+  aux: any;
   estudios: Estudio[] = [];
   preguntasEncuesta: Pregunta[] = [];
   opciones: Opcion[] = [];
@@ -63,6 +66,7 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
     private encuestaService: EncuestaService,
     private formBuilder: FormBuilder,
     public actRoute: ActivatedRoute,
+    private toast: ToastService,
     public router: Router
   ) { }
 
@@ -148,5 +152,22 @@ export class ListaEstudiosEncuestadoComponent implements OnInit {
       texto: '',
       opciones: []
     };
+  }
+
+  HandleErrorGet(){
+    if (this.aux.estado == 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+      this.estudios = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
+  }
+
+  HandleErrorPostPut(){
+    if (this.aux.estado == 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
   }
 }

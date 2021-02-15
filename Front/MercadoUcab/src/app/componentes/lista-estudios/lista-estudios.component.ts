@@ -10,6 +10,7 @@ import { EstudioService } from 'src/app/services/estudio.service';
 import { LugarService } from 'src/app/services/lugar.service';
 import { NivelSocioEconomicoService } from 'src/app/services/nivel-socio-economico.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
+import {ToastService} from "../../services/toast.service";
 
 @Component({
   selector: 'app-lista-estudios',
@@ -20,12 +21,14 @@ export class ListaEstudiosComponent implements OnInit {
   cambio = false;
 
   // Declaracion de variables
+  aux: any;
   estudios: Estudio[] = [];
   _id = this.actRoute.snapshot.params._id;
   @Input() estudioData = {_id: 0,
     nombre: '',
     estado: 'Solicitado',
     comentarioAnalista : '',
+    analista: {_id: 0},
     edadMinima: 0,
     edadMaxima: 0 ,
     fechaInicio: '',
@@ -86,6 +89,7 @@ export class ListaEstudiosComponent implements OnInit {
     public analistaService: AnalistaService,
     public actRoute: ActivatedRoute,
     public router: Router,
+    private toast: ToastService,
     private formBuilder: FormBuilder
     ) {this.createForm(); }
 
@@ -243,6 +247,23 @@ export class ListaEstudiosComponent implements OnInit {
       this.nivelSocioEconomico = data;
       console.log(this.nivelSocioEconomico);
     });
+  }
+
+  HandleErrorGet(){
+    if (this.aux.estado == 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+      this.estudios = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
+  }
+
+  HandleErrorPostPut(){
+    if (this.aux.estado == 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
   }
 
   // Validaciones de Pregunta

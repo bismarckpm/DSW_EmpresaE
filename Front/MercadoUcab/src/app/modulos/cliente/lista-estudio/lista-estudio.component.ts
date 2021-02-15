@@ -8,6 +8,7 @@ import { EstudioService } from 'src/app/services/estudio.service';
 import { LugarService } from 'src/app/services/lugar.service';
 import { NivelSocioEconomicoService } from 'src/app/services/nivel-socio-economico.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
+import {ToastService} from "../../../services/toast.service";
 
 @Component({
   selector: 'app-lista-estudio-cliente',
@@ -18,6 +19,7 @@ export class ListaEstudioClienteComponent implements OnInit {
 
   cambio = false;
   // Declaracion de variables
+  aux: any;
   estudios: Estudio[] = [];
   _id = this.actRoute.snapshot.params['_id'];
   @Input() estudioData = {_id: 0,
@@ -81,6 +83,7 @@ export class ListaEstudioClienteComponent implements OnInit {
   public nivelsocioeconomicoService: NivelSocioEconomicoService,
   public actRoute: ActivatedRoute,
   public router: Router,
+  private toast: ToastService,
   private formBuilder: FormBuilder
   ) {this.createForm(); }
 
@@ -221,6 +224,23 @@ export class ListaEstudioClienteComponent implements OnInit {
       this.estudioData.lugar.lugar.lugar._id = this.auxEstadoID;
     }
 
+  }
+
+  HandleErrorGet(){
+    if (this.aux.estado == 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+      this.estudios = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
+  }
+
+  HandleErrorPostPut(){
+    if (this.aux.estado == 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
   }
 
 

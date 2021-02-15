@@ -3,6 +3,7 @@ import {Tipo} from '../../models/tipo';
 import {TipoService} from '../../services/tipo.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ToastService} from "../../services/toast.service";
 
 @Component({
   selector: 'app-lista-tipo',
@@ -11,6 +12,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class ListaTipoComponent implements OnInit {
 
+  aux: any;
   Tipo: Tipo[] = [];
   _id = this.actRoute.snapshot.params._id;
   @Input() tipoData = {_id: 0, nombre: '', estado: '', descripcion: ''};
@@ -23,6 +25,7 @@ export class ListaTipoComponent implements OnInit {
     private formBuilder: FormBuilder,
     public actRoute: ActivatedRoute,
     public router: Router,
+    private toast: ToastService,
     public tipoService: TipoService) {
     this.createForm();  }
 
@@ -49,6 +52,23 @@ export class ListaTipoComponent implements OnInit {
 
   editar(tipo){
     this.tipoData = tipo;
+  }
+
+  HandleErrorGet(){
+    if (this.aux.estado == 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+      this.Tipo = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
+  }
+
+  HandleErrorPostPut(){
+    if (this.aux.estado == 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
   }
 
   /// Validacion de Datos

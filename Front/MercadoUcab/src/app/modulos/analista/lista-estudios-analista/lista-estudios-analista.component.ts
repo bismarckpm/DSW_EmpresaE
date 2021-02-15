@@ -10,6 +10,7 @@ import {PreguntaService} from '../../../services/pregunta.service';
 import {EncuestaService} from '../../../services/encuesta.service';
 import {Pregunta} from '../../../models/pregunta';
 import {Opcion} from '../../../models/opcion';
+import {ToastService} from "../../../services/toast.service";
 // @ts-ignore
 highcharts3D( Highcharts );
 
@@ -25,6 +26,7 @@ class Multiple { constructor(public _id: number){} }
 export class ListaEstudiosAnalistaComponent implements OnInit {
 
   // Declaracion de variables
+  aux: any;
   estudios: Estudio[] = [];
   preguntasEncuesta: Pregunta[] = [];
   opciones: Opcion[] = [];
@@ -76,6 +78,7 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
     private encuestaService: EncuestaService,
     private formBuilder: FormBuilder,
     public actRoute: ActivatedRoute,
+    private toast: ToastService,
     public router: Router
 
   ) { this.createForm(); }
@@ -244,6 +247,23 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
       ]
     };
     return chartOptions;
+  }
+
+  HandleErrorGet(){
+    if (this.aux.estado == 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+      this.estudios = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
+  }
+
+  HandleErrorPostPut(){
+    if (this.aux.estado == 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
   }
 
   get comentarioAnalistaEstudio(){ return this.formEstudioAnalista.get('comentarioAnalistaEstudio'); }

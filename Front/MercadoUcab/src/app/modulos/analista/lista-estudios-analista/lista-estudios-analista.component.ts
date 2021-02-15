@@ -9,6 +9,7 @@ import highcharts3D from 'highcharts/highcharts-3d.src';
 import {PreguntaService} from '../../../services/pregunta.service';
 import {EncuestaService} from '../../../services/encuesta.service';
 import {Pregunta} from '../../../models/pregunta';
+import { ToastService } from 'src/app/services/toast.service';
 import {Opcion} from '../../../models/opcion';
 // @ts-ignore
 highcharts3D( Highcharts );
@@ -38,6 +39,7 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
   infoGraficos: any = [];
   chartOptions: Highcharts.Options[] = [];
   highcharts = Highcharts;
+  aux:any=[];
 
   patronFechaEstudio: any = /^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/;
   get fechaFinEstudio(){return this.formEstudioAnalista.get('fechaFinEstudio'); }
@@ -78,6 +80,7 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
     private encuestaService: EncuestaService,
     private formBuilder: FormBuilder,
     public actRoute: ActivatedRoute,
+    public toast: ToastService,
     public router: Router
 
   ) { this.createForm(); }
@@ -91,6 +94,34 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
   editar(estudio){
     this.analistaData = estudio;
   }
+
+  Comenzar(){
+    this.analistaData.estado='en ejecucion';
+    console.log(this.analistaData);
+
+    this.estudioService.updateEstudio(this.analistaData._id, this.analistaData).subscribe(data => {
+      this.aux=data;
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      }
+    });
+  }
+
+  Terminar(){
+    this.analistaData.estado='culminado';
+    console.log(this.analistaData);
+    this.estudioService.updateEstudio(this.analistaData._id, this.analistaData).subscribe(data => {
+      this.aux=data;
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      }
+    });
+  }
+
 
   addRespuestasEncuesta(): void{
     this.respuestaEncuesta.respuestas = this.listaRespuestas;
@@ -186,14 +217,26 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
   loadEstudios(): void {
     const user = JSON.parse(localStorage.getItem('usuarioID'));
     this.estudioService.getEstudioAnalista(user).subscribe(data => {
-      this.estudios = data;
+      this.aux=data;
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+        this.estudios = this.aux.objeto;
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      }
     });
   }
 
   loadDataMuestra(id): void {
-    this.prueba = id; //este es el id del estudio que se selecciona para que quede almacenado para el segundo ngfor
-    this.estudioService.getDataMuestra(id).subscribe(data => {
-      this.encuestados = data;
+    this.prueba = id;
+    this.estudioService.getDataMuestraxAnalista(id).subscribe(data => {
+      this.aux=data;
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+        this.encuestados = this.aux.objeto;
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      }
     });
   }
 
@@ -207,7 +250,13 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
     this.infoGraficos = [];
     this.chartOptions = [];
     this.estudioService.getDataGraficos(estudio).subscribe(data => {
-      this.infoGraficos = data;
+      this.aux=data;
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+        this.infoGraficos = this.aux.objeto;
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      }
       this.agregarDatos();
       console.log(this.infoGraficos);
     });

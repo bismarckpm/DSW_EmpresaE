@@ -26,7 +26,7 @@
                 Completada
               </label>
 
-              <div class="modal fade " id="exampleModal"  data-backdrop="static" data-keyboard="false" tabindex="-1" 
+              <div class="modal fade " id="exampleModal"  data-backdrop="static" data-keyboard="false" tabindex="-1"
               aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable">
                   <div class="modal-content">
@@ -78,14 +78,14 @@
                                 </div>
                               </div>
                               <div class="col-md-2 col-sm-3 mb-2">
-                                <button type="button" class="btn btn-primary" (click)="addOpcionesRespuesta(pregunta._id)"
-                                [ngClass]="{'d-none': pregunta.tipo._id == 1 || pregunta.tipo._id == 4}">
+                                <button type="button" class="btn btn-primary" (click)="addOpcionesRespuesta(pregunta._id); addRespuestasEncuesta()"
+                                        [ngClass]="{'d-none': pregunta.tipo._id == 1 || pregunta.tipo._id == 4}">
                                   Aceptar
                                 </button>
-                                <button type="button" class="btn btn-primary" *ngIf="pregunta.tipo._id == 1" (click)="addRespuestaAbierta(pregunta._id)">
+                                <button type="button" class="btn btn-primary" *ngIf="pregunta.tipo._id == 1" (click)="addRespuestaAbierta(pregunta._id); addRespuestasEncuesta()">
                                   Aceptar
                                 </button>
-                                <button type="button" class="btn btn-primary" *ngIf="pregunta.tipo._id == 4" (click)="addRespuestaMultiple(pregunta._id)">
+                                <button type="button" class="btn btn-primary" *ngIf="pregunta.tipo._id == 4" (click)="addRespuestaMultiple(pregunta._id); addRespuestasEncuesta()">
                                   Aceptar
                                 </button>
                               </div>
@@ -96,10 +96,10 @@
                     </div>
 
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal" 
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal"
                       (click)="listaOpciones = []; listaRespuestas = []">Cancelar</button>
-                      <button type="submit" class="btn btn-success" data-dismiss="modal" data-toggle="modal" 
-                      data-target="#modalConfirmacion" (click)="buscarDescripPreguntas(); buscarDescripRespuestas()">Enviar respuesta</button>
+                      <button type="submit" class="btn btn-success" data-dismiss="modal" data-toggle="modal"
+                              data-target="#modalConfirmacion">Enviar respuesta</button>
                     </div>
                   </div>
                 </div>
@@ -112,7 +112,7 @@
   </div>
 </div>
 
-<div class="modal fade" id="modalConfirmacion"  data-backdrop="static" data-keyboard="false" tabindex="-1" 
+<div class="modal fade" id="modalConfirmacion"  data-backdrop="static" data-keyboard="false" tabindex="-1"
 aria-labelledby="staticBackdropLabel" aria-hidden="true">>
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">

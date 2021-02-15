@@ -83,7 +83,7 @@
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                               <button type="submit" class="btn btn-success" (click)="updateEstudio()" data-dismiss="modal">Actualizar</button>
                               <br>
-                              
+
                                 <div *ngIf="analistaData.estado ==='procesado'">
                                   <button type="submit" class="btn btn-info" (click)="Comenzar()" data-dismiss="modal">Comenzar</button>
                                 </div>
@@ -118,7 +118,7 @@
                   </div>
                   <!-- Cuerpo completo del Modal -->
                   <div class="modal-body">
-                      <div class="modal-dialog">
+                      <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                           <table class="table table-striped table-sm bg-light">
                             <thead>
@@ -126,8 +126,7 @@
                               <th>ID</th>
                               <th>Primer Nombre</th>
                               <th>Primer Apellido</th>
-                              <th>Nivel Academico</th>
-                              <th></th>
+                              <th>Telefono</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -135,16 +134,14 @@
                               <td>{{ encuestado._id }}</td>
                               <td>{{ encuestado.primerNombre }}</td>
                               <td>{{ encuestado.primerApellido}}</td>
-                              <td>{{ encuestado.nivelacademico.nombre }}</td>
-                              <td>{{ prueba }}</td>
+                              <td>{{ encuestado.telefono }}</td>
 
                               <td>
                                 <div>
-                                  <button type="button" class="btn btn-primary" data-toggle="modal" (click)="loadPreguntasResponderxAnalista(encuestado._id)" data-target="#exampleModalEncuesta">
+                                  <button type="button" class="btn btn-primary" data-toggle="modal" (click)="loadPreguntasResponderxAnalista(encuestado._id)" data-target="#exampleModalEncuesta" [ngClass]="{'d-none': encuestado.estadoEstudioEncuestado == 'Finalizado'}">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                       <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
                                     </svg>
-                                    Responder
                                   </button>
                                   <div class="modal fade " id="exampleModalEncuesta" tabindex="-1" aria-labelledby="exampleModalLabelEncuesta" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -215,7 +212,8 @@
                                         </div>
                                         <div class="modal-footer">
                                           <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="listaOpciones = []">Cancelar</button>
-                                          <button type="submit" class="btn btn-success" data-dismiss="modal" (click)="addRespuestasEncuestaxAnalista()">Enviar respuesta</button>
+                                          <button type="submit" class="btn btn-success" data-dismiss="modal" data-toggle="modal"
+                                                  data-target="#modalConfirmacion" (click)="buscarDescripPreguntas(); buscarDescripRespuestas(); addRespuestasEncuesta()">Enviar respuesta</button>
                                         </div>
                                       </div>
                                     </div>
@@ -236,12 +234,12 @@
               </div>
             </div> <!-- Finall Modal -->
 
-            <div *ngIf=" estudio.estado === 'Culminado' ">
+            <div *ngIf=" estudio.estado === 'culminado' ">
               <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" (click)="loadInfoGraficos(estudio._id)" data-target="#modalGrafico" > +
-                <!-- <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                   <path fill-rule="evenodd" d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                </svg> -->
+                </svg>
                 graf
               </button>
             </div>

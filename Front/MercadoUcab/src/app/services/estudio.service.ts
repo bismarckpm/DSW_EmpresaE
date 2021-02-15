@@ -12,8 +12,8 @@ export class EstudioService {
 
 
   //apiurl = 'http://localhost:3000';
-   apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
-
+   //apiurl='http://localhost:8080/servicio-1.0-SNAPSHOT/api';
+  apiurl='http://200.109.149.240:8080/servicio-1.0-SNAPSHOT/api';
 
   constructor(private http: HttpClient) { }
 
@@ -78,6 +78,14 @@ export class EstudioService {
 
   getDataMuestra(id): Observable<Encuestado[]>{
      return this.http.get<Encuestado[]>(this.apiurl + '/estudio/dataMuestra/' + id)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+
+  getDataMuestraxAnalista(id): Observable<Encuestado[]>{
+    return this.http.get<Encuestado[]>(this.apiurl + '/estudio/dataMuestraxAnalista/' + id)
       .pipe(
         retry(1),
         catchError(this.handleError)

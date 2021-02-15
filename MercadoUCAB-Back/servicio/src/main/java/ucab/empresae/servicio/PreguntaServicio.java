@@ -164,9 +164,9 @@ public class PreguntaServicio {
     public Response getPreguntasbySubcategoria(@PathParam("id") long id) {
         DtoResponse response = DtoFactory.DtoResponseInstance();
         try {
-            //this.comando = ComandoFactory.comandoGetPreguntasBySubcategoriaInstancia(id);
-            ComandoGetPreguntasBySubcategoria comandoP = new ComandoGetPreguntasBySubcategoria(id);
-            return Response.ok(comandoP.getResult()).build();
+            this.comando = ComandoFactory.comandoGetPreguntasBySubcategoriaInstancia(id);
+            //ComandoGetPreguntasBySubcategoria comandoP = new ComandoGetPreguntasBySubcategoria(id);
+            return Response.ok(this.comando.getResult()).build();
         }catch (CustomException cex){
             response.setEstado("ERROR");
             response.setMensaje(cex.getMensaje());
@@ -192,9 +192,8 @@ public class PreguntaServicio {
     public Response getPreguntasyOpcionesxEncuestado(@PathParam("id_estudio") long id_estudio, @PathParam("id_encuestado") long id_encuestado) {
         DtoResponse response = DtoFactory.DtoResponseInstance();
         try {
-            //this.comando = ComandoFactory.comandoGetEncuestaInstancia(id_estudio, id_encuestado);//id de encuestado es el id del usuario
-            ComandoGetEncuesta comandoGetEncuesta = new ComandoGetEncuesta(id_estudio, id_encuestado);
-            return Response.ok(comandoGetEncuesta.getResult()).build();
+            this.comando = ComandoFactory.comandoGetEncuestaInstancia(id_estudio, id_encuestado);//id de encuestado es el id del usuario
+            return Response.ok(comando.getResult()).build();
         }catch (CustomException cex){
             response.setEstado("ERROR");
             response.setMensaje(cex.getMensaje());

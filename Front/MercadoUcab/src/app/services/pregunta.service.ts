@@ -8,9 +8,10 @@ import { retry, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PreguntaService {
-
+  //apiurl='http://localhost:3000';
   apiurl = 'http://localhost:8080/servicio-1.0-SNAPSHOT/api';
-  // apiurl = 'http://localhost:3000';
+  //apiurl='http://200.109.149.240:8080/servicio-1.0-SNAPSHOT/api';
+
 
   constructor(private http: HttpClient) { }
   // Http Options
@@ -75,8 +76,7 @@ export class PreguntaService {
   // }
 
   sugerirPreguntas(idEstudio): Observable<Pregunta[]>{
-    // return this.http.get<Pregunta[]>(this.apiurl + '/pregunta/sugerirPreguntas/' + idEstudio)
-    return this.http.get<Pregunta[]>(this.apiurl + '/pregunta')
+    return this.http.get<Pregunta[]>(this.apiurl + '/pregunta/preguntasSubcategoria/' + idEstudio)
     .pipe(
       retry(1),
       catchError(this.handleError)

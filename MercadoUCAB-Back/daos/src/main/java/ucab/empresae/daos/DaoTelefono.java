@@ -3,6 +3,7 @@ package ucab.empresae.daos;
 import ucab.empresae.entidades.ClienteEntity;
 import ucab.empresae.entidades.EncuestadoEntity;
 import ucab.empresae.entidades.TelefonoEntity;
+
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 

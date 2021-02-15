@@ -19,19 +19,20 @@
           <td>
             <div  class="d-flex justify-content-around">
               <button  type="button" class="btn btn-primary btn-sm" (click)="loadPreguntasResponder(estudioEncuestado._id)"
-                       data-toggle="modal" data-target="#exampleModal" [ngClass]="{'d-none': estudioEncuestado.estadoEstudioEncuestado == 'Finalizado'}">
+              data-toggle="modal" data-target="#exampleModal" [ngClass]="{'d-none': estudioEncuestado.estadoEstudioEncuestado == 'Finalizado'}">
                 Responder
               </button>
               <label for="" class="text-success d-none" [ngClass]="{'d-block': estudioEncuestado.estadoEstudioEncuestado == 'Finalizado'}">
                 Completada
               </label>
 
-              <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+              <div class="modal fade " id="exampleModal"  data-backdrop="static" data-keyboard="false" tabindex="-1"
+              aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLabel">Encuesta</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"  (click)="listaOpciones = []">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="listaOpciones = []; listaRespuestas = []">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
@@ -77,14 +78,14 @@
                                 </div>
                               </div>
                               <div class="col-md-2 col-sm-3 mb-2">
-                                <button type="button" class="btn btn-primary" (click)="addOpcionesRespuesta(pregunta._id)"
-                                [ngClass]="{'d-none': pregunta.tipo._id == 1 || pregunta.tipo._id == 4}">
+                                <button type="button" class="btn btn-primary" (click)="addOpcionesRespuesta(pregunta._id); addRespuestasEncuesta()"
+                                        [ngClass]="{'d-none': pregunta.tipo._id == 1 || pregunta.tipo._id == 4}">
                                   Aceptar
                                 </button>
-                                <button type="button" class="btn btn-primary" *ngIf="pregunta.tipo._id == 1" (click)="addRespuestaAbierta(pregunta._id)">
+                                <button type="button" class="btn btn-primary" *ngIf="pregunta.tipo._id == 1" (click)="addRespuestaAbierta(pregunta._id); addRespuestasEncuesta()">
                                   Aceptar
                                 </button>
-                                <button type="button" class="btn btn-primary" *ngIf="pregunta.tipo._id == 4" (click)="addRespuestaMultiple(pregunta._id)">
+                                <button type="button" class="btn btn-primary" *ngIf="pregunta.tipo._id == 4" (click)="addRespuestaMultiple(pregunta._id); addRespuestasEncuesta()">
                                   Aceptar
                                 </button>
                               </div>
@@ -95,8 +96,10 @@
                     </div>
 
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="listaOpciones = []">Cancelar</button>
-                      <button type="submit" class="btn btn-success" data-dismiss="modal" (click)="addRespuestasEncuesta()">Enviar respuesta</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                      (click)="listaOpciones = []; listaRespuestas = []">Cancelar</button>
+                      <button type="submit" class="btn btn-success" data-dismiss="modal" data-toggle="modal"
+                              data-target="#modalConfirmacion">Enviar respuesta</button>
                     </div>
                   </div>
                 </div>
@@ -106,5 +109,45 @@
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+<div class="modal fade" id="modalConfirmacion"  data-backdrop="static" data-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Confirmación de respuesta de encuesta</h5>
+      </div>
+      <div class="modal-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let resp of listaRespuestas; let i = index">
+            <div class="row">
+              <div class="col-md-3">
+                Pregunta {{ resp._id }}
+              </div>
+              <div class="col-md-9">
+                {{ descripPreguntas[i] }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                Respuesta
+              </div>
+              <div class="col-md-9 d-none" [ngClass]="{'d-block': resp.texto != ''}">
+                {{ resp.texto }}
+              </div>
+              <div class="col-md-9 d-block" [ngClass]="{'d-none': resp.texto == ''}">
+                <p *ngFor="let op of resp.opciones">{{ op._id }}</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="listaOpciones = []; listaRespuestas = []">Cancelar</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="addRespuestasEncuesta()">Confirmar</button>
+      </div>
+    </div>
   </div>
 </div>

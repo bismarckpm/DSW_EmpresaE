@@ -5,6 +5,7 @@ import {LugarService} from '../../services/lugar.service';
 import {UsuarioService} from '../../services/usuario.service';
 import {Router} from '@angular/router';
 import {ClienteService} from '../../services/cliente.service';
+import {ToastService} from "../../services/toast.service";
 
 @Component({
   selector: 'app-form-clientes',
@@ -15,7 +16,7 @@ export class FormClientesComponent implements OnInit {
 
   @Input() cliente = {_id: 0, rif: '', razonSocial: '', estado: '',
     lugar:  {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: ''}}}},
-    usuario: {_id: 0, username: '', estado: '', clave: '', correoElectronico: ''},
+    usuario: {_id: 0, username: '', estado: '', clave: '', correoelectronico: ''},
     telefono: {_id: 0, numero: ''},
 
   };
@@ -32,6 +33,7 @@ export class FormClientesComponent implements OnInit {
   auxEstadoID: number;
   auxMunicipioID: number;
   auxParroquiaID: number;
+  aux: any;
 
   patronCorreoCliente: any = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   patronRIFCliente: any = /^([VEJPGvejpg]{1})-([0-9]{8})-([0-9]{1}$)/;
@@ -44,6 +46,7 @@ export class FormClientesComponent implements OnInit {
     public lugarService: LugarService,
     public usuarioService: UsuarioService,
     public clienteService: ClienteService,
+    public toast:ToastService,
     public router: Router) {
     this.createForm();
   }
@@ -66,7 +69,13 @@ export class FormClientesComponent implements OnInit {
 
   addLugar(): void {
     this.lugarService.getLugars().subscribe((Lugares: {}) => {
-      this.estados = Lugares;
+      this.aux = Lugares;
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+        this.estados = this.aux.objeto;
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      }
     });
   }
 
@@ -76,7 +85,13 @@ export class FormClientesComponent implements OnInit {
     // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
     if (id > 0 ){
       this.lugarService.getMunicipio(this.auxEstadoID).subscribe((data: {}) => {
-        this.municipios = data;
+        this.aux = data;
+        if(this.aux.estado == "Exitoso"){
+          this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+          this.municipios = this.aux.objeto;
+        }else{
+          this.toast.showError(this.aux.estado,this.aux.mensaje)
+        }
       });
     }
   }
@@ -87,7 +102,13 @@ export class FormClientesComponent implements OnInit {
     // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
     if (id > 0 ) {
       this.lugarService.getParroquia(this.auxMunicipioID, id).subscribe((data: {}) => {
-        this.parroquias = data;
+        this.aux = data;
+        if(this.aux.estado == "Exitoso"){
+          this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+          this.parroquias = this.aux.objeto;
+        }else{
+          this.toast.showError(this.aux.estado,this.aux.mensaje)
+        }
       });
     }
   }
@@ -109,7 +130,6 @@ export class FormClientesComponent implements OnInit {
     this.formCliente = this.formBuilder.group({
       rifCliente: '',
       razonSocialCliente: '',
-      estadoCliente: '',
       lugarCliente: '',
       usernameCliente: '',
       claveCliente: '',

@@ -46,7 +46,7 @@ export class FormMarcaComponent implements OnInit {
   createForm(){
     this.formMarca = this.formBuilder.group({
       nombreMarca: ['', [Validators.pattern(this.patronNombreMarca), Validators.required]],
-      estadoMarca: ['', Validators.required],
+      //estadoMarca: ['', Validators.required],
     });
   }
 

@@ -1,4 +1,3 @@
-
 <div class="modal-dialog">
   <div class="modal-content">
 
@@ -51,26 +50,14 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4 mb-3">
-            <label for="fechaInicio">Fecha Inicio</label>
-            <input type="text" class="form-control"  placeholder="AAAA-MM-DD"  [(ngModel)]="estudio.fechaInicio" formControlName="fechaInicioEstudio" value="fechaInicio">
-            <div *ngIf="fechaInicioEstudio.invalid && (fechaInicioEstudio.dirty || fechaInicioEstudio.touched)" class="alert alert-danger">
-              <div *ngIf="fechaInicioEstudio.errors.required">
-                Este campo es obligatorio
-              </div>
-              <div *ngIf="fechaInicioEstudio.errors.pattern">
-                Introduzca un formato valido
-              </div>
-            </div>
-          </div>
-        </div>
 
+        </div>
         <div class="row">
           <div class="col-md-4 mb-3">
-            <label for="" class="col-sm-4 col-form-label escrituerModal"> Subcategoria</label>
-            <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudio.subcategoria._id" formControlName="subcategoriaEstudio" >
-              <option  value=""> Seleccione una ...</option>
-              <option  *ngFor="let sub of subcategoria" [ngValue]= "sub._id"  >{{sub.nombre}}</option>
+            <label for="" class="col-sm-4 col-form-label escrituerModal">Subcategoria</label>
+            <select name="id_categoria"  class="custom-select d-block w-100 mt-4"  [(ngModel)]="estudio.subcategoria._id" formControlName="subcategoriaEstudio" >
+                <option  value="0"> Choose...</option>
+                <option  *ngFor="let sub of subcategoria" [ngValue]= "sub._id"  >{{sub.nombre}}</option>
             </select>
             <div *ngIf="subcategoriaEstudio.invalid && (subcategoriaEstudio.dirty || subcategoriaEstudio.touched)" class="alert alert-danger">
               <div *ngIf="subcategoriaEstudio.errors.required">
@@ -78,10 +65,10 @@
               </div>
             </div>
           </div>
-          <div class="col-md-8 mb-3">
+          <div class="col-md-4 mb-3">
             <label for="" class="col-md-8 col-form-label escrituerModal">Nivel SocioEconomico</label>
             <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudio.nivelSocioEconomico._id" formControlName="nivelEstudio" >
-              <option  value=""> Seleccione uno ...</option>
+              <option  value="0">Choose...</option>
               <option  *ngFor="let nivel of nivelSocioEconomico" [ngValue]= "nivel._id"  >{{nivel.nombre}}</option>
             </select>
             <div *ngIf="nivelEstudio.invalid && (nivelEstudio.dirty || nivelEstudio.touched)" class="alert alert-danger">
@@ -91,11 +78,11 @@
             </div>
           </div>
         </div>
-
         <div class="row">
           <div class="col-md-4 mb-3">
             <label for="estado">Estado</label>
-            <select class="custom-select d-block w-100"  [(ngModel)]="estudio.lugar._id" (click)="busquedaMunicipio(estudio.lugar._id)"formControlName="lugarEstudio"  value="estudio.lugar._id">
+            <select class="custom-select d-block w-100"  [(ngModel)]="estudio.lugar._id" (click)="busquedaMunicipio(estudio.lugar._id)"
+            formControlName="lugarEstudio"  value="estudio.lugar._id">
               <option value="0">Choose...</option>
               <option  *ngFor="let estado of estados" [ngValue]= "estado._id"  >{{estado.nombre}}</option>
             </select>
@@ -128,6 +115,33 @@
               <div *ngIf="lugarEstudio.errors.required">
                 Este campo es obligatorio
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <label for="">Via del Estudio</label>
+          <select class="custom-select d-block w-100"  [(ngModel)]="estudio.via" formControlName="viaEstudio"  value="estudio.via">
+            <option value="telefono">telefono</option>
+            <option value="plataforma">plataforma</option>
+
+          </select>
+          <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
+            <div *ngIf="lugarEstudio.errors.required">
+              Este campo es obligatorio
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="" >Género</label>
+          <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudio.genero._id" formControlName="GeneroEstudio">
+            <option value="0">Choose...</option>
+            <option *ngFor="let gen of genero" [ngValue]= "gen._id"  >{{gen.nombre}}</option>
+          </select>
+          <div *ngIf="GeneroEstudio.invalid && (GeneroEstudio.dirty || GeneroEstudio.touched)" class="alert alert-danger">
+            <div *ngIf="GeneroEstudio.errors.required">
+              Este campo es obligatorio
             </div>
           </div>
         </div>

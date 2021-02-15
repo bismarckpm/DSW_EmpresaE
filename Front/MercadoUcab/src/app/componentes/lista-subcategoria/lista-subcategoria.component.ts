@@ -20,6 +20,7 @@ export class ListaSubcategoriaComponent implements OnInit {
     // Declaracion de las varibales del componente que se usa
   aux: any;
   Subcategoria: Subcategoria[] = [];
+  aux: any = [];
   _id = this.actRoute.snapshot.params._id;
   @Input()subcategoriaData = { _id: 0, nombre: '', estado: '', categoria: {_id: 0}};
   categoria: any;
@@ -45,7 +46,8 @@ export class ListaSubcategoriaComponent implements OnInit {
 
   loadSubcategoria(): void {
     this.subcategoriaService.getsubcategorias().subscribe(data => {
-      this.Subcategoria = data;
+      this.aux = data;
+      this.HandleErrorGet();
     });
   }
 
@@ -113,7 +115,14 @@ export class ListaSubcategoriaComponent implements OnInit {
     });
   }
 
-
+  HandleErrorGet(): void {
+    if (this.aux.estado === 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+      this.Subcategoria = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
+  }
 
 
 

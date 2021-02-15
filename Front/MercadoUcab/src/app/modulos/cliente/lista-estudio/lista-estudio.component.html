@@ -21,12 +21,12 @@
             <th>{{ estudio.nombre }}</th>
             <th>{{ estudio.edadMinima }}</th>
             <th>{{ estudio.edadMaxima }}</th>
-            <th>{{ estudio.genero }}</th>
+            <th>{{ estudio.genero.nombre }}</th>
             <th>{{ estudio.fechaInicio }}</th>
             <th>{{ estudio.fechaFin }}</th>
-  
+
             <td>
-              <div *ngIf=" estudio.estado === 'Solicitado' "  class="d-flex justify-content-around">
+              <div *ngIf=" estudio.estado === 'solicitado' || estudio.estado === 'rechazado' "  class="d-flex justify-content-around">
 
                 <button  type="button" class="btn btn-primary" data-toggle="modal" (click)="editar(estudio)" data-target="#exampleModal">
                   <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -85,44 +85,30 @@
                                   </div>
                                 </div>
                               </div>
-                            <div class="row">
-                              <div class="col-md-6 mb-3">
-                                <label for="fechaInicio">Fecha inicio</label>
-                                <input type="text" class="form-control" id="fechaInicio" placeholder="AAAA/MM/DD" [(ngModel)]="estudioData.fechaInicio" formControlName="fechaInicioEstudio" value="fechaInicio">
-                                <div *ngIf="fechaInicioEstudio.invalid && (fechaInicioEstudio.dirty || fechaInicioEstudio.touched)" class="alert alert-danger">
-                                  <div *ngIf="fechaInicioEstudio.errors.required">
-                                    Este campo es obligatorio
-                                  </div>
-                                  <div *ngIf="fechaInicioEstudio.errors.pattern">
-                                    Introduzca un formato valido
-                                  </div>
-                                </div>
-                              </div>
-                              
-                            </div>
 
-  
+
+
                             <div class="row">
                               <div class="col-md-4 mb-3">
                                 <label for="estado">Estado</label>
                                 <input type="text" class="form-control" [(ngModel)]="estudioData.lugar.lugar.lugar.nombre" value="estudioData.lugar.lugar.lugar.nombre" formControlName="lugarEstudio"  readonly="readonly">
                               </div>
-                    
+
                               <div class="col-md-4 mb-3">
                                 <label for="municipio">Municipio</label>
                                 <input type="text" class="form-control" [(ngModel)]="estudioData.lugar.lugar.nombre" value="estudioData.lugar.lugar.nombre" formControlName="lugarmunicipio"  readonly="readonly">
                               </div>
-                          
-                    
+
+
                             <div class="col-md-4 mb-3">
                               <label for="estado">Parroquia</label>
                               <input type="text" class="form-control" [(ngModel)]="estudioData.lugar.nombre" value="estudioData.lugar.nombre" formControlName="lugarparroquia"  readonly="readonly">
-                            </div> 
+                            </div>
                               <div class="col-md-4 mb-3">
                               <button type="submit" class="btn btn-success"  (click)="Cambio()"> modificar </button>
-                            </div> 
+                            </div>
                           </div>
-                     
+
 
                         <div *ngIf="cambio == true" >
                         <div class="row">
@@ -137,7 +123,7 @@
                               </div>
                             </div>
                           </div>
-                
+
                           <div class="col-md-4 mb-3">
                             <label for="municipio">Municipio</label>
                             <select class="custom-select d-block w-100"  [(ngModel)]="municipioData._id" (click)="busquedaParroquia(municipioData._id)" formControlName="MunicipioData"  value="municipioData._id">
@@ -150,7 +136,7 @@
                             </div>
                           </div>
                         </div>
-                
+
                         <div class="col-md-4 mb-3">
                           <label for="estado">Parroquia</label>
                           <select class="custom-select d-block w-100"  [(ngModel)]="parroquiaData._id"  (click)="seleccionarParroquia(parroquiaData._id)" formControlName="ParroquiaData" value="parroquiaData._id">
@@ -161,10 +147,10 @@
                               Este campo es obligatorio
                             </div>
                           </div>
-                        </div> 
-                      </div> 
-  
-  
+                        </div>
+                      </div>
+
+
                         <div class="col-md-5 mb-3">
                           <label for="" class="col-sm-6 col-form-label escrituerModal"> Subcategoria </label>
                               <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.subcategoria._id" formControlName="subcategoriaEstudio" value="estudioData.subcategoria._id">
@@ -177,7 +163,7 @@
                                   </div>
                                 </div>
                          </div>
-  
+
                           <div class="col-md-5 mb-3">
                             <label for="" class="col-sm-6 col-form-label escrituerModal">Nivel Socio Economico  </label>
                                 <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.nivelSocioEconomico._id" formControlName="nivelEstudio" value="estudioData.nivelSocioEconomico._id" >
@@ -190,20 +176,48 @@
                                     </div>
                                   </div>
                           </div>
-  
-  
+
+                          <div class="col-md-4 mb-3">
+                            <label for="">Via del Estudio</label>
+                            <select class="custom-select d-block w-100"  [(ngModel)]="estudioData.via" formControlName="viaEstudio"  value="estudio.via">
+                              <option value="telefono">telefono</option>
+                              <option value="plataforma">plataforma</option>
+
+                            </select>
+                            <div *ngIf="lugarEstudio.invalid && (lugarEstudio.dirty || lugarEstudio.touched)" class="alert alert-danger">
+                              <div *ngIf="lugarEstudio.errors.required">
+                                Este campo es obligatorio
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-6 mb-3">
+                            <label for="" >Género</label>
+                            <select name="id_categoria"  class="custom-select d-block w-100"  [(ngModel)]="estudioData.genero._id" formControlName="GeneroEstudio">
+                              <option value="0">Choose...</option>
+                              <option *ngFor="let gen of genero" [ngValue]= "gen._id"  >{{gen.nombre}}</option>
+                            </select>
+                            <div *ngIf="GeneroEstudio.invalid && (GeneroEstudio.dirty || GeneroEstudio.touched)" class="alert alert-danger">
+                              <div *ngIf="GeneroEstudio.errors.required">
+                                Este campo es obligatorio
+                              </div>
+                            </div>
+                          </div>
+
+
                         </form>
                       </div><!-- cierre del cuerpo modal -->
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-success" (click)="updateEstudio()" data-dismiss="modal">Guardar</button>
+
                       </div>
-  
+
                     </div>
                   </div>
                 </div> <!-- Finall Modal -->
-                
-             
+
+
               </div>
             </td>
           </tr>
@@ -211,4 +225,4 @@
       </table>
     </div>
   </div>
-  
+

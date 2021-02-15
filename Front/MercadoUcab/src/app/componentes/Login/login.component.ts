@@ -27,59 +27,58 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
+  
 
   Loggearse(){
-  //////////////////////// Para el proyecto como tal //////////////////////////////////
-    if (this.formLogin.valid) {
-      this.usuarioService.Logear(this.usuario).subscribe( data  => {
-        this.user=data
-
-        if(this.user.autenticacion=="valida") {
-          console.log("==============") ;
-          console.log(this.user.username) ;
-          console.log(this.user.rol) ; ;
-          console.log("==============") ;
-          if(this.user.rol=="Administrador"){
-            console.log("Entre en  administrador");
-            this.router.navigate(['/admin/0']);
-            localStorage.setItem('usuarioID',JSON.stringify(this.user._id));
-            localStorage.setItem('rol',JSON.stringify(this.user.rol));
-          }
-          if(this.user.rol=="Encuestado"){
-            console.log("Entre en  Encuestado")
-            this.router.navigate(['encuestado/0'])
-            localStorage.setItem('usuarioID',JSON.stringify(this.user._id));
-            localStorage.setItem('rol',JSON.stringify(this.user.rol));
-          }
-          if(this.user.rol=="Analista"){
-            console.log("Entre en  Analsita");
-            this.router.navigate(['/analista/0']);
-            localStorage.setItem('usuarioID',JSON.stringify(this.user._id));
-            localStorage.setItem('rol',JSON.stringify(this.user.rol));
-          }
-          if(this.user.rol=="Cliente"){
-            console.log("Entre en  Cliente");
-            this.router.navigate(['/cliente/0']);
-            localStorage.setItem('usuarioID',JSON.stringify(this.user._id));
-            localStorage.setItem('rol',JSON.stringify(this.user.rol));
-          }
-          this.toast.showSuccess('Logeado correctamente', 'Acceso permitido');
-        }else {
-          this.toast.showError('Verifique sus datos y vuelva a intentarlo', 'Usuario no registrado o Informacion Incorrecta');
-        }
-      },
-      (error) => {
-        console.log(error);
-        this.toast.showError('Intentelo más tarde', 'Comunicación no disponible');
-      }
-      );
-    }else {
-      this.toast.showError('Verifique sus datos y vuelva a intentarlo', 'Username o contraseña no válidas');
-    }
+  ////////////////////////// Para el proyecto como tal //////////////////////////////////
+     if (this.formLogin.valid) {
+       this.usuarioService.Logear(this.usuario).subscribe( data  => {
+         this.user=data
+         if(this.user.autenticacion=="valida") {
+           console.log("==============") ;
+           console.log(this.user.username) ;
+           console.log(this.user.rol) ; ;
+           console.log("==============") ;
+           if(this.user.rol=="Administrador"){
+             console.log("Entre en  administrador");
+             this.router.navigate(['/admin/0']);
+             localStorage.setItem('usuarioID',JSON.stringify(this.user._id));
+             localStorage.setItem('rol',JSON.stringify(this.user.rol));
+           }
+           if(this.user.rol=="Encuestado"){
+             console.log("Entre en  Encuestado")
+             this.router.navigate(['encuestado/0'])
+             localStorage.setItem('usuarioID',JSON.stringify(this.user._id));
+             localStorage.setItem('rol',JSON.stringify(this.user.rol));
+           }
+           if(this.user.rol=="Analista"){
+             console.log("Entre en  Analsita");
+             this.router.navigate(['/analista/0']);
+             localStorage.setItem('usuarioID',JSON.stringify(this.user._id));
+             localStorage.setItem('rol',JSON.stringify(this.user.rol));
+           }
+           if(this.user.rol=="Cliente"){
+             console.log("Entre en  Cliente");
+             this.router.navigate(['/cliente/0']);
+             localStorage.setItem('usuarioID',JSON.stringify(this.user._id));
+             localStorage.setItem('rol',JSON.stringify(this.user.rol));
+           }
+           this.toast.showSuccess('Logeado correctamente', 'Acceso permitido');
+         }else {
+           this.toast.showError('Verifique sus datos y vuelva a intentarlo', 'Usuario no registrado o Informacion Incorrecta');
+         }
+       },
+       (error) => {
+         console.log(error);
+         this.toast.showError('Intentelo más tarde', 'Comunicación no disponible');
+       }
+       );
+     }else {
+       this.toast.showError('Verifique sus datos y vuelva a intentarlo', 'Username o contraseña no válidas');
+     }
     ////////////////////////////////Para trabajar en el front Unicamente////////////////
-/*
-    if (this.formLogin.valid) {
+
+   /* if (this.formLogin.valid) {
       this.usuarioService.getUsuarios().subscribe( data  => {
         console.log(data) ;
 

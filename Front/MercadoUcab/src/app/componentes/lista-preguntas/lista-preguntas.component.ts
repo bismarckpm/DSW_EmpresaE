@@ -23,6 +23,7 @@ export class ListaPreguntasComponent implements OnInit {
   @Input() preguntaData ={ _id:0, descripcion:'',estado:'',tipo:{_id:0,estado:'',tipo:''} ,subcategoria:{_id:0, nombre:'',estado:'',}, opciones:[] };
    subcategoria:any;
    tipopregunta:any;
+   aux: any = [];
 
    aux: any;
    formPregunta: FormGroup;
@@ -81,7 +82,8 @@ ValidarTipopregunta(tipoid){
 
   loadpregunta():void {
     this.preguntaService.getPreguntas().subscribe(data => {
-      this.preguntas = data;
+      this.aux = data;
+      this.HandleErrorGet();
     })
   }
 
@@ -165,6 +167,13 @@ ValidarTipopregunta(tipoid){
     });
   }
 
-
+  HandleErrorGet(): void {
+    if (this.aux.estado === 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+      this.preguntas = this.aux.objeto;
+    }else{
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
+  }
 
 }

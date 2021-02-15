@@ -10,10 +10,9 @@ import ucab.empresae.dtos.DtoFactory;
 import ucab.empresae.dtos.DtoResponse;
 import ucab.empresae.entidades.BaseEntity;
 import ucab.empresae.entidades.CategoriaEntity;
-import ucab.empresae.excepciones.CategoriaException;
 import ucab.empresae.excepciones.CustomException;
 
-import javax.json.JsonObject;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +37,7 @@ public class ComandoGetCategorias extends ComandoBase<DtoResponse> {
      * @throws Exception En caso de algún problema a la hora de mapear de la lista de entidades a lista de dto
      */
     @Override
-    public void execute() throws CustomException {
+    public void execute() throws CustomException, ParseException {
         Dao daoCategoria = DaoFactory.DaoCategoriaInstancia();
         List<BaseEntity> categorias = daoCategoria.findAll(CategoriaEntity.class);
 

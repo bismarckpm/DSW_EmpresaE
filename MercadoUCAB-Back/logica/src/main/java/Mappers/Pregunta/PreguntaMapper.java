@@ -64,7 +64,7 @@ public class PreguntaMapper {
                 throw new CustomException("Entidad correspondiente al dto no encontrada.");
             } else {
                 pregunta.setDescripcion(dto.getDescripcion());
-                pregunta.setEstado(dto.getEstado());
+                pregunta.setEstado("a");
 
                 DaoTipoPregunta daoTipoPregunta = DaoFactory.DaoTipoPreguntaInstancia();
                 DaoSubcategoria daoSubcategoria = DaoFactory.DaoSubcategoriaInstancia();

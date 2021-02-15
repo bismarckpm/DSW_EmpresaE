@@ -3,6 +3,7 @@ package ucab.empresae.servicio;
 import ucab.empresae.daos.DaoTipo;
 import ucab.empresae.dtos.DtoTipo;
 import ucab.empresae.entidades.TipoEntity;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -32,7 +33,7 @@ public class TipoServicio {
         try{
             if(dtoTipo != null) {
                 tipo.setNombre(dtoTipo.getNombre());
-                tipo.setEstado(dtoTipo.getEstado());
+                tipo.setEstado("a");
                 tipo.setDescripcion(dtoTipo.getDescripcion());
                 TipoEntity resul = dao.insert(tipo);
                 return Response.ok(tipo).build();
@@ -108,7 +109,6 @@ public class TipoServicio {
             TipoEntity tipo = dao.find(id, TipoEntity.class);
             if (tipo != null){
                 tipo.setNombre(dtoTipo.getNombre());
-                tipo.setEstado(dtoTipo.getEstado());
                 tipo.setDescripcion(dtoTipo.getDescripcion());
                 TipoEntity resul = dao.update(tipo);
                 return Response.ok().entity(tipo).build();

@@ -54,7 +54,7 @@ public class LugarEntity extends BaseEntity{
         this.lugar = lugar;
     }
 
-    /*@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "id_nivelsocioeco", referencedColumnName = "id")
     private NivelSocioeconomicoEntity nivelsocioeco;
     public NivelSocioeconomicoEntity getNivelsocioeco() {
@@ -63,7 +63,7 @@ public class LugarEntity extends BaseEntity{
 
     public void setNivelsocioeco(NivelSocioeconomicoEntity nivelsocioeco) {
         this.nivelsocioeco = nivelsocioeco;
-    }*/
+    }
 
     public LugarEntity(long id) {
         super(id);

@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { parse } from 'path';
+//import { parse } from 'path';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import {ToastService} from "../../services/toast.service";
 
 @Component({
   selector: 'app-cambiar-clave',
@@ -11,15 +10,12 @@ import {ToastService} from "../../services/toast.service";
 })
 export class CambiarClaveComponent implements OnInit {
 
-  aux: any;
-
   @Input() usuario={ claveNueva:"" };
   @Input() auxUsuario={ claveNueva:"" };
 
   constructor(
     public usuarioService: UsuarioService,
-    public router:Router,
-    private toast: ToastService
+    public router:Router
 
   ) { }
 
@@ -39,7 +35,6 @@ export class CambiarClaveComponent implements OnInit {
     })
 
   }
-
 
 
 

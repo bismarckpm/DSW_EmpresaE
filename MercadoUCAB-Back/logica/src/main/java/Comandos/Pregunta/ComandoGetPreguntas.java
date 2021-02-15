@@ -8,13 +8,12 @@ import ucab.empresae.daos.Dao;
 import ucab.empresae.daos.DaoFactory;
 import ucab.empresae.dtos.DtoFactory;
 import ucab.empresae.dtos.DtoPregunta;
-import ucab.empresae.dtos.DtoPresentacion;
 import ucab.empresae.dtos.DtoResponse;
 import ucab.empresae.entidades.BaseEntity;
 import ucab.empresae.entidades.PreguntaEntity;
-import ucab.empresae.entidades.PresentacionEntity;
 import ucab.empresae.excepciones.CustomException;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +31,7 @@ public class ComandoGetPreguntas extends ComandoBase<DtoResponse> {
      * @throws Exception En caso de algún problema a la hora de mapear de la lista de entidades a lista de dto
      */
     @Override
-    public void execute() throws CustomException {
+    public void execute() throws CustomException, ParseException {
         Dao daoPregunta = DaoFactory.DaoPreguntaInstancia();
         List<PreguntaEntity> preguntas = daoPregunta.findAll(PreguntaEntity.class);
 
@@ -46,7 +45,7 @@ public class ComandoGetPreguntas extends ComandoBase<DtoResponse> {
      * @throws CustomException En caso de haber algún problema en métodos llamados con anterioridad
      */
     @Override
-    public DtoResponse getResult() throws CustomException {
+    public DtoResponse getResult() throws CustomException, ParseException {
         execute();
         DtoResponse dtoResponse = DtoFactory.DtoResponseInstance();
         dtoResponse.setEstado("Exitoso");

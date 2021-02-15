@@ -1,11 +1,12 @@
 package ucab.empresae.daos;
 
+import ucab.empresae.entidades.BaseEntity;
+
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
-import ucab.empresae.entidades.BaseEntity;
 
 public class Dao<T>
 {

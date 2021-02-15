@@ -1,10 +1,8 @@
 package ucab.empresae.entidades;
 
 import javax.json.bind.annotation.JsonbDateFormat;
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "estudio", schema = "mercadeoucab")
@@ -41,6 +39,17 @@ public class EstudioEntity extends BaseEntity{
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    @Basic
+    @Column(name = "via")
+    private String via;
+    public String getVia() {
+        return via;
+    }
+
+    public void setVia(String via) {
+        this.via = via;
     }
 
     @Basic
@@ -141,17 +150,12 @@ public class EstudioEntity extends BaseEntity{
 
     public void setAnalista(UsuarioEntity analista) { this.analista = analista; }
 
-    @ManyToMany
-    @JsonbTransient
-    @JoinTable(name = "estudio_genero", schema = "mercadeoucab", joinColumns = @JoinColumn(name = "id_estudio", referencedColumnName = "id", nullable = false), inverseJoinColumns = @JoinColumn(name = "id_genero", referencedColumnName = "id", nullable = false))
-    private List<GeneroEntity> generos;
-    public List<GeneroEntity> getGeneros() {
-        return generos;
-    }
+    @ManyToOne
+    @JoinColumn(name = "id_genero", referencedColumnName = "id")
+    private GeneroEntity genero;
+    public GeneroEntity getGenero() { return genero; }
 
-    public void setGeneros(List<GeneroEntity> generos) {
-        this.generos = generos;
-    }
+    public void setGenero(GeneroEntity genero) { this.genero = genero; }
 
     /*@OneToMany(mappedBy = "estudio")
     public List<ClienteEstudioEntity> getClienteestudios() {

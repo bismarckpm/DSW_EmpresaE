@@ -4,15 +4,12 @@ import ucab.empresae.daos.*;
 import ucab.empresae.dtos.*;
 import ucab.empresae.entidades.*;
 import ucab.empresae.excepciones.EncuestaException;
-import ucab.empresae.excepciones.PruebaExcepcion;
 
 import javax.json.Json;
 import javax.json.JsonObject;
-import javax.websocket.EncodeException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -88,10 +85,7 @@ public class EncuestaServicio extends AplicacionBase{
                 //Se inserta en la n a n tantas veces como preguntas relacionadas al estudio
                 EncuestaEntity encuesta = new EncuestaEntity();
                 encuesta.setEstado("a");
-                Date fechaInicio = sdf.parse(dtoEncuesta.getFechaInicio());
-                Date fechaFin = sdf.parse(dtoEncuesta.getFechaFin());
-                encuesta.setFechaInicio(fechaInicio);
-                encuesta.setFechaFin(fechaFin);
+                encuesta.setFechaInicio(new Date());
 
                 encuesta.setEstudio(estudio);
 
@@ -99,6 +93,23 @@ public class EncuestaServicio extends AplicacionBase{
                 encuesta.setPregunta(pregunta);
                 dao.insert(encuesta);
             }
+
+
+            List<DtoEncuestado> encuestados = dtoEncuesta.getEncuestados();
+
+            DaoEstudioEncuestado daoEstudioEncuestado = DaoFactory.DaoEstudioEncuestadoInstancia();
+            DaoEncuestado daoEncuestado = DaoFactory.DaoEncuestadoInstancia();
+            for(DtoEncuestado encuestadoCiclo: encuestados){
+                EncuestadoEntity encuestado = daoEncuestado.find(encuestadoCiclo.get_id(), EncuestadoEntity.class);
+
+                EstudioEncuestadoEntity estudioEncuestadoEntity = EntidadesFactory.EstudioEncuestadoInstance();
+                estudioEncuestadoEntity.setEstado("Pendiente");
+                estudioEncuestadoEntity.setEstudio(estudio);
+                estudioEncuestadoEntity.setEncuestado(encuestado);
+
+                daoEstudioEncuestado.insert(estudioEncuestadoEntity);
+            }
+
 
             return Response.ok().entity(preguntas).build();
         } catch (Exception ex) {

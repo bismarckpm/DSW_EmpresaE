@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Encuesta } from 'src/app/models/encuesta';
 import { EstudioService } from 'src/app/services/estudio.service';
 import { TipoPreguntaService } from 'src/app/services/tipo-pregunta.service';
+import { ToastService } from 'src/app/services/toast.service';
 import { EncuestaService } from '../../services/encuesta.service';
 import {ToastService} from "../../services/toast.service";
 
@@ -55,18 +56,30 @@ export class ListaEncuestaComponent implements OnInit {
   loadEncuestas(): void {
     this.servicio.getEncuestas().subscribe(data => {
       this.encuestas = data;
+    },
+    (error) => {
+      console.log(error);
+      this.toast.showError('Error al cargar las encuestas intentelo más tarde', 'Comunicación no disponible');
     });
   }
 
   loadEstudios(): void {
-    this.servicioEstudio.getEstudios().subscribe((data: {}) => {
+    this.servicioEstudio.getEstudios().subscribe((data) => {
       this.estudios = data;
+    },
+    (error) => {
+      console.log(error);
+      this.toast.showError('Error al cargar los estudios, intentelo más tarde', 'Comunicación no disponible');
     });
   }
 
   loadTipoPreguntas(): void {
-    this.servicioTipoPregunta.getTipoPreguntas().subscribe((data: {}) => {
+    this.servicioTipoPregunta.getTipoPreguntas().subscribe((data) => {
       this.tipoPreguntas = data;
+    },
+    (error) => {
+      console.log(error);
+      this.toast.showError('Error al cargar los tipos de preguntas, intentelo más tarde', 'Comunicación no disponible');
     });
   }
 
@@ -78,6 +91,7 @@ export class ListaEncuestaComponent implements OnInit {
         this.loadEncuestas();
       });
     }
+    this.toast.showSuccess(null, 'Encuesta eliminada');
   }
 
   updateEncuesta(): void {
@@ -85,10 +99,10 @@ export class ListaEncuestaComponent implements OnInit {
       this.servicio.updateEncuesta(this.encuestaData._id, this.encuestaData).subscribe(data => {
        });
       this.loadEncuestas();
-      }
-      else{
-        alert('ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
-      }
+    }
+    else{
+      this.toast.showError('Es necesario llenar los todos los campos', 'Campos incompletos');
+    }
   }
   // Sustitucion de variables para el update
   editar(encuesta): void{

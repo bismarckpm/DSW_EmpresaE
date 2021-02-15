@@ -1,6 +1,7 @@
 package ucab.empresae.daos;
 
 import ucab.empresae.entidades.MedioConexionEntity;
+
 import javax.persistence.EntityManager;
 
 public class DaoMedioConexion extends Dao<MedioConexionEntity> {

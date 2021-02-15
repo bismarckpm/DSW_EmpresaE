@@ -7,7 +7,10 @@ import ucab.empresae.excepciones.UsuarioException;
 
 import javax.json.Json;
 import javax.json.JsonObject;
-import javax.mail.*;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.ws.rs.Consumes;

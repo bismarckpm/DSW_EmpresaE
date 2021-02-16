@@ -152,7 +152,7 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
                 estudio.setGenero(daoGenero.find(dtoEstudio.getGenero().get_id(), GeneroEntity.class));
             }
 
-            if(dtoEstudio.getComentarioAnalista() != "") {
+            if(dtoEstudio.getComentarioAnalista() != null) {
                 estudio.setComentarioAnalista(dtoEstudio.getComentarioAnalista());
                 if(dtoEstudio.getFechaFin() == null) {
                     estudio.setEstado("culminado");

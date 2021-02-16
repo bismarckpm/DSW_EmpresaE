@@ -3,13 +3,16 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cliente } from 'src/app/models/cliente';
 import { Estudio } from 'src/app/models/estudio';
-
+import * as Highcharts from 'highcharts';
+import highcharts3D from 'highcharts/highcharts-3d.src';
 import { EstudioService } from 'src/app/services/estudio.service';
 import { GeneroService } from 'src/app/services/genero.service';
 import { LugarService } from 'src/app/services/lugar.service';
 import { NivelSocioEconomicoService } from 'src/app/services/nivel-socio-economico.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 import { ToastService } from 'src/app/services/toast.service';
+// @ts-ignore
+highcharts3D( Highcharts );
 
 @Component({
   selector: 'app-lista-estudio-cliente',
@@ -38,7 +41,7 @@ export class ListaEstudioClienteComponent implements OnInit {
    subcategoria: any;
     aux:any=[];
     genero:any;
- 
+
    ///// Atributos para la busqueda de acuerdo a lo seleccionado
    lugar: any;
    parroquias: any;
@@ -47,8 +50,13 @@ export class ListaEstudioClienteComponent implements OnInit {
    auxEstadoID: number;
    auxMunicipioID: number;
    auxParroquiaID: number;
-   
- 
+   comentarioEstudio: string;
+
+   infoGraficos: any = [];
+   chartOptions: Highcharts.Options[] = [];
+   highcharts = Highcharts;
+
+
    // Declaracion para validar
    formEstudio: FormGroup;
    patronEdadEstudio: any = /^(0?[0-9]{1,2}|1[0-7][0-9]|99)$/;
@@ -84,7 +92,7 @@ export class ListaEstudioClienteComponent implements OnInit {
      this.estudios = this.aux.objeto;
     }else{
       this.toast.showError(this.aux.estado,this.aux.mensaje)
-    } 
+    }
     });
   }
 
@@ -104,9 +112,9 @@ export class ListaEstudioClienteComponent implements OnInit {
      this.genero = this.aux.objeto;
     }else{
       this.toast.showError(this.aux.estado,this.aux.mensaje)
-    } 
+    }
     })
-  
+
   }
 
   Cambio(){
@@ -121,10 +129,10 @@ export class ListaEstudioClienteComponent implements OnInit {
   updateEstudio(){
     console.log("entro a update");
 
-    
+
     if (this.formEstudio.valid) {
       console.log("la vaidaciones son correctas");
-      
+
           if(this.cambio == true){
             console.log("estado actual del cambio :"+ this.cambio);
             console.log("llamo validar los cambios del lugar");
@@ -132,16 +140,16 @@ export class ListaEstudioClienteComponent implements OnInit {
             console.log("Hago la llamada de http con este estudio :");
             console.log(this.estudioData);
             this.estudioData.estado="solicitado";
-            
-            
-            
+
+
+
             this.estudioService.updateEstudioCliente(this.estudioData._id, this.estudioData).subscribe(data => {
               this.aux=data;
               if(this.aux.estado == "Exitoso"){
                 this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
               }else{
                 this.toast.showError(this.aux.estado,this.aux.mensaje)
-              } 
+              }
              });
              console.log("termine la llamada del http");
             this.cambio= false;
@@ -155,7 +163,7 @@ export class ListaEstudioClienteComponent implements OnInit {
                 this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
               }else{
                 this.toast.showError(this.aux.estado,this.aux.mensaje)
-              } 
+              }
             });
            this.loadEstudios();
           }
@@ -183,7 +191,7 @@ addLugar(){
      this.estados = this.aux.objeto;
     }else{
       this.toast.showError(this.aux.estado,this.aux.mensaje)
-    } 
+    }
   });
 }
 
@@ -195,7 +203,7 @@ addMunicipios(id){
      this.municipios = this.aux.objeto;
     }else{
       this.toast.showError(this.aux.estado,this.aux.mensaje)
-    } 
+    }
   });
 }
 
@@ -207,7 +215,7 @@ addParroquia(id){
      this.parroquias = this.aux.objeto;
     }else{
       this.toast.showError(this.aux.estado,this.aux.mensaje)
-    } 
+    }
   });
 }
 
@@ -222,7 +230,7 @@ busquedaMunicipio(id){
 
 busquedaParroquia(id){
   // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
-  if (id > 0 ){     
+  if (id > 0 ){
       this.auxMunicipioID= id;
         this.addParroquia(id)
   }
@@ -242,7 +250,7 @@ addSubcategoria(){
      this.subcategoria = this.aux.objeto;
     }else{
       this.toast.showError(this.aux.estado,this.aux.mensaje)
-    } 
+    }
   });
 }
 
@@ -254,16 +262,16 @@ addNivelSocioEconomico(){
      this.nivelSocioEconomico = this.aux.objeto;
     }else{
       this.toast.showError(this.aux.estado,this.aux.mensaje)
-    } 
+    }
   });
 }
 
 validarCambiosLugar(){
 
-    
-    
+
+
   console.log("entro en la llamada de las validaciones de lugar");
-  
+
   if((this.estudioData.lugar._id != this.parroquiaData._id) && (this.parroquiaData._id == this.auxParroquiaID)){
     console.log("la parroquia es diferente y hago el cambio");
     console.log("id de la parroquia anterior :"+ this.estudioData.lugar._id);
@@ -281,6 +289,80 @@ validarCambiosLugar(){
 
 }
 
+
+
+  loadInfoGraficos(estudio): void {
+     this.comentarioEstudio = estudio.comentarioAnalista;
+    this.infoGraficos = [];
+    this.chartOptions = [];
+    this.estudioService.getDataGraficos(estudio._id).subscribe(data => {
+      this.aux=data;
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+        this.infoGraficos = this.aux.objeto;
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      }
+      this.agregarDatos();
+      console.log(this.infoGraficos);
+    });
+  }
+
+  agregarDatos() {
+    this.infoGraficos.forEach(element => {
+      const valor = element.opcionesResultado.map((x: any) => {
+        return { name: x.descripcion, y: x.valor };
+      });
+      const enunciado = element.descripcion;
+
+      this.chartOptions.push(this.chart(enunciado, valor));
+    });
+  }
+
+  chart(enunciado: any, valor: any): Highcharts.Options {
+    const chartOptions: Highcharts.Options = {
+      chart: {
+        type: 'pie',
+        plotShadow: false,
+        options3d: {
+          enabled: true,
+          alpha: 45,
+          beta: 0
+        }
+      },
+      title: {
+        text: enunciado
+      },
+      tooltip: {
+        headerFormat: '',
+        pointFormat:
+          '<span style=\'color:{point.color}\'>\u25CF</span> {point.name}: <b>{point.y}</b>',
+        style: {
+          fontSize: '10px'
+        }
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          depth: 35,
+          shadow: true,
+          innerSize: '20%',
+          dataLabels: {
+            enabled: false
+          },
+          showInLegend: true
+        }
+      },
+      series: [
+        {
+          type: 'pie',
+          data: valor
+        }
+      ]
+    };
+    return chartOptions;
+  }
 
  // Validaciones de Pregunta
  get nombreEstudio(){return this.formEstudio.get('nombreEstudio'); }

@@ -273,6 +273,18 @@ public class EncuestaServicio extends AplicacionBase{
                 daoEstudioEncuestado.update(estudioEncuestadoEntity);
             }
 
+
+            //VALIDAR QUE TODOS LOS ENCUESTADOS HAN RESPONDIDO EL ESTUDIO
+
+            long cantidadEncuestados = daoEstudioEncuestado.getCantidadEncuestados(estudioEntity.get_id());
+            long cantidadEncuestadosFinalizado = daoEstudioEncuestado.getCantidadEncuestadosFinalizado(estudioEntity.get_id());
+
+            if(cantidadEncuestados == cantidadEncuestadosFinalizado){
+                estudioEntity.setEstado("por analizar");
+                daoEstudio.update(estudioEntity);
+            }
+
+
             return Response.ok().build();
 
         } catch (Exception ex) {
@@ -352,6 +364,18 @@ public class EncuestaServicio extends AplicacionBase{
                 EstudioEncuestadoEntity estudioEncuestadoEntity = daoEstudioEncuestado.getEstudioEncuestado(encuestadoEntity, estudioEntity);
                 estudioEncuestadoEntity.setEstado("En Proceso");
                 daoEstudioEncuestado.update(estudioEncuestadoEntity);
+            }
+
+
+
+            //VALIDAR QUE TODOS LOS ENCUESTADOS HAN RESPONDIDO EL ESTUDIO
+
+            long cantidadEncuestados = daoEstudioEncuestado.getCantidadEncuestados(estudioEntity.get_id());
+            long cantidadEncuestadosFinalizado = daoEstudioEncuestado.getCantidadEncuestadosFinalizado(estudioEntity.get_id());
+
+            if(cantidadEncuestados == cantidadEncuestadosFinalizado){
+                estudioEntity.setEstado("por analizar");
+                daoEstudio.update(estudioEntity);
             }
 
             return Response.ok().build();

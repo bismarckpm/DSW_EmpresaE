@@ -38,7 +38,7 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
             throw new CustomException("MAPEST001","El id debe ser mayor a 0.");
         }else if(estudio.getEstado() == null) {
             throw new CustomException("MAPEST001","El estudio debe tener un estado asignado.");
-        }else if(!estudio.getEstado().equals("solicitado") && !estudio.getEstado().equals("procesado") && !estudio.getEstado().equals("en ejecucion") && !estudio.getEstado().equals("culminado") && !estudio.getEstado().equals("rechazado")) {
+        }else if(!estudio.getEstado().equals("solicitado") && !estudio.getEstado().equals("procesado") && !estudio.getEstado().equals("en ejecucion") && !estudio.getEstado().equals("culminado") && !estudio.getEstado().equals("rechazado") && !estudio.getEstado().equals("por analizar")) {
             throw new CustomException("MAPEST001","El estado del estudio no es válido");
         }else if(estudio.getNombre() == null) {
             throw new CustomException("MAPEST001","El estudio debe tener un nombre asignado.");
@@ -152,9 +152,9 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
                 estudio.setGenero(daoGenero.find(dtoEstudio.getGenero().get_id(), GeneroEntity.class));
             }
 
-            if(dtoEstudio.getComentarioAnalista() != null) {
+            if(dtoEstudio.getComentarioAnalista() != "") {
                 estudio.setComentarioAnalista(dtoEstudio.getComentarioAnalista());
-                if(dtoEstudio.getEstado() == null) {
+                if(dtoEstudio.getFechaFin() == null) {
                     estudio.setEstado("culminado");
                     estudio.setFechaFin(new Date());
                 }

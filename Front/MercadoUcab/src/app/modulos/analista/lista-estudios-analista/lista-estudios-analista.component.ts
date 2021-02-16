@@ -237,9 +237,15 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
   }
 
   updateEstudio(){
-    this.estudioService.updateEstudio(this.analistaData._id, this.analistaData).subscribe(data => {
-    });
-    this.loadEstudios();
+    if(this.analistaData.comentarioAnalista !== ''){
+      this.analistaData.estado='culminado';
+      this.estudioService.updateEstudio(this.analistaData._id, this.analistaData).subscribe(data => {
+      });
+      this.loadEstudios();
+    }else {
+      this.toast.showError("Comentario esta vacio","Ingresa un comentario")
+    }
+
   }
 
   loadInfoGraficos(estudio): void {
@@ -320,8 +326,8 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
   createForm() {
     this.formEstudioAnalista = this.formBuilder.group({
       comentarioAnalistaEstudio: ['', [Validators.required, Validators.maxLength(100)]],
-      estadoEstudioAnalista: ['', Validators.required],
-      fechaFinEstudio: ['', [ Validators.pattern(this.patronFechaEstudio)]],
+      //estadoEstudioAnalista: ['', Validators.required],
+      //fechaFinEstudio: ['', [ Validators.pattern(this.patronFechaEstudio)]],
     });
   }
 }

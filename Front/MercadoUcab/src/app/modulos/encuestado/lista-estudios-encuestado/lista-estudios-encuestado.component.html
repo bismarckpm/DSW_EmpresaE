@@ -4,8 +4,7 @@
       <thead>
       <tr>
         <th>Nombre</th>
-        <th>Fecha de Inicio</th>
-        <th>Fecha de Culminación</th>
+        <th>Categoria</th>
         <th>Subcategoria</th>
         <th></th>
       </tr>
@@ -13,8 +12,7 @@
       <tbody>
         <tr *ngFor="let estudioEncuestado of estudios; let i = index">
           <td>{{ estudioEncuestado.nombre }}</td>
-          <td>{{ estudioEncuestado.fechaInicio }}</td>
-          <td>{{ estudioEncuestado.fechaFin }}</td>
+          <td>{{ estudioEncuestado.subcategoria.categoria.nombre }}</td>
           <td>{{ estudioEncuestado.subcategoria.nombre }}</td>
           <td>
             <div  class="d-flex justify-content-around">
@@ -99,7 +97,7 @@
                       <button type="button" class="btn btn-secondary" data-dismiss="modal"
                       (click)="listaOpciones = []; listaRespuestas = []">Cancelar</button>
                       <button type="submit" class="btn btn-success" data-dismiss="modal" data-toggle="modal"
-                              data-target="#modalConfirmacion">Enviar respuesta</button>
+                              >Enviar respuesta</button>
                     </div>
                   </div>
                 </div>

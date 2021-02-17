@@ -79,13 +79,6 @@
                               </div>
                             </div>
                           <div class="row">
-                            <div class="col-md-6 mb-3">
-                              <label for="estatus"> Estado</label>
-                              <select class="custom-select d-block w-100" [(ngModel)]= "clienteData.estado" formControlName="estadoCliente" id="estatus" name="estado" >
-                                <option value="a">Activa</option>
-                                <option value="i">Inactiva</option>
-                              </select>
-                            </div>
                           </div>
                           <div *ngIf="estadoCliente.invalid && (estadoCliente.dirty || estadoCliente.touched)" class="alert alert-danger">
                             <div *ngIf="estadoCliente.errors.required">

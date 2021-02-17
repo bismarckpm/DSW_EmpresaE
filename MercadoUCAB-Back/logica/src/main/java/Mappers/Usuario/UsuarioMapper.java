@@ -3,6 +3,8 @@ package Mappers.Usuario;
 import Mappers.GenericMapper;
 import Mappers.MapperFactory;
 import Mappers.TipoUsuario.TipoUsuarioMapper;
+import ucab.empresae.daos.DaoFactory;
+import ucab.empresae.daos.DaoTipoUsuario;
 import ucab.empresae.dtos.DtoFactory;
 import ucab.empresae.dtos.DtoUsuario;
 import ucab.empresae.entidades.BaseEntity;
@@ -34,10 +36,14 @@ public class UsuarioMapper extends GenericMapper<DtoUsuario> {
         }else {
             DtoUsuario dtoUsuario = DtoFactory.DtoUsuarioInstance();
             dtoUsuario.setEstado(usuario.getEstado());
+
             TipoUsuarioMapper tipoUsuarioMapper = MapperFactory.tipoUsuarioMapperInstancia();
             dtoUsuario.setTipoUsuario(tipoUsuarioMapper.CreateDto(usuario.getTipousuario()));
+
             dtoUsuario.set_id(usuario.get_id());
             dtoUsuario.setClave(usuario.getClave());
+
+            dtoUsuario.setUsername(usuario.getUsername());
 
             return dtoUsuario;
         }
@@ -61,8 +67,8 @@ public class UsuarioMapper extends GenericMapper<DtoUsuario> {
             usuario.setUsername(dtoUsuario.getUsername());
             usuario.setClave(dtoUsuario.getClave());
 
-            TipoUsuarioMapper tipoUsuarioMapper = MapperFactory.tipoUsuarioMapperInstancia();
-            usuario.setTipousuario((TipoUsuarioEntity) tipoUsuarioMapper.CreateEntity(dtoUsuario.getTipoUsuario()));
+            DaoTipoUsuario daoTipoUsuario = DaoFactory.DaoTipoUsuarioInstancia();
+            usuario.setTipousuario(daoTipoUsuario.find(dtoUsuario.getTipoUsuario().get_id(), TipoUsuarioEntity.class));
 
             if(usuario.get_id() != 0) {
                 usuario.set_id(dtoUsuario.get_id());

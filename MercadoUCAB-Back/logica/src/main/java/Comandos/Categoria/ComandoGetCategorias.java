@@ -10,10 +10,8 @@ import ucab.empresae.dtos.DtoFactory;
 import ucab.empresae.dtos.DtoResponse;
 import ucab.empresae.entidades.BaseEntity;
 import ucab.empresae.entidades.CategoriaEntity;
-import ucab.empresae.excepciones.CategoriaException;
 import ucab.empresae.excepciones.CustomException;
 
-import javax.json.JsonObject;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;

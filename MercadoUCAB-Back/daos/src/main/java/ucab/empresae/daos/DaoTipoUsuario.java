@@ -1,6 +1,7 @@
 package ucab.empresae.daos;
 
 import ucab.empresae.entidades.TipoUsuarioEntity;
+
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 

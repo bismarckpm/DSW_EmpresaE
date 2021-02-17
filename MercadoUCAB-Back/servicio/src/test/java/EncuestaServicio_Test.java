@@ -1,8 +1,9 @@
 import org.junit.Assert;
 import org.junit.Test;
-import ucab.empresae.dtos.*;
+import ucab.empresae.dtos.DtoEncuesta;
+import ucab.empresae.dtos.DtoEstudio;
+import ucab.empresae.dtos.DtoPregunta;
 import ucab.empresae.servicio.EncuestaServicio;
-import ucab.empresae.servicio.PreguntaServicio;
 
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;

@@ -24,8 +24,8 @@
         <td>{{ estudio.fechaFin }}</td>
 
         <td>
-          <div class="d-flex justify-content-around">
-            <button type="button" class="btn btn-primary" data-toggle="modal" (click)="editar(estudio)" data-target="#exampleModal">
+          <div  *ngIf="estudio.estado ==='culminado' || estudio.estado ==='en ejecucion' || estudio.estado ==='procesado' || estudio.estado ==='por analizar'" class="d-flex justify-content-around">
+            <button type="button" class="btn btn-primary" data-toggle="modal" (click)="editar(estudio)" data-target="#exampleModal" [ngClass]="{'d-none': estudio.estado != 'por analizar' }">
               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
               </svg>
@@ -60,23 +60,8 @@
                             </div>
                           </div>
                           <div class="row">
-                            <div class="col-md-6 mb-3">
-                              <label for="estado"> Estado</label>
-                              <select class="custom-select d-block w-100" [(ngModel)]= "analistaData.estado" formControlName="estadoEstudioAnalista" id="estado" name="estado" >
-                                <option value="Aprobado">Aprobado</option>
-                                <option value="Solicitado">Solicitado</option>
-                                <option value="Rechazado">Rechazado</option>
-                                <option value="En Proceso">En Proceso</option>
-                                <option value="Culminado">Culminado</option>
-                              </select>
-                              <div *ngIf="estadoEstudioAnalista.invalid && (estadoEstudioAnalista.dirty || estadoEstudioAnalista.touched)" class="alert alert-danger">
-                                <div *ngIf="estadoEstudioAnalista.errors.required">
-                                  Este campo es obligatorio
-                                </div>
-                              </div>
-                            </div>
 
-                            <div *ngIf="analistaData.estado==='Culminado'" class="col-md-6 mb-3">
+                            <!--<div *ngIf="analistaData.estado==='Culminado'" class="col-md-6 mb-3">
                               <label for="fechaFin">Fecha fin</label>
                               <input type="text" class="form-control"  placeholder="AAAA-MM-DD"  [(ngModel)]="analistaData.fechaFin" formControlName="fechaFinEstudio" value="analistaData.fechaFin">
                               <div *ngIf="fechaFinEstudio.invalid && (fechaFinEstudio.dirty || fechaFinEstudio.touched)" class="alert alert-danger">
@@ -87,14 +72,26 @@
                                   Introduzca un formato valido
                                 </div>
                               </div>
-                            </div>
+                            </div>-->
 
                           </div>
                           <br>
                           <!-- Parte inferior del modal -->
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-success" (click)="updateEstudio()" data-dismiss="modal">Enviar</button>
+                            <div>
+                              <div class="row">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                              <button type="submit" class="btn btn-success" (click)="updateEstudio()" data-dismiss="modal">Actualizar</button>
+                              <br>
+
+                             <!--   <div *ngIf="analistaData.estado ==='procesado'">
+                                  <button type="submit" class="btn btn-info" (click)="Comenzar()" data-dismiss="modal">Comenzar</button>
+                                </div>
+                                <div *ngIf="analistaData.estado ==='en ejecucion'">
+                                  <button type="submit" class="btn btn-info" (click)="Terminar()" data-dismiss="modal">Terminal</button>
+                                </div>-->
+                              </div>
+                          </div>
 
                           </div>
                         </div>
@@ -121,7 +118,7 @@
                   </div>
                   <!-- Cuerpo completo del Modal -->
                   <div class="modal-body">
-                      <div class="modal-dialog">
+                      <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                           <table class="table table-striped table-sm bg-light">
                             <thead>
@@ -129,7 +126,8 @@
                               <th>ID</th>
                               <th>Primer Nombre</th>
                               <th>Primer Apellido</th>
-                              <th>Nivel Academico</th>
+                              <th>Telefono</th>
+                              <th>Estado</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -137,8 +135,93 @@
                               <td>{{ encuestado._id }}</td>
                               <td>{{ encuestado.primerNombre }}</td>
                               <td>{{ encuestado.primerApellido}}</td>
-                              <td>{{ encuestado.nivelacademico.nombre }}</td>
+                              <td>{{ encuestado.telefono }}</td>
+                              <td>{{ encuestado.estadoEstudioEncuestado }}</td>
 
+                              <td>
+                                <div>
+                                  <button type="button" class="btn btn-primary" data-toggle="modal" (click)="loadPreguntasResponderxAnalista(encuestado._id)" data-target="#exampleModalEncuesta" [ngClass]="{'d-none': encuestado.estadoEstudioEncuestado == 'Finalizado' || via != 'telefono'}">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                      <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                                    </svg>
+                                  </button>
+                                  <div class="modal fade " id="exampleModalEncuesta" tabindex="-1" aria-labelledby="exampleModalLabelEncuesta" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabelEncuesta">Encuesta</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"  (click)="listaOpciones = []">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                          <form class="needs-validation">
+                                            <ul class="list-group list-group-flush">
+                                              <li class="list-group-item"  *ngFor="let pregunta of preguntasEncuesta; let i=index" [ngValue]= "pregunta._id">
+                                                <div class="form-row">
+                                                  <div class="col-md-3 col-sm-3 mb-3">
+                                                    <label for="pregunta">Pregunta N°{{ i+1 }}</label>
+                                                  </div>
+                                                  <div class="col-md-9 col-sm-3 mb-3">
+                                                    <label for="pregunta">{{ pregunta.descripcion }}</label>
+                                                  </div>
+                                                </div>
+                                                <div class="form-row">
+                                                  <div class="col-md-3 col-sm-2 mb-3">
+                                                    <label for="pregunta">Respuesta</label>
+                                                  </div>
+                                                  <div class="col-md-7 col-sm-7 mb-3">
+                                                    <div [ngSwitch]="pregunta.tipo._id">
+                                                      <div *ngSwitchCase="1">
+                                                        <div class="form-group">
+                                                          <textarea class="form-control" id="campoRespuesta" rows="2" [(ngModel)]="respuestaAbierta" name="respuestaAbierta"
+                                                          value="respuestas.textos"></textarea>
+                                                        </div>
+                                                      </div>
+                                                      <div *ngSwitchCase="4">
+                                                        <select class="custom-select d-block w-100" name="miselect" [(ngModel)]="respuestaMultiple" multiple="multiple">
+                                                          <option [value]="opcion._id" *ngFor="let opcion of pregunta.opciones">{{opcion.descripcion}}</option>
+                                                        </select>
+                                                      </div>
+                                                      <div *ngSwitchDefault>
+                                                        <select class="custom-select d-block w-100" id="pregunta" value="" id="pregunta" name="respuestaDOpcion._id"
+                                                                [(ngModel)]="respuestaDOpcion._id">
+                                                          <option *ngFor="let opcion of pregunta.opciones" [ngValue]= "opcion._id"> {{ opcion.descripcion }}</option>
+                                                        </select>
+                                                      </div>
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                      Please select a valid option.
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-2 col-sm-3 mb-2">
+                                                    <button type="button" class="btn btn-primary" (click)="addOpcionesRespuesta(pregunta._id); addRespuestasEncuestaxAnalista()"
+                                                            [ngClass]="{'d-none': pregunta.tipo._id == 1 || pregunta.tipo._id == 4}">
+                                                      Aceptar
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary" *ngIf="pregunta.tipo._id == 1" (click)="addRespuestaAbierta(pregunta._id); addRespuestasEncuestaxAnalista()">
+                                                      Aceptar
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary" *ngIf="pregunta.tipo._id == 4" (click)="addRespuestaMultiple(pregunta._id); addRespuestasEncuestaxAnalista()">
+                                                      Aceptar
+                                                    </button>
+                                                  </div>
+                                                </div>
+                                              </li>
+                                            </ul>
+                                          </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="listaOpciones = []">Cancelar</button>
+                                          <button type="submit" class="btn btn-success" data-dismiss="modal" data-toggle="modal"
+                                                  data-target="#modalConfirmacion">Enviar respuesta</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
                             </tr>
                             </tbody>
                           </table>
@@ -153,12 +236,12 @@
               </div>
             </div> <!-- Finall Modal -->
 
-            <div *ngIf=" estudio.estado === 'Culminado' ">
+            <div *ngIf=" estudio.estado === 'por analizar' || estudio.estado === 'culminado' ">
               <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" (click)="loadInfoGraficos(estudio._id)" data-target="#modalGrafico" > +
-                <!-- <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                   <path fill-rule="evenodd" d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                </svg> -->
+                </svg>
                 graf
               </button>
             </div>
@@ -188,7 +271,7 @@
               </div>
             </div>
 
-            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" (click)="loadDataMuestra(estudio._id)" data-target="#dataMuestra">
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" (click)="loadDataMuestra(estudio)" data-target="#dataMuestra">
               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                 <path fill-rule="evenodd" d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>

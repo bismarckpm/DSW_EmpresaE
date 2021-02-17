@@ -5,7 +5,7 @@ import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { Subcategoria } from 'src/app/models/subcategoria';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ToastService } from 'src/app/services/toast.service';
+import {ToastService} from "../../services/toast.service";
 
 
 
@@ -35,8 +35,8 @@ export class ListaSubcategoriaComponent implements OnInit {
     public categoriaService: CategoriaService,
     public actRoute: ActivatedRoute,
     public router: Router,
-    private formBuilder: FormBuilder,
-    private toast:ToastService
+    private toast: ToastService,
+    private formBuilder: FormBuilder
   ) {  this.createForm(); }
 
   ngOnInit(): void {
@@ -46,8 +46,8 @@ export class ListaSubcategoriaComponent implements OnInit {
 
   loadSubcategoria(): void {
     this.subcategoriaService.getsubcategorias().subscribe(data => {
-     this.aux = data;
-     this.HandleErrorGet();
+      this.aux = data;
+      this.HandleErrorGet();
     });
   }
 
@@ -98,23 +98,15 @@ export class ListaSubcategoriaComponent implements OnInit {
     });
   }
 
-
-  HandleErrorGet(){
-    if(this.aux.estado == "Exitoso"){
-      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+  HandleErrorGet(): void {
+    if (this.aux.estado === 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
       this.Subcategoria = this.aux.objeto;
     }else{
-      this.toast.showError(this.aux.estado,this.aux.mensaje)
-    } 
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
   }
-  
-  HandleErrorPostPut(){
-    if(this.aux.estado == "Exitoso"){
-      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
-     }else{
-     this.toast.showError(this.aux.estado,this.aux.mensaje)
-     }
-  }
+
 
 
 }

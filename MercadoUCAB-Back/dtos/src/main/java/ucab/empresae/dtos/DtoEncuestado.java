@@ -1,7 +1,5 @@
 package ucab.empresae.dtos;
 
-import java.sql.Date;
-
 public class DtoEncuestado extends DtoBase {
 
     //Atributos
@@ -22,7 +20,6 @@ public class DtoEncuestado extends DtoBase {
     private DtoLugar lugar;
     private DtoUsuario usuario;
     private DtoTelefono telefono;
-
 
     //Constructores
     public DtoEncuestado() {

@@ -1,10 +1,8 @@
 package ucab.empresae.entidades;
 
 import javax.json.bind.annotation.JsonbDateFormat;
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "estudio", schema = "mercadeoucab")

@@ -3,15 +3,14 @@ package Comandos.Pregunta;
 import Comandos.ComandoBase;
 import Mappers.GenericMapper;
 import Mappers.MapperFactory;
+import Mappers.Pregunta.PreguntaMapper;
 import ucab.empresae.daos.Dao;
 import ucab.empresae.daos.DaoFactory;
 import ucab.empresae.dtos.DtoFactory;
 import ucab.empresae.dtos.DtoPregunta;
-import ucab.empresae.dtos.DtoPresentacion;
 import ucab.empresae.dtos.DtoResponse;
 import ucab.empresae.entidades.BaseEntity;
 import ucab.empresae.entidades.PreguntaEntity;
-import ucab.empresae.entidades.PresentacionEntity;
 import ucab.empresae.excepciones.CustomException;
 
 import java.text.ParseException;
@@ -34,9 +33,9 @@ public class ComandoGetPreguntas extends ComandoBase<DtoResponse> {
     @Override
     public void execute() throws CustomException, ParseException {
         Dao daoPregunta = DaoFactory.DaoPreguntaInstancia();
-        List<BaseEntity> preguntas = daoPregunta.findAll(PreguntaEntity.class);
+        List<PreguntaEntity> preguntas = daoPregunta.findAll(PreguntaEntity.class);
 
-        GenericMapper preguntaMapper = MapperFactory.preguntaMapperInstancia();
+        PreguntaMapper preguntaMapper = MapperFactory.preguntaMapperInstancia();
         this.dtoPreguntas = preguntaMapper.CreateDtoList(preguntas);
     }
 

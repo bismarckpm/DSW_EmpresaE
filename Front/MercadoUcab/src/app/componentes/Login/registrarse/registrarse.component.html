@@ -52,19 +52,6 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-4">
-        <label for="estatus">Estado</label>
-        <select class="custom-select d-block w-100" [(ngModel)]= "encuestado.estado" formControlName="estadoEncuestado" id="estatus" name="estado">
-          <option value="">Choose...</option>
-          <option value="a">Activa</option>
-          <option value="i">Inactiva</option>
-        </select>
-        <div *ngIf="estadoEncuestado.invalid && (estadoEncuestado.dirty || estadoEncuestado.touched)" class="alert alert-danger">
-          <div *ngIf="estadoEncuestado.errors.required">
-            Este campo es obligatorio
-          </div>
-        </div>
-      </div>
-      <div class="form-group col-md-4">
         <label for="fechanacimiento">Fecha de Nacimiento</label>
         <input type="text" class="form-control" [(ngModel)]="encuestado.fechaNacimiento" formControlName="fechaNacimientoEncuestado" id="fechanacimiento" name="fechaNacimiento" placeholder="AAAA-MM-DD">
       </div>
@@ -225,7 +212,7 @@
           </div>
           <div class="form-group col-md-6">
             <label for="correo">Correo electronico</label>
-            <input type="text" class="form-control" [(ngModel)]="encuestado.usuario.correoElectronico" id="correo" formControlName="correoElectronicoEncuestado" value="">
+            <input type="text" class="form-control" [(ngModel)]="encuestado.usuario.correoelectronico" id="correo" formControlName="correoElectronicoEncuestado" value="">
             <div *ngIf="correoElectronicoEncuestado.invalid && (correoElectronicoEncuestado.dirty || correoElectronicoEncuestado.touched)" class="alert alert-danger">
               <div *ngIf="correoElectronicoEncuestado.errors.required">
                 Este campo es obligatorio

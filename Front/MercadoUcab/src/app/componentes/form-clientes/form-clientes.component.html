@@ -109,7 +109,7 @@
             <div class="row">
               <div class="col-md-9 mb-3">
                 <label for="correo">Correo Electronico</label>
-                <input type="text" [(ngModel)]="cliente.usuario.correoElectronico" class="form-control"  formControlName="correoElectronicoCliente" name="correoElectronico" id="correo" placeholder="" >
+                <input type="text" [(ngModel)]="cliente.usuario.correoelectronico" class="form-control"  formControlName="correoElectronicoCliente" name="correoElectronico" id="correo" placeholder="" >
                 <div *ngIf="correoElectronicoCliente.invalid && (correoElectronicoCliente.dirty || correoElectronicoCliente.touched)" class="alert alert-danger">
                   <div *ngIf="correoElectronicoCliente.errors.required">
                     Este campo es obligatorio
@@ -121,20 +121,6 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-3 mb-3">
-                <label for="estatus">Estado</label>
-                <select class="custom-select d-block w-100" [(ngModel)]="cliente.estado" id="estatus" name="estado" formControlName="estadoCliente">
-                  <option value="">Choose...</option>
-                  <option value="a">Activo</option>
-                  <option value="i">Inactivo</option>
-                </select>
-                <div *ngIf="estadoCliente.invalid && (estadoCliente.dirty || estadoCliente.touched)" class="alert alert-danger">
-                  <div *ngIf="estadoCliente.errors.required">
-                    Este campo es obligatorio
-                  </div>
-                </div>
-              </div>
-
             </div>
             <div class="row">
 

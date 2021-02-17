@@ -1,6 +1,7 @@
 package ucab.empresae.daos;
 
 import ucab.empresae.entidades.MarcaEntity;
+
 import javax.persistence.EntityManager;
 
 public class DaoMarca extends Dao<MarcaEntity>{

@@ -5,6 +5,9 @@ import { EstudioService } from '../../services/estudio.service';
 import { TipoPreguntaService } from '../../services/tipo-pregunta.service';
 import { PreguntaService } from '../../services/pregunta.service';
 import { ToastService } from '../../services/toast.service';
+import { Encuestado } from 'src/app/models/encuestado';
+
+class DataMuestra { constructor(public _id: number){} }
 
 @Component({
   selector: 'app-form-encuesta',
@@ -19,7 +22,8 @@ export class FormEncuestaComponent implements OnInit {
     fechaInicio: '',
     fechaFin: '',
     estudio: {_id: 0},
-    preguntas: []
+    preguntas: [],
+    datamuestra: []
   };
   @Input() preguntaEstudio = { };
   @Input() preguntaInsertar1 = {_id: 0};
@@ -37,6 +41,7 @@ export class FormEncuestaComponent implements OnInit {
   @Input() preguntaInsertar13 = {_id: 0};
   @Input() preguntaInsertar14 = {_id: 0};
   @Input() preguntaInsertar15 = {_id: 0};
+  @Input() dataMuestra = {_id : 0};
   cantPreguntas = 0;
   listaPreguntasInsertar = [];
   preguntasMostrar: any = [];
@@ -44,6 +49,9 @@ export class FormEncuestaComponent implements OnInit {
   tipoPreguntas: any = [];
   opcionesCantidad: number[] = [5, 10, 15];
   sugerenciasPreguntas: any = [];
+  listaMuestraInsertar = [];
+  dataMuestraMostrar: Encuestado[] = [];
+  listaMuestraSeleccionada = [];
 
   /// PAra validar
   formEncuesta: FormGroup;
@@ -69,6 +77,7 @@ export class FormEncuestaComponent implements OnInit {
     console.log(this.encuesta);
     if (this.formEncuesta.valid) {
       this.encuesta.preguntas = this.listaPreguntasInsertar;
+      this.encuesta.datamuestra = this.listaMuestraInsertar;
       this.servicio.createEncuesta(this.encuesta).subscribe((data: {}) => {
         this.toast.showSuccess('La encuesta ha sido creada', 'Creada satisfactoriamente');
       },
@@ -81,12 +90,13 @@ export class FormEncuestaComponent implements OnInit {
         fechaInicio: '',
         fechaFin: '',
         estudio: {_id: 0},
-        preguntas: []
+        preguntas: [],
+        datamuestra: []
       };
       location.reload();
     }
     else{
-      this.toast.showError('Campos Incompletos', 'ES NECESARIO LLENAR LOS TODOS LOS CAMPOS');
+      this.toast.showError('Campos Incompletos', 'Es necesario llenar los todos los campos');
     }
   }
 
@@ -98,6 +108,24 @@ export class FormEncuestaComponent implements OnInit {
     }else {
       this.toast.showError('Seleccion incorrecta', 'Seleccione una pregunta válida');
     }
+  }
+
+  // agregar encuestados de la datamuestra a la lista a enviar
+  addDataMuestra(): void {
+    this.listaMuestraInsertar.push(new DataMuestra(this.dataMuestra._id));
+    // aqui tengo que hacer pop de la lista datamuestraMostrar
+    this.listaMuestraInsertar.forEach(muestra => {
+      this.dataMuestraMostrar.forEach(data => {
+        if (data._id === muestra._id) {
+          const persona = data.primerNombre + ' ' + data.primerApellido;
+          this.listaMuestraSeleccionada.push(persona);
+          this.listaMuestraSeleccionada = this.listaMuestraSeleccionada.filter( (value, index, self) => {
+            return self.indexOf(value) === index;
+          });
+        }
+      });
+    });
+    this.dataMuestra._id = 0;
   }
 
   ////// cargar de servicios
@@ -128,7 +156,16 @@ export class FormEncuestaComponent implements OnInit {
     });
   }
 
+  cargarDataMuestra(): void {
+    this.servicioEstudio.getDataMuestra(this.encuesta.estudio._id).subscribe(data => {
+      this.dataMuestraMostrar = data;
+    });
+    console.log('datamuestra');
+    console.log(this.dataMuestraMostrar);
+  }
+
   limpiar(): void{
+    this.encuesta.estudio._id = 0;
     this.preguntaInsertar1 = {_id: 0};
     this.preguntaInsertar2 = {_id: 0};
     this.preguntaInsertar3 = {_id: 0};
@@ -145,6 +182,8 @@ export class FormEncuestaComponent implements OnInit {
     this.preguntaInsertar14 = {_id: 0};
     this.preguntaInsertar15 = {_id: 0};
     this.cantPreguntas = 0;
+    this.listaMuestraInsertar = [];
+    this.listaMuestraSeleccionada = [];
   }
 
   ///// Metodos para las validaciones
@@ -164,12 +203,17 @@ export class FormEncuestaComponent implements OnInit {
     return this.formEncuesta.get('pregunta');
   }
 
+  get muestra(): AbstractControl{
+    return this.formEncuesta.get('muestra');
+  }
+
   createForm(): void{
     this.formEncuesta = this.formBuilder.group({
       fechaInicioEncuesta: ['', [Validators.required, Validators.pattern(this.patronFechaEstudio)]],
       fechaFinEncuesta: ['', [ Validators.pattern(this.patronFechaEstudio)]],
       estudio: ['', Validators.required],
       pregunta: ['', Validators.required],
+      muestra: ['', Validators.required],
     });
   }
 

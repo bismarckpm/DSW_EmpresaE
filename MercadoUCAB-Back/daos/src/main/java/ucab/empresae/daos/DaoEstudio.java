@@ -1,6 +1,9 @@
 package ucab.empresae.daos;
 
-import ucab.empresae.entidades.*;
+import ucab.empresae.entidades.EncuestadoEntity;
+import ucab.empresae.entidades.EstudioEntity;
+import ucab.empresae.entidades.LugarEntity;
+import ucab.empresae.entidades.NivelSocioeconomicoEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -33,7 +36,7 @@ public class DaoEstudio extends Dao<EstudioEntity> {
     public List<EstudioEntity> estudiosAnalista(long id) {
         try{
             TypedQuery<EstudioEntity> estudios = this._em
-                    .createQuery("SELECT e FROM EstudioEntity e where e.analista._id = :id", EstudioEntity.class);
+                    .createQuery("SELECT e FROM EstudioEntity e where e.analista._id = :id AND e.estado != 'solicitado' AND e.estado != 'rechazado'", EstudioEntity.class);
             estudios.setParameter("id", id).getResultList();
 
             List<EstudioEntity> resultado = estudios.getResultList();

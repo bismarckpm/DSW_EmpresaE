@@ -11,9 +11,9 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class ListaCategoriaComponent implements OnInit {
 
-   /// PAra validar
-   formCategoria: FormGroup;
-   namePattern: any = /^[A-Za-z0-9\s]+$/;
+  /// PAra validar
+  formCategoria: FormGroup;
+  namePattern: any = /^[A-Za-z0-9\s]+$/;
   aux:any;
   Categoria: any=[];
   _id = this.actRoute.snapshot.params['_id'];
@@ -23,8 +23,8 @@ export class ListaCategoriaComponent implements OnInit {
     public categoriaService: CategoriaService,
     public actRoute: ActivatedRoute,
     public router: Router,
-    private formBuilder: FormBuilder,
-    private toast:ToastService
+    private toast: ToastService,
+    private formBuilder: FormBuilder
     ) {this.createForm(); }
 
   ngOnInit(): void {
@@ -33,8 +33,8 @@ export class ListaCategoriaComponent implements OnInit {
 
   loadCategorias(){
     return this.categoriaService.getCategorias().subscribe((data: {}) => {
-        this.aux=data;
-        this.HandleErrorGet()
+      this.aux = data;
+      this.HandleErrorGet();
     });
   }
 
@@ -43,7 +43,7 @@ export class ListaCategoriaComponent implements OnInit {
     if (window.confirm('Are you sure, you want to delete?')){
       this.categoriaService.deleteCategoria(id).subscribe(data => {
         this.aux=data;
-        this.HandleErrorPostPut()
+        // this.HandleErrorPostPut()
 
       });
     }
@@ -54,7 +54,7 @@ export class ListaCategoriaComponent implements OnInit {
     if (this.formCategoria.valid) {
       this.categoriaService.updateCategoria(this.categoriaData._id, this.categoriaData).subscribe(data => {
         this.aux=data
-        this.HandleErrorPostPut();
+        // this.HandleErrorPostPut();
       })
     }
     else{
@@ -83,21 +83,14 @@ export class ListaCategoriaComponent implements OnInit {
     });
   }
 
-  HandleErrorGet(){
-    if(this.aux.estado == "111"){
-      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
-     this.Categoria = this.aux.objeto;
+  HandleErrorGet(): void {
+    if (this.aux.estado === 'Exitoso'){
+      this.toast.showSuccess(this.aux.estado, this.aux.mensaje);
+      this.Categoria = this.aux.objeto;
     }else{
-      this.toast.showError(this.aux.estado,this.aux.mensaje)
-    } 
+      this.toast.showError(this.aux.estado, this.aux.mensaje);
+    }
   }
-  
-  HandleErrorPostPut(){
-    if(this.aux.estado == "111"){
-      this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
-     }else{
-     this.toast.showError(this.aux.estado,this.aux.mensaje)
-     }
-  }
+
 
 }

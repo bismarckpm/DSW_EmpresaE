@@ -6,8 +6,15 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Encuestado} from '../../../models/encuestado';
 import * as Highcharts from 'highcharts';
 import highcharts3D from 'highcharts/highcharts-3d.src';
+import {PreguntaService} from '../../../services/pregunta.service';
+import {EncuestaService} from '../../../services/encuesta.service';
+import {Pregunta} from '../../../models/pregunta';
+import { ToastService } from 'src/app/services/toast.service';
+import {Opcion} from '../../../models/opcion';
 // @ts-ignore
 highcharts3D( Highcharts );
+
+class Multiple { constructor(public _id: number){} }
 
 @Component({
   selector: 'app-lista-estudios-analista',
@@ -19,7 +26,11 @@ highcharts3D( Highcharts );
 export class ListaEstudiosAnalistaComponent implements OnInit {
 
   // Declaracion de variables
+  prueba: number;
+  prueba2: number;
   estudios: Estudio[] = [];
+  preguntasEncuesta: Pregunta[] = [];
+  opciones: Opcion[] = [];
   encuestados: Encuestado[] = [];
   _id = this.actRoute.snapshot.params._id;
   @Input() analistaData = {_id: 0, comentarioAnalista: '', estado: '', fechaFin: ''};
@@ -28,15 +39,49 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
   infoGraficos: any = [];
   chartOptions: Highcharts.Options[] = [];
   highcharts = Highcharts;
+  aux:any=[];
+  via: string;
 
-  patronFechaEstudio: any = /^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/
+  patronFechaEstudio: any = /^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/;
   get fechaFinEstudio(){return this.formEstudioAnalista.get('fechaFinEstudio'); }
 
+  // variable a asignar a la clave del objeto a devolver
+  listaRespuestas: any = [];
+  listaOpciones: any = [];
+
+  respuestaAPregunta: any = {
+    // id de la pregunta a responder
+    _id: 0,
+    texto: '',
+    opciones: []
+  };
+
+  // objeto devolver en el post
+  respuestaEncuesta = {
+    usuario: 0,
+    estudio: 0,
+    respuestas: []
+  };
+
+  @Input() respuestaDOpcion = {_id: 0};
+  @Input() respuestaAbierta = '';
+  @Input() respuestaMultiple = [];
+
+  @Input() respuestas: any = {
+    opcionesVF: [],
+    opcionesRg: [],
+    opcionesMulti: [],
+    opcionesSimple: [],
+    textos: ['prueba1', 'prueba2']
+  };
 
   constructor(
     public estudioService: EstudioService,
+    private preguntaService: PreguntaService,
+    private encuestaService: EncuestaService,
     private formBuilder: FormBuilder,
     public actRoute: ActivatedRoute,
+    public toast: ToastService,
     public router: Router
 
   ) { this.createForm(); }
@@ -51,30 +96,169 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
     this.analistaData = estudio;
   }
 
-  loadEstudios(): void {
-    const user = JSON.parse(localStorage.getItem('usuarioID'));
-    this.estudioService.getEstudioAnalista(user).subscribe(data => {
-      this.estudios = data;
+  Comenzar(){
+    this.analistaData.estado='en ejecucion';
+    console.log(this.analistaData);
+
+    this.estudioService.updateEstudio(this.analistaData._id, this.analistaData).subscribe(data => {
+      this.aux=data;
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      }
     });
   }
 
-  loadDataMuestra(id): void {
-    this.estudioService.getDataMuestra(id).subscribe(data => {
-      this.encuestados = data;
+  Terminar(){
+    this.analistaData.estado='culminado';
+    console.log(this.analistaData);
+    this.estudioService.updateEstudio(this.analistaData._id, this.analistaData).subscribe(data => {
+      this.aux=data;
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      }
+    });
+  }
+
+  addRespuestasEncuestaxAnalista(): void{
+    this.respuestaEncuesta.respuestas = this.listaRespuestas;
+    this.respuestaEncuesta.usuario = this.prueba2 ;     //JSON.parse(localStorage.getItem('usuarioID'))
+    console.log('JSON a enviar....');
+    console.log(this.respuestaEncuesta);
+    this.encuestaService.createRespuestaEncuestaxAnalista(this.respuestaEncuesta).subscribe((data) => {});
+    this.listaRespuestas = [];
+  }
+
+  loadPreguntasResponder(idEstudio: number): void{                      //DEBE SER DIFERENTE EL NOMBRE, Y QUE SEA EL ID DEL ENCUESTADO NO DEL USUARIO
+    // aqui esta el get en preguntas pasandole el id del estudio
+    const idUsuario = JSON.parse(localStorage.getItem('usuarioID')); //OJOOOOOOOOOOOOOOOOOOO ESE ID NO ESSSSSSSSSS
+
+    this.preguntaService.getPreguntasResponder(idEstudio, idUsuario)
+      .subscribe((data) => {
+        this.preguntasEncuesta = data;
+      });
+    this.respuestaEncuesta.estudio = idEstudio;
+  }
+
+  loadPreguntasResponderxAnalista(idEncuestado: number): void{
+    // aqui esta el get en preguntas pasandole el id del estudio
+    this.prueba2 = idEncuestado;                  //este es el id del encuestado
+    console.log(this.prueba2);
+    console.log(this.prueba);
+    this.preguntaService.getPreguntasResponderxAnalista(this.prueba, idEncuestado) //this.prueba es el id del estudio
+      .subscribe((data) => {
+        this.preguntasEncuesta = data;
+      });
+    this.respuestaEncuesta.estudio = this.prueba; //aqui estaba un "idestudio" que elimine
+  }
+
+  addOpcionesRespuesta(idPregunta): void {
+    this.listaOpciones.push(this.respuestaDOpcion);
+    this.respuestaDOpcion = {_id: 0};
+    this.respuestaAPregunta._id = idPregunta;
+    this.respuestaAPregunta.opciones = this.listaOpciones;
+    this.listaOpciones = [];
+    console.log('objeto respuesta a pregunta');
+    console.log(this.respuestaAPregunta);
+    console.log('lista de preguntas a enviar');
+    this.listaRespuestas.push(this.respuestaAPregunta);
+    console.log(this.listaRespuestas);
+    this.respuestaAPregunta = {
+      _id: 0,
+      texto: '',
+      opciones: []
+    };
+  }
+
+  addRespuestaAbierta(idPregunta): void {
+    this.respuestaAPregunta.texto = this.respuestaAbierta;
+    this.respuestaAbierta = '';
+    this.respuestaAPregunta._id = idPregunta;
+    console.log('objeto respuesta a pregunta');
+    console.log(this.respuestaAPregunta);
+    console.log('lista de preguntas a enviar');
+    this.listaRespuestas.push(this.respuestaAPregunta);
+    console.log(this.listaRespuestas);
+    this.respuestaAPregunta = {
+      _id: 0,
+      texto: '',
+      opciones: []
+    };
+  }
+
+  addRespuestaMultiple(idPregunta): void {
+    for (const resp of this.respuestaMultiple){
+      this.listaOpciones.push(new Multiple(resp));
+    }
+    console.log(this.listaOpciones);
+    this.respuestaAPregunta._id = idPregunta;
+    this.respuestaAPregunta.opciones = this.listaOpciones;
+    this.listaOpciones = [];
+    console.log('objeto respuesta a pregunta');
+    console.log(this.respuestaAPregunta);
+    console.log('lista de preguntas a enviar');
+    this.listaRespuestas.push(this.respuestaAPregunta);
+    console.log(this.listaRespuestas);
+    this.respuestaAPregunta = {
+      _id: 0,
+      texto: '',
+      opciones: []
+    };
+  }
+
+  loadEstudios(): void {
+    const user = JSON.parse(localStorage.getItem('usuarioID'));
+    this.estudioService.getEstudioAnalista(user).subscribe(data => {
+      this.aux=data;
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+        this.estudios = this.aux.objeto;
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      }
+    });
+  }
+
+  loadDataMuestra(estudio): void {
+    this.via = estudio.via;
+    this.prueba = estudio._id;
+    this.estudioService.getDataMuestraxAnalista(estudio._id).subscribe(data => {
+      this.aux=data;
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+        this.encuestados = this.aux.objeto;
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      }
     });
   }
 
   updateEstudio(){
-    this.estudioService.updateEstudio(this.analistaData._id, this.analistaData).subscribe(data => {
-    });
-    this.loadEstudios();
+    if(this.analistaData.comentarioAnalista !== ''){
+      this.analistaData.estado='culminado';
+      this.estudioService.updateEstudio(this.analistaData._id, this.analistaData).subscribe(data => {
+      });
+      this.loadEstudios();
+    }else {
+      this.toast.showError("Comentario esta vacio","Ingresa un comentario")
+    }
+
   }
 
   loadInfoGraficos(estudio): void {
     this.infoGraficos = [];
     this.chartOptions = [];
     this.estudioService.getDataGraficos(estudio).subscribe(data => {
-      this.infoGraficos = data;
+      this.aux=data;
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+        this.infoGraficos = this.aux.objeto;
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      }
       this.agregarDatos();
       console.log(this.infoGraficos);
     });
@@ -92,9 +276,9 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
   }
 
   chart(enunciado: any, valor: any): Highcharts.Options {
-    let chartOptions: Highcharts.Options = {
+    const chartOptions: Highcharts.Options = {
       chart: {
-        type: "pie",
+        type: 'pie',
         plotShadow: false,
         options3d: {
           enabled: true,
@@ -106,20 +290,20 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
         text: enunciado
       },
       tooltip: {
-        headerFormat: "",
+        headerFormat: '',
         pointFormat:
-          "<span style='color:{point.color}'>\u25CF</span> {point.name}: <b>{point.y}</b>",
+          '<span style=\'color:{point.color}\'>\u25CF</span> {point.name}: <b>{point.y}</b>',
         style: {
-          fontSize: "10px"
+          fontSize: '10px'
         }
       },
       plotOptions: {
         pie: {
           allowPointSelect: true,
-          cursor: "pointer",
+          cursor: 'pointer',
           depth: 35,
           shadow: true,
-          innerSize: "20%",
+          innerSize: '20%',
           dataLabels: {
             enabled: false
           },
@@ -128,7 +312,7 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
       },
       series: [
         {
-          type: "pie",
+          type: 'pie',
           data: valor
         }
       ]
@@ -142,8 +326,8 @@ export class ListaEstudiosAnalistaComponent implements OnInit {
   createForm() {
     this.formEstudioAnalista = this.formBuilder.group({
       comentarioAnalistaEstudio: ['', [Validators.required, Validators.maxLength(100)]],
-      estadoEstudioAnalista: ['', Validators.required],
-      fechaFinEstudio: ['', [ Validators.pattern(this.patronFechaEstudio)]],
+      //estadoEstudioAnalista: ['', Validators.required],
+      //fechaFinEstudio: ['', [ Validators.pattern(this.patronFechaEstudio)]],
     });
   }
 }

@@ -1,12 +1,11 @@
 package ucab.empresae.daos;
 
+import ucab.empresae.entidades.EncuestadoEntity;
 import ucab.empresae.entidades.OpcionEntity;
-import ucab.empresae.entidades.PreguntaOpcionEntity;
 import ucab.empresae.entidades.RespuestaEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import java.util.List;
 
 public class DaoRespuesta extends Dao<RespuestaEntity>{
     private EntityManager _em;
@@ -24,6 +23,20 @@ public class DaoRespuesta extends Dao<RespuestaEntity>{
             cantidadRespuestas.setParameter("id_estudio", id_estudio).setParameter("opcion", opcion).getSingleResult();
 
             Long resultado = cantidadRespuestas.getSingleResult();
+            return resultado;
+
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    public Long getCantidadPreguntasRespondidas(long id_estudio, EncuestadoEntity encuestado){
+
+        try{
+            TypedQuery<Long> cantidadPreguntas = this._em.createQuery("select count(DISTINCT re.id_pregunta) from RespuestaEntity re where re.encuestado = :encuestado and re.estudio._id = :id_estudio", Long.class);
+            cantidadPreguntas.setParameter("id_estudio", id_estudio).setParameter("encuestado", encuestado).getSingleResult();
+
+            Long resultado = cantidadPreguntas.getSingleResult();
             return resultado;
 
         }catch (Exception e){

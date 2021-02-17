@@ -7,16 +7,17 @@ import Mappers.MapperFactory;
 import Mappers.NivelSocioeconomico.NivelSocioeconomicoMapper;
 import Mappers.Subcategoria.SubcategoriaMapper;
 import Mappers.Usuario.UsuarioMapper;
+import ucab.empresae.daos.*;
 import ucab.empresae.dtos.DtoCategoria;
 import ucab.empresae.dtos.DtoEstudio;
 import ucab.empresae.dtos.DtoFactory;
 import ucab.empresae.entidades.*;
 import ucab.empresae.excepciones.CustomException;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class EstudioMapper extends GenericMapper<DtoEstudio> {
@@ -37,7 +38,7 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
             throw new CustomException("MAPEST001","El id debe ser mayor a 0.");
         }else if(estudio.getEstado() == null) {
             throw new CustomException("MAPEST001","El estudio debe tener un estado asignado.");
-        }else if(!estudio.getEstado().equals("solicitado") && !estudio.getEstado().equals("procesado") && !estudio.getEstado().equals("en ejecucion") && !estudio.getEstado().equals("culminado")) {
+        }else if(!estudio.getEstado().equals("solicitado") && !estudio.getEstado().equals("procesado") && !estudio.getEstado().equals("en ejecucion") && !estudio.getEstado().equals("culminado") && !estudio.getEstado().equals("rechazado") && !estudio.getEstado().equals("por analizar")) {
             throw new CustomException("MAPEST001","El estado del estudio no es válido");
         }else if(estudio.getNombre() == null) {
             throw new CustomException("MAPEST001","El estudio debe tener un nombre asignado.");
@@ -46,7 +47,6 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
         }else if(estudio.getVia() == null) {
             throw new CustomException("MAPEST001","El estudio debe tener una vía de respuesta.");
         }else if(!estudio.getVia().equals("telefono") && !estudio.getVia().equals("plataforma")) {
-
             throw new CustomException("MAPEST001","La vía de respuestas del estudio no es válida.");
         }else {
 
@@ -54,7 +54,10 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
             dtoEstudio.set_id(estudio.get_id());
             dtoEstudio.setEstado(estudio.getEstado());
             dtoEstudio.setNombre(estudio.getNombre());
-            dtoEstudio.setFechaInicio(estudio.getFechaInicio().toString());
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            dtoEstudio.setFechaInicio(dateFormat.format(estudio.getFechaInicio()));
+
             dtoEstudio.setVia(estudio.getVia());
 
             SubcategoriaMapper subcategoriaMapper = MapperFactory.subcategoriaMapperInstancia();
@@ -86,7 +89,7 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
                 dtoEstudio.setEdadMaxima(estudio.getEdadMaxima());
             }
             if(estudio.getFechaFin() != null) {
-                dtoEstudio.setFechaFin(estudio.getFechaFin().toString());
+                dtoEstudio.setFechaFin(dateFormat.format(estudio.getFechaFin()));
             }
 
             return dtoEstudio;
@@ -102,61 +105,74 @@ public class EstudioMapper extends GenericMapper<DtoEstudio> {
      */
     @Override
     public BaseEntity CreateEntity(DtoEstudio dtoEstudio) throws CustomException, ParseException {
-       if(dtoEstudio.getEstado() == null) {
-            throw new CustomException("MAPEST002","El estudio debe tener un estado asignado.");
-        }else if(!dtoEstudio.getEstado().equals("solicitado") && !dtoEstudio.getEstado().equals("procesado") && !dtoEstudio.getEstado().equals("en ejecucion") && !dtoEstudio.getEstado().equals("culminado")) {
-            throw new CustomException("MAPEST002","El estado del estudio no es válido");
-        }else if(dtoEstudio.getNombre() == null) {
+        if(dtoEstudio.getNombre() == null) {
             throw new CustomException("MAPEST002","El estudio debe tener un nombre asignado.");
-        }else if(dtoEstudio.getFechaInicio() == null) {
-            throw new CustomException("MAPEST002","El estudio debe tener una fecha de inicio.");
         }else if(dtoEstudio.getVia() == null) {
             throw new CustomException("MAPEST002","El estudio debe tener una vía de respuesta.");
         }else if(!dtoEstudio.getVia().equals("telefono") && !dtoEstudio.getVia().equals("plataforma")) {
             throw new CustomException("MAPEST002","La vía de respuestas del estudio no es válida.");
         }else {
             EstudioEntity estudio = EntidadesFactory.EstudioInstance();
-            estudio.setEstado(dtoEstudio.getEstado());
             estudio.setNombre(dtoEstudio.getNombre());
             estudio.setVia(dtoEstudio.getVia());
 
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            estudio.setFechaInicio(dateFormat.parse(dtoEstudio.getFechaInicio()));
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
-            SubcategoriaMapper subcategoriaMapper = MapperFactory.subcategoriaMapperInstancia();
-            estudio.setSubcategoria((SubcategoriaEntity) subcategoriaMapper.CreateEntity(dtoEstudio.getSubcategoria()));
+            if(dtoEstudio.getFechaInicio() == null) {
+                estudio.setFechaInicio(new Date());
+            }else {
+                estudio.setFechaInicio(dateFormat.parse(dtoEstudio.getFechaInicio()));
+            }
 
-            NivelSocioeconomicoMapper nivelSocioeconomicoMapper = MapperFactory.nivelSocioeconomicoMapperInstancia();
-            estudio.setNivelSocioEconomico((NivelSocioeconomicoEntity) nivelSocioeconomicoMapper.CreateEntity(dtoEstudio.getNivelSocioEconomico()));
+            //SubcategoriaMapper subcategoriaMapper = MapperFactory.subcategoriaMapperInstancia();
+            DaoSubcategoria daoSubcategoria = DaoFactory.DaoSubcategoriaInstancia();
+            estudio.setSubcategoria(daoSubcategoria.find(dtoEstudio.getSubcategoria().get_id(), SubcategoriaEntity.class));
 
-            LugarMapper lugarMapper = MapperFactory.lugarMapperInstancia();
-            estudio.setLugar((LugarEntity) lugarMapper.CreateEntity(dtoEstudio.getLugar()));
+            //NivelSocioeconomicoMapper nivelSocioeconomicoMapper = MapperFactory.nivelSocioeconomicoMapperInstancia();
+            DaoNivelSocioeconomico daoNivelSocioeconomico = DaoFactory.DaoNivelSocioeconomicoInstancia();
+            estudio.setNivelSocioEconomico(daoNivelSocioeconomico.find(dtoEstudio.getNivelSocioEconomico().get_id(), NivelSocioeconomicoEntity.class));
+
+            //LugarMapper lugarMapper = MapperFactory.lugarMapperInstancia();
+            DaoLugar daoLugar = DaoFactory.DaoLugarInstancia();
+            estudio.setLugar(daoLugar.find(dtoEstudio.getLugar().get_id(), LugarEntity.class));
 
             if(dtoEstudio.get_id() != 0) {
                 estudio.set_id(dtoEstudio.get_id());
             }
 
             if(dtoEstudio.getAnalista() != null) {
-                UsuarioMapper usuarioMapper = MapperFactory.usuarioMapperInstancia();
-                estudio.setAnalista((UsuarioEntity) usuarioMapper.CreateEntity(dtoEstudio.getAnalista()));
+                //UsuarioMapper usuarioMapper = MapperFactory.usuarioMapperInstancia();
+                DaoUsuario daoUsuario = DaoFactory.DaoUsuarioInstancia();
+                estudio.setAnalista(daoUsuario.find(dtoEstudio.getAnalista().get_id(), UsuarioEntity.class));
             }
 
             if(dtoEstudio.getGenero() != null) {
-                GeneroMapper generoMapper = MapperFactory.generoMapperInstancia();
-                estudio.setGenero((GeneroEntity) generoMapper.CreateEntity(dtoEstudio.getGenero()));
+                //GeneroMapper generoMapper = MapperFactory.generoMapperInstancia();
+                DaoGenero daoGenero = DaoFactory.DaoGeneroInstancia();
+                estudio.setGenero(daoGenero.find(dtoEstudio.getGenero().get_id(), GeneroEntity.class));
             }
 
             if(dtoEstudio.getComentarioAnalista() != null) {
                 estudio.setComentarioAnalista(dtoEstudio.getComentarioAnalista());
+                if(dtoEstudio.getFechaFin() == null) {
+                    estudio.setEstado("culminado");
+                    estudio.setFechaFin(new Date());
+                }
+            }else if(dtoEstudio.getEstado() == null && estudio.getEstado() == null) {
+                estudio.setEstado("solicitado");
             }
-            if(dtoEstudio.getEdadMinima() !=0) {
+            if(dtoEstudio.getEstado().equals("culminado") && dtoEstudio.getFechaFin() == null) {
+                estudio.setFechaFin(new Date());
+            }
+            if(dtoEstudio.getEstado() != null){
+                estudio.setEstado(dtoEstudio.getEstado());
+            }
+
+            if(dtoEstudio.getEdadMinima() != null) {
                 estudio.setEdadMinima(dtoEstudio.getEdadMinima());
             }
-            if(dtoEstudio.getEdadMaxima() != 0) {
+            if(dtoEstudio.getEdadMaxima() != null) {
                 estudio.setEdadMaxima(dtoEstudio.getEdadMaxima());
-            }
-            if(dtoEstudio.getFechaFin() != null) {
-                estudio.setFechaFin(dateFormat.parse(dtoEstudio.getFechaFin()));
             }
 
             return estudio;

@@ -1,8 +1,9 @@
 import org.junit.Assert;
 import org.junit.Test;
 import ucab.empresae.dtos.*;
-import javax.ws.rs.core.Response;
 import ucab.empresae.servicio.EncuestadoServicio;
+
+import javax.ws.rs.core.Response;
 
 /**
  * Pruebas unitarias utilizadas para pribar el servicio de encuestado.

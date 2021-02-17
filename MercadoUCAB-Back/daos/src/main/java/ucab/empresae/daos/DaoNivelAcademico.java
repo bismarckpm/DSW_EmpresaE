@@ -1,6 +1,7 @@
 package ucab.empresae.daos;
 
 import ucab.empresae.entidades.NivelAcademicoEntity;
+
 import javax.persistence.EntityManager;
 
 

@@ -9,9 +9,7 @@ import ucab.empresae.dtos.DtoFactory;
 import ucab.empresae.dtos.DtoPresentacion;
 import ucab.empresae.dtos.DtoResponse;
 import ucab.empresae.entidades.BaseEntity;
-import ucab.empresae.entidades.CategoriaEntity;
 import ucab.empresae.entidades.PresentacionEntity;
-import ucab.empresae.excepciones.CategoriaException;
 import ucab.empresae.excepciones.CustomException;
 
 import java.text.ParseException;

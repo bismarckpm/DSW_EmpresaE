@@ -50,7 +50,7 @@ export class FormCategoriaComponent implements OnInit {
   createForm(){
     this.formCategoria = this.formBuilder.group({
       nombreCategoria: ['', [Validators.pattern(this.namePattern), Validators.required]],
-      estadoCategoria: ['', Validators.required],
+      //estadoCategoria: ['', Validators.required],
     });
   }
 }

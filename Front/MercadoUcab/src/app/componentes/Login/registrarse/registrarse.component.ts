@@ -11,6 +11,7 @@ import {MedioConexionService} from '../../../services/medio-conexion.service';
 import {EstadoCivilService} from '../../../services/estado-civil.service';
 import {NivelAcademicoService} from '../../../services/nivel-academico.service';
 import {HijoService} from '../../../services/hijo.service';
+import {ToastService} from "../../../services/toast.service";
 
 @Component({
   selector: 'app-registrarse',
@@ -29,7 +30,7 @@ export class RegistrarseComponent implements OnInit {
     telefono: {_id: 0, numero: 0},
     hijo: {_id: 0, fechaNacimientoHijo: '', generoHijo: ''},
     lugar:  {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: '', lugar: {_id: 0, estado: '', nombre: '', tipo: ''}}}},
-    usuario: {_id: 0, username: '', estado: '', clave: '', correoElectronico: ''},
+    usuario: {_id: 0, username: '', estado: '', clave: '', correoelectronico: ''},
   };
 
   tieneHijos: boolean = false;
@@ -40,7 +41,7 @@ export class RegistrarseComponent implements OnInit {
   genero: any;
   ocupacion: any;
   nivelSocioEconomico: any;
- 
+
   lugar: any;
   usuario: any;
   username: any;
@@ -56,6 +57,7 @@ export class RegistrarseComponent implements OnInit {
   auxParroquiaID: number;
   cantHijos = [1, 2, 3, 4, 5, 6, 7];
   auxIterador = [];
+  aux:any;
 
   patronFechaNacimientoEncuestado: any = /^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/;
   patronNombreEncuestado: any = /^[A-Za-z\s]+$/;
@@ -95,6 +97,7 @@ export class RegistrarseComponent implements OnInit {
     public lugarService: LugarService,
     public usuarioService: UsuarioService,
     public router: Router,
+    private toast: ToastService,
     private formBuilder: FormBuilder
     ) {
     this.createForm();
@@ -112,6 +115,7 @@ export class RegistrarseComponent implements OnInit {
 
   addEncuestado(encuestado){
     this.encuestado.lugar._id = this.auxParroquiaID;
+    //console.log(this.encuestado);
     this.encuestadoService.createEncuestado(this.encuestado).subscribe((data: {}) => {});
   }
 
@@ -136,7 +140,13 @@ export class RegistrarseComponent implements OnInit {
 
   addGenero(){
     this.generoService.getGeneros().subscribe((Generos: {}) => {
-      this.genero = Generos;
+      this.aux = Generos;
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+        this.genero = this.aux.objeto;
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      }
     });
   }
 
@@ -148,13 +158,25 @@ export class RegistrarseComponent implements OnInit {
 
   addNivelSocioEconomico(){
     this.nivelSocioEconomicoService.getNivelesSocioEconomicos().subscribe((NivelesSocioeconomicos: {}) => {
-      this.nivelSocioEconomico = NivelesSocioeconomicos;
+      this.aux = NivelesSocioeconomicos;
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+        this.nivelSocioEconomico = this.aux.objeto;
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      }
     });
   }
 
   addLugar(){
     this.lugarService.getLugars().subscribe((Lugares: {}) => {
-      this.estados = Lugares;
+      this.aux = Lugares;
+      if(this.aux.estado == "Exitoso"){
+        this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+        this.estados = this.aux.objeto;
+      }else{
+        this.toast.showError(this.aux.estado,this.aux.mensaje)
+      }
     });
   }
 
@@ -164,7 +186,13 @@ export class RegistrarseComponent implements OnInit {
     // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
     if (id > 0 ){
       this.lugarService.getMunicipio(this.auxEstadoID).subscribe((data: {}) => {
-        this.municipios = data;
+        this.aux = data;
+        if(this.aux.estado == "Exitoso"){
+          this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+          this.municipios = this.aux.objeto;
+        }else{
+          this.toast.showError(this.aux.estado,this.aux.mensaje)
+        }
       });
     }
 
@@ -176,7 +204,13 @@ export class RegistrarseComponent implements OnInit {
     // Esta peticion se realiza para mostar todas las parroquias aasociadas al estado
     if (id > 0 ) {
       this.lugarService.getParroquia(this.auxMunicipioID, id).subscribe((data: {}) => {
-        this.parroquias = data;
+        this.aux = data;
+        if(this.aux.estado == "Exitoso"){
+          this.toast.showSuccess(this.aux.estado,this.aux.mensaje)
+          this.parroquias = this.aux.objeto;
+        }else{
+          this.toast.showError(this.aux.estado,this.aux.mensaje)
+        }
       });
     }
   }
@@ -219,7 +253,7 @@ export class RegistrarseComponent implements OnInit {
       segundoNombreEncuestado: ['', [Validators.required, Validators.pattern(this.patronNombreEncuestado)]],
       primerApellidoEncuestado: ['', [Validators.required, Validators.pattern(this.patronNombreEncuestado)]],
       segundoApellidoEncuestado: ['', [Validators.required, Validators.pattern(this.patronNombreEncuestado)]],
-      estadoEncuestado: ['', Validators.required],
+     // estadoEncuestado: ['', Validators.required],
       fechaNacimientoEncuestado: ['', [Validators.required, Validators.pattern(this.patronFechaNacimientoEncuestado)]],
       lugarEncuestado: ['', Validators.required],
       estadoCivilEncuestado: ['', Validators.required],
@@ -248,4 +282,5 @@ export class RegistrarseComponent implements OnInit {
         err => console.error(err)
       );*/
   }
+
 }
